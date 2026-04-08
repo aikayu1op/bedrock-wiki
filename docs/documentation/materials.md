@@ -1,6 +1,6 @@
 ---
-title: Vanilla Materials
-description: Materials documentation.
+title: バニラ Material
+description: Material のドキュメントです。
 show_outline: false
 tags:
     - expert
@@ -13,14 +13,14 @@ mentions:
 ---
 
 :::warning
-Materials are not for the faint of heart. Be prepared for potential crashes, content log errors, and long loading times.
+Material は扱いが難しいです。クラッシュ、コンテンツログエラー、長い読み込み時間が起こりうることを覚悟してください。
 :::
 
-Materials are extremely useful for making entities more unique. You can make new ones for your add-ons, or use pre-existing vanilla materials.
+Material は、エンティティをより個性的にするのに非常に役立ちます。アドオン用に新しく作ることも、既存のバニラ Material を使うこともできます。
 
-You can learn more about creating materials [here](/visuals/materials).
+Material の作成については [こちら](/visuals/materials) で詳しく学べます。
 
-## List of Vanilla Materials
+## バニラ Material 一覧
 
 | Vanilla_Material                                                                        |
 | --------------------------------------------------------------------------------------- |
@@ -82,36 +82,36 @@ You can learn more about creating materials [here](/visuals/materials).
 | [opaque_block_color](#opaque-block-color)                                               |
 | [opaque_block_color_uv2](#opaque-block-color-uv2)                                       |
 
-## Properties
+## プロパティ
 
-Materials can have a range of different properties which affect their appearance, including:
+Material には、見た目に影響するさまざまなプロパティがあります。たとえば:
 
 ### Backface-Culling
 
-This makes the inside faces of models **not** render.
+これにより、モデルの内側の面は **描画されなくなります**。
 
 ### Alpha Channel
 
-Enables analogue translucency, usage of the alpha channel of textures.
+テクスチャの alpha channel を使った、連続的な半透明表現を有効にします。
 
 ### Emissive
 
-Causes the texture to not be affected by dim lighting, and appear to glow. If there is usage of the alpha channel, the emissivity is in direct proportion to how transparent each individual pixel is.
+テクスチャが暗い照明の影響を受けず、発光しているように見えます。alpha channel を使っている場合、発光度は各ピクセルの透明度に直接比例します。
 
 ### Set Translucency
 
-Regardless of other properties, is always completely rendered at a pre-determined translucency.
+他のプロパティに関係なく、あらかじめ決められた半透明度で常に描画されます。
 
 ### Texture Blending
 
-When multiple textures are present, may use a filter of sorts to change the entities appearance, based on the textures.
+複数のテクスチャがある場合、何らかのフィルターを使って、テクスチャに基づいてエンティティの見た目を変えることがあります。
 
-## Details on the Materials
+## Material の詳細
 
-The following is a last of each material, along with general known properties. The names are vague pointers to what each will do, some may act rather unpredictably, or have undocumented usages, so this only is what's certain for each:
+以下は各 Material の一覧と、一般に知られているプロパティです。名前は各 Material の動作をざっくり示すもので、予測しづらい挙動をするものや、未文書の用途を持つものもあります。そのため、ここでは各 Material で確実だと分かっていることだけを載せています。
 
 :::warning
-The following section has currently **only** been tested for with single textures. Take it all with a pinch of salt. It is highly recommended to experiment with the materials yourself.
+以下のセクションは、現時点では **単一テクスチャでのみ** テストされています。参考程度に見てください。Material は自分でも試してみることを強くおすすめします。
 :::
 
 ### alpha_block
@@ -414,5 +414,5 @@ Inconsistently renders objects with transparency behind.
 -   Backface-Culling
 
 :::warning
-Please note, that these have also only been tested using a RenderDragon platform. Non-RenderDragon visuals may differ.
+これらも RenderDragon 環境でのみテストされています。RenderDragon 以外では見た目が異なる場合があります。
 :::

@@ -1,220 +1,220 @@
 ---
-title: How to Contribute
+title: 貢献のしかた
 hidden: true
 mentions:
     - TheItsNameless
     - QuazChick
-description: Make your first contribution!
+description: 最初の貢献をしてみよう！
 ---
 
-## About This Guide
+## このガイドについて
 
-This guide will walk you through how to get started editing the wiki. While it is possible to edit the wiki "in-place" on the github website, this guide will instead teach you the proper technique. This is a valuable and transferable skill, and will set you up for additional knowledge beyond just editing the wiki.
+このガイドでは、Wiki の編集を始める方法を順を追って説明します。GitHub のサイト上で Wiki を「その場で」編集することもできますが、このガイドでは正しい手順を学びます。これは価値のある、他の場面にも応用できるスキルであり、Wiki を編集する以上の知識にもつながります。
 
-This article will teach you how to use GitHub Desktop, the easiest way to manage your local Repositories. Its possible to do this without GitHub Desktop just by using Git, but this is more advanced than just using GitHub Desktop and we won't be covering this in this guide.
+この記事では、ローカルリポジトリの管理を最も簡単に行える GitHub Desktop の使い方を説明します。Git を直接使えば GitHub Desktop なしでもできますが、これは GitHub Desktop よりも上級者向けです。このガイドでは扱いません。
 
-If you already know some of the steps we cover in this guide, feel free to use the Table of Contents on the right side to skip to the sections you don't know!
+このガイドで説明する手順の一部をすでに知っている場合は、右側の目次を使って、知らない部分だけに飛んでください。
 
-And if you want to learn more about our fancy styling-features, continue with our [Contribute-Style-Guide](/contribute-style)!
+Wiki の見た目の細かなスタイル機能についてもっと知りたい場合は、[Contribute-Style-Guide](/contribute-style) を続けて読んでください。
 
-## Steps to Edit the Wiki
+## Wiki を編集する手順
 
-To edit the wiki, there are 5 major steps that you need to follow (downloading and setting up the software is just done the first time):
+Wiki を編集するには、次の 5 つの大きな手順に従います（ソフトウェアのダウンロードとセットアップは最初の 1 回だけ行います）。
 
-1. Fork the Repository
-2. Clone the Repository
-3. Edit the Wiki
-4. Commit your local changes and sync with GitHub
-5. Create a Pull Request
+1. リポジトリを Fork する
+2. リポジトリを Clone する
+3. Wiki を編集する
+4. ローカル変更を commit して GitHub と同期する
+5. Pull Request を作成する
 
-If you see this the first time, it might look a little overwhelming, but don't worry! Its very easy and we guide you through this step by step.
+初めて見ると少し大変そうに見えるかもしれませんが、心配いりません。とても簡単で、ここでは 1 つずつ順番に案内します。
 
-## Setting Up the Software
+## ソフトウェアのセットアップ
 
-To edit our wiki, you need to download and install the following software:
+Wiki を編集するには、次のソフトウェアをダウンロードしてインストールする必要があります。
 
 -   GitHub Desktop
 -   NodeJS
 -   Visual Studio Code
 
-If you want to edit the wiki more frequently, you might want to start using Git, as its more powerful than GitHub Desktop. But don't worry, GitHub Desktop is enough for us!
+より頻繁に Wiki を編集したいなら、Git を使い始めるのもよいでしょう。Git は GitHub Desktop より強力です。ただし心配はいりません。私たちには GitHub Desktop で十分です！
 
 ### Visual Studio Code
 
-[Visual Studio Code (VSCode)](https://code.visualstudio.com/Download) is a great environment to edit all your files, code something, etc. You can use other editors too, but in this tutorial we will guide you through the installation of VSCode.
+[Visual Studio Code (VSCode)](https://code.visualstudio.com/Download) は、ファイルやコードなどを編集するのにとても便利な環境です。他のエディタを使っても構いませんが、このチュートリアルでは VSCode のインストールを案内します。
 
 ![](/assets/images/contribute/setting_up_software/vscode/vsc_download.png)
 
-#### Installation
+#### インストール
 
-Go to your folder where you saved the .exe and double-click it. The setup window will open. You can click on `next` most of the time, just make sure on the "additional tasks" window, that `add to PATH` is selected.
+保存した `.exe` があるフォルダーを開いて、ダブルクリックしてください。セットアップ画面が開きます。ほとんどの場合は `next` を押して大丈夫ですが、「additional tasks」画面で `add to PATH` が選択されていることだけ確認してください。
 
-On the last page, just click `install`.
+最後の画面では `install` をクリックします。
 
-After the installation has finished, just click `Finish`. VSCode should now start. If it doesn't start, open it manually.
+インストールが終わったら `Finish` をクリックしてください。これで VSCode が起動するはずです。起動しない場合は手動で開いてください。
 
-Now you can customize the look of your VSCode. If you are done or don't want to customize it, click "Next Section".
+ここから VSCode の見た目をカスタマイズできます。終わった、またはカスタマイズしたくない場合は「Next Section」をクリックしてください。
 
 <WikiImage src="/assets/images/contribute/setting_up_software/vscode/vsc_look.png" width="210" />
 
-Now you can learn some fundamentals for VSCode. As before, if you are done, just click "Next Section".
+次に、VSCode の基本を学べます。前と同じく、終わっていれば「Next Section」をクリックしてください。
 
 <WikiImage
     src="/assets/images/contribute/setting_up_software/vscode/vsc_fundamentals.png"
     width="210"
 />
 
-On the last page, as before, click "Mark Done" if you are ready.
+最後のページでは、準備ができたら、前と同じように「Mark Done」をクリックしてください。
 
 <WikiImage
     src="/assets/images/contribute/setting_up_software/vscode/vsc_productivity.png"
     width="210"
 />
 
-We are finished with the installation of VSCode. You can close it for now.
+これで VSCode のインストールは完了です。いったん閉じて構いません。
 
 ### GitHub Desktop
 
-[GitHub Desktop](https://desktop.github.com) is used to download GitHub Repositories, so you can edit them locally. Its possible to do this with Git, a command line tool, instead, but this is a bit more advanced and won't be covered in this tutorial.
+[GitHub Desktop](https://desktop.github.com) は、GitHub リポジトリをダウンロードしてローカルで編集できるようにするためのツールです。コマンドラインツールの Git を使って同じこともできますが、これは少し上級者向けで、このチュートリアルでは扱いません。
 
 ![](/assets/images/contribute/setting_up_software/ghdesktop/ghd_download.png)
 
-#### Installation
+#### インストール
 
-As before, go to your folder where you saved the .exe and double-click it. The Setup will open and automatically install GitHub Desktop. When its done, GitHub Desktop will automatically start.
+先ほどと同じように、保存した `.exe` のあるフォルダーへ行き、ダブルクリックしてください。セットアップが開き、GitHub Desktop が自動的にインストールされます。完了すると、GitHub Desktop が自動で起動します。
 
 <WikiImage
     src="/assets/images/contribute/setting_up_software/ghdesktop/ghd_install.png"
     width="210"
 />
 
-Next it asks you to sign in. If you already have a GitHub Account, just click `Sign in to GitHub.com`. In the browser tab, just sign in to your account. If you don't have a GitHub Account, click on `Create your free account` and create an account. Then continue normally.
+次にサインインを求められます。すでに GitHub アカウントがあるなら、`Sign in to GitHub.com` をクリックしてください。ブラウザーのタブでアカウントにサインインします。GitHub アカウントをまだ持っていない場合は、`Create your free account` をクリックしてアカウントを作成してください。その後は通常どおり進めます。
 
 ![](/assets/images/contribute/setting_up_software/ghdesktop/ghd_login.png)
 
-Now in GitHub Desktop, don't change anything and click "Finish".
+GitHub Desktop では何も変えず、そのまま「Finish」をクリックしてください。
 
 ![](/assets/images/contribute/setting_up_software/ghdesktop/ghd_configure.png)
 
-For now, you can close GitHub Desktop.
+ひとまず GitHub Desktop は閉じて構いません。
 
 ### NodeJS
 
-With [NodeJS](https://www.nodejs.org) we can view the wiki locally, as it would appear on the web. Its great to get typos or errors before you push it and we get an error on merging it.
+[NodeJS](https://www.nodejs.org) を使うと、Web 上と同じ見た目で Wiki をローカル表示できます。プッシュ前に typo やエラーを見つけられるので、マージ時のエラーを減らせます。
 
 ![](/assets/images/contribute/setting_up_software/nodejs/njs_download.png)
 
-#### Installation
+#### インストール
 
-Now, again, just go to your download folder and double-click the nodejs setup file. For our setup, you don't need to change anything. Just make sure you don't add `Tools for native modules`, as we don't need them. On the last page, just click `Install`. Wait for the installation to finish and click `Finish`.
+ここでも、ダウンロードフォルダーに行って NodeJS のセットアップファイルをダブルクリックするだけです。今回のセットアップでは、特に変更は不要です。`Tools for native modules` は追加しないようにしてください。必要ありません。最後のページでは `Install` をクリックします。インストールが終わるまで待ってから `Finish` をクリックしてください。
 
-## Set Up Your Local Environment
+## ローカル環境をセットアップする
 
-Now as we have installed all of our necessary programs, we can start to contribute to the wiki. Well, at first we have to setup our local working environment. Don't worry, its very easy. Just follow the steps below:
+必要なプログラムはすべてインストールできたので、Wiki への貢献を始められます。まずはローカル作業環境をセットアップする必要があります。心配いりません。とても簡単です。以下の手順に従ってください。
 
-Open our [GitHub Repository](https://github.com/Bedrock-OSS/bedrock-wiki) and click on `Fork`. If you already forked it, no problem! Just continue below.
+[GitHub リポジトリ](https://github.com/Bedrock-OSS/bedrock-wiki) を開き、`Fork` をクリックします。すでに Fork 済みでも問題ありません。そのまま進めてください。
 
 ![](/assets/images/contribute/setting_up_local/setup_fork.png)
 
-Open GitHub Desktop and click on `Clone a repository from the Internet`.
+GitHub Desktop を開き、`Clone a repository from the Internet` をクリックします。
 
 ![](/assets/images/contribute/setting_up_local/setup_clone.png)
 
-Now select your fork and click on "Clone". Your repository will automatically be cloned.
+次に、自分の fork を選んで「Clone」をクリックします。リポジトリが自動で clone されます。
 
 ![](/assets/images/contribute/setting_up_local/setup_clone_2.png)
 
-After that, you will see an overview over your clone. To work on it, just click on "Open in Visual Studio Code". VSCode will automatically open with our wiki. If VSCode asks you if it should trust the folder, just click on `Yes, I trust the authors`.
+そのあと、clone の概要が表示されます。作業するには「Open in Visual Studio Code」をクリックしてください。VSCode が Wiki とともに自動で開きます。フォルダーを信頼するか聞かれたら、`Yes, I trust the authors` をクリックしてください。
 
 ![](/assets/images/contribute/setting_up_local/setup_vsc.png)
 
-Now you have successfully cloned the wiki to your local device and you can edit all files!
+これで Wiki の clone はローカル端末に成功し、すべてのファイルを編集できるようになりました！
 
-## Committing Your Changes
+## 変更をコミットする
 
-Once you finished working on the wiki, you can now commit and push your changes directly to our repository!
+Wiki での作業を終えたら、変更を直接リポジトリに commit して push できます。
 
-Switch to GitHub Desktop and you should see your changes. If you can't see them, make sure you saved your files and opened the right repository in GitHub Desktop.
+GitHub Desktop に切り替えると、変更が表示されるはずです。表示されない場合は、ファイルを保存したか、GitHub Desktop で正しいリポジトリを開いているか確認してください。
 
-Once you confirmed your changes in GitHub Desktop, you can give your commit a name and a description (but both aren't necessary) and click on `commit to main`.
+変更を GitHub Desktop で確認したら、commit 名と説明を付けられます（どちらも必須ではありません）。そのあと `commit to main` をクリックしてください。
 
 ![](/assets/images/contribute/committing_changes/committing.png)
 
-After you committed your changes, you need to push your local clone to GitHub. Just click on `Push commits to the origin remote`.
+commit が終わったら、ローカル clone を GitHub に push する必要があります。`Push commits to the origin remote` をクリックしてください。
 
 ![](/assets/images/contribute/committing_changes/committing_push.png)
 
-GitHub will now send your local clone to their servers.
+これで GitHub が、あなたのローカル clone を自分たちのサーバーへ送信します。
 
-## Creating a Pull Request
+## Pull Request を作成する
 
-Now that GitHub has your edits on their servers, you need to create a `"Pull Request"` (PR), so that we can merge your changes.
+GitHub に編集内容が反映されたので、次は `Pull Request`（PR）を作成し、変更をマージできるようにします。
 
-There are many ways to do this. For now, just click on `Create Pull Request` in GitHub Desktop.
+方法はいくつかあります。ここでは、GitHub Desktop で `Create Pull Request` をクリックします。
 
 ![](/assets/images/contribute/creating_pr/pr.png)
 
-GitHub Desktop will open your PR in your browser. You can edit your PR, but you don't need to. Everything should already be correct and enough for us to merge it. Just click on `Create Pull Request`.
+GitHub Desktop がブラウザーで PR を開きます。PR は編集できますが、必須ではありません。すでにマージに十分な状態になっているはずです。そのまま `Create Pull Request` をクリックしてください。
 
 ![](/assets/images/contribute/creating_pr/pr_2.png)
 
-You are done! Now its our turn to merge your changes in our wiki!
+これで完了です。あとは私たちが Wiki に変更をマージする番です！
 
-## Updating Local Environment
+## ローカル環境を更新する
 
-Since you are not the only person who works on the wiki, there might be some changes that you currently don't have in your local clone. To update your local clone, you need to update your fork. Don't worry, its really easy!
+Wiki で作業しているのはあなただけではないので、ローカル clone にはまだ入っていない変更がある場合があります。ローカル clone を更新するには、自分の fork を更新する必要があります。心配いりません。とても簡単です！
 
-With GitHub opened in your browser, open your fork. You will see a field that shows you, that you are out of date. Just click on `Fetch upstream` and then on `Fetch and merge`.
+ブラウザーで GitHub を開いた状態で、自分の fork を開いてください。古い状態であることを示す表示が出るはずです。`Fetch upstream` をクリックし、続いて `Fetch and merge` をクリックします。
 
 ![](/assets/images/contribute/updating_local/updating.png)
 
-Now in GitHub Desktop you need to pull the origin by clicking on `Pull Origin`. Your local clone should automatically update.
+次に GitHub Desktop で `Pull Origin` をクリックして origin から pull します。ローカル clone は自動的に更新されます。
 
 ![](/assets/images/contribute/updating_local/updating_pull.png)
 
-Your local clone is now up-to-date!
+これでローカル clone は最新です！
 
-### Troubleshooting
+### トラブルシューティング
 
-This process has to be done every time someone else updates our wiki. If you forget to to that, you might get some problems, like we can't automatically merge your PR. (You see this, when you try to open a PR)
+この作業は、他の誰かが Wiki を更新したたびに毎回行う必要があります。これを忘れると、PR を自動マージできないなどの問題が起きることがあります。（PR を開こうとしたときに分かります）
 
 ![](/assets/images/contribute/troubleshooting/merge/merge_merge.png)
 
-If this happens, don't worry. You can easily fix this problem.
+その場合でも心配いりません。簡単に直せます。
 
-#### Fixing It
+#### 修正方法
 
-Update your fork like we did in the previous step. After that, you can't just pull the changes to your local clone in GitHub Desktop, because this would cause problems. Instead, click on `Current branch`.
+前の手順と同じように fork を更新してください。そのあと、GitHub Desktop でそのまま pull してはいけません。そうすると問題が起きます。代わりに `Current branch` をクリックしてください。
 
 ![](/assets/images/contribute/troubleshooting/merge/merge_branch.png)
 
-Now click on `Choose a branch to merge into ...`.
+次に `Choose a branch to merge into ...` をクリックします。
 
 <WikiImage
     src="/assets/images/contribute/troubleshooting/merge/merge_choose_branch.png"
     width="250"
 />
 
-Select the default branch (it should already be selected) and click on `Create a merge commit`.
+デフォルトブランチを選び（たいていはすでに選ばれています）、`Create a merge commit` をクリックしてください。
 
 <WikiImage src="/assets/images/contribute/troubleshooting/merge/merge_commit.png" width="260" />
 
-Now open in VSCode.
+次に VSCode で開きます。
 
 ![](/assets/images/contribute/troubleshooting/merge/merge_open.png)
 
-Click on `Accept Current Change`, because you want your changes to be updated, not someone elses. This step has to be done for every problem that exists. If you don't do this for every problem, we can't merge your PR.
+変更を更新したいのは相手の変更ではなく自分の変更なので、`Accept Current Change` をクリックしてください。この手順は、存在する問題ごとに行う必要があります。各問題でこれを行わないと、PR をマージできません。
 
 ![](/assets/images/contribute/troubleshooting/merge/merge_accept.png)
 
-Otherwise, you can `Accept Incoming Change` to accept the changes someone else made. Then save and return to GitHub Desktop. There you just click on `continue merge`.
+逆に、他の人が加えた変更を受け入れたい場合は `Accept Incoming Change` をクリックします。そのあと保存して GitHub Desktop に戻り、そこで `continue merge` をクリックするだけです。
 
 ![](/assets/images/contribute/troubleshooting/merge/merge_continue.png)
 
-And now this problem is solved! You can continue safely, commit to your branch and create a PR.
+これで問題は解決です！安全に続行し、ブランチに commit して PR を作成できます。
 
-## Conclusion
+## まとめ
 
-Now you have all the software installed and learned all the skills you need to edit our wiki! If you wan't to learn more about styling your articles, please read our guide on
+これで必要なソフトウェアはすべてインストールでき、Wiki を編集するために必要なスキルも学びました！ 文章のスタイルについてもっと知りたいなら、次のガイドを読んでください。
 
-<Button link="/contribute-style">How to edit pages on our wiki</Button>
+<Button link="/contribute-style">Wiki ページの編集方法</Button>

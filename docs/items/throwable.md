@@ -1,6 +1,6 @@
 ---
-title: Throwable Items
-description: Learn how to create a custom item that can be thrown as a projectile.
+title: 投げられるアイテム
+description: 投射物として投げられるカスタムアイテムの作り方を学びます。
 category: Tutorials
 tags:
     - intermediate
@@ -17,14 +17,14 @@ mentions:
 ---
 
 ::: tip
-This tutorial assumes you have a basic understanding of Molang, animation controllers and entity definitions.
+このチュートリアルでは、Molang、animation controller、entity 定義の基本を理解していることを前提にしています。
 :::
 
-Items like the Splash Potion or the Trident are special items that can be thrown.
+スプラッシュポーションやトライデントのようなアイテムは、投げられる特別なアイテムです。
 
-## Item
+## アイテム
 
-First, you'll want to make the actual item:
+まず、実際のアイテムを作ります。
 
 <CodeHeader>BP/items/throwable_item.item.json</CodeHeader>
 
@@ -49,10 +49,10 @@ First, you'll want to make the actual item:
 }
 ```
 
-## Entity
+## エンティティ
 
-The entity will be the actual thrown item, and it will behave like a projectile.
-Make sure to add snowball runtime identifier to make your projectile to actually be shoot, not spawned. You can also experiment with other projectile runtime id's.
+このエンティティが実際に投げられるアイテムになり、投射物として動作します。
+投射物を「生成される」のではなく「発射される」ようにするため、snowball の runtime identifier を設定してください。他の projectile runtime id を試してみることもできます。
 
 <CodeHeader>BP/entities/throwable_item_entity.se.json</CodeHeader>
 
@@ -104,10 +104,10 @@ Make sure to add snowball runtime identifier to make your projectile to actually
 }
 ```
 
-This entity is based on the Vanilla splash potion.
+このエンティティはバニラのスプラッシュポーションをベースにしています。
 
-You can then customize its behavior by editing the `minecraft:projectile` component, in this case the thrown item will grant some exp and will damage any entity it will hit.
+その後、`minecraft:projectile` コンポーネントを編集して動作をカスタマイズできます。この例では、投げたアイテムが経験値を少し与え、命中したエンティティにダメージを与えます。
 
-## Conclusion
+## 結論
 
-Once you have your throwable item you can start trying several things, like playing with its power, effects, animations or combining it with an [area effect cloud](/entities/area-effect-clouds). The only limit is your imagination.
+投げられるアイテムができたら、威力、効果、アニメーションを調整したり、[area effect cloud](/entities/area-effect-clouds) と組み合わせたりと、いろいろ試せます。あとは想像力次第です。

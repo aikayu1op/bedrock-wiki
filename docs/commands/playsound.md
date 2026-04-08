@@ -7,72 +7,72 @@ mentions:
     - BedrockCommands
     - zheaEvyline
     - jordanparki7
-description: Understanding /playsound command.
+description: "`/playsound` コマンドを理解するためのページです。"
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-You can use the `/playsound` command to play sound effects to players present anywhere in your world.
+`/playsound` コマンドを使うと、ワールド内のどこにいるプレイヤーにも効果音を再生できます。
 
 ## Syntax
 
 `/playsound <sound> [player] [position] [volume] [pitch] [minimumVolume]`
 
-## Definitions
+## 定義
 
 ### Sound
 
--   It is the sound effect you wish to play.
--   You can find the list of Sound Effect IDs currently available at:
+-   再生したい効果音です。
+-   現在利用可能な Sound Effect ID の一覧は次で確認できます。
     -   https://playsoundlist.xyz/
 
 ### Player
 
--   This is an optional argument.
--   It refers to your typical target selectors (whom you want to play the sound to) `@a`, `@r`, etc. However, the `@e` selector without the `type=player` argument is not applicable.
+-   これは任意の引数です。
+-   音を再生したい対象を示す、通常のターゲットセレクター（`@a`、`@r` など）を指します。ただし、`type=player` なしの `@e` は使えません。
 
 ### Position
 
--   This is an optional argument.
--   It refers to the `x y z` position from where the sound will be played, Thus will be the center of the playsound radius.
+-   これは任意の引数です。
+-   音を再生する `x y z` の位置を指します。つまり、`playsound` の半径の中心になります。
 
 ### Volume
 
--   This is an optional argument.
--   It determines the size of the sphere in which the sound effect can be heard.
-    -   `0.0` is the minimum size.
--   The audible sphere size will increase as the `volume` value is increased.
-    -   Playsound volume of `1` is equal to an audible sphere of radius 16 blocks.
-    -   Similarly, volume of `4` will be equal to 64 blocks.
+-   これは任意の引数です。
+-   音が聞こえる球の大きさを決めます。
+    -   `0.0` が最小値です。
+-   `volume` の値を上げるほど、聞こえる範囲が広がります。
+    -   `1` の `playsound` は、半径 16 ブロックの可聴範囲に相当します。
+    -   同様に、`4` なら 64 ブロックに相当します。
 
 ### Pitch
 
--   This is an optional argument.
--   It determines the pitch for the sound effect.
--   It can be a value between `0.0` and `256.0`
-    -   The higher the value, the higher the pitch.
-    -   Values less than or equal to `0.0` makes the sound inaudible.
+-   これは任意の引数です。
+-   効果音のピッチを決めます。
+-   値は `0.0` から `256.0` の範囲で指定できます。
+    -   値が高いほどピッチも高くなります。
+    -   `0.0` 以下では音は聞こえません。
 
-> Note: Pitch affects the speed at which the sound effect is played. For example, a pitch of `0.5` would mean the sound effect is played at `0.5×` speed.
+> 注: ピッチは、音が再生される速度にも影響します。たとえば `0.5` のピッチは、音が `0.5×` の速度で再生されることを意味します。
 
 ### Minimum Volume
 
--   This is an optional argument.
--   It determines the minimum volume at which the sound will be heard outside of the audible sphere.
--   It can be a value between `0.0` and `1.0`
+-   これは任意の引数です。
+-   可聴範囲の外で聞こえる最小音量を決めます。
+-   値は `0.0` から `1.0` の範囲です。
 
-## Examples
+## 例
 
 ```yaml
-# Play a random explosion sound effect to closest player
+# 近くのプレイヤーにランダムな爆発音を再生
 /playsound random.explode @p
 
-# Play a random orb sound effect to all players at their position with a volume of 10000
+# すべてのプレイヤーの位置で、音量 10000 のランダムなオーブ音を再生
 /execute as @a at @s playsound random.orb @s ~ ~ ~ 10000
 ```
 
-Note: Since the `/playsound` command is positional, it is helpful to play the sound effect at their position with a large volume like shown in the second example above. This prevents the sound effect from cutting off in certain situations, such as after teleporting to a far away distance.
+注: `/playsound` コマンドは位置依存なので、上の 2 つ目の例のように、対象の位置で大きな音量を使って再生すると便利です。これにより、遠くへテレポートしたあとなど、特定の状況で音が途切れるのを防げます。
 
-**(Recommended) Read Next: [Sounds](/concepts/sounds)**
+**（推奨）次に読む: [Sounds](/concepts/sounds)**

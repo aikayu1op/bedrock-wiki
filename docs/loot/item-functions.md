@@ -1,6 +1,6 @@
 ---
-title: Item Functions
-description: Item functions modify the nature of an item in loot tables and trade tables.
+title: アイテム関数
+description: アイテム関数は、ルートテーブルとトレードテーブル内のアイテムの性質を変更します。
 category: Documentation
 nav_order: 4
 mentions:
@@ -11,10 +11,10 @@ mentions:
     - Supernova3695
 ---
 
-Item functions modify the nature of an item in [loot tables](/loot/loot-tables) and [trade tables](/loot/trade-tables).
+アイテム関数は、[ルートテーブル](/loot/loot-tables) と [トレードテーブル](/loot/trade-tables) にあるアイテムの性質を変更します。
 
 TODO
-can enchantments be prefixed with minecraft:/whatever?
+エンチャント名に `minecraft:/whatever` のような接頭辞を付けられるのか？
 
 <CodeHeader>Loot Entry</CodeHeader>
 
@@ -35,21 +35,21 @@ can enchantments be prefixed with minecraft:/whatever?
 }
 ```
 
-Most of the functions here were tested in trade tables only.
+ここにある関数の大半は、トレードテーブルでのみテストされています。
 
-These functions are usable in trade tables and **loot tables only**.
+これらの関数は、トレードテーブルと**ルートテーブルのみ**で使用できます。
 
-These functions should be under the `functions` array.
+これらの関数は `functions` 配列の下に記述します。
 
-None accept Molang.
+どれも Molang は受け付けません。
 
-No Java additional functions or properties were successful.
+Java の追加関数や追加プロパティは、どれも成功しませんでした。
 
-All may be prefixed with any sequence of text followed by a colon, like `minecraft:exploration_map` or `d1245436576u:fio2ejfoijfiowejf::::::exploration_map`
+すべて、`minecraft:exploration_map` や `d1245436576u:fio2ejfoijfiowejf::::::exploration_map` のように、任意の文字列の後ろにコロンを付けた接頭辞を付けられます。
 
-## General
+## 基本
 
-A handful of functions are available for basic item properties. These functions are usable on any item.
+基本的なアイテムプロパティ用の関数がいくつかあります。これらの関数は任意のアイテムに使用できます。
 
 | Function             | Container Loot | Block Drops | Fishing | Entity Drops | Entity Equipment | Trade Tables |
 | -------------------- | -------------- | ----------- | ------- | ------------ | ---------------- | ------------ |
@@ -61,7 +61,7 @@ A handful of functions are available for basic item properties. These functions 
 | `random_aux_value`   | ✅             | ✅          | ✅      | ✅           | ✅               | ✅           |
 | `set_damage`         | ✅             | ✅          | ✅      | ✅           | ✅               | ✅           |
 
-### Count
+### 数量
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -73,10 +73,10 @@ A handful of functions are available for basic item properties. These functions 
 | Trade table      | ❌     |
 
 ::: tip NOTE
-Trade tables use the [`"quantity"` property](/loot/trade-tables#quantity) to set their count.
+トレードテーブルでは、数量の設定に [`"quantity"` プロパティ](/loot/trade-tables#quantity) を使います。
 :::
 
-The `set_count` function sets the count for that item entry.
+`set_count` 関数は、そのアイテムエントリーの数量を設定します。
 
 <CodeHeader>Count Function</CodeHeader>
 
@@ -90,9 +90,9 @@ The `set_count` function sets the count for that item entry.
 }
 ```
 
-The `"count"` property determines how many of that item should be yielded; it can either be provided as an integer or a [range object](/documentation/shared-constructs#range-objects). Provided counts values may be larger than the stack size for that item. When this happens, the item will leak into other slots if in a container or separate into multiple different item stacks if dropped into the world. The count property actually defaults to `0`, so it should always be included.
+`"count"` プロパティは、そのアイテムをいくつ生成するかを決めます。整数でも [range object](/documentation/shared-constructs#range-objects) でも指定できます。指定した数量がそのアイテムのスタック上限を超えることがあります。その場合、コンテナー内では他のスロットへあふれ、地上に落ちた場合は複数の別スタックに分かれます。`count` プロパティの既定値は実際には `0` なので、常に含めるべきです。
 
-### Name
+### 名前
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -103,7 +103,7 @@ The `"count"` property determines how many of that item should be yielded; it ca
 | Entity equipment | ✅     |
 | Trade table      | ✅     |
 
-The name of an item can be set using the `set_name` function. Names are visible in the user interface when hovering over an item. Names can be changed by players using anvils.
+アイテム名は `set_name` 関数で設定できます。名前はアイテムにカーソルを合わせたときにユーザーインターフェースに表示されます。名前はプレイヤーが金床で変更できます。
 
 <CodeHeader>Name Function</CodeHeader>
 
@@ -114,9 +114,9 @@ The name of an item can be set using the `set_name` function. Names are visible 
 }
 ```
 
-The name to give the item is given with the string `"name"` property. By default, name text appears italicized. However, item names support format codes, and `§r` can be inserted at the start of the text to reset it to non-italics. Raw text is unsupported in item names. `\n` can be used for newlines.
+アイテムに付ける名前は、文字列 `"name"` プロパティで指定します。既定では、名前の文字は斜体で表示されます。ただし、アイテム名は書式コードに対応しており、`§r` を先頭に入れることで斜体を解除できます。アイテム名では raw text は使えません。改行には `\n` を使えます。
 
-### Lore
+### ロア
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -127,7 +127,7 @@ The name to give the item is given with the string `"name"` property. By default
 | Entity equipment | ✅     |
 | Trade table      | ✅     |
 
-The `set_lore` function sets the lore for an item.
+`set_lore` 関数はアイテムのロアを設定します。
 
 <CodeHeader>Lore Function</CodeHeader>
 
@@ -138,9 +138,9 @@ The `set_lore` function sets the lore for an item.
 }
 ```
 
-The `"lore"` property configures the lore. It can be represented as either a string or an array of strings. All lore strings support format codes but do not support localization. In the array form, each string represents a new line of lore. Each such string's formatting context is independent, meaning formatting will reset with each string. By default, purple and italicized text is used for lore; this can be reset by prepending the reset format code (`§r`) to each string as necessary. `\n` can be used within any lore string to form a newline while preserving the current formatting context.
+`"lore"` プロパティはロアを設定します。文字列または文字列配列のどちらでも表せます。すべてのロア文字列は書式コードに対応していますが、ローカライズには対応していません。配列形式では、各文字列がロアの 1 行になります。各文字列の書式コンテキストは独立しているため、書式は文字列ごとにリセットされます。既定ではロアには紫色の斜体テキストが使われますが、必要に応じて各文字列の先頭にリセット用の書式コード（`§r`）を付けることで戻せます。任意のロア文字列内で `\n` を使うと、現在の書式コンテキストを保ったまま改行できます。
 
-### Data
+### データ
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -151,7 +151,7 @@ The `"lore"` property configures the lore. It can be represented as either a str
 | Entity equipment | ✅     |
 | Trade table      | ✅     |
 
-`set_data` establishes the data for the given item, similar to the argument in the `/give` command. If used on a block, it will set the block's data value. If used on an item, it will set it's aux value. Unlike the command, however, `set_data` cannot set the durability of an item. For that, use [`durability`](#durability).
+`set_data` は、`/give` コマンドの引数に似た形で、指定したアイテムのデータを設定します。ブロックに使うと、そのブロックの data 値を設定します。アイテムに使うと、その aux 値を設定します。ただしコマンドと違い、`set_data` ではアイテムの耐久値は設定できません。その場合は [`durability`](#durability) を使ってください。
 
 <CodeHeader>Data Function</CodeHeader>
 
@@ -162,7 +162,7 @@ The `"lore"` property configures the lore. It can be represented as either a str
 }
 ```
 
-The `"data"` property sets the item's data. If not provided, it will default to `0`. `"data"` can either be provided as an integer or a [range object](/documentation/shared-constructs#range-objects).
+`"data"` プロパティはアイテムの data を設定します。指定しない場合は `0` が既定値です。`"data"` は整数でも [range object](/documentation/shared-constructs#range-objects) でも指定できます。
 
 As an integer:
 
@@ -179,9 +179,9 @@ As a range object:
 }
 ```
 
-The object form will randomly select a data value inclusively between the provided minimum and maximum each instance this function's item entry is selected.
+オブジェクト形式では、この関数のアイテムエントリーが選ばれるたびに、指定された最小値と最大値の間から両端を含めて data 値がランダムに選ばれます。
 
-### Block State
+### ブロック状態
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -192,7 +192,7 @@ The object form will randomly select a data value inclusively between the provid
 | Entity equipment | ✅     |
 | Trade table      | ✅     |
 
-`random_block_state` sets an individual block state for a block.
+`random_block_state` は、ブロックの個別の block state を設定します。
 
 <CodeHeader>Block State Function</CodeHeader>
 
@@ -204,15 +204,15 @@ The object form will randomly select a data value inclusively between the provid
 }
 ```
 
-Sets a block state for a block.
+ブロックの block state を設定します。
 
-`block_state`: Required string name of block state.
+`block_state`: 必須の block state 名の文字列。
 
-`values`: Can be a number or a [range object](/documentation/shared-constructs#range-objects).
+`values`: 数値または [range object](/documentation/shared-constructs#range-objects)。
 
-Defaults to 0… kinda required otherwise pointless? IDK…
+既定値は 0 ですが、実質的には必須です。そうでないと意味がありません。たぶん。
 
-### Aux Value
+### Aux 値
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -237,19 +237,19 @@ Defaults to 0… kinda required otherwise pointless? IDK…
 }
 ```
 
-Sets the auxiliary value of an item.
+アイテムの auxiliary value を設定します。
 
 `values`: Can be an integer or a [range object](/documentation/shared-constructs#range-objects).
 
-If using a range object, it will randomly choose the values uniformly(each value has the same chance of being chosen).
+range object を使うと、値を一様ランダムに選びます（各値が選ばれる確率は同じです）。
 
-Only used for **auxiliary value**; won't, for example, set damage of a tool but will set color of wool.
+**auxiliary value** にのみ使われます。たとえば、道具の damage は設定せず、羊毛の色は設定します。
 
-It overrides any provided auxiliary value as identifier `:suffix`, like `minecraft:wool:10`.
+`minecraft:wool:10` のような、識別子の `:suffix` で指定された auxiliary value は上書きされます。
 
-Also works for block data.
+ブロック data にも使えます。
 
-### Durability
+### 耐久値
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -260,7 +260,7 @@ Also works for block data.
 | Entity equipment | ✅     |
 | Trade table      | ✅     |
 
-Item durability can be set using the `set_damage` function.
+アイテムの耐久値は `set_damage` 関数で設定できます。
 
 <CodeHeader>Durability Function</CodeHeader>
 
@@ -274,16 +274,16 @@ Item durability can be set using the `set_damage` function.
 }
 ```
 
-Sets the damage value of this item.
+このアイテムの damage 値を設定します。
 
-`damage`: Can either be a set number or a [range object](/documentation/shared-constructs#range-objects). Allowed values range from `0.0-1.0`.
+`damage`: 固定値または [range object](/documentation/shared-constructs#range-objects) を指定できます。許容範囲は `0.0-1.0` です。
 
-Note that if this item has no durability component, this function will be ignored.
+このアイテムに durability コンポーネントがない場合、この関数は無視されます。
 
 
-## Item-Specific Data
+## アイテム固有データ
 
-Some functions are only usable by a certain set of items. See each function for which items are relevant.
+一部の関数は、特定のアイテム群にしか使えません。各関数で、どのアイテムが対象かを確認してください。
 
 | Function                       | Container Loot | Block Drops | Fishing | Entity Drops | Entity Equipment | Trade Tables |
 | ------------------------------ | -------------- | ----------- | ------- | ------------ | ---------------- | ------------ |
@@ -298,7 +298,7 @@ Some functions are only usable by a certain set of items. See each function for 
 | `set_ominous_bottle_amplifier` | ✅             | ✅          | ✅      | ✅           | ✅               | ⚠️           |
 | `set_stew_effect`              | ✅             | ✅          | ✅      | ✅           | ✅               | ✅           |
 
-### Heat Item
+### 熱処理アイテム
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -319,10 +319,10 @@ Some functions are only usable by a certain set of items. See each function for 
 }
 ```
 
-Auto-implies that the entity must’ve been on fire when they died.
-Vanilla files use a function condition for this, but even removing that condition still implies that the entity must’ve died on fire for the `furnace_smelt` function to trigger.
+エンティティが死亡時に燃えていたことを自動的に前提にします。
+バニラのファイルではこれに関数条件が使われていますが、その条件を外しても、`furnace_smelt` 関数が発動するにはエンティティが炎上死している必要があるようです。
 
-### Book Contents
+### 本の内容
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -346,25 +346,25 @@ Vanilla files use a function condition for this, but even removing that conditio
 }
 ```
 
-Sets the data for a book.
+本のデータを設定します。
 
-Can only be used on `minecraft:writable_book` or `minecraft:written_book`.
+`minecraft:writable_book` または `minecraft:written_book` にのみ使用できます。
 
-`author`: String name of the author.
+`author`: 著者名の文字列。
 
-`title`: String name of the book.
+`title`: 本のタイトルの文字列。
 
-`pages`: Array of strings — each string is the contents of that page.
+`pages`: 文字列配列。各文字列がそのページの内容です。
 
-Supports up to 50 strings and 798 characters per string
-12,800‌ character limit across all pages.
-Use `\n` in the string (not `\\n`) to add newlines.
+最大 50 個の文字列、各文字列 798 文字まで対応しています。
+全ページ合計で 12,800 文字までです。
+改行を入れるには、文字列内で `\n`（`\\n` ではありません）を使います。
 
-Can’t use tabs.
+タブは使えません。
 
-Can use color codes; Each different page string resets the color codes each time.
+カラーコードは使えます。ページごとに文字列が変わるたび、カラーコードはリセットされます。
 
-### Exploration Map
+### 探索マップ
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -386,31 +386,31 @@ Can use color codes; Each different page string resets the color codes each time
 }
 ```
 
-**Trade Table info**:
+**トレードテーブルの情報**:
 
 `destination`:
 
-Currently only `monument` and `mansion` are allowed.
+現在は `monument` と `mansion` だけが使えます。
 
-Nothing else, not even buried treasure (this one looks like it’ll work — names the map right instead of Unknown Map like the others, but it doesn’t point anywhere). :(
+それ以外は使えません。埋もれた宝でさえ不可です（これは一見うまくいきそうに見えます。ほかのものと違って Unknown Map ではなく正しい名前が付くためです。ただし、どこにも向かいません）。:(
 
-**Loot Table info**:
+**ルートテーブルの情報**:
 
 `destination`:
 
-Works for any /locate location (see old recipe notes for caveats there; this is for container loot tables).
+任意の `/locate` 対象で動作します（注意点については古いレシピの注記を参照してください。これはコンテナー用ルートテーブルについてです）。
 
-Only works if in the appropriate dimension.
+適切な次元にいる場合にのみ動作します。
 
-If a mansion or monument, gets named, colored, and icon’d correctly, corresponding to the right marker decoration.
+mansion または monument の場合、正しいマーカー装飾に対応して、名前、色、アイコンが正しく設定されます。
 
-If invalid or no destination is given, shows no marker but still has the river and ocean lines on the map.
+無効な destination、または destination がない場合は、マーカーは表示されませんが、地図上の川と海の線は残ります。
 
-Works in both containers and entity equipment and drops.
+コンテナー、entity の装備、ドロップのいずれでも動作します。
 
-Keep in mind how **only 2 locations** worked from traders.
+trader では **2 つの場所だけ** が動作したことに注意してください。
 
-### Banner Type
+### バナーの種類
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -432,17 +432,17 @@ Keep in mind how **only 2 locations** worked from traders.
 }
 ```
 
-Sets type of a `minecraft:banner` or the banner on a `minecraft:shield` (only usable on these).
+`minecraft:banner`、または `minecraft:shield` 上のバナーの種類を設定します（これらにのみ使用できます）。
 
-`type`: Can only be `0` or `1`.
+`type`: `0` または `1` のみです。
 
-- `0` is a White Banner.
-- `1` is an Ominous Banner.
+- `0` は White Banner です。
+- `1` は Ominous Banner です。
 
 `base_color`: Can be set for banners of type 0 and sets the color of the banner.
 `patterns`: Is an array of banner patterns and colors to be applied to the banner. Up to 6 patterns can be applied.
 
-### Random Dyeing
+### ランダム染色
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -463,11 +463,11 @@ Sets type of a `minecraft:banner` or the banner on a `minecraft:shield` (only us
 }
 ```
 
-Randomly dyes dyeable items. Such as leather horse armor, leather armor, and wolf armor.
+染色可能なアイテムをランダムに染めます。たとえば、革の馬鎧、革の防具、オオカミの防具です。
 
-It doesn’t work on wool or other related items.
+羊毛やその関連アイテムには使えません。
 
-### Spawn Eggs
+### スポーンエッグ
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -489,13 +489,13 @@ It doesn’t work on wool or other related items.
 }
 ```
 
-Usable with spawn eggs.
+スポーンエッグに使えます。
 
-`id`: The identifier for the mob.
+`id`: Mob の識別子です。
 
-In trade tables, if the `id` property is omitted, it defaults to the trader's identifier.
+トレードテーブルでは、`id` プロパティを省略すると trader の識別子が既定値になります。
 
-### Container Contents
+### コンテナーの中身
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -517,15 +517,15 @@ In trade tables, if the `id` property is omitted, it defaults to the trader's id
 }
 ```
 
-Sets the contents of a container item/block. Allows container items such as shulker boxes and bundles to contain loot itself.
+コンテナーアイテムまたはブロックの中身を設定します。シュルカーボックスや bundle などのコンテナーアイテムに、ルートそのものを入れられます。
 
-`loot_table`: Path to loot table file from behavior pack root.
+`loot_table`: behavior pack ルートからのルートテーブルファイルのパスです。
 
-The `loot_table` property is needed or it will just be the normal item.
-It cannot point to the same loot table the item is in.
-Works in containers and both entity stuff and blocks
+`loot_table` プロパティは必須です。なければ通常のアイテムのままになります。
+アイテムが入っているのと同じルートテーブルを指すことはできません。
+コンテナー、entity の装備やドロップ、ブロックで動作します。
 
-### Potion Type
+### ポーションの種類
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -547,11 +547,11 @@ Works in containers and both entity stuff and blocks
 }
 ```
 
-Sets the potion type of this item. Allowed item types are: `minecraft:potion`, `minecraft:splash_potion`, `minecraft:lingering_potion`, and `minecraft:arrow`.
+このアイテムの potion type を設定します。対応するアイテム型は `minecraft:potion`、`minecraft:splash_potion`、`minecraft:lingering_potion`、`minecraft:arrow` です。
 
-`id`: the name of the potion type. Here is the list of all the [Potion Types](#potion-types).
+`id`: potion type の名前です。すべての [Potion Types](#potion-types) の一覧はここにあります。
 
-### Ominous Bottle Amplifier
+### 不吉な瓶の増幅値
 
 | Usage            | Usable                       |
 | ---------------- | ---------------------------- |
@@ -576,11 +576,11 @@ Sets the potion type of this item. Allowed item types are: `minecraft:potion`, `
 }
 ```
 
-Sets the `minecraft:ominous_bottle` potion effect amplifier.
+`minecraft:ominous_bottle` の potion effect amplifier を設定します。
 
-`amplifier`: can be a set number or a [range object](/documentation/shared-constructs#range-objects). Allowed values are `0-4`.
+`amplifier`: 固定値または [range object](/documentation/shared-constructs#range-objects) にできます。許容値は `0-4` です。
 
-### Suspicous Stew Effect
+### 怪しげなシチューの効果
 
 | Usage            | Usable                       |
 | ---------------- | ---------------------------- |
@@ -609,13 +609,13 @@ Sets the `minecraft:ominous_bottle` potion effect amplifier.
 }
 ```
 
-Sets the effect of a `minecraft:suspicious_stew` item.
+`minecraft:suspicious_stew` アイテムの効果を設定します。
 
-`id` can be set to any integer from 0 to 12. 
+`id` は 0 から 12 までの任意の整数にできます。
 
-## Enchanting
+## エンチャント
 
-These functions control whether an item has an enchantment.
+これらの関数は、アイテムにエンチャントを付けるかどうかを制御します。
 
 | Function                   | Container Loot | Block Drops | Fishing | Entity Drops | Entity Equipment | Trade Tables |
 | -------------------------- | -------------- | ----------- | ------- | ------------ | ---------------- | ------------ |
@@ -625,7 +625,7 @@ These functions control whether an item has an enchantment.
 | `enchant_random_gear`      | ✅             | ✅          | ✅      | ✅           | ✅               | ✅           |
 | `specific_enchants`        | ✅             | ✅          | ✅      | ✅           | ✅               | ✅           |
 
-### Enchant for Trading
+### 取引用エンチャント
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -646,9 +646,9 @@ These functions control whether an item has an enchantment.
 }
 ```
 
-**Documented in trade tables.**
+**トレードテーブルで解説済みです。**
 
-### Level-Based Enchantments
+### レベルベースのエンチャント
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -659,7 +659,7 @@ These functions control whether an item has an enchantment.
 | Entity equipment | ✅     |
 | Trade table      | ✅     |
 
-`enchant_with_levels` enchants items using enchantment table logic, optionally allowing for treasure enchantments.
+`enchant_with_levels` は、エンチャントテーブルのロジックでアイテムにエンチャントを付けます。宝エンチャントも任意で許可できます。
 
 <CodeHeader>Level-Based Enchantments Function</CodeHeader>
 
@@ -674,18 +674,18 @@ These functions control whether an item has an enchantment.
 }
 ```
 
-Enchants books as though off an Enchanting Table with the given levels.
+指定されたレベルで、エンチャントテーブルから付与したかのように本へエンチャントします。
 
-Unlike the Enchanting Table, it doesn’t cap at `30`, otherwise seems symmetrical.
+エンチャントテーブルと違い、`30` で上限にはなりません。それ以外は対称的に見えます。
 
-Level `99999` gives ludicrously powerful books… with pretty much every possible enchantment on them.
+レベル `99999` にすると、ほぼあり得る限りのエンチャントが付いた、非常識なほど強力な本になります。
 
-`treasure`: Enables treasure enchantments as possibilities for that item. **Boolean**, defaults to `false`. If `false`, curses can't appear as possibilities; if `true`, they can.
+`treasure`: そのアイテムに宝エンチャントを候補として含めます。**Boolean** で、既定値は `false` です。`false` の場合、呪いは候補に出ません。`true` の場合は出ます。
 
-`levels`: Can be a number or a [range object](/documentation/shared-constructs#range-objects). Defaults to `0`.
-Can be negative, but will just be remapped as though `0`.
+`levels`: 数値または [range object](/documentation/shared-constructs#range-objects) にできます。既定値は `0` です。
+負の値も指定できますが、`0` として扱われます。
 
-### Random Enchantments
+### ランダムエンチャント
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -706,11 +706,11 @@ Can be negative, but will just be remapped as though `0`.
 }
 ```
 
-Randomly picks a count of enchantments and their strengths for the given item.
+指定したアイテムに、ランダムな数のエンチャントとその強さを付けます。
 
-`treasure`:Enables treasure enchantments as possibilities for that item. **Boolean**, defaults to `false`.
+`treasure`: そのアイテムに宝エンチャントを候補として含めます。**Boolean** で、既定値は `false` です。
 
-### Enchant Gear
+### 装備をエンチャント
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -732,16 +732,16 @@ Randomly picks a count of enchantments and their strengths for the given item.
 }
 ```
 
-Randomly picks a count of enchantments and their strengths for the given item.
+指定したアイテムに、ランダムな数のエンチャントとその強さを付けます。
 
-Pretty much like `enchant_randomly`, but seemingly no treasure enchantments.
+`enchant_randomly` にかなり似ていますが、宝エンチャントは付かないようです。
 
-Not working on shears, but does even work on carrot-on-a-stick.
+ハサミには動きませんが、にんじん付きの棒には動きます。
 
-`chance`: the probability of this item to get an enchanted at all. Allowed values ranges from `0.0-1.0`. Defaults to `0`.
-Note that going over `1.0` doesn't make it more "enchanted".
+`chance`: このアイテムがそもそもエンチャントされる確率です。許容範囲は `0.0-1.0` で、既定値は `0` です。
+`1.0` を超えても、より「エンチャントされる」わけではありません。
 
-### Specific Enchantments
+### 特定のエンチャント
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -768,24 +768,24 @@ Note that going over `1.0` doesn't make it more "enchanted".
 }
 ```
 
-Applies a specific set of enchantments.
+特定の組み合わせのエンチャントを適用します。
 
 `enchants`:
 
-Can be a string array or object. Here is the list of all [Enchantment Types](#enchantment-types).
+文字列配列またはオブジェクトにできます。すべての [Enchantment Types](#enchantment-types) の一覧はここです。
 
-For array, any mix of strings or objects (see below).
+配列の場合、文字列とオブジェクトを混在できます（下記参照）。
 
-For string, an enchantment id.
+文字列の場合は、エンチャント ID です。
 
-For object:
+オブジェクトの場合:
 
-`id`: The identifier for the enchantment.
+`id`: エンチャントの識別子です。
 
 `level`:
 
-Optional, defaults to `1`
-Can be an exact number or a 2-valued array, representing `min` and `max`, inclusive.
+任意で、既定値は `1` です。
+正確な数値か、`min` と `max` を表す 2 要素配列にできます（両端を含みます）。
 
 Example:
 
@@ -802,9 +802,9 @@ Example:
 }
 ```
 
-## External Factors
+## 外部要因
 
-External conditions that affect item drops.
+アイテムドロップに影響する外部条件です。
 
 | Function                    | Container Loot | Block Drops | Fishing | Entity Drops | Entity Equipment | Trade Tables |
 | --------------------------- | -------------- | ----------- | ------- | ------------ | ---------------- | ------------ |
@@ -813,7 +813,7 @@ External conditions that affect item drops.
 | `set_data_from_color_index` | ❌             | ❌          | ❌      | ❌           | ❌               | ✅           |
 | `trader_material_type`      | ❌             | ❌          | ❌      | ❌           | ❌               | ✅           |
 
-### Held Tool Looting Enchantment
+### 手持ちツールの Looting エンチャント
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -838,11 +838,11 @@ External conditions that affect item drops.
 }
 ```
 
-Increases the number of items dropped based on the Looting Enchantment level used to kill the entity.
+entity を倒したときに使われた Looting エンチャントのレベルに応じて、ドロップ数を増やします。
 
-Count can be an integer or a [range object](/documentation/shared-constructs#range-objects).
+count は整数または [range object](/documentation/shared-constructs#range-objects) にできます。
 
-### Explosion Decay
+### 爆発による減衰
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -863,9 +863,9 @@ Count can be an integer or a [range object](/documentation/shared-constructs#ran
 }
 ```
 
-By default, always survives. If in an explosion, has a chance of not dropping based on explosion power at that block’s location
+既定では常に残ります。爆発に巻き込まれた場合、そのブロック位置での爆発の強さに応じてドロップしないことがあります。
 
-### Entity Color
+### Entity の色
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -886,9 +886,9 @@ By default, always survives. If in an explosion, has a chance of not dropping ba
 }
 ```
 
-Sets the data value of the block to the value of the `minecraft:color` component on the entity
+ブロックの data 値を、entity 上の `minecraft:color` コンポーネントの値に設定します。
 
-### Trader Material Type
+### Trader 素材タイプ
 
 | Usage            | Usable |
 | ---------------- | ------ |
@@ -909,19 +909,19 @@ Sets the data value of the block to the value of the `minecraft:color` component
 }
 ```
 
-Only in trades? Maybe it can work somewhere in loot.
+取引専用でしょうか。ルートのどこかで動くかもしれません。
 
-# Type Identifiers
+# 型識別子
 
-List of all string values used in functions that use string values such as potion types and enchantments.
+ポーション type やエンチャントなど、文字列値を使う関数で使用される文字列値の一覧です。
 
 :::warning 
-Some of identifiers might not have been included or might be wrong. Always refer to official documentation, but otherwise some of these are usable.
+一部の識別子は含まれていないか、誤っている可能性があります。必ず公式ドキュメントを参照してください。ただし、そのうちのいくつかは実際に使えます。
 :::
 
-## Potion Types
+## ポーションの種類
 
-Used by the `set_potion` function.
+`set_potion` 関数で使います。
 
 - "water"
 - "mundane"
@@ -972,7 +972,7 @@ Used by the `set_potion` function.
 
 ## Enchantment Types
 
-Used by the `specific_enchants` function.
+`specific_enchants` 関数で使います。
 
 - "protection"
 - "fire_protection"

@@ -1,16 +1,16 @@
 ---
 title: Discord
-description: Bedrock Wiki Discord Communities.
+description: Bedrock Wiki の Discord コミュニティです。
 show_contributors: false
 show_outline: false
 hidden: true
 ---
 
-The Bedrock Wiki is supported by two active discord communities, which you are encouraged to join. Additionally, we maintain an actively updated list of community discords for Bedrock tools, content, or simply socialization.
+Bedrock Wiki は、参加を歓迎している 2 つの活発な Discord コミュニティによって支えられています。さらに、Bedrock 向けツールやコンテンツ、あるいは単純に交流を目的としたコミュニティ Discord の一覧も継続的に更新しています。
 
-Please feel free to join us to ask questions, get involved in Bedrock Add-Ons, or to contribute to this site!
+質問をしたり、Bedrock アドオンに参加したり、このサイトに貢献したりするために、ぜひ気軽に参加してください。
 
-## Servers
+## サーバー
 
 <CardGrid>
 <Card
@@ -19,9 +19,9 @@ Please feel free to join us to ask questions, get involved in Bedrock Add-Ons, o
     image="/assets/images/discord/bao.png"
 >
 
-Bedrock Add-Ons is a centralized creators discord for learning about and creating add-ons.
+Bedrock Add-Ons は、アドオンの学習と制作のための creators 向けの中心的な Discord です。
 
-Here you can learn about add-ons, ask questions, and participate in events.
+ここでは、アドオンについて学んだり、質問したり、イベントに参加したりできます。
 
 </Card>
 <Card
@@ -30,18 +30,18 @@ Here you can learn about add-ons, ask questions, and participate in events.
     image="/assets/images/discord/oss.png"
 >
 
-Bedrock OSS is a programming-focused creators discord for Bedrock.
+Bedrock OSS は、Bedrock 向けのプログラミングに重点を置いた creators 向け Discord です。
 
-Here you can report wiki issues, collaborate on new articles, and get help with Bedrock tools, such as bridge. or Blockception's VSCode add-on.
+ここでは、wiki の問題を報告したり、新しい記事の作業を共同で進めたり、bridge. や Blockception の VSCode アドオンなど Bedrock ツールの助けを得たりできます。
 
 </Card>
 <Card
-    title="Additional Servers"
+    title="追加サーバー"
     link="/meta/useful-links#discord-links"
     image="/assets/images/icons/book.png"
 >
 
-We maintain an active list of community discords as well, which you can find on our Useful Links page.
+コミュニティ Discord の一覧も管理しており、[便利なリンク](/meta/useful-links) のページで確認できます。
 
 </Card>
 </CardGrid>

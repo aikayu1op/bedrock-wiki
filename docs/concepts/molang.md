@@ -1,6 +1,6 @@
 ---
 title: Molang
-description: Learn about the basics of Molang.
+description: Molang の基本を学びます。
 tags:
     - intermediate
 mentions:
@@ -14,45 +14,45 @@ mentions:
     - QuazChick
 ---
 
-## What Is Molang?
+## Molang とは？
 
-**Molang** is a math-based expression language used throughout Minecraft Bedrock Edition. It is used in animations, particles, render controllers, and behavior logic.
+**Molang** は、Minecraft Bedrock Edition 全体で使われている数式ベースの式言語です。アニメーション、パーティクル、レンダーコントローラー、行動ロジックなどで使われます。
 
-## Expressions
+## 式
 
-Molang expressions are like little math problems the game solves constantly.
+Molang の式は、ゲームが絶えず解いている小さな数式のようなものです。
 
 ```molang
 q.health < 5 ? 1 : 0
 ```
 
-This returns `1.0`{lang=molang} if health is less than 5, otherwise `0.0`{lang=molang}.
+これは、体力が 5 未満なら `1.0`{lang=molang} を返し、それ以外では `0.0`{lang=molang} を返します。
 
-## Accessing Game Data
+## ゲームデータへのアクセス
 
-### 1. Queries (`query.`{lang=molang} or `q.`{lang=molang})
+### 1. クエリ（`query.`{lang=molang} または `q.`{lang=molang}）
 
-**Read-only values provided by the game.**
+**ゲームから提供される読み取り専用の値です。**
 
-Queries can either return a value directly, or accept arguments to return context-specific results.
+クエリは、値を直接返すことも、引数を受け取って状況に応じた結果を返すこともできます。
 
-Examples without arguments:
+引数なしの例:
 
 -   `query.is_sneaking`{lang=molang}
 -   `query.time_of_day`{lang=molang}
 -   `query.health`{lang=molang}
 
-Examples with arguments:
+引数ありの例:
 
 -   `query.position(0)`{lang=molang}
 -   `query.is_item_name_any('slot.weapon.offhand', 'minecraft:dirt')`{lang=molang}
 -   `query.in_range(5, 0, 10)`{lang=molang}
 
-### 2. Variables (`variable.`{lang=molang} or `v.`{lang=molang})
+### 2. 変数（`variable.`{lang=molang} または `v.`{lang=molang}）
 
-**Read-write values stored per-entity.**
+**エンティティごとに保存される読み書き可能な値です。**
 
-Examples:
+例:
 
 -   `variable.buff_timer`{lang=molang}
 -   `variable.has_effect`{lang=molang}
@@ -61,97 +61,97 @@ Examples:
 v.buff_timer = (v.buff_timer ?? 0) + q.delta_time;
 ```
 
-#### Default Variables
+#### デフォルト変数
 
-| Variable                                           | Description                                                   |
+| 変数                                           | 説明                                                   |
 | -------------------------------------------------- | ------------------------------------------------------------- |
-| `variable.animation_frames_128x128`{lang=molang}   | Controls animation frame index for 128x128 textures (persona) |
-| `variable.animation_frames_32x32`{lang=molang}     | Controls animation frame index for 32x32 textures             |
-| `variable.animation_frames_face`{lang=molang}      | Controls face animation frames (used in facial expressions)   |
-| `variable.attack_time`{lang=molang}                | Progress of an attack animation (0.0 to 0.7)                  |
-| `variable.bob_animation`{lang=molang}              | Oscillation used for idle/movement bobbing                    |
-| `variable.charge_amount`{lang=molang}              | Amount of charge built up (used in attachables)               |
-| `variable.damage_nearby_mobs`{lang=molang}         | `true`{lang=molang} if nearby mobs are being damaged          |
-| `variable.gliding_speed_value`{lang=molang}        | Speed value while gliding                                     |
-| `variable.has_target`{lang=molang}                 | Whether the entity currently has a target                     |
-| `variable.is_brandishing_spear`{lang=molang}       | Whether the entity is holding up a trident                    |
-| `variable.is_holding_left`{lang=molang}            | Whether the left hand is holding something                    |
-| `variable.is_holding_right`{lang=molang}           | Whether the right hand is holding something                   |
-| `variable.is_holding_spyglass`{lang=molang}        | Whether the player is holding a spyglass                      |
-| `variable.is_horizontal_splitscreen`{lang=molang}  | `true`{lang=molang} if horizontal splitscreen is active       |
-| `variable.is_paperdoll`{lang=molang}               | Whether the paperdoll is currently visible                    |
-| `variable.is_sneaking`{lang=molang}                | Whether the player is sneaking                                |
-| `variable.is_tooting_goat_horn`{lang=molang}       | Whether the player is tooting a goat horn                     |
-| `variable.is_using_brush`{lang=molang}             | Whether the player is using a brush                           |
-| `variable.is_using_vr`{lang=molang}                | Whether the player is using a VR headset                      |
-| `variable.is_vertical_splitscreen`{lang=molang}    | `true`{lang=molang} if vertical splitscreen is active         |
-| `variable.last_blink_time`{lang=molang}            | Time since last blink event (persona)                         |
-| `variable.left_arm_swim_amount`{lang=molang}       | Amount of swimming animation applied to left arm              |
-| `variable.map_face_icon`{lang=molang}              | `true`{lang=molang} if there is a map face icon display       |
-| `variable.player_arm_height`{lang=molang}          | Height offset of arms (usually adjusted in first-person view) |
-| `variable.player_x_rotation`{lang=molang}          | X-axis rotation of the player’s view                          |
-| `variable.right_arm_swim_amount`{lang=molang}      | Amount of swimming animation applied to right arm             |
-| `variable.short_arm_offset_left`{lang=molang}      | Adjusts arm length for left arm (used in VR/paperdoll)        |
-| `variable.short_arm_offset_right`{lang=molang}     | Adjusts arm length for right arm                              |
-| `variable.swim_amount`{lang=molang}                | General swimming animation progress                           |
-| `variable.use_blinking_animation`{lang=molang}     | Enables/disables blinking animation logic                     |
-| `variable.use_item_interval_progress`{lang=molang} | Tracks middle portion of item use timeline                    |
-| `variable.use_item_startup_progress`{lang=molang}  | Tracks startup phase of item use animation                    |
-| `variable.is_first_person`{lang=molang}            | Whether the player is in first-person                         |
+| `variable.animation_frames_128x128`{lang=molang}   | 128x128 テクスチャ（persona）のアニメーションフレーム index を制御します |
+| `variable.animation_frames_32x32`{lang=molang}     | 32x32 テクスチャのアニメーションフレーム index を制御します             |
+| `variable.animation_frames_face`{lang=molang}      | 顔のアニメーションフレームを制御します（表情に使われます）   |
+| `variable.attack_time`{lang=molang}                | 攻撃アニメーションの進行度（0.0 から 0.7）                  |
+| `variable.bob_animation`{lang=molang}              | 待機時や移動時の揺れに使う振動                     |
+| `variable.charge_amount`{lang=molang}              | 溜まったチャージ量（attachable で使われます）               |
+| `variable.damage_nearby_mobs`{lang=molang}         | 近くの mob がダメージを受けている場合は `true`{lang=molang}          |
+| `variable.gliding_speed_value`{lang=molang}        | 滑空中の速度値                                     |
+| `variable.has_target`{lang=molang}                 | エンティティが現在ターゲットを持っているかどうか                     |
+| `variable.is_brandishing_spear`{lang=molang}       | エンティティがトライデントを掲げているかどうか                    |
+| `variable.is_holding_left`{lang=molang}            | 左手に何かを持っているかどうか                    |
+| `variable.is_holding_right`{lang=molang}           | 右手に何かを持っているかどうか                   |
+| `variable.is_holding_spyglass`{lang=molang}        | プレイヤーが望遠鏡を持っているかどうか                      |
+| `variable.is_horizontal_splitscreen`{lang=molang}  | 横分割画面が有効なら `true`{lang=molang}       |
+| `variable.is_paperdoll`{lang=molang}               | ペーパードールが現在表示されているか                    |
+| `variable.is_sneaking`{lang=molang}                | プレイヤーがスニークしているか                                |
+| `variable.is_tooting_goat_horn`{lang=molang}       | プレイヤーがヤギの角笛を吹いているか                     |
+| `variable.is_using_brush`{lang=molang}             | プレイヤーがブラシを使っているか                           |
+| `variable.is_using_vr`{lang=molang}                | プレイヤーが VR ヘッドセットを使っているか                      |
+| `variable.is_vertical_splitscreen`{lang=molang}    | 縦分割画面が有効なら `true`{lang=molang}         |
+| `variable.last_blink_time`{lang=molang}            | 最後のまばたきイベントからの時間（persona）                         |
+| `variable.left_arm_swim_amount`{lang=molang}       | 左腕に適用される水泳アニメーション量              |
+| `variable.map_face_icon`{lang=molang}              | マップの顔アイコン表示がある場合は `true`{lang=molang}       |
+| `variable.player_arm_height`{lang=molang}          | 腕の高さオフセット（通常は一人称視点で調整） |
+| `variable.player_x_rotation`{lang=molang}          | プレイヤー視点の X 軸回転                          |
+| `variable.right_arm_swim_amount`{lang=molang}      | 右腕に適用される水泳アニメーション量             |
+| `variable.short_arm_offset_left`{lang=molang}      | 左腕の長さを調整します（VR/paperdoll で使用）        |
+| `variable.short_arm_offset_right`{lang=molang}     | 右腕の長さを調整します                              |
+| `variable.swim_amount`{lang=molang}                | 一般的な水泳アニメーションの進行度                           |
+| `variable.use_blinking_animation`{lang=molang}     | まばたきアニメーションロジックの有効/無効を切り替えます                     |
+| `variable.use_item_interval_progress`{lang=molang} | アイテム使用タイムラインの中間部分を追跡します                    |
+| `variable.use_item_startup_progress`{lang=molang}  | アイテム使用アニメーションの開始フェーズを追跡します                    |
+| `variable.is_first_person`{lang=molang}            | プレイヤーが一人称視点かどうか                         |
 
-### 3. Temporary Variables (`temp.`{lang=molang} or `t.`{lang=molang})
+### 3. 一時変数（`temp.`{lang=molang} または `t.`{lang=molang}）
 
-**Read-write values stored per-pack.**
+**パックごとに保存される読み書き可能な値です。**
 
 ```molang
 t.temp_speed = q.ground_speed * 1.2;
 ```
 
-Temporary variables are **pack-scoped** and **ephemeral**. They only exist for the duration of the current Molang expression or loop. They are **shared globally** across a pack and are **cleared automatically** after each expression completes. They do not support structs (no `.x`, `.y`, `.z`).
+一時変数は **パック単位** で、**一時的** です。現在の Molang 式またはループが続いている間だけ存在します。これらはパック全体で **共有** され、各式の完了後に自動で **消去** されます。構造体はサポートしません（`.x`、`.y`、`.z` は不可）。
 
 :::tip
-They are also incredibly useful for **passing intermediate results between expressions**, especially in contexts that **do not support passing in variables or queries directly**, such as particles.
+一時変数は、**式の間で中間結果を渡す** ためにも非常に便利です。特に、**変数やクエリを直接渡せない** パーティクルのような文脈で役立ちます。
 :::
 
-### 4. Context Variables (`context.`{lang=molang} or `c.`{lang=molang})
+### 4. コンテキスト変数（`context.`{lang=molang} または `c.`{lang=molang}）
 
-**Read-only values from the base game in specific situations.**
+**特定の状況で、ベースゲームから読み取る値です。**
 
-#### Common Context Variables
+#### よく使うコンテキスト変数
 
-| Context Variable                                 | Contexts                                 | Description                                                   |
+| コンテキスト変数                                 | 文脈                                 | 説明                                                   |
 | ------------------------------------------------ | ---------------------------------------- | ------------------------------------------------------------- |
-| `context.count`{lang=molang}                     | Recipes                                  | Count of something in the current context                     |
-| `context.is_first_person`{lang=molang}           | Animations, Entities, Render Controllers | `true`{lang=molang} if the entity is rendered in first person |
-| `context.item_slot`{lang=molang}                 | Models                                   | Slot index of the current item                                |
-| `context.other`{lang=molang}                     | Items                                    | The "other" item (for repair targets)                         |
-| `context.owning_entity`{lang=molang}             | Attachables                              | Entity that owns this context (used for getting queries)      |
-| `context.player_offhand_arm_height`{lang=molang} | Models                                   | Arm offset used when rendering offhand                        |
+| `context.count`{lang=molang}                     | レシピ                                  | 現在の文脈における対象の数                     |
+| `context.is_first_person`{lang=molang}           | アニメーション、エンティティ、レンダーコントローラー | エンティティが一人称で描画される場合は `true`{lang=molang} |
+| `context.item_slot`{lang=molang}                 | モデル                                   | 現在のアイテムのスロット index                                |
+| `context.other`{lang=molang}                     | アイテム                                    | 「もう一方」のアイテム（修理対象など）                         |
+| `context.owning_entity`{lang=molang}             | attachable                              | このコンテキストを所有するエンティティ（クエリ取得に使用）      |
+| `context.player_offhand_arm_height`{lang=molang} | モデル                                   | オフハンド描画時に使う腕のオフセット                        |
 
-Example:
+例:
 
 ```molang
 context.other->query.remaining_durability
 ```
 
-## Logic and Conditions
+## ロジックと条件
 
-### Comparison Operators
+### 比較演算子
 
-| Operator                             | Description                |
+| 演算子                             | 説明                |
 | ------------------------------------ | -------------------------- |
-| `==`{lang=molang}                    | Equal                      |
-| `!=`{lang=molang}                    | Not equal                  |
-| `<`{lang=molang}, `>`{lang=molang}   | Less/greater than          |
-| `<=`{lang=molang}, `>=`{lang=molang} | Less/greater than or equal |
+| `==`{lang=molang}                    | 等しい                      |
+| `!=`{lang=molang}                    | 等しくない                  |
+| `<`{lang=molang}, `>`{lang=molang}   | より小さい / より大きい          |
+| `<=`{lang=molang}, `>=`{lang=molang} | 以下 / 以上                |
 
 ```molang
 q.health <= 10
 ```
 
-### Boolean Logic
+### ブール演算
 
-| Operator            | Meaning |
+| 演算子            | 意味 |
 | ------------------- | ------- |
 | `&&`{lang=molang}   | AND     |
 | `\|\|`{lang=molang} | OR      |
@@ -160,18 +160,18 @@ q.health <= 10
 q.is_sneaking && q.is_using_item
 ```
 
-### Conditional Operators
+### 条件演算子
 
-Use `?`{lang=molang} and `:`{lang=molang} like if-else:
+`?`{lang=molang} と `:`{lang=molang} を if-else のように使えます。
 
--   Binary: `condition ? result`{lang=molang}
--   Ternary: `condition ? true : false`{lang=molang}
+-   二項: `condition ? result`{lang=molang}
+-   三項: `condition ? true : false`{lang=molang}
 
 ```molang
 q.is_jumping ? 3 : 0
 ```
 
-You can also use the **null coalescing operator** (`??`{lang=molang}) to provide a fallback when a variable might not be initialized:
+また、変数がまだ初期化されていない場合のフォールバックとして、**null 合体演算子** (`??`{lang=molang}) も使えます。
 
 -   `fallback = value ?? default`{lang=molang}
 
@@ -179,48 +179,48 @@ You can also use the **null coalescing operator** (`??`{lang=molang}) to provide
 v.timer = (v.timer ?? 0) + q.delta_time
 ```
 
-This avoids content log errors if `v.timer`{lang=molang} has not been defined yet.
+これにより、`v.timer`{lang=molang} がまだ定義されていない場合でもコンテンツログエラーを避けられます。
 
-## Math Functions
+## 数学関数
 
-Molang supports a wide range of math functions, using **degrees** (not radians) for trigonometry. These are useful for animation timing, oscillation, directional math, clamping, and more.
+Molang は幅広い数学関数をサポートしており、三角関数には **ラジアンではなく度数法** を使います。これらはアニメーションのタイミング、揺れ、方向計算、値の制限などに便利です。
 
-| Function                                           | Description                                               |
+| 関数                                           | 説明                                               |
 | -------------------------------------------------- | --------------------------------------------------------- |
-| `math.abs(x)`{lang=molang}                         | Absolute value of `x`                                     |
-| `math.acos(x)`{lang=molang}                        | Arccosine (inverse cosine) of `x`                         |
-| `math.asin(x)`{lang=molang}                        | Arcsine (inverse sine) of `x`                             |
-| `math.atan(x)`{lang=molang}                        | Arctangent (inverse tangent) of `x`                       |
-| `math.atan2(y, x)`{lang=molang}                    | Arctangent of `y / x` — returns angle in degrees          |
-| `math.ceil(x)`{lang=molang}                        | Round `x` up to the nearest integer                       |
-| `math.clamp(x, min, max)`{lang=molang}             | Constrain `x` between `min` and `max`                     |
-| `math.cos(x)`{lang=molang}                         | Cosine of `x` degrees                                     |
-| `math.die_roll(n, low, high)`{lang=molang}         | Roll `n` floats between `low` and `high` and sum them     |
-| `math.die_roll_integer(n, low, high)`{lang=molang} | Same as above but rolls integers                          |
-| `math.exp(x)`{lang=molang}                         | Exponential (e^x)                                         |
-| `math.floor(x)`{lang=molang}                       | Round `x` down to the nearest integer                     |
-| `math.hermite_blend(t)`{lang=molang}               | Smooth curve: `3t^2 - 2t^3`, good for eased interpolation |
-| `math.lerp(a, b, t)`{lang=molang}                  | Linearly interpolate between `a` and `b` by `t`           |
-| `math.lerprotate(a, b, t)`{lang=molang}            | Rotational interpolation, shortest path around a circle   |
-| `math.ln(x)`{lang=molang}                          | Natural logarithm of `x`                                  |
-| `math.max(a, b)`{lang=molang}                      | Larger of `a` or `b`                                      |
-| `math.min(a, b)`{lang=molang}                      | Smaller of `a` or `b`                                     |
-| `math.min_angle(x)`{lang=molang}                   | Clamp angle `x` to the range -180° to 180°                |
-| `math.mod(a, b)`{lang=molang}                      | Remainder of `a / b`                                      |
-| `math.pi`{lang=molang}                             | Constant for π (approximately 3.14159)                    |
-| `math.pow(base, exponent)`{lang=molang}            | Raise `base` to the `exponent` power                      |
-| `math.random(low, high)`{lang=molang}              | Random float between `low` and `high`                     |
-| `math.random_integer(low, high)`{lang=molang}      | Random integer between `low` and `high`                   |
-| `math.round(x)`{lang=molang}                       | Round `x` to the nearest integer                          |
-| `math.sin(x)`{lang=molang}                         | Sine of `x` degrees                                       |
-| `math.sqrt(x)`{lang=molang}                        | Square root of `x`                                        |
-| `math.trunc(x)`{lang=molang}                       | Remove fractional part of `x` (round toward zero)         |
+| `math.abs(x)`{lang=molang}                         | `x` の絶対値                                     |
+| `math.acos(x)`{lang=molang}                        | `x` の逆余弦                                     |
+| `math.asin(x)`{lang=molang}                        | `x` の逆正弦                             |
+| `math.atan(x)`{lang=molang}                        | `x` の逆正接                       |
+| `math.atan2(y, x)`{lang=molang}                    | `y / x` の逆正接。角度を度で返します          |
+| `math.ceil(x)`{lang=molang}                        | `x` を最も近い整数に切り上げる                       |
+| `math.clamp(x, min, max)`{lang=molang}             | `x` を `min` と `max` の間に制限する                     |
+| `math.cos(x)`{lang=molang}                         | `x` 度の余弦                                     |
+| `math.die_roll(n, low, high)`{lang=molang}         | `low` から `high` の間の浮動小数を `n` 回振って合計する     |
+| `math.die_roll_integer(n, low, high)`{lang=molang} | 上と同じだが整数を振る                          |
+| `math.exp(x)`{lang=molang}                         | 指数関数（e^x）                                         |
+| `math.floor(x)`{lang=molang}                       | `x` を最も近い整数に切り下げる                     |
+| `math.hermite_blend(t)`{lang=molang}               | なめらかな曲線: `3t^2 - 2t^3`。イージング補間に便利 |
+| `math.lerp(a, b, t)`{lang=molang}                  | `t` によって `a` と `b` の間を線形補間する           |
+| `math.lerprotate(a, b, t)`{lang=molang}            | 回転補間。円周上の最短経路を取る   |
+| `math.ln(x)`{lang=molang}                          | `x` の自然対数                                  |
+| `math.max(a, b)`{lang=molang}                      | `a` と `b` の大きいほう                                      |
+| `math.min(a, b)`{lang=molang}                      | `a` と `b` の小さいほう                                     |
+| `math.min_angle(x)`{lang=molang}                   | 角度 `x` を -180° から 180° の範囲に収める                |
+| `math.mod(a, b)`{lang=molang}                      | `a / b` の余り                                      |
+| `math.pi`{lang=molang}                             | π の定数（約 3.14159）                    |
+| `math.pow(base, exponent)`{lang=molang}            | `base` を `exponent` 乗する                      |
+| `math.random(low, high)`{lang=molang}              | `low` と `high` の間のランダムな浮動小数                     |
+| `math.random_integer(low, high)`{lang=molang}      | `low` と `high` の間のランダムな整数                   |
+| `math.round(x)`{lang=molang}                       | `x` を最も近い整数に丸める                          |
+| `math.sin(x)`{lang=molang}                         | `x` 度の正弦                                       |
+| `math.sqrt(x)`{lang=molang}                        | `x` の平方根                                        |
+| `math.trunc(x)`{lang=molang}                       | `x` の小数部分を取り除く（0 に向かって丸める）         |
 
-## Structs
+## 構造体
 
-Structs in Molang are values that contain multiple related fields, like `.x`, `.y`, `.z`.
+Molang の構造体は、`.x`、`.y`、`.z` のように複数の関連フィールドを持つ値です。
 
-You can create your own structs using `variable.`{lang=molang} and assign values to their fields directly:
+`variable.`{lang=molang} を使って自分で構造体を作り、そのフィールドに直接値を代入できます。
 
 ```molang
 v.location.x = 1;
@@ -228,19 +228,19 @@ v.location.y = 2;
 v.location.z = 3;
 ```
 
-These values can then be reused or passed to other expressions:
+これらの値は、ほかの式で再利用したり渡したりできます。
 
 ```molang
 v.target = v.other_mob->v.location;
 ```
 
 :::warning
-`temp.`{lang=molang} variables do **not** support structs. Use `variable.`{lang=molang} for anything involving `.x`, `.y`, `.z`, etc.
+`temp.`{lang=molang} 変数は構造体を **サポートしません**。`.x`、`.y`、`.z` などを使う場合は `variable.`{lang=molang} を使ってください。
 :::
 
-## Loops and Flow Control
+## ループとフロー制御
 
-You can run expressions multiple times using `loop`{lang=molang}.
+`loop`{lang=molang} を使うと、式を複数回実行できます。
 
 ```molang
 v.a = 1;
@@ -253,10 +253,10 @@ loop(10, {
 });
 ```
 
-### `break`{lang=molang} and `continue`{lang=molang}
+### `break`{lang=molang} と `continue`{lang=molang}
 
--   `break;`{lang=molang} exits the current loop early
--   `continue;`{lang=molang} skips to the next iteration
+-   `break;`{lang=molang} は現在のループを途中で抜けます
+-   `continue;`{lang=molang} は次の反復へ進みます
 
 ```molang
 loop(10, {
@@ -265,15 +265,15 @@ loop(10, {
 });
 ```
 
-## Simple vs Complex Expressions
+## 単純な式と複雑な式
 
--   **Simple**: a single expression that returns a value
+-   **単純**: 値を返す 1 つの式
 
 ```molang
 math.sin(q.anim_time * 10)
 ```
 
--   **Complex**: multiple statements with `;` and an explicit `return`{lang=molang}
+-   **複雑**: `;` で区切られ、明示的な `return`{lang=molang} を含む複数文
 
 ```molang
 t.a = math.sin(q.anim_time * 10);
@@ -281,24 +281,24 @@ t.b = t.a * t.a;
 return t.b + 1;
 ```
 
-## Versioning and `min_engine_version`
+## バージョンと `min_engine_version`
 
-Molang behavior can change depending on the `min_engine_version` defined in your pack’s `manifest.json`. These changes improve how expressions behave, fix bugs, and deprecate older behavior.
+Molang の挙動は、`manifest.json` で定義された `min_engine_version` によって変わることがあります。これらの変更は、式の動作改善、バグ修正、古い挙動の非推奨化などを目的としています。
 
-Make sure your pack's engine version is set correctly to take advantage of the latest fixes and syntax improvements.
+最新の修正や構文改善を活かすために、パックの engine version を正しく設定してください。
 
-| Pack `min_engine_version` | Description                                                                                                                                                  |
+| Pack `min_engine_version` | 説明                                                                                                                                                  |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `1.17.0`                  | Initial support for Versioned Changes added. (Not actually a Versioned Change)                                                                               |
-| `1.17.30`                 | Fixed `query.item_remaining_use_duration` conversion from ticks to seconds (was multiplied by 20 instead of divided). Also reversed its normalization logic. |
-| `1.17.40`                 | Added new error messages for invalid expressions (e.g., `'text' + 1` now causes a content error).                                                            |
-| `1.17.40`                 | Added error detection for mismatched parentheses/brackets and unknown tokens.                                                                                |
-| `1.18.10`                 | Fixed ternary operator associativity. `A ? B : C ? D : E` now evaluates correctly as `A ? B : (C ? D : E)`.                                                  |
-| `1.18.20`                 | Changed operator precedence: logical `AND` now evaluates before `OR`, and comparison before equality.                                                        |
-| `1.19.60`                 | Fixed issue where dividing by a dynamically negative value used the absolute value instead.                                                                  |
-| `1.20.0`                  | Fixed `query.cape_flap_amount` using incorrect head rotation instead of body rotation.                                                                       |
-| `1.20.10`                 | Renamed `block_property` and `has_block_property` to `block_state` and `has_block_state`.                                                                    |
-| `1.20.40`                 | Deprecated `block_property` and `has_block_property`.                                                                                                        |
-| `1.20.50`                 | Fully removed `block_property` logic. Also removed queries: `is_scenting`, `is_rising`, and `is_feeling_happy`. Replaced by `timer_flag_1–3`.                |
-| `1.20.70`                 | Step particle texture queries now treat leaf blocks as valid sources.                                                                                        |
+| `1.17.0`                  | Versioned Changes の初期サポートが追加されました。（実際には Versioned Change ではありません）                                                                               |
+| `1.17.30`                 | `query.item_remaining_use_duration` の ticks から seconds への変換を修正しました（20 倍ではなく 20 で割るよう修正）。また正規化ロジックも反転しました。 |
+| `1.17.40`                 | 無効な式に対する新しいエラーメッセージを追加しました（例: `'text' + 1` でコンテンツエラーになります）。                                                            |
+| `1.17.40`                 | 括弧やブラケットの不一致、未知のトークンの検出を追加しました。                                                                                |
+| `1.18.10`                 | 三項演算子の結合性を修正しました。`A ? B : C ? D : E` は `A ? B : (C ? D : E)` として正しく評価されます。                                                  |
+| `1.18.20`                 | 演算子の優先順位を変更しました。論理 `AND` は `OR` より先、比較は等価より先に評価されます。                                                        |
+| `1.19.60`                 | 動的に負の値で割るとき、絶対値が使われてしまう問題を修正しました。                                                                  |
+| `1.20.0`                  | `query.cape_flap_amount` が body rotation ではなく誤った head rotation を使っていた問題を修正しました。                                                                       |
+| `1.20.10`                 | `block_property` と `has_block_property` を `block_state` と `has_block_state` に改名しました。                                                                    |
+| `1.20.40`                 | `block_property` と `has_block_property` を非推奨にしました。                                                                                                        |
+| `1.20.50`                 | `block_property` のロジックを完全に削除しました。また `is_scenting`、`is_rising`、`is_feeling_happy` クエリを削除しました。`timer_flag_1–3` に置き換えられました。                |
+| `1.20.70`                 | 歩行時のパーティクルテクスチャクエリが、leaf ブロックを有効なソースとして扱うようになりました。                                                                                        |
 

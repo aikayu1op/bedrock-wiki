@@ -1,6 +1,6 @@
 ---
-title: Vanilla Block Models
-description: Block models that are built into the game for use with custom blocks.
+title: バニラのブロックモデル
+description: カスタムブロックで使えるように、ゲーム内に組み込まれているブロックモデルです。
 category: Documentation
 tags:
     - beginner
@@ -11,17 +11,17 @@ mentions:
     - QuazChick
 ---
 
-Although custom blocks are unable to make use of vanilla [block shapes](/blocks/block-shapes), Mojang provides several `minecraft` namespaced models that replicate their look!
+カスタムブロックはバニラの [block shapes](/blocks/block-shapes) を使えませんが、Mojang は見た目を再現した `minecraft` 名前空間のモデルをいくつか用意しています。
 
 :::danger HARDCODED
-Currently, vanilla block models are not data-driven, so cannot be modified nor found as JSON files in the vanilla resource pack.
+現在、バニラのブロックモデルはデータ駆動ではないため、変更したり、バニラのリソースパック内の JSON ファイルとして見つけたりすることはできません。
 
-This also means that they are not compatible with the `bone_visibility` and `culling` parameters of the [geometry](/blocks/block-components#geometry) component.
+これは、[geometry](/blocks/block-components#geometry) コンポーネントの `bone_visibility` および `culling` パラメータにも対応していないことを意味します。
 :::
 
-## Applying Vanilla Models
+## バニラモデルの適用
 
-Vanilla block models are applied in the same way as [custom block models](/blocks/block-models), using the [geometry](/blocks/block-components#geometry) component, with textures defined in [material instances](/blocks/block-components#material-instances):
+バニラのブロックモデルは、[カスタムブロックモデル](/blocks/block-models) と同じ方法で適用します。[geometry](/blocks/block-components#geometry) コンポーネントを使い、テクスチャは [material instances](/blocks/block-components#material-instances) で定義します。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -34,6 +34,6 @@ Vanilla block models are applied in the same way as [custom block models](/block
 }
 ```
 
-## List of Vanilla Models
+## バニラモデル一覧
 
 <Table data="models.json" />

@@ -1,6 +1,5 @@
 ---
-title: Structure Presentation
-description: Learn how to capture in-game structures as images that can be shared elsewhere.
+title: 構造物のプレゼンテーション
 category: Ideas
 mentions:
     - MedicalJewel105
@@ -8,52 +7,52 @@ mentions:
     - ThomasOrs
 ---
 
-This page demonstrates different methods of presenting structures, allowing you to showcase your add-on and its features.
+このページでは、構造物の見せ方をいくつか紹介し、アドオンやその機能をわかりやすく示せるようにします。
 
-## Presentation Methods
+## 見せ方
 
-There are lots ways of you could showcase structures to people. You can:
+構造物を人に見せる方法はいろいろあります。たとえば、次のようなものです。
 
--   Take in-game screenshots of the structure.
--   Take a screenshot inside of a structure block.
--   Create a 3D object of your structure.
+-   構造物をゲーム内でスクリーンショットする。
+-   ストラクチャーブロック内でスクリーンショットする。
+-   構造物を 3D オブジェクトとして作成する。
 
-Below all three methods will be shown using the Pillager outpost structure as an example.
+以下では、ピリジャーの前哨基地を例にして、3 つの方法を順に見ていきます。
 
-### In-Game Screenshot
+### ゲーム内スクリーンショット
 
-This is the simplest method because it is quick and easy. It also lets you showcase the structure in the context of the world, there are some disadvantages however. You may need to find a good place to take a screenshot or have difficulty finding a good angle.
+これは最も簡単な方法で、手早く実行できます。世界の文脈の中で構造物を見せられる利点もありますが、欠点もあります。撮影場所を探す必要があったり、良い角度を見つけにくかったりします。
 
 ![](in-game.png)
 
-### In a Structure Block
+### ストラクチャーブロック内で撮る
 
-This method avoids some of the disadvantages of a screenshot in the world, you are able to focus entirely on the structure without other blocks in the view.
+この方法なら、ゲーム内で撮るときのいくつかの欠点を避けられます。ほかのブロックを映さず、構造物だけに集中できます。
 
 ![](structure-block-0.png)
 
-By making [JSON UI](/json-ui/json-ui-intro) edits you can change the background color and remove other elements to further improve this method.
+[JSON UI](/json-ui/json-ui-intro) を編集すれば、背景色を変えたり、ほかの要素を消したりして、この方法をさらに改善できます。
 
 ![](structure-block-1.png)
 
-Or you can use the **Structure Presentation Pack** by @minato4743 to simplify the process. It includes some default colors and gradients as well as a toggle to hide the preview arrows.
+あるいは、@minato4743 の **Structure Presentation Pack** を使えば手順を簡略化できます。既定の色やグラデーションに加えて、プレビュー矢印を隠す切り替えも含まれています。
 
 <Button
     link="/assets/packs/visuals/structure-presentation/structure_presentation_pack.mcpack"
     download
 >
-    Download Pack
+    Pack をダウンロード
 </Button>
 
 ![](structure_presentation_pack.png)
 
 ![](pack_gradient_result.png)
 
-### Rendered 3D Object
+### レンダリングした 3D オブジェクト
 
-Structures can be exported as a 3D model from the Structure Block UI.
+構造物は、ストラクチャーブロックの UI から 3D モデルとして書き出せます。
 
 ![](model-render.png)
 
-This method is only available for Windows users.
-You can create a simple render in Paint 3D or a more advanced render in Blender.
+この方法は Windows ユーザーのみ利用できます。
+Paint 3D で簡単なレンダリングを作ることも、Blender でより高度なレンダリングを作ることもできます。

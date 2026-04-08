@@ -9,20 +9,20 @@ mentions:
     - zheaEvyline
     - jordanparki7
 nav_order: 3
-description: Learn about functions in MCBE.
+description: MCBE の functions について学びます。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-Functions are `.mcfunction` files which contain multiple lines of commands. They are run with the `/function` command in-game.
+Functions は、複数行のコマンドを含む `.mcfunction` ファイルです。ゲーム内では `/function` コマンドで実行します。
 
-Functions are created in a **Behavior Pack**, nested within the **functions** folder. A function pack creates a system using solely function files.
+Functions は **Behavior Pack** 内の **functions** フォルダに作成します。function pack は、関数ファイルだけでシステムを構成します。
 
-Functions are useful in many ways to reduce the time spent going from command block to command block debugging a system. They also help with packaging systems for use in multiple worlds and provide many functions that can change how everything works.
+Functions は、コマンドブロックを行き来してシステムをデバッグする時間を減らすのに役立ちます。複数のワールドで使うためにシステムをまとめるのにも便利で、動作全体を変えられる多くの利点があります。
 
-## Function Pack Folder Structure
+## Function Pack のフォルダ構成
 
 <FolderView :paths="[
     'BP/functions/this_code.mcfunction',
@@ -31,25 +31,25 @@ Functions are useful in many ways to reduce the time spent going from command bl
     'BP/functions/nested/this_code_is_nested.mcfunction',
 ]" />
 
-To help create a consistent format, make it easier for everyone to follow, and to maintain uniformity across your functions, it is advised to follow these best-practices for your folder structure:
+一貫した形式を作り、誰にとっても追いやすくし、functions 全体の統一感を保つために、フォルダ構成では次のベストプラクティスに従うことをおすすめします。
 
-1. All your `.mcfunction` files must be go in a namespaced root-folder within the functions folder. On Bedrock Wiki, we use the `wiki` namespace. However, you may choose a namespace based on your name or project. For more info, refer to the [namespaces](/concepts/namespaces) page.
+1. すべての `.mcfunction` ファイルは、functions フォルダ内の名前空間付きルートフォルダに入れる必要があります。Bedrock Wiki では `wiki` 名前空間を使っていますが、名前やプロジェクトに合わせて別の名前空間を選んでもかまいません。詳しくは [namespaces](/concepts/namespaces) のページを参照してください。
     - ✅️ `BP/functions/wiki/random_number.mcfunction`
     - ❌️ `BP/functions/random_number.mcfunction`
-2. Folders and files in a pack must be named using `snake_case`
-    - This means only **lowercase** alpha-numeric characters and underscores (`_`) are allowed.
+2. パック内のフォルダ名とファイル名は `snake_case` で付ける必要があります。
+    - 使えるのは **小文字** の英数字とアンダースコア (`_`) だけです。
     - ✅️ `BP/functions/wiki/scoreboard/objectives/add_all.mcfunction`
     - ❌️ `BP/functions/wiki/scoreboard/objectives/Add-All.mcfunction`
-3. They must be properly nested:
+3. 適切にネストされている必要があります。
     - ✅️ `BP/functions/wiki/teleport/zone/hell`
     - ❌ `BP/functions/wiki/teleport_hellzone`
-4. The names must follow an `action_object` structure. Meaning verbs should come before subjects.
+4. 名前は `action_object` 構造に従う必要があります。つまり、動詞を主語より前に置きます。
     - ✅️ `add_all`
     - ❌️ `all_add`
     - ✅️ `shuffle_position`
     - ❌️ `position_shuffle`
-5. The total character length of any path must not exceed 80 characters (console limitation).
-6. Content folders should use consistent pluralization: Stick with names that are either all plural or all singular, don't mix and match. Example:
+5. どのパスも文字数は合計 80 文字を超えてはいけません（コンソールの制限）。
+6. コンテンツフォルダの複数形・単数形は統一してください。すべて複数、またはすべて単数に揃え、混在させないでください。例:
 
 ✅️ **Consistent**:
 
@@ -60,8 +60,8 @@ BP/functions/wiki/event/players/on_death.mcfunction
 BP/functions/wiki/event/worlds/on_initialize.mcfunction
 ```
 
--   All content folders `ability` and `event` are consistently singular.
--   The content folders in `event` are also consistent, as both `players` and `worlds` are plural.
+-   コンテンツフォルダ `ability` と `event` はどちらも単数形で統一されています。
+-   `event` 内のコンテンツフォルダも、`players` と `worlds` がどちらも複数形で統一されています。
 
 ❌️ **Inconsistent**:
 
@@ -73,11 +73,11 @@ BP/functions/wiki/event/world/on_initialize.mcfunction
 ```
 
 -   Only `abilities` content folder is pluralized while `event` is singular.
--   Also, in the `event` folder, the `players` folder is plural while `world` is singular.
+-   また、`event` フォルダ内では `players` が複数形なのに対し、`world` が単数形になっています。
 
-## Notes For Beginners
+## 初心者向けの注意
 
-_Below is an example function file for beginners reference:_
+_以下は初心者向けの参考用 function ファイル例です。_
 
 <CodeHeader>BP/functions/wiki/effects.mcfunction</CodeHeader>
 
@@ -91,26 +91,26 @@ effect @a[tag=wiki:at_spawn] weakness 12 255 true
 effect @a[tag=wiki:in_nether] fire_resistance 12 255 true
 ```
 
--   Commands in a function may not begin with a slash (`/`). Each new line in a function file represents a new command (ignored if left blank). You may start a line with a hashtag ( `#`) to add comments — the space after `#` is only a format preference. For comments style guide for functions, see the section **[below](#comments-style-guide)**.
+-   function 内のコマンドはスラッシュ (`/`) で始められません。function ファイルの各新しい行は新しいコマンドを表します（空行は無視されます）。行頭をハッシュ (`#`) にしてコメントを追加できます。`#` の後のスペースは書式上の好みです。function のコメント書式ガイドについては、**[下](#comments-style-guide)** の節を参照してください。
 
--   All commands in a function are run in the _same tick_. Because of this, a function which causes large changes may cause a sudden lag spike and it is helpful to delegate some commands across multiple ticks, if possible. Commands in a function are still run in the same sequence, however.
+-   function 内のすべてのコマンドは _同じティック_ で実行されます。そのため、大きな変化を起こす function は急なラグを生むことがあり、可能であれば一部のコマンドを複数ティックに分けるとよいです。ただし、function 内のコマンドは順番どおりに実行されます。
 
--   In Minecraft Bedrock, functions cannot run more than 10,000 commands in a function file. This includes any other function files that are executed inside of the original file.
+-   Minecraft Bedrock では、1 つの function ファイルで 10,000 コマンドを超えて実行できません。元のファイル内で実行されるほかの function ファイルもこれに含まれます。
 
--   It is not possible to run conditional commands. Those will still need to utilize command blocks in some way, or could utilize the 1.19.50 execute syntax.
+-   条件付きコマンドを実行することはできません。そうした処理は何らかの形でコマンドブロックを使うか、1.19.50 の execute 構文を使う必要があります。
 
--   Running commands with a specified delay in a function involves using scoreboard timers to incrementally count up each tick until a certain point, and executing commands at specific scores within the file. See [Scoreboard Timers](/commands/scoreboard-timers) page to learn it's setup.
+-   function 内で指定遅延付きのコマンドを実行するには、スコアボードタイマーを使って各ティックごとに少しずつカウントし、特定のスコアに達したときにファイル内のコマンドを実行します。セットアップは [Scoreboard Timers](/commands/scoreboard-timers) のページを参照してください。
 
-## Comments Style Guide
+## コメントの書式ガイド
 
--   When working with functions that contain many commands, it's helpful to keep them organized by using multiple hashtags in comments to indicate different header levels.
--   _Optionally_, to further distinguish these levels, you can apply different styles:
--   level 1 headers - **# UPPERCASE**
--   level 2 headers - **## Title Case**
--   level 3 headers - **### Sentence case**
--   Try to avoid the use of more than three header levels or too many headers overall, as this can make the code look cluttered. For your reference, see the example file below:
+-   コマンドが多い function を扱うときは、コメントでハッシュ記号の数を変えて見出しレベルを分けると整理しやすくなります。
+-   _必要に応じて_、さらに区別するために次のスタイルを使えます。
+-   レベル 1 見出し - **# 大文字**
+-   レベル 2 見出し - **## Title Case**
+-   レベル 3 見出し - **### Sentence case**
+-   見出しレベルは 3 つ以下、または見出しの数を増やしすぎないようにしてください。コードが雑然として見えやすくなります。参考として、以下の例を見てください。
 
-<Spoiler title="Example Function File">
+<Spoiler title="サンプル function ファイル">
 
 <CodeHeader>BP/functions/wiki/ability/fire_trail.mcfunction</CodeHeader>
 
@@ -141,21 +141,21 @@ scoreboard players remove @a [scores={wiki:ability.fire_trail=1..}] wiki:ability
 
 </Spoiler>
 
-Note the use of two lines of spacing before level 1 headers and one line of spacing before level 2 headers for improved readability.
+可読性を高めるために、レベル 1 見出しの前には 2 行、レベル 2 見出しの前には 1 行の空行を入れています。
 
-This practice helps create a consistent format, making it easier for everyone to follow, and maintain uniformity across your functions.
-For Scoreboard and Tags convention, see the **[Style Guide](/meta/style-guide#scoreboard-objectives-tags)** page.
+この書き方は一貫した形式を作り、誰にとっても追いやすくし、functions 全体の統一感を保つのに役立ちます。
+スコアボードとタグの規約については、**[Style Guide](/meta/style-guide#scoreboard-objectives-tags)** のページを参照してください。
 
-## Creating a Function
+## function の作成
 
-1. Locate the `📁 com.mojang` folder and navigate to `📁 development_behavior_packs`
+1. `📁 com.mojang` フォルダを見つけて、`📁 development_behavior_packs` に移動します。
 
-    - The development folders are used for quick reloading of packs, as the packs aren't cached to the world files.
+    - 開発用フォルダは、パックがワールドファイルにキャッシュされないため、素早く再読み込みするのに使います。
 
-2. Create a folder (of any name) for the function pack. This will be referred to as Behavior Pack or BP.
+2. function pack 用のフォルダを任意の名前で作成します。これを Behavior Pack、または BP と呼びます。
 
-3. Create a `📄 manifest.json` file and a `🖼 pack_icon.png` file (optional) within the BP folder.
-    - A manifest file contains all the information needed to register a pack, while a pack icon displays visually in the pack menu. A pack icon is typically a 128x128 or a 256x256 image, though any power-of-2 resolution will do, they will be upscaled and downscaled accordingly.
+3. BP フォルダ内に `📄 manifest.json` ファイルと、任意で `🖼 pack_icon.png` ファイルを作成します。
+    - manifest ファイルにはパック登録に必要な情報がすべて入ります。pack icon はパックメニューに表示されます。一般的には 128x128 または 256x256 の画像を使いますが、2 の累乗ならどの解像度でもかまいません。必要に応じて拡大・縮小されます。
 
 <Spoiler title="Sample 📄 manifest.json">
 
@@ -182,7 +182,7 @@ For Scoreboard and Tags convention, see the **[Style Guide](/meta/style-guide#sc
 }
 ```
 
-Note that the uuid field needs to be replaced with an actual uuid, and the two generated must be different from one another. You can generate a uuid at **[uuidgenerator.net](https://uuidgenerator.net/)**
+`uuid` フィールドは実際の uuid に置き換える必要があり、生成する 2 つは互いに異なる必要があります。uuid は **[uuidgenerator.net](https://uuidgenerator.net/)** で生成できます。
 
 </Spoiler>
 <Spoiler title="Sample 🖼 pack_icon.png">
@@ -197,30 +197,30 @@ Sample B:
 
 </Spoiler>
 
-4. Create a `📁 functions` folder. Any file within this folder that ends with **.mcfunction** will be registered as a function in-game, which can be run with `/function <function_name>`.
+4. `📁 functions` フォルダを作成します。このフォルダ内で **.mcfunction** で終わるファイルは、ゲーム内で function として登録され、`/function <function_name>` で実行できます。
 
-    - Nested functions are allowed, simply list the file path in relation to the functions folder as shown in the function pack folder structure.
+    - ネストした function も使えます。function pack のフォルダ構成にあるように、functions フォルダからの相対パスでファイルを指定するだけです。
 
-5. Apply the behavior pack in-game and try out the functions. Function file changes can be reflected in the world by running `/reload` or by simply relogging.
+5. ゲーム内で behavior pack を適用し、function を試します。function ファイルの変更は `/reload` を実行するか、再ログインするだけでワールドに反映されます。
 
-:::tip NOTE:
+:::tip 注:
 
-Functions are versioned; therefore, they will run in the version listed in the `📄 manifest.json`, such as:
+Functions にはバージョンがあり、`📄 manifest.json` に記載されたバージョンで動作します。たとえば次のようになります。
 
 -   `min_engine_version` 1.19.50 or above will adopt the new execute syntax.
 -   `min_engine_version` 1.19.70 or above will require aux values be replaced with block states.
 
 :::
 
-## Execution
+## 実行
 
-Functions can be executed in-game by typing `/function name_of_function`. This will execute all the commands in the function file, all in a single tick.
+Functions は、ゲーム内で `/function name_of_function` と入力して実行できます。これにより、function ファイル内のすべてのコマンドが 1 ティック内で実行されます。
 
-Nested functions, for example `BP/functions/wiki/teleport/zone/hell` can be run using the nested folder path, in this case `/function wiki/teleport/zone/hell`
+ネストした function たとえば `BP/functions/wiki/teleport/zone/hell` は、ネストしたフォルダパスを使って `/function wiki/teleport/zone/hell` のように実行できます。
 
 ## Tick JSON
 
-The final file within a functions folder is the **`tick.json`** file. This specifies functions to run server-side on every game tick, (similar to a repeating command block). It is located in the `BP/functions` folder. By default, functions running in this file execute at origin (`0, 0, 0`) in the overworld. Example **tick.json`** file:
+functions フォルダ内の最後のファイルは **`tick.json`** です。これは、サーバー側で毎ゲームティック実行する function を指定します（反復コマンドブロックに似ています）。配置場所は `BP/functions` フォルダです。既定では、このファイルで実行される function はオーバーワールドの原点 (`0, 0, 0`) で実行されます。**tick.json** の例:
 
 <CodeHeader>BP/functions/tick.json</CodeHeader>
 ```json
@@ -231,92 +231,92 @@ The final file within a functions folder is the **`tick.json`** file. This speci
   ]
 }
 ```
-> Note: Functions in this file are run as soon as the world is *initialized*, regardless of whether or not the player has been *loaded*. This may cause unintended behavior if used incorrectly.
+> 注: このファイルの function は、プレイヤーが読み込まれているかどうかに関係なく、ワールドが *初期化* されるとすぐに実行されます。使い方を誤ると、意図しない挙動を起こすことがあります。
 
-## Sample Function Pack
+## サンプル Function Pack
 
 <Card
     image="/assets/images/discord/bcc.png"
-    title="Download"
+    title="ダウンロード"
     link="https://github.com/Bedrock-OSS/bedrock-examples/releases/download/download/functions_sample.mcpack"
 />
 
-## Troubleshooting Functions
+## Functions のトラブルシューティング
 
-Your functions may not appear within the command suggestions when using `/function`. This is normally due to an error with one or more commands in the function.
+`/function` を使ったときに、function がコマンド候補に表示されないことがあります。これは通常、function 内の 1 つ以上のコマンドにエラーがあるためです。
 
-Enabling the [Content Log](/guide/troubleshooting#content-log) in the creator settings allows you to see if there are any errors in your function pack, which function the error is in, on which line, and exactly what the syntax error is for that command.
+クリエイター設定で [Content Log](/guide/troubleshooting#content-log) を有効にすると、function pack にエラーがあるかどうか、どの function のどの行で、コマンドのどんな構文エラーが起きているかを確認できます。
 
-The list of errors will be generated every time you load a world or run `/reload` to reflect changes after editing files. The list can be viewed on-screen for a few seconds, as well as in the content log history in settings.
+エラー一覧は、ワールドを読み込むたび、または `/reload` を実行するたびに生成され、ファイル編集後の変更が反映されます。表示は数秒間画面上に出るほか、設定内の content log 履歴でも確認できます。
 
 ![contentLogToggles](/assets/images/commands/mcfunctions/content-log-toggles.png)
 
 ![contentLogHistory](/assets/images/commands/mcfunctions/content-log-history.png)
 
-## Professional Workspace Setup (Optional)
+## プロ向けの作業環境セットアップ（任意）
 
-Setting up a dedicated workspace is the final step in developing function packs or add-ons like a pro. While you can write functions in a basic text editor, the following tools will help you catch errors instantly, collaborate with others, and sync your changes directly into Minecraft.
+専用の作業環境を整えるのは、function pack やアドオンを本格的に開発する最後のステップです。基本的なテキストエディタでも function は書けますが、次のツールを使うとエラーをすぐ見つけられ、他人と共同作業でき、変更を Minecraft に直接同期できます。
 
 ### 1. Visual Studio Code (VS Code)
 
-Think of **VS Code** as your command center. It is a powerful, free code editor that makes writing `.mcfunction` files much easier than using Notepad.
+**VS Code** を指令室だと思ってください。強力で無料のコードエディタで、`.mcfunction` ファイルを書くのが Notepad よりずっと簡単になります。
 
-- **Download:** Get it from the [Official VS Code Site](https://code.visualstudio.com/Download).
-- **The Essential Plugin:** Once installed, click the **Extensions** icon (the four squares) on the left sidebar and search for **MCBE Command Checker**.
-- **Why use it?**
-    - **Syntax Highlighting:** Commands change color based on their type, making them easier to read.
-    - **Auto-Complete:** As you type, the editor will suggest valid arguments, targets, and block names.
-    - **Error Detection:** It will highlight typos or invalid syntax with a red underline before you even open the game.
+- **ダウンロード:** [Official VS Code Site](https://code.visualstudio.com/Download) から入手できます。
+- **必須プラグイン:** インストールしたら、左サイドバーの **Extensions** アイコン（4 つの四角）をクリックし、**MCBE Command Checker** を検索します。
+- **なぜ使うのか?**
+    - **シンタックスハイライト:** コマンドの種類に応じて色が変わり、読みやすくなります。
+    - **自動補完:** 入力中に、正しい引数・対象・ブロック名を提案してくれます。
+    - **エラー検出:** ゲームを開く前に、 টাইポや無効な構文を赤い下線で示してくれます。
 
-Example screenshot:
+例のスクリーンショット:
 
 ![Editing a .mcfunction file in VSCode](/public/assets/images/commands/mcfunctions/mcfunction-file-vscode.png)
 
-### 2. Version Control with GitHub
+### 2. GitHub によるバージョン管理
 
-**GitHub** is a cloud-based service that acts as a "save point" for your projects.
+**GitHub** は、プロジェクトの「セーブポイント」として機能するクラウドサービスです。
 
-- **Create an Account:** Sign up at [GitHub.com](https://github.com/).
-- **The Benefits:**
-    - **Cloud Backup:** You’ll never lose your work if your computer crashes.
-    - **Collaboration:** You can share a link to your code so others can review it or help you fix bugs without sending files back and forth.
-    - **History:** You can see exactly what changes you made today versus a week ago.
-    - **Releases:** Once your pack is ready for the public, you can create a "Release." This allows you to host specific versions (like v1.0 or v2.1) as downloadable `.mcpack` files, making it easy for players to find the most stable version of your work.
+- **アカウント作成:** [GitHub.com](https://github.com/) で登録します。
+- **利点:**
+    - **クラウドバックアップ:** PC が壊れても作業を失いません。
+    - **共同作業:** コードへのリンクを共有でき、ファイルのやり取りなしで他人にレビューや修正を手伝ってもらえます。
+    - **履歴:** 今日の変更と 1 週間前の変更の違いを正確に確認できます。
+    - **リリース:** パックが公開可能になったら「Release」を作成できます。これにより、v1.0 や v2.1 のような特定バージョンをダウンロード可能な `.mcpack` として公開でき、プレイヤーが安定版を見つけやすくなります。
 
 ### 3. GitHub Desktop
 
-While GitHub lives in the cloud, **GitHub Desktop** is the app on your computer that talks to it. It’s the easiest way for beginners to manage their files without learning complex "Git" commands.
+GitHub はクラウド上にありますが、**GitHub Desktop** はそれとやり取りするための PC アプリです。複雑な Git コマンドを覚えずにファイルを管理するには、初心者にとって最も簡単な方法です。
 
-- **Download:** Get it at [desktop.github.com](https://desktop.github.com).
-- **The Workflow:** After you finish writing code in VS Code, you use GitHub Desktop to "Commit" (save) and "Push" (upload) your changes to the cloud.
+- **ダウンロード:** [desktop.github.com](https://desktop.github.com) から入手できます。
+- **作業の流れ:** VS Code でコードを書き終えたら、GitHub Desktop を使って変更を "Commit"（保存）し、"Push"（クラウドへアップロード）します。
 
-### 4. Linking Your Folders
+### 4. フォルダのリンク
 
-The biggest hurdle in Bedrock development is moving files from your "Work" folder to the Minecraft "Behavior Pack" folder. You can skip this manual step by creating a **Directory Junction** (a shortcut that acts like a real folder).
+Bedrock 開発で最大の難関は、"Work" フォルダから Minecraft の "Behavior Pack" フォルダへファイルを移すことです。**Directory Junction**（実際のフォルダのように振る舞うショートカット）を作れば、この手動作業を省けます。
 
-By linking your `\GitHub\ProjectName` folder to Minecraft's `\development_behavior_packs\ProjectName` folder, any change you save in VS Code is **instantly updated** in your Minecraft files.
+`\\GitHub\\ProjectName` フォルダを Minecraft の `\\development_behavior_packs\\ProjectName` フォルダにリンクすると、VS Code で保存した変更は Minecraft のファイルに **即座に反映** されます。
 
-**How to Link Folders (Windows):**
+**フォルダをリンクする方法（Windows）:**
 
-1.  Locate your project in your GitHub folder.
-> Example:
+1.  GitHub フォルダ内でプロジェクトを見つけます。
+> 例:
 > ```
 > C:\Github\YOUR_PROJECT_NAME
 > ```
-2.  Locate your Minecraft development folder.
-> Example:
+2.  Minecraft の開発用フォルダを見つけます。
+> 例:
 > ```
 > C:\Users\YOUR_NAME\AppData\Roaming\Minecraft Bedrock\Users\Shared\games\com.mojang\development_behavior_packs\YOUR_PROJECT_NAME
 > ```
-3.  Open **Command Prompt** as Administrator.
-4.  Use the `mklink /J` command to link them.
-> Example:
+3.  **コマンドプロンプト** を管理者として開きます。
+4.  `mklink /J` コマンドでリンクします。
+> 例:
 > ```
 > mklink /J "Path\To\Minecraft\Folder" "Path\To\GitHub\Folder"`
 > ```
 
 :::tip
-Once these folders are linked, you don’t need to restart Minecraft or even re-enter the world to test your work. Simply save your file in VS Code and run the `/reload` command in-game to apply your changes immediately. 
+これらのフォルダをリンクすれば、Minecraft を再起動したりワールドに入り直したりしなくても作業を試せます。VS Code で保存し、ゲーム内で `/reload` を実行するだけで、変更がすぐ反映されます。
 
-**Bonus Tip:** Enable **Auto Save** in VS Code (**File > Auto Save**) to make this process even faster—just tab back into Minecraft and run `/reload`!
+**補足:** VS Code の **Auto Save**（**File > Auto Save**）を有効にすると、さらに速くなります。Minecraft に戻って `/reload` を実行するだけです。
 :::

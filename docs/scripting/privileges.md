@@ -1,6 +1,6 @@
 ---
-title: Script Privileges
-description: Learn about Script API privileges, including read-only and early-execution modes.
+title: Script の権限
+description: 読み取り専用モードや早期実行モードを含む Script API の権限について学びます。
 category: Tutorials
 tags:
     - beginner
@@ -11,15 +11,15 @@ mentions:
     - QuazChick
 ---
 
-This is a guide on understanding what Script API privileges are. This includes going through what read-only mode, and the new early-execution mode implemented in Scripting v2.0.0 are about.
+これは、Script API の権限が何かを理解するためのガイドです。読み取り専用モードと、Scripting v2.0.0 で導入された新しい早期実行モードについて説明します。
 
-You might have encountered this error when running your scripts, about not having required privileges when calling a native function or a property such as the following message:
+スクリプト実行時に、次のようなメッセージが出て、ネイティブ関数やプロパティを呼ぶのに必要な権限がないと示されることがあります。
 
 > ReferenceError: Native function \[Class::method\] does not have required privileges.
 
-There are two reasons this message occurs, one is that the method or property is called during read-only mode, or early-execution mode.
+このメッセージが出る理由は 2 つあります。1つは、その method やプロパティを読み取り専用モード中に呼んでいる場合、もう1つは早期実行モード中に呼んでいる場合です。
 
-## Restricted-Execution Mode
+## 制限実行モード
 
 This means scripts that are in this state are not allowed to alter world state within these callbacks. The script is in restricted execution state when Minecraft simulation begins and before events are triggered, or before the start of the "script" tick.
 

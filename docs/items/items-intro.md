@@ -1,6 +1,6 @@
 ---
-title: Intro to Items
-description: A "Hello world" guide in making items. Learn the item format and how to create basic custom items.
+title: アイテム入門
+description: アイテム作成の "Hello world" ガイドです。アイテム形式と、基本的なカスタムアイテムの作り方を学びます。
 category: General
 nav_order: 1
 tags:
@@ -24,15 +24,15 @@ mentions:
     - QuazChick
 ---
 
-Minecraft Bedrock allows us to add custom items into our world with various vanilla-like properties
+Minecraft Bedrock では、さまざまなバニラ風の特性を持つカスタムアイテムをワールドに追加できます。
 
-This tutorial will cover how to create basic items for the stable version of Minecraft.
+このチュートリアルでは、Minecraft の安定版向けに基本的なアイテムを作成する方法を説明します。
 
-## Registering Items
+## アイテムの登録
 
-Item definitions are structured similarly to entities: they contain a description and a list of components that defines the item's behavior.
+アイテム定義はエンティティと似た構造で、説明と、アイテムの動作を定義するコンポーネントの一覧を含みます。
 
-Below is the **minimum** behavior-side code to get a custom item into the creative inventory.
+以下は、カスタムアイテムをクリエイティブインベントリに入れるために必要な、**最小限** のビヘイビア側コードです。
 
 <CodeHeader>BP/items/custom_item.json</CodeHeader>
 
@@ -51,17 +51,17 @@ Below is the **minimum** behavior-side code to get a custom item into the creati
 }
 ```
 
-### Item Description
+### アイテムの説明
 
--   Defines the item's identifier - a unique ID in the format of `namespace:identifier`.
--   Configures which `menu_category` the item is placed into.
-    -   Also takes the optional parameters `group` and `is_hidden_in_commands`.
+-   アイテムの識別子を定義します。形式は `namespace:identifier` の一意な ID です。
+-   アイテムをどの `menu_category` に配置するかを設定します。
+    -   オプションの `group` と `is_hidden_in_commands` も指定できます。
 
-## Adding Components
+## コンポーネントの追加
 
-Right now, our custom item is using the default component values (which can be found [here](/items/item-components)).
+今のカスタムアイテムは、デフォルトのコンポーネント値を使っています（一覧は[こちら](/items/item-components)）。
 
-Let's configure our own functionality!
+ここから独自の機能を設定してみましょう。
 
 <CodeHeader>BP/items/custom_item.json</CodeHeader>
 
@@ -86,11 +86,11 @@ Let's configure our own functionality!
 }
 ```
 
-Browse more item components [here](/items/item-components)!
+他のアイテムコンポーネントは[こちら](/items/item-components)で確認できます。
 
-## Applying Textures
+## テクスチャの適用
 
-We need to create a texture shortname to link it to an image in `RP/textures/item_texture.json`.
+`RP/textures/item_texture.json` 内の画像に結びつけるため、テクスチャの短縮名を作成する必要があります。
 
 <CodeHeader>RP/textures/item_texture.json</CodeHeader>
 
@@ -104,7 +104,7 @@ We need to create a texture shortname to link it to an image in `RP/textures/ite
 }
 ```
 
-In our item file, we will add the `minecraft:icon` component to apply the texture.
+アイテムファイルでは、テクスチャを適用するために `minecraft:icon` コンポーネントを追加します。
 
 <CodeHeader>BP/items/custom_item.json</CodeHeader>
 
@@ -126,12 +126,12 @@ In our item file, we will add the `minecraft:icon` component to apply the textur
 ```
 
 :::tip BLOCK ICONS
-Alternatively, [block placer](/items/item-components#block-placer) items can omit the `minecraft:icon` component to display the item using the block's 3D icon.
+別の方法として、[block placer](/items/item-components#block-placer) アイテムでは `minecraft:icon` コンポーネントを省略でき、ブロックの 3D アイコンで表示されます。
 :::
 
-## Defining Names
+## 名前の定義
 
-Finally, let's define our item's name like this:
+最後に、アイテム名を次のように定義します。
 
 <CodeHeader>RP/texts/en_US.lang</CodeHeader>
 
@@ -139,11 +139,11 @@ Finally, let's define our item's name like this:
 item.wiki:custom_item=Custom Item
 ```
 
-## Result
+## 結果
 
-In this page, you've learnt about the following:
+このページでは、次の内容を学びました。
 
--   [x] Basic features of items
--   [x] How to apply a texture
--   [x] How to link textures using shortnames in `item_texture.json`
--   [x] How to define names in the language file
+-   [x] アイテムの基本機能
+-   [x] テクスチャの適用方法
+-   [x] `item_texture.json` の短縮名を使ってテクスチャを結びつける方法
+-   [x] 言語ファイルで名前を定義する方法

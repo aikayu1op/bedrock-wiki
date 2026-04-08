@@ -1,6 +1,6 @@
 ---
-title: Block Permutations
-description: Block permutations represent all state configurations that blocks can possibly be in.
+title: ブロックのパーミュテーション
+description: ブロックのパーミュテーションは、ブロックが取りうるすべての状態構成を表します。
 category: General
 nav_order: 7
 related:
@@ -13,20 +13,20 @@ mentions:
 ---
 
 :::tip FORMAT VERSION 1.26.10
-Before you learn about block permutations, you should be confident with [block states](/blocks/block-states).
+ブロックのパーミュテーションを学ぶ前に、[ブロック状態](/blocks/block-states) をしっかり理解しておくべきです。
 
-When working with block states, ensure that the `min_engine_version` in your pack manifest is 1.20.20 or higher.
+ブロック状態を扱うときは、パックの manifest にある `min_engine_version` が 1.20.20 以上であることを確認してください。
 :::
 :::danger OVERRIDING COMPONENTS
-Only **one** instance of each component can be active at once.
-Duplicate components will be overridden by the latest [`permutations`](#conditionally-applying-components) array entry.
+同じコンポーネントは 1 つしか有効にできません。
+重複したコンポーネントは、最後の [`permutations`](#conditionally-applying-components) 配列要素によって上書きされます。
 :::
 
-## What Are Permutations?
+## パーミュテーションとは？
 
-Block permutations represent all state value configurations that each block can possibly be in.
+ブロックのパーミュテーションは、それぞれのブロックが取りうるすべての状態値の組み合わせを表します。
 
-For example, if you added a custom block with two boolean states…
+たとえば、2 つの真偽値状態を持つカスタムブロックを追加した場合…
 
 <CodeHeader>minecraft:block</CodeHeader>
 
@@ -40,30 +40,30 @@ For example, if you added a custom block with two boolean states…
 }
 ```
 
-…the 4 following block permutations would be added to the world:
+…次の 4 つのブロックパーミュテーションがワールドに追加されます。
 
-| Block Type                  | `wiki:first_state` | `wiki:second_state` |
-| --------------------------- | ------------------ | ------------------- |
+| ブロックタイプ               | `wiki:first_state` | `wiki:second_state` |
+| ---------------------------- | ------------------ | ------------------- |
 | `wiki:permutations_example` | `false`{lang=json} | `false`{lang=json}  |
 | `wiki:permutations_example` | `true`{lang=json}  | `false`{lang=json}  |
 | `wiki:permutations_example` | `false`{lang=json} | `true`{lang=json}   |
 | `wiki:permutations_example` | `true`{lang=json}  | `true`{lang=json}   |
 
-To calculate how many permutations your block has, multiply the amount of valid state values each state has together.
-For instance, the calculation for the example above would be 2 &times; 2, meaning this block has 4 permutations.
+ブロックのパーミュテーション数を計算するには、各状態の有効値の数を掛け合わせます。
+上の例では 2 &times; 2 の計算になり、このブロックには 4 つのパーミュテーションがあります。
 
-### Clearing Up Misconceptions
+### よくある誤解の整理
 
--   All blocks have permutations, even blocks with no states have 1 permutation that is simply made up of the block identifier.
--   The number of permutations your block has is based on the states it has, not the number of items in the `permutations` array.
+-   すべてのブロックにはパーミュテーションがあります。状態を持たないブロックでも、ブロック識別子だけで構成された 1 つのパーミュテーションがあります。
+-   ブロックのパーミュテーション数は、`permutations` 配列の項目数ではなく、ブロックが持つ状態に基づいて決まります。
 
-## Conditionally Applying Components
+## 条件付きでコンポーネントを適用する
 
-The block `permutations` array provides a way of conditionally applying components (including tags) to a block based on its current permutation.
+ブロックの `permutations` 配列を使うと、現在のパーミュテーションに応じてコンポーネント（タグを含む）を条件付きで適用できます。
 
-Components within the `permutations` array can override the block's base components, as well as those of other component lists. The latest component list in the `permutations` array takes priority.
+`permutations` 配列内のコンポーネントは、ブロックの基本コンポーネントや他のコンポーネントリストを上書きできます。`permutations` 配列の最後のコンポーネントリストが優先されます。
 
-_Requires format version [1.19.70](/blocks/block-format-history#_1-19-70) or later._
+_format version [1.19.70](/blocks/block-format-history#_1-19-70) 以降が必要です。_
 
 <CodeHeader>BP/blocks/custom_block.json</CodeHeader>
 
@@ -104,36 +104,36 @@ _Requires format version [1.19.70](/blocks/block-format-history#_1-19-70) or lat
 }
 ```
 
-### Permutation Conditions
+### パーミュテーション条件
 
-When evaluated as truthy (not `false`{lang=json} or `0`{lang=json}), the involved component list is applied.
+真と評価される場合（`false`{lang=json} や `0`{lang=json} でない場合）、該当するコンポーネントリストが適用されます。
 
-Permutation conditions are written as Molang expression strings, and have very limited context:
+パーミュテーション条件は Molang 式文字列として書かれ、使えるコンテキストは非常に限られています。
 
--   Conditions are purely based on the block's permutation, therefore only have access to the `q.block_state()`{lang=molang} query function.
--   This also means that conditions cannot have side effects.
-    -   The following math functions may not be used: `math.die_roll()`{lang=molang}, `math.die_roll_integer()`{lang=molang}, `math.random()`{lang=molang}, `math.random_integer()`{lang=molang}.
-    -   Variables (including `temp`{lang=molang} variables) cannot be assigned.
+-   条件は純粋にブロックのパーミュテーションに基づくため、`q.block_state()`{lang=molang} クエリ関数しか使えません。
+-   つまり、条件に副作用は持てません。
+    -   次の数値関数は使えません: `math.die_roll()`{lang=molang}, `math.die_roll_integer()`{lang=molang}, `math.random()`{lang=molang}, `math.random_integer()`{lang=molang}。
+    -   `temp`{lang=molang} 変数を含む変数には代入できません。
 
 ```molang
 q.block_state('wiki:integer_state_example') < 6 || !q.block_state('wiki:boolean_state_example')
 ```
 
-## Permutation Limits
+## パーミュテーションの上限
 
-As with all things blocks, some limitations have been put in place by Mojang to prevent undesirable behavior.
+ブロック全般と同じく、望ましくない挙動を防ぐために Mojang による制限があります。
 
-### Maximum Amount per Block
+### ブロック 1 個あたりの最大数
 
-A block _cannot_ have more than 65,536 permutations (equivalent to 4 states with 16 values each).
-This is because a block permutation must be representable by 16 bits.
+ブロックは 65,536 個を超えるパーミュテーションを持てません（16 個の値を持つ状態が 4 つある場合に相当します）。
+これは、ブロックパーミュテーションが 16 ビットで表現可能である必要があるためです。
 
-Exceeding this limit will result in some states being absent from your block so that its permutation count is within the limit, along with a content log error.
+この上限を超えると、パーミュテーション数を制限内に収めるために、一部の状態がブロックから欠落し、コンテンツログエラーが発生します。
 
-### Maximum Amount per World
+### ワールド全体の最大数
 
-A world _shouldn't_ have more than a total of 65,536 **custom** block permutations registered (not necessarily placed).
+ワールドに登録された **カスタム** ブロックパーミュテーションの総数は、65,536 を超えない方がよいです（配置済みである必要はありません）。
 
-Exceeding this limit should not affect block functionality, however will result in the following content log warning:
+この上限を超えてもブロック機能に影響はないはずですが、次のコンテンツログ警告が出ます。
 
 > [Blocks][warning]-World with over 65536 block permutations may degrade performance. Current world has XXXXX permutations.

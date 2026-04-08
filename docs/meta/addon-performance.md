@@ -1,6 +1,6 @@
 ---
-title: Add-On Performance
-description: Learn how to optimize your add-on.
+title: アドオンのパフォーマンス
+description: アドオンを最適化する方法を学びます。
 mentions:
     - SirLich
     - Joelant05
@@ -10,210 +10,210 @@ mentions:
 ---
 
 ::: warning
-This page was compiled primarily using community feedback from multiple sources. As a result, some information may be generalized, subjective, or conflicting. Always use your own best judgment when optimizing your add-ons. This page is not a substitute for testing your add-on on a wide range of devices.
+このページは、複数の情報源から得られたコミュニティのフィードバックをもとに主にまとめられています。そのため、内容の一部には一般化された表現、主観的な表現、あるいは相反する情報が含まれる場合があります。アドオンを最適化するときは、必ず自分の判断を優先してください。このページは、さまざまな端末でアドオンをテストすることの代わりにはなりません。
 :::
 
-Performance in add-ons is crucial, as the most technically fantastic add-on is mainly useless if the majority of the player base cannot experience it. When developing add-ons, it should always be considered that many Bedrock players will be experiencing your add-on on a significantly lower power device than you are developing on. This is especially true for mobile users. Therefore, add-ons should be developed with performance in mind and tested for performance on lower-end devices when possible.
+アドオンにおけるパフォーマンスは非常に重要です。技術的にどれほど優れたアドオンでも、大半のプレイヤーが体験できなければ、実質的にはほとんど役に立ちません。アドオンを開発するときは、多くの Bedrock プレイヤーが、開発者が使っている端末よりかなり性能の低い端末でアドオンを体験することを常に意識すべきです。これは特にモバイルユーザーで顕著です。したがって、アドオンはパフォーマンスを意識して開発し、可能であれば低スペック端末で性能テストを行うべきです。
 
-This guide is a non-exhaustive list of specific performance considerations separated by the various subsystems of Bedrock Edition. No single point should be taken as a hard and fast rule. Instead, these performance considerations should help you to recognize potential areas for improvement.
+このガイドは、Bedrock Edition の各サブシステムごとの具体的なパフォーマンス上の考慮点を、網羅的ではない形でまとめたものです。どの項目も絶対的なルールとして受け取るべきではありません。むしろ、これらの考慮点は改善余地のある箇所を見つける手助けになるはずです。
 
-## Biomes and Features
+## バイオームと機能
 
-### Biomes
+### バイオーム
 
--   The biome system is generally efficient
--   Large values for heightmaps are usually handled gracefully
--   The component `climate` creates large particle storms
+-   バイオームシステムは一般に効率的です
+-   高さマップの値が大きくても、通常は問題なく処理されます
+-   `climate` コンポーネントは大規模なパーティクルストームを発生させます
 
-### Features
+### 機能
 
--   Biomes generally cause less lag than feature generation.
--   Hundreds of iterations per chunk of a multi-block feature have been achieved at a low-performance cost.
--   Thousands of iterations per chunk of multi-block features negatively impact gameplay.
--   Hundreds of thousands of iterations per chunk of a single-block feature have been achieved at a low-performance cost.
--   Thousands of instances of features _per chunk_ comes at little cost.
--   Tens of thousands of feature instances _per chunk_ yields a noticeable impact on chunk loading.
--   Hundreds of thousands of instances of features _per chunk_ slows chunk loading to an unbearable crawl.
+-   バイオームは一般に、機能生成よりもラグが少ないです。
+-   マルチブロック機能を 1 チャンクあたり数百回繰り返しても、性能コストは低く抑えられています。
+-   マルチブロック機能を 1 チャンクあたり数千回繰り返すと、ゲームプレイに悪影響が出ます。
+-   単一ブロック機能を 1 チャンクあたり数十万回繰り返しても、性能コストは低く抑えられています。
+-   機能のインスタンスが _1 チャンクあたり_ 数千個程度なら、コストはごくわずかです。
+-   機能のインスタンスが _1 チャンクあたり_ 数万個になると、チャンク読み込みに目に見える影響が出ます。
+-   機能のインスタンスが _1 チャンクあたり_ 数十万個になると、チャンク読み込みが耐えがたいほど遅くなります。
 
-## Blocks
+## ブロック
 
-### Materials
+### マテリアル
 
--   The minimum needed material type with regards to rendering should always be utilized
-    > `alpha_blend` performance is worse than `alpha_test`, which is worse than `opaque`
+-   描画に必要な最小限のマテリアル種別を常に使うべきです
+    > `alpha_blend` の性能は `alpha_test` より悪く、`alpha_test` は `opaque` より悪いです
 
-### Quantity and Type
+### 数量と種類
 
--   Flowing liquids should be avoided and minimized
+-   流れる液体は避け、最小限に抑えるべきです
 
-### Updates
+### 更新
 
--   Block updates should be minimized
+-   ブロック更新は最小限に抑えるべきです
 
-## Commands
+## コマンド
 
-### Quantity and Type
+### 数量と種類
 
--   Minimize the number of commands run per tick
-    > `/effect` and `/gamemode` run every tick are avoidable and have a significant performance impact
--   Large clones, fills and structure loads during runtime should be avoided
-    > Breaking these more extensive operations into multiple commands distributed over multiple ticks will avoid lag spikes, consider using structure loading animations
+-   1 tick あたりに実行するコマンド数を最小化する
+    > 毎 tick 実行される `/effect` や `/gamemode` は回避可能であり、かなりの性能影響があります
+-   実行時の大規模な clone、fill、structure load は避ける
+    > こうした大きな操作を複数のコマンドに分割し、複数 tick に散らせばラグスパイクを避けられます。structure loading アニメーションの利用も検討してください
 
-### Selectors
+### セレクター
 
--   Care should be taken to ensure a function is not executed on too many entities, and therefore too many times
--   Executing a scoreboard command outweighs the cost of running an entity selector multiple times
--   Using c=1 to ensure the selector stops when it finds one entity may improve performance
--   When executing multiple commands with the same selector, use a function instead to avoid repeatedly resolving the same selector
+-   関数が大量のエンティティに対して、つまり大量に実行されないよう注意する
+-   スコアボードコマンドを実行するコストは、エンティティセレクターを複数回実行するコストよりも大きいです
+-   `c=1` を使って、1 体見つけた時点でセレクターが止まるようにすると性能が改善する場合があります
+-   同じセレクターで複数コマンドを実行する場合は、同じセレクターを何度も解決しないよう、代わりに関数を使ってください
 
-### Tags vs. Scoreboards
+### タグとスコアボード
 
--   Scoreboards perform better at a large scale than tags
+-   大規模環境では、タグよりスコアボードのほうが性能が良いです
 
-## Entities
+## エンティティ
 
--   Entities generally have one of the most significant performance impacts by subsystem and thus should be minimized where possible
+-   エンティティは一般に、サブシステムの中でも特に大きな性能影響を持つため、可能な限り数を抑えるべきです
 
-### Components
+### コンポーネント
 
--   Pathfinding on flying mobs has a significant performance cost
--   Flying mobs in general encounter performance problems
-    > Faking flying mobs via animation should be considered if possible
+-   飛行するモブの経路探索は、性能コストが大きいです
+-   一般に飛行するモブは性能問題を起こしやすいです
+    > 可能であれば、アニメーションで飛行しているように見せる方法を検討してください
 
-### Dummy Entities
+### ダミーエンティティ
 
--   Dummy entities generally have equal performance impact to proper entities, except when excluding heavy components like pathfinding
+-   ダミーエンティティは、経路探索のような重いコンポーネントを除けば、通常のエンティティとおおむね同等の性能影響があります
 
-### Geometry
+### ジオメトリ
 
-#### Bones
+#### ボーン
 
--   No performance impact has been observed regarding bone count
+-   ボーン数による性能影響は観測されていません
 
-#### Elements
+#### 要素
 
--   Element count is not generally an issue, except in extreme cases when thousands of elements are reached
+-   要素数は通常問題になりません。ただし、数千要素に達するような極端な場合は別です
 
-### Materials
+### マテリアル
 
--   The minimum material required to achieve the desired effect should always be used
--   When in doubt, refer to the material definition files to get an idea of the costs of various materials, taking the material inheritance system into account
+-   望む効果を得るために必要な最小限のマテリアルを常に使うべきです
+-   迷ったら、マテリアル定義ファイルを参照して、継承システムも考慮しながら各マテリアルのコスト感を把握してください
 
-### Quantity
+### 数量
 
--   Loaded entities at any given time should be minimized
-    > Below 30 is optimal
+-   どの時点でも読み込まれているエンティティ数は最小限にすべきです
+    > 30 未満が最適です
 
-## Lighting
+## 照明
 
-### Map Considerations
+### マップ上の考慮点
 
--   Hollow areas will cause lag due to lighting calculations even if you don't see them
-    > Avoid this by filling in unused enclosed areas
--   Keeping the map set to day or night will avoid lighting recalculation
+-   空洞のある領域は、見えていなくても照明計算のためラグの原因になります
+    > 使っていない閉鎖空間は埋めておくとこれを避けられます
+-   マップを昼または夜に固定しておくと、照明の再計算を避けられます
 
-### Sources
+### 光源
 
--   Bedrock lighting is calculated dynamically, meaning different light sources have different performance costs
-    > Light blocks are the most performant because they lack particles, rendering, and particular state logic
+-   Bedrock の照明は動的に計算されるため、光源の種類ごとに性能コストが異なります
+    > Light block は、パーティクル、描画、特定の状態ロジックを持たないため、最も高性能です
 
-> Torches are a minor performance issue because they emit particles, render, and have particular state logic dependent on what block they connect to
+> Torch はパーティクルを出し、描画も行い、接続先のブロックに依存する特定の状態ロジックを持つため、軽度の性能問題になります
 
-> Custom light blocks with minimal components are a reasonable compromise between performance and aesthetics
+> コンポーネントを最小限にしたカスタム light block は、性能と見た目のバランスを取る現実的な妥協案です
 
-#### Comparison Table
+#### 比較表
 
-|     Light Source | Score | Redstone Updates | Animated Texture | Light Updates | Tick Updates | Particles | Renders |
-| ---------------: | :---: | :--------------: | :-------------: | :-----------: | :----------: | :-------: | :-----: |
-|     Light Blocks |   1   |      False       |      False      |     True      |    False     |   False   |  False  |
-|         Lanterns |   4   |      False       |      True       |     True      |     True     |   False   |  True   |
-|    Custom Blocks |   2   |      False       |      False      |     True      |    False     |   False   |  True   |
-|        Mushrooms |   3   |      False       |      False      |     True      |     True     |   False   |  True   |
-|   Redstone Lamps |   3   |       True       |      False      |     True      |    False     |   False   |  True   |
-|        Glowstone |   3   |       True       |      False      |     True      |     True     |   False   |  True   |
-|     Sea Lanterns |   4   |      False       |      True       |     True      |     True     |   False   |  True   |
-|          Torches |   4   |      False       |      False      |     True      |     True     |   True    |  True   |
+|     光源 | スコア | レッドストーン更新 | アニメーションテクスチャ | 光更新 | Tick 更新 | パーティクル | 描画 |
+| -------: | :---: | :--------------: | :-------------: | :-----------: | :----------: | :-------: | :-----: |
+| Light Blocks |   1   |      False       |      False      |     True      |    False     |   False   |  False  |
+| Lanterns |   4   |      False       |      True       |     True      |     True     |   False   |  True   |
+| Custom Blocks |   2   |      False       |      False      |     True      |    False     |   False   |  True   |
+| Mushrooms |   3   |      False       |      False      |     True      |     True     |   False   |  True   |
+| Redstone Lamps |   3   |       True       |      False      |     True      |    False     |   False   |  True   |
+| Glowstone |   3   |       True       |      False      |     True      |     True     |   False   |  True   |
+| Sea Lanterns |   4   |      False       |      True       |     True      |     True     |   False   |  True   |
+| Torches |   4   |      False       |      False      |     True      |     True     |   True    |  True   |
 | Redstone Torches |   5   |       True       |      False      |     True      |     True     |   True    |  True   |
 
 ## Molang
 
-### Recursion
+### 再帰
 
--   Minimize use of recursion when possible
--   Intense nested loop structures will cause performance issues
--   Use break to escape loops when possible
+-   可能であれば再帰の使用を最小限にする
+-   入れ子の深いループ構造は性能問題を引き起こします
+-   ループから抜ける必要がある場合は、可能な限り `break` を使う
 
-### Structs
+### 構造体
 
--   Avoid making structs too deep, as there is a performance cost with each layer
+-   各レイヤーごとにコストが発生するため、構造体を深くしすぎない
 
-### Variables
+### 変数
 
--   Use temp variables when possible to minimize variables loaded in memory
--   Consider how often variables are calculated based on script type
+-   メモリ上に読み込まれる変数を減らすため、可能なら一時変数を使う
+-   スクリプトの種類に応じて、変数がどのくらいの頻度で計算されるかを考慮する
 
-## Textures
+## テクスチャ
 
-### Textures List
+### テクスチャ一覧
 
--   Tons of textures badly affect game performance. Create a [`textures_list.json`](/concepts/textures-list) file.
+-   テクスチャが大量にあると、ゲームのパフォーマンスに悪影響を与えます。[`textures_list.json`](/concepts/textures-list) ファイルを作成してください。
 
-### Quantity
+### 数量
 
--   No more than 3000 textures should be used.
-    This is due to limits imposed by Render Dragon
+-   使うテクスチャは 3000 枚以下にするべきです。
+    これは Render Dragon による制限のためです
 
-> Render Dragon has a 4096 texture quantity limit, and there are 800 vanilla textures as of 1.16
+> Render Dragon には 4096 枚のテクスチャ上限があり、1.16 時点のバニラテクスチャは 800 枚あります
 
-### Resolution
+### 解像度
 
--   The maximum texture resolution is 16384×16384
--   The recommended maximum texture resolution is 4096×4096 to maintain compatibility with low-end devices
--   Keep in mind that block and item textures are [atlased](/concepts/texture-atlases), and larger textures can mess with atlas generation on lower-end devices
--   Only make textures as significant as needed to convey the detail needed at the needed distance
+-   最大テクスチャ解像度は 16384×16384 です
+-   低スペック端末との互換性を保つため、推奨最大解像度は 4096×4096 です
+-   ブロックとアイテムのテクスチャは [アトラス化](/concepts/texture-atlases) されることを忘れないでください。大きすぎるテクスチャは、低スペック端末で atlas 生成を壊すことがあります
+-   必要な距離で必要な詳細を伝えるのに十分な大きさだけ、テクスチャを作成してください
 
-## Trades
+## 取引
 
-Villager trades cause performance issues and even crashes on all devices at 60 trades or greater. Avoid tons of trades for one entity.
-Your best bet to resolve this issue is to split your trades in half and move them to another villager or custom entity/npc, 30 trades is a good safe number from testing.
+村人の取引は、60 件以上になるとすべての端末でパフォーマンス問題やクラッシュを引き起こします。1 体に大量の取引を持たせるのは避けてください。
+この問題を解決する最善策は、取引を半分に分けて別の村人やカスタムエンティティ/NPC に移すことです。テスト上、30 件の取引は安全な目安です。
 _probably JSON UI issues_
 
-## Sounds
+## サウンド
 
-### Count
+### 件数
 
--   Total registered sounds are reported to have an impact on performance
+-   登録されているサウンド総数は、パフォーマンスに影響すると報告されています
 
-### Compression
+### 圧縮
 
--   Sound compression is exceptionally beneficial to pack size
--   This is especially noticeable on older and low power devices, such as the Switch
--   The FMod simple API utilized by Bedrock decompresses all sounds into WAV before loading into RAM, meaning no CPU performance improvement in this respect
-    -   If audio is streamed, this does not occur
+-   サウンド圧縮はパックサイズの削減に非常に有効です
+-   これは Switch のような旧世代・低電力端末で特に効果が分かりやすいです
+-   Bedrock が利用する FMod の simple API は、読み込み前にすべてのサウンドを WAV に展開して RAM に入れるため、この点では CPU 性能の向上はありません
+    -   音声がストリーミングされる場合は、この処理は発生しません
 
-### Streaming
+### ストリーミング
 
--   As general guidance, sounds over 500kB in size or 1 minute in length should be streamed
+-   一般的な目安として、サイズが 500kB を超えるか、長さが 1 分を超えるサウンドはストリーミングすべきです
 
-## Redstone
+## レッドストーン
 
-### Chunk Boundaries
+### チャンク境界
 
--   Crossing chunk boundaries with Redstone should be avoided
+-   レッドストーンがチャンク境界をまたぐのは避けるべきです
 
-### Command Blocks
+### コマンドブロック
 
--   When creating large command blockchains, stack vertically and in a single chunk
--   Minimize command block use in favor of functions and behaviors where possible
+-   大きなコマンドブロックチェーンを作る場合は、縦に積み、1 チャンク内に収める
+-   可能な限り、コマンドブロックの使用を減らし、関数やビヘイビアを優先する
 
-## Ticking Areas
+## チッキングエリア
 
--   Total chunks are of more significant concern than ticking areas
--   Dynamic areas should be avoided unless necessary
--   Best practice is to minimizing the ticking area to one chunk if possible
-    -   All always-on Redstone should fit in this ticking chunk
--   Unload ticking areas when they are no longer needed, testing via /testforblock
+-   一時に読み込まれているチャンク総数のほうが、チッキングエリアそのものより重要です
+-   必要がない限り、動的エリアは避けるべきです
+-   可能であれば、ベストプラクティスはチッキングエリアを 1 チャンクに抑えることです
+    -   常時稼働するレッドストーンはすべてこのチッキングチャンク内に収めるべきです
+-   もう不要になったチッキングエリアは、`/testforblock` で検証しつつ解除してください
 
-## Files
+## ファイル
 
--   Tons of files can badly affect game performance. Create a [`contents.json`](/concepts/contents) file.
+-   ファイルが大量にあると、ゲームのパフォーマンスに悪影響を与えます。[`contents.json`](/concepts/contents) ファイルを作成してください。

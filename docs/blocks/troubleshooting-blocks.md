@@ -1,6 +1,6 @@
 ---
-title: Troubleshooting Blocks
-description: Guide for blocks troubleshooting.
+title: ブロックのトラブルシューティング
+description: ブロックのトラブルシューティングガイドです。
 category: General
 tags:
     - help
@@ -14,24 +14,24 @@ mentions:
 ---
 
 :::tip
-This page contains troubleshooting information about _blocks_. You should read our [global troubleshooting](/guide/troubleshooting) document before continuing here.
+このページは _ブロック_ に関するトラブルシューティング情報を含みます。続ける前に、まず [全体のトラブルシューティング](/guide/troubleshooting) を読んでください。
 :::
 
-## 0.0 - Trouble
+## 0.0 - 問題発生
 
-> "I followed a tutorial or tried to make my own block and something's wrong!"
+> 「チュートリアルを見ながら作ったか、自分でブロックを作ってみたら、何かがおかしい!」
 
-No need to panic! This page will help debug common issues.
+慌てる必要はありません。このページが、よくある問題の原因特定を手助けします。
 
-## 1.0 - Texture Troubleshooting
+## 1.0 - テクスチャのトラブルシューティング
 
-Fix issues related to block textures.
+ブロックテクスチャに関する問題を解決します。
 
-## 1.1 - Texture is Black and Magenta
+## 1.1 - テクスチャが黒とマゼンタになる
 
-I will be reviewing three different types of blocks that have different layouts: Dirt-like ![](dirt.png), Log-like ![](log.png), Grass-like ![](grass.png)
+ここでは、レイアウトが異なる 3 種類のブロックを扱います。土っぽいブロック ![](dirt.png)、原木っぽいブロック ![](log.png)、草っぽいブロック ![](grass.png) です。
 
-Navigate to your `RP/textures/terrain_texture.json`. Ensure that the file is properly named.
+`RP/textures/terrain_texture.json` に移動し、ファイル名が正しいことを確認してください。
 
 <CodeHeader>RP/textures/terrain_texture.json</CodeHeader>
 
@@ -60,9 +60,9 @@ Navigate to your `RP/textures/terrain_texture.json`. Ensure that the file is pro
 }
 ```
 
-Next, navigate to your block file. In your block file, make sure you have the `material_instances` component.
+次にブロックファイルへ移動します。ブロックファイルには `material_instances` コンポーネントがあることを確認してください。
 
-Dirt like block example:
+土っぽいブロックの例:
 
 <CodeHeader>BP/blocks/dirt_like.json</CodeHeader>
 
@@ -84,7 +84,7 @@ Dirt like block example:
 }
 ```
 
-Log like block example:
+原木っぽいブロックの例:
 
 <CodeHeader>BP/blocks/custom_log.json</CodeHeader>
 
@@ -111,7 +111,7 @@ Log like block example:
 }
 ```
 
-Grass-like block example:
+草っぽいブロックの例:
 
 <CodeHeader>BP/blocks/custom_grass.json</CodeHeader>
 
@@ -139,29 +139,29 @@ Grass-like block example:
 }
 ```
 
-If you followed this properly, your block should now have correct texture.
+正しく設定できていれば、ブロックのテクスチャは正しく表示されるはずです。
 
-## 1.2 - Texture Displays "?" on Dirt
+## 1.2 - テクスチャが「?」として表示される
 
-Problem: My custom block has turned into a dirt block with a question mark on it.
+問題: カスタムブロックが、疑問符の付いた土ブロックに変わってしまった。
 
 <WikiImage src="unknown.png" pixelated="true" width="128" class="my-4" />
 
-This an `unknown` block, which appears when the block identifier is changed or if your block JSON invalid.
+これは `unknown` ブロックで、ブロック識別子が変更された場合やブロック JSON が無効な場合に表示されます。
 
-Solution: Use a JSON linter and double check that your identifier didn't change. Ensure that your block has `minecraft:geometry` and `minecraft:material_instances`, or an `RP/blocks.json` textures entry.
+解決策: JSON リンターを使い、識別子が変わっていないか再確認してください。ブロックに `minecraft:geometry` と `minecraft:material_instances` があるか、または `RP/blocks.json` にテクスチャ項目があることを確認してください。
 
 ---
 
-## 2.0 - Rendering Troubleshooting
+## 2.0 - レンダリングのトラブルシューティング
 
-This section will describe common block rendering issues and how to fix them.
+このセクションでは、よくあるブロック描画の問題とその修正方法を説明します。
 
-## 2.1 - Transparency isn't Working
+## 2.1 - 透過が機能しない
 
-Problem: You have transparent pixels in your texture file, but when applied in-game, they become opaque.
+問題: テクスチャファイルに透明ピクセルがあるのに、ゲーム内で適用すると不透明になってしまう。
 
-Solution: Navigate to your block file. Navigate to your `material_instances` component. Add the following to your component:
+解決策: ブロックファイルに移動し、`material_instances` コンポーネントを開きます。コンポーネントに次を追加してください。
 
 <CodeHeader>BP/blocks/your_block.json</CodeHeader>
 
@@ -181,11 +181,11 @@ Solution: Navigate to your block file. Navigate to your `material_instances` com
 }
 ```
 
-## 2.2 - Block Creates Shadows
+## 2.2 - ブロックに影ができる
 
-Problem: You have block with custom geometry but it has a shadow.
+問題: カスタムジオメトリを持つブロックに影が付いている。
 
-Solution: Add following component to your block's code:
+解決策: ブロックのコードに次のコンポーネントを追加してください。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -193,34 +193,34 @@ Solution: Add following component to your block's code:
 "minecraft:light_dampening": 0
 ```
 
-## 3.0 - Common Content Log Errors
+## 3.0 - よくあるコンテンツログのエラー
 
-This section will describe common content log errors and how to debug them.
+このセクションでは、よくあるコンテンツログのエラーとその調査方法を説明します。
 
-## 3.1 - Collision/Selection Box Errors
+## 3.1 - Collision/Selection Box エラー
 
-Problem: You get a content error similar to:
+問題: 次のようなコンテンツエラーが出る。
 
 > `[Blocks][error]-minecraft:collision_box: min can't be below (-8, 0, -8) and max can't be more than (8, 16, 8)`
 
-Solution: Check your `minecraft:collision_box` or `minecraft:selection_box` components and do the following:
+解決策: `minecraft:collision_box` または `minecraft:selection_box` コンポーネントを確認し、次の点を満たしてください。
 
--   Make sure the X and Z values are from `-8`{lang=json} to `8`{lang=json}.
--   Make sure the Y value is from `0`{lang=json} to `16`{lang=json}.
--   Make sure the box doesn't exit the block's 16&times;16&times;16 unit area.
+-   X と Z の値が `-8`{lang=json} から `8`{lang=json} の範囲内であること。
+-   Y の値が `0`{lang=json} から `16`{lang=json} の範囲内であること。
+-   ボックスがブロックの 16&times;16&times;16 単位の領域からはみ出していないこと。
 
-## 3.2 - Model Errors
+## 3.2 - モデルエラー
 
-Problem: You get a content error similar to:
+問題: 次のようなコンテンツエラーが出る。
 
 > `geometry.your_block contains X boxes outside...`
 
-Solution: Your geometry is bigger than Minecraft blocks allow. You can either make the geometry smaller or split it into multiple blocks.
+解決策: ジオメトリが Minecraft ブロックの許容サイズより大きくなっています。ジオメトリを小さくするか、複数のブロックに分割してください。
 
 ---
 
-## What Now?
+## 次は？
 
-If you still have problems after trying these steps, feel free to join the discord server and ask your question there.
+これらを試してもまだ問題がある場合は、discord サーバーに参加して質問してください。
 
-If you believe any information is wrong or outdated, please contribute via github!
+情報が間違っている、または古いと思う場合は、GitHub 経由でぜひ貢献してください。

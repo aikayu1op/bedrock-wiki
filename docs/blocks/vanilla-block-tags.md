@@ -1,6 +1,6 @@
 ---
-title: Vanilla Block Tags
-description: Learn about block tags that are built into the game and applied to vanilla blocks.
+title: バニラのブロックタグ
+description: ゲームに組み込まれていて、バニラブロックに適用されるブロックタグについて学びます。
 category: Documentation
 related:
     - /blocks/block-tags
@@ -11,6 +11,6 @@ mentions:
 
 <Table data="tags.json" />
 
-## Tags per Block
+## ブロックごとのタグ
 
 <Table data="tags_per_block.json" />

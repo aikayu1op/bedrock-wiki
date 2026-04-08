@@ -1,6 +1,6 @@
 ---
-title: Splashes
-description: Learn how to add your own splash texts to Minecraft.
+title: スプラッシュテキスト
+description: Minecraft に独自のスプラッシュテキストを追加する方法を学びます。
 category: General
 license: true
 mentions:
@@ -8,12 +8,12 @@ mentions:
     - QuazChick
 ---
 
-Splashes are the yellow lines of text that appear next to the Minecraft logo on the title screen.
-There are a bunch of splash texts that Minecraft has on its own, but you can modify these splashes too.
+スプラッシュは、タイトル画面で Minecraft のロゴの横に表示される黄色いテキストです。
+Minecraft には元からたくさんのスプラッシュテキストがありますが、これらも変更できます。
 
-## Editing Splashes
+## スプラッシュの編集
 
-It's very easy to create custom splash texts. All you have to do is to create a `splashes.json` file in your resource pack and edit it. Splash texts also support formatting (using `§`).
+カスタムスプラッシュテキストの作成はとても簡単です。リソースパック内に `splashes.json` ファイルを作成して編集するだけです。スプラッシュテキストは書式設定 (`§`) にも対応しています。
 
 <CodeHeader>RP/splashes.json</CodeHeader>
 
@@ -29,14 +29,14 @@ It's very easy to create custom splash texts. All you have to do is to create a 
 }
 ```
 
-<WikiImage src="splash_text_example.png" caption="A splash text example" width="400" />
+<WikiImage src="splash_text_example.png" caption="スプラッシュテキストの例" width="400" />
 
-The `canMerge` parameter determines whether the game will show vanilla splash texts alongside custom splash texts.
-If you set this parameter to `true`{lang=json}, the splash text will be chosen from both vanilla splash texts and custom splash texts.
-If you omit this parameter or set it to `false`{lang=json}, the splash text will be chosen only from custom splash texts.
+`canMerge` パラメータは、ゲームがバニラのスプラッシュテキストとカスタムスプラッシュテキストを一緒に表示するかどうかを決めます。
+このパラメータを `true`{lang=json} にすると、スプラッシュテキストはバニラとカスタムの両方から選ばれます。
+このパラメータを省略するか `false`{lang=json} にすると、スプラッシュテキストはカスタムのものだけから選ばれます。
 
-If you leave the `splashes` array empty with `canMerge` set to `false`, the game will not show any splash text at all.
+`canMerge` を `false` にした状態で `splashes` 配列を空にすると、ゲームはスプラッシュテキストを一切表示しません。
 
-There isn't a limit to how long a splash text is, but it will be split into multiple lines if it's too long, or may become so small that it is not readable!
+スプラッシュテキストの長さに上限はありませんが、長すぎると複数行に分割されたり、読めないほど小さくなったりします。
 
-<WikiImage src="long_splash_text_example.png" caption="A long splash text example" width="400" />
+<WikiImage src="long_splash_text_example.png" caption="長いスプラッシュテキストの例" width="400" />

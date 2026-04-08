@@ -3,22 +3,22 @@ title: Material Creations
 tags:
     - expert
 category: General
-description: Useful material creations by community.
+description: コミュニティによる便利なマテリアル作例です。
 ---
 
 :::warning
-Materials are not for the faint of heart. Be prepared for potential crashes, content log errors, and long loading times.
+Materials は気軽に触るものではありません。クラッシュ、content log のエラー、長い読み込み時間に備えてください。
 :::
 
-On this page you can find material creations by community.
+このページでは、コミュニティによるマテリアル作例を紹介します。
 
-## Custom material that glows and works with semi transparency.
+## 発光し、半透明に対応するカスタムマテリアル
 
-Note: this also works by disabling culling so you don't run into those weird culling issues where you can't see entities and things behind the texture the material is applied to.
+注: これは culling を無効化することでも機能するため、マテリアルを適用したテクスチャの背後にあるエンティティや物が見えなくなる奇妙な culling 問題を避けられます。
 
-Note: Texture needs to have semi transparency in it to add the glow effect.
+注: 発光効果を出すには、テクスチャに半透明が含まれている必要があります。
 
-"customblend" is what you would call in your entity as a material.
+`customblend` は、エンティティ側でマテリアルとして呼び出す名前です。
 
 <Spoiler title="Show">
 
@@ -37,9 +37,9 @@ Note: Texture needs to have semi transparency in it to add the glow effect.
 
 Credit: StealthyX.
 
-## Alpha Channel Textures with Render Dragon
+## Render Dragon でのアルファチャンネルテクスチャ
 
-Material that allows for alpha channel textures with render dragon:
+Render Dragon でアルファチャンネルテクスチャを使えるマテリアルです。
 
 <Spoiler title="Show">
 
@@ -98,13 +98,13 @@ Material that allows for alpha channel textures with render dragon:
 
 </Spoiler>
 
-After some more testing was found out that this only works in 3rd person, but still useful since vanilla blending materials still were broken regardless of perspective.
+さらに試したところ、これは 3 人称でしか動作しないことがわかりましたが、バニラのブレンド系マテリアルは視点に関係なく壊れていたため、それでも有用です。
 
 Credit: Ambient.
 
-## overlay_color in render controllers
+## render controller の `overlay_color`
 
-Material that doesn't permit overlay_color to be used in render controllers:
+render controller で `overlay_color` を使えないようにするマテリアルです。
 
 <Spoiler title="Show">
 
@@ -192,12 +192,12 @@ Material that doesn't permit overlay_color to be used in render controllers:
 
 </Spoiler>
 
-May be useful for applying to a specific bone and not the entire geometry.
+ジオメトリ全体ではなく、特定の bone にだけ適用したいときに役立つかもしれません。
 
 Credit: Ambient.
 
-## entity_alphablend_nocolorentity_static Material
+## `entity_alphablend_nocolorentity_static` マテリアル
 
-Using the `entity_alphablend_nocolorentity_static` material will reliably crash Minecraft.
+`entity_alphablend_nocolorentity_static` マテリアルを使うと、Minecraft は高確率でクラッシュします。
 
 Credit: Gecko.

@@ -1,6 +1,6 @@
 ---
-title: Spawning Items
-description: Learn how to spawn item entities.
+title: アイテムのスポーン
+description: アイテムエンティティをスポーンする方法を学びます。
 category: Tutorials
 tags:
     - intermediate
@@ -14,11 +14,11 @@ mentions:
     - Xterionix
 ---
 
-It is fairly common to want to spawn an item in the world, as if dropped. This page will walk through how to accomplish this through various methods, including Entity Deaths, Interactions, and an all-purpose method.
+ワールド内に、ドロップしたようなアイテムをスポーンしたいことはよくあります。このページでは、エンティティの死亡、インタラクション、そして万能な方法を含む、さまざまな手段でそれを実現する方法を説明します。
 
 ## /loot
 
-The simplest method of spawning items to date is by using /loot. Formatted as such:
+現時点で最も簡単なアイテムスポーン方法は `/loot` を使うことです。次のように書きます。
 
 ```
 /loot spawn ~ ~ ~ loot "entities/cow"
@@ -32,9 +32,9 @@ The simplest method of spawning items to date is by using /loot. Formatted as su
 }
 ```
 
-## Entity Deaths
+## エンティティの死亡
 
-Another simple method of spawning items - and generally the most common one - is dropping items upon an entity's death. This is done by adding the `minecraft:loot` component to the entity and linking it to the respective loot table (`forium` in the following example) containing items you wish to be dropped.
+もう 1 つの簡単な方法で、一般的にもよく使われるのが、エンティティの死亡時にアイテムを落とす方法です。これは、エンティティに `minecraft:loot` コンポーネントを追加し、ドロップしたいアイテムを含む対応する loot table（以下の例では `forium`）へリンクします。
 
 <CodeHeader>BP/entities/my_entity.json#components</CodeHeader>
 
@@ -44,11 +44,11 @@ Another simple method of spawning items - and generally the most common one - is
 }
 ```
 
-## Dummy Entity Deaths
+## ダミーエンティティの死亡
 
-We can use `minecraft:loot` on a [dummy entity](/entities/dummy-entities) that dies when we spawn it to create a `drop_entity`. This entity can be summoned like `/summon wiki:drop_entity` to spawn the items. This is useful for scenarios where death particles or sounds are not an issue.
+スポーンしたときに死亡する [dummy entity](/entities/dummy-entities) に `minecraft:loot` を使って `drop_entity` を作ることができます。このエンティティは `/summon wiki:drop_entity` のように召喚して、アイテムをスポーンできます。死亡時のパーティクルや音が問題にならない場面で便利です。
 
-Behaviors:
+動作例:
 
 <CodeHeader>BP/entities/my_entity.json</CodeHeader>
 
@@ -64,7 +64,7 @@ Behaviors:
         },
 
         "components": {
-            // Causes the entity to die when spawned
+            // スポーン時にエンティティを死亡させる
             "minecraft:health": {
                 "value": 0
             },
@@ -76,11 +76,11 @@ Behaviors:
 }
 ```
 
-## Interactions
+## インタラクション
 
-Here is an example of an entity called "box" which will drop its contents upon interaction. The table in `spawn_items` is linked to the loot table with the items desired to be dropped. In this particular case, the event `break_box` is also called when the entity is interacted with, adding a component group that removes the box.
+ここでは、インタラクションすると中身を落とす "box" というエンティティの例を示します。`spawn_items` の table は、ドロップしたいアイテムを含む loot table にリンクします。この例では、エンティティとインタラクションしたときに `break_box` イベントも呼び出され、box を削除するコンポーネントグループが追加されます。
 
-Note that if the entity is not removed upon interaction, it can be interacted with again and will spawn the items. If the entity should persist after the interaction, the `cooldown` parameter may be added to the entity to prevent interaction for a specified amount of time. Alternatively, an event may be called to remove the component group containing this `minecraft:interact` component.
+エンティティがインタラクション後に削除されない場合、再度インタラクションでき、そのたびにアイテムがスポーンします。インタラクション後もエンティティを残したい場合は、`cooldown` パラメーターを追加して、一定時間インタラクションを防ぐことができます。あるいは、この `minecraft:interact` コンポーネントを含むコンポーネントグループを削除するイベントを呼び出しても構いません。
 
 <CodeHeader>BP/entities/my_entity.json#components</CodeHeader>
 
@@ -106,17 +106,17 @@ Note that if the entity is not removed upon interaction, it can be interacted wi
 }
 ```
 
-## All-Purpose Method
+## 万能な方法
 
-This is a method that can be used for virtually any scenario: entity deaths, animation-based interactions, general item drops. This method was created in particular for dropping items without any death animation, sound, or particles.
+これは、エンティティの死亡、アニメーションベースのインタラクション、一般的なアイテムドロップなど、ほぼあらゆる場面で使える方法です。特に、死亡アニメーション、音、パーティクルなしでアイテムを落としたいときのために作られました。
 
-Several parts are required to set up the item dropping: a new entity with behavior, a corresponding animation controller, the resources for an invisible entity (refer to Dummy Entities tutorial), and a loot table. To spawn the items after it is set up, the entity is spawned where the items are to be dropped. If multiple items are desired, component groups with spawn events may be set up for each item.
+アイテムドロップを設定するには、いくつかの要素が必要です。behavior を持つ新しいエンティティ、対応する animation controller、透明なエンティティの資産（Dummy Entities チュートリアルを参照）、そして loot table です。設定が終わったら、アイテムを落としたい場所にエンティティをスポーンします。複数のアイテムを出したい場合は、各アイテムごとに spawn event を持つコンポーネントグループを用意できます。
 
 ### Behavior
 
-The items are spawned using the `minecraft:behavior.drop_item_for` component in conjunction with the `minecraft:navigation.walk` component, the latter being required for the former to work. Note that the `time_of_day_range` parameter in the following is not initialized to how it is defined below despite the documentation listing it as such, and this is necessary for proper function. The parameter `max_dist` must be increased to an appropriate value if the items are desired to be dropped when the player is very far away.
+アイテムは `minecraft:behavior.drop_item_for` コンポーネントを `minecraft:navigation.walk` コンポーネントと組み合わせてスポーンします。後者は前者を動かすために必要です。なお、以下の `time_of_day_range` パラメーターは、ドキュメントの記載どおりには初期化されておらず、正しく動作させるにはこの形が必要です。プレイヤーがかなり遠くにいてもドロップさせたい場合は、`max_dist` を適切な値まで大きくする必要があります。
 
-This behavior appears to push the mob back when the items are dropped. Thus it is essential to summon the entity slightly above the ground (or teleport it up in the following animation controller) to avoid the items spawning a few blocks away from the spawn location. Decreasing the size of the collision box may also help.
+この動作は、アイテムが落ちたときに mob を少し押し戻すようです。そのため、アイテムがスポーン地点から数ブロック離れた場所に出ないよう、エンティティを地面より少し上に召喚する（または次の animation controller で上にテレポートさせる）ことが重要です。collision box を小さくするのも有効です。
 
 <CodeHeader>BP/entities/my_entity.json#components</CodeHeader>
 
@@ -130,11 +130,11 @@ This behavior appears to push the mob back when the items are dropped. Thus it i
 }
 ```
 
-### Animation Controller
+### アニメーションコントローラー
 
-**The following animation controller must be linked to the entity** to remove it upon summoning. Alternatively, an animation with a timeline can be used. If you are unsure how to do this, refer to the Entity Commands tutorial.
+**以下の animation controller をエンティティにリンクする必要があります**。こうすることで、召喚後にエンティティを削除できます。あるいは、timeline を持つ animation を使っても構いません。やり方が分からない場合は、Entity Commands のチュートリアルを参照してください。
 
-Teleporting the entity into the void causes no death animation, sound, or particles. Two transitions are used to ensure it is not killed in the same tick it spawns.
+エンティティを void にテレポートさせると、死亡アニメーション、音、パーティクルは発生しません。スポーンした同じ tick で死亡しないように、2 つの transition を使っています。
 
 <CodeHeader>BP/animation_controllers/my_entity.ac.json</CodeHeader>
 
@@ -168,11 +168,11 @@ Teleporting the entity into the void causes no death animation, sound, or partic
 }
 ```
 
-## Structure Method
+## 構造物を使う方法
 
-There is also one interesting method of spawning items - via structure.
-You can fill a structure with `structure_void` (so air doesn't replace blocks when structure loaded) and drop an item into it.
-This method allows us to keep item data (such as durability).
-Then you can load this structure whenever and wherever you want.
+アイテムをスポーンする面白い方法として、structure を使う方法もあります。
+structure を `structure_void` で埋めておけば（structure 読み込み時に空気がブロックを置き換えないようにできます）、そこにアイテムを落とせます。
+この方法では、耐久値のようなアイテムデータを保持できます。
+あとは、その structure を好きなときに好きな場所へ読み込めます。
 
 ![](structure-method.png)

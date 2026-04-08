@@ -1,6 +1,6 @@
 ---
-title: Molang Queries
-description: Some of the MoLang queries explained.
+title: Molang クエリ
+description: いくつかの Molang クエリを解説します。
 outline_depth: 2
 mentions:
     - SirLich
@@ -18,10 +18,10 @@ mentions:
     - ThomasOrs
 ---
 
-The bedrock documentation for Molang is notoriously bad. This page will attempt to remedy this by providing additional details for individual queries, _where possible_. This page is intended to be searched, not read in full. Use the side-bar, or use `ctrl-f` to navigate.
+Bedrock の Molang ドキュメントは、悪名高いほど分かりづらいです。このページでは、可能な限り個別のクエリに追加情報を与えることで、その問題を少しでも改善しようとしています。このページは通読するものではなく、検索して使うことを想定しています。サイドバーを使うか、`ctrl-f` で移動してください。
 
 :::tip
-This page is not an exhaustive list list! It only contains queries we've written extra information for. The full list of queries can be found [here](https://bedrock.dev/docs/stable/Molang#List%20of%20Entity%20Queries)!
+このページは網羅的な一覧ではありません。追加情報を書いたクエリだけを載せています。完全な一覧は [こちら](https://bedrock.dev/docs/stable/Molang#List%20of%20Entity%20Queries) で確認できます。
 :::
 
 ## query.armor_texture_slot

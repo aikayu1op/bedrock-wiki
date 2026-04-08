@@ -7,21 +7,21 @@ mentions:
     - SirLich
     - TheItsNameless
     - QuazChick
-description: Trade tables represent the fundamental data behind trading item transactions for an entity.
+description: トレードテーブルは、entity のアイテム取引の基礎データを表します。
 ---
 
-Trade tables represent the fundamental data behind trading item transactions for an entity. Trade tables are not standalone; they must be referenced from an [entity component](https://bedrock.dev/docs/stable/Entities#minecraft%3Aeconomy_trade_table). Using the randomizing properties available to trade tables, trade offers, item counts, and cost calculations may vary across entity instances, even if all would point to the same trade table.
+トレードテーブルは、entity のアイテム取引の基礎データを表します。トレードテーブルは単独では機能せず、[entity component](https://bedrock.dev/docs/stable/Entities#minecraft%3Aeconomy_trade_table) から参照する必要があります。トレードテーブルで使えるランダム化プロパティにより、同じトレードテーブルを参照していても、entity ごとに取引内容、アイテム数、コスト計算が変化することがあります。
 
 ![](trading.png)
 
-Trade tables are not identified or versioned. Like loot tables, trade tables do not support Molang and instead rely on JSON constructs, like range objects and [functions](#functions). Despite being different, trade tables still support comments.
+トレードテーブルには識別子もバージョン管理もありません。ルートテーブルと同様に、トレードテーブルは Molang をサポートせず、range object や [functions](#functions) のような JSON 構造に依存します。別物ではありますが、トレードテーブルでもコメントは使えます。
 
-## Integration
+## 統合
 
-Trade tables don't represent a primary add-on system, like blocks or biomes. They aren't registered by being placed in a specific folder; instead, they're referenced (from entities). Trade tables may be placed anywhere within a behavior pack.
+トレードテーブルは、ブロックやバイオームのような主要なアドオン要素ではありません。特定のフォルダに置くことで登録されるのではなく、entity から参照されます。トレードテーブルは behavior pack 内のどこに置いてもかまいません。
 
 ::: tip
-It's recommended to include a namespace folder (here we've called it `wiki`) at the top level of the `trading` folder when adding custom trade tables to avoid conflicts between packs.
+カスタムのトレードテーブルを追加する際は、パック間の衝突を避けるため、`trading` フォルダの最上位に namespace フォルダ（ここでは `wiki` と呼んでいます）を入れることを推奨します。
 :::
 
 <FolderView :paths="[
@@ -29,7 +29,7 @@ It's recommended to include a namespace folder (here we've called it `wiki`) at 
     'BP/trading/economy_trades/cleric_trades.json'
 ]" />
 
-The following example is referenced and analyzed throughout the document:
+以下の例は、この文書全体で参照・解説されます。
 
 <Spoiler title="Trade Table File Example">
 
@@ -160,9 +160,9 @@ The following example is referenced and analyzed throughout the document:
 
 </Spoiler>
 
-## Structure
+## 構造
 
-Trade tables are represented as un-versioned, un-namespaced objects.
+トレードテーブルは、バージョンなし・名前空間なしのオブジェクトとして表されます。
 
 <CodeHeader>#</CodeHeader>
 
@@ -181,11 +181,11 @@ Trade tables are represented as un-versioned, un-namespaced objects.
 }
 ```
 
-Trade tables use [tiers](#tiers) to structure trade organization. Tiers are defined with the required top-level `"tiers"` array property. Tiers appear in order in the trading interface.
+トレードテーブルは [tiers](#tiers) を使って取引の構成を整理します。tier は必須の最上位 `"tiers"` 配列プロパティで定義します。tier は取引画面に順番どおりに表示されます。
 
-### Tiers
+### 階層
 
-Tiers act as an unlockable set of trades and represent the highest level of grouping in a trade table.
+tier はアンロック可能な取引のまとまりとして機能し、トレードテーブル内で最上位のグループ単位になります。
 
 <CodeHeader>#/tiers/0</CodeHeader>
 
@@ -205,17 +205,17 @@ Tiers act as an unlockable set of trades and represent the highest level of grou
 }
 ```
 
-Each tier must either represent a set of [trades](#trades) (as `"trades"`) or [trade groups](#groups) (as `"groups"`); one of these properties is required. If trades are specified, all such trades will appear for that tier. If instead groups are given, trades from all listed groups will be used for that tier; how each group selects its trades depends on its configuration.
+各 tier は、[trades](#trades) の集合（`"trades"`）または [trade groups](#groups)（`"groups"`）のどちらかを表す必要があります。これらのうち少なくとも 1 つが必要です。trades を指定した場合、その tier にはそれらすべての取引が表示されます。代わりに groups を指定した場合、その tier では列挙されたすべての group から取引が使われます。各 group がどの取引を選ぶかは、その設定に依存します。
 
 ::: tip NOTE
-If both `"trades"` and `"groups"` are given in a tier, the trades declaration is ignored in favor of groups.
+tier に `"trades"` と `"groups"` の両方がある場合、`trades` の記述は無視され、groups が優先されます。
 :::
 
-Within a tier, trades appear in order in the trading interface. If trades are grouped, those groups will appear in their defined order as well, organized by group and then by trade. Trades in one group are not visually differentiable from trades in other groups; only tiers are visually separated and identifiable.
+tier 内では、取引は取引画面に順番どおりに表示されます。取引が group 化されている場合、その group も定義順に表示され、group ごと、さらにその中の trade ごとに整理されます。ある group の取引は他の group の取引と見た目上区別されません。視覚的に分かれて識別できるのは tier のみです。
 
-#### Experience Requirement
+#### 経験条件
 
-Tiers are unlocked when the _trader_ meets experience thresholds. Each trader has its own internal lifetime experience that accumulates when trading with players. The amount of experience obtained per trade depends on that trade's [experience reward](#trader-experience). The optional `"total_exp_required"` property specifies how much experience the trader needs in order for that tier to unlock.
+tier は、_trader_ が経験値のしきい値を満たしたときにアンロックされます。各 trader には固有の累積経験値があり、プレイヤーとの取引で増えていきます。取引ごとに得られる経験値量は、その取引の [experience reward](#trader-experience) に依存します。オプションの `"total_exp_required"` プロパティは、その tier を解放するために trader に必要な経験値を示します。
 
 <CodeHeader>#/tiers/1/</CodeHeader>
 
@@ -223,27 +223,27 @@ Tiers are unlocked when the _trader_ meets experience thresholds. Each trader ha
 "total_exp_required": 28
 ```
 
-By default, the amount of experience needed is set to the index of the trade tier. Therefore, the second tier would require the trader to have 1 XP; the third tier would require 2 XP; and so forth. The first tier is always unlocked automatically, [regardless of its set experience threshold](#initial-tier-experience).
+既定では、必要経験値は trade tier のインデックスに設定されます。つまり、2 番目の tier には trader に 1 XP が必要で、3 番目の tier には 2 XP が必要です。最初の tier は常に自動でアンロックされ、[設定された経験値しきい値に関係なく](#initial-tier-experience) 有効になります。
 
-#### Tier Unlocking
+#### Tier のアンロック
 
-Tiers are unlocked in order. When a new tier is unlocked, the subsequent tier is additionally checked to see if its threshold is met by the current XP. If it is, it unlocks and checks its subsequent tier, and so forth. Tier unlocking is checked when the rewarded trader experience would suffice for multiple tiers or if a [provided initial experience](#initial-tier-experience) would unlock subsequent tiers when correctly updated by the game.
+tier は順番にアンロックされます。新しい tier がアンロックされると、続く tier も現在の XP で条件を満たしているか追加で確認されます。満たしていればアンロックされ、その次の tier も同様に確認されます。tier のアンロックは、付与された trader 経験値で複数の tier を解放できる場合や、[指定した初期経験値](#initial-tier-experience) がゲーム側で正しく更新された結果として後続 tier が解放される場合に行われます。
 
 ::: tip NOTE
-Since tiers are checked one-at-a-time, if tier unlocking would stop due to the XP requirements of a tier not being met, no subsequent tiers will be checked, even if those later tiers' XP requirements have been met.
+tier は 1 つずつ確認されるため、ある tier の XP 条件を満たさずにアンロックが止まると、その後ろの tier は、それらの条件を満たしていても確認されません。
 :::
 
-##### Initial Tier Experience
+##### 初期 Tier の経験値
 
-Special handling occurs for a non-zero experience threshold in the first tier. If negative, _all_ tiers will be unlocked. If greater than 0, the initial experience of the trader is set to the provided value.
+最初の tier の経験値しきい値が 0 以外の場合は特別な扱いになります。負の値なら、_すべて_ の tier がアンロックされます。0 より大きい場合は、trader の初期経験値がその値に設定されます。
 
 ::: warning
-When the initial tier's experience threshold is non-zero, a manual update is required for a trader's trades to reflect the actual nature of their trade table. In these cases, performing a trade or closing and re-opening the trading interface will update the interface correctly. Initially, only the first tier will be available even if other tiers should be unlocked.
+初期 tier の経験値しきい値が 0 以外の場合、trader の取引内容を実際のトレードテーブルに反映するには手動更新が必要です。この場合、取引を 1 回行うか、取引画面を閉じて再度開くと正しく更新されます。最初は、他の tier がアンロックされるはずでも、最初の tier だけが利用可能になります。
 :::
 
-##### Tier Freezing
+##### Tier の固定
 
-Excluding the [initial tier](#initial-tier-experience), it's possible to freeze trades at a tier:
+[初期 tier](#initial-tier-experience) を除けば、取引を tier で固定できます。
 
 <CodeHeader>Example Tier Freeze</CodeHeader>
 
@@ -251,11 +251,11 @@ Excluding the [initial tier](#initial-tier-experience), it's possible to freeze 
 "total_exp_required": -1
 ```
 
-When its prior tier is unlocked, a tier with a negative XP requirement will immediately unlock, [as expected](#tier-unlocking). However, it will be impossible for the player to progress to any subsequent tiers.
+前の tier がアンロックされると、負の XP 要件を持つ tier は [期待どおり](#tier-unlocking) すぐにアンロックされます。ただし、プレイヤーがその先の tier に進むことはできません。
 
-### Trade Groups
+### 取引グループ
 
-Trade groups are a way to randomly select which trades an individual trader should use for a tier.
+取引グループは、個々の trader がその階層でどの取引を使うかをランダムに選ぶ方法です。
 
 <CodeHeader>#/tiers/0/groups/0</CodeHeader>
 
@@ -267,19 +267,19 @@ Trade groups are a way to randomly select which trades an individual trader shou
 }
 ```
 
-The trades from which to select are given with the required `"trades"` array; each entry is a [trade](#trades). A select number of these trades, indicated by the optional `"num_to_select"` property, will be picked for that tier for each trader. If `"num_to_select"` is `0`, all trades will be selected; this is the default.
+選択対象の取引は、必須の `"trades"` 配列で指定します。各エントリーは [trade](#trades) です。オプションの `"num_to_select"` プロパティで示した数だけの取引が、各 trader のその tier で選ばれます。`"num_to_select"` が `0` の場合は、すべての取引が選ばれます。これが既定値です。
 
 ::: tip NOTE
-Trade groups cannot be nested for advanced chance selection.
+trade group を入れ子にして、より高度な確率選択を行うことはできません。
 :::
 
 ::: tip
-Currently, no random selection count is possible. Nor is weighting by trade, but trades can be duplicated within the array to effectively increase their likelihood of being selected.
+現在は、ランダム選択数を指定することはできません。取引ごとの重み付けにも対応していませんが、配列内で取引を重複させることで、選ばれる可能性を実質的に高められます。
 :::
 
-### Trades
+### 取引
 
-Trades represent a transaction between a trader and the player.
+取引は、trader とプレイヤーの間の交換を表します。
 
 <CodeHeader>#/tiers/0/trades/1</CodeHeader>
 
@@ -294,15 +294,15 @@ Trades represent a transaction between a trader and the player.
 }
 ```
 
-Once a trade is picked for a trade slot, it will not fundamentally change. Only the [quantity](#quantity) can be modified in certain situations.
+取引スロットに一度選ばれた trade は、根本的には変化しません。特定の状況で変更できるのは [quantity](#quantity) だけです。
 
 ::: tip
-Individual trade definitions can affect more than just trades themselves. Notably, an entity can [hold a particular item](https://bedrock.dev/docs/stable/Entities#minecraft%3Abehavior.trade_interest) in response to the player holding an item.
+個別の trade 定義は、取引そのもの以外にも影響します。たとえば、プレイヤーがアイテムを持っていることに応じて、entity が [特定のアイテムを持つ](https://bedrock.dev/docs/stable/Entities#minecraft%3Abehavior.trade_interest) ことがあります。
 :::
 
-#### Wanted and Given Items
+#### 必要アイテムと提供アイテム
 
-The fundamental transactional units are declared using `"wants"` and `"gives"`; players trade with `"wants"` to receive `"gives"`. Both properties must be arrays and are required.
+基本の取引単位は `"wants"` と `"gives"` で定義します。プレイヤーは `"wants"` を渡して `"gives"` を受け取ります。どちらのプロパティも配列で、必須です。
 
 <CodeHeader>#/tiers/0/trades/1/</CodeHeader>
 
@@ -311,17 +311,17 @@ The fundamental transactional units are declared using `"wants"` and `"gives"`; 
 "gives": […]
 ```
 
-A trade can have between 1 and 2 wanted entries and must have exactly 1 given entry. Each entry of either array may be either an [item](#items) or a [choice](#choices).
+1 つの trade には 1 つから 2 つまでの必要アイテムを含められ、提供アイテムはちょうど 1 つでなければなりません。どちらの配列の各エントリーも、[item](#items) または [choice](#choices) のどちらかにできます。
 
-The trading interface will adapt depending on the number of items wanted. In some circumstances, some trading modifiers, such as [quantity-modifying enchantment functions](#quantity-modifying-enchantment-functions), only affect the first wanted item.
+取引画面は、必要アイテムの数に応じて表示を変えます。場合によっては、[quantity-modifying enchantment functions](#quantity-modifying-enchantment-functions) のような一部の取引修飾は、最初の必要アイテムにしか影響しません。
 
 ::: tip NOTE
-If an object is provided as an entry that contains both item and choice properties, only the choice part is considered; the item parts will be ignored.
+item と choice の両方を含むオブジェクトをエントリーとして与えた場合、choice の部分だけが考慮され、item の部分は無視されます。
 :::
 
-#### Trade Limit
+#### 取引回数制限
 
-A trader can typically only perform an individual trade a set number of times before having to resupply. The numeric `"max_uses"` property configures this number.
+trader は通常、個別の trade を一定回数だけ行うと、補充が必要になります。この回数は数値 `"max_uses"` プロパティで設定します。
 
 <CodeHeader>#/tiers/0/trades/1/</CodeHeader>
 
@@ -329,17 +329,17 @@ A trader can typically only perform an individual trade a set number of times be
 "max_uses": 2
 ```
 
-Trade limits are specific to each trade. Diminishing supply in one trade won't affect another trade, even if both trades have the same wanted and given items. By default, a trader will be able to carry out an individual trade 7 times before needing to resupply.
+取引回数制限は trade ごとに個別です。1 つの trade で在庫が減っても、必要アイテムと提供アイテムが同じ別の trade には影響しません。既定では、trader は各 trade を 7 回行うと補充が必要になります。
 
 ::: tip NOTE
-The act of resupplying is handled by an entity component (`"minecraft:trade_resupply": {}`).
+補充の処理は entity component（`"minecraft:trade_resupply": {}`）で行われます。
 :::
 
-If a value of `0` is given, that trade will be shown in the trading interface but will be impossible to use. If a negative value is given, that trade will never need resupplying; it will be infinitely usable.
+値に `0` を指定すると、その trade は取引画面に表示されますが、使用はできません。負の値を指定すると、その trade は補充不要になり、無限に使えます。
 
-#### Player Experience
+#### プレイヤー経験値
 
-Experience orbs intended for the _player_ can be disabled for a trade using the optional Boolean `"reward_exp"` property.
+_player_ 向けの経験値オーブは、オプションの Boolean `"reward_exp"` プロパティで無効化できます。
 
 <CodeHeader>#/tiers/0/trades/1/</CodeHeader>
 
@@ -347,11 +347,11 @@ Experience orbs intended for the _player_ can be disabled for a trade using the 
 "reward_exp": false
 ```
 
-By default, `"reward_exp"` is true, and the player will be rewarded with some experience for trading. The amount of experience received is not modifiable within a trade table.
+既定では `"reward_exp"` は true で、プレイヤーは取引で一定の経験値を受け取ります。受け取る経験値量は、トレードテーブル内では変更できません。
 
-#### Trader Experience
+#### 取引者経験値
 
-Traders may receive experience when the player finalizes a trade. This property is the key to establishing a trade progression system with a trader using [tiers](#tiers).
+プレイヤーが取引を確定すると、trader が経験値を得ることがあります。このプロパティは、[tiers](#tiers) を使った取引進行システムを作るうえで重要です。
 
 <CodeHeader>#/tiers/0/trades/1/</CodeHeader>
 
@@ -359,15 +359,15 @@ Traders may receive experience when the player finalizes a trade. This property 
 "trader_exp": 8
 ```
 
-The amount of experience to reward the _trader_ is given the the optional numeric property `"trader_exp"`. By default, the trader will receive 1 XP.
+_trader_ に与える経験値量は、オプションの数値プロパティ `"trader_exp"` で指定します。既定では trader は 1 XP を受け取ります。
 
 ::: tip
-For non-linearly spaced tiers, it's typical for the trader experience to increase in higher tiers. This way, lower-tier trades will have less leveling impact than higher-tier trades.
+線形でない階層配置では、上位階層ほど trader 経験値を増やすのが一般的です。そうすると、下位階層の取引は上位階層の取引よりレベル上昇への影響が小さくなります。
 :::
 
-### Choices
+### 選択肢
 
-Choices are simple objects for randomly selecting an item to use for a trade. One item is selected with uniform randomness for that trade for each instance of a trader.
+選択肢は、取引に使うアイテムをランダムに選ぶためのシンプルなオブジェクトです。trader の各インスタンスごとに、その trade 用のアイテムが一様ランダムで 1 つ選ばれます。
 
 <CodeHeader>#/tiers/1/trades/0/wants/0</CodeHeader>
 
@@ -386,19 +386,19 @@ Choices are simple objects for randomly selecting an item to use for a trade. On
 }
 ```
 
-Choices only contain the required `"choice"` array property. Each entry in the array is an [item](#items). At least one item must be provided.
+選択肢には、必須の `"choice"` 配列プロパティだけが含まれます。配列内の各エントリーは [item](#items) です。少なくとも 1 つのアイテムが必要です。
 
 ::: tip NOTE
-Choices cannot be nested.
+選択肢を入れ子にすることはできません。
 :::
 
 ::: tip
-There are currently no means of specifying a weight for a given item, but an item may be duplicated within the array to effectively increase its likelihood for being selected.
+現在、特定のアイテムの重みを指定する方法はありませんが、配列内でアイテムを重複させることで、選ばれる確率を実質的に高められます。
 :::
 
-### Items
+### アイテム
 
-Items are the subjects of a trade. Their definitions are shared between wanted and given items, but there are some various implications depending on location used.
+アイテムは trade の対象です。必要アイテムと提供アイテムで定義は共通ですが、使う場所によっていくつかの意味合いが変わります。
 
 <CodeHeader>#/tiers/1/trades/0/wants/0/choice/0</CodeHeader>
 
@@ -433,9 +433,9 @@ Items are the subjects of a trade. Their definitions are shared between wanted a
 }
 ```
 
-#### Item Reference
+#### アイテム参照
 
-Items are referenced within trades using the required `"item"` string property.
+trade 内では、必須の `"item"` 文字列プロパティを使ってアイテムを参照します。
 
 <CodeHeader>#/tiers/1/trades/0/wants/0/choice/0/</CodeHeader>
 
@@ -443,7 +443,7 @@ Items are referenced within trades using the required `"item"` string property.
 "item": "wiki:exalted_blade"
 ```
 
-The item reference must point to the identifier of an item. A data value can be provided in-place to the reference as a suffix:
+item reference は、アイテムの識別子を指している必要があります。data 値は接尾辞としてその場で指定できます。
 
 <CodeHeader>Example Data Assignment</CodeHeader>
 
@@ -452,14 +452,14 @@ The item reference must point to the identifier of an item. A data value can be 
 ```
 
 ::: tip
-Data values can also be set (and much more conveniently randomized) using the `set_data` function.
+data 値は `set_data` 関数でも設定できますし、こちらのほうがランダム化もしやすいです。
 :::
 
-If no data value is specified for a _wanted_ item, any item with that identifier may be traded. If no data value is specified for a _given_ item, a data value of `0` is implied.
+_必要アイテム_ に data 値が指定されていない場合、その識別子を持つ任意のアイテムを取引できます。_提供アイテム_ に data 値が指定されていない場合は、data 値 `0` が既定です。
 
-#### Quantity
+#### 数量
 
-The optional `"quantity"` property specifies the count of items wanted or given in a trade.
+オプションの `"quantity"` プロパティは、trade で必要または提供されるアイテム数を指定します。
 
 <CodeHeader>#/tiers/1/trades/0/wants/0/choice/0/</CodeHeader>
 
@@ -470,15 +470,15 @@ The optional `"quantity"` property specifies the count of items wanted or given 
 }
 ```
 
-Quantity can be expressed as either an integer literal or a range object, such as seen above. If expressed as a range, a random value is selected uniformly inclusively within the specified limits. If no quantity is provided, the item count will default to 1.
+quantity は、上の例のように整数リテラルまたは range object で指定できます。range object の場合は、指定範囲内から両端を含めて一様ランダムに値が選ばれます。quantity を指定しない場合、アイテム数の既定値は 1 です。
 
 ::: tip NOTE
-Quantity is always bounded by the stack size and can only affect a single slot in a trade. It's impossible to, for example, enforce a requirement of 100 planks from a single slot (although this can be done using 2 `"wants"`) or giving 2 un-stackable swords to the player in a single trade.
+quantity は常にスタックサイズの範囲内に収まり、trade の 1 スロットにしか影響しません。たとえば、1 スロットで 100 枚の木材を要求することはできません（ただし `"wants"` を 2 つ使えば可能です）。また、積み重ねられない剣を 1 回の trade で 2 本渡すこともできません。
 :::
 
-#### Price Multiplier
+#### 価格倍率
 
-The price multiplier dictates how an item's [base quantity](#quantity) is altered due to certain events.
+価格倍率は、特定のイベントによってアイテムの [基本数量](#quantity) がどう変わるかを決めます。
 
 <CodeHeader>#/tiers/1/trades/0/wants/0/choice/0/</CodeHeader>
 
@@ -486,49 +486,49 @@ The price multiplier dictates how an item's [base quantity](#quantity) is altere
 "price_multiplier": 0.5
 ```
 
-`"price_multiplier"` is optional and defaults to `0`. Two systems exist that use the price multiplier: a modern and a legacy system. In the modern system, the given price multiplier can only affect the _first wanted item_ in a trade. In the legacy system, any _wanted items_ can be affected.
+`"price_multiplier"` は任意で、既定値は `0` です。価格倍率を使う仕組みには、現行のものと旧式の 2 種類があります。現行システムでは、指定された価格倍率は trade の _最初の必要アイテム_ にしか影響しません。旧式システムでは、任意の _必要アイテム_ に影響します。
 
-##### Fluctuation Factors
+##### 変動要因
 
-Trade prices fluctuate as a result of serval factors:
+trade 価格は、いくつかの要因で変動します。
 
--   An increased demand, occurring when trading for the same item across multiple [resupplies](#trade-limit)
--   Being recently cured, such as villagers being cured from being zombie villagers
--   Being _near_ a trader who was recently cured
--   Trading with a player who is affected with "Hero of the Village"
+-   需要の増加。複数回の [resupply](#trade-limit) をまたいで同じアイテムを取引したときに発生します。
+-   直近で治療されたこと。たとえば zombie villager から villager を治療した場合などです。
+-   直近で治療された trader の _近く_ にいること
+-   "Hero of the Village" の影響を受けているプレイヤーとの取引
 
-The price multiplier affects all these situations with the exception of a player having "Hero of the Village" when using the new pricing formula, which uses fixed values.
+価格倍率は、固定値を使う新しい価格計算式でプレイヤーが "Hero of the Village" を持っている場合を除き、これらすべての状況に影響します。
 
-##### Cost Calculations
+##### コスト計算
 
-The price multiplier directly and solely affects cost increases in response to an increased demand for a trade. By default, demand is 0 and cannot decrease past that value. Demand for a trade stacks, increasing when resupplying after that trade [has been exhausted](#trade-limit) and decreasing if no trades occurred between resupplies.
+価格倍率は、取引の需要が増えたときのコスト増加に直接かつ専ら影響します。既定では需要は 0 であり、その値を下回ることはありません。取引の需要は累積し、その取引が [使い切られた](#trade-limit) 後の補充で増え、補充の間に取引が行われなかった場合は減少します。
 
-Cost increase due solely to demand is linear, where each increase in demand adds a proportion of the base cost, given by the price multiplier. Assuming the following variables…
+需要だけによるコスト増加は線形で、需要が 1 増えるごとに、価格倍率で与えられる基本コストの一部が加算されます。次の変数を仮定すると…
 
-| Variable | Meaning                                                                              |
-| -------- | ------------------------------------------------------------------------------------ |
-| _c_      | Total cost                                                                           |
-| _p_      | Base cost, including [quantity overrides](#quantity-modifying-enchantment-functions) |
-| _m_      | Price multiplier                                                                     |
-| _d_      | Current demand                                                                       |
+| 変数 | 意味                                                                                 |
+| ---- | ------------------------------------------------------------------------------------ |
+| _c_  | 総コスト                                                                             |
+| _p_  | 基本コスト。[quantity overrides](#quantity-modifying-enchantment-functions) を含む |
+| _m_  | 価格倍率                                                                             |
+| _d_  | 現在の需要                                                                           |
 
-…The following formula can be used to calculate the total cost when no other factors are present:
+…他の要因がない場合、次の式で総コストを計算できます。
 
 _c_ = _p_ × (1 + _m_ \* _d_)
 
 ::: tip NOTE
-Other situations additionally use entity properties for cost calculations and are not provided here.
+他の状況では、コスト計算に entity のプロパティも使われますが、ここでは扱いません。
 :::
 
-If the price multiplier is `0`, the quantity will remain constant in most situations (except the "Hero of the Village" modifier using the new pricing formula).
+価格倍率が `0` の場合、ほとんどの状況で quantity は一定のままです（ただし、新しい価格計算式を使う "Hero of the Village" 修正は例外です）。
 
 ::: tip NOTE
-A negative price multiplier is possible but can't affect increasing costs due to [demand](#trade-limit); the multiplier will effectively be capped to `0`. However, negative values do affect prices in response to the trader recently being cured, the trader being nearby another trader who was recently cured, or trading with a player affected with "Hero of the Village" _using the legacy pricing formulas_.
+負の価格倍率も指定できますが、[demand](#trade-limit) による増加コストには影響せず、実質的に `0` に丸められます。ただし、trader が最近治療された場合、最近治療された別の trader の近くにいる場合、または "Hero of the Village" 付きのプレイヤーとの取引で _旧価格計算式_ を使う場合には、負の値でも価格に影響します。
 :::
 
-#### Functions
+#### 関数
 
-Functions are used to modify the nature of the item. The optional `"functions"` array contains a collection of functions to be applied to the item.
+関数は、アイテムの性質を変更するために使います。オプションの `"functions"` 配列には、そのアイテムに適用する関数の集まりを入れます。
 
 <CodeHeader>#/tiers/0/groups/0/trades/1/gives/0/</CodeHeader>
 
@@ -546,11 +546,11 @@ Functions are used to modify the nature of the item. The optional `"functions"` 
 ]
 ```
 
-The functions used by trade tables are shared with loot tables. When used ([where usable](#unusable-wanted-item-functions)) in a wanted item declaration, they act to restrict the nature of the wanted item. Such function restrictions can only affect the first wanted item.
+トレードテーブルで使う関数はルートテーブルと共通です。必要アイテムの宣言で使うと（[使用可能な範囲](#unusable-wanted-item-functions) で）、必要アイテムの性質を制限する役割になります。この種の関数制限は最初の必要アイテムにしか影響しません。
 
-##### Generally Unusable Functions
+##### 一般的に使えない関数
 
-In general, functions behave well for trading; however, the following do not work anywhere in trade tables:
+一般に、関数は取引でも問題なく動作します。ただし次のものはトレードテーブルのどこでも動作しません。
 
 -   `set_count`
 -   `furnace_smelt`
@@ -558,14 +558,14 @@ In general, functions behave well for trading; however, the following do not wor
 -   `trader_material_type`
 
 ::: tip NOTE
-`set_count`'s functionality is replaced by the [quantity property](#quantity).
+`set_count` の機能は [quantity property](#quantity) で置き換えられています。
 
-`trader_material_type`, seen only in a single vanilla trade table, would theoretically set the data value of the item based on the mark variant of the entity, but this doesn't seem to be usable in any custom way.
+`trader_material_type` はバニラの 1 つのトレードテーブルにしか登場しません。理論上は entity の mark variant に基づいて item の data 値を設定するはずですが、カスタム用途では使えないようです。
 :::
 
-##### Unusable Wanted Item Functions
+##### 必要アイテムでは使えない関数
 
-In general, using functions to specify item attributes for a wanted item will require the offered item to conform to those attributes. However, the following functions do not enforce a strict match and are therefore useless on wanted items:
+一般に、必要アイテムの属性を関数で指定すると、提示されるアイテムはその属性に一致している必要があります。ただし、次の関数は厳密な一致を強制しないため、必要アイテムでは無意味です。
 
 -   `set_name`
 -   `set_lore`
@@ -574,20 +574,20 @@ In general, using functions to specify item attributes for a wanted item will re
 -   `random_dye`
 -   `fill_container`
 
-##### Quantity-Modifying Enchantment Functions
+##### 数量を変えるエンチャント関数
 
-2 functions actually set the quantity for the first _wanted item_ if being used as _given items_, potentially overriding any provided [quantity](#quantity) for that first wanted item:
+実際には 2 つの関数が、_提供アイテム_ として使われる場合に最初の _必要アイテム_ の quantity を設定し、最初の必要アイテムに指定された [quantity](#quantity) を上書きすることがあります。
 
 -   `enchant_with_levels`
 -   `enchant_book_for_trading`
 
 ::: tip NOTE
-Despite overriding the quantity, all [modified trade prices](#fluctuation-factors) adapt correctly. These functions cannot affect the quantity of a second wanted item, even when using the legacy cost formulas. If these functions are used on a _wanted item_, the quantity is not overridden.
+quantity を上書きしても、すべての [modified trade prices](#fluctuation-factors) は正しく適応します。これらの関数は、旧コスト計算式を使っていても、2 つ目の必要アイテムの quantity には影響しません。これらの関数を _必要アイテム_ に使った場合、quantity は上書きされません。
 :::
 
-###### Enchant with Levels Function
+###### レベル付きエンチャント関数
 
-`enchant_with_levels` randomly enchants an item as through enchanted from an enchantment table.
+`enchant_with_levels` は、エンチャントテーブルで付与したかのように、アイテムにランダムでエンチャントを付けます。
 
 <CodeHeader>#/tiers/0/groups/0/trades/1/gives/0/functions/0</CodeHeader>
 
@@ -603,11 +603,11 @@ Despite overriding the quantity, all [modified trade prices](#fluctuation-factor
 }
 ```
 
-The cost for the first wanted item is determined by adding this function's chosen level value (capped to `0` if it would be negative) to the original [quantity](#quantity). The level value is computed from the optional `"levels"` property. If a numeric literal is used, that value is the chosen level value. If a range object is used, as above, a random number is rolled inclusively between the provided minimum and maximum. That random number then acts as the chosen level value. In the above example, the first wanted item's cost would be increased by 5 to 25.
+最初の必要アイテムのコストは、この関数で選ばれたレベル値（負になる場合は `0` に切り上げ）を元の [quantity](#quantity) に加算して決まります。レベル値はオプションの `"levels"` プロパティから算出されます。数値リテラルを使った場合は、その値が選ばれたレベル値になります。上のように range object を使う場合は、指定した最小値と最大値の間から両端を含めて乱数を振ります。その乱数が選ばれたレベル値になります。上の例では、最初の必要アイテムのコストは 5 増えて 25 になります。
 
-###### Enchant Book for Trading Function
+###### 取引用本エンチャント関数
 
-`enchant_book_for_trading` is intended solely for trading. Its properties combine to determine the first wanted item's cost.
+`enchant_book_for_trading` は、取引用にのみ使うことを意図したものです。各プロパティの組み合わせで、最初の必要アイテムのコストが決まります。
 
 <CodeHeader>#/tiers/0/groups/0/trades/0/gives/0/functions/0</CodeHeader>
 
@@ -622,28 +622,28 @@ The cost for the first wanted item is determined by adding this function's chose
 }
 ```
 
-This function was only designed to be used on books, rolling for a single enchantment across all possible non-curse enchantments, including treasure enchantments. The function doesn't adapt to the current item. If used on a book, an enchantment will always successfully be applied; if used on something else enchantable, it's possible the item won't be successfully enchanted.
+この関数は本に使うことだけを想定しており、宝エンチャントを含むすべての呪い以外のエンチャントから、1 つのエンチャントを振ります。この関数は現在のアイテムに合わせて調整されません。本に使えばエンチャントは必ず成功しますが、他のエンチャント可能なものに使うと、成功しない場合があります。
 
 ::: tip NOTE
-Presumably, when failing, the function rolls for an enchantment not applicable to the item and then fails to apply this irrelevant enchantment, resulting in an unenchanted item. The successfulness of enchanting a non-book is therefore proportional to the number of enchantments applicable to that item.
+おそらく失敗時には、そのアイテムに適用できないエンチャントが選ばれ、その無関係なエンチャントの適用に失敗するため、結果として無エンチャントのアイテムになります。したがって、本以外へのエンチャント成功率は、そのアイテムに適用可能なエンチャント数に比例します。
 :::
 
-The total cost is set from a base cost, which is independent of the rolled enchantment, and a per-level cost, which is dependent on the random roll. All cost configuration properties are optional.
+総コストは、振られたエンチャントとは独立した基本コストと、ランダムロールに依存するレベルごとのコストから決まります。コスト設定プロパティはすべて任意です。
 
-The base cost is computed by summing a starting value and a random roll. The starting value is given with `"base_cost"`, which defaults to `2`. The random roll is provided via `"base_random_cost"`, which defaults to `4`. A number will be uniformly randomly selected inclusively between 0 and the `"base_random_cost"` when a trade is generated for a trader.
+基本コストは、開始値とランダムロールを足し合わせて計算されます。開始値は `"base_cost"` で指定し、既定値は `2` です。ランダムロールは `"base_random_cost"` で指定し、既定値は `4` です。trader 用の trade が生成されるとき、0 から `"base_random_cost"` までの間から両端を含めて一様ランダムに値が選ばれます。
 
-For each level on the chosen enchantment, the same process occurs as in the base cost calculations: a fixed value is added to a uniformly randomly selected value. In this case, the base per-level cost is given with `"per_level_cost"`, which defaults to `3`, and the random per-level cost is given with `"per_level_random_cost"`, which defaults to `10`. The random per-level roll may be different for each level.
+選ばれたエンチャントの各レベルについても、基本コスト計算と同じ処理が行われます。固定値に、一様ランダムに選ばれた値を加えます。この場合、基本のレベルごとのコストは `"per_level_cost"` で指定し、既定値は `3` です。ランダムなレベルごとのコストは `"per_level_random_cost"` で指定し、既定値は `10` です。レベルごとのランダムロールは、各レベルで異なっていてもかまいません。
 
-Once the base cost and costs for each level are calculated, they are summed together to form the total cost. Finally, if the chosen enchantment is a treasure enchantment, the cost is then doubled. As usual, this cost cannot be less than 1 or greater than the stack size of that item. This formula holds true regardless of the pricing system being used by the trader.
+基本コストと各レベルのコストが計算されたら、それらを合計して総コストを求めます。最後に、選ばれたエンチャントが宝エンチャントなら、コストは 2 倍になります。通常どおり、このコストは 1 未満にも、そのアイテムのスタックサイズを超えることもできません。この式は、trader が使っている価格システムに関係なく成り立ちます。
 
 ::: warning
-If either random cost property is negative, there seems to be a 50-50 chance that the cost will be either the given [quantity](#quantity) or the maximum stack size for that first wanted item.
+どちらかのランダムコストプロパティが負の値だと、コストが、指定した [quantity](#quantity) か最初の必要アイテムの最大スタックサイズのどちらかになる 50-50 の可能性があるようです。
 :::
 
 ::: tip
-If the total combined cost would be negative (assuming no negative random cost properties were used), the provided [quantity](#quantity) of the affected wanted item is used instead. The simplest means of guaranteeing this would be:
+総コストが負になる場合（負のランダムコストプロパティを使っていない前提では）、影響を受ける必要アイテムに指定された [quantity](#quantity) が代わりに使われます。これを保証する最も簡単な方法は次のとおりです。
 
-<CodeHeader>Example Quantity-Based Enchanted Book Cost</CodeHeader>
+<CodeHeader>数量ベースのエンチャント本コストの例</CodeHeader>
 
 ```json
 {
@@ -658,11 +658,11 @@ If the total combined cost would be negative (assuming no negative random cost p
 
 :::
 
-##### Spawn Egg Trader Binding
+##### スポーンエッグの trader バインド
 
-The `"set_actor_id"` function is used to set the data value of a spawn egg based on a provided entity identifier, given with `"id"`.
+`"set_actor_id"` 関数は、`"id"` で与えられた entity 識別子に基づいて、スポーンエッグの data 値を設定するために使います。
 
-<CodeHeader>Example Spawn Egg Trader Binding</CodeHeader>
+<CodeHeader>スポーンエッグの trader バインド例</CodeHeader>
 
 ```json
 {
@@ -670,33 +670,35 @@ The `"set_actor_id"` function is used to set the data value of a spawn egg based
 }
 ```
 
-In trade tables, if no ID is provided, the trader's entity type will be assigned to the egg.
+トレードテーブルでは、ID が指定されない場合、その取引者のエンティティ種別がエッグに割り当てられます。
 
-## Overrides
+## 上書き
 
-Because trade tables do not use in-data identifiers, they are overridden simply by replacing a prior trade table with a new one. You can learn more about [asset overrides here](/concepts/overwriting-assets)
+トレードテーブルは data 内識別子を使わないため、以前のトレードテーブルを新しいものに置き換えるだけで上書きできます。詳しくは [アセットの上書きはこちら](/concepts/overwriting-assets) を参照してください。
 
-Below are the currently used vanilla trade tables for each trader:
+以下は、各取引者で現在使われているバニラのトレードテーブルです。
 
-| Trader           | Path                                                     |
-| ---------------- | -------------------------------------------------------- |
-| Stone Mason      | `BP/trading/economy_trades/stone_mason_trades.json`      |
-| Farmer           | `BP/trading/economy_trades/farmer_trades.json`           |
-| Fisherman        | `BP/trading/economy_trades/fisherman_trades.json`        |
-| Butcher          | `BP/trading/economy_trades/butcher_trades.json`          |
-| Shepherd         | `BP/trading/economy_trades/shepherd_trades.json`         |
-| Leather Worker   | `BP/trading/economy_trades/leather_worker_trades.json`   |
-| Librarian        | `BP/trading/economy_trades/librarian_trades.json`        |
-| Cartographer     | `BP/trading/economy_trades/cartographer_trades.json`     |
-| Cleric           | `BP/trading/economy_trades/cleric_trades.json`           |
-| Tool Smith       | `BP/trading/economy_trades/tool_smith_trades.json`       |
-| Weapon Smith     | `BP/trading/economy_trades/weapon_smith_trades.json`     |
-| Fletcher         | `BP/trading/economy_trades/fletcher_trades.json`         |
-| Armorer          | `BP/trading/economy_trades/armorer_trades.json`          |
-| Wandering Trader | `BP/trading/economy_trades/wandering_trader_trades.json` |
+| 取引者 | パス                                                     |
+| ------ | -------------------------------------------------------- |
+| 石工   | `BP/trading/economy_trades/stone_mason_trades.json`      |
+| 農民   | `BP/trading/economy_trades/farmer_trades.json`           |
+| 釣り人 | `BP/trading/economy_trades/fisherman_trades.json`        |
+| 肉屋   | `BP/trading/economy_trades/butcher_trades.json`          |
+| 羊飼い | `BP/trading/economy_trades/shepherd_trades.json`         |
+| 革細工師 | `BP/trading/economy_trades/leather_worker_trades.json` |
+| 蔵書管理者 | `BP/trading/economy_trades/librarian_trades.json`     |
+| 地図師 | `BP/trading/economy_trades/cartographer_trades.json`     |
+| 聖職者 | `BP/trading/economy_trades/cleric_trades.json`           |
+| 道具鍛冶 | `BP/trading/economy_trades/tool_smith_trades.json`     |
+| 武器鍛冶 | `BP/trading/economy_trades/weapon_smith_trades.json`    |
+| 矢師   | `BP/trading/economy_trades/fletcher_trades.json`         |
+| 防具鍛冶 | `BP/trading/economy_trades/armorer_trades.json`        |
+| 行商人 | `BP/trading/economy_trades/wandering_trader_trades.json` |
 
 ::: tip NOTE
-Additional trade tables exist directly within the `trading` folder, but these are deprecated. Only the tables in the `economy_trades` sub-folder are currently used.
+`trading` フォルダ直下にも追加のトレードテーブルがありますが、これらは非推奨です。現在使われているのは `economy_trades` サブフォルダ内のテーブルだけです。
 :::
 
-Alternatively, a trader entity definition can be updated to point to a new trade table location.
+別の方法として、取引者 entity 定義を更新して、新しいトレードテーブルの場所を指すようにできます。
+
+

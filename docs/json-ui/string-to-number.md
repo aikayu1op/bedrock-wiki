@@ -1,5 +1,5 @@
 ---
-title: String to Number
+title: 文字列から数値へ
 category: Tutorials
 tags:
     - intermediate
@@ -7,20 +7,20 @@ mentions:
     - shanewolf38
     - SmokeyStack
     - ThomasOrs
-description: In this tutorial, you will learn how to convert a numerical string into a number and a number into a text string.
+description: このチュートリアルでは、数値文字列を数値に変換する方法と、数値をテキスト文字列に変換する方法を学びます。
 ---
 
-In this tutorial, you will learn how to convert a numerical string into a number and a number into a text string.
+このチュートリアルでは、数値文字列を数値に変換する方法と、数値をテキスト文字列に変換する方法を学びます。
 
-## Overview
+## 概要
 
-There are many instances that a text string will be passed into the UI, be it through a title, actionbar, scoreboard, or some other source. When we wish to dynamically change elements based off the string that was passed in, it is very helpful to be able to do numerical comparisons. However, numerical strings such as "34" or "89" will normally be treated as text and cannot be compared to a number, only other strings. In this case, we'll need to convert that string to a number.
+タイトル、アクションバー、スコアボード、その他のソースを通じて、文字列が UI に渡される場面はたくさんあります。渡された文字列に応じて要素を動的に変更したいとき、数値比較ができると非常に便利です。しかし、"34" や "89" のような数値文字列は通常テキストとして扱われ、数値とは比較できず、他の文字列としか比較できません。この場合は、その文字列を数値に変換する必要があります。
 
-To convert the string to a number, we will utilize multiplication. Multiplying any numerical string by a number, or stripping the text from a string containing a number, will cause the game to read that value as a number instead of a string.
+文字列を数値に変換するには、掛け算を利用します。数値文字列に数を掛ける、または数値を含む文字列からテキストを取り除くと、ゲームはその値を文字列ではなく数値として読み取ります。
 
-## String to Number
+## 文字列から数値へ
 
-The following code creates a label element that, when added to the root panel, displays the highest value in the scoreboard sidebar if that number is between 100-999.
+次のコードは、root panel に追加したとき、スコアボードのサイドバーにある最大値が 100 から 999 の範囲なら、その値を表示する label 要素を作成します。
 
 <CodeHeader>RP/ui/hud_screen.json</CodeHeader>
 
@@ -36,25 +36,25 @@ The following code creates a label element that, when added to the root panel, d
         },
         {
             "binding_type": "view",
-            "source_property_name": "(#player_score_sidebar * 1)",   // convert score from string to number
+            "source_property_name": "(#player_score_sidebar * 1)",   // スコアを文字列から数値に変換します
             "target_property_name": "#score"
         },
         {
             "binding_type": "view",
-            "source_property_name": "((#score > 99) and (#score < 1000))",   // visible between 100-999
+            "source_property_name": "((#score > 99) and (#score < 1000))",   // 100 から 999 の間だけ表示します
             "target_property_name": "#visible"
         }
     ]
 }
 ```
 
-The first binding reads the top value in the scoreboard sidebar (the binding is hardcoded as a string), the second binding converts that score to a number by multiplying it by 1 (can also subtract any text string from it), and the third binding makes the element visible only when the score is greater than 99 or less than 1000.
+最初のバインディングは、スコアボードのサイドバーの先頭値を読み取ります (このバインディングは文字列としてハードコードされています)。2 つ目のバインディングは、そのスコアに 1 を掛けることで数値に変換します (テキスト文字列を引く方法でも構いません)。3 つ目のバインディングは、スコアが 99 より大きく 1000 より小さい場合にのみ要素を表示します。
 
-**Note:** if you want the number to read as a float instead of an integer, pass a variable or binding into the equation which uses a float, such as dividing by 1.0 (it must be through a variable or binding--placing the float number directly does not work). This is especially useful for the `#clip-ratio` binding.
+**注意:** 数値を整数ではなく浮動小数として読み取りたい場合は、1.0 で割るなど、浮動小数を使う式に変数やバインディングを渡してください (変数やバインディング経由である必要があり、浮動小数を直接置いても動作しません)。これは特に `#clip-ratio` バインディングで有用です。
 
-## Number to String
+## 数値から文字列へ
 
-The following code creates a label element that, when added to the root panel, displays the number # when passing in a title formatted "strength: #".
+次のコードは、`strength: #` という形式のタイトルを渡したとき、`#` の数値だけを表示する label 要素を作成します。
 
 <CodeHeader>RP/ui/hud_screen.json</CodeHeader>
 
@@ -76,4 +76,4 @@ The following code creates a label element that, when added to the root panel, d
 }
 ```
 
-In the case when using a title, subtitle, etc. to pass in text in combination with a number, this method will allow you to display just the number. After subtracting out the excess text to strip the string down to its number, text is added before the number to convert the value to a string (the `text` parameter cannot read a binding with a numerical value). In this case, the parentheses are not needed around the subtraction but exist to show that it converts the number rather than simply maintains it as a string. The text added, `§z`, is a non-existent Minecraft formatting code so that it doesn't register in the display of the number and does not affect the label's color parameter. If visible text exists around the number which cannot all be subtracted out, a good method to remove it from the display is to wrap the element in a panel with `"clips_children": true` and appropriate sizing.
+タイトルやサブタイトルなどで、数値と一緒にテキストを渡す場合でも、この方法なら数値だけを表示できます。余分なテキストを引いて文字列を数値まで切り詰めたあと、数値の前にテキストを追加して文字列に変換します (`text` パラメータは数値を持つバインディングを読み取れません)。この場合、引き算の前後に括弧は必須ではありませんが、単に文字列を保つのではなく数値へ変換していることを示すために付けています。追加するテキスト `§z` は Minecraft に存在しない書式コードなので、数値表示に影響せず、ラベルの色パラメータにも干渉しません。数値の周囲に、すべては引き切れない可視テキストがある場合は、要素を `"clips_children": true` と適切なサイズを持つ panel で包むと表示から取り除きやすくなります。

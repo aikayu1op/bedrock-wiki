@@ -1,37 +1,37 @@
 ---
-title: Using Schemas
+title: スキーマの使い方
 mentions:
     - SirLich
     - MedicalJewel105
     - 7dev7urandom
     - KalmeMarq
-description: Using schemas in add-on development for VSCode.
+description: VSCode でアドオン開発にスキーマを使う方法。
 ---
 
-A JSON schema gives you two things: validation to be sure that your JSON has the correct structure and (depending on editor support) IntelliSense to help you write your JSON correctly, to begin with. Schemas are nice because they give you instant feedback when you screw something up, but they can't catch everything.
+JSON スキーマには 2 つの役割があります。1 つは、JSON の構造が正しいことを確認するための検証です。もう 1 つは、エディターの対応状況に応じて、最初から JSON を正しく書くのを助ける IntelliSense です。スキーマが便利なのは、間違えたときにすぐフィードバックをくれるからです。ただし、すべての間違いを検出できるわけではありません。
 
-JSON schemas are just JSON files themselves and don't do anything on their own. You can write your own or use somebody else's. There's a handful of schemas for Bedrock out there already. Since none of the schemas are "official" (that I know of), and since Bedrock is a moving target, there will probably be some inaccuracies in any schema that you find. So keep that in mind: sometimes the issue will be in your code, sometimes the schema may be wrong. If you find a wrong schema, consider improving it and giving the author a pull request to our collective benefit.
+JSON スキーマ自体もただの JSON ファイルであり、それだけでは何もしません。自分で書くことも、他人のものを使うこともできます。Bedrock 向けのスキーマはいくつかすでに存在します。私が知る限り、どれも「公式」ではなく、Bedrock 自体が変化し続ける対象なので、見つけたスキーマには多少の誤りがあるかもしれません。つまり、問題はコード側にある場合もあれば、スキーマ側が間違っている場合もあります。もし誤ったスキーマを見つけたら、それを改善し、作者に pull request を送ることを検討してください。みんなの利益になります。
 
-To get the validation working, you'll need a validator. You have many options here, including editor-specific options.
+検証を機能させるには、バリデーターが必要です。ここには、エディター固有のものを含め、さまざまな選択肢があります。
 
-## Schemas
+## スキーマ
 
-Many schemas exist, with many minor differences. Try out different schemas and see which one works best for you:
+多くのスキーマがあり、細かな違いもたくさんあります。いくつか試して、どれが自分に最適か確認してみてください。
 
-| Author                                                                | Supports                                                                                                       | Note                                             |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| [Assassin](https://github.com/aexer0e/bedrock-schema)                 | Behavior pack entity file                                                                                      | The original Schema this article was written for |
-| [Tschrock's](https://github.com/bedrock-studio/bedrock-json-schemas/) | Manifest, Actor Animation Controller, Actor Animations, Actor Resource Definition, Render Controller, Geometry |                                                  |
-| [stirante](https://github.com/stirante/bedrock-shader-schema/)        | Shaders                                                                                                        |                                                  |
-| [KalmeMarq](https://github.com/KalmeMarq/Bugrock-JSON-UI-Schemas/)    | JSON UI files (including \_ui_defs.json and \_global_variables.json)                                           |                                                  |
+| 作者                                                                   | 対応内容                                                                                                  | 備考                                               |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [Assassin](https://github.com/aexer0e/bedrock-schema)                 | ビヘイビアパックのエンティティファイル                                                                       | この記事が最初に書かれた元のスキーマ               |
+| [Tschrock's](https://github.com/bedrock-studio/bedrock-json-schemas/) | マニフェスト、アクターアニメーションコントローラー、アクターアニメーション、アクターリソース定義、レンダーコントローラー、ジオメトリ |                                                    |
+| [stirante](https://github.com/stirante/bedrock-shader-schema/)        | シェーダー                                                                                                 |                                                    |
+| [KalmeMarq](https://github.com/KalmeMarq/Bugrock-JSON-UI-Schemas/)    | JSON UI ファイル（`_ui_defs.json` と `_global_variables.json` を含む）                                      |                                                    |
 
 ## VSCode
 
-To use this schema inside your JSON file in VSCode, simply add this line to your root object:
+このスキーマを VSCode の JSON ファイル内で使うには、ルートオブジェクトに次の行を追加するだけです。
 
 `"$schema": "https://aexer0e.github.io/bedrock-schema/"`
 
-It should look like something like this:
+見た目は次のようになります。
 
 <CodeHeader></CodeHeader>
 
@@ -40,11 +40,11 @@ It should look like something like this:
 "$schema": "https://aexer0e.github.io/bedrock-schema/"
 ```
 
-### Adding Schema to Workspaces
+### ワークスペースにスキーマを追加する
 
-If you want to utilize this schema to work with all of your files inside your Workspace, you can add it to your VS Code Workspace's settings.
+ワークスペース内のすべてのファイルでこのスキーマを使いたい場合は、VS Code ワークスペースの設定に追加できます。
 
-To do this, make sure you're in your Workspace, then press `Ctrl+Shift+P` and type and select `>Preferences: Open Workspace Settings (JSON)`. After that, add this to the root object
+そのためには、ワークスペースを開いた状態で `Ctrl+Shift+P` を押し、`>Preferences: Open Workspace Settings (JSON)` と入力して選択します。そのあと、ルートオブジェクトに次の内容を追加してください。
 
 <CodeHeader></CodeHeader>
 
@@ -61,4 +61,4 @@ To do this, make sure you're in your Workspace, then press `Ctrl+Shift+P` and ty
 }
 ```
 
-To test if it works, create a `.json` file, open an object, and see if you get the auto-completion options. (You can also press `Ctrl+Space` to force it into showing the available options.)
+動作確認をするには、`.json` ファイルを作成してオブジェクトを開き、オートコンプリート候補が表示されるか確認してください。（表示される候補を強制的に出したい場合は `Ctrl+Space` を押しても構いません。）

@@ -5,319 +5,313 @@ mentions:
     - SmokeyStack
 ---
 
-This Q&A took place in the [Bedrock Add-Ons discord](https://discord.gg/uZF75ZxcJq). A few Mojang/Microsoft employees joined us to answer questions about the custom blocks and items API. Questions were community sourced.
+この Q&A は [Bedrock Add-Ons discord](https://discord.gg/uZF75ZxcJq) で行われました。Mojang/Microsoft の社員数名が、custom blocks と items の API に関する質問に答えました。質問はコミュニティから集められたものです。
 
 :::warning
-Not all messages were copied over, and some were copy-edited. If you want to see everything, join the above discord, and get the "events archive" role.
+すべての発言がそのまま転記されているわけではなく、一部は文面を整えています。全部を見たい場合は、上記の discord に参加して「events archive」ロールを取得してください。
 :::
 
-## Plans Regarding Locator Maps?
+## Locator Map は？
 
--   **Q**: I've seen that locator maps for custom jigsaws are possible, but are there any plans for more 'official' support (i.e custom icons / map names)?
--   **A**: This is on our radar - but it's not on the short term roadmap.
+-   **Q**: custom jigsaw では locator map を使えるようですが、custom icon や map 名のような、もっと公式なサポートの予定はありますか？
+-   **A**: 注目はしていますが、短期ロードマップには入っていません。
 
-## Any plans to update vanilla structures to use the current Jigsaw system?
+## vanilla structures を今の Jigsaw system に更新する予定は？
 
--   **Q**: It'd be cool if one day we can modify all vanilla structures, like villages, pillager outposts, etc. From what I understand, they use a legacy version of Jigsaws, or a totally different system. But it'll be awesome if these were moved over to our current Jigsaw system like trail ruins and trial chambers. It's like the one thing I think the community would love if they can change every vanilla structure.
--   **A**: We would like to convert more vanilla structures to use the new system, but it is not in the short or medium term roadmap. The current vanilla structures that can be used are Trial Chambers and Trail Ruins. Which would you like to see first?
--   **A**: It's also worth noting that the folks on this Q&A can't speak on behalf of the Vanilla team and their intents.
+-   **Q**: villages や pillager outposts など、vanilla structures をいつか全部編集できたら面白いです。今は legacy 版の Jigsaw か、別の仕組みを使っているようですが、trail ruins や trial chambers のように今の Jigsaw system へ移せたら最高です。コミュニティとしては、vanilla structure を全部いじれたら嬉しいはずです。
+-   **A**: もっと多くの vanilla structures を新 system に移したいとは考えていますが、短期・中期ロードマップにはありません。今使える vanilla structures は Trial Chambers と Trail Ruins です。どちらを先に見たいですか？
+-   **A**: なお、この Q&A の参加者は Vanilla team の代理として意図を話す立場ではありません。
 
-## Custom Biomes in Other Dimensions
+## 他 dimension の custom biome
 
--   **Q**: When custom biomes return to Bedrock, will there be more support for the Nether and The End? as far as i know, custom end biomes never existed before..
--   **A**: The client_biome settings in resource packs (for visuals and audio) should work in any biome now, including in the nether and the end. For things that affect behavior and world generation, we agree it'd be great to affect those dimensions as well, but don't have anything on the roadmap for it.
+-   **Q**: Bedrock に custom biome が戻ったら、Nether や The End への対応も増えますか？ 私の知る限り、custom end biome は存在したことがありません。
+-   **A**: resource pack の `client_biome` 設定（見た目と音）は、今は nether や end を含むどの biome でも動くはずです。挙動や world generation に影響する部分については、そちらの dimension にも効くと良いのは同意ですが、今のところロードマップにはありません。
 
-## Will the option to add custom environment particles be added to custom biomes?
+## custom biome に environment particle を追加できる？
 
--   **Q**: When custom biomes could still be created, the only particles that could be added to them without external methods was by adding the particles from the nether, but it would be great if in the future we could add any custom particle to set the biomes.
--   **A**: Custom environment particles are something we've taken a look at in the past, and would be something we could consider. Any information that you can give us about how you'd like to use them we're happy to have.
+-   **Q**: custom biome を作れた頃、外部の方法なしで追加できる particle は nether の particle くらいでした。将来的には、任意の custom particle を biome に設定できるようになったら嬉しいです。
+-   **A**: custom environment particle は以前から検討していて、今後も候補にできます。どう使いたいかの情報があれば、ぜひ教えてください。
 
 ## Custom Dimensions
 
--   **Q**: The ability to introduce new dimensions for futuristic add-ons, having the ability to edit the entire dimension from the height limit to the dimension generation system, just like the java one, in java we can create custom dimensions very easily, it would be very nice to have that on bedrock.
--   **A**: We definitely see that custom dimensions are important for creators, but in the meanwhile we're focusing on a lot of the elements of world gen.
+-   **Q**: 未来的な add-on 向けに新しい dimension を追加し、height limit から生成システムまで dimension 全体を編集できるようにしてほしいです。Java では custom dimension が簡単に作れるので、Bedrock でもそれが欲しいです。
+-   **A**: creators にとって custom dimensions が重要なのは間違いありませんが、今は world gen の多くの要素に集中しています。
 
-    In the immediate term, we're looking to build on features and jigsaw structures, and more capabilities, to move up towards more biome customization.
+    当面は features や jigsaw structures などを拡張し、biome customization に近づける方向で進めています。
 
-## `/place feature` command
+## `/place feature` コマンド
 
--   **Q**: Will there be an option to place features with commands in the future?
--   **A**: This is on our short-term roadmap!
+-   **Q**: 将来的に command で features を置けるようになりますか？
+-   **A**: これは短期ロードマップにあります。
 
-## Can we get a block width increase for Jigsaw?
+## Jigsaw の幅は広げられる？
 
--   **Q**: 128 is too small, and personally I need a number 6x that size for a Marketplace project. If not, have the ability to customize this per jigsaw structure.
--   **A**: 128 isn't a strict limit. However, when we generate a level chunk we will check up to 8 chunks away to allow larger structures to generate and build in to that chunk. However because of perf concerns for anything past 128 might be a bit worrisome. Another point to make is that this is from center, not total! Meaning 128 is the half width not the full width, which is - you guessed it - 256. 😄
+-   **Q**: 128 は小さすぎます。Marketplace project ではその 6 倍くらい必要です。無理なら、jigsaw structure ごとに幅を調整できるようにしてほしいです。
+-   **A**: 128 は厳密な上限ではありません。ただし level chunk を生成するときは、より大きな structure がその chunk に入るよう、最大で 8 chunk 先まで確認します。とはいえ、128 を超えると性能面が少し心配です。もうひとつ大事なのは、これは総幅ではなく中心からの幅だということです。つまり 128 は全幅ではなく半幅で、全幅は 256 です😄
 
-## Will Molang be receiving any performance enhancements?
+## Molang の性能改善
 
--   **Q**: Using 3D noise with Molang for custom terrain generation can easily cause worlds to take 5 minutes to load or longer, even if ur only using 1 block type and 1 feature and feature rule, which is honestly ridiculously long.
--   **A**: We're looking at the performance of q.noise specifically and seeing if we can do more things like maybe cache it so it works more performantly. In the meanwhile I might avoid using it heavily.
+-   **Q**: custom terrain generation で Molang の 3D noise を使うと、block 1 種類、feature 1 個、feature rule 1 個だけでもワールドの読み込みに 5 分以上かかることがあります。かなり長いです。
+-   **A**: 特に `q.noise` の性能を見ています。キャッシュなどで改善できるかもしれません。今のところは、重く使いすぎないほうがよさそうです。
 
-## Why did jigsaws take so long?
+## jigsaw が遅かった理由
 
--   **Q**: We've had the jigsaw block since a long long time... why was it never fully functional/why did making it functional take so long?
+-   **Q**: jigsaw block はずっと前からありますが、なぜ完全には機能していなかったのでしょう？ どうして有効化にそんなに時間がかかったのですか？
 
-    I'm just curious why we were left with a half baked solution for ages, like was there a reason you abandoned adding the jigsaw back then?
+    長い間、中途半端な状態だった理由が知りたいです。当時、なぜ jigsaw の追加をやめたのですか？
 
-    And what was your motivation behind finally enabling creators to use them?
+    そして、最終的に creators に使わせる決断をした動機は何でしたか？
 
--   **A**: Honestly in times past sometimes we would work on a platform feature but not finish it in a satisfying or timely way - e.g., holiday creator features. In most cases it means we need to get better at getting things into stable platform, though in some cases it might mean cutting experiments more quickly if it looks like they won't pan out. We're trying to do better at getting things into the platform if we start them, though I'm sure we won't be perfect.
+-   **A**: 正直、過去には platform feature を作っても、満足できる形や適切な時期に仕上げられないことがありました。たとえば holiday creator features です。多くの場合は、stable platform へきちんと載せるのをもっと上手くやる必要があるという意味です。ただ、うまくいかなさそうなら experiment を早めに切るべき場合もあります。始めたものは platform に入れ切るよう、もっと良くしていきたいです。完璧ではないでしょうが。
 
-    RE: Why jigsaws now, we have a backlog of capabilities that we work towards to get to add to the platform for people to use, and now we working though some of the elemental worldgen stuff. Before bringing out these capabilities, a lot of times we need to do a lot of updates to stabilize the area to make it more upgradeable, performant, and tolerant to all the things you all will build (and even the, there will be lots of ways that these things can break)..
+    なぜ今 jigsaw なのかというと、プラットフォームに追加するための能力が backlog にたくさんあり、今はそのうちのいくつか、worldgen の基本要素を進めているからです。こうした能力を出す前に、upgrade しやすく、性能が良く、みなさんが作るものにも耐えられるよう、多くの stabilizing 作業が必要になります。その結果、壊れ方もいろいろ出てきます。
 
-## Spawn Spots in Custom Structures
+## custom structure に spawn spot は作れる？
 
--   **Q**: One of the caveats of the previous structure framework is that we cannot place entities or create spawn spots (which is how nether fortresses, ocean monuments, and other structures repeatedly spawn entities). I usually create a ticking block that spawns an entity and deletes itself, but this can lead to some problems.
+-   **Q**: 以前の structure framework の caveat のひとつは、entity を置いたり spawn spot を作ったりできないことでした（nether fortress や ocean monument などが entity を繰り返し spawn する仕組みです）。私はたいてい ticking block を作って entity を spawn して自壊させていますが、問題もあります。
 
-    With structures getting some love and jigsaws becoming usable, we are now able to place entities in structures, but is there a plan to add spawn spot support to the world generation framework?
+    structure の対応が進み、jigsaw も使えるようになってきたので、structure の中に entity を置けるようになりました。ですが、world generation framework に spawn spot support を追加する予定はありますか？
 
--   **A**: Hi all! Loving the discussion here. This is currently in the works! Tho given that the mob spawn system is slightly delicate (**cough** farms), we want to make sure we do everything in our power to smooth out the edges. So... that means more testing. Look forward to more stuff coming out in experimental soon!
--   **Q**: Does this mean that spawn rates could be in parity with Java too?
--   **A**: That's the goal! Once we get it into experimental (soon), we'll definitely need all the help we can get to make sure the world still seems balanced and spawning isn't off. That includes any impact/improvements on mob farms
+-   **A**: みなさん、議論ありがとうございます。これは現在進行中です。ただ、mob spawn system は少し繊細です（咳）farm も含めて、可能な限り丁寧に整えたいです。なので、もっと testing が必要です。experimental で近いうちに出てくるものを楽しみにしていてください。
+-   **Q**: つまり spawn rate も Java と同等になるということですか？
+-   **A**: それが目標です。experimental に入ったら（もうすぐです）、world がちゃんとバランスしていて spawn が変になっていないか、できる限り手伝ってほしいです。mob farm への影響や改善も含みます。
 
-## Structure Colliding
+## structure の衝突
 
--   **Q**: Systems people have been using as workarounds, like spawning an entity, or using a command block to spawn in a structure (or a line of them for example when creating dungeons), always have a chance, especially for underground structures, to collide.
+-   **Q**: entity を spawn する、command block で structure を spawn する（dungeon を作るときに line で並べる、など）といった回避策は、特に地下 structure で衝突しやすいです。
 
-    For example with the trial chambers, it can intersect with other structure’s, destroying them. I would love to see a feature with the jigsaw block as well as general structures, where you can prevent this collision from occurring.
+    たとえば trial chambers がほかの structure と交差して壊してしまうことがあります。jigsaw block や一般の structures に、こうした衝突を防ぐ機能があると嬉しいです。
 
-    I’d like to know what the mojang teams thoughts are on this
+    Mojang チームの考えを知りたいです。
 
--   **A**: Hi all! This is definitely on our radar, tho we have no concrete work planned so far. especially given there's a deeper problem at root here.
+-   **A**: これは確かに注目していますが、今のところ具体的な作業計画はありません。というのも、根本にもっと深い問題があるからです。
 
-## Directory Structure Concerns
+## ディレクトリ構成の懸念
 
--   **Q**: With the new Jigsaw system, all the related files are placed under `worldgen`. Are there any plans to move `structures`, `features`, `feature_rules`, and `biomes` into this folder? Is there any reason why the Jigsaw sets are under `worldgen` or was it just for parity sake?
--   **A**: We grouped the jigsaw things together as the files were logically grouped for jigsaw things. "worldgen" as the name of the grouping folder was.. an interesting choice if features and feature rules are outside of it; we may adjust other files or folders in the future, but no plans currently exist to move things like features and feature rules into it.
+-   **Q**: 新しい Jigsaw system では関連ファイルがすべて `worldgen` の下にあります。`structures`、`features`、`feature_rules`、`biomes` もこのフォルダーへ移す予定はありますか？ Jigsaw セットが `worldgen` の下にある理由はあるのでしょうか？ それとも単に parity のためですか？
+-   **A**: jigsaw 関連のファイルを論理的にまとめた結果です。`worldgen` というフォルダー名は、features や feature rules が外にあるなら少し面白い選び方でした。将来的にほかのファイルやフォルダーを調整する可能性はありますが、feature や feature rules をそこへ移す予定は今のところありません。
 
-## Jigsaw Utility Inquiry
+## Jigsaw の用途
 
--   **Q**: Would jigsaw blocks be an effective way to make custom Massive Ore Veins (akin to Iron and Copper Mega veins)?
-
-    Or would the Partially Exposed Blob Feature be the preferred method?
-
--   **A**: We have the minecraft:ore_feature to support custom ore veins, are there missing features there that would help you achieve the result you are looking for?
+-   **Q**: jigsaw block は、大規模な ore vein（Iron / Copper mega vein のようなもの）を作るのに向いていますか？ それとも Partially Exposed Blob Feature のほうがよいですか？
+-   **A**: custom ore vein を支える `minecraft:ore_feature` があります。目的を達成するために足りない機能があれば教えてください。
 
 ## Scripting
 
--   **Q**: Are there any plans to enable scripting integration within world generation? For example scripts that can modify structure placement or contents based on world events.
--   **A**: We're looking to explore some ways to maybe integrate scripting with world gen, but as you all note, it's a bit hard because it wouldn't be performant to, say, have scripting "take over" significant parts of chunk generation. Three-deep for loops of a set of blocks can get slow quickly 🙂
+-   **Q**: world generation の中で scripting を統合する予定はありますか？ たとえば structure の配置や中身を world event に応じて script で変えるようなものです。
+-   **A**: scripting と world gen を統合する方法は探っています。ただ、ご指摘の通り、chunk generation の大部分を scripting に任せるのは性能面で厳しいです。3 重ループで block を処理すると、すぐ重くなります🙂
 
-    But maybe there are places where we can call out to script to "make a decision" about something. Not aware of a place where script will be in the short term roadmap for worldgen though.
+    ただ、何かを「判断する」ために script を呼ぶ場所はあるかもしれません。とはいえ、worldgen に scripting を短期で入れる予定はまだありません。
 
-    One of the first demos I tried to build with scripting a couple of years ago was a dungeon generator in script, but it was hard to make it work because most of the logic was about how do you timeslice all of the block placement (and also deal with chunk load semantics) across ticks to get the thing built.
+    数年前に最初に script で作ろうとしたデモのひとつは dungeon generator でしたが、block 配置をどう timeslice するかや、chunk load の扱いを ticks にまたがってどう処理するかが難しく、うまくいきませんでした。
 
-    Since then there is a bit more support in scripting for things like generator functions to take advantage of spare cycles in a tick - and maybe if you limit its usage to highly performant devices (a beefy dedicated server) or you really optimize - it could be pretty workable and awesome. I know some people in the community have built some cool things along those lines.
+    その後、generator function のように tick の余った cycle を使うサポートは少し増えました。高速な dedicated server など性能の高い端末に絞るか、かなり最適化すれば、実用的でかなり面白いものになるかもしれません。コミュニティには、そういう方向で面白いものを作った人もいます。
+-   **A**: 別の場所でも話しましたが、面白い試作としては webworker モデルを使って JavaScript を別 thread へ飛ばし、world generation のような処理を動かすことです。
 
--   **A**: I've chatted about it elsewhere, but a fun prototype for us to do would be to use the webworker model to spin off JavaScript to actually run on other threads for stuff like world generation.
+    そういう機能用に、別の API surface（import できる別 module）を用意するのも良い案です。
 
-    A neat idea would be to provide a different API surface (a different module you can import) with specific world-gen related APIs.
+    いまはどれもアイデア段階ですが、いつか実現するかもしれません。
 
-    All just fun ideas at this point, but maybe one day!
+## Mojang チームは何を楽しみにしている？
 
-## What does the Mojang team look forward most to seeing as these new tools are given to creators?
-
--   **A**: I am SO looking forward to the various dungeons, legends, and lores. So much coming, so much to be unlocked.. 👀
+-   **A**: いろいろな dungeon、legends、lore を見るのを本当に楽しみにしています。これからたくさんのものが来て、たくさん解放されるはずです.. 👀
 
 ## Structure Orientation
 
--   **Q**: Will we be able to handle Jigsaw structures rotation?, if so, how will that work?, will we be able to ensure that the structure always aligns correctly with certain features?, like mountain slopes or rivers. or will it be just a simple conditional handler?.
--   **A**: We received feedback from Creators from our last preview and is on our radar! That being said, what specific scenarios are you thinking?
+-   **Q**: Jigsaw structures の rotation を扱えるようになりますか？ もしそうなら、どう動きますか？ 山の斜面や川のような特定の feature に対して、structure が常に正しく揃うようにできますか？ それとも単純な条件分岐ですか？
+-   **A**: 前回の preview で creators からフィードバックを受けていて、注目しています。とはいえ、具体的にどんなシナリオを想定していますか？
 -   **Q**:
 
-    > what specific scenarios are you thinking?
+    > 具体的にどんなシナリオを想定していますか？
 
-    Random structure rotations are a must have, unless you have a deeper lore to why every structure faces north. And like Ciosciaa said, another issue that comes with this is that custom blocks don't rotate.
+    ランダムな structure rotation は必須です。もし全 structure が北を向く深い lore があるなら別ですが。Ciosciaa が言っていたように、custom block が回転しないことも問題です。
 
--   **A**: Makes sense. I believe we've had conversations regarding structure rotations. I'll start the conversation to get that added onto the list of structure improvements we have already!
+-   **A**: なるほどです。structure rotation については会話がありました。既にある structure 改善リストに追加できるよう、話を進めます。
 
-## Why don't you allow the conditinal_list and sculk_patch_feature features to be used?
+## `conditional_list` と `sculk_patch_feature` をなぜ使えないのか
 
--   **Q**: I know conditional_list was removed, but why isn't it back yet? And why did they never allow sculk_patch_feature to be used?
--   **A**: Conditional_list needs more work to make it robust - and we're seeing about where that might slot in. Sculk_patch_feature turned out to be too vanilla focused; we might look at a more general alternative at some point.
--   **Q**: Does this mean you guys are against very vanilla-centric feature types in the future? Tree features are a thing after all.
--   **A**: Generally, I'll say there is a bit of a fuzzy line between when a capability is a generic platform feature (great!), vanilla-ish, and too-vanilla-focused-to-be-a-robust-platform-item-and-so-we-should-rethink-it. I guess that's where the boundary lies right now 🙂
+-   **Q**: `conditional_list` は削除されたのは知っていますが、なぜまだ戻っていないのでしょう？ それと、なぜ `sculk_patch_feature` は使わせてもらえなかったのでしょう？
+-   **A**: `conditional_list` は、もっと堅牢にするために追加作業が必要です。どこに入れるかも検討中です。`sculk_patch_feature` は vanilla 寄りすぎました。いずれ、もっと汎用的な代替を検討するかもしれません。
+-   **Q**: ということは、今後かなり vanilla 中心の feature type には反対ということですか？ tree feature だってありますよね。
+-   **A**: 一般論としては、機能が generic platform feature（良い）、vanilla っぽい、そして vanilla に寄りすぎていて堅牢な platform item としては再考すべき、の間に少し曖昧な境界があります。今の境界はそのあたりです🙂
 
-## Will missing jigsaw features from java edition be added?
+## Java 版にある不足している jigsaw 機能は追加される？
 
--   **Q**: Jigsaw structures in Java edition have a few features that seem to not exist:
-    -   placing features from structure (i.e. `minecraft:feature_pool_element`)
-    -   template pool aliasing (java edition uses that to select which set of trial spawners a trial chamber has, how does that work in bedrock?)
--   **A**: Hi all! As you've noticed, we have spawn overrides in the new jigsaw system, but not currently data driven yet with data driven jigsaw structures. The team is currently working to simplify spawn rules before we fully expose that spawn system.
+-   **Q**: Java 版の Jigsaw structures には、見当たらない機能がいくつかあります。
+    -   structure から feature を置く（`minecraft:feature_pool_element` など）
+    -   template pool aliasing（Java 版では trial chamber の trial spawner 群の選択に使われるが、Bedrock ではどうなる？）
+-   **A**: ご覧の通り、新しい jigsaw system には spawn override がありますが、data-driven jigsaw structures ではまだ data-driven 化されていません。チームは今、spawn system を完全公開する前に spawn rules の簡素化に取り組んでいます。
 -   **Q**:
 
-    > The team is currently working to simplify spawn rules
+    > チームは今、spawn rules の簡素化に取り組んでいます
 
-    The entire system? That is, the elusive `spawn_category` in the entity BP JSON file and the whole `spawn_rules` folder? Does it mean simplify then expand the functionality?
+    その system 全体ですか？ つまり entity BP JSON のあの `spawn_category` や、`spawn_rules` フォルダー全体も含みますか？ 簡素化してから機能を広げる、という意味でしょうか？
 
--   **A**: Yep - as with all refactors, gotta start at the base system first. We're close to getting the mob spawn system at parity with Java. At the same time, we're simplifying spawn rules so that when we do expose the functionalities, they'll be cleaner to play with!
+-   **A**: はい。リファクタリングはいつもそうですが、まず基盤から始める必要があります。mob spawn system は Java との parity にかなり近づいています。同時に spawn rules を簡素化しているので、機能を公開したときには、もっと扱いやすくなるはずです。
 
-## Option to update world to new generation
+## 新しい生成への world 更新オプション
 
--   **Q**: Would there be an option for updating your world more smart? Since the structure generation is kinda trouble to me when there is an update with new structure, I would need to travel to new chunks to find them, some of them even being "eaten" by existing chunks.
+-   **Q**: world をもっと賢く更新するオプションはありますか？ structure generation は、新しい structure が追加された更新のたびに面倒です。新しい chunk へ移動して見つける必要があり、既存 chunk に「食われる」ことさえあります。
 
-    The point of this question is, will there be an option that it'll detect empty chunks (remained unchanged, been explored only, or slightly changed chunks) to be updated with new structures? That'll be good
+    この質問の要点は、空の chunk（未変更、探索済みのみ、または少しだけ変わった chunk）を検出して、新しい structure で更新するオプションがあるかどうかです。あると良いです。
 
--   **A**: We've considered this! But making it work in a way without a lot of odd side effects would be really hard (as some of you have mentioned above).
-    But we are curious! In case this were possible, would you use this capability for testing purposes, or would you need it for in-game world purposes?
+-   **A**: 検討したことはあります。ただし、奇妙な副作用をあまり出さずに実現するのはかなり難しいです（上でも何人かが言っている通りです）。
+    でも興味はあります。もし可能なら、その機能は testing 用に使いますか？ それとも in-game world 用に使いますか？
 
-## Custom superflat generator
+## カスタム superflat generator
 
--   **Q**: In Java Edition there is the custom superflat generator. On Bedrock such system doesn't exist, which is highly requested on the feedback site as well: https://feedback.minecraft.net/hc/en-us/community/posts/360009373731--Java-Parity-Custom-World-generator-Superflat-worlds
+-   **Q**: Java Edition には custom superflat generator があります。Bedrock にはそういう system がなく、feedback site でもかなり要望があります: https://feedback.minecraft.net/hc/en-us/community/posts/360009373731--Java-Parity-Custom-World-generator-Superflat-worlds
 
-    It will be useful for all kinds of play, also for the Marketplace (some Marketplace maps already do have a sort of superflat by copying a world from Java)
+    いろいろな遊び方に役立ちますし、Marketplace にも有用です（すでに Java から world をコピーして superflat っぽくしている Marketplace map もあります）。
 
-    If such system is implemented, will it also allow things like biomes and structure support?
+    もしそういう system を実装するなら、biome や structure 対応も含まれますか？
 
--   **A**: It's not currently on the roadmap. If we did bring it over from Java we'd probably need to do some Bedrock specific design changes with the Vanilla team like we did in adapting Hardcore Mode.
+-   **A**: いまのところロードマップにはありません。Java から持ってくるなら、Hardcore Mode を適応したときのように、Vanilla team と Bedrock 固有の設計変更が必要になるでしょう。
 
-## Place above block feature rule
+## `place_above` のような feature rule
 
--   **Q**: Sometime ago I wanted to create a rock I wanted to make it replace air but only air that is above A a stone block I would be happy if there was a new statement added to feature rule like
+-   **Q**: 以前、rock を作りたくて、air だけを stone block の上にある場所に置き換えたいと思ったことがあります。feature rule に次のような新しい文が追加されると嬉しいです。
 
-    place_above
+    `place_above`
 
-    place_under
+    `place_under`
 
-    Those would help with worldgen so much
+    こういうものは worldgen にとても役立つはずです。
 
--   **A**: I believe you are looking for the minecraft:single_block_feature with the may_attach_to "top" & "bottom" option. Let us know if that option doesn't give you enough control.
+-   **A**: `minecraft:single_block_feature` の `may_attach_to` オプションで、`top` と `bottom` を使うものを探しているのだと思います。そのオプションで十分でなければ教えてください。
 
-    You could bundle that into the aggregate feature or sequential feature if you want to do something else with more features at that location.
+    さらにそこで何かしたいなら、aggregate feature や sequential feature にまとめることもできます。
 
-## changing biome via command or addons
+## command や add-on で biome を変える
 
--   **Q**: So, we have a feature(I give a guess) that you can change biome via world file, is there going to be ability to change them in game right away or even via addons?
-    For example
+-   **Q**: world file 経由で biome を変更できる feature はあると聞いていますが、ゲーム内ですぐに、あるいは add-on 経由で変更できるようになりますか？
+    たとえば:
 
     /Fill biome ~50 ~50 ~50 ~-50 ~-50 ~-50 plains
 
-    And now everything around me in this coordinates will be plain biome.
+    これで、この座標周辺はすべて plains biome になります。
 
-    This can be used to change type of weather such as snow and rain between unless Mojang adds more in the future.
+    これは snow や rain のような weather の種類を変えるのに使えるはずです。Mojang が今後もっと追加するなら別ですが。
 
-    (Other example is mobs)
+    （ほかの例は mobs です）
 
--   **A**: We have looked at the fillbiome command in Java, but need to solve a lot of things on the Bedrock side before we can know how this might become available.
+-   **A**: Java の `fillbiome` command は見ていますが、Bedrock 側でどう実現するかを判断する前に、解決すべきことがたくさんあります。
 
-## What is the mindset behind world gen improvements?
+## world gen 改善の考え方は？
 
--   **Q**: I am curious how the team thinks about world gen (data-driving biomes, dimensions, jigsaw improvements, etc.) in a broader sense.
+-   **Q**: チームが world gen（data-driven biomes、dimensions、jigsaw 改善など）をどう広く考えているのか気になります。
 
-    Are improvements trying to be shipped into betas as quickly as possible or taken slow, and why or why not?
+    改善はできるだけ早く beta に出す方針ですか？ それとも慎重に進めますか？ その理由は？
 
-    Is the team worried about breaking worlds in preview versions?
+    preview 版で world を壊すことを心配していますか？
 
-    (Long term) is world gen working toward full customization? Which parts are being favored in development first?
+    （長期的には）world gen は完全なカスタマイズに向かっていますか？ どの部分から先に開発を進めていますか？
 
-    What have been hurdles in any world gen processes (deciding best practices, long term vs short term, technical hardships)?
+    world gen のプロセスで難しかったことは何ですか？（ベストプラクティスの決定、長期 vs 短期、技術的な難しさなど）
 
-    How does thinking about bedrock world gen relate and differ from how it’s done on Java?
+    Bedrock の world gen を考えることは、Java でのやり方とどう関係し、どう違いますか？
 
-    Sorry for a lot of sub-questions, I’m curious!❤️<:bao_logo_mojang:1071082722807791696>
+    質問がたくさんですみません。興味があります！❤️<:bao_logo_mojang:1071082722807791696>
 
--   **A**: Lots of sub-questions! I'll try a few.
+-   **A**: 質問がたくさんありますね。いくつか答えます。
 
-    As a team, we always try to work in an iterative way. We want to ship small things regularly so we can get feedback from you all.
+    チームとしては、いつも反復的に進めることを意識しています。小さな機能を定期的に出して、みなさんからフィードバックをもらいたいからです。
 
-    Breaking worlds in Preview - we try to avoid doing this as much as possible. But we don't hold ourselves to the same rigor as we do on retail builds. So Preview builds will always be a bit more risky for players.
+    Preview で world を壊すことについては、できるだけ避けるようにしています。ただし retail build と同じ厳しさでは見ていません。なので Preview build のほうがプレイヤーにとって少しリスクが高いのは確かです。
 
-    Long-term, one of our principles is that creators should be able to do almost anything we (Mojang) can do with the Vanilla game. So that's pretty extensive customization. But this is aspirational, and it'll be a long road for us to travel down together here. We'll release incremental features as we go.
+    長期的な方針のひとつは、creators が vanilla game で Mojang ができることのほとんど全部をできるようにすることです。かなり広いカスタマイズになります。ただし、これは目標であって、そこへ向かうのは長い道のりです。少しずつ機能を出していきます。
 
-    Which parts are being favored first? I think that's being discussed in other threads.
+    どこを先に優先するか？ それはほかのスレッドでも議論されています。
 
-    Bedrock vs. Java - there are a lot more things we need to consider on Bedrock. A lot of the differences boil down to:
+    Bedrock と Java の違いについては、Bedrock ではもっと考えるべき点が多いです。主な違いは次のとおりです。
 
-    -   multi-platform, and differing compute capabilities
-    -   backwards compatibility and multi-add-on compatibility
+    -   複数プラットフォームと、異なる計算能力
+    -   後方互換性と、複数 add-on との互換性
 
-    This requires us to spend a lot more time thinking through how to do things in Bedrock since it has to work in so many more situations.
+    そのため、Bedrock ではより多くの状況で動くように、どう実装するかを長く考える必要があります。
 
-## Roadmap For worldgen
+## worldgen のロードマップ
 
--   **Q**: For a while the players got to know what Mojang is working and what is in the vault or what it is considering
-    But creators that aren't marketplace affiliated don't know what will be happing untill either someone asks for a timeline or it gets released I'm hoping we get a 1 year timeline so that we can start to learn stuff or prepare around it.
+-   **Q**: しばらくの間、プレイヤーは Mojang が何を作っていて、何を保留にしていて、何を検討しているかを知ることができました。でも marketplace に関係しない creators は、誰かがタイムラインを聞くかリリースされるまで、何が起きているのか分かりません。1 年先くらいのタイムラインがほしいです。そうすれば、学んだり準備したりできます。
 
-    I don’t mind if things get delayed; I’d just like to have a sense of what you’re considering or actively working on
+    遅れても構いません。ただ、何を検討しているのか、何を実際に進めているのかの感覚がほしいです。
 
--   **A**: The roadmap for worldgen is going to be a bit long. We're starting now with some of the elements - improving block features and capabilities (see the previous Q&A :), then moving onto ways to embed things into the world (features, jigsaw structures). Then, we do want to start with biome capabilities.
+-   **A**: worldgen のロードマップは少し長くなります。まずは一部の要素から始めます。block features と capabilities の改善です（前の Q&A を参照してください🙂）。その後、world にものを埋め込む方法（features、jigsaw structures）へ進みます。そして biome capabilities から始めたいと考えています。
 
-    The way biomes works in vanilla now is complex, and finding a workable solution has been challenging, but we're actively working on it. We don't know what the timeline might be, but we hope to share more on the potential designs in the next year.
+    vanilla での biome の動き方はかなり複雑で、実用的な解決策を見つけるのは難しいですが、今も取り組んでいます。タイムラインはまだ分かりませんが、来年のうちに設計案についてもっと共有できることを願っています。
 
-    As far as what might be included for biomes, we are aware of many technical needs: noise maps, scale, weather, fog, audio, etc. Our goal is a robust solution that takes your needs into account. We'd love to know your top 5-10 must have or should have needs for biomes!
+    biome に含めるものとしては、noise map、scale、weather、fog、audio など、技術的な要件がたくさんあることを認識しています。目標は、みなさんの要件を取り込んだ堅牢な解決策です。biome に必要なもの、ほしいものを 5〜10 個ぜひ教えてください。
 
-## Any plans fixing structure template feature size limit?
+## structure template のサイズ上限は直る？
 
--   **Q**: Actually the limit is 48x48 because of chunks, any plans to fixing this or increasing the size limit?
--   **A**: Sorry for the late response, but based on the limits of the size of chunks and the way world generation works, upping this limit is a bit tricky. I think we'd recommend for larger structures that folks consider the jigsaw structure system.
+-   **Q**: 実際の上限は chunk の都合で 48x48 ですよね。これを直す、あるいはサイズ上限を上げる予定はありますか？
+-   **A**: 遅れてすみません。chunk のサイズ制限と world generation の仕組みからすると、この上限を上げるのは少し難しいです。大きな structure には jigsaw structure system を使うことをおすすめします。
 
-## Why no generated structures toggle?
+## generated structures のトグルがない理由
 
--   **Q**: I am very excited about more possible world generation features in the future and I was wondering if the lack of a generated structures toggle on bedrock is somehow related to custom world generation being a WIP, or if it's just been low priority. When using add-ons to customize my game I often find myself wishing I could change or remove vanilla structures. Sorry if this can't be answered, idk how intertwined development of addons and world settings are.
-
--   **A**: Loving the discussion here. To truly unlock the power of customizing various aspects of world gen, we'll need custom biomes. This will hopefully allow us to add APIs to parts of world gen that we normally couldn't touch without being hacky about it.
+-   **Q**: 将来的にもっと world generation 機能が増えるのを楽しみにしています。Bedrock に generated structures のトグルがないのは、custom world generation が WIP だからなのでしょうか？ それとも単に優先度が低かったのでしょうか？ add-on でゲームをカスタマイズしていると、vanilla structures を変えたり消したりしたいことがよくあります。答えられないなら大丈夫です。addon 開発と world setting がどれくらい絡んでいるのか分からないので。
+-   **A**: ここでの議論は良いですね。world gen のさまざまな面を本当にカスタマイズできるようにするには custom biomes が必要です。そうなれば、普段なら hacky にしか触れなかった world gen の部分にも API を追加できるようになるはずです。
 
 ## Subchunks?
 
--   **Q**: I’m curious about your thoughts on subchunks. Do you plan on ever switching features to them? Maybe the base generation? Both? Have you considered what you might change if you were to do that (q.heightmap, for instance)?
+-   **Q**: subchunk についてどう考えていますか？ いつか feature をそちらへ切り替える予定はありますか？ base generation は？ 両方？ そうするなら、何を変えるか考えたことはありますか？（たとえば `q.heightmap`）
 
-    I feel like if we were to get custom dimension support later on, using conventional chunks would be a slog for dimensions with large bounds. I know rewriting the entire worldgen system to use subchunks is easier said than done, but I think it would be a worthwhile investment moving forward.
+    将来的に custom dimension 対応が来るなら、従来の chunk を使うのは、境界の大きい dimension ではかなり大変そうです。worldgen system 全体を subchunk に書き換えるのは簡単ではないのは分かっていますが、今後に向けた価値ある投資だと思います。
 
--   **A**: With the coordinate range functionality of a feature_rule you could manually do this today. You would need to generate 4 features_rules to do it, to have different extents for the that 16 x 16 sections (ie: "extent": [ 0, 15 ], "extent": [ 16, 32 ], for the X & Z).
+-   **A**: feature_rule の coordinate range 機能を使えば、今でも手動でできます。16 x 16 の各範囲に別の extent を持たせるため、4 つの feature_rules を生成する必要があります（X と Z について、たとえば `"extent": [ 0, 15 ]`、`"extent": [ 16, 32 ]` のように）。
 
-    We don't currently have any specific subchunk related functionality on our roadmap.
+    subchunk 関連の機能は、今のところロードマップにはありません。
 
 ## Marketplace
 
--   **Q**: Do you intend to add structure and mineral generation to the marketplace?
--   **A**: Yes, we're looking to allow for the usage of Features/Feature Rules in marketplace add-on content.
+-   **Q**: structure や mineral generation を marketplace に追加するつもりはありますか？
+-   **A**: はい。Marketplace の add-on content でも Features / Feature Rules を使えるようにしたいと考えています。
 
-    There will likely be some guardrails on things like performance. But.. it's also hard to legislate through policy "please don't go too overboard with this, in unfun ways." I think we'll have to see if there are patterns that emerge that are bad for players that we need to mitigate.
+    性能面などには、ある程度のガードレールが入るでしょう。ただし、「これはやりすぎないでください」とポリシーで細かく言うのは難しいです。プレイヤーにとって問題になるパターンが出ないかを見て、必要なら対処していくことになるでしょう。
 
-## More custom feature types
+## もっと custom feature type を
 
--   **Q**: Will mojang expand the actual customizable features? Like creating a Custom bone meal patch and using a /place feature to use It, or create a custom dripstone collumn feature instead of using structures
--   **A**: We aren't currently planning anymore feature types, but alot of what you are suggesting can be accomplished with combinations of existing features. Like a dripstone column could be a sequential_feature or single_block features instead. Or a combination of weighted_random features of sequential_features (if you wanted different heights)
+-   **Q**: Mojang は、実際のカスタマイズ可能な features をもっと広げますか？ たとえば custom bone meal patch を作って `/place feature` で使うとか、structure を使わず custom dripstone column feature を作るとか。
+-   **A**: いまのところ新しい feature type を増やす予定はありませんが、提案の多くは既存 feature の組み合わせで実現できます。たとえば dripstone column は sequential_feature や single_block feature で表せますし、異なる高さがほしいなら weighted_random feature と sequential_features の組み合わせでもできます。
 
-    And /place feature is on our short-term roadmap!
+    そして `/place feature` は短期ロードマップに入っています。
 
-## Plans to stabilize jigsaws
+## jigsaw を安定化する予定は？
 
--   **Q**: I wonder if there are plans to stabilize jigsaws in the next couple of months? Surely the API still needs a lot of adjustments, but will we see jigsaws getting out of experimental in a few months? (2-4 months)
--   **A**: Hi Lucy - love your question! We're actively learning from community feedback on what needs tweaking. So to all the lovely jigsaw builders out there - plz go ham! We won't know what needs tweaking without the stress-testing.
+-   **Q**: 今後 2 か月くらいで jigsaw を安定化する予定はありますか？ API にはまだ調整がかなり必要だと思いますが、数か月で experimental を抜けられるのでしょうか？（2〜4 か月）
+-   **A**: こんにちは Lucy、良い質問です！ 何を調整すべきか、コミュニティからのフィードバックで積極的に学んでいます。なので、jigsaw builder のみなさん、どんどん使ってください！ stress test がないと、何を直すべきか分かりません。
 
-## Broader Application of Processor Lists
+## Processor Lists のより広い活用
 
--   **Q**: These are amazing. Right now, there's really aren't any systems that conveniently allow modifications of globs of block data. It would be incredible to see processor lists in the following places:
+-   **Q**: これ、すばらしいです。今のところ、block data の塊を便利に編集できる system はあまりありません。processor lists を次の場所で見られたら最高です。
 
-    -   As part of the `fill` command and related scripting APIs
-    -   As part of the `structure` command and related scripting APIs
-    -   As part of structure template features (or maybe _any_ feature type?)
-    -   Even _standalone_, as a way to transform a given volume already in the world (like the fill command over specified coordinates)
+    -   `fill` command と関連 scripting API の一部
+    -   `structure` command と関連 scripting API の一部
+    -   structure template features の一部（あるいは _どんな_ feature type でも？）
+    -   さらに _単独_ で、既に world にある volume を変換する手段として（指定座標への fill command のように）
 
-    Integrations into existing systems would massively boost the functionality of those systems and make block processing/transformation much more convenient.
+    既存 system への統合は、それらの機能を大きく強化し、block processing / transformation をもっと便利にするはずです。
 
--   **A**: Hi Ciosciaa - I agree! That seems like an awesome idea and we don't have that on our roadmap right now, but making sure to note this down <:bao_bee:937587347124535346>
+-   **A**: こんにちは Ciosciaa、同意します！ すばらしいアイデアです。今のロードマップにはありませんが、しっかりメモしておきます <:bao_bee:937587347124535346>
 
-## Jigsaw File Structure is Strange?
+## Jigsaw のファイル構造は変？
 
--   **Q**: The jigsaw systems implemented a couple of weeks ago are nearly direct copies of Java in a Bedrock versioned registered file wrapper. I'm wondering why that is. I took a look at this a week ago over at https://discord.com/channels/523663022053392405/1303973556476055592.
+-   **Q**: 数週間前に実装された jigsaw system は、Bedrock 版の versioned registered file wrapper の中に、Java のほぼ直接コピーのような形で入っています。なぜそうなっているのか気になります。1 週間前にこちらを見ました: https://discord.com/channels/523663022053392405/1303973556476055592
 
-    Essentially, I'm wondering about the team's thoughts on whether the more obtuse, unfamiliar Java-style interface outweighs something more intuitive and familiar.
+    要するに、もっと分かりやすく親しみやすいものより、難解で見慣れない Java 風 interface のほうが良いのか、チームの考えを知りたいです。
 
--   **A**: Hi Ciosciaa! Great question and good insights. We have been working to make the Bedrock system more at parity with Java. ~~~~I believe the current Bedrock system actually looks like the idea you proposed below!~~ Sorry - that was probably from one of our prototypes or designs. Are there specific suggestions you had in mind?
+-   **A**: こんにちは Ciosciaa！ 良い質問で、鋭い指摘です。Bedrock system を Java により近づける作業をしてきました。~~~~今の Bedrock system は、実は下で提案されているアイデアに見えると思います！~~ すみません、それはたぶん試作品か設計のひとつでした。何か具体的な提案はありますか？
 
-    Ah sorry, that "Possible Idea" one looked like something we've been looking into on the side, but what you have under "Existing" is what we have right now. Has the current system been inconvenient or confusing to navigate?
+    ああ、すみません。その「Possible Idea」のほうは、こちらでも検討していたものに見えますが、今の実装は「Existing」にあるものです。現在の system は、使うのが不便だったり、分かりにくかったりしますか？
 
--   **Q**: It's mostly just obtuse and unfamiliar. But it's also just bizarre at times…
+-   **Q**: たいていは、ただ難解で見慣れないだけです。でも、ときどき本当に奇妙です…
 
-    -   Why are randomization tests bundled with block testing via `minecraft:random_block_match`?
-    -   And even if the above _should exist_, why is `minecraft:random_block_match` even a thing? Why not just have `probability` on `minecraft:block_match` and default it to `1`?
-    -   Why is `output_state` required on rules processors if all I want to do is bind loot to block types I selected via `input_predicate`?
-    -   `{"predicate_type": "minecraft:always_true"}` as a bit much as a baseline/default. 😅
-    -   `location_predicate` vs. `position_predicate` is confusion naming-wise, but they mean 2 completely different things.
+    -   なぜ randomization test が `minecraft:random_block_match` を通じて block testing に束ねられているのですか？
+    -   そもそも、もし上のものが _必要_ だとしても、なぜ `minecraft:random_block_match` なんてものがあるのでしょう？ `minecraft:block_match` に `probability` を付けて、デフォルトを `1` にすればいいのでは？
+    -   なんで rules processors で `output_state` が必須なのですか？ `input_predicate` で選んだ block type に loot を結びつけたいだけなのに。
+    -   `{"predicate_type": "minecraft:always_true"}` は、基準 / デフォルトとしてはちょっとやりすぎでは？😅
+    -   `location_predicate` と `position_predicate` は名前が紛らわしいですが、実際は全然違うものを指しています。
 
-    I'd say, as much as I love the idea of processor lists (https://discord.com/channels/523663022053392405/1307025062830014535), this has got to be the most alienating file schema on Bedrock right now.
+    processor lists のアイデアは大好きですが（https://discord.com/channels/523663022053392405/1307025062830014535）、今の Bedrock でいちばん取っつきにくい file schema だと思います。
 
--   **A**: Great insights and input Ciosciaa! Bringing it to the team 🫡
+-   **A**: すばらしい指摘です、Ciosciaa。チームに持っていきます🫡

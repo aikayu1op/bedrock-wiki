@@ -1,6 +1,6 @@
 ---
-title: Vanilla Voxel Shapes
-description: Learn about the voxel shapes that are built into the game for use with blocks.
+title: バニラのボクセル形状
+description: ブロックで使えるように、ゲーム内に組み込まれているボクセル形状について学びます。
 category: Documentation
 tags:
     - experimental
@@ -11,7 +11,7 @@ mentions:
 ---
 
 :::warning EXPERIMENTAL
-Voxel shapes are experimental and require the "Experimental Voxel Shape Features" toggle to be enabled in order to function.
+ボクセル形状は実験的機能であり、動作させるには「Experimental Voxel Shape Features」トグルを有効にする必要があります。
 :::
 
 <Table data="shapes.json" />

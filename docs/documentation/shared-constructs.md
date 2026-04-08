@@ -1,20 +1,20 @@
 ---
 title: Shared Constructs
-description: JSON constructs are expressible in multiple locations in the add-ons system.
+description: JSON 構文はアドオンシステム内の複数の場所で使えます。
 mentions:
     - Ciosciaa
     - ThomasOrs
     - QuazChick
 ---
 
-JSON constructs are expressible in multiple locations in the add-ons system.
+JSON 構文は、アドオンシステム内の複数の場所で表現できます。
 
-## Block Descriptors
+## ブロック記述子
 
-Block descriptors can be used to check for blocks that match the specified parameters.
-For example, block descriptors are used in the block [placement filter](/blocks/block-components#placement-filter) to determine which types of blocks a custom block can survive on.
+ブロック記述子は、指定した条件に一致するブロックを判定するために使えます。
+たとえば、ブロック記述子はブロックの [配置フィルター](/blocks/block-components#placement-filter) で、カスタムブロックがどの種類のブロック上に存続できるかを判定するために使われます。
 
-### Block Type Descriptor
+### ブロックタイプ記述子
 
 <CodeHeader>Block Descriptor</CodeHeader>
 
@@ -24,7 +24,7 @@ For example, block descriptors are used in the block [placement filter](/blocks/
 }
 ```
 
-### Block Permutation Descriptor
+### ブロック状態記述子
 
 <CodeHeader>Block Descriptor</CodeHeader>
 
@@ -37,9 +37,9 @@ For example, block descriptors are used in the block [placement filter](/blocks/
 }
 ```
 
-### Block Tags Descriptor
+### ブロックタグ記述子
 
-Only has access to the `q.all_tags()`{lang=molang} and `q.any_tag()`{lang=molang} query functions.
+`q.all_tags()`{lang=molang} と `q.any_tag()`{lang=molang} のクエリ関数だけにアクセスできます。
 
 <CodeHeader>Block Tags Descriptor</CodeHeader>
 
@@ -49,12 +49,12 @@ Only has access to the `q.all_tags()`{lang=molang} and `q.any_tag()`{lang=molang
 }
 ```
 
-## Item Descriptors
+## アイテム記述子
 
-Item descriptors can be used to check for items that match the specified parameters.
-For example, item descriptors are used in the item [repairable](/items/item-components#repairable) component to determine which types of item can be used to repair the item.
+アイテム記述子は、指定した条件に一致するアイテムを判定するために使えます。
+たとえば、アイテム記述子はアイテムの [修復可能](/items/item-components#repairable) コンポーネントで、どの種類のアイテムを使ってそのアイテムを修復できるかを判定するために使われます。
 
-### Item Type Descriptor
+### アイテムタイプ記述子
 
 <CodeHeader>Item Descriptor</CodeHeader>
 
@@ -64,9 +64,9 @@ For example, item descriptors are used in the item [repairable](/items/item-comp
 }
 ```
 
-### Item Tags Descriptor
+### アイテムタグ記述子
 
-Only has access to the `q.all_tags()`{lang=molang} and `q.any_tag()`{lang=molang} query functions.
+`q.all_tags()`{lang=molang} と `q.any_tag()`{lang=molang} のクエリ関数だけにアクセスできます。
 
 <CodeHeader>Item Tags Descriptor</CodeHeader>
 
@@ -76,9 +76,9 @@ Only has access to the `q.all_tags()`{lang=molang} and `q.any_tag()`{lang=molang
 }
 ```
 
-## Range Objects
+## 範囲オブジェクト
 
-Range objects define a spread between two numbers.
+範囲オブジェクトは、2つの数値の間の幅を定義します。
 
 <CodeHeader>Range Object Example</CodeHeader>
 
@@ -89,11 +89,11 @@ Range objects define a spread between two numbers.
 }
 ```
 
-When provided, a random value will be selected inclusively between the minimum and maximum. Rolls are not retained; a new random value will be rolled each instance the range object would be used. The maximum must not be less than the minimum, but they may be equal to affix rolls to a specific value.
+指定された場合、最小値と最大値の両端を含めた範囲からランダムな値が選ばれます。抽選結果は保持されず、範囲オブジェクトが使われるたびに新しい乱数が引かれます。最大値は最小値より小さくできませんが、同じ値にして固定値にすることはできます。
 
-## Fraction Objects
+## 分数オブジェクト
 
-Fraction objects define a fraction using a numerator and denominator.
+分数オブジェクトは、分子と分母を使って分数を定義します。
 
 <CodeHeader>Fraction Object Example</CodeHeader>
 
@@ -104,4 +104,4 @@ Fraction objects define a fraction using a numerator and denominator.
 }
 ```
 
-The value used in place of the object will be the computed division, `numerator` ÷ `denominator`. Both the numerator and denominator must be at least `1`, and the denominator cannot be equal to the numerator.
+このオブジェクトの代わりに使われる値は、`numerator` ÷ `denominator` の計算結果です。分子と分母はどちらも少なくとも `1` である必要があり、分母を分子と同じ値にはできません。

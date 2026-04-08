@@ -1,5 +1,5 @@
 ---
-title: On Player Respawn
+title: プレイヤーリスポーン時
 category: On Event Systems
 tags:
     - easy
@@ -7,60 +7,60 @@ mentions:
     - BedrockCommands
     - zheaEvyline
 nav_order: 5
-description: This system will run your desired commands on the event that a player respawns from death state.
+description: プレイヤーが死亡状態からリスポーンしたときに、指定したコマンドを実行するシステムです。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-This system will run your desired commands on the event that a player respawns from death state.
+このシステムは、プレイヤーが死亡状態からリスポーンしたときに、指定したコマンドを実行します。
 
-## Setup
+## セットアップ
 
-_Type the following command in Chat:_
+_チャットに次のコマンドを入力してください：_
 
 `/scoreboard objectives add wiki:respawn dummy`
 
-If you are working with functions and prefer to have the objective added automatically on world initialization, follow the process outlined in [On First World Load](/commands/on-first-world-load).
+関数を使っていて、ワールド初期化時にこの目標を自動で追加したい場合は、[ワールドの初回読み込み時](/commands/on-first-world-load) に記載されている手順に従ってください。
 
-## System
+## システム
 
 <CodeHeader>BP/functions/wiki/events/player/on_respawn.mcfunction</CodeHeader>
 
 ```yaml
-## Your Commands Here (Example)
+## ここにコマンドを入れます（例）
 execute as @e[scores={wiki:respawn=1}] run say I died and respawned.
 
-## Set Player States
-### Currently respawning
+## プレイヤーの状態を設定
+### 現在リスポーン中
 scoreboard players set @a wiki:respawn 1
-### Currently not respawning
+### 現在リスポーン中ではない
 scoreboard players set @e[type=player] wiki:respawn 0
 ```
 
 ![Chain of 3 Command Blocks](/assets/images/commands/command-block-chain/3.png)
 
-Here, we have used an `/execute - say` command as an example, but you can use any command you prefer and as many as you need.
+ここでは例として `/execute - say` コマンドを使っていますが、好きなコマンドを必要な数だけ使えます。
 
-Just make sure to follow the given order and properly apply the `@e[scores={wiki:respawn=1}]` selector argument as shown for your desired commands.
+ただし、必ず示された順序を守り、目的のコマンドには `@e[scores={wiki:respawn=1}]` セレクター引数を正しく適用してください。
 
-## Explanation
+## 解説
 
--   **`wiki:respawn=0`** player is alive or had already respawned.
--   **`wiki:respawn=1`** player is dead or has just respawned (in the current game-tick).
--   **`@a`** selector will target all players alive/dead. Hence, we will use it to mark players as `1` 'respawning'
--   **`@e`** selector on the other hand will only target players who are alive, so we can use this to mark all alive players 0 'respawned'
+-   **`wiki:respawn=0`** は、プレイヤーが生存しているか、すでにリスポーン済みであることを示します。
+-   **`wiki:respawn=1`** は、プレイヤーが死亡しているか、ちょうどリスポーンした直後（現在のゲームティック内）であることを示します。
+-   **`@a`** セレクターは、生死を問わずすべてのプレイヤーを対象にします。そのため、`1` を付けて「リスポーン中」を示すために使います。
+-   **`@e`** セレクターは一方で、生存しているプレイヤーだけを対象にします。そのため、これを使って生存中のプレイヤーを `0` の「リスポーン済み」として設定できます。
 
-Now that _respawning_ players are `1` and _respawned_ players are `0`, we can use this knowledge to run our desired commands when the players with score `1` respawn from death state. They are targeted with `@e` selector.
+これで、_リスポーン中_ のプレイヤーが `1`、_リスポーン済み_ のプレイヤーが `0` だとわかりました。この知識を使えば、スコアが `1` のプレイヤーが死亡状態から復帰したときに、目的のコマンドを実行できます。対象は `@e` セレクターで指定します。
 
-In the system, your desired commands must come before the other 2 commands because players change from death state to alive state along the start of the game-tick, before commands are run.
+このシステムでは、目的のコマンドは残り 2 つのコマンドより前に置く必要があります。プレイヤーはコマンドが実行される前、ゲームティックの開始時に死亡状態から生存状態へ変わるためです。
 
-Hence, if we were to put them at the end, the other 2 commands would set respawning players score to `0` first and the commands you want to run won't be able to select those players as our selector argument is `@e[scores={wiki:respawn=1}]`, not `0`. Using `0` would not work as then it would repeat endlessly even on players who have already respawned.
+そのため、これらを最後に置くと、残りの 2 つのコマンドが先にリスポーン中のプレイヤーのスコアを `0` にしてしまい、実行したいコマンドはそのプレイヤーを選択できなくなります。セレクター引数は `0` ではなく `@e[scores={wiki:respawn=1}]` だからです。`0` を使うと、すでにリスポーンしたプレイヤーに対しても無限に繰り返されてしまいます。
 
 ## Tick JSON
 
-If you are using functions instead of command blocks, the `on_respawn` function must be added to the `tick.json` in order to loop and run it continuously. Multiple files can be added to the `tick.json` by placing a comma after each string. Refer to [Functions](/commands/mcfunctions#tick-json) documentation for further info.
+コマンドブロックの代わりに関数を使う場合は、`on_respawn` 関数を `tick.json` に追加して、ループさせながら継続実行する必要があります。`tick.json` には、各文字列の後ろにカンマを付けることで複数ファイルを追加できます。詳しくは [Functions](/commands/mcfunctions#tick-json) のドキュメントを参照してください。
 
 <CodeHeader>BP/functions/tick.json</CodeHeader>
 ```json
@@ -71,7 +71,7 @@ If you are using functions instead of command blocks, the `on_respawn` function 
 }
 ```
 
-If using functions, your pack folder structure will be as follows:
+関数を使う場合、パックのフォルダ構成は次のようになります。
 
 <FolderView
 	:paths="[

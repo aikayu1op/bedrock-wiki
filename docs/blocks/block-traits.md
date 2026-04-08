@@ -1,6 +1,6 @@
 ---
-title: Block Traits
-description: Block traits can be used to apply vanilla block states (such as direction) to your custom blocks easily, without the need for events and triggers.
+title: ブロックの trait
+description: ブロック trait を使うと、イベントやトリガーを使わずに、向きなどのバニラブロック状態をカスタムブロックへ簡単に適用できます。
 category: General
 nav_order: 5
 related:
@@ -13,14 +13,14 @@ mentions:
 ---
 
 :::tip FORMAT VERSION 1.26.10
-Before you learn about block traits, you should be confident with [block states](/blocks/block-states).
+ブロック trait を学ぶ前に、[ブロック状態](/blocks/block-states) をしっかり理解しておくべきです。
 
-When working with block states, ensure that the `min_engine_version` in your pack manifest is 1.20.20 or higher.
+ブロック状態を扱うときは、パックの manifest にある `min_engine_version` が 1.20.20 以上であることを確認してください。
 :::
 
-## Applying Traits
+## trait の適用
 
-Block traits can be used to apply vanilla block states (such as direction) to your custom blocks easily, without the need for events and triggers.
+ブロック trait を使うと、イベントやトリガーを使わずに、向きなどのバニラブロック状態をカスタムブロックへ簡単に適用できます。
 
 <CodeHeader>BP/blocks/custom_slab.json</CodeHeader>
 
@@ -46,33 +46,33 @@ Block traits can be used to apply vanilla block states (such as direction) to yo
 }
 ```
 
-_This example will set the `minecraft:vertical_half` block state when placed to either `"top"`{lang=json} or `"bottom"`{lang=json} - depending on where the player is looking._
+_この例では、配置時に `minecraft:vertical_half` ブロック状態が `"top"`{lang=json} または `"bottom"`{lang=json} に設定されます。これはプレイヤーがどこを見ているかによって変わります。_
 
-**Entries in the [permutations array](/blocks/block-permutations#conditionally-applying-components) are still required for this state to make a functional difference, with conditions querying**
+**この状態を機能させるには、[permutations array](/blocks/block-permutations#conditionally-applying-components) による条件付き適用も必要で、条件は次のように記述します。**
 
 ```molang
 q.block_state('minecraft:vertical_half')
 ```
 
-## List of Traits
+## trait 一覧
 
-### Connection
+### 接続
 
-Allows for fence-like connection permutations by updating cardinal connection states based on adjacent blocks.
+隣接ブロックに応じて方角ごとの接続状態を更新し、フェンスのような接続パーミュテーションを実現します。
 
-_Requires format version [1.26.0](/blocks/block-format-history#_1-26-0) or later._
+_format version [1.26.0](/blocks/block-format-history#_1-26-0) 以降が必要です。_
 
--   `enabled_states` — Array
-    -   May only contain `"minecraft:cardinal_connections"`{lang=json}, which enables _all_ of the following states.
+-   `enabled_states` — 配列
+    -   `"minecraft:cardinal_connections"`{lang=json} のみを含められます。これにより、以下すべての状態が有効になります。
 
-#### Provided States {#connection-states}
+#### 提供される状態 {#connection-states}
 
-| State                        | Values                                              | Description                                                        |
-| ---------------------------- | --------------------------------------------------- | ------------------------------------------------------------------ |
-| `minecraft:connection_north` | `false`{lang=json} _(default)_<br>`true`{lang=json} | Whether the block is connected to the adjacent block to the north. |
-| `minecraft:connection_south` | `false`{lang=json} _(default)_<br>`true`{lang=json} | Whether the block is connected to the adjacent block to the south. |
-| `minecraft:connection_west`  | `false`{lang=json} _(default)_<br>`true`{lang=json} | Whether the block is connected to the adjacent block to the west.  |
-| `minecraft:connection_east`  | `false`{lang=json} _(default)_<br>`true`{lang=json} | Whether the block is connected to the adjacent block to the east.  |
+| 状態                        | 値                                                  | 説明                                                         |
+| --------------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
+| `minecraft:connection_north` | `false`{lang=json} _(既定)_<br>`true`{lang=json} | 北側の隣接ブロックと接続しているかどうか。                  |
+| `minecraft:connection_south` | `false`{lang=json} _(既定)_<br>`true`{lang=json} | 南側の隣接ブロックと接続しているかどうか。                  |
+| `minecraft:connection_west`  | `false`{lang=json} _(既定)_<br>`true`{lang=json} | 西側の隣接ブロックと接続しているかどうか。                  |
+| `minecraft:connection_east`  | `false`{lang=json} _(既定)_<br>`true`{lang=json} | 東側の隣接ブロックと接続しているかどうか。                  |
 
 <CodeHeader>minecraft:block > description > traits</CodeHeader>
 
@@ -82,29 +82,29 @@ _Requires format version [1.26.0](/blocks/block-format-history#_1-26-0) or later
 }
 ```
 
-### Placement Direction
+### 配置方向
 
-Contains information about the player's rotation when the block was placed.
+ブロックが配置されたときのプレイヤーの向きに関する情報を保持します。
 
-_Requires format version [1.26.0](/blocks/block-format-history#_1-26-0) or later._
+_format version [1.26.0](/blocks/block-format-history#_1-26-0) 以降が必要です。_
 
--   `enabled_states` — Array
-    -   May contain any of the states from the table below (excluding `minecraft:corner`), enabling only the states specified.
-    -   Alternatively, may contain `"minecraft:corner_and_cardinal_direction"`{lang=json} which enables both `minecraft:corner` and `minecraft:cardinal_direction`.
--   `y_rotation_offset` — Integer (optional)
-    -   This rotation offset only applies to the horizontal state values (north, south, east, west).
-    -   Only axis-aligned angles may be specified (e.g. 90, 180).
--   `blocks_to_corner_with` — Array (optional)
-    -   Lists the blocks (as an array of [block descriptors](/documentation/shared-constructs#block-descriptors)) that the block can create corners with.
-    -   This parameter may only be specified when `"minecraft:corner_and_cardinal_direction"`{lang=json} is included in the `enabled_states` array.
+-   `enabled_states` — 配列
+    -   下の表にある状態を含められます（`minecraft:corner` を除く）。指定した状態だけが有効になります。
+    -   あるいは `"minecraft:corner_and_cardinal_direction"`{lang=json} を含めると、`minecraft:corner` と `minecraft:cardinal_direction` の両方が有効になります。
+-   `y_rotation_offset` — 整数（任意）
+    -   この回転オフセットは、水平状態値（north、south、east、west）にのみ適用されます。
+    -   指定できるのは軸に沿った角度のみです（例: 90, 180）。
+-   `blocks_to_corner_with` — 配列（任意）
+    -   ブロックが角を作れる対象のブロックを、[block descriptors](/documentation/shared-constructs#block-descriptors) の配列として列挙します。
+    -   このパラメータは、`enabled_states` 配列に `"minecraft:corner_and_cardinal_direction"`{lang=json} が含まれている場合にのみ指定できます。
 
-#### Provided States {#placement-direction-states}
+#### 提供される状態 {#placement-direction-states}
 
-| State                          | Values                                                                                                                                                | Description                                         |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `minecraft:cardinal_direction` | `"south"`{lang=json} _(default)_<br>`"north"`{lang=json}<br>`"west"`{lang=json}<br>`"east"`{lang=json}                                                | Cardinal facing direction of player when placed.    |
-| `minecraft:facing_direction`   | `"down"`{lang=json} _(default)_<br>`"up"`{lang=json}<br>`"south"`{lang=json}<br>`"north"`{lang=json}<br>`"west"`{lang=json}<br>`"east"`{lang=json}    | Overall direction of player when placed.            |
-| `minecraft:corner`             | `"none"`{lang=json} _(default)_<br>`"inner_left"`{lang=json}<br>`"inner_right"`{lang=json}<br>`"outer_left"`{lang=json}<br>`"outer_right"`{lang=json} | The shape of the corner that the block has created. |
+| 状態                          | 値                                                                                                                                                | 説明                                         |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| `minecraft:cardinal_direction` | `"south"`{lang=json} _(既定)_<br>`"north"`{lang=json}<br>`"west"`{lang=json}<br>`"east"`{lang=json}                                                | 配置時のプレイヤーの方角。                   |
+| `minecraft:facing_direction`   | `"down"`{lang=json} _(既定)_<br>`"up"`{lang=json}<br>`"south"`{lang=json}<br>`"north"`{lang=json}<br>`"west"`{lang=json}<br>`"east"`{lang=json}    | 配置時のプレイヤーのおおまかな向き。         |
+| `minecraft:corner`             | `"none"`{lang=json} _(既定)_<br>`"inner_left"`{lang=json}<br>`"inner_right"`{lang=json}<br>`"outer_left"`{lang=json}<br>`"outer_right"`{lang=json} | ブロックが作った角の形。                     |
 
 <CodeHeader>minecraft:block > description > traits</CodeHeader>
 
@@ -115,21 +115,21 @@ _Requires format version [1.26.0](/blocks/block-format-history#_1-26-0) or later
 }
 ```
 
-### Placement Position
+### 配置位置
 
-Contains information about where the player placed the block.
+ブロックがどこに配置されたかに関する情報を保持します。
 
-_Requires format version [1.20.20](/blocks/block-format-history#_1-20-20) or later._
+_format version [1.20.20](/blocks/block-format-history#_1-20-20) 以降が必要です。_
 
--   `enabled_states` — Array
-    -   May contain any of the states from the table below, enabling only the states specified.
+-   `enabled_states` — 配列
+    -   下の表にある状態を含められます。指定した状態だけが有効になります。
 
-#### Provided States {#placement-position-states}
+#### 提供される状態 {#placement-position-states}
 
-| State                     | Values                                                                                                                                             | Description                                   |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| `minecraft:block_face`    | `"down"`{lang=json} _(default)_<br>`"up"`{lang=json}<br>`"south"`{lang=json}<br>`"north"`{lang=json}<br>`"west"`{lang=json}<br>`"east"`{lang=json} | Face on which the block was placed.           |
-| `minecraft:vertical_half` | `"top"`{lang=json}<br>`"bottom"`{lang=json} _(default)_                                                                                            | The vertical half where the block was placed. |
+| 状態                     | 値                                                                                                                                             | 説明                                   |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `minecraft:block_face`    | `"down"`{lang=json} _(既定)_<br>`"up"`{lang=json}<br>`"south"`{lang=json}<br>`"north"`{lang=json}<br>`"west"`{lang=json}<br>`"east"`{lang=json} | ブロックが配置された面。               |
+| `minecraft:vertical_half` | `"top"`{lang=json}<br>`"bottom"`{lang=json} _(既定)_                                                                                            | ブロックが配置された上下どちらの半分か。 |
 
 <CodeHeader>minecraft:block > description > traits</CodeHeader>
 

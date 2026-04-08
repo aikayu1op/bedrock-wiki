@@ -1,5 +1,5 @@
 ---
-title: Intro to Animation Controllers
+title: アニメーションコントローラー入門
 nav_order: 1
 tags:
     - guide
@@ -13,64 +13,64 @@ mentions:
     - ThijsHankelMC
     - MetalManeMc
     - ThomasOrs
-description: Introduction to animation controllers.
+description: アニメーションコントローラーの概要です。
 ---
 
-Animation controllers (AC) are state-machines that can be used in both the resource pack, and the behavior pack. In the resource pack, animation controllers (RPAC) are used to play animations, and in the behavior pack (BPAC), they are used to play commands, and command "animations".
+アニメーションコントローラー（AC）は、リソースパックとビヘイビアパックの両方で使える状態機械です。リソースパックではアニメーションコントローラー（RPAC）をアニメーションの再生に使い、ビヘイビアパック（BPAC）ではコマンドやコマンド用の「アニメーション」の実行に使います。
 
-## What are State Machines?
+## 状態機械とは何か?
 
-State machines are a special kind of logic management, that relies on a series of states. Each state has two properties:
+状態機械は、複数の状態の連なりに基づく特殊なロジック管理の仕組みです。各状態には次の2つの要素があります。
 
--   What to do in the current state
--   How to move to other states
+-   現在の状態で何を行うか
+-   他の状態へどう移るか
 
-State machines are used all over the place, especially in classical programming. They aren't only found in minecraft! You can learn more about state machines [here](https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/overview_what_are_state_machines).
+状態機械は、特に古典的なプログラミングで広く使われています。Minecraft だけのものではありません。状態機械については[こちら](https://www.itemis.com/en/yakindu/state-machine/documentation/user-guide/overview_what_are_state_machines)で詳しく学べます。
 
-A state machine can only be `in` one state at a time. When a state machine "runs", you can think of it as moving from state to state, executing the logic inside, and then following `transitions` to other states.
+状態機械は一度にひとつの状態にしか `in` できません。状態機械が「動作」しているときは、状態から状態へ移動し、各状態の中のロジックを実行してから、`transitions` に従って他の状態へ移る、と考えるとよいでしょう。
 
-## State Machine example
+## 状態機械の例
 
-The reason that state-machines are useful, is they allow us to naturally break up our animations into a logical flow, where each state handles its own animations _and_ its own logic.
+状態機械が便利なのは、アニメーションを自然なロジックの流れとして分割でき、各状態がそれぞれのアニメーションとロジックを担当できるからです。
 
-For example, imagine you want to animate the spinning blade of a helicopter - but only when on the ground. You have two states:
+たとえば、ヘリコプターの回転するブレードをアニメーションさせたいとします。ただし、地上にいるときだけです。この場合、次の2つの状態があります。
 
 -   `ground state`
 -   `flying state`
 
-We can annotate these states with the two pieces of information described above:
+これらの状態には、先ほどの2つの情報を次のように割り当てられます。
 
 -   `ground state`:
-    -   play no animation
-    -   move to `flying state` if in the air
+    -   アニメーションを再生しない
+    -   空中にいる場合は `flying state` に移る
 -   `flying state`:
-    -   play flying animation
-    -   move to `ground state` if on the ground
+    -   飛行アニメーションを再生する
+    -   地上にいる場合は `ground state` に移る
 
-Here is the state-machine, visualized as a flow-chart:
+状態機械をフローチャートとして表すと次のようになります。
 
 ![](two_state_FSM.png)
 
-In this flowchart, states are represented by rectangles, and arrows represent _transitions_ from one state to another.
+このフローチャートでは、状態は四角形で表され、矢印はある状態から別の状態への _transitions_ を表します。
 
-Flowcharts are a nice way to visualize multi-state finite-state-machines, is it allows you to follow the logical _flow_ of the animation. Let us look at a more detailed example, which adds a third `explode` state:
+フローチャートは、複数状態の有限状態機械の流れを可視化するのに便利です。アニメーションの論理的な _流れ_ を追いやすくなります。では、3つ目の `explode` 状態を追加した、より詳しい例を見てみましょう。
 
 ![](three_state_FSM.png)
 
-As you can see, states can go to more than one state at once. States can also be dead-ends (since the helicopter is dead, and doesn't need further animation). The branching flow of animation-controllers is a large part of what makes them powerful.
+見てわかるように、状態は複数の状態へ分岐できます。状態は行き止まりにもできます（ヘリコプターは破壊されているので、これ以上のアニメーションは不要です）。このような分岐の流れが、アニメーションコントローラーを強力にしている大きな理由です。
 
-## What are Animation Controllers?
+## アニメーションコントローラーとは何か?
 
-Animation Controllers are Minecraft state machines that allow us to play animations and run commands. Animation controllers always go under the `animation_controllers` folder, in either the RP, or the BP.
+アニメーションコントローラーは、アニメーションの再生やコマンドの実行を可能にする Minecraft の状態機械です。アニメーションコントローラーは、RP でも BP でも必ず `animation_controllers` フォルダに配置します。
 
-### Attaching our controller to an entity
+### コントローラーをエンティティに接続する
 
-Animation controller are defined in their own files, and must be "attached" to entities before they can do anything. To attach an AC into your entity, you must do two things:
+アニメーションコントローラーは専用のファイルで定義され、何かをする前にエンティティへ「接続」しなければなりません。AC をエンティティに接続するには、次の2つが必要です。
 
--   Define a short-name for the animation controller
--   Run the animation controller via `scripts`
+-   アニメーションコントローラーの短い名前を定義する
+-   `scripts` からアニメーションコントローラーを実行する
 
-Here is a sample `description`, which shows how the AC can first be defined in `animations`, and then played in `scripts/animate`.
+以下はサンプルの `description` で、AC をまず `animations` で定義し、次に `scripts/animate` で再生する方法を示しています。
 
 <CodeHeader>RP/entity/helicopter.ce.json OR BP/entities/helicopter.se.json</CodeHeader>
 
@@ -88,7 +88,7 @@ Here is a sample `description`, which shows how the AC can first be defined in `
 }
 ```
 
-If you want to conditionally play an animation controller, you can supply an optional molang argument. If the argument evaluates to true, the controller will play:
+アニメーションコントローラーを条件付きで再生したい場合は、任意の Molang 引数を指定できます。引数が true と評価されると、コントローラーが再生されます。
 
 <CodeHeader>RP/entity/helicopter.ce.json OR BP/entities/helicopter.se.json</CodeHeader>
 
@@ -103,19 +103,19 @@ If you want to conditionally play an animation controller, you can supply an opt
 }
 ```
 
-### RP Animation Controllers
+### RP アニメーションコントローラー
 
-RP animation controllers go in the RP, and can be attached to RP entities. They allow you to play bone-animations.
+RP アニメーションコントローラーは RP に置き、RP エンティティに接続できます。ボーンアニメーションを再生できます。
 
-### BP Animation Controllers
+### BP アニメーションコントローラー
 
-BP animation controllers go in the BP, and can be attached to BP entities. They allow you to play commands and send events to entities.
+BP アニメーションコントローラーは BP に置き、BP エンティティに接続できます。コマンドを実行したり、エンティティへイベントを送ったりできます。
 
-## Animation Controller example
+## アニメーションコントローラーの例
 
-Lets look at a simple animation controller from our State Machine example above:
+先ほどの状態機械の例を使って、簡単なアニメーションコントローラーを見てみましょう。
 
-### Simple Example
+### 簡単な例
 
 <CodeHeader>RP/animation_controllers/helicopter.ac.json</CodeHeader>
 
@@ -147,17 +147,17 @@ Lets look at a simple animation controller from our State Machine example above:
 }
 ```
 
-There is... a lot going on here. Lets break it down, step by step. As we do so, remember two things:
+ここには……たくさんの要素があります。ひとつずつ分解して見ていきましょう。その前に、次の2点を覚えておいてください。
 
--   Animation controllers are a _list of states_
--   Each state contains two pieces of information: _What to do in any given state_, and _How to transition to new states_.
+-   アニメーションコントローラーは _状態の一覧_ です
+-   各状態には、_その状態で何をするか_ と _新しい状態へどう移るか_ の2つの情報があります。
 
-So this particular example contains two states:
+この例には、次の2つの状態があります。
 
 -   `ground`
 -   `flying`
 
-You can note that `"initial_state": "ground"` means that our Animation Controller will begin in the `ground` state.
+`"initial_state": "ground"` は、このアニメーションコントローラーが `ground` 状態から始まることを意味します。
 
 <CodeHeader>
     RP/animation_controllers/helicopter.ac.json#animation_controllers/controller.animation.helicopter.blade/states
@@ -173,7 +173,7 @@ You can note that `"initial_state": "ground"` means that our Animation Controlle
 }
 ```
 
-The `ground` state contains a list of _transitions_, which is how we get to other states. In this example, the default state is saying: _Move to the `flying` state when `q.is_on_ground` is NOT true_. In other words - start the flying animation when we fly into the air!
+`ground` 状態には、他の状態へ移るための _transitions_ の一覧があります。この例では、既定の状態が _`q.is_on_ground` が true ではないときに `flying` 状態へ移る_ と言っています。つまり、空中に飛び立ったら飛行アニメーションを開始するということです。
 
 <CodeHeader>
     RP/animation_controllers/helicopter.ac.json#animation_controllers/controller.animation.helicopter.blade/states
@@ -192,16 +192,16 @@ The `ground` state contains a list of _transitions_, which is how we get to othe
 }
 ```
 
-The `flying` state also contains a list of transitions. In this case it contains the opposite transition: _Move to the `ground` state when `q.is_on_ground` is true_. In other words - move back to the default state when we land on the ground!
+`flying` 状態にも transitions の一覧があります。この場合は逆の遷移で、_`q.is_on_ground` が true のときに `ground` 状態へ移る_ となっています。つまり、地上に着地したら既定の状態へ戻ります。
 
-Alongside the `transition` list, there is also a list of `animations` to play while inside of this state. In this case, playing the `flying` animation. This animation will need to be defined in the entity definition file for this entity.
+`transitions` の一覧に加えて、この状態の中で再生する `animations` の一覧もあります。この場合は `flying` アニメーションを再生しています。このアニメーションは、対象エンティティの定義ファイルで定義しておく必要があります。
 
-### Full Example
+### 完全な例
 
-Here is the code for the second state machine from above, with three states this time. This example illustrates a few new concepts:
+以下は、先ほどの2つ目の状態機械のコードです。今回は3つの状態があります。この例では、次の新しい概念が示されています。
 
--   States with multiple transitions
--   States with no transitions
+-   複数の遷移を持つ状態
+-   遷移を持たない状態
 
 <CodeHeader>RP/animation_controllers/helicopter.ac.json</CodeHeader>
 
@@ -244,8 +244,8 @@ Here is the code for the second state machine from above, with three states this
 
 ## RP Animation Controllers
 
-Resource Pack animation controllers can run things like sounds and particles too.
-Before calling sound or particle in an animation controller, you need to define them in client entity file.
+リソースパックのアニメーションコントローラーは、サウンドやパーティクルのようなものも実行できます。
+アニメーションコントローラー内でサウンドやパーティクルを呼び出す前に、client entity ファイルでそれらを定義しておく必要があります。
 
 <CodeHeader>RP/entities/custom_tnt.json#minecraft:client_entity/description</CodeHeader>
 
@@ -294,23 +294,23 @@ And only then you can call them in the animation controller:
 }
 ```
 
-:::warning Warning! Not every particle works there. If you have problems, consider trying another particle. For example, use one from the blaze animation controller.
+:::warning 警告! すべてのパーティクルがここで動作するわけではありません。問題がある場合は、別のパーティクルを試してください。たとえば、blaze のアニメーションコントローラーで使われているものを試してみてください。
 :::
 
-## BP Animation Controllers
+## BP アニメーションコントローラー
 
-Behavior Pack animation controllers use the same general format as RP Animation Controllers, except instead of triggering animations, they allow you to trigger commands, events, or execute Molang code. In general, they introduce two new fields:
+ビヘイビアパックのアニメーションコントローラーは、RP アニメーションコントローラーと同じ基本形式を使いますが、アニメーションを起動する代わりに、コマンドやイベントの発火、Molang コードの実行を行えます。一般に、次の2つの新しいフィールドが追加されます。
 
--   `on_entry`: Commands to play when the state is entered
--   `on_exit`: Commands to play when the state is exited
+-   `on_entry`: 状態に入ったときに実行するコマンド
+-   `on_exit`: 状態から出たときに実行するコマンド
 
-Commands in this context mean three distinct things:
+ここでいうコマンドには、次の3種類があります。
 
--   A slash command, such as `/say Hello there!`
--   An event trigger, on the entity, such as: `@s wiki:transform_into_plane`
--   An arbitrary Molang expression, such as `v.tickets += 1;` (this also works in Resource Pack animation controllers)
+-   `/say Hello there!` のようなスラッシュコマンド
+-   `@s wiki:transform_into_plane` のような、エンティティ上のイベントトリガー
+-   `v.tickets += 1;` のような任意の Molang 式（これはリソースパックのアニメーションコントローラーでも使えます）
 
-Here is an example BP animation controller, which exhibits some of this behavior:
+以下は、この挙動の一部を示す BP アニメーションコントローラーの例です。
 
 <CodeHeader>BP/animation_controllers/helicopter.ac.json</CodeHeader>
 
@@ -343,28 +343,28 @@ Here is an example BP animation controller, which exhibits some of this behavior
 }
 ```
 
-## Animation Controller Flow
+## アニメーションコントローラーの流れ
 
-Through the examples, hopefully you are starting to get some concept for how animation controller flow works. In this section, I will explain it more explicitly.
+ここまでの例で、アニメーションコントローラーの流れが少し見えてきたはずです。この節では、その仕組みをもう少し明確に説明します。
 
-### Loading
+### 読み込み
 
-When an entity loads into the world, it will _enter_ the default animation controller state, in each of its attached animation controllers. If no `initial_state` is defined, the state named `default` is used. If this is missing, the AC will generate a content log.
+エンティティがワールドに読み込まれると、接続されている各アニメーションコントローラーで、既定の状態に _入ります_。`initial_state` が定義されていない場合は、`default` という名前の状態が使われます。これもない場合、AC はコンテンツログを生成します。
 
-When running, the AC will do the following things each tick:
+動作中、AC は各ティックごとに次の処理を行います。
 
-1. Run any animations in the current state (will loop if set to loop, otherwise it will just play once). Run any commands in `on_entry`, the state was just entered.
-2. Check all transitions to see if there is any valid transition. Search from the top to the bottom of the list, and move to the first valid transition. If a transition is found, `on_exit` commands will be played.
+1. 現在の状態にあるアニメーションを再生します（ループ設定なら繰り返し、そうでなければ1回だけ再生します）。状態に入った直後なら、`on_entry` のコマンドも実行します。
+2. すべての遷移を確認し、有効な遷移があるか調べます。一覧の上から下へ検索し、最初に有効だった遷移へ移動します。遷移が見つかると、`on_exit` のコマンドが実行されます。
 
-Because of the way animation controllers are setup, it will only move from state to state at a MAXIMUM of once per tick.
+アニメーションコントローラーの仕組み上、1ティックあたり最大1回しか状態を移動しません。
 
-### Resetting
+### リセット
 
-Animation Controllers "reset" when an entity reloads (player join/leave, chunk reload, etc). This means that it will "jump" back to the default state. You should always have logic in your default state that can handle restarting any critical animations.
+アニメーションコントローラーは、エンティティが再読み込みされると（プレイヤーの参加/退出、チャンクの再読み込みなど）「リセット」されます。つまり、既定の状態に「飛び戻る」ことになります。重要なアニメーションを再開できるロジックは、必ず既定の状態に用意しておくべきです。
 
-## Notes
+## 補足
 
-You can create variables (and remap their values) in animation controllers too!
+アニメーションコントローラー内で変数を作成し、その値を再マッピングすることもできます。
 
 ```json
 {

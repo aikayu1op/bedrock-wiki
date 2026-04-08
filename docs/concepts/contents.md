@@ -1,6 +1,6 @@
 ---
 title: contents.json
-description: A file that lists every file in your pack.
+description: パック内のすべてのファイルを一覧化するファイルです。
 mentions:
     - MedicalJewel105
     - Osaxely
@@ -12,20 +12,20 @@ mentions:
     - QuazChick
 ---
 
-`contents.json` is a file that is _probably_ used for the game to process the pack files more easily.
-It is not required to have this file in your pack for the pack to work properly.
+`contents.json` は、おそらくゲームがパック内のファイルをより簡単に処理するために使うファイルです。
+パックを正常に動かすために、このファイルを入れることは必須ではありません。
 
-Its main purpose is allowing files in Marketplace content to be encrypted, however it is also included in the vanilla packs which are not encrypted.
+主な目的は Marketplace コンテンツ内のファイルを暗号化できるようにすることですが、暗号化されていないバニラパックにも含まれています。
 
-## JSON Format
+## JSON 形式
 
-The `contents.json` file is located at the root of the pack directory, in the same place as the pack's `manifest.json`.
-It contains a list of the files that are included in the pack in the form of an array under the `content` parameter.
+`contents.json` ファイルは、パックの `manifest.json` と同じ場所、つまりパックディレクトリのルートに置かれます。
+`content` パラメータの下に配列として、パックに含まれるファイル一覧が入ります。
 
-Each `content` entry can contain two parameters:
+各 `content` エントリには 2 つのパラメータがあります。
 
--   `path` — The path of the file relative to the pack's root directory. This must include the file extension.
--   `key` (optional) — The key used for decrypting a file that has been encrypted.
+-   `path` — パックのルートディレクトリからの相対パスです。ファイル拡張子を含める必要があります。
+-   `key`（任意）— 暗号化されたファイルを復号するためのキーです。
 
 <CodeHeader>RP/contents.json</CodeHeader>
 
@@ -55,12 +55,12 @@ Each `content` entry can contain two parameters:
     'RP/manifest.json',
 ]" />
 
-## Automating the Process
+## 手順の自動化
 
-The `contents.json` file can be generated automatically by the game itself!
-Allowing Minecraft to generate this file for you means that you won't make mistakes trying to create it.
+`contents.json` ファイルは、ゲーム自身によって自動生成できます。
+Minecraft に生成させれば、作成ミスを防げます。
 
-However, the file must be prepared first. Create a new empty file called `contents.json` in the root directory of your add-on, and add empty brackets.
+ただし、先にファイルを用意する必要があります。アドオンのルートディレクトリに `contents.json` という空のファイルを作成し、空の中かっこを書いておきます。
 
 <CodeHeader>BP|RP/contents.json</CodeHeader>
 
@@ -68,10 +68,10 @@ However, the file must be prepared first. Create a new empty file called `conten
 {}
 ```
 
-The file content will be automatically written next time the game is launched.
+ファイルの内容は、次回ゲーム起動時に自動で書き込まれます。
 
-## Additional Information
+## 追加情報
 
--   The automatic process can be achieved regardless of the location of the pack (development folders or normal folders).
--   Do not make a `contents.json` for each subpack, the file at the root of the pack is sufficient.
--   This file is not required for your packs to work properly.
+-   この自動処理は、パックの場所（development フォルダーでも通常フォルダーでも）に関係なく利用できます。
+-   サブパックごとに `contents.json` を作る必要はありません。パックのルートにあるファイルだけで十分です。
+-   このファイルは、パックを正常に動かすために必須ではありません。

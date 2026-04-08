@@ -1,6 +1,6 @@
 ---
-title: Custom Emojis
-description: Learn how to add your own emojis to Minecraft.
+title: カスタム絵文字
+description: Minecraft に独自の絵文字を追加する方法を学びます。
 category: Emojis & Symbols
 mentions:
     - SirLich
@@ -12,81 +12,81 @@ mentions:
 ---
 
 :::warning
-This method is not officially supported. While many creators use it on the Marketplace, caution is advised.
+この方法は公式にはサポートされていません。Marketplace では多くの制作者が使っていますが、注意して扱ってください。
 :::
 :::danger ORE UI
-Emojis are not supported by Ore UI screens.
+絵文字は Ore UI の画面ではサポートされていません。
 :::
 
-To make a custom emoji, we use a very similar method to the pre-built emojis by overwriting the vanilla spritesheet with our own!
-Some character cells are already occupied by vanilla emojis, but there are blank cells that we can use.
+カスタム絵文字を作るには、バニラのスプライトシートを自分のものに置き換えることで、プリセット絵文字と非常によく似た方法を使います。
+すでにバニラの絵文字で埋まっている文字セルもありますが、使える空きセルもあります。
 
-To get started, download the spritesheets below and move them into your resource pack's `font` folder.
+まずは、下のスプライトシートをダウンロードして、リソースパックの `font` フォルダへ移動してください。
 
-Below, you'll find an edited sample with some custom emojis for free-use.
+下には、自由に使えるカスタム絵文字入りの編集済みサンプルがあります。
 
-## Modifying Glyph Grids
+## グリフグリッドの編集
 
-### Glyph Grid Template
+### グリフグリッドのテンプレート
 
-The provided template grid is 256×256 pixels but you could make it bigger to allow for larger emojis.
+提供されているテンプレートグリッドは 256×256 ピクセルですが、より大きな絵文字に対応できるよう、もっと大きくしても構いません。
 
 <WikiImage src="glyph_grid.png" width="512" pixelated />
 
-### Glyph E0
+### グリフ E0
 
 <WikiImage src="glyph_E0.png" caption="RP/font/glyph_E0.png" pixelated />
 
-### Glyph E1
+### グリフ E1
 
 <WikiImage src="glyph_E1.png" caption="RP/font/glyph_E1.png" pixelated />
 
 :::tip
-`E0` and `E1` aren't the only code points available to achieve custom emojis.
-You can also use `E2`, `E3`, `E4`, `E5`, `E6`, `E7`, `E8`, `E9`, `EA`, `EB`, `EC`, `ED`, `EE`, `EF`, `F0`, `F1`, `F2`, `F3`, `F4`, `F5`, `F6`, `F7` and `F8`, as these aren't being used by vanilla.
+`E0` と `E1` だけがカスタム絵文字に使えるコードポイントではありません。
+`E2`、`E3`、`E4`、`E5`、`E6`、`E7`、`E8`、`E9`、`EA`、`EB`、`EC`、`ED`、`EE`、`EF`、`F0`、`F1`、`F2`、`F3`、`F4`、`F5`、`F6`、`F7`、`F8` も使えます。これらはバニラで使われていないためです。
 
-Using these code points can also help reduce conflicts with other packs to some extent.
+これらのコードポイントを使うと、ほかのパックとの競合もある程度減らせます。
 :::
 
-## Example
+## 例
 
-_Edited sample `glyph_E1.png` (CC0), shared by @zheaEvyline for free use:_
+_編集済みサンプル `glyph_E1.png` (CC0)。@zheaEvyline が自由利用向けに共有しているものです。_
 
 ![](glyph_E1_modified.png)
 
-If you'd like to add existing vanilla textures or custom ones to the glyph and use them as emojis in-game, you can easily do so with the **[Textures to Glyph Web Tool](https://minato.beyondbedrock.org/web-apps/textures-to-glyph/)** created by @minato4743
+既存のバニラテクスチャやカスタムテクスチャをグリフに追加して、ゲーム内で絵文字として使いたい場合は、@minato4743 が作成した **[Textures to Glyph Web Tool](https://minato.beyondbedrock.org/web-apps/textures-to-glyph/)** を使えば簡単にできます。
 
-Your file paths should look like this:
+ファイルパスは次のようになります。
 
 <FolderView :paths="[
     'RP/font/glyph_E0.png',
     'RP/font/glyph_E1.png'
 ]" />
 
-## Using the Emojis In-Game
+## ゲーム内で絵文字を使う
 
-Once you have your custom emojis inside `glyph_E0.png` or `glyph_E1.png`, you need to obtain its corresponding letter/symbol which you will be able to copy-paste to display the emoji in-game using the converter below.
+カスタム絵文字を `glyph_E0.png` または `glyph_E1.png` に配置したら、対応する文字や記号を取得する必要があります。下の変換ツールを使えば、その文字をコピーしてゲーム内に絵文字を表示できます。
 
-The first two characters of the input are `E0`, `E1`, or any other code point, depending on which file you added emojis to.
+入力の最初の 2 文字は、絵文字を追加したファイルに応じて `E0`、`E1`、または別のコードポイントになります。
 
-The next two characters are the position inside the image in the format `<row><column>`, where each character is a number in hexadecimal numeral system.
-You can find this number by referencing the images above. For example, the top-right square in `E0` is `0F`, and the bottom right is `FF`.
+次の 2 文字は画像内の位置で、`<row><column>` という形式になっており、それぞれの文字は 16 進数の数字です。
+この番号は上の画像を参照して確認できます。たとえば、`E0` の右上は `0F`、右下は `FF` です。
 
-So, after you are done, it might look like `E102` (`E1` + `02`).
+つまり、完成後は `E102` (`E1` + `02`) のようになります。
 
-Copy this code into the following field, and press **Convert**. The symbol on the right-hand side can be copy/pasted into Minecraft.
+このコードを下の入力欄に入れて、**変換** を押してください。右側の記号をコピーして、Minecraft に貼り付けできます。
 
 <div>
     <form>
         <input
             id="hexValue"
-            placeholder="Hex value"
+            placeholder="16 進値"
             class="button"
             style="background: none; outline: none;"
         />
         <input
             id="result"
-            placeholder="Result"
+            placeholder="結果"
             readonly
             class="button"
             style="background: none; outline: none; margin-inline: 0.5em;"
@@ -97,27 +97,27 @@ Copy this code into the following field, and press **Convert**. The symbol on th
             style="cursor: pointer;"
             onclick="document.getElementById('result').value = String.fromCodePoint(parseInt(document.getElementById('hexValue').value, 16))"
         >
-            Convert
+            変換
         </button>
     </form>
 </div>
 
-Alternatively, you can obtain the letter/symbol at this website **[here](https://everythingfonts.com/unicode/0xE300)** or with the help of this **[Glyph Web Tool](https://nhanaz.github.io/glyph/)** made by @NhanAZ.
+代わりに、**[ここ](https://everythingfonts.com/unicode/0xE300)** のウェブサイトや、@NhanAZ が作成した **[Glyph Web Tool](https://nhanaz.github.io/glyph/)** を使って、文字や記号を取得することもできます。
 
-## Positioning the Emoji
+## 絵文字の位置調整
 
--   To position an emoji upwards/downwards, simply move it up/down within its own emoji slot.
--   To position an emoji towards the left or right, simply add any pixel of 5-10% opacity to its side (within its own slot), opposite to the direction you want to move it.
-    -   Ex: to move an emoji to the right by 2 pixels, add any 5-10% opacity pixel connecting to it, anywhere on its left-most side and add another one to the left of that pixel.
+-   絵文字を上下に動かしたい場合は、自分の絵文字スロット内で上下に移動させるだけです。
+-   絵文字を左右に動かしたい場合は、移動させたい方向とは反対側の端に、5〜10% の不透明度のピクセルを 1 つ追加します (同じスロット内で)。
+    -   例: 絵文字を右に 2 ピクセル動かしたい場合は、左端のどこかに 5〜10% の不透明度のピクセルを 1 つ接続し、その左側にもう 1 つ追加します。
 
-_Note: The following steps apply only to emojis that do not fill their slot width (i.e., are smaller than the slot size)._
+_注: 以下の手順は、スロット幅をすべて使い切らない絵文字 (つまりスロットサイズより小さいもの) にのみ適用されます。_
 
-## Glyph Separation Space
+## グリフ間の余白
 
-Sometimes, displaying two glyphs close together in-game may leave a few empty pixels between them. The only way to fix this is by scaling the glyph (PNG file) so that your emoji, which originally spans multiple slots, fits within a single slot.
+ゲーム内で 2 つのグリフを近接して表示すると、その間に空白のピクセルが少し残ることがあります。これを直す方法は、元々複数スロットにまたがる絵文字が 1 つのスロットに収まるように、グリフ (PNG ファイル) を拡大縮小することだけです。
 
-For example, if you created an emoji in the `glyph_E1` file using two 16×16 slots, you would need to double the resolution of the default file (from **256×256** to **512×512**). Then, simply align your **16×32** emoji into one of the **32×32** slots in the scaled glyph file.
+たとえば、`glyph_E1` ファイルで 16×16 スロットを 2 つ使って絵文字を作った場合、デフォルトファイルの解像度を 2 倍にして (**256×256** から **512×512** へ)、拡大後のグリフファイル内の **32×32** スロットの 1 つに **16×32** の絵文字を配置します。
 
-## Resizing the Emoji
+## 絵文字のリサイズ
 
-To resize the emoji, change the resolution of the glyph (PNG file) to 512×512. The reason for doubling the resolution is that it increases the number of pixels, providing more room for editing. Once you've done this, open an image editor of your choice, select the new emoji, resize it, and center it within the emoji slot. This will give the emoji more space around it when used in the game.
+絵文字のサイズを変更するには、グリフ (PNG ファイル) の解像度を 512×512 にします。解像度を 2 倍にするのは、ピクセル数が増えて編集スペースが広がるためです。これが終わったら、好みの画像編集ソフトで新しい絵文字を選び、サイズを変更して、絵文字スロットの中央に配置します。そうすると、ゲーム内で使うときに絵文字の周囲に余白ができます。

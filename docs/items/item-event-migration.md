@@ -1,6 +1,6 @@
 ---
-title: Item Event Migration
-description: View Script API implementations of the deprecated JSON item event responses.
+title: アイテムイベントの移行
+description: 廃止された JSON のアイテムイベント応答を、Script API でどう実装するかを確認します。
 category: General
 nav_order: 5
 tags:
@@ -10,14 +10,14 @@ mentions:
     - QuazChick
 ---
 
-:::tip BEFORE YOU START
-This page requires you to be comfortable with basic JavaScript and requires knowledge of how modern [item events](/items/item-events) work.
+:::tip 始める前に
+このページでは、基本的な JavaScript に慣れていることと、現行の [item events](/items/item-events) の仕組みを理解していることが前提です。
 :::
 
-Struggling to upgrade your items' JSON events to [custom components](/items/item-events#registering-custom-components)
-Don't worry! This page will help you to understand what the deprecated JSON event responses look like implemented using the Script API.
+アイテムの JSON イベントを [custom components](/items/item-events#registering-custom-components) に移行するのに苦労していませんか。
+心配はいりません。このページでは、廃止された JSON のイベント応答が Script API でどのように実装されるかを理解できるようにします。
 
-## Add Mob Effect
+## Mob 効果の追加
 
 <CodeHeader>Custom Component</CodeHeader>
 
@@ -30,7 +30,7 @@ onHitEntity({ hitEntity }) {
 }
 ```
 
-## Damage (Holder)
+## ダメージ（保持者）
 
 ```js
 import { EntityDamageCause } from "@minecraft/server";
@@ -46,7 +46,7 @@ onUse({ source }) {
 }
 ```
 
-## Damage (Item)
+## ダメージ（アイテム）
 
 ```js
 import { EquipmentSlot, GameMode, Player } from "@minecraft/server";
@@ -94,7 +94,7 @@ onMineBlock({ source }) {
 }
 ```
 
-## Decrement Stack
+## スタック数を減らす
 
 ```js
 import { EquipmentSlot, GameMode } from "@minecraft/server";
@@ -122,7 +122,7 @@ onUse({ source }) {
 }
 ```
 
-## Remove Mob Effect
+## Mob 効果の削除
 
 <CodeHeader>Custom Component</CodeHeader>
 
@@ -132,7 +132,7 @@ onHitEntity({ hitEntity }) {
 }
 ```
 
-## Run Command
+## コマンド実行
 
 <CodeHeader>Custom Component</CodeHeader>
 
@@ -143,7 +143,7 @@ onUse({ source }) {
 }
 ```
 
-## Teleport
+## テレポート
 
 <CodeHeader>Custom Component</CodeHeader>
 
@@ -153,7 +153,7 @@ onConsume({ source }) {
 }
 ```
 
-## Transform Item
+## アイテムの変換
 
 ```js
 import { EquipmentSlot, ItemStack } from "@minecraft/server";

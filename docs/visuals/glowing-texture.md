@@ -1,29 +1,29 @@
 ---
-title: Glowing Entity Texture
+title: 発光するエンティティのテクスチャ
 category: Tutorials
 mentions:
     - LeGend077
     - MedicalJewel105
-description: Re-create Enderman's glowing eyes in your own details.
+description: エンダーマンの光る目のような表現を、自分のコンテンツで再現します。
 ---
 
-In this tutorial, you will learn how to make a glowing texture, like Enderman's eyes have for an entity by using materials and textures.
+このチュートリアルでは、material と texture を使って、エンダーマンの目のように発光するエンティティの texture を作る方法を学びます。
 
-## Texture
+## テクスチャ
 
-To make your entity's texture glow, you need to open your texture in an advanced image editor (here, Blockbench) to half-erase the pixels alpha.
+エンティティの texture を発光させるには、advanced image editor（ここでは Blockbench）で texture を開き、pixel の alpha を半分消す必要があります。
 
--   Open your entity's texture file.
+-   エンティティの texture file を開きます。
 
 _Don't mind strange bones rotation, Mojang likes to render models correctly through animations._
 
--   Find the **Eraser** tool and set its opacity/alpha to something low like 71 or 23.
+-   **Eraser** tool を見つけ、opacity / alpha を 71 や 23 のような低い値に設定します。
 
 ![](eraser.png)
 
 ![](opacity.png)
 
--   Then, erase the part of the texture you want it to glow. The less visible a pixel is the more it glows, but be sure it is not 100% erased.
+-   次に、発光させたい texture 部分を消します。pixel が見えにくいほどよく光りますが、100% 消し切らないようにしてください。
 
 ![](erase-pixels.png)
 
@@ -33,7 +33,7 @@ Example Pig texture:
 
 ## Material
 
-We need to modify the `RP/entity/my_entity.entity.json` file of the mob we want to glow. Now, find `"materials":{}` and set the values to `"entity_emissive_alpha"`. (Be sure to check if the textures are properly defined).
+発光させたい mob の `RP/entity/my_entity.entity.json` file を変更する必要があります。`"materials":{}` を見つけて、値を `"entity_emissive_alpha"` に設定します。（texture が正しく定義されているか確認してください）
 
 <CodeHeader>RP/entity/pig.entity.json#description</CodeHeader>
 
@@ -94,8 +94,8 @@ We need to modify the `RP/entity/my_entity.entity.json` file of the mob we want 
 
 </Spoiler>
 
-## Testing
+## テスト
 
-Now, load up Minecraft and open a word with this resource pack enabled. Set the time to _midnight_ or find a nearby cave and test it out. The entity should glow as expected.
+Minecraft を起動し、この resource pack を有効にした world を開きます。時刻を _midnight_ にするか、近くの洞窟で試してみてください。エンティティは期待どおりに光るはずです。
 
 ![](result.png)

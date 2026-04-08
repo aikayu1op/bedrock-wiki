@@ -7,14 +7,14 @@ mentions:
     - JaylyDev
     - SmokeyStack
     - ThomasOrs
-description: Watchdog is a performance system for script engine that is enabled in Minecraft script plugins by default.
+description: Watchdog は、Minecraft script plugin で既定で有効になっている script engine のパフォーマンスシステムです。
 ---
 
-Watchdog is a performance system for script engine that is enabled in Minecraft script plugins by default.
+Watchdog は、Minecraft script plugin で既定で有効になっている script engine のパフォーマンスシステムです。
 
-## Watchdog Configuration
+## Watchdog の設定
 
-There is a set of watchdog configuration that governs the performance of the script environment since 1.19.20. These options cannot be modified in world or realms, but they can be modified via `server.properties` in [Dedicated Server](https://www.minecraft.net/en-us/download/server/bedrock). Below is default watchdog settings, which are the same on all devices for world and realms.
+1.19.20 以降、script environment のパフォーマンスを管理する watchdog 設定があります。これらの設定は world や realm では変更できませんが、[Dedicated Server](https://www.minecraft.net/en-us/download/server/bedrock) の `server.properties` から変更できます。以下は既定の watchdog 設定で、world と realm のすべての端末で同じです。
 
 <CodeHeader>bedrock-server/server.properties</CodeHeader>
 
@@ -49,52 +49,52 @@ script-watchdog-enable-shutdown=true
 script-watchdog-hang-exception=true
 ```
 
-## Watchdog Messages
+## Watchdog メッセージ
 
-These watchdog messages are thrown with `[Watchdog]` label in error or warning. They're displayed in a warning or an error. These error should never be ignored.
+これらの watchdog メッセージは、エラーまたは警告として `[Watchdog]` ラベル付きで出力されます。警告やエラーとして表示され、無視すべきではありません。
 
-### Slow-running script detected in behavior pack '%s' (x ms average)
+### behavior pack '%s' で遅い script を検出しました（平均 x ms）
 
-Script runtime is delayed by over a certain timeframe.
+script runtime が一定時間以上遅れています。
 
-### x ms script spike detected in behavior pack '%s'
+### behavior pack '%s' で x ms の script spike を検出しました
 
-There is a spike in script runtime.
+script runtime に急激な負荷上昇があります。
 
-### Out of memory exception detected in behavior pack '%s'
+### behavior pack '%s' で out of memory 例外を検出しました
 
-This error occurs when the combined memory usage exceeds.
+この error は、合計メモリ使用量がしきい値を超えたときに発生します。
 
-This saves and shuts down the world by Watchdog termination and cannot be canceled using `BeforeWatchdogTerminateEvent`.
+これは Watchdog termination によって world を保存して終了し、`BeforeWatchdogTerminateEvent` でキャンセルすることはできません。
 
-### x ms script hang detected in behavior pack '%s'
+### behavior pack '%s' で x ms の script hang を検出しました
 
-The scripts freezes at a certain location of your script for more than the watchdog threshold for single tick.
+script が、単一 tick の watchdog しきい値を超えて特定の場所で停止しています。
 
-This is usually caused by iteration, such as `while` loop and `for` loop.
+これは通常、`while` loop や `for` loop` のような反復処理が原因です。
 
-### Stack overflow detected in behavior pack '%s'
+### behavior pack '%s' で stack overflow を検出しました
 
-Occurs when there is a recursive function (a function that calls itself) without an exit point.
+終了条件のない再帰関数（自分自身を呼ぶ function）があると発生します。
 
-### High memory usage detected
+### 高いメモリ使用量を検出しました
 
-Produces a content log warning when the combined memory usage exceeds the given threshold in megabytes.
+合計メモリ使用量が指定されたしきい値（メガバイト）を超えると、content log に警告を出します。
 
-### Unhandled critical exception of type '%s' in behavior pack '%s'
+### behavior pack '%s' で型 '%s' の未処理の重大な例外が発生しました
 
-Produces a content log error when an unhandled critical exception occurs.
+未処理の重大な例外が発生すると、content log に error を出します。
 
-There are multiple reasons that a watchdog is deciding to terminate execution of a behavior pack's script.
+watchdog が behavior pack の script の実行を終了する理由はいくつかあります。
 
--   `hang`: script is not responsive due to a hang or infinite loop.
--   `stackOverflow`: a long, and potentially infinite chain of function calls.
+-   `hang`: hang または無限 loop により script が応答しない。
+-   `stackOverflow`: 長く、場合によっては無限に続く function 呼び出しの連鎖。
 
-## Cancel Watchdog Termination
+## Watchdog 終了をキャンセルする
 
-Using Minecraft's scripting API, you are able to connect to a callback that will be called when a script runtime is being terminated due to a violation of the performance watchdog system.
+Minecraft の scripting API を使うと、パフォーマンス watchdog system の違反によって script runtime が終了されるときに呼ばれる callback に接続できます。
 
-This event allows you to cancel the termination of the script runtime to prevent from the watchdog from stopping the server from running. Note that depending on server configuration settings, cancellation of the termination may not be allowed.
+この event を使うと、script runtime の終了をキャンセルして、watchdog が server の実行を止めないようにできます。ただし、server の設定によっては終了のキャンセルが許可されない場合があります。
 
 ```js
 import { system } from "@minecraft/server";
@@ -105,11 +105,11 @@ system.events.beforeWatchdogTerminate.subscribe((event) => {
 });
 ```
 
-## Watchdog Commands
+## Watchdog コマンド
 
-Watchdog implementation comes with Minecraft's slash commands, which can be used with the `/script watchdog` command.
+Watchdog 実装には Minecraft の slash command があり、`/script watchdog` command で使えます。
 
--   `/script watchdog exportstats`: Exports performance profiling of scripting environment, this includes plugin handles and runtime information.
+-   `/script watchdog exportstats`: scripting environment の performance profiling を書き出します。plugin handle と runtime 情報が含まれます。
 
 ---
 

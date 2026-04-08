@@ -1,7 +1,7 @@
 ---
-title: Project Setup
+title: プロジェクトのセットアップ
 category: Guide
-description: Learn how to set up your project folders.
+description: プロジェクト用フォルダーの設定方法を学びます。
 nav_order: 4
 prefix: "4. "
 mentions:
@@ -24,46 +24,46 @@ mentions:
     - QuazChick
 ---
 
-## Introduction
+## はじめに
 
-This page will guide you through the steps required to create your first "working" add-on and view it in game. If you're joining on android, you should follow this alternative guide:
+このページでは、最初の「動く」アドオンを作成し、ゲーム内で確認するために必要な手順を案内します。Android で始める場合は、代わりに次のガイドに従ってください。
 
-<Button link="./project-setup-android">Android guide</Button>
+<Button link="./project-setup-android">Android ガイド</Button>
 
-## The com.mojang Folder
+## com.mojang フォルダー
 
-The `com.mojang` folder is a special folder where Minecraft stores data (Add-ons, Worlds, Player info...). Minecraft understands this location, and all files we access or create will be placed somewhere in this folder!
+`com.mojang` フォルダーは、Minecraft がデータ（アドオン、ワールド、プレイヤー情報など）を保存する特別なフォルダーです。Minecraft はこの場所を理解しており、私たちがアクセスしたり作成したりするファイルはすべて、このフォルダー内のどこかに配置されます。
 
-You should create a shortcut to the `com.mojang` folder on your Desktop or on your mobile device, so you can easily access it at any time. The exact location of the `com.mojang` folder will depend on your device OS.
+この `com.mojang` フォルダーへのショートカットをデスクトップまたはモバイル端末に作成しておくと、いつでも簡単にアクセスできます。`com.mojang` フォルダーの正確な場所は、デバイスの OS によって異なります。
 
 ### Windows
 
-On Windows, there are multiple `com.mojang` folders in order to accommodate having different content (such as worlds) and settings available when logged into Minecraft with different Xbox accounts.
-Packs that are in development should be saved in the "Shared" `com.mojang` folder which can be found at:
+Windows では、Minecraft に異なる Xbox アカウントでログインしたときに、異なるコンテンツ（ワールドなど）や設定を扱えるように、複数の `com.mojang` フォルダーがあります。
+開発中のパックは、次の場所にある「Shared」 `com.mojang` フォルダーに保存してください。
 
 `C:\Users\<USERNAME>\AppData\Roaming\Minecraft Bedrock\Users\Shared\games\com.mojang`{lang=xml}
 
-:::tip USING PATH VARIABLES
-You can make use of the `APPDATA` variable to jump directly to your `AppData\Roaming` folder.
+:::tip パス変数の利用
+`APPDATA` 変数を使うと、`AppData\Roaming` フォルダーへ直接移動できます。
 
-Simply type/paste `%APPDATA%\Minecraft Bedrock\Users\Shared\games\com.mojang` into the File Explorer address bar to find your `com.mojang` folder.
+ファイルエクスプローラーのアドレスバーに `%APPDATA%\Minecraft Bedrock\Users\Shared\games\com.mojang` を入力または貼り付けると、`com.mojang` フォルダーを開けます。
 :::
 
 ### Android
 
-Android 11 or older: `Phone > games > com.mojang`
+Android 11 以前: `Phone > games > com.mojang`
 
-Android 12 and newer: `Phone > Android > data > com.mojang.minecraftpe > files > games > com.mojang`
+Android 12 以降: `Phone > Android > data > com.mojang.minecraftpe > files > games > com.mojang`
 
 ### ChromeOS
 
-Before you can see the `com.mojang` in your files, make sure to change the `File Storage Location` to `External` in your Minecraft Settings:
+ファイル一覧で `com.mojang` を見られるようにするには、Minecraft の設定で `File Storage Location` を `External` に変更してください。
 
--   Go to `Minecraft Settings`.
--   Navigate to `Settings > General > Storage`.
--   Change the `File Storage Location` to `External`.
+-   `Minecraft Settings` を開きます。
+-   `Settings > General > Storage` に移動します。
+-   `File Storage Location` を `External` に変更します。
 
-After that you can access the `com.mojang` folder in your Android Subsystem:
+その後、Android サブシステム内から次の場所にアクセスできます。
 
 `My Files > Play Files > Android > data > com.mojang.minecraftpe > files > games > com.mojang`
 
@@ -71,48 +71,48 @@ After that you can access the `com.mojang` folder in your Android Subsystem:
 
 `My iDevice > Minecraft > games > com.mojang`
 
-### Development Packs
+### 開発用パック
 
-We will develop our add-on in `development_behavior_packs` and `development_resource_packs`.
-When you make changes within these folders, you can _exit and re-enter a world with the packs applied_, to automatically reload the content.
-This allows you to quickly test your add-on without reloading Minecraft.
+アドオンは `development_behavior_packs` と `development_resource_packs` で開発します。
+これらのフォルダー内で変更を加えたら、_パックを適用したワールドをいったん退出して再参加する_ ことで、コンテンツを自動的に再読み込みできます。
+これにより、Minecraft を再起動せずにアドオンをすばやくテストできます。
 
-:::tip RELOAD ALL
-A quicker shortcut for reloading a world is the `/reload all` command.
+:::tip すべてを再読み込み
+ワールドを再読み込みする、より素早いショートカットとして `/reload all` コマンドがあります。
 :::
 
-`resource_packs` and `behavior_packs` on the other hand contain stable add-ons, including those imported via `.mcpack`. We can ignore these folders for now.
+一方で `resource_packs` と `behavior_packs` には、`.mcpack` でインポートされたものを含む安定版のアドオンが入っています。ここは今は無視してかまいません。
 
-## Your Workspace
+## 作業環境
 
 :::tip
-In this guide, BP refers to the folder you created in `development_behavior_packs` ("the behavior pack"), and RP refers to the folder you created in `development_resource_packs` ("the resource pack")
+このガイドでは、BP は `development_behavior_packs` に作成したフォルダー（「behavior pack」）、RP は `development_resource_packs` に作成したフォルダー（「resource pack」）を指します。
 :::
 
-First of all, you will need to create the proper folders in suitable locations and set up your workspace.
-_The remainder of this guide assumes you are using VSCode. You may also follow along with other editors._
+まず、適切な場所に必要なフォルダーを作成し、作業環境を準備する必要があります。
+_このガイドの残りは VSCode を使う前提で説明します。ほかのエディターでも同様に進められます。_
 
-Let's create your first add-on workspace in Visual Studio Code now.
+Visual Studio Code で最初のアドオン用ワークスペースを作りましょう。
 
-1. Open VSCode (_Visual Studio Code, the code editor_)
-2. Create a folder named "`your_pack_name_RP`" in `development_resource_packs`. **We will refer to this folder as `RP`**
-3. Create a folder "`your_pack_name_BP`" in `development_behavior_packs`. **We will refer to this folder as `BP`**.
-4. Go to `File > Add folder to workspace...` and choose `BP`. Do the same with `RP`.
-5. Press `File > Save Workspace as...` to save the workspace file to your Desktop. Whenever you're working on your add-on, all you have to do is open the workspace by double-clicking, and you will get quick access to both BP and RP folders.
+1. VSCode を開きます（_Visual Studio Code、コードエディター_）
+2. `development_resource_packs` に `your_pack_name_RP` というフォルダーを作成します。**このフォルダーを `RP` と呼びます。**
+3. `development_behavior_packs` に `your_pack_name_BP` というフォルダーを作成します。**このフォルダーを `BP` と呼びます。**
+4. `File > Add folder to workspace...` を開き、`BP` を選択します。`RP` でも同じ操作を行います。
+5. `File > Save Workspace as...` を押して、ワークスペースファイルをデスクトップに保存します。今後アドオンを作業するときは、このワークスペースをダブルクリックして開くだけで、BP と RP の両方にすばやくアクセスできます。
 
-## BP Manifest
+## BP マニフェスト
 
-:::tip CREATING FILES
-In this guide, you will often be instructed to create files with specific names, placed in specific folders.
-If the folder doesn't exist yet, please create it!
+:::tip ファイルの作成
+このガイドでは、特定の名前のファイルを特定のフォルダーに作成するよう指示されることがよくあります。
+フォルダーがまだ存在しない場合は、作成してください。
 :::
 
-The manifest is a file that identifies your pack to Minecraft. Every pack has one manifest. A folder with a correctly formatted manifest will show up in Minecraft, and we consider this the "minimal" pack before we can add additional content.
+マニフェストは、Minecraft にパックを識別させるためのファイルです。各パックにはマニフェストが 1 つあります。正しく書式設定されたマニフェストを持つフォルダーは Minecraft に表示され、追加コンテンツを入れる前の「最小構成」のパックとみなされます。
 
-Manifest files are written in JSON. If this isn't familiar to you, you can learn more about json [here](/guide/understanding-json).
+マニフェストファイルは JSON で書かれます。もし馴染みがなければ、[ここ](/guide/understanding-json) で詳しく学べます。
 
-First, create a new file in your BP folder by right-clicking on the folder and selecting `New File`
-Call the file `manifest.json` and paste the following code into the file to begin with.
+まず、BP フォルダーを右クリックして `New File` を選び、新しいファイルを作成してください。
+ファイル名を `manifest.json` にし、次のコードを貼り付けます。
 
 <CodeHeader>BP/manifest.json</CodeHeader>
 
@@ -140,49 +140,49 @@ Call the file `manifest.json` and paste the following code into the file to begi
 }
 ```
 
-### Manifest Explained
+### マニフェストの解説
 
--   `format_version` defines what version of manifest JSON format you are using. Version 3 is the most recent stable version; use it.
+-   `format_version` は、使っているマニフェスト JSON の形式のバージョンを定義します。Version 3 が最新の安定版なので、これを使ってください。
 
--   `name` is the name of your behavior pack. `description` will show up under it in-game.
+-   `name` は behavior pack の名前です。`description` はゲーム内でその下に表示されます。
 
-    We are defining these fields as _localization keys_ so we can translate them later into other languages.
-    For more information about localization, look [here](/text/text-intro).
+    これらの値は後で他の言語へ翻訳できるよう、_ローカライズキー_ として定義しています。
+    ローカライズについて詳しくは [ここ](/text/text-intro) を参照してください。
 
--   The `uuid` field is **essential**, and will be discussed in more detail below.
+-   `uuid` フィールドは **必須** で、下で詳しく説明します。
 
--   `version` defines the version of your add-on.
+-   `version` はアドオンのバージョンを表します。
 
-    This allows users to import updated versions of your add-on without encountering a "Duplicate pack detected" error.
-    You don't need to change the version if you have the add-on in `development_*_packs` folders and only use them on private worlds.
+    これにより、ユーザーはアドオンの更新版をインポートしても `Duplicate pack detected` エラーを避けられます。
+    ただし、アドオンを `development_*_packs` フォルダーに置き、非公開ワールドでのみ使うなら、バージョンを変更する必要はありません。
 
--   `min_engine_version` defines the minimum Minecraft client version that'll be able to use your add-on.
-    The number specified here should match the current version of the game, unless you're planning for backwards compatibility with older versions.
+-   `min_engine_version` は、アドオンを使える Minecraft クライアントの最小バージョンを定義します。
+    ここで指定する数字は、後方互換性を重視していない限り、ゲームの現在バージョンと一致させてください。
 
--   In `modules`, a module with the `type` of `"data"`{lang=json} is added. This makes your pack a _behavior pack_.
+-   `modules` では、`type` が `"data"`{lang=json} のモジュールが追加されています。これはこのパックが _behavior pack_ であることを示します。
 
--   In `metadata`, the `product_type` allows your add-on to enable achievements on your world. It must be a product type of `"addon"`{lang=json}.
+-   `metadata` では、`product_type` により、このアドオンでワールドの実績を有効化できます。`"addon"`{lang=json} を指定する必要があります。
 
-### UUID Explained
+### UUID の解説
 
-A UUID (_Universally Unique Identifier_) identifies your pack for other programs (in this case, Minecraft) to read. It looks something like this: `5c830391-0937-44d6-9774-406de66b6984`
+UUID（_Universally Unique Identifier_）は、他のプログラム（この場合は Minecraft）にパックを識別させるためのものです。例として `5c830391-0937-44d6-9774-406de66b6984` のような形式になります。
 
-**NEVER USE THE SAME UUID TWICE.** You can generate your own UUIDs [here](https://www.uuidgenerator.net/version4) or, if you use VSCode, you can install [this](https://marketplace.visualstudio.com/items?itemName=netcorext.uuid-generator) extension. Many other tools like _bridge._ generate UUIDs automatically. Every manifest file uses at least two different UUIDs, or more if the pack has multiple `modules` (such as when adding scripts).
+**同じ UUID を 2 回使ってはいけません。** 自分で UUID を生成するには [ここ](https://www.uuidgenerator.net/version4) を使うか、VSCode を使っているなら [この](https://marketplace.visualstudio.com/items?itemName=netcorext.uuid-generator) 拡張機能を入れることもできます。`bridge.` など、UUID を自動生成するツールもあります。各マニフェストファイルでは少なくとも 2 つの異なる UUID を使います。複数の `modules` を持つパック（スクリプト追加時など）では、それ以上必要になります。
 
-To ensure that your add-on will work correctly you should generate two new UUID's which you will paste into the BP `manifest.json` file, at each `"..."`{lang=json}.
-When you are finished, it should look something like this:
+アドオンを正しく動かすために、BP の `manifest.json` の各 `"..."`{lang=json} に貼り付ける 2 つの新しい UUID を生成してください。
+完了すると、次のようになります。
 
 ```json
 "uuid": "5c830391-0937-44d6-9774-406de66b6984"
 ```
 
-## RP Manifest
+## RP マニフェスト
 
-The next step is to create the `manifest.json` for the RP.
-The format for a resource pack manifest is nearly identical to a BP manifest except that the module `type` is `"resources"`{lang=json}, which marks the pack as a _resource pack_.
-Additionally, we specify a `pack_scope` of `"world"`{lang=json} which prevents the pack from being activated outside of worlds.
+次の手順は、RP 用の `manifest.json` を作成することです。
+resource pack のマニフェスト形式は BP とほぼ同じですが、モジュールの `type` が `"resources"`{lang=json} になっており、これがそのパックが _resource pack_ であることを示します。
+さらに、`pack_scope` を `"world"`{lang=json} に指定して、ワールド外では有効化できないようにします。
 
-Copy the following code into your newly created `RP/manifest.json` and insert your own UUIDs.
+新しく作成した `RP/manifest.json` に次のコードをコピーし、自分の UUID を入れてください。
 
 <CodeHeader>RP/manifest.json</CodeHeader>
 
@@ -212,23 +212,23 @@ Copy the following code into your newly created `RP/manifest.json` and insert yo
 }
 ```
 
-## Pack Icon
+## パックアイコン
 
-The pack icon is an image file which identifies how your add-on will look in-game. If you have a low-resolution square image, you can use it. Otherwise, download and use this example icon:
+パックアイコンは、アドオンがゲーム内でどのように見えるかを示す画像ファイルです。低解像度の正方形画像があれば、それを使えます。なければ、このサンプルアイコンをダウンロードして使ってください。
 
 <WikiImage src="pack_icon.png" alt="Pack Icon" pixelated />
 
 <Button link="pack_icon.png" download>
-    Download Image
+    画像をダウンロード
 </Button>
 
-You should place a copy of your desired image into both the RP and the BP. The image needs to be named `pack_icon.png`
+使いたい画像のコピーを RP と BP の両方に置いてください。画像ファイル名は `pack_icon.png` にする必要があります。
 
-## Language Files
+## 言語ファイル
 
-The last thing to do is setup language support for your add-on.
-You will need to create a language file for both the RP and the BP (note that the BP translations are only used by the BP manifest, **all other translations such as item names go in the RP**).
-You can learn more about how Minecraft handles localization [here](/text/text-intro).
+最後に、アドオンの言語対応を設定します。
+RP と BP の両方に言語ファイルを作成する必要があります（BP の翻訳は BP マニフェストでのみ使われ、**アイテム名などその他すべての翻訳は RP に置きます**）。
+Minecraft のローカライズの仕組みについて詳しくは [ここ](/text/text-intro) を参照してください。
 
 <CodeHeader>RP/texts/en_US.lang</CodeHeader>
 
@@ -256,43 +256,43 @@ pack.description=A Ghostly Guide
 ["en_US"]
 ```
 
-## Checking Your Work
+## 作業の確認
 
-If you have done everything correctly, your packs should show up in Minecraft now! If you don't see your pack, you should follow the [troubleshooting guide](/guide/troubleshooting).
+すべて正しくできていれば、パックは Minecraft に表示されるはずです。パックが見えない場合は、[トラブルシューティングガイド](/guide/troubleshooting) を確認してください。
 
 ![](active_pack.png)
 
-## Enabling the Content Log
+## コンテンツログを有効にする
 
-:::warning Content Log
-Content log is the most useful tool you have for debugging your add-ons. Please do not skip this step!
+:::warning コンテンツログ
+コンテンツログは、アドオンのデバッグで最も役立つツールです。この手順は飛ばさないでください。
 :::
 
 ![](/assets/images/guide/content_log.png)
 
-Content Log is an extremely important debugging tool, which you should always have on.
+Content Log は非常に重要なデバッグツールなので、常に有効にしておくべきです。
 
-Turn on both content log settings in `Settings > Creator`.
-This will show you any errors in your add-on when you enter a world with it applied.
+`Settings > Creator` でコンテンツログの設定を両方ともオンにしてください。
+これにより、パックを適用したワールドに入ったときに、アドオン内のエラーが表示されます。
 
-You can open the content log GUI in-game by pressing `Ctrl + H` or by pressing `Content Log History` in the creator settings panel.
-Learn more about the content log [here](/guide/troubleshooting).
+ゲーム内では `Ctrl + H` を押すか、creator 設定パネルの `Content Log History` を押すことでコンテンツログの GUI を開けます。
+コンテンツログについて詳しくは [ここ](/guide/troubleshooting) を参照してください。
 
-## Creating Your Testing World
+## テスト用ワールドの作成
 
-Now we create a world to test your new add-on!
+ここで、新しいアドオンをテストするワールドを作成します。
 
-1. Click "**Create new world**";
+1. `**Create new world**` をクリックします。
 
-2. Now activate your behavior pack and your resource pack from the "Available" tab.
+2. その後、`Available` タブから behavior pack と resource pack を有効化します。
 
-3. Now click '**Create**'!
+3. `Create` をクリックします。
 
-## Overview
+## 概要
 
-**Here is how your project should look, after completing this page:**
+**このページを完了したら、プロジェクトは次のようになっているはずです。**
 
-Remember that in the future, we will represent `com.mojang/development_behavior_packs/guide_RP` as `RP`, and `com.mojang/development_behavior_packs/guide_BP` as `BP`.
+今後は `com.mojang/development_behavior_packs/guide_RP` を `RP`、`com.mojang/development_behavior_packs/guide_BP` を `BP` と表記します。
 
 <FolderView :paths="[
 	'com.mojang/development_behavior_packs/guide_BP/texts/en_US.lang',
@@ -305,28 +305,28 @@ Remember that in the future, we will represent `com.mojang/development_behavior_
 	'com.mojang/development_resource_packs/guide_RP/pack_icon.png',
 ]" />
 
-## What You Have Learned
+## 学んだこと
 
-:::tip What you have learned:
+:::tip 学んだこと:
 
--   What the `com.mojang` folder is, where it is and what folders it contains
--   How to setup your workspace
--   What a `manifest.json` file is
--   How to use UUIDs
--   How to create an icon for your add-on
--   What a `.lang` file is
-
-:::
-
-## Your Progress So Far
-
-:::tip What you have learned
-
--   [x] Set up your pack
--   [ ] Create a custom item
--   [ ] Create a custom entity
--   [ ] Create the entity's loot, spawn rules and a custom recipe
+-   `com.mojang` フォルダーが何で、どこにあり、何が入っているか
+-   ワークスペースの設定方法
+-   `manifest.json` ファイルとは何か
+-   UUID の使い方
+-   アドオン用アイコンの作り方
+-   `.lang` ファイルとは何か
 
 :::
 
-<Button link="/guide/custom-item">Next: Custom Item</Button>
+## ここまでの進捗
+
+:::tip ここまで学んだこと
+
+-   [x] パックをセットアップした
+-   [ ] カスタムアイテムを作成する
+-   [ ] カスタムエンティティを作成する
+-   [ ] エンティティのドロップ、スポーンルール、カスタムレシピを作成する
+
+:::
+
+<Button link="/guide/custom-item">次へ: カスタムアイテム</Button>

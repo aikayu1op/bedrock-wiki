@@ -6,15 +6,15 @@ mentions:
     - SirLich
     - solvedDev
     - MedicalJewel105
-description: Tips, tricks, and things you should know when modeling for Minecraft Bedrock Edition.
+description: Minecraft Bedrock Edition 向けのモデリングで知っておくべきコツや注意点です。
 ---
 
-This will guide tips, tricks, and things you should know when modeling for Minecraft Bedrock Edition.
+このページでは、Minecraft Bedrock Edition 向けのモデリングで知っておくべきコツや注意点を紹介します。
 
-## Texture Glitch
+## テクスチャの不具合
 
-Sometimes the texture on some (smaller) faces is glitched or invisible. This is because the size of cubes is floored for the UV map calculation. This means that any size smaller than 1 will result in a 0 pixel wide UV map, which will look glitchy. To prevent this, make sure all of your cubes are at least 1 unit long in each direction. To create smaller cubes, use the Inflate slider.
-Another trick to solve this if you _must_ have smaller textures is by **increasing the element size by 1 in each direction** and then **inflating the element by -1** though note that this will make you have smaller pixels textured incorrectly will lead to mixels.
+ときどき、いくつかの（小さな）面のテクスチャが壊れたり見えなくなったりします。これは、UV map 計算で cube のサイズが切り捨てられるためです。つまり、1 未満のサイズは 0 pixel 幅の UV map になり、見た目が崩れます。これを防ぐには、すべての cube の各方向の長さを少なくとも 1 unit にしてください。もっと小さな cube を作るには Inflate slider を使います。
+どうしても小さい texture が必要な場合の別の対処法は、**element のサイズを各方向に 1 だけ大きくしてから**、**element を -1 で inflate する**ことです。ただし、これをすると小さい pixel が正しく texture 化されず、mixel が発生します。
 
 ## Vertex Snap
 
@@ -22,9 +22,9 @@ Vertex snap is a handy tool in blockbench any modeler should use. It's beneficia
 You can find this tool right top next to the movement & scale tools. It has 2 modes, Move & Scale. How this tool works can be seen in the following gif.
 ![](vertex_snap.gif)
 
-## Transparency
+## 透明表現
 
-If you use semi-transparent textures (like colored glass), you need to move elements with that texture to the bottom of the element list. Otherwise, elements behind these semi-transparent ones won't render in-game.
+半透明の texture（色付きガラスなど）を使う場合、その texture を持つ element を element 一覧の下のほうに移動する必要があります。そうしないと、その半透明 element の背後にある element がゲーム内で描画されません。
 
 ## Texturing
 

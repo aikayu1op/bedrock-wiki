@@ -1,6 +1,6 @@
 ---
-title: Block Texture Variation
-description: Block texture variation is when a block type can have multiple textures that are randomly applied to the block based on its position in the world.
+title: ブロックのテクスチャ変種
+description: ブロックのテクスチャ変種とは、ブロックの位置に応じて複数のテクスチャがランダムに適用される仕組みです。
 category: Visuals
 tags:
     - intermediate
@@ -14,30 +14,30 @@ mentions:
 ---
 
 :::tip FORMAT VERSION 1.26.10
-When using texture variation with the [material instances](/blocks/block-components#material-instances) component, ensure that the `format_version` of your block JSON is 1.21.110 or higher.
+[material instances](/blocks/block-components#material-instances) コンポーネントとテクスチャ変種を使う場合、ブロック JSON の `format_version` が 1.21.110 以上であることを確認してください。
 :::
 
-Block texture variation is when a block type can have multiple textures that are randomly applied to the block based on its position in the world.
-This is useful for blocks such as gravel or grass, where some blocks may have slight variations, such as small rocks, and others don't.
+ブロックのテクスチャ変種とは、ブロックの位置に応じて複数のテクスチャがランダムに適用される仕組みです。
+これは、砂利や草のように、少しだけ違う見た目を持つブロックがある場合に便利です。たとえば、小さな石が付いているものと付いていないものがあります。
 
-**Issues:**
+**問題点:**
 
--   Variations referencing texture set files do not use the defined heightmap, MER or normal map files ([MCPE-126617](https://bugs.mojang.com/browse/MCPE-126617)).
+-   テクスチャセットファイルを参照する変種は、定義された heightmap、MER、normal map ファイルを使用しません ([MCPE-126617](https://bugs.mojang.com/browse/MCPE-126617))。
 
-## Applying Texture Variation
+## テクスチャ変種の適用
 
-To enable texture variations, create a `terrain_texture.json` file in your resource pack's `textures` folder.
+テクスチャ変種を有効にするには、リソースパックの `textures` フォルダに `terrain_texture.json` ファイルを作成します。
 
-This file contains a list of block textures to be included in the terrain [texture atlas](/concepts/texture-atlases).
-Variated atlas entries have a `variations` parameter which is an array of the different textures that will be randomly displayed on the block.
-Through use of the `weight` parameter, certain texture variations can be made more common than others ([see here](#weighted-texture-variation)).
+このファイルには、テクスチャアトラスに含めるブロックテクスチャの一覧が入ります。
+変種のある atlas 項目には `variations` パラメータがあり、これはブロックにランダム表示される複数のテクスチャの配列です。
+`weight` パラメータを使うと、あるテクスチャ変種を他よりも出やすくできます（[こちら](#weighted-texture-variation) を参照）。
 
-This is an example of how to create 3 texture variations for the vanilla gravel block:
+以下は、バニラの砂利ブロックに 3 つのテクスチャ変種を作る例です。
 
--   Create or modify three gravel textures, name them `gravel0.png`, `gravel1.png`, and `gravel2.png`.
--   Copy the `gravel0.png`, `gravel1.png` and `gravel2.png` files to the location specified by the `path` parameter.
-    This could contain additional folders if you want to be orderly.
--   Add the following to the `gravel` texture atlas entry:
+-   `gravel0.png`、`gravel1.png`、`gravel2.png` という 3 つの砂利テクスチャを作成または編集します。
+-   `gravel0.png`、`gravel1.png`、`gravel2.png` を `path` パラメータで指定された場所にコピーします。
+    整理しやすいように、追加のフォルダを含めてもかまいません。
+-   `gravel` テクスチャ atlas 項目に次を追加します。
 
 <CodeHeader>RP/textures/terrain_texture.json</CodeHeader>
 
@@ -57,11 +57,11 @@ This is an example of how to create 3 texture variations for the vanilla gravel 
 }
 ```
 
-## Weighted Texture Variation
+## 重み付きテクスチャ変種
 
-After using the example above, you might want to adjust the weights, edit the `terrain_texture.json` to include a weight field as shown below.
+上の例を使ったあとで重みを調整したくなったら、次のように `terrain_texture.json` に `weight` フィールドを追加します。
 
-To calculate how likely a texture variation is, add all of the weights together (in this case 70 + 20 + 10 = 100) and divide the weight by this total. For example, the probability of the `gravel0` variation being chosen is 70 &div; 100, so 70% of positions in the world will display `gravel0` if gravel is placed there.
+テクスチャ変種がどれくらい選ばれやすいかを計算するには、重みをすべて足し合わせ（この場合は 70 + 20 + 10 = 100）、その合計で重みを割ります。たとえば、`gravel0` 変種が選ばれる確率は 70 &div; 100 なので、ワールドの砂利の 70% の位置では `gravel0` が表示されます。
 
 <CodeHeader>RP/textures/terrain_texture.json</CodeHeader>
 

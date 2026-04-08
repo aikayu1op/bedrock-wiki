@@ -6,20 +6,20 @@ category: Tutorials
 mentions:
     - SirLich
     - MedicalJewel105
-description: Player's client entity files.
+description: プレイヤーのクライアントエンティティファイルです。
 ---
 
-This tutorial will show you how to create player NPCs and add them into your world. These player NPCs will take vanilla player skins, and come included with walk-animations, attack animations, etc.
+このチュートリアルでは、プレイヤー NPC を作成し、ワールドに追加する方法を紹介します。これらのプレイヤー NPC はバニラのプレイヤースキンを使い、歩行アニメーションや攻撃アニメーションなども含まれます。
 
-This tutorial is a _graphical_ tutorial. Mechanics are not covered.
+このチュートリアルは _見た目_ に関する内容です。仕組みの説明は扱いません。
 
 :::warning
 This will be a very json-heavy document. The json is intended for copy-pasting.
 :::
 
-## Geometry File
+## ジオメトリファイル
 
-This json contains geometry for both the Steve and Alex versions:
+この JSON には、Steve 版と Alex 版の両方のジオメトリが含まれています。
 
 `geometry.npc.steve`
 

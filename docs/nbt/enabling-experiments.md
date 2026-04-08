@@ -1,6 +1,6 @@
 ---
-title: Enabling Experiments by Editing NBT
-description: Learn how to enable experimental features in existing world by editing the level.dat file. This is useful when working with Minecraft Education and Bedrock Dedicated Servers.
+title: NBTを編集して実験機能を有効にする
+description: "`level.dat` ファイルを編集して、既存ワールドで実験機能を有効にする方法を学びます。Minecraft Education や Bedrock Dedicated Server で作業する際に便利です。"
 category: Tutorials
 tags:
     - intermediate
@@ -18,50 +18,50 @@ mentions:
 [string]: /assets/images/nbt/string.png
 [byte]: /assets/images/nbt/byte.png
 
-To enable experiments on an existing world, you can just use world settings in the game itself.
-However, on Minecraft Education and Bedrock Dedicated Servers it is not possible through the GUI or settings.
+既存のワールドで実験機能を有効にするには、ゲーム内のワールド設定を使えばよい場合があります。
+ただし Minecraft Education と Bedrock Dedicated Server では、GUI や設定からは有効化できません。
 
-Here's how you can manually enable experiments by editing the world's `level.dat` file.
+ここでは、ワールドの `level.dat` ファイルを編集して手動で実験機能を有効にする方法を説明します。
 
 :::info
-Minecraft Education is a variant of Bedrock Edition with some different features and limitations.
-For security reasons it doesn't allow you to enable experimental features from the game.
+Minecraft Education は Bedrock Edition の派生版で、いくつか異なる機能と制限があります。
+セキュリティ上の理由から、ゲーム内から実験機能を有効にすることはできません。
 :::
 
-## Editing NBT
+## NBT の編集
 
-:::warning BACKUPS
-Always make a backup of your data before editing NBT files!
+:::warning バックアップ
+NBT ファイルを編集する前に、必ずデータのバックアップを取ってください！
 
-Experimental features may not be compatible with every device and can cause your world to behave in unexpected way.
+実験機能はすべてのデバイスで互換性があるとは限らず、ワールドが予期しない動作をすることがあります。
 :::
 
-1. Find your world folder (located in `com.mojang`) or extract your `.mcworld`, `.mctemplate`
-2. Open the `level.dat` file with an NBT editor (NBT Studio for example)
-3. Select the first node, which is ![][structure] `level.dat`
-4. Create a new compound tag called ![][compound] `experiments` (if it doesn't already exist)
-5. Select the new node and create a new ![][byte] byte tag, with the value of 1 and with the name of the feature you need (see next section!)
-6. Finally, save the file and put it back in the world package or directory
+1. ワールドのフォルダ（`com.mojang` 内）を見つけるか、`.mcworld` / `.mctemplate` を展開します
+2. `level.dat` ファイルを NBT エディタ（たとえば NBT Studio）で開きます
+3. 最初のノード、つまり ![][structure] `level.dat` を選択します
+4. ![][compound] `experiments` という新しい compound タグを作成します（まだ存在しない場合）
+5. 新しいノードを選択し、値が 1 で、必要な機能名を持つ新しい ![][byte] byte タグを作成します（次の節を参照！）
+6. 最後にファイルを保存し、ワールドのパッケージまたはディレクトリに戻します
 
-## Experimental Features
+## 実験機能
 
-### Preview Only
+### プレビュー限定
 
-#### Add-On Creators
+#### アドオン制作者
 
-| Feature Name (In-Game)              | Feature Name (NBT)           |
+| ゲーム内の機能名              | NBT 上の機能名           |
 | ----------------------------------- | ---------------------------- |
 | Render Dragon Features for Creators | `deferred_technical_preview` |
 
 ### 1.21.120
 
-#### Gameplay
+#### ゲームプレイ
 
 | Feature Name (In-Game)     | Feature Name (NBT)          |
 | -------------------------- | --------------------------- |
 | Villager Trade Rebalancing | `villager_trades_rebalance` |
 
-#### Add-On Creators
+#### アドオン制作者
 
 | Feature Name (In-Game)               | Feature Name (NBT)             |
 | ------------------------------------ | ------------------------------ |
@@ -71,13 +71,13 @@ Experimental features may not be compatible with every device and can cause your
 
 ### 1.21.110
 
-#### Gameplay
+#### ゲームプレイ
 
 | Feature Name (In-Game)     | Feature Name (NBT)          |
 | -------------------------- | --------------------------- |
 | Villager Trade Rebalancing | `villager_trades_rebalance` |
 
-#### Add-On Creators
+#### アドオン制作者
 
 | Feature Name (In-Game)               | Feature Name (NBT)             |
 | ------------------------------------ | ------------------------------ |
@@ -88,14 +88,14 @@ Experimental features may not be compatible with every device and can cause your
 
 ### 1.21.100
 
-#### Gameplay
+#### ゲームプレイ
 
 | Feature Name (In-Game)     | Feature Name (NBT)          |
 | -------------------------- | --------------------------- |
 | Villager Trade Rebalancing | `villager_trades_rebalance` |
 | Drop 3 2025                | `y_2025_drop_3`             |
 
-#### Add-On Creators
+#### アドオン制作者
 
 | Feature Name (In-Game)               | Feature Name (NBT)             |
 | ------------------------------------ | ------------------------------ |
@@ -106,31 +106,31 @@ Experimental features may not be compatible with every device and can cause your
 | Data-Driven Jigsaw Structures        | `jigsaw_structures`            |
 
 :::tip
-Minecraft Education is usually one or two versions behind the classic Bedrock Edition, so you'll always know in advance which experimental features will be added to the stable gameplay and which will be modified or removed.
-Try to add only features that will persist over time if you want to use that world in your classroom.
+Minecraft Education は通常、通常版の Bedrock Edition より1〜2バージョン遅れています。そのため、どの実験機能が安定版のゲームプレイに追加され、どれが変更または削除されるのかを事前に把握できます。
+教室でそのワールドを使う予定があるなら、長期的に残る機能だけを追加するようにしてください。
 :::
 
-## Gallery
+## ギャラリー
 
-_(Add Byte Tag window)_
+_(Byte タグの追加ウィンドウ)_
 
 ![](byte-add-new.png)
 
-_(Below is, how your `experiments` compound structure might look like)_
+_(以下は、`experiments` compound 構造の見た目の例です)_
 
 ![](experiments-file.png)
 
-## Additional Tags
+## 追加タグ
 
-There are `experiments_ever_used` and `saved_with_toggled_experiments` byte tags,
-that appear automatically after the world is loaded with experiments enabled.
+`experiments_ever_used` と `saved_with_toggled_experiments` の byte タグがあります。
+これらは、実験機能を有効にした状態でワールドを読み込むと自動的に現れます。
 
-## Disabling Experiments
+## 実験機能の無効化
 
-:::danger UNSUPPORTED
-This is not officially supported and might lead to unintended consequences.
-For example, a world containing experimental blocks will have those blocks turn into "unknown" blocks.
-Backup your world!
+:::danger 非対応
+これは公式にはサポートされておらず、意図しない結果を招く可能性があります。
+たとえば、実験ブロックを含むワールドでは、それらのブロックが「unknown」ブロックに変わることがあります。
+ワールドをバックアップしてください！
 :::
 
-If you want to disable experiments, you can do so by removing its ![][byte] byte tag(s) from the ![][compound] `experiments` compound.
+実験機能を無効にしたい場合は、![][compound] `experiments` compound から ![][byte] byte タグを削除します。

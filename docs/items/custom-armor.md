@@ -1,7 +1,7 @@
 ---
-title: Custom Armor
+title: カスタムアーマー
 example: custom_armor
-description: Learn how to make a custom armor set.
+description: カスタムアーマーセットの作り方を学びます。
 category: Tutorials
 license: true
 mentions:
@@ -19,18 +19,18 @@ mentions:
     - QuazChick
 ---
 
-:::tip FORMAT VERSION 1.26.10
-This page assumes a basic understanding of custom items and attachables.
-Check out the [items guide](/items/items-intro) before starting!
+:::tip フォーマットバージョン 1.26.10
+このページでは、カスタムアイテムと attachable の基本を理解していることを前提にしています。
+始める前に [items guide](/items/items-intro) を確認してください。
 :::
 
-Making custom armors is surprisingly easy to do, although you need to do a bit of fiddling around as there are a few files that need to be added and there can be a little bit of texturing involved.
+カスタムアーマーの作成は意外と簡単ですが、追加が必要なファイルがいくつかあり、少しテクスチャ作業もあるため、多少の調整は必要です。
 
-## Armor Textures
+## アーマーテクスチャ
 
-Each set of custom armor will need four textures for item icons, as well as three separate textures that will be applied to the armor model when worn.
+各カスタムアーマーセットには、アイコン用の 4 枚のテクスチャと、装備時にアーマーモデルへ適用される 3 枚の別個のテクスチャが必要です。
 
-The first armor model texture (named `custom_1.png` here) is applied to the helmet, chestplate and boots whereas the second texture (named `custom_2.png` here) is applied to the leggings.
+1 枚目のアーマーモデル用テクスチャ（ここでは `custom_1.png`）はヘルメット、チェストプレート、ブーツに適用され、2 枚目のテクスチャ（ここでは `custom_2.png`）はレギンスに適用されます。
 
 <div style="display: grid; grid-template-columns: repeat(auto-fill, 256px); column-gap: 1em;">
 
@@ -44,30 +44,30 @@ The first armor model texture (named `custom_1.png` here) is applied to the helm
 
 </div>
 
-You'll also need to add each item icon to the [items texture atlas](/concepts/texture-atlases#items) using the `item_texture.json` file:
+また、`item_texture.json` を使って、各アイテムアイコンを [items texture atlas](/concepts/texture-atlases#items) に追加する必要があります。
 
 <ExampleFile path="RP/textures/item_texture.json" />
 
-## Custom Helmet
+## カスタムヘルメット
 
-### Item JSON
+### アイテム JSON
 
 <ExampleFile path="BP/items/custom_helmet.json" />
 
 ### Attachable JSON
 
-At this point your item would appear in-game and would be wearable but it would not have any appearance on the player's model.
+この時点でアイテムはゲーム内に表示され、装備もできますが、プレイヤーモデル上にはまだ見た目が反映されません。
 
-This appearance can be achieved by using a feature known as _attachables_, which visually _attach_ themselves to another entity based on its equipment.
-To start with, you'll need to create an `attachables` folder in your resource pack (you may already have one).
+この見た目は、_attachables_ という機能を使うことで実現できます。attachables は、装備内容に応じて別のエンティティに視覚的に _attach_ されます。
+まずは、resource pack に `attachables` フォルダを作成する必要があります（すでにあるかもしれません）。
 
-The attachable samples in this guide are largely based on the vanilla armor attachables, which have support for armor trims, enchantment glint and dedicated models for baby mobs.
+このガイドにある attachable サンプルは、主にバニラのアーマー attachable をベースにしています。これには、アーマートリム、エンチャントのきらめき、子モブ専用モデルのサポートがあります。
 
 <ExampleFile path="RP/attachables/custom_helmet.json" />
 
-### Item Name
+### アイテム名
 
-Finally, let's define the name of our item by adding a translation in the resource pack in the form `item.<identifier>=<name>`{lang=xml}.
+最後に、`item.<identifier>=<name>`{lang=xml} の形式で resource pack に翻訳を追加し、アイテム名を定義します。
 
 <CodeHeader>RP/texts/en_US.lang</CodeHeader>
 
@@ -75,13 +75,13 @@ Finally, let's define the name of our item by adding a translation in the resour
 item.wiki:custom_helmet=Custom Helmet
 ```
 
-If you now go into the game and check what you have produced you should be able to wear your helmet and pat yourself on the back for a job well done.
+ここまでできたら、ゲームに入って成果を確認してみましょう。ヘルメットを装備できるはずです。ここまでできれば上出来です。
 
 ![](inventory.png)
 
-## Custom Chestplate
+## カスタムチェストプレート
 
-### Item JSON
+### アイテム JSON
 
 <ExampleFile path="BP/items/custom_chestplate.json" />
 
@@ -89,7 +89,7 @@ If you now go into the game and check what you have produced you should be able 
 
 <ExampleFile path="RP/attachables/custom_chestplate.json" />
 
-### Item Name
+### アイテム名
 
 <CodeHeader>RP/texts/en_US.lang</CodeHeader>
 
@@ -97,9 +97,9 @@ If you now go into the game and check what you have produced you should be able 
 item.wiki:custom_chestplate=Custom Chestplate
 ```
 
-## Custom Leggings
+## カスタムレギンス
 
-### Item JSON
+### アイテム JSON
 
 <ExampleFile path="BP/items/custom_leggings.json" />
 
@@ -107,7 +107,7 @@ item.wiki:custom_chestplate=Custom Chestplate
 
 <ExampleFile path="RP/attachables/custom_leggings.json" />
 
-### Item Name
+### アイテム名
 
 <CodeHeader>RP/texts/en_US.lang</CodeHeader>
 
@@ -115,9 +115,9 @@ item.wiki:custom_chestplate=Custom Chestplate
 item.wiki:custom_leggings=Custom Leggings
 ```
 
-## Custom Boots
+## カスタムブーツ
 
-### Item JSON
+### アイテム JSON
 
 <ExampleFile path="BP/items/custom_boots.json" />
 
@@ -125,7 +125,7 @@ item.wiki:custom_leggings=Custom Leggings
 
 <ExampleFile path="RP/attachables/custom_boots.json" />
 
-### Item Name
+### アイテム名
 
 <CodeHeader>RP/texts/en_US.lang</CodeHeader>
 
@@ -133,26 +133,26 @@ item.wiki:custom_leggings=Custom Leggings
 item.wiki:custom_boots=Custom Boots
 ```
 
-## Result
+## 結果
 
-That's it, you now have a whole suit of custom armor to swagger around in!
-You can use this as a basis to make whatever other armor you want in the game.
+これで完了です。これで、堂々と歩き回れるカスタムアーマー一式が手に入りました。
+これを土台にして、ゲーム内で好きなほかのアーマーを作れます。
 
 ![An armor stand and a baby zombie both equipped with a full set of custom armor.](armor_stand.png)
 
-## Bonus - Making Set Effects
+## おまけ - セット効果を作る
 
-This is a bit more advanced but lets say you want your custom armor to act like it's a set from an RPG game. We can add some code to check if we have the set equipped and do some great stuff with it.
+これは少し応用的ですが、カスタムアーマーを RPG のセット装備のように動かしたいとします。その場合は、セットが装備されているかをチェックして、何か特別な処理を行うコードを追加できます。
 
-Note that for effects you can use `tick.json` and functions with hasitem selector argument to avoid using player.json.
+効果の処理には、`player.json` を使わずに `tick.json` と `hasitem` セレクター引数付きの関数を使うこともできます。
 
-In this example we will just add a chance to teleport the attacker somewhere nearby and put a blurb on the console for flavour.
+この例では、攻撃してきた相手を近くのどこかへテレポートさせる確率を追加し、演出用にコンソールへ一言出すだけにします。
 
-As we want this to trigger when the player is hit we need to add some logic to the `player.json` file. This is a huge file and we unfortunately need to make sure it has all the default content in there as well due to the way it will overwrite the default player components etc.
+これはプレイヤーが攻撃を受けたときに発動させたいので、`player.json` にいくつかのロジックを追加する必要があります。このファイルは非常に大きく、デフォルトのプレイヤーコンポーネントなどを上書きする都合上、既定の内容もすべて含める必要があります。
 
-So rather than include the whole `player.json` I will just include the parts you will need to add to your `components` and `events` sections. If you have no idea what the `player.json` is then look in the vanilla behavior pack and look for it and just copy it over into your project.
+そのため、`player.json` 全体は載せず、`components` と `events` セクションに追加する必要がある部分だけを示します。`player.json` が何か分からない場合は、バニラの behavior pack を見て探し、そのままプロジェクトへコピーしてください。
 
-So first of all lets put in the damage sensor component (which goes in your component section) which listens for when you take damage and lets you raise an event from it.
+まずは、ダメージを受けたときに反応し、そこからイベントを発火できる damage sensor コンポーネントを（components セクションに）追加します。
 
 <CodeHeader>BP/entities/player.json#components</CodeHeader>
 
@@ -205,10 +205,10 @@ So first of all lets put in the damage sensor component (which goes in your comp
 }
 ```
 
-As you can see from the comments, there is a lot there but really all we are doing is listening out for something then making sure we only filter the results we care about then relay on an event.
+コメントを見ると多く見えますが、実際にやっていることは、何かを検知し、必要な結果だけを絞り込み、イベントへ渡しているだけです。
 
-The event can be called anything but it is often better to have it more specific, in case you end up having multiple similar events etc., also it can help finding if you have multiple sections to it, i.e. I could search for "armour_sets" and find all events related to it.
-Then once you are done, in the same file we decide what we want to do with the event, which we put into our `events` section.
+イベント名は何でも構いませんが、似たイベントが複数できる場合に備えて、より具体的にしておく方がよいことが多いです。複数のセクションにまたがる場合の検索もしやすくなります。たとえば "armour_sets" で検索すれば、それに関連するイベントをすべて見つけられます。
+そして最後に、同じファイル内の `events` セクションで、そのイベントが起きたときに何をするかを決めます。
 
 <CodeHeader>BP/entities/player.json#events</CodeHeader>
 
@@ -243,6 +243,6 @@ Then once you are done, in the same file we decide what we want to do with the e
 }
 ```
 
-Thats it, you can rejig the bits how you see fit but ultimately you have all the pieces to apply effects to armor and check for if you have the whole set applied or check for other equipment.
+以上です。必要に応じて細部は調整できますが、これでアーマーに効果を適用したり、フルセット装備を確認したり、他の装備をチェックしたりするための部品は揃いました。
 
-You can also change the equipment checks from self to other and check if whoever is attacking you has something equipped or even check if you are attacking a sort of block/entity and do different effects based on that. We haven't touched on that directly here but there is a good enough starting point to get you on your way and let you be creative with things.
+装備チェックを self から other に変えて、攻撃してきた相手が何かを装備しているか確認することもできますし、ブロックやエンティティを攻撃しているかどうかで効果を変えることもできます。ここでは直接触れていませんが、これで十分な出発点にはなり、自由に工夫できるはずです。

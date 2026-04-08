@@ -1,6 +1,6 @@
 ---
 title: Project Setup Android
-description: Learn how to set up your project on Android devices.
+description: Android デバイスでのプロジェクト設定方法を学びます。
 category: Extra
 prefix: "f. "
 nav_order: 6
@@ -13,93 +13,93 @@ mentions:
     - QuazChick
 ---
 
-## Tools
+## ツール
 
-It is not easy to find good apps to make add-ons for android platform, but we tried our best and collected Google Play apps for you.
-For development on Android, you'll need a combination of 3 applications.
+Android 向けにアドオンを作るのに良いアプリを見つけるのは簡単ではありませんが、できる限り探して Google Play のアプリをまとめました。
+Android で開発するには、3 つのアプリを組み合わせる必要があります。
 
-1. A file manager that can create ZIP archives if your device is running Android 12 or newer.
-2. A code editor (any text editor will work, but only code editors will show syntax highlights).
-3. An image editor (no device comes with a editor that can go down to the pixels).
+1. デバイスが Android 12 以降なら ZIP アーカイブを作成できるファイルマネージャー。
+2. コードエディター（どんなテキストエディターでも動きますが、構文ハイライトが出るのはコードエディターだけです）。
+3. 画像エディター（ピクセル単位まで扱えるものは標準搭載されていません）。
 
-### File Managers
+### ファイルマネージャー
 
-These file managers are known to have ZIP archiving and view-only access to the `Android/data` folder:
+次のファイルマネージャーは、ZIP 圧縮と `Android/data` フォルダーへの閲覧専用アクセスに対応していることが確認されています。
 
-1. [**Zarchiver**](https://play.google.com/store/apps/details?id=ru.zdevs.zarchiver) - a versatile archive manager that supports a wide range of compression formats (ZIP, 7z, RAR, etc.) and allows users to create, extract, and manage compressed files. It features options for password-protected archives, partial archive extraction, and multi-threading for faster performance. On rooted devices or while using [**Shizuku**](https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api), Zarchiver can access and modify files in Android/data and system directories, making it ideal for advanced file management.
+1. [**Zarchiver**](https://play.google.com/store/apps/details?id=ru.zdevs.zarchiver) - 幅広い圧縮形式（ZIP、7z、RAR など）に対応した多機能アーカイブマネージャーで、圧縮ファイルの作成、展開、管理ができます。パスワード保護アーカイブ、部分展開、マルチスレッドによる高速処理にも対応しています。ルート化済み端末、または [**Shizuku**](https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api) 使用時には、Zarchiver から Android/data やシステムディレクトリ内のファイルを参照・変更できるため、高度なファイル管理に向いています。
 
-2. [**X-Plore**](https://play.google.com/store/apps/details?id=com.lonelycatgames.Xplore) - a powerful file manager with dual-pane tree view, a built-in text editor (not code), several file compression formats (ZIP, 7zip, RAR, etc.), and more. On rooted devices, X-Plore has edit access to `Android/data` and root directories.
+2. [**X-Plore**](https://play.google.com/store/apps/details?id=com.lonelycatgames.Xplore) - 2 ペインのツリー表示、内蔵テキストエディター（コード用ではない）、複数の圧縮形式（ZIP、7zip、RAR など）、その他の機能を備えた強力なファイルマネージャーです。ルート化済み端末では `Android/data` と root ディレクトリへの編集アクセスがあります。
 
-3. [**Total Commander**](https://play.google.com/store/apps/details?id=com.ghisler.android.TotalCommander) - not as powerful out of the box compared to X-Plore, but contains some of the same features including dual pane, ZIP and RAR archives, and view-only access to `Android/data`. Total Commander has list view instead of tree and many other features that require plugins (apps from Google Play) to use.
+3. [**Total Commander**](https://play.google.com/store/apps/details?id=com.ghisler.android.TotalCommander) - そのままでは X-Plore ほど多機能ではありませんが、2 ペイン表示、ZIP/RAR アーカイブ、`Android/data` への閲覧専用アクセスなど、同じような機能をいくつか備えています。Total Commander はツリーではなく一覧表示で、ほかの多くの機能は Google Play のプラグインアプリが必要です。
 
-### Code Editors
+### コードエディター
 
-1. **Acode:** [Free version](https://play.google.com/store/apps/details?id=com.foxdebug.acodefree) comes with ads that can be toggled off without paying. Supports GitHub integration using a Personal Access Token, FTP/SFTP, syntax highlighting for over 100+ languages including JSON, tab-view for multi-file editing, dozens of themes, and more. This app is open source and does have a [paid version](https://play.google.com/store/apps/details?id=com.foxdebug.acode) that allows a much deeper theme customization.
+1. **Acode:** [無料版](https://play.google.com/store/apps/details?id=com.foxdebug.acodefree) には広告がありますが、課金せずにオフにできます。Personal Access Token を使った GitHub 連携、FTP/SFTP、JSON を含む 100 以上の言語の構文ハイライト、複数ファイル編集用のタブ表示、多数のテーマなどに対応しています。このアプリはオープンソースで、より深いテーマカスタマイズが可能な [有料版](https://play.google.com/store/apps/details?id=com.foxdebug.acode) もあります。
 
 :::info
-Acode is the only powerful code editor actively being developed on Android at this time. Other editors are very limited or have been abandoned long enough to vanish from the Google Play store. If you know of a code application, you can contribute to this guide.
+Acode は、現時点で Android 上で継続的に開発されている、実用的なコードエディターとしてはほぼ唯一の存在です。ほかのエディターはかなり機能が限られているか、長らく放置されて Google Play から消えているものがほとんどです。コードアプリを知っているなら、このガイドに貢献できます。
 :::
 
-### Image Editors
+### 画像エディター
 
-1. [**Pocket Paint**](https://play.google.com/store/apps/details?id=org.catrobat.paintroid) - lightweight editor with the bare minimum features needed for any add-on creation. This app is easy to use and allows importing other images over others. Saves in JPG (compressed), PNG (lossless, with transparency), and ORA (multi-layer images). This app is open source.
-2. [**PixaPencil**](https://f-droid.org/en/packages/com.therealbluepandabear.pixapencil) - very lightweight, no ads or in app purchases. Plentiful tools and customizable brushes, ability to save palettes internally or externally although only available in F-droid, Allows for some easy quick textures.
-3. [**Pix2D**](https://play.google.com/store/apps/details?id=com.pix2d.pix2dapp) - a simple lightweight app. Would be the best if you need just to draw some texture-placeholder or edit some small textures and it does allow for making animations.
+1. [**Pocket Paint**](https://play.google.com/store/apps/details?id=org.catrobat.paintroid) - アドオン作成に必要な最小限の機能を備えた軽量エディターです。使いやすく、ほかの画像の上に別の画像を重ねて読み込めます。JPG（圧縮）、PNG（透明対応の非圧縮）、ORA（複数レイヤー）で保存できます。オープンソースです。
+2. [**PixaPencil**](https://f-droid.org/en/packages/com.therealbluepandabear.pixapencil) - 非常に軽量で、広告やアプリ内課金はありません。多彩なツールとカスタマイズ可能なブラシを備え、パレットを内部・外部のどちらにも保存できます。F-Droid でのみ利用可能ですが、手早いテクスチャ作成に向いています。
+3. [**Pix2D**](https://play.google.com/store/apps/details?id=com.pix2d.pix2dapp) - シンプルで軽量なアプリです。テクスチャのプレースホルダーを描いたり、小さなテクスチャを編集したりするだけなら最適でしょうし、アニメーション作成も可能です。
 
-## Your Workspace
+## 作業環境
 
 :::tip
-In this version of the guide, "BP" refers to your behavior pack folder and "RP" refers to your resource pack folder in your workspace. For locations in files or directories, `../<current location>` indicates "From last location" followed by the added space (e.g.: `/one/two/three/file.txt` would be shortened to `../three/file.txt`)
+この版のガイドでは、"BP" は作業環境内の behavior pack フォルダー、"RP" は resource pack フォルダーを指します。ファイルやディレクトリの場所について、`../<current location>` は「直前の場所から」を意味し、その後に追加の階層が続きます（例: `/one/two/three/file.txt` は `../three/file.txt` と短く表せます）。
 
-If your device is rooted or you have setup Shizuku, you can follow the main project setup using the `/Android/data/com.mojang.minecraftpe/files/games/com.mojang` [here](https://wiki.bedrock.dev/guide/project-setup) development behavior and resource pack folders directly. Otherwise, follow the steps below or Setup Shizuku.
+端末がルート化されているか、Shizuku を設定済みなら、メインのプロジェクト設定に従って `/Android/data/com.mojang.minecraftpe/files/games/com.mojang` [here](https://wiki.bedrock.dev/guide/project-setup) の development behavior/resource pack フォルダーを直接使えます。そうでない場合は、下の手順に従うか、Shizuku を設定してください。
 :::
 
-Before we begin, you need a workspace. Using your file manager, navigate to your Internal Storage (In most cases, it's `/`. In others, the full path (e.g.: `/storage/emulated/0/`) is displayed. Both are acceptable.) and create a folder that will contain your packs. For this example, our full directory is `/Minecraft Packs/MyFirstAddon`. From there, you'll need one folder for both your behavior and resource packs (e.g.: `../MyFirstAddon/addonBP` and `../MyFirstAddon/addonRP`).
+始める前に作業環境が必要です。ファイルマネージャーを使って内部ストレージへ移動し（多くの場合は `/`、ほかの場合は完全なパス、例: `/storage/emulated/0/` が表示されます。どちらでも構いません）、パックを入れるフォルダーを作成してください。ここでは、完全なディレクトリを `/Minecraft Packs/MyFirstAddon` とします。そこに behavior pack と resource pack 用の 2 つのフォルダーが必要です（例: `../MyFirstAddon/addonBP` と `../MyFirstAddon/addonRP`）。
 
-Now that you have the workplace setup, code editors should have a way for you to open a folder as a workplace. In this guide, we'll be walking through Acode.
+作業環境ができたら、コードエディターでフォルダーを開けるようにしておきましょう。このガイドでは Acode を使います。
 
-1. Open Acode.
-2. Tap the file browser button (3 bars in the top-left), followed by "Open folder"
-3. Tap "Add a storage", followed by "select folder"
-4. This should have opened your device's file browser. Navigate to the _main_ folder for your projects (for us, `/Minecraft Packs`) then tap "Use this folder". If your device asked you to allow Acode access, tap "Allow".
-5. You should be back in Acode now. Tap "OK" and your folder should now be in the list. Tap on it and then "Select Folder" on the bottom of the screen.
-6. Now when you open the file browser (3 bars in top-left), you should see your folder in the list. You now have quick access to your add-on's behavior and resource pack folders. The file browser uses tree view to display your active workspace.
+1. Acode を開きます。
+2. 左上の 3 本線のファイルブラウザボタンをタップし、`Open folder` を選びます。
+3. `Add a storage` をタップし、続けて `select folder` を選びます。
+4. 端末のファイルブラウザーが開いたら、プロジェクトの _親_ フォルダー（ここでは `/Minecraft Packs`）まで移動し、`Use this folder` をタップします。デバイスが Acode のアクセス許可を求めたら、`Allow` をタップします。
+5. Acode に戻ります。`OK` をタップするとフォルダーが一覧に追加されます。それをタップし、画面下部の `Select Folder` を押します。
+6. 以後、ファイルブラウザー（左上の 3 本線）を開くと、フォルダーが一覧に表示されます。これでアドオンの behavior pack と resource pack のフォルダーへすばやくアクセスできます。ファイルブラウザーはツリー表示でアクティブな作業環境を表示します。
 
 :::tip
-You can create new files and folders inside your packs from the file browser by tapping and holding on the folder you want to create the item in.
+ファイルブラウザーでフォルダーを長押しすると、その中に新しいファイルやフォルダーを作成できます。
 :::
 
 ## Shizuku
 
 :::tip
-Shizuku only works With Dev mode enabled and needs to be started after restart.
-You also need Android 11 or higher for Shizuku to work.
+Shizuku は Dev mode を有効にした状態でのみ動作し、再起動後に起動し直す必要があります。
+また、Shizuku を使うには Android 11 以上が必要です。
 :::
 
-This Section is optional.
-if you want to be able to use development folders without rooting your device then Shizuku might help you Shizuku allows you to write to Android/data if it's running and your using a supported file manger like [**Zarchiver**](https://play.google.com/store/apps/details?id=ru.zdevs.zarchiver).
+このセクションは任意です。
+端末を root 化せずに開発用フォルダーを使いたい場合、Shizuku が役立つかもしれません。Shizuku が動作していて、[**Zarchiver**](https://play.google.com/store/apps/details?id=ru.zdevs.zarchiver) のような対応ファイルマネージャーを使っていれば、Android/data へ書き込めます。
 
-To setup it app first enable developer mode this process differs from phone to another
+まずアプリを設定します。最初に開発者モードを有効にしてください。この手順は機種によって異なります。
 
-open dev options and enable USB debug and wireless debugging
-open Shizuku Click Pairing
+開発者向けオプションを開き、USB デバッグとワイヤレスデバッグを有効にします。
+Shizuku を開き、`Pairing` を押します。
 Developer options
-scroll down untill you see wireless debugging enable it and then click on it
-click pair with code and enter the code in the notification.
+下へスクロールしてワイヤレスデバッグを見つけ、有効にしてからそれをタップします。
+`pair with code` を押し、通知に表示されたコードを入力します。
 
-Now start Shizuku.
+これで Shizuku を起動してください。
 
-## BP & RP Manifests
+## BP と RP のマニフェスト
 
 :::warning
-From here on out, all files and folders have very specific names unless otherwise noted. Wrongly named files and/or folders are a common reason of an error. Please ensure you're checking your work carefully in accordance to the examples provided. If a file or folder mentioned has not yet been created, please create it in it's appropriate directory.
+ここから先は、特に明記がない限り、すべてのファイルとフォルダーに厳密な名前があります。名前の間違いは、よくあるエラーの原因です。提示された例に従って、作業内容を丁寧に確認してください。まだ作成していないファイルやフォルダーがある場合は、適切な場所に作成してください。
 
-When creating a new file in a file manager or some text or code applications, the `.txt` extension is added automatically to the end of the file name. To ensure our files work as intended, be sure to remove `.txt`. Like names, the wrong file extension is also a common reason of an error. If you're using Acode, you'll notice `untitled.txt` is completely highlighted instead of just `untitled`. This is a common practice for naming programming language files.
+ファイルマネージャーや一部のテキスト／コードアプリで新規ファイルを作ると、ファイル名の末尾に `.txt` が自動で付けられることがあります。意図どおりに動作させるには、この `.txt` を必ず削除してください。ファイル名と同じく、拡張子の間違いもよくあるエラーの原因です。Acode を使っている場合、`untitled.txt` は `untitled` だけでなく全体がハイライトされます。これはプログラミング用ファイル名の一般的な扱いです。
 :::
 
-The manifest file is the file Minecraft uses to identify your packs. Every pack has one (and only one) manifest. A folder with a correctly formatted manifest will show up in Minecraft. Before we begin adding content, we will ensure our "minimal" pack is visible. Manifests are written in the `JSON` programming language. If you're unfamiliar with JSON, you can learn more about it [here](/guide/understanding-json).
+マニフェストファイルは、Minecraft がパックを識別するために使うファイルです。各パックには 1 つだけマニフェストがあります。正しく書式設定されたマニフェストを持つフォルダーは Minecraft に表示されます。追加コンテンツを入れる前に、まず「最小構成」のパックが表示されることを確認しましょう。マニフェストは `JSON` で書かれています。JSON に馴染みがない場合は、[ここ](/guide/understanding-json) で詳しく学べます。
 
-Create a new text file in your add-on's behavior pack folder called `manifest.json`. To begin, copy and paste the following code into the `manifest.json` file. A full breakdown of the manifest file is provided after creating these files.
+アドオンの behavior pack フォルダーに `manifest.json` という新しいテキストファイルを作成してください。まず、次のコードを `manifest.json` にコピーして貼り付けます。マニフェストファイルの詳細は、ファイル作成後に解説します。
 
 <codeHeader>BP/manifest.json</codeHeader>
 
@@ -123,7 +123,7 @@ Create a new text file in your add-on's behavior pack folder called `manifest.js
 }
 ```
 
-Now create another `manifest.json` file in your add-on's resource pack folder. Again, copy and paste the following code inside the new file.
+次に、resource pack フォルダーにも別の `manifest.json` ファイルを作成します。ここでも、次のコードを新しいファイルにコピーして貼り付けます。
 
 <codeHeader>RP/manifest.json</codeHeader>
 
@@ -147,37 +147,37 @@ Now create another `manifest.json` file in your add-on's resource pack folder. A
 }
 ```
 
-## Manifest Breakdown
+## マニフェストの内訳
 
--   `format_version` defines the version the syntax your manifest is written in. Version 2 is the most recent stable version. Always use this version.
--   `name` is name of your pack. We will be defining the this in "code form" later so they can easily be translated into other languages, should you create a pack with multiple languages.
--   `description` is a short description about your pack that will show up under the `name` in-game. This will also be defined later in "code form".
--   `uuid` is required to help identify your pack from other packs and will have a breakdown of it's own below. Once explained, you'll need to replace all of the `...` with them.
--   `version` is literally the version of your add-on. Upon completing your add-on, you can always change this to `[1, 0, 0]`. However, it'll be easier to use the hotfix spot while making your changes on mobile.
--   `min_engine_version` tells Minecraft what the minimum version it needs to be in order for your pack to work. For example, if your pack has a crafting recipe that involves concrete, your pack can't run on Minecraft 1.5 because concrete doesn't exist in that version.
--   Under `modules`, you have the `type` field. This tells Minecraft what your pack is. So `data` in your BP tells the game that pack is a behavior pack and `resources` in your RP tells the game that pack is a resource pack.
+-   `format_version` は、マニフェストが書かれている構文のバージョンを定義します。Version 2 が最新の安定版です。必ずこれを使ってください。
+-   `name` はパックの名前です。後で他の言語に翻訳しやすいように、これらを後で「コード形式」で定義します。
+-   `description` は、ゲーム内で `name` の下に表示される短い説明です。これも後で「コード形式」で定義します。
+-   `uuid` は、ほかのパックから自分のパックを識別するために必要です。後で詳しく説明します。説明後は、`...` を UUID に置き換えてください。
+-   `version` は、文字どおりアドオンのバージョンです。アドオンを完成させたら、いつでも `[1, 0, 0]` に変更できます。ただし、モバイルで変更を加える間はホットフィックス用の番号を使うほうが簡単です。
+-   `min_engine_version` は、パックが動作するために必要な Minecraft の最小バージョンを示します。たとえば、コンクリートを含むクラフトレシピがある場合、その版にコンクリートが存在しない Minecraft 1.5 では動作しません。
+-   `modules` の下にある `type` フィールドは、Minecraft にそのパックの種類を伝えます。BP の `data` は behavior pack を、RP の `resources` は resource pack を意味します。
 
-## UUID Breakdown
+## UUID の内訳
 
-A UUID, or **U**niversally **U**nique **ID**entifier, both identifies your pack for other programs (Minecraft, for example) and separates your pack from someone else's pack for the program it's for. A version 4 UUID (UUID-4) is usually in the format `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` and made of a random string of letters and numbers. For example: `5c830391-0937-44d6-9774-406de66b6984`.
+UUID は **U**niversally **U**nique **ID**entifier の略で、Minecraft などのプログラムにパックを識別させたり、ほかのパックと区別したりするためのものです。Version 4 UUID（UUID-4）は通常 `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` という形式で、英数字のランダムな文字列から作られます。たとえば `5c830391-0937-44d6-9774-406de66b6984` です。
 
-You should **NEVER** use the same UUID twice! Use the [Online UUID Generator Tool](https://www.uuidgenerator.net/version4) to generate the UUID's needed for your manifest files. Every manifest file uses two different UUID's. So to ensure your packs will work correctly, get 4 different UUID's to replace all of the `...` in both manifests. When finished, each UUID entry should look similar like this: `"uuid": "5c830391-0937-44d6-9774-406de66b6984`
+**同じ UUID を 2 回使ってはいけません。** マニフェストに必要な UUID は [Online UUID Generator Tool](https://www.uuidgenerator.net/version4) で生成できます。各マニフェストには 2 つずつ異なる UUID が必要です。したがって、両方のマニフェストの `...` を置き換えるために、合計 4 つの異なる UUID を用意してください。完了したら、各 UUID エントリは次のようになります。`"uuid": "5c830391-0937-44d6-9774-406de66b6984`
 
-## Pack Icon
+## パックアイコン
 
-Notice how other packs have a icon? It's a image file which can quickly identify how your add-on will appear in-game. Got a low-resolution square image as a PNG? You can use it! Otherwise, you can use this example icon.
+ほかのパックにアイコンがあるのを見たことがありますか？ それは、アドオンがゲーム内でどう見えるかをすばやく見分けるための画像ファイルです。低解像度の正方形 PNG 画像を持っていますか？ それなら使えます。なければ、このサンプルアイコンを使ってください。
 
 <WikiImage src="/assets/images/guide/project-setup/pack_icon.png" alt="Pack Icon" pixelated />
 
 <Button link="/assets/images/guide/project-setup/pack_icon.png" download>
-    Download Image
+    画像をダウンロード
 </Button>
 
-You must place a copy of your desired image in both the behavior and resource packs. In order for the image to be read correctly, the name must be `pack_icon.png`.
+使いたい画像のコピーを behavior pack と resource pack の両方に置く必要があります。画像が正しく読み込まれるように、ファイル名は `pack_icon.png` にしてください。
 
-## Language Files
+## 言語ファイル
 
-Remember when we said we'll define the pack name and description in code form earlier? Now is that time as it's the last thing we need to do to setup your add-on. You will need to create 4 new files and 2 new folders (2 files and 1 folder for each pack). You can You can learn more about how Minecraft handles localization [here](/text/text-intro). You can also format your definitions using the `§` symbol. You can view a list of colors and formats [here](https://htmlcolorcodes.com/minecraft-color-codes/). If you use any formatting, make sure you `§r`eset when changing formats: `§kl My pack l` will render "My pack" unreadable whereas `§kl §rMy pack §kl` can be read properly.
+以前、パック名と説明をコード形式で定義すると言いましたよね。今がそのときです。アドオンのセットアップに必要な最後の作業だからです。新しいファイルを 4 つ、フォルダーを 2 つ作成する必要があります（各パックにつきファイル 2 つとフォルダー 1 つ）。Minecraft のローカライズの扱いについては [ここ](/text/text-intro) で詳しく学べます。定義には `§` 記号を使って書式を付けることもできます。色と書式の一覧は [ここ](https://htmlcolorcodes.com/minecraft-color-codes/) で確認できます。書式を使う場合は、切り替えの際に必ず `§r` でリセットしてください。たとえば `§kl My pack l` は「My pack」を読めなくしますが、`§kl §rMy pack §kl` なら正しく読めます。
 
 <codeHeader>BP/texts/en_US.lang</codeHeader>
 
@@ -205,50 +205,50 @@ pack.description=This add-on is made by a Wiki Contributor!
 ["en_US"]
 ```
 
-## Importing Your Add-on
+## アドオンのインポート
 
-Now that your add-on has all of the required content, we need to import it to Minecraft. To do this, we need to create a file with the extension `.mcaddon`.
+必要なコンテンツがすべて揃ったので、Minecraft にインポートします。そのために、拡張子が `.mcaddon` のファイルを作成します。
 
-1. Open your preferred file manager and navigate to the folder containing your behavior and resource packs.
-2. Using multi-select, select both packs and create a ZIP file.
-3. When asked for the name of the file, ensure that `.zip` is changed to `.mcaddon`.
+1. お好みのファイルマネージャーを開き、behavior pack と resource pack が入っているフォルダーへ移動します。
+2. 複数選択で両方のパックを選び、ZIP ファイルを作成します。
+3. ファイル名を聞かれたら、`.zip` を `.mcaddon` に変更してください。
    ![](zip-addon.png)
-4. When your file manager finishes, it should be a `MCADDON` file with Minecraft as it's icon. Tapping on this file should launch Minecraft.
+4. ファイルマネージャーの処理が終わると、Minecraft のアイコンが付いた `MCADDON` ファイルになります。このファイルをタップすると Minecraft が起動します。
 
-If done correctly, Minecraft will display a banner for both packs. First is `Importing...`. After should be `Successfully imported "<your pack name>"`. You can also go to `Settings > Storage` if you don't see the import messages to verify your packs were imported. If you do not see either pack, check out our [troubleshooting guide](/guide/troubleshooting).
+正しくできていれば、Minecraft に両方のパックのバナーが表示されます。最初に `Importing...`、その後に `Successfully imported "<your pack name>"` が表示されます。インポートメッセージが見えない場合は、`Settings > Storage` で確認することもできます。どちらのパックも見えない場合は、[トラブルシューティングガイド](/guide/troubleshooting) を確認してください。
 
-## Turn on Content Log
+## コンテンツログをオンにする
 
 :::warning
-Content log is the most useful tool you have for debugging your add-ons. Please do not skip this step.
+コンテンツログは、アドオンのデバッグで最も役立つツールです。この手順は飛ばさないでください。
 :::
 
 ![](/assets/images/guide/content_log.png)
 
-Content Log is an extremely important debugging tool, which you should always have on.
+Content Log は非常に重要なデバッグツールなので、常にオンにしておくべきです。
 
-Turn on both content log settings in `settings > creator`. This will show you any errors in your add-on when you enter a world with it applied. You can also open the content log GUI in-game by pressing `ctrl+h`. Learn more about the content log [here](/guide/troubleshooting).
+`settings > creator` でコンテンツログの設定を両方ともオンにしてください。これにより、パックを適用したワールドに入ったときに、アドオン内のエラーが表示されます。ゲーム内では `ctrl+h` を押すことでコンテンツログ GUI を開けます。コンテンツログについて詳しくは [ここ](/guide/troubleshooting) を参照してください。
 
-## Creating Your Testing World
+## テスト用ワールドの作成
 
-Now we create a world to test your new add-on!
+ここで、新しいアドオンをテストするワールドを作成します。
 
-1. Click "**Create new world**";
+1. `**Create new world**` をクリックします。
 
-2. Ensure that the following settings are set.
+2. 次の設定になっていることを確認します。
 
     ![](/assets/images/guide/project-setup/settings_1.png)
     ![](/assets/images/guide/project-setup/settings_2.png)
 
-3. Now activate your behavior pack, and your resource pack. You can do this by selecting the packs, and clicking 'apply'.
+3. それから behavior pack と resource pack を有効化します。パックを選んで `apply` をクリックしてください。
 
-4. Now click '**Create**'!
+4. `**Create**` をクリックします。
 
-## Final Notes
+## 最後に
 
-**Here is how your project should look, after completing this page:**
+**このページを完了したら、プロジェクトは次のようになっているはずです。**
 
-Remember that in future, we will represent `com.mojang/development_behavior_packs/guide_RP/` as `RP`, and `com.mojang/development_behavior_packs/guide_BP/` as `BP`.
+今後は `com.mojang/development_behavior_packs/guide_RP/` を `RP`、`com.mojang/development_behavior_packs/guide_BP/` を `BP` と表記します。
 
 <FolderView :paths="[
 	'com.mojang/development_resource_packs/guide_RP/manifest.json',
@@ -261,22 +261,22 @@ Remember that in future, we will represent `com.mojang/development_behavior_pack
 	'com.mojang/development_behavior_packs/guide_BP/texts/languages.json',
 ]" />
 
-## What You Have Learned
+## 学んだこと
 
-:::tip What you have learned:
+:::tip 学んだこと:
 
--   What and where your `com.mojang` folder is and what it contains
--   How to setup your mobile workspace
--   What a `manifest.json` file is
--   What are UUID's and how to use them
--   How to create icons for your add-ons
--   What a `.lang` file is
+-   `com.mojang` フォルダーが何で、どこにあり、何が入っているか
+-   モバイル用ワークスペースの設定方法
+-   `manifest.json` ファイルとは何か
+-   UUID とは何か、どう使うか
+-   アドオン用アイコンの作り方
+-   `.lang` ファイルとは何か
 
 :::
 
-## Your Progress So Far
+## ここまでの進捗
 
--   [x] Setup your pack
--   [ ] Create a custom item
--   [ ] Create a custom entity
--   [ ] Create a custom block
+-   [x] パックをセットアップした
+-   [ ] カスタムアイテムを作成する
+-   [ ] カスタムエンティティを作成する
+-   [ ] カスタムブロックを作成する

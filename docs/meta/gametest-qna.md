@@ -10,365 +10,272 @@ mentions:
     - Herobrine643928
 ---
 
-This Q&A took place in the [Bedrock Add-Ons discord](https://discord.gg/NGeNhZpvzV). Five Microsoft employees joined us to answer questions about the Gametest framework. Questions were community sourced.
+この Q&A は [Bedrock Add-Ons discord](https://discord.gg/NGeNhZpvzV) で行われました。Microsoft の社員 5 名が GameTest framework についての質問に答えました。質問はコミュニティから集められたものです。
 
-_warning:_ Not all messages were copied over, and some were copy-edited. If you want to see everything, join the above discord, and get the "events archive" role.
+_warning:_ すべての発言がそのまま転記されているわけではなく、一部は文面を整えています。
 
 ## Realms
 
--   **Q**: Is Gametest designed to work on Realms?
+-   **Q**: GameTest は Realms で動くように設計されていますか？
+-   **A**: はい。
 
--   **A**: Yes
+## QuickJS と V8
 
-## QuickJS Vs. V8
+-   **Q**: V8 などほかの JS 実装ではなく QuickJS を選んだ理由は？ QuickJS はかなり遅く、主に JIT がないのが大きな欠点です。
+-   **A**: いくつかのメンバーは過去のプロジェクトで QuickJS を使っていて、統合がとても簡単でした。V8 なども検討しており、将来的には移行するかもしれません。JIT は魅力的ですが、すべてのプラットフォームが簡単に、あるいはまったく対応しているわけではありません。
 
--   **Q**: What were the reasons for choosing QuickJS over other JS choices like V8? QuickJS is much slower (mostly because it lacks JIT) and in some communities that is a big con to using it
+## ファイル / ネットワークアクセス
 
--   **A**: A few of us have used QuickJS in past projects and its very easy to integrate. We have looked at V8 (and others) and we may move to them in the future. JIT is very desirable but not all platforms support it (easily, or at all).
+-   **Q**: GameTest に file や network の interface はありますか？
+-   **A**: scripting API は最初は制限を保ち、機能を徐々に増やしていきたいと考えています。file や network API は権限やゲーム所有者の同意が必要になるので、デフォルト API には入らない可能性が高いですが、将来的には追加するかもしれません（サーバー所有者向けなど）。
+-   **Q**: そういう interface は、利用可能なプラットフォームの一部でしか実装されないのでしょうか？
+-   **A**: すべての API をすべてのプラットフォームで実装することを目指しています。例外は、editor 専用 API のような desktop 限定機能を導入する場合くらいです。
 
-## File & Network access
+## スラッシュコマンド
 
--   **Q**: Would there be a file or network interface for gametest?
+-   **Q**: カスタム slash command を登録できるのはいつですか？
+-   **A**: 具体的な時期はまだありませんが、かなり優先度の高い項目です。
+-   **A**: みんなが自分で `!commands` を作り始めた時点で、必要性はかなり明らかでした。
 
--   **A**: We want to default to keeping the scripting APIs more limited and add functionality over time. File and network APIs would require privileges and likely consent by the game owner, so those probably won't be in the default set of APIs, but we may add those capabilities down the road (e.g., potentially for server owners)
+## バニラのテスト
 
--   **Q**: So such interface will only be implemented on part of all available platforms?
+-   **Q**: いまは GameTest framework を使って Vanilla Behavior pack をテストしていますか？ あるいは、自分たちのコンテンツに testing API をどのように使っていますか？
+-   **A**: はい。今は vanilla コンテンツ向けのテストがたくさんありますし、今後も増やしていきたいです。public build には `vanilla_gametest` として一部のテストも同梱しています。
+-   **A**: 長期的には、コミュニティにも GameTest を使って vanilla のバグを報告してもらえれば嬉しいです。修正後にそのテストを取り込み、同じ問題を再発させないようにできます🙂
 
--   **A:** We strive to implement all APIs across all platforms. The only exception would be if we introduce some editor specific APIs that may be desktop only.
+## タイムライン
 
-## Slash Commands
+-   **Q**: 次にどんな event を API に入れる予定か、タイムラインはありますか？
+-   **A**: どの event を次に追加するかはまだ検討中で、共有できる具体的なタイムラインはあまりありません。どの event を追加してほしいですか？
+-   **A**: block の破壊や配置が高優先度なのは確かにそうです。
 
--   **Q:** when are we able to register custom slash commands?
+## GameTest の政治的な背景
 
--   **A:** While we don't have a concrete timeline, this is high up in our list of things to build.
+-   **Q**: GameTest API がうまく育ったのに、元の Scripting API がそうならなかったのは、技術的・構造的・政治的にどんな理由があったのでしょう？ 今回「何を変えた」のか話せますか？ さらに、GameTest が「成功」と見なされるには何が必要ですか？ それを手伝うために、私たちにできることはありますか？
+-   **A**: 今はまず、対象とするシナリオに絞って進めています。content testing と validation から始めていて、これは core Minecraft だけでなく、Minecraft の custom content にももっと必要な領域です。開発者が自分のコンテンツに対してテストを組み立てやすくしたいと強く考えています。この用途は要件も比較的限られています（たとえば、対応プラットフォームを少なくできる、性能の問題がそこまで大きくない、など）。だから GameTest に集中していて、成功のためには creators が自分のものを簡単にテストできることが重要だと考えています。
+-   **A**: もちろん、将来的には gameplay を含めてもっと多くのシナリオに広げられる可能性はあります。ただし、性能や対応プラットフォームの拡大、フィードバックへの対応がもう少し固まるまでは、gameplay 用の scripting/gametest API に期待を持たせすぎたくありません。
+-   **A**: それを手伝うには何ができますか？ -> 改善提案や新機能の要望をこれからも送ってください🙂 creator community がすべての原動力です。
 
--   **A:** It was pretty clear that we need this when people started making their own !commands
+## コンソール
 
-## Testing Vanilla
+-   **Q**: なぜ console では gametest を実行できないのですか？ 将来的に console は gametest API をサポートしますか？
+-   **A**: はい。すべてのプラットフォームをサポートする計画です。いくつかのプラットフォームでは JS engine が必要とする API が足りず、そのひとつが `aligned_alloc` でした。今、そのプラットフォームを有効化する作業を進めています。
 
--   **Q:** Are you currently using GameTests framework to test the Vanilla Behavior pack? Or, in what ways are you utilizing the testing API on your own content?
+## 追加言語
 
--   **A:** Yes! We have lots of tests for vanilla content right now and want to expand that to more and more over time. We actually ship some of the tests we have for vanilla content in our public builds (vanilla_gametest).
+-   **Q**: gametest はほかの言語もサポートしますか？
+-   **A**: binding layer は、ほかのプログラミング / scripting 言語にも対応できるように汎用的に作っています。内部では Lua や Blockly のようなもので遊んだこともあります。ただ、現時点で公式にほかの言語をサポートすると約束はできません🙂
+-   **Q**: Kotlin は考えましたか？
+-   **A**: Kotlin はまだあまり調べていません（Android 側は今も Java です🙂）が、面白そうです。少し見てみます。
 
--   **A:** Ideally, over time, the community would also help us by using GameTest to report bugs with vanilla and we could incorporate those tests (once we fix the issue) and make sure we don't break that stuff again 🙂
+## event system
 
-## Timeline
+-   **Q**: data-driven 側にも event system があります。GameTest framework の event system と data-driven の event system の関係はどう考えていますか？ 将来的に両者の間に interface はできますか？
+-   **A**: 2 つのシステムがうまく連携することを目指しています。data-driven に慣れているなら、その中に自然な形で script を差し込めるようにしたいです。具体的な形はまだ詰めているところです。
 
--   **Q:** Could we get a timeline of what events are planned for the API next?
+## NOT リストに何かある？
 
--   **A:** Our team is still deciding which events to add next so there isn't much of a timeline we can share. Which events would you like to see added?
+-   **Q**: これまで話し合って、明確に実装しないと決めたものはありますか？ サポートしない端末や、API の方向性として取りたくないものなど、なんでも構いません。
+-   **A**: 良い質問です。絶対にやらないものはあまり多くありません。
+-   **A**: ただし、次のものは慎重に扱います。
 
--   **A:** Definitely agree with block breaking/placing being a high priority
+    -   ネットワークアクセス
+    -   ファイルアクセス
+    -   プラットフォーム固有 API
 
-## Politics of GameTests
-
--   **Q:** What technical, structural, or political reasons has allowed GameTests API to flourish, while the original Scripting API has not? Can you talk about "what you did different" this time? Additionally, what needs to happen for GameTest to be considered "successful" (and therefore not abandoned). Is there anything we can do to help with that?
-
--   **A:** In general we're trying to be pretty focused on the scenarios we're targeting, starting with content testing and validation which we can always use more of not just for core Minecraft but also for custom content in Minecraft. We really want to make it simpler for folks to scaffold and build tests around their content. That scenario also has more limited requirements (e.g., we can be on fewer platforms, perf is not as much an issue, etc.) So, we are focused on GameTest and for that to be successful we'd want to see that it's easy for content creators to test their stuff.
-
--   **A:** Of course, we do see the potential for more scenarios down the road - including gameplay - but we really don't want to get anyone's expectations high (or have people take a bet on scripting/gametest APIs for gameplay) until we have a bit more validation on things like perf, and getting support for more platforms, and responding to your feedback as well.
-
--   **A:** RE: Is there anything we can do to help with that? - Keep engaging with us on improving and adding new stuff! 🙂 The creator community is the driver for all of this.
-
-## Consoles
-
--   **Q:** What is the reason that consoles cannot run gametests, and will consoles eventually support the gametest API in the future?
-
--   **A:** Yes! we plan to support all our platforms, a couple of platforms didn't have all the API's our JS Engine Required, aligned_alloc was one. We are actively working on enabling those platforms.
-
-## Additional Languages
-
--   **Q:** Will there be any support for gametests to support different languages?
-
--   **A:** We've implemented the binding layer generically enough to fit into other programming/scripting languages. Internally we've done some fun things like play around with Lua and even something like Blockly. I don't think we can commit to adding any official support for other languages at the moment though 🙂
-
--   **Q:** Have you considered Kotlin
-
--   **A:** I haven't looking into Kotlin much (all of our Android platform is still written in Java 🙂 ) but that sounds sweet! I'll take a peak some time.
-
-## Event System
-
--   **Q:** Seeing there is also an event system in data-driven. How do you position the relationship between the event system in the gametest framework and the event system in data-driven? Will an interface between the two be provided in the future?
-
--   **A:** We want the systems to play well together. If you're familiar with building with data driving , we'd like you to be able to sprinkle in script in a way that makes sense. We're still working out exactly what that looks like.
-
-## Anything in our NOT list?
-
--   **Q:** Can you share anything from your 'Not List' (things you've discussed, and decided unilaterally NOT to implement)? This could be certain devices you won't support, or certain directions you don't want to take the API. Pretty much anything off the table.
-
--   **A:** Great question. There's little in our list of "absolutely not" list.
-
--   **A:** Here are some things in our "use extreme caution" list:
-
-    -   Network access
-    -   File access
-    -   Platform specific APIs
-
--   **A:** Network access is something that we might allow through very structured APIs to specific targets. Same with files: we will likely have some kind of persistent storage, but not free form files.
-
--   **A:** Platform specific APIs are something we'd like to avoid. But we can imagine implementing desktop specific APIs for editor scenarios. We'd avoid that for gameplay and gametest scenarios.
-
--   **A:** Another thing that I'd love to expose that is super hard is custom shaders. PlayStation requires that shaders are built into the submission. So we'll have to approach this by providing a physically based materials system where we hard code very flexible shaders.
-
--   **Q:** with said "persistent storage" are we gonna have a method to write and read simple int variables in a instance-independent manner? or is it still gonna be in the instance and deleted when runtime ends?
-
--   **A:** Yes we have plans to add key value pair storage maybe Json storage. One would be with a Javascript Api for accessing tags and scoreboards. but going further would be to allow for generic read write storage (still not direct File system access). There are some security issues we'd want to work through around ensuring storage is sand boxed per pack.
+-   **A**: ネットワークアクセスは、特定の相手に対してかなり構造化された API で許可するかもしれません。ファイルも同様で、何らかの永続ストレージは持つ可能性がありますが、自由形式の file にはしないつもりです。
+-   **A**: プラットフォーム固有 API は避けたいです。ただ、editor 向けに desktop 固有 API を実装する可能性はあります。gameplay や gametest では避けたいです。
+-   **A**: もうひとつ公開したいけれど難しいものとして custom shaders があります。PlayStation では shader を提出物に組み込む必要があります。なので、非常に柔軟な shader をハードコードした physically based materials system で対応する必要があります。
+-   **Q**: その「永続ストレージ」では、インスタンスに依存しない形で simple int 変数を読み書きできますか？ それともインスタンス内だけで、runtime が終わると消えますか？
+-   **A**: key/value pair storage、あるいは Json storage を追加する計画があります。ひとつは tags や scoreboards にアクセスする JavaScript API です。さらに進めるなら、一般的な read/write storage を可能にしたいです（ただし直接 file system にはアクセスしません）。ただし、pack ごとに sandbox された storage を保証する安全性の課題は解く必要があります。
 
 ## Custom Dimensions
 
--   **Q:** Plans to support GameTests on custom dimensions, if that ever happened?
+-   **Q**: いつか custom dimensions に GameTest を対応させる計画はありますか？
+-   **A**: GameTest API を設計するとき、custom content を常に意識していました。だからたとえば `Commands.run` が dimension を文字列で受け取るようにしていて、固定の dimension 変数にしていません。将来的に custom dimensions やほかの custom content と統合できる余地は、しっかり残しています。
 
--   **A:** While designing the GameTest APIs we've been keeping custom content in mind. That's actually why Commands.run takes the dimension as a string, rather than a hard-coded dimension variable for example. So we're definitely leaving open the possibility for integration with custom dimensions and other custom content down the road.
+## 旧 Scripting API
 
-## Old Scripting API
-
--   **Q:** What will happen to the old scripting api? Is it still going to stay available but with no updates? (That is it will never become unsupported)
-
--   **A:** The original scripting API will be available (and as you've noticed, it hasn't gotten really any updates in the recent past.) As gametest APIs and other systems of gameplay logic evolve to potentially cover the capabilities of scripting v1, we'd remove the scripting V1 functionality.
-
--   **A:** The old scripting API was experimental, so there isn't nearly as much (well, any) guarantee of backwards compatibility. And the old scripting API wasn't available on mobile devices, and we'd not expand its platform support at this point.
-
--   **A:** We do want to support client-side experiences and things like UI - we have a number of ideas on how to do that not a firm plan as yet
+-   **Q**: 旧 scripting api はどうなりますか？ 更新はされなくても、今後も使える状態のままですか？（つまり、非対応にはならない？）
+-   **A**: 元の scripting API は引き続き使えます（ご覧のとおり、最近はほとんど更新されていません）。GameTest API や、ほかの gameplay logic の仕組みが scripting v1 の機能をカバーできるようになれば、scripting V1 の機能は削除します。
+-   **A**: 旧 scripting API は experimental だったので、後方互換性の保証はかなり少ないです。モバイルで使えなかったこともあり、今から対応プラットフォームを広げる予定もありません。
+-   **A**: client-side の体験や UI のようなものはサポートしたいと思っています。そのためのアイデアはいくつかありますが、まだ固まった計画はありません。
 
 ## World Generation
 
--   **Q:** Any plans for exposing the world noise in GameTests? Noise libraries exist for JS, but what's needed is the noise used in biome generation/the Molang query.
+-   **Q**: GameTest から world noise を公開する予定はありますか？ JS 用の noise ライブラリはありますが、必要なのは biome generation や Molang query で使われている noise です。
+-   **A**: scripting の中で world generation をどう扱うべきか、まだ本格的には検討しきれていません。chunk 生成は task thread で動いていて、今の gametest 実装では別 thread へ安全に移すことができません。
+    web worker のようなものを作る案はありますが、まだ会話以上には進んでいません。
 
--   **A:** We haven't taken a hard look at how we want to allow world generation to exist in scripting. Chunks generation runs on task threads and currently our gametest implementation doesn't allow for migration to other threads safely.
-    We have some ideas to create something similar to web workers, but haven't gone further than conversations yet.
+## GameTests と BDS
 
-## GameTests BDS
+-   **Q**: 近いうちに BDS で gametest はスムーズに動くようになりますか？
+-   **A**: 現在、CI pipeline では BDS を使って GameTest を実行し、結果を検証しています。
+-   **A**: BDS と GameTest の相性で問題があるところはありますか？
+-   **A**: GameTest がうまく動かない理由のひとつは、world で experiment を有効にする必要があることです。これは dedicated server からだとやりにくいです。今いちばん簡単なのは、Minecraft client で GameTest experiment を有効にした world を作り、それを dedicated server に移す方法です。
 
--   **Q:** Will gametest work smoothly on BDS soon?
+## JS を学ぶ
 
--   **A:** We currently use BDS in our CI pipeline to run GameTest and validate the results!
-
--   **A:** Are there any areas where BDS and GameTest don't place nicely?
-
--   **A:** One reason GameTest might not work is that the world needs to have the experiment enabled, which is not easy to do via dedicated server. The easiest way to do it today is use a Minecraft client to generate the world w/ the GameTest experiment turned on, and then transfer the world over to dedicated server.
-
-## Learning JS
-
--   **Q:** As someone who is just starting to learn JavaScript, is there anything you can recommend that would help new coders to learn gametests? Talking more about in the context of gametests, not JS in general.
-
--   **A:** Awesome! JavaScript is a great way to start programming 🙂
-
--   **A:** We have a super small article here on building your first game test: https://docs.microsoft.com/en-us/minecraft/creator/documents/gametestbuildyourfirstgametest
-
--   **A:** Hopefully we'll have more content soon!
-
--   **Q:** NOTE: If you want to contribute to these guides, we'd love that!
+-   **Q**: JavaScript を学び始めたところです。新しい coder が gametest を学ぶのに役立つおすすめはありますか？ JS 全般ではなく、gametest の文脈で知りたいです。
+-   **A**: いいですね！ JavaScript はプログラミングを始めるのにとても良い方法です🙂
+-   **A**: 最初の game test の作り方について、かなり小さな記事があります: https://docs.microsoft.com/en-us/minecraft/creator/documents/gametestbuildyourfirstgametest
+-   **A**: もっとコンテンツを増やせるといいですね！
+-   **Q**: NOTE: これらのガイドに貢献したいなら、ぜひお願いします！
 
 ## Beta BDS
 
--   **Q:** Are there any plans to release beta builds of BDS to the public to help us better debug and diagnose issues in Gametests?
-
--   **A:** Thanks for the suggestion. I'd like to do that. I'll follow up with our release management team to see if it's possible.
+-   **Q**: Gametest の問題をよりよくデバッグ・診断できるように、beta ビルドの BDS を一般公開する予定はありますか？
+-   **A**: 提案ありがとうございます。やりたいです。可能かどうか release management チームに確認します。
 
 ## NPM
 
--   **Q:** Can gametest support npm libraries?
+-   **Q**: gametest は npm library をサポートできますか？
+-   **A**: ネイティブでは NPM library をサポートしていませんが、WebPack を使ってパッケージを「焼き固める」ことで、限定的にうまくいった例はあります。
+-   **A**: それと、公式の TypeScript bindings ももうすぐ出ます🙂 ここでは初期版を共有してきましたが、公開までもう少しです。
+-   **Q**: npm のような gametest 用の package manager はありますか？
+-   **A**: 考えたことはありますが、かなり作業が多いです。引き続き検討します🙂 scripting を使う人が増えれば、自然な開発パターンが見えてきて、それに乗っていきたいです。
 
--   **A:** Natively we don't support NPM libraries but we have had some limited successes when playing around with WebPack to "bake" down the packages.
+## GameTest の最終目標
 
--   **A:** Also!! our official TypeScript bindings are coming soon 🙂 We've shared some early versions on here but we are getting much closer to publishing them
-
--   **Q:** Will there be a package manager for the gametest like npm?
-
--   **A:** We've thought about it, but it's a lot of work. We'll keep thinking about it 🙂 I think as more and more people start using the scripting stuff we'll see some natural dev. patterns emerge and we'll want to lean into those
-
-## Ultimate Goal of GameTests
-
--   **Q:** What exactly is the ultimate goal for GameTests? Will it remain as a testing tool, or will it extend beyond, perhaps, to add totally new content?
-
--   **A:** For GameTest, we're looking to make the testing of content and validation much easier. We want it to be simple for folks to build tests around their content, their contraptions, and their scripts. Part of that is a rich script API for mocking and testing assertions, which we've built out with the GameTest modules. We will be adding some new APIs as well to GameTest including some really cool methods for simulating players in the environment. We are also trying to figure out ways to make it even easier to create those JavaScript based tests.
-
--   **A:** Of course, a happy byproduct of GameTest is the opportunity to build out more of a generalized server-based scripting API which helps us explore how it could be used in scenarios down the road, as well.
+-   **Q**: GameTest の最終目標は何ですか？ テストツールのままですか、それとも新しいコンテンツ追加のような用途まで広がりますか？
+-   **A**: GameTest では、コンテンツのテストと検証をもっと簡単にしたいです。自分のコンテンツ、装置、script に対して簡単にテストを組めるようにしたい。そのために、GameTest modules で mock や assertion 用の豊富な script API を作っています。環境内の player をシミュレートする、とても面白い方法を含むいくつかの新しい API も追加する予定です。JavaScript ベースのテストをもっと簡単に作れるようにする方法も考えています。
+-   **A**: もちろん、GameTest の嬉しい副産物として、より一般化された server-based scripting API を作り、将来のシナリオにもどう使えるかを探れるようになるのも大きいです。
 
 ## Experimental Modules
 
--   Q you've indicated in the past that there is hope all commands will become API's. If an experimental feature arrives, will it get api support and if so will that be in an experimental module?
+-   **Q**: 以前、すべての command が API になると期待していると話していました。もし experimental feature が来たら API 対応されますか？ その場合、それは experimental module になりますか？
+-   **A**: experimental feature には API を用意したいです。どうするかはまだ決めていません。`mojang-minecraft-experimental` のような別 module にする案もあります。これは、C++ でまだ標準化されていない型を experimental namespace に置くのと似ています。
 
--   **A:** We definitely want to have APIs for experimental features. We haven't decided exactly how we'll do that. Maybe a separate module, mojang-minecraft-experimental or something like that? This would mirror how C++ handles not yet standardized types in experimental namespaces.
+## GameTest API を作るうえで
 
-## Working on GameTests API
+-   **Q**: GameTest API を作るうえで、いちばん面白い部分は何ですか？ 実装していて本当に気持ちよかった、あるいは楽しかった設計判断や技術的要素はありましたか？
+-   **A**: 私にとっては、複数の scripting 言語をサポートできる Binding layer + Consumer を作ったことでした。
+-   **A**: 各 pack が、どの scripting runtime を使うか選べるようにしたい、というのが考え方です🙂
+-   **Q**: 最高です！ 将来的に Python を使える可能性はありますか？
+-   **A**: Game Jam では Python 2.7 をかなり無理やり動かしたことがありますが、今のところ製品計画には入っていません。
 
--   **Q:** What is the coolest part of working on GameTests API? Any particular design-decision or technical aspect that was really satisfying or fun to implement?
+## API のカバー範囲
 
--   **A:** For me personally it was creating a Binding layer + Consumer which allows for support of multiple scripting languages.
+-   **Q**: 現在のいくつかの method は player にも使えるようになりますか？ たとえば item stack method のようなものです。
+-   **A**: 最新の API 一覧はこちらです: https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/player
+-   **A**: まだ API surface は少し小さいですが、少しずつ増やしています。
 
--   **A:** The idea is that each pack would be able to chose which scripting runtime to use 🙂
+## GameTest が Command Block を置き換える？
 
--   **Q:** Hype! Any chance we get Python some time in the future?
+-   **Q**: GameTest は command block を置き換えますか？
+-   **A**: scripting が command block を完全に置き換えるとは思いませんが、重い logic の多くは script 側に移ると思います。理想的には、script で custom command を登録し、command block がそれを実行する、といった連携になるでしょう。
 
--   **A:** In a Game Jam I actually did get Python 2.7 working in a very hacked manner, but we don't have a product plan for it at the moment.
+## EDU Edition の Code Builder
 
-## API Coverage
+-   **Q**: education edition の code builder のように、gametest API をもっと扱いやすくする予定はありますか？
+-   **A**: GameTest に Blockly のような visual programming を取り入れる案を検討し始めています。まだ確定した内容はありませんが、とても面白そうです！
 
--   **Q:** Are some of the current methods going to also be available to the player? Such as the item stack method
+## いちばん笑ったバグ
 
--   **A:** You can see the latest list of APIs here: https://docs.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/player
-
--   **A:** Note: The API surface is still a bit small, we are slowing adding more and more as we go!
-
-## GameTests replacing CommandBlocks
-
--   **Q:** Will GameTests replace command blocks?
-
--   **A:** I don't see the scripting stuff replacing command blocks, but I do see it shifting a lot of the "heavy logic" to script. Ideally they'd work closely with each other (think something like registering a custom command in script and having a command block execute it)
-
-## EDU Edition Code Builder
-
--   **Q:** Are there any plans to make the gametest API more accessible like the education edition code builder?
-
--   **A:** We've started looking into something like Blockly (visual programming) for GameTest. Nothing concrete to report right now, but I think it'd be super cool!
-
-## Funniest Bug
-
--   **Q:** What was the funniest bug that has happened while working on gametest?
-
--   **A:** A funny one that happened a while back was I was testing the taming API and wanted to see what would happen if I spawned and tamed 100 or so wolves... https://imgur.com/a/NIF7D4x
+-   **Q**: gametest で作業していて、いちばん笑ったバグは何でしたか？
+-   **A**: かなり前の話ですが、taming API をテストしていて、100 匹くらいの狼を spawn して tame したらどうなるか見たことがあります... https://imgur.com/a/NIF7D4x
 
 ## Marketplace
 
--   **Q:** How much of an impact will GameTests have on the marketplace?
-
--   **A:** Right now, GameTest is an experimental feature so it can't be included with marketplace content. We do think GameTest would be great "on the side" for helping to validate content before it goes into the marketplace.
+-   **Q**: GameTest は marketplace にどれくらい影響しますか？
+-   **A**: 今の GameTest は experimental feature なので、marketplace content には含められません。ただ、marketplace に出す前の検証にはかなり役立つと考えています。
 
 ## Realms
 
--   **Q:** What is the future of game test on realms? Is it going to remain on realms or be removed like the old scripting API?
+-   **Q**: Realms における game test の将来は？ そのまま残りますか、それとも旧 scripting API のように削除されますか？
+-   **A**: GameTest（およびその後の gameplay scripting）は Realms で提供するつもりです。なので、その後に非推奨化する予定はありません。
 
--   **A:** It is our intention to ship Gametest (and subsequent gameplay scripting) on Realms. Therefore we would not expect to subsequently deprecate it.
+## GameTest は汎用的？
 
-## Is GameTests General Purpose?
-
--   **Q:** Seeing how the community's utilization of gametests has mostly been to include them as part of a final product (like what the scripting engine was designed for) as oppose to strictly using them during production to catch bugs, do you see gametests being repurposed to serve more general applications and grow to become considered a supported feature of add-ons?
-
--   **A:** We're focused on GameTest for content testing right now. Ahead of supporting the scripting APIs for general gameplay purposes, we want to make sure we do more testing and add more infrastructure behind the scenes to determine when and how those scripting APIs can come out of experimental so they can be used in those roles.
+-   **Q**: コミュニティでの gametest の使われ方を見ると、主に最終製品の一部として組み込まれています（本来の scripting engine の設計意図のように）。しかし、制作中にバグを見つけるためのテストとして厳密に使われているわけではありません。将来的に gametest は、もっと一般的な用途に転用され、add-on の正式機能として扱われるようになるのでしょうか？
+-   **A**: 今は content testing に集中しています。一般的な gameplay 向けの scripting API を支える前に、もっとテストし、裏側の基盤を整え、どのタイミングでどう experimental から出せるかを判断したいです。
 
 ## Molang
 
--   **Q:** Can you test Molang through the GameTest API?
+-   **Q**: GameTest API で Molang をテストできますか？
+-   **A**: entity behavior はいろいろな方法でテストできます。もちろん entity には animation controller や state transition 条件で Molang を入れられます。
+-   **A**: 何か具体的にカバーしたいものはありますか？
+-   **A**: GameTest を custom entity で使うときは、実行中にその entity の behavior pack を stack に入れておけば使えます。
 
--   **A:** You can test entity behavior in a variety of ways. And of course entities can have Molang in their animation controllers and conditions for entity state transitions.
+## コミュニティのフィードバック
 
--   **A:** Do you have something specific in mind that you'd like to cover?
+-   **Q**: 新しい Gametest Features は、Mojang がテストのために必要なものに基づいて追加されますか？ それともコミュニティのフィードバックや要望に基づきますか？ これから変わりますか？
+-   **A**: 両方です。vanilla の挙動をテストするために新しい GameTest API を追加してきましたし、みなさんがどの API に興味があるかも知りたいです。
+-   **A**: その一例が custom commands API です。コミュニティからの要望が多いので、追加候補の上位にあります😄
+-   **A**: ほかにも、gametest をより強力で作りやすくするために、simulated player API と Visual Studio Code での script debugging を追加予定です。
 
--   **A:** Should have mentioned that you can use GameTest on custom entities by having your custom entity's behavior pack in the stack while you're running game tests.
+## プラットフォームの効率
 
-## Community Feedback
+-   **Q**: 他のプラットフォームとの互換性はどうですか？ 全体として効率は良いですか？
+-   **A**: すべてのプラットフォームで有効化する予定です。性能面では、JIT をサポートするプラットフォームとそうでないプラットフォームの両方をまたいで対応する必要があります。なので、これはかなり大きな性能分析とチューニングの対象です。
+-   **Q**: 「効率が良い」とは、API がどれだけ「metal に近いか」という意味です。
+-   **A**: 補足ありがとうございます。まずは data-driven システムとうまく連携する API を目指します。つまり、Minecraft の entity / item / block / chunk などの抽象度で動かす形です。Bukkit を知っているなら、それに近い抽象度を目指しています（さらに client-side の拡張も視野に入っています）。
 
--   **Q:** Are new Gametest Features planed/going to be added based on what Mojang needs for testing purposes or community feedback/request? Will this change?
+## 名前の由来
 
--   **A:** Definitely a mix of both! We have been adding some new GameTest APIs to test some Vanilla behaviors, but we also want to know which APIs you all are interested in.
+-   **Q**: GameTest という名前の理由は何ですか？
+-   **A**: Java 側で先に行われていた作業を土台にしていました。Java には、テスト工程で使う初期の GameTest framework がありました。
+-   **A**: それに続く話として、システム全体を gametests と呼ぶのか、それとも別の名前になるのか、という点はどうですか？
+-   **A**: テスト以外のシナリオまで広がるなら、JS API 全体を GameTest と呼ぶのはおかしいと思います。API 名全体にもその考え方が反映されています。
 
--   **A:** A good example of this is a custom commands API. It's high on our list to add because the community has been asking for it :smile:
+## なぜ Gametests なのか
 
--   **A:** Just a couple of other features coming to make gametests more powerful and easier to create: simulated player APIs, and script debugging in Visual Studio Code
+-   **Q**: gametest の意図や、用途を考えるうえで大事にしたことは何ですか？
+-   **A**: 要するに「ゲームをテストする」ことです。再コンパイルせずにテストをゲームへ追加できるのは大きな利点です。テストをもっと速く作れますし、community の人たちも bug report の際にテストを書けます。
+-   **A**: GameTest は、Minecraft 上で script を動かすための「試験場」としてもとても重要です。
 
-## Efficiency of Platforms
+## gametest の限界は？
 
--   **Q:** How compatible will it be with other platforms/generally efficient?
-
--   **A:** We expect to enable it on all platforms. Re: performance, we do have to work across both platforms that support Just in Time compilation and platforms that don't. So that is a big area of known analysis and performance tuning for us.
-
--   **Q:** By generally efficient i mean how "close to the metal" the api is
-
--   **A:** Thanks for the clarification on efficient: Our API will attempt to "play well" with data driven systems to start out. And therefore operate at a Minecraft entity, item, block, chunk, etc. level of abstraction. If you're familiar with Bukkit we're attempting to have a similar level of abstraction to that (plus client side additions also within our ambitions).
-
-## Why the name?
-
--   **Q:** what was the reason for the name GameTest?
-
--   **A:** We were building off work that Java had done. They built an initial GameTest framework that they use in their testing process.
-
--   **A:** Sort of a follow up on this, is the plan to refer to the whole system as gametests or something else?
-
--   **A:** I don't think it would make sense to refer to the whole JS API set as GameTest if we extend beyond testing scenarios. You can see some of this thinking surface in the overall API naming.
-
-## Why Gametests?
-
--   **Q:** What was your guys intention with the gametest or things that you thought of while coming up about it's uses
-
--   **A:** Basically: Test the game! Allowing tests to be added to the game without needing to re-compile is a great tool. We can work faster on tests and community members can write tests when they report bugs.
-
--   **A:** GameTest is also a great "proving ground" for us in terms of getting script to run in Minecraft.
-
-## What are the limits of gametest?
-
--   **Q:** What are the limits of gametest?
--   **A:** Only your imagination!
-
--   **A:** Seriously though, we have some limits: structures are limited to 64x64x64. We presently only run in the overworld dimension, but we'd like to broaden that.
-
--   **A:** We don't support interactions with player right now but that's deep in the works.
-
--   **A:** Gametest does work on mobile. And we're working on the only two platforms that it doesn't presently work on: Switch and PlayStation.
-
--   **Q:** how many for loops will i be able to nest before crashing the game?
-
--   **A:** Actually, that's a good question. Right now if you while (true) you will hang the game. But we prototyped and plan to build a "watchdog" that will be able to detect and stop this case.
-
--   **A:** Our watchdog prototype did more than that. It was also able to monitor script object count and memory in addition to cycles.
-    (and worked across language runtimes, so that's cool)
+-   **Q**: gametest の限界は何ですか？
+-   **A**: あなたの想像力です！
+-   **A**: ただし本当に限界はあります。structure は 64x64x64 までです。今は overworld でしか動かしていませんが、将来的には広げたいです。
+-   **A**: player との interaction はまだ対応していませんが、かなり進めています。
+-   **A**: Gametest は mobile でも動きます。今は未対応の 2 プラットフォーム、Switch と PlayStation にも対応作業中です。
+-   **Q**: いくつの for loop を入れたらゲームが落ちますか？
+-   **A**: 良い質問です。今は `while (true)` にするとゲームが止まります。ただ、これを検出して止める watchdog を試作しており、実装する予定です。
+-   **A**: その watchdog 試作はそれ以上のこともできました。cycles だけでなく、script object 数や memory も監視できました。
+    （しかも language runtime をまたいで動いたので、かなり良いです）
 
 ## Hot Reloading
 
--   **Q:** Will there ever be any easy way to re-load the gametest api files from within the game similar to the /reload command used for functions? The ability to reload quickly really makes debugging and just working on things in general much easier and more enjoyable.
+-   **Q**: function の `/reload` コマンドのように、ゲーム内から gametest api ファイルを簡単に再読み込みできるようになる予定はありますか？ すぐ reload できると、debug や作業がずっと楽になります。
+-   **A**: gametest JS をたくさん書いてきた立場として、JS をもっと簡単に再読み込みする方法は、まさに私たちも必要性を感じていて、ロードマップにも入っています。
 
--   **A:** speaking as someone who has written a bunch of gametest JS, definitely on our mind and roadmap to have an easier way to reload JS
+## ドキュメント
 
-## Documentation
-
--   **Q:** The documentation of gametests has been one of the things that's made it difficult for me to get into. Are there plans to make the documentation more accessible to allow people to more easily understand how to use this framework from a ground up perspective?
-
--   **A:** We recently released a new creator portal which includes articles on how to get started with GameTest. https://docs.microsoft.com/en-us/minecraft/creator/documents/gametestgettingstarted
-
--   **A:** The API docs are fairly new so we have a long way to go in terms of providing detailed documentation and samples. The docs are hosted on GitHub so we're welcome to pull requests if people from the community wish to contribute. https://github.com/MicrosoftDocs/minecraft-creator/tree/main/creator/ScriptAPI
+-   **Q**: gametest のドキュメントは、私が入りにくかった理由のひとつです。もっと accessible にして、基礎からこの framework を理解しやすくする予定はありますか？
+-   **A**: 最近、新しい creator portal を公開しました。GameTest の始め方に関する記事も含まれています。https://docs.microsoft.com/en-us/minecraft/creator/documents/gametestgettingstarted
+-   **A**: API docs はまだ新しいので、詳しいドキュメントや sample を増やす余地はたくさんあります。docs は GitHub で公開しているので、community からの pull request も歓迎です。https://github.com/MicrosoftDocs/minecraft-creator/tree/main/creator/ScriptAPI
 
 ## Hummingbird UI
 
--   **Q:** Would gametest succeed scripting's role as the engine for Hummingbird UI?
+-   **Q**: gametest は Hummingbird UI の engine として scripting の役割を担えますか？
+-   **A**: Hummingbird は GameFace の旧名です（https://coherent-labs.com/products/coherent-gameface/）。新しい Bedrock UI を作るために一緒に取り組んでいる UI 技術です。
+-   **A**: scripts で UI を作成・変更できるようにするつもりは確かにあります。ただ、既存の UI と自然に連携する形にしたくて、そこはまだ調整中です。
+-   **A**: GameFace JS と同じ sandbox で動かす想定ではありません。また今は server first で進めていて、GameFace は client 側でしか動いていません。
 
--   **A:** Hummingbird is for former name for GameFace (https://coherent-labs.com/products/coherent-gameface/). It's a UI tech we're working with to build new Bedrock UI.
+## 外部スクリプト
 
--   **A:** We certainly plan to allow scripts to create or modify UI. However, we want it to work with the built in UI in a natural way and we're still working out how that will work.
-
--   **A:** We don't expect to run in the same sandbox as GameFace JS. Also, right now we're focused server first and GameFace is only running on the client.
-
-## External Scripts
-
--   **Q:** will gametest work with external scripts? so they could communicate with scripts that are run in another directory
-
--   **A:** We do want to provide a way for scripts to have dependencies on other scripts - e.g., maybe a really good script for doing testing, or for doing terrain gen -- but that'd probably be through the behavior pack dependency system. I don't think we've have a way to load JS from arbitrary locations.
-
--   **A:** Yeah, making external scripts work across all platforms would be challenging. And potentially a security challenge as well.
+-   **Q**: gametest は外部スクリプトと連携できますか？ 別ディレクトリで動く script と通信できるようなものです。
+-   **A**: scripts に別の script への依存関係を持たせる仕組みは欲しいです。たとえばテスト用の優秀な script や terrain gen 用の script などです。ただ、それは behavior pack の依存システム経由になるでしょう。任意の場所から JS を読み込む仕組みは今のところありません。
+-   **A**: そうですね、外部 script をすべてのプラットフォームで動かすのは大変ですし、セキュリティ上の課題にもなりえます。
 
 ## Marketplace
 
--   **Q:** Will gametests be available for marketplace content? If yes, is there an approximate date?
-
--   **A:** Currently our focus is on testing scenarios. While we have lots of future thoughts and plans, we don't want to get folks making plans or counting on anything we can't promise yet.
+-   **Q**: gametest は marketplace content で使えますか？ 使えるなら、おおよその時期はありますか？
+-   **A**: 今は testing シナリオに集中しています。将来の構想や計画はいろいろありますが、まだ約束できないものに期待させたくはありません。
 
 ## Discord
 
--   **Q:** will gametest be able to connect discord to mc?
+-   **Q**: gametest で discord を Minecraft に接続できますか？
+-   **A**: 最初のバージョンでは、おそらく無理です🙂
 
--   **A:** not in the first versions, probably, no 🙂
+## Java 互換
 
-## Java Parity
-
--   **Q:** Many of the vanilla game tests marked with suite:java_parity are disabled, presumably because the behavior does not work correctly. Were these tests ported from Java's testing suite? What is the intent of these tests?
-
--   **A:** We were building this off some of the GameTest work inside of Java, and some of those tests were ported as well. We also wanted to pull over and track some of the tests that Java had, even if there are parity differences between Java and Bedrock that might prevent them from working in the same way
-
--   **Q:** It would be great to see the disabled parity tests as a to-do list for porting more java behavior, and we could definitely provide some more, ahaha...
-
--   **A:** If you write a game test that demonstrates a Java parity issue, we'd love to have it: https://aka.ms/gametestsamples
-
--   **A:** And yes, we're tracking parity issues that were discovered through game test with bugs.
-
--   **Q:** If gametests are open for contribution in this way, is there any way we could contribute to the actual Vanilla Behavior/Resource packs?
-
--   **A:** We're currently discussing whether or not we should move the "built in" game tests to the same repository and make it easier to get the open source behavior pack package(s)
+-   **Q**: `suite:java_parity` が付いた vanilla game test の多くが無効になっていますが、おそらく挙動が正しく動かないからですよね。これらのテストは Java の test suite から移植されたものですか？ これらのテストの意図は何ですか？
+-   **A**: Java 内の GameTest 作業を土台にしていて、その中のいくつかのテストも移植しました。Java と Bedrock では互換性に差があるため同じようには動かないことがあっても、Java 側にあったテストを持ってきて追跡したかった、というのもあります。
+-   **Q**: 無効化された parity test を、もっと Java 挙動を移植するための TODO リストのように見られたらいいですね。こちらでもかなり追加できます、笑
+-   **A**: Java parity の問題を示す game test を書いてくれたら、ぜひ欲しいです: https://aka.ms/gametestsamples
+-   **A**: はい、game test から見つかった parity 問題は bug として追跡しています。
+-   **Q**: こういう形で gametest がコントリビュート可能なら、実際の Vanilla Behavior / Resource pack への貢献もできますか？
+-   **A**: 「built in」の game tests を同じ repository に移して、open source の behavior pack package を取りやすくするべきか、今まさに議論しています。

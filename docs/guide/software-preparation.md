@@ -1,7 +1,7 @@
 ---
-title: Software & Preparation
+title: ソフトウェアと準備
 category: Guide
-description: How to setup your development environment
+description: 開発環境のセットアップ方法
 nav_order: 3
 prefix: "3. "
 mentions:
@@ -22,32 +22,32 @@ mentions:
     - QuazChick
 ---
 
-Before you can start creating add-ons, you first have to install the required tools and applications. While development will be easiest on Windows 10, we have provided mobile alternatives for both Android and iOS, where applicable.
+アドオンの作成を始める前に、必要なツールとアプリケーションをインストールする必要があります。開発は Windows 10 が最も簡単ですが、該当する場合は Android と iOS 向けの代替手段も用意しています。
 
-This page will provide you a list of software to install, and configuration tips for setup.
+このページでは、インストールすべきソフトウェアの一覧と、セットアップのための設定のヒントを紹介します。
 
-## Download Minecraft Bedrock Edition
+## Minecraft Bedrock Edition をダウンロードする
 
 -   [Windows](https://xbox.com/games/store/minecraft-for-windows/9NBLGGH2JHXJ)
 -   [Android](https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=en)
 -   [iOS](https://apps.apple.com/us/app/minecraft/id479516143)
--   [Run MC on Linux](https://discord.gg/VJTZ3KaTx6)
+-   [Linux で MC を動かす](https://discord.gg/VJTZ3KaTx6)
 
-## Picking an Editor
+## エディターを選ぶ
 
-Add-ons can be created using any text editor, however it's much more comfortable to work in a dedicated editor. A good editor can give you code-completion, error-detection, and in-editor documentation.
+アドオンはどんなテキストエディターでも作れますが、専用エディターを使うほうがずっと快適です。良いエディターは、コード補完、エラー検出、エディター内ドキュメントを提供してくれます。
 
-There are strong opinions about the best editor for beginners, but generally speaking you cannot go wrong selecting either VSCode, or bridge. If you are mobile, you will need to use a mobile alternative.
+初心者に最適なエディターについては意見が分かれますが、一般的には VSCode か bridge. を選べば間違いありません。モバイルの場合は、モバイル向けの代替エディターを使う必要があります。
 
 ### VSCode
 
-VSCode is a general purpose text-editor and IDE. With VSCode, you will be able to edit your add-ons in plain-text, guided along by a powerful array of extensions and add-ons. VSCode is a great option for programmers and advanced users.
+VSCode は汎用テキストエディター兼 IDE です。VSCode を使えば、強力な拡張機能やアドオンに支えられながら、プレーンテキストでアドオンを編集できます。プログラマーや上級者にはとても良い選択肢です。
 
-[⚙️Install VSCode](https://code.visualstudio.com/)
+[⚙️ VSCode をインストール](https://code.visualstudio.com/)
 
-<Spoiler title="Configuring VSCode">
+<Spoiler title="VSCode の設定">
 
-Many packages exist for VSCode that make editing add-ons easier:
+アドオン編集を簡単にする VSCode 向けのパッケージはいくつもあります。
 
 -   [Blockception's Minecraft Bedrock Development](https://marketplace.visualstudio.com/items?itemName=BlockceptionLtd.blockceptionvscodeminecraftbedrockdevelopmentextension)
 -   [.mcfunction support](https://marketplace.visualstudio.com/items?itemName=arcensoth.language-mcfunction)
@@ -62,18 +62,18 @@ Many packages exist for VSCode that make editing add-ons easier:
 
 ### bridge.
 
-[bridge.](https://bridge-core.app/) is a light-weight, dedicated IDE for Minecraft add-ons. It features [innovative features](https://bridge-core.app/guide/features/) such as [entity and block previews](https://bridge-core.app/guide/features/index.html#file-previews), [rich auto-completions and file validations](https://bridge-core.app/guide/features/index.html#auto-completions-and-validation) and [advanced file creation with presets](https://bridge-core.app/guide/features/index.html#advanced-file-creation).
-bridge. includes a regular text editor for experienced add-on creators and a tree editor to make it easy for beginners to get started with editing JSON files.
+[bridge.](https://bridge-core.app/) は、Minecraft アドオン向けの軽量な専用 IDE です。[革新的な機能](https://bridge-core.app/guide/features/)として、[エンティティとブロックのプレビュー](https://bridge-core.app/guide/features/index.html#file-previews)、[豊富なオートコンプリートとファイル検証](https://bridge-core.app/guide/features/index.html#auto-completions-and-validation)、[プリセットを使った高度なファイル作成](https://bridge-core.app/guide/features/index.html#advanced-file-creation) などがあります。
+bridge. には、経験豊富なアドオン制作者向けの通常のテキストエディターと、初心者が JSON ファイル編集を始めやすいツリーエディターが含まれています。
 
-<Spoiler title="Configuring Bridge">
+<Spoiler title="bridge. の設定">
 
--   [Read more on why you should use bridge.](https://bridge-core.app/guide/why-bridge)
--   [Read our guide on getting started with bridge.](https://bridge-core.app/guide/index)
--   [Try out bridge. online](https://editor.bridge-core.app/)
+-   [bridge. を使うべき理由について詳しく読む](https://bridge-core.app/guide/why-bridge)
+-   [bridge. で始めるためのガイドを読む](https://bridge-core.app/guide/index)
+-   [bridge. online を試す](https://editor.bridge-core.app/)
 
 </Spoiler>
 
-### Mobile Editors
+### モバイルエディター
 
 #### Android
 
@@ -87,107 +87,107 @@ bridge. includes a regular text editor for experienced add-on creators and a tre
 
 ## Blockbench
 
--   [Blockbench](https://blockbench.net/) is a 'boxy 3D model editor' typically used to create Minecraft models, textures and animations. Also provides a web-browser version which is compatible with mobile.
+-   [Blockbench](https://blockbench.net/) は、Minecraft のモデル、テクスチャ、アニメーションを作るのによく使われる「箱型 3D モデルエディター」です。モバイルでも使える Web ブラウザー版もあります。
 
-## Image Editors
+## 画像エディター
 
-When choosing an image editor, it is important to keep in mind that the traditional Minecraft style is composed of simple 16X16 pixel art. There are plenty of powerful and free art programs available for you to use. However, many of these programs have more tools than you will need for Minecraft graphical design and these tools require time to learn.
+画像エディターを選ぶときは、Minecraft の伝統的なスタイルがシンプルな 16x16 のピクセルアートで構成されていることを覚えておくとよいでしょう。使える強力で無料のアートソフトはたくさんあります。ただし、その多くは Minecraft のグラフィック制作に必要以上の機能を持っており、それらを習得するには時間がかかります。
 
 :::tip
-Choose a program that feels comfortable and easy for you to use. Many Add-on creators use different art programs for different tasks. (Example: One might use paint․net for most of the art, and piskel for Minecraft block animations). Choose what works best for you!
+自分にとって使いやすく、快適だと感じるプログラムを選びましょう。多くのアドオン制作者は、用途ごとに別のアートソフトを使い分けています。（例: ほとんどのアートは paint.net、Minecraft ブロックのアニメーションは Piskel など。）自分に合うものを選んでください！
 :::
 
 ### Krita
 
-Krita is a powerful open-source art programed with the goal of giving free powerful digital art tools to artists. Krita has more than enough features to cover your Minecraft needs and works on a MAC or PC.
+Krita は、アーティストに無料で強力なデジタルアートツールを提供することを目標とした、強力なオープンソースのアートプログラムです。Minecraft に必要な機能は十分にそろっており、Mac と PC のどちらでも使えます。
 
--   **+ Pros:** Plenty of features including a pixel brush with an intuitive user interface.
--   **- Cons:** Requires a little time to become familiar with the tools.
+-   **+ 長所:** 直感的な UI のピクセルブラシを含む多くの機能があります。
+-   **- 短所:** ツールに慣れるまで少し時間がかかります。
 
-[Download Krita](https://krita.org/en/)
+[Krita をダウンロード](https://krita.org/en/)
 
 ### GIMP
 
-Gimp is similar to Krita in that it is a free and open source digital art program that has a vast arrays of tools. Where Krita focuses more on illustration, GIMP focuses more on image manipulation (think Photoshop). Gimp also works on MAC or PC.
+GIMP は Krita に似た、無料でオープンソースのデジタルアートプログラムで、非常に多くのツールを備えています。Krita がイラスト寄りなのに対して、GIMP は画像加工（Photoshop のような用途）に重点を置いています。GIMP も Mac と PC のどちらでも使えます。
 
--   **+ Pros:** GIMP has more than enough tools for editing Minecraft art
--   **- Cons:** The interface is not intuitive. Even though GIMP is powerful, it requires a steep learning curve.
+-   **+ 長所:** Minecraft のアート編集に十分なツールがあります
+-   **- 短所:** インターフェースが直感的ではありません。強力ではありますが、習得にはかなりの学習コストがあります。
 
-[Download Gimp](https://www.gimp.org/)
+[GIMP をダウンロード](https://www.gimp.org/)
 
 ### Paint.NET
 
-Paint.NET is a simple yet powerful image editing and art software. Paint.NET may not have a vast array of tools like Krita and GIMP, but it does offer simplicity and ease of use.
+Paint.NET は、シンプルでありながら強力な画像編集・アートソフトです。Krita や GIMP のように膨大なツールがあるわけではありませんが、その代わりにシンプルさと使いやすさがあります。
 
--   **+ Pros:** Easy to use and learn.
--   **- Cons:** Only works on Windows.
+-   **+ 長所:** 使いやすく、覚えやすいです。
+-   **- 短所:** Windows でしか使えません。
 
-[Download Paint.net](https://www.getpaint.net)
+[Paint.NET をダウンロード](https://www.getpaint.net)
 
 ### Pixilart
 
-Pixilart is a web-based pixel art software. It is extremely simple to use since it is focused on pixel art. It also has a powerful resize option that may come in handy, so that you can resize your art without losing the pixel art details.
+Pixilart は、Web ベースのピクセルアートソフトです。ピクセルアートに特化しているため、非常にシンプルに使えます。リサイズ機能も強力で、ピクセルアートの細部を失わずにサイズ変更できるので便利です。
 
--   **+ Pros:** Easy to use and learn. Curated specifically for pixel art.
--   **- Cons:** Must have internet connection. May be missing tools you want.
+-   **+ 長所:** 使いやすく、覚えやすいです。ピクセルアート専用に作られています。
+-   **- 短所:** インターネット接続が必要です。欲しい機能がない場合があります。
 
-[Use Pixilart](https://www.pixilart.com/)
+[Pixilart を使う](https://www.pixilart.com/)
 
 ### Piskel
 
-Piskel is a web-based pixel art software with a focus of making pixelated sprites (or video game character animations). This tool, similar to Pixilart, is simple to use. This is also a great tool for making flipbooks (Minecraft block or skin animations).
+Piskel は、ピクセル化されたスプライト（またはゲームキャラクターのアニメーション）を作ることに特化した Web ベースのピクセルアートソフトです。Pixilart と同様に、使い方は簡単です。フリップブック（Minecraft のブロックやスキンのアニメーション）を作るのにも向いています。
 
--   **+ Pros:** Easy to use and learn. Perfect for flipbook animations
--   **- Cons:** Must have internet connection. Only offers the most basic tools.
+-   **+ 長所:** 使いやすく、覚えやすいです。フリップブックアニメーションに最適です
+-   **- 短所:** インターネット接続が必要です。基本的なツールしかありません。
 
-[Download Piskel](https://www.piskelapp.com/)
+[Piskel をダウンロード](https://www.piskelapp.com/)
 
 ### Libresprite
 
-LibreSprite is a free and open source program for creating and animating your sprites. Based on the last GPLv2 commit of Aseprite.
+LibreSprite は、スプライトを作成・アニメーション化するための無料のオープンソースプログラムです。Aseprite の最後の GPLv2 コミットをベースにしています。
 
--   **+ Pros**: Basic & easy to use, customizable and curated for pixel artists.
--   **- Cons**: May not work on Mac, maintained only by a small community.
+-   **+ 長所**: 基本的で使いやすく、カスタマイズ可能で、ピクセルアーティスト向けに作られています。
+-   **- 短所**: Mac では動かない場合があります。小規模なコミュニティだけで保守されています。
 
-## Additional Materials
+## 追加資料
 
 :::tip
-This guide will walk you through the first stages of add-on development, but it is not comprehensive! To learn more about add-ons, you will have to use and reference other sources of information, which we will link to here.
+このガイドではアドオン開発の最初の段階を案内しますが、網羅的ではありません。アドオンについてさらに学ぶには、ほかの情報源も使う必要があります。ここではそのリンクを紹介します。
 :::
 
-### Join the Discord
+### Discord に参加する
 
-The best place to get help with this guide is to join the [discord server](/discord)(s).
+このガイドで助けが必要なら、[Discord サーバー](/discord) に参加するのが最適です。
 
 ### Vanilla Packs
 
-Minecraft's vanilla files are a good source of reference material. You should download these packs, and store them on a convenient location on your computer. When you need an example of an item, or entity, or animation, you can reference these files for inspiration.
+Minecraft のバニラファイルは、参考資料としてとても役立ちます。これらのパックをダウンロードして、パソコンの使いやすい場所に保存しておきましょう。アイテム、エンティティ、アニメーションの例が必要になったときに、これらのファイルを参考にできます。
 
 -   [Vanilla packs](https://github.com/Mojang/bedrock-samples/releases)
 
-### Documentation
+### ドキュメント
 
-There are many good sources of Add-on documentation. Familiarize yourself with all of them, and consider bookmarking them.
+アドオンに関する良質なドキュメントはたくさんあります。できるだけ目を通し、ブックマークも検討してください。
 
--   [bedrock.dev](https://bedrock.dev/): Reference documentation.
--   [wiki.bedrock.dev](https://wiki.bedrock.dev/): Tutorials and guides.
--   [MS Docs](https://docs.microsoft.com/en-us/minecraft/creator/): The official microsoft creator portal for add-ons.
+-   [bedrock.dev](https://bedrock.dev/): 参考ドキュメント。
+-   [wiki.bedrock.dev](https://wiki.bedrock.dev/): チュートリアルとガイド。
+-   [MS Docs](https://docs.microsoft.com/en-us/minecraft/creator/): アドオン向けの Microsoft 公式クリエーターポータル。
 
-### Troubleshooting and Additional Help
+### トラブルシューティングと追加ヘルプ
 
--   If the json format is very tricky for you, consider reading the [understanding-json guide](/guide/understanding-json).
--   If you get stuck with an odd error, consider reading the [troubleshooting guide](/guide/troubleshooting).
--   You can explore additional tools [here](/meta/useful-links).
+-   JSON 形式がかなり難しく感じるなら、[JSON の理解ガイド](/guide/understanding-json) を読んでみてください。
+-   変なエラーで行き詰まったら、[トラブルシューティングガイド](/guide/troubleshooting) を読んでみてください。
+-   追加ツールは [ここ](/meta/useful-links) から見られます。
 
-## Next
+## 次へ
 
-:::tip What you have learned
+:::tip 学んだこと
 
--   [x] Installed the necessary software
--   [x] Downloaded the Vanilla Example files
--   [ ] Locate your `com.mojang` folder and create your add-on's workspace.
--   [ ] Create the manifest and pack icon for your first add-on
+-   [x] 必要なソフトウェアをインストールした
+-   [x] Vanilla のサンプルファイルをダウンロードした
+-   [ ] `com.mojang` フォルダーを見つけて、アドオンのワークスペースを作成する
+-   [ ] 最初のアドオンの manifest とパックアイコンを作成する
 
 :::
 
-<Button link="/guide/project-setup">Next: Project Setup</Button>
+<Button link="/guide/project-setup">次へ: プロジェクトのセットアップ</Button>

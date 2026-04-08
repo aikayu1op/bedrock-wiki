@@ -9,23 +9,23 @@ mentions:
     - Kaioga5
     - TheItsNameless
     - QuazChick
-description: Run command when entity dies.
+description: エンティティが死亡したときにコマンドを実行します。
 ---
 
-<Button link="animation-controllers-intro">Learn more about Animation Controllers</Button>
+<Button link="animation-controllers-intro">Animation Controller について詳しく見る</Button>
 
-I define `Death Effects` as "Doing something when an Entity dies". There are a few wrong ways to achieve this that should be avoided, including:
+ここでは `Death Effects` を「エンティティが死亡したときに何かを行うこと」と定義します。これを実現する方法には、避けるべきものがいくつかあります。
 
 -   Detecting death in the entity file, adding a component, and _then_ trying to detect that component in the animation controller. This is wrong because the entity will be removed from the world before the animation controller has a chance to run.
 -   Detecting the entity death from an outside source, such as a ticking command block. This method isn't _strictly_ wrong, and in some circumstances, it may even be preferred. However it is costly and easy to break.
 
-## Using q.is_alive
+## `q.is_alive` を使う
 
-The best way to create death effects is by using the `is_alive` query.
+死亡時の効果を作る最善の方法は、`is_alive` クエリを使うことです。
 
-Simply create an animation controller with a transition based on `is_alive`. The final `on_entry` will run before the entity is removed from the world, allowing you to run your commands.
+`is_alive` に基づく遷移を持つアニメーションコントローラーを作るだけです。最後の `on_entry` は、エンティティがワールドから削除される前に実行されるため、そこでコマンドを実行できます。
 
-Here is a sample animation controller:
+サンプルのアニメーションコントローラーは次のとおりです。
 
 <CodeHeader>BP/animation_controllers/death.ac.json</CodeHeader>
 
@@ -52,9 +52,9 @@ Here is a sample animation controller:
 }
 ```
 
-## Use on player entities
+## プレイヤーエンティティで使う場合
 
-In the case of player entities, an additional transition must be added to the second animation state in order to ensure the state resets between deaths:
+プレイヤーエンティティの場合は、死亡のたびに状態がリセットされるよう、2 つ目のアニメーション状態に追加の遷移を入れる必要があります。
 
 <CodeHeader>BP/animation_controllers/death.ac.json</CodeHeader>
 
@@ -86,11 +86,11 @@ In the case of player entities, an additional transition must be added to the se
 }
 ```
 
-## Using minecraft:on_death
+## `minecraft:on_death` を使う
 
-You can also use the `minecraft:on_death` component in your `entity.json` file in the Behavior Pack, which is a fairly easy way to accomplish a command on death.
+Behavior Pack の `entity.json` ファイルでは、`minecraft:on_death` コンポーネントも使えます。これを使うと、死亡時にコマンドを実行するのがかなり簡単になります。
 
-You first add it to your components and make it run an event on self;
+まずコンポーネントに追加し、自分自身に対してイベントを実行するようにします。
 
 ```json
 "minecraft:on_death" : {
@@ -99,7 +99,7 @@ You first add it to your components and make it run an event on self;
 }
 ```
 
-And then, in your events section you add the event;
+次に、events セクションへイベントを追加します。
 
 ```json
 "wiki:on_death": {
@@ -112,5 +112,5 @@ And then, in your events section you add the event;
 ```
 
 :::tip
-You can add scores and tags to the entity even when it is dead using this method.
+この方法を使えば、エンティティが死亡していてもスコアやタグを追加できます。
 :::

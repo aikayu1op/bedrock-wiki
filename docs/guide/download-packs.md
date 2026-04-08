@@ -1,7 +1,7 @@
 ---
-title: Download Example Packs
+title: サンプルパックのダウンロード
 category: Extra
-description: Appendix for downloading example Packs
+description: サンプルパックをダウンロードするための付録
 prefix: "b. "
 nav_order: 2
 show_outline: false
@@ -19,15 +19,15 @@ mentions:
 ---
 
 ::: tip
-This is an appendix page. You can start the guide from the beginning [here](/guide/introduction).
+これは付録ページです。ガイドの最初から始めるなら[ここ](/guide/introduction)です。
 :::
 
-To get the most out of the guide, you should always attempt all guide-exercises yourself! However if you get very stuck, the example packs should give you some valuable reference material.
+ガイドを最大限に活用するには、各ガイド演習に必ず自分で取り組んでみてください。とはいえ、どうしても行き詰まった場合は、サンプルパックが役立つ参考資料になります。
 
-Download here:
+ダウンロードはこちら:
 
 <Button link="https://github.com/Bedrock-OSS/bedrock-examples/releases/download/download/guide.mcaddon">
-    Download Add-On
+    アドオンをダウンロード
 </Button>
 
-To install, simply unzip the behavior pack into the Minecraft folder: `com.mojang\development_behavior_packs` or `com.mojang\development_*_packs`, depending on which pack you downloaded.
+インストールするには、ダウンロードしたパックに応じて、ビヘイビアパックを Minecraft フォルダーの `com.mojang\development_behavior_packs` または `com.mojang\development_*_packs` に解凍してください。

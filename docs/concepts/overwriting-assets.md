@@ -1,6 +1,6 @@
 ---
-title: Overwriting Assets
-description: Overwriting assets explained.
+title: アセットの上書き
+description: アセットの上書きについての説明です。
 tags:
     - intermediate
 mentions:
@@ -10,33 +10,33 @@ mentions:
     - SmokeyStack
 ---
 
-## Add-on Layering
+## アドオンのレイヤー構造
 
-The add-on system is built layer by layer, where each pack is added _on top_ of the ones before it. Even if you only have a single pack added, there is an implicit _vanilla_ pack which is always added. When you add custom content, this content will have full access to all vanilla files.
+アドオンシステムはレイヤーごとに構築されており、各パックはそれ以前のパックの _上_ に追加されます。1 つのパックしか追加していなくても、常に _バニラ_ パックが暗黙的に追加されています。カスタムコンテンツを追加すると、そのコンテンツはすべてのバニラファイルに完全にアクセスできます。
 
-### Accessing Vanilla Files
+### バニラファイルへのアクセス
 
-This layered structure is very useful, because it allows us to access the files inside of vanilla, without copy/pasting them into our add-on. For example you can access `blocks/stone.png` without moving it into your add-on! Just set it as the texture for your custom entity - it will work out of the box. This is particularly useful for things like models, or render controllers, or sounds.
+このレイヤー構造はとても便利です。コピーして貼り付けなくても、バニラ内のファイルへアクセスできるからです。たとえば、`blocks/stone.png` をアドオンに移動しなくても参照できます。カスタムエンティティのテクスチャとして設定するだけで、すぐに使えます。これは特に、モデル、レンダーコントローラー、音などで役立ちます。
 
-If the vanilla assets change, for example if [JAPPA](https://twitter.com/JasperBoerstra?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor) updates the stone texture, your add-on will also receive the update, since you are relying on the actual dynamic, vanilla resources.
+バニラのアセットが変更された場合、たとえば [JAPPA](https://twitter.com/JasperBoerstra?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor) が石のテクスチャを更新すると、あなたのアドオンにもその更新が反映されます。なぜなら、実際のデータを参照しているからです。
 
-You should try to use this system of layering as often as you can. If you don't _need_ to copy/paste something into your add-on, don't.
-
-:::warning
-It is never OK to make an add-on inside of a copy of the vanilla resource/behavior pack. This will make the download for your add-on incredibly huge, and will reduce performance. Always begin with a blank add-on, then copy/paste the files you want to overwrite.
-:::
-
-## Overwriting Assets
-
-Pack Layering also allows us to overwrite vanilla assets, by _overwriting_ them with a file that shares the same path, or the same identifier. Our new file will replace the one being used in vanilla, allowing us to change textures, sounds, entity behavior, etc.
+このレイヤー構造は、できるだけ頻繁に活用してください。アドオンに何かをコピーして貼り付ける必要がないなら、しないほうがよいです。
 
 :::warning
-Different resources have different methods of overwriting, so be careful to use the right method for each type!
+バニラの resource pack / behavior pack を丸ごとコピーした中にアドオンを作るのは、絶対にやめてください。そうするとアドオンのダウンロードサイズが非常に大きくなり、パフォーマンスも低下します。必ず空のアドオンから始めて、上書きしたいファイルだけをコピーして貼り付けてください。
 :::
 
-### Overwriting by Path
+## アセットの上書き
 
-Assets that are referenced by _path_, and do _not have an identifier_ can be overwritten by simply placing a new asset into the same path. The following can be overwritten in this way:
+パックのレイヤー構造を使うと、同じパスまたは同じ identifier を持つファイルでバニラのアセットを _上書き_ できます。新しいファイルはバニラで使われているものを置き換え、テクスチャ、音、エンティティの挙動などを変更できます。
+
+:::warning
+アセットごとに上書きの方法は異なるので、各種類に対して正しい方法を使ってください！
+:::
+
+### パスによる上書き
+
+_パス_ で参照され、_identifier を持たない_ アセットは、同じパスに新しいアセットを置くだけで上書きできます。次のものはこの方法で上書きできます。
 
 -   Functions
 -   Loot tables
@@ -44,15 +44,15 @@ Assets that are referenced by _path_, and do _not have an identifier_ can be ove
 -   Sounds
 -   Trade Tables
 
-When you overwrite these files, the overwriting is absolute: The new asset will fully replace the old asset.
+これらのファイルを上書きすると、その上書きは完全です。新しいアセットが古いアセットを完全に置き換えます。
 
 :::tip
-**Example**: If you would like to replace the redstone ore texture, simply place a new file at `textures/blocks/redstone_ore.png`.
+**例**: レッドストーン鉱石のテクスチャを置き換えたい場合は、`textures/blocks/redstone_ore.png` に新しいファイルを置くだけです。
 :::
 
-### Overwriting by Identifier
+### identifier による上書き
 
-Many assets are defined not by their name, but by their identifier! To overwrite these assets, simply create a new file that shares the same identifier, regardless of file-path. The following can be overwritten in this way:
+多くのアセットは、名前ではなく identifier で定義されています。これらを上書きするには、ファイルパスに関係なく、同じ identifier を持つ新しいファイルを作成すればよいです。次のものはこの方法で上書きできます。
 
 -   BP Entities
 -   RP Entities
@@ -64,22 +64,22 @@ Many assets are defined not by their name, but by their identifier! To overwrite
 -   Particles
 -   Render Controllers
 
-When you overwrite these files, the overwriting is absolute: The new asset will fully replace the old asset.
+これらのファイルを上書きすると、その上書きは完全です。新しいアセットが古いアセットを完全に置き換えます。
 
 :::tip
-**Example**: If you would like to make Ghasts have higher health, simply create a new BP entity with the `minecraft:ghast` identifier, and all the behaviors required to make the ghast function.
+**例**: ガストの体力を増やしたい場合は、`minecraft:ghast` という identifier を持つ新しい BP entity を作成すれば、ガストが機能するために必要な振る舞いをまとめて定義できます。
 
-Remember, entity files do not merge together, so you will first need to copy/paste the entire BP Ghast file, and _then_ edit the health. Simply creating a `minecraft:ghast` with a high health component inside will not work.
+エンティティファイルは自動で結合されないことを忘れないでください。まず BP の Ghast ファイル全体をコピーして貼り付け、その _あと_ で体力を編集する必要があります。単に `minecraft:ghast` と高い体力コンポーネントだけを入れても機能しません。
 :::
 
-### Overwriting via Reference File
+### 参照ファイルによる上書き
 
-Many assets can also be registered into some kind of "registration system" file. These files are interesting, because unlike the other asset types, they are _merged together_ instead of _overwritten_. This means that when you define these files, you do not need to copy from the vanilla resources. You can simply start with a blank file, and then overwrite the specific definitions you want.
+多くのアセットは、ある種の「登録システム」ファイルに登録することもできます。これらのファイルは、他のアセット種類と違って _上書き_ ではなく _結合_ されるのが特徴です。つまり、これらのファイルを定義するときは、バニラリソースからコピーする必要がありません。空のファイルから始めて、上書きしたい定義だけを置き換えればよいのです。
 
-The following files work in this way:
+この方法で機能するファイルは次のとおりです。
 
--   All UI files
--   [All language files](/text/text-intro)
+-   すべての UI ファイル
+-   [すべての言語ファイル](/text/text-intro)
 -   `item_texture.json`
 -   `flipbook_textures.json`
 -   `terrain_texture.json`
@@ -88,7 +88,7 @@ The following files work in this way:
 -   `sound_definitions.json`
 
 :::tip
-**Example:** Lets say you want to override the `sugar` texture, using the reference files. You can do so by creating a new `item_texture.json`, with the following contents:
+**例**: 参照ファイルを使って `sugar` のテクスチャを上書きしたいとします。次の内容の新しい `item_texture.json` を作成すればできます。
 
 <CodeHeader></CodeHeader>
 
@@ -102,19 +102,19 @@ The following files work in this way:
 }
 ```
 
-This _definition_ will be merged with the vanilla `item_texture.json`, and will override the short-name `sugar`. When the vanilla item accesses this short-name, it will get a reference to your custom texture path, instead of the actual texture path to sugar.
+この _定義_ はバニラの `item_texture.json` と結合され、短い名前 `sugar` を上書きします。バニラのアイテムがこの短い名前を参照すると、実際の sugar のテクスチャパスではなく、あなたのカスタムテクスチャパスを参照するようになります。
 :::
 
-## Overwriting Dangers
+## 上書きの危険性
 
-Since add-ons mostly _overwrite_ each other rather than _merge_, it can be very difficult to get two incompatible add-ons to work together. For example, if you try to combine two add-ons that overwrite the creeper behavior (for example, one makes them very fast, and one makes them very large) the add-on you have applied _second_ will overwrite the first.
+アドオンは多くの場合、_結合_ よりも _上書き_ を行うため、互換性のない 2 つのアドオンを一緒に動かすのはとても難しいことがあります。たとえば、クリーパーの挙動を上書きする 2 つのアドオン（片方はとても速くし、もう片方はとても大きくする）を組み合わせようとすると、_後から_ 適用したアドオンが先のものを上書きします。
 
-This is mostly a problem with `player.json` (in either the RP or the BP), since this file is often used for gameplay purposes.
+これは主に `player.json`（RP でも BP でも）で問題になります。このファイルはゲームプレイ用途でよく使われるためです。
 
-## Things that Cannot be Overwritten
+## 上書きできないもの
 
-Not everything can be overwritten, the following is a list of things that cannot be overwritten using any of the described methods:
+すべてが上書きできるわけではありません。次のものは、ここで説明したいずれの方法でも上書きできません。
 
--   Vanilla items (Not all)
--   Vanilla blocks
--   Vanilla fogs (create a fog with another namespace and change it everywhere it is used)
+-   バニラアイテム（すべてではない）
+-   バニラブロック
+-   バニラの fogs（別の namespace で fog を作成し、使われているすべての場所を変更してください）

@@ -1,7 +1,7 @@
 ---
-title: Custom Glass
+title: カスタムガラス
 example: custom_glass
-description: This page will show you how to use material instances to allow texture translucency on full blocks.
+description: このページでは、material instances を使ってフルブロックにテクスチャの半透明表現を持たせる方法を紹介します。
 category: Vanilla Re-Creations
 tags:
     - beginner
@@ -14,29 +14,29 @@ mentions:
 ---
 
 :::tip FORMAT VERSION 1.26.10
-This example requires basic knowledge of blocks to understand.
-Check out the [blocks guide](/blocks/blocks-intro) before starting.
+この例を理解するには、ブロックの基本知識が必要です。
+始める前に [ブロックガイド](/blocks/blocks-intro) を確認してください。
 :::
 
-Making glass blocks may seem like a simple task, however when you first try your block may appear opaque.
-This page will show you how to use [material instances](/blocks/block-components#material-instances) to allow texture translucency and [culling rules](/blocks/block-culling) to hide unwanted block faces.
+ガラスブロックを作るのは簡単そうに見えますが、最初に作るとブロックが不透明に見えることがあります。
+このページでは、[material instances](/blocks/block-components#material-instances) を使ってテクスチャに半透明表現を持たせ、[culling rules](/blocks/block-culling) で不要なブロック面を隠す方法を紹介します。
 
-By the end you should be able to create something like this!
+最終的には、次のようなものを作れるようになります。
 
-![A collection of custom glass blocks](showcase.png)
+![カスタムガラスブロックのコレクション](showcase.png)
 
-## Block Model
+## ブロックモデル
 
-[Vanilla block models](/blocks/vanilla-block-models) cannot have culling rules applied.
-Therefore, we need to create our own full block model in order for our glass to appear correctly.
+[バニラのブロックモデル](/blocks/vanilla-block-models) にはカリングルールを適用できません。
+そのため、ガラスを正しく表示するには独自のフルブロックモデルを作成する必要があります。
 
-<Spoiler title="Custom Glass Model JSON">
+<Spoiler title="カスタムガラスモデル JSON">
 
 <ExampleFile path="RP/models/blocks/custom_glass.geo.json" />
 
 </Spoiler>
 
-## Initial Block JSON
+## 初期ブロック JSON
 
 <CodeHeader>BP/blocks/custom_glass.json</CodeHeader>
 
@@ -68,19 +68,19 @@ Therefore, we need to create our own full block model in order for our glass to 
 }
 ```
 
-## Applying Sounds
+## サウンドの適用
 
 <ExampleFile path="RP/blocks.json" />
 
-## Glass Block Culling
+## ガラスブロックのカリング
 
-Currently, our custom glass doesn't have any culling applied.
+今のところ、カスタムガラスにはカリングが適用されていません。
 
-This means that, when multiple glass blocks are next to each other, there will be faces separating them:
+つまり、複数のガラスブロックが隣り合っていると、それらを区切る面が残ります。
 
-![A collection of custom glass blocks without culling](without_culling.png)
+![カリングなしのカスタムガラスブロックのコレクション](without_culling.png)
 
-### Block Culling JSON
+### ブロックカリング JSON
 
 <Spoiler title="Custom Glass Culling Rules JSON">
 
@@ -88,7 +88,7 @@ This means that, when multiple glass blocks are next to each other, there will b
 
 </Spoiler>
 
-### Applying Culling Rules
+### カリングルールの適用
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 

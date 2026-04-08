@@ -1,5 +1,5 @@
 ---
-title: "Intro to Particles"
+title: パーティクル入門
 category: General
 tags:
     - guide
@@ -7,38 +7,38 @@ mentions:
     - SirLich
     - MedicalJewel105
     - TheItsNameless
-description: Introduction to Minecraft Bedrock particles.
+description: Minecraft Bedrock のパーティクル入門です。
 ---
 
-## Particle Systems
+## パーティクルシステム
 
-A [particle system](https://www.wikiwand.com/en/Particle_system) is a technique in game physics, motion graphics, and computer graphics that uses many small sprites to create convincing effects such as smoke, fire, or swarms of insects. You can create new particle systems in the Bedrock Edition of Minecraft by using your own custom textures, and your own movement logic. This makes particles extremely fun and powerful!
+[パーティクルシステム](https://www.wikiwand.com/en/Particle_system) は、ゲーム物理、モーショングラフィックス、コンピューターグラフィックスで使われる手法で、小さなスプライトを多数使って、煙、火、虫の群れのような説得力のある効果を作り出します。Bedrock Edition の Minecraft では、自分のカスタムテクスチャと独自の動きのロジックを使って、新しいパーティクルシステムを作れます。これにより、パーティクルは非常に楽しく、強力になります！
 
-The MoLang integration in particles is also extremely well developed, which allows you to pass data between different particles, or between an entity and a particle.
+パーティクルにおける MoLang の統合も非常によく整備されており、異なるパーティクル間や、エンティティとパーティクルの間でデータを受け渡しできます。
 
-### Particles
+### パーティクル
 
-A 'particle', or a 'particle instance' is a single sprite (texture) which is placed in 3D space, and has its own logic for how to move about and change its appearance. Some examples of a particle could include:
+「パーティクル」または「particle instance」は、3D 空間に配置され、それ自体がどう動き、どのように見た目を変えるかのロジックを持つ 1 つのスプライト（テクスチャ）です。パーティクルの例には次のようなものがあります。
 
--   A single snowflake
--   A single raindrop
--   A single wisp of smoke
+-   1 枚の雪の結晶
+-   1 つの雨粒
+-   ひと筋の煙
 
-### Emitters
+### エミッター
 
-An 'emitter' or 'particle emitter' is a system that can spawn many particles, either all at once (explosion), or over time (steady). Emitters have their own logic for how to move, how many particles to spawn, and where. Some examples of emitters could include:
+「エミッター」または「particle emitter」は、多数のパーティクルを一度に（爆発）または時間をかけて（持続的に）生成できるシステムです。エミッターには、どう動くか、いくつ生成するか、どこで生成するかの独自ロジックがあります。エミッターの例には次のようなものがあります。
 
--   A snowstorm (creates snowflakes)
--   A rainstorm (creates raindrops)
--   A smokey chimney (creates smoke wisps)
+-   吹雪（雪の結晶を生成する）
+-   雨（雨粒を生成する）
+-   煙突の煙（煙の筋を生成する）
 
-## Creating Your First Particle
+## 最初のパーティクルを作る
 
-To create a particle, you need a resource pack, a texture, and a particle definition file:
+パーティクルを作るには、resource pack、テクスチャ、そして particle definition ファイルが必要です。
 
 <FolderView :paths="[
     'RP/particles/snowflake.json',
     'RP/textures/wiki/particles/snowflake.png'
 ]" />
  
-You can use [Snowstorm](https://jannisx11.github.io/snowstorm/) to create particles.
+[Snowstorm](https://jannisx11.github.io/snowstorm/) を使うと、パーティクルを作成できます。

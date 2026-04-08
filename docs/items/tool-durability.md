@@ -1,5 +1,5 @@
 ---
-title: Tool Durability
+title: ツールの耐久値
 category: Tutorials
 tags:
     - experimental
@@ -9,24 +9,24 @@ mentions:
     - MedicalJewel105
     - TheDoctor15
     - napstaa967
-description: Add vanilla-like durability to custom tools.
+description: カスタムツールにバニラ風の耐久値を追加します。
 hidden: true
 ---
 
-## Introduction
+## はじめに
 
-1.21.10+ items have different durability mechanic than 1.10 and 1.16 items.
-Now you need to define when will the item get durability damage and also an event that does it.
-What will be discussed on this page:
+1.21.10 以降のアイテムは、1.10 や 1.16 のアイテムとは耐久値の仕組みが異なります。
+現在は、いつアイテムが耐久ダメージを受けるかと、その処理を行うイベントを定義する必要があります。
+このページで扱う内容は次のとおりです。
 
--   Durability component
--   Event that updates durability
--   Damaging entities
--   Block breaking
--   `repair_amount` value
--   `on_tool_used` event
+-   耐久コンポーネント
+-   耐久値を更新するイベント
+-   エンティティにダメージを与える
+-   ブロックを破壊する
+-   `repair_amount` の値
+-   `on_tool_used` イベント
 
-### Components
+### コンポーネント
 
 <CodeHeader>BP/items/my_item.json#components</CodeHeader>
 
@@ -36,11 +36,11 @@ What will be discussed on this page:
 }
 ```
 
-`minecraft:durability` will give your item a set max durability
+`minecraft:durability` は、アイテムに最大耐久値を設定します。
 
-## Event
+## イベント
 
-### Item event
+### アイテムイベント
 
 <CodeHeader>BP/items/my_item.json#events</CodeHeader>
 
@@ -54,14 +54,14 @@ What will be discussed on this page:
 }
 ```
 
-When this event is called the item (`self` target) will receive durability damage.
-Looks simple, doesn't it?
+このイベントが呼ばれると、アイテム（`self` 対象）が耐久ダメージを受けます。
+簡単そうでしょう？
 
-### Script event
+### スクリプトイベント
 
-For the script methods, we'll be using a function to damage our item
+スクリプト方式では、アイテムにダメージを与える関数を使います。
 
-This function supports unbreaking on items
+この関数はアイテムの耐久力エンチャントに対応しています。
 
 <CodeHeader>BP/scripts/main.js</CodeHeader>
 
@@ -90,38 +90,38 @@ function damage_item(item) {
 }
 ```
 
-## Damaging entities
+## エンティティにダメージを与える
 
-### Using scripts
+### スクリプトを使用する
 
-:::warning Experimental Script
+:::warning 実験用スクリプト
 
-This script uses `@minecraft/server 1.9.0-beta`, which will change in the next minecraft update.
+このスクリプトは `@minecraft/server 1.9.0-beta` を使用しますが、これは次の Minecraft アップデートで変更されます。
 :::
 
-For format versions 1.20.40 and onward, `on_hurt_entity` no longer works.
+形式バージョン 1.20.40 以降では、`on_hurt_entity` は動作しなくなりました。
 
-This provides a way to damage weapons using scripts
+これは、スクリプトを使って武器の耐久値を減らす方法です
 
 <CodeHeader>BP/scripts/main.js</CodeHeader>
 
 ```js
-// Add your item IDs into this array
+// この配列にアイテム ID を追加します
 const my_items = ["wiki:silver_dagger"];
 
 world.afterEvents.entityHurt.subscribe((event) => {
-    // If there's no source entity, skip
+    // ソースとなるエンティティがなければスキップします
     if (!event.damageSource.damagingEntity) return;
 
-    // Get equipped weapon
+    // 装備中の武器を取得します
     const equipment = event.damageSource.damagingEntity.getComponent("minecraft:equippable");
     if (!equipment) return;
     const weapon = equipment.getEquipment(EquipmentSlot.Mainhand);
 
-    // If there's no weapon, skip
+    // 武器がなければスキップします
     if (!weapon) return;
 
-    // If the item is not in our item IDs, skip
+    // アイテムが対象の ID に含まれていなければスキップします
     if (!my_items.includes(weapon.typeId)) return;
     let newItem = damage_item(weapon);
     equipment.setEquipment(EquipmentSlot.Mainhand, newItem);
@@ -152,32 +152,32 @@ world.afterEvents.entityHurt.subscribe((event) => {
 }
 ```
 
-## Block breaking
+## ブロック破壊
 
-### Using scripts
+### スクリプトを使用する
 
-:::warning Experimental Script
+:::warning 実験用スクリプト
 
-This script uses `@minecraft/server 1.9.0-beta`, which will change in the next minecraft update.
+このスクリプトは `@minecraft/server 1.9.0-beta` を使用しますが、これは次の Minecraft アップデートで変更されます。
 :::
 
-For format versions 1.20.20 and onward, `on_dig` no longer works.
+形式バージョン 1.20.20 以降では、`on_dig` は動作しなくなりました。
 
-This provides a way to damage digger items by using scripts
+これは、スクリプトを使って採掘用アイテムの耐久値を減らす方法です
 
 <CodeHeader>BP/scripts/main.js</CodeHeader>
 
 ```js
-// Add your item IDs into this array
+// この配列にアイテム ID を追加します
 const my_items = ["wiki:obsidian_pickaxe"];
 
 world.afterEvents.playerBreakBlock.subscribe((event) => {
-    // If there's no item, skip
+    // アイテムがなければスキップします
     if (!event.itemStackAfterBreak) return;
-    // If the item is not in our item IDs, skip
+    // アイテムが対象の ID に含まれていなければスキップします
     if (!my_items.includes(event.itemStackAfterBreak.typeId)) return;
 
-    // If player is in creative, skip
+    // プレイヤーがクリエイティブならスキップします
     if (
         world
             .getPlayers({
@@ -215,13 +215,13 @@ world.afterEvents.playerBreakBlock.subscribe((event) => {
             },
             "speed": 8,
             "on_dig": {
-                // Defines event that should happen when block with tag wood was dug.
+                // wood タグを持つブロックが掘られたときに発生するイベントを定義します。
                 "event": "durability_update"
             }
         }
     ],
     "on_dig": {
-        // Defines event that should happen when any block was destroyed.
+        // いずれかのブロックが破壊されたときに発生するイベントを定義します。
         "event": "durability_update"
     }
 }
@@ -247,27 +247,27 @@ world.afterEvents.playerBreakBlock.subscribe((event) => {
 }
 ```
 
-Formula explanation:
+式の説明:
 
 `"context.other->q.remaining_durability + 0.05 * context.other->q.max_durability"`
 
-The _final_ durability will be durability of the first axe + durability of the second axe + 5% of 2nd axe MAX durability.
+最終的な耐久値は、1 本目の斧の耐久値 + 2 本目の斧の耐久値 + 2 本目の斧の最大耐久値の 5% になります。
 
 ## on_tool_used
 
-(This might not work now)
-`on_tool_used` is special event that can be called using tags.
-Tags work kinda like runtime identifiers for entities.
-Known tags:
+（現在は動作しない可能性があります）
+`on_tool_used` は、タグを使って呼び出せる特殊なイベントです。
+タグは、エンティティに対する実行時識別子のようなものです。
+既知のタグ:
 
-| Tag                  | Effects        | How can be called                                  |
+| Tag                  | 効果           | 呼び出し方法                                           |
 | -------------------- | -------------- | -------------------------------------------------- |
-| minecraft:is_axe     | Strips logs    | By interacting with blocks that axe interacts with |
-| minecraft:is_hoe     | Makes farmland | By interacting with blocks that hoe interacts with |
-| minecraft:is_pickaxe | Unknown        | Unknown                                            |
-| minecraft:is_sword   | Unknown        | Unknown                                            |
+| minecraft:is_axe     | 原木の樹皮を剥ぐ | 斧が作用するブロックとやり取りするとき                 |
+| minecraft:is_hoe     | 耕地にする     | クワが作用するブロックとやり取りするとき               |
+| minecraft:is_pickaxe | 不明           | 不明                                                |
+| minecraft:is_sword   | 不明           | 不明                                                |
 
-You can apply these tags this way:
+これらのタグは次のように適用できます:
 
 <CodeHeader>BP/items/my_item.json#components</CodeHeader>
 

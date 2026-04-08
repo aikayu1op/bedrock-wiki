@@ -1,6 +1,6 @@
 ---
-title: Custom Weapons
-description: Learn how to make custom weapons.
+title: カスタム武器
+description: カスタム武器の作り方を学びます。
 category: Tutorials
 tags:
     - easy
@@ -15,13 +15,13 @@ mentions:
     - QuazChick
 ---
 
-Follow along with this guide to create a custom sword item. Change it up yourself to create any weapon you want!
+このガイドに沿ってカスタムの剣アイテムを作成します。自由に変えて、好きな武器を作ってみてください。
 
-Check out the [hit entity](/items/item-events#hit-entity) event to add even more functionality to your weapon if you'd like.
+必要なら、[hit entity](/items/item-events#hit-entity) イベントを使って武器にさらに機能を追加できます。
 
-## Custom Sword Item
+## カスタム剣アイテム
 
-Like with the other item tutorials we will start by making a simple custom sword like so.
+他のアイテムチュートリアルと同様に、まずは次のようなシンプルなカスタム剣を作ります。
 
 <CodeHeader>BP/items/my_sword.json</CodeHeader>
 
@@ -69,7 +69,7 @@ Like with the other item tutorials we will start by making a simple custom sword
 }
 ```
 
-So at a bare minimum that is enough to get a sword put into the game, we still need to register the icon with the RP but thats not a massive issue as all we need to do is go to our RP folder and enter it in like so.
+これで最低限、ゲーム内に剣を入れることはできます。まだ RP 側でアイコンを登録する必要はありますが、やることは RP フォルダに移動して次のように追加するだけなので、それほど大変ではありません。
 
 <CodeHeader>RP/textures/item_texture.json</CodeHeader>
 
@@ -84,7 +84,7 @@ So at a bare minimum that is enough to get a sword put into the game, we still n
 }
 ```
 
-Here is an example texture if you do not have your own to use, just "Save As" and plop it in the `RP/textures/items` directory.
+自分用のテクスチャがない場合は、以下のサンプルを使えます。画像を「名前を付けて保存」して、`RP/textures/items` ディレクトリに入れてください。
 
 <WikiImage
     src="my_sword.png"
@@ -94,23 +94,23 @@ Here is an example texture if you do not have your own to use, just "Save As" an
     pixelated
 />
 
-## In-game
+## ゲーム内での確認
 
-Now that we have a BP containing our item's JSON definition and an RP containing the texture, we can make a new world, ensuring that we apply our add-on.
+これでアイテムの JSON 定義を含む BP と、テクスチャを含む RP がそろったので、新しいワールドを作成し、アドオンを適用できます。
 
-Once you have done all the above, go into creative mode and you should be able to find your sword by its name, or under the sword category as shown.
+ここまでできたら、クリエイティブモードに入ると、剣の名前で探すか、表示されている剣カテゴリから見つけられるはずです。
 
 ![](custom_sword.jpg)
 
-Then, if you put it in your hand, you should see it in the game like this.
+そして、手に持つと、ゲーム内では次のように見えるはずです。
 
 ![](held_sword.jpg)
 
-Now that wasn't too hard was it? You can make as many custom swords as you want now, however there is far more fun stuff you can do from here if you feel up for it.
+それほど難しくなかったはずです。これで好きなだけカスタム剣を作れますし、ここからさらに楽しいこともたくさんできます。
 
-## Tool-like Functionality
+## ツールのような機能
 
-You can also mix and match other components like `minecraft:digger` to allow you to go through web or bamboo quicker like this:
+`minecraft:digger` のような他のコンポーネントを組み合わせれば、クモの巣や竹をより速く壊せるようにもできます。
 
 <CodeHeader>minecraft:item > components</CodeHeader>
 
@@ -130,9 +130,9 @@ You can also mix and match other components like `minecraft:digger` to allow you
 }
 ```
 
-## Item Recipe
+## アイテムレシピ
 
-You should probably make a recipe for it, which is covered in previous chapters, as there isn't anything really new in there, but in case you are unsure here is an example one to make the sword with ender eyes and ender pearls.
+レシピも作っておくとよいでしょう。これは前の章で扱った内容で、特に新しい要素はありませんが、よく分からない場合に備えて、エンダーアイとエンダーパールで剣を作る例を載せておきます。
 
 <CodeHeader>BP/recipes/my_sword.json</CodeHeader>
 
@@ -170,4 +170,4 @@ You should probably make a recipe for it, which is covered in previous chapters,
 
 ![](sword_recipe.jpg)
 
-If you whack that in then you can now craft your sword in the game and hopefully go off and make any other custom swords you fancy or even bows or tridents.
+これを入れれば、ゲーム内で剣をクラフトできるようになります。そこから先は、好きなだけ別のカスタム剣を作ったり、弓やトライデントを作ったりしてみてください。

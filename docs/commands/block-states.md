@@ -1,5 +1,5 @@
 ---
-title: Block States
+title: ブロックステート
 category: General
 tags:
     - easy
@@ -8,43 +8,43 @@ mentions:
     - zheaEvyline
     - SmokeyStack
     - ThomasOrs
-description: Learn how to use block states in commands.
+description: コマンドでブロックステートを使う方法を学びます。
 ---
 
-## Introduction
+## はじめに
 
-[Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
+[Bedrock Commands Community (BCC) Discord が出典です](https://bedrockcommands.org/)
 
-Block States, also known as Block Properties, define how blocks appear or behave, including attributes like direction, color, variant, or power state. These are extensively used in commands such as `/clone`, `/execute`, `/fill`, `/setblock`, and `/testforblock`.
+ブロックステートはブロックプロパティとも呼ばれ、向き、色、バリアント、電源状態など、ブロックの見た目や挙動を定義します。これらは `/clone`、`/execute`、`/fill`、`/setblock`、`/testforblock` などのコマンドで広く使われています。
 
-Before version 1.19.70, Bedrock Edition relied on Aux values (metadata) to define blocks. However, this approach has been replaced by Block States. Aux values are no longer supported in newer engine versions.
+1.19.70 より前の Bedrock Edition では、ブロック定義に Aux 値（メタデータ）を使っていました。しかし、この方法はブロックステートに置き換えられました。Aux 値は新しいエンジン版ではサポートされていません。
 
-### Example Conversion
+### 変換例
 
 <CodeHeader></CodeHeader>
 
 ```yaml
-# Aux value example:
+# Aux 値の例:
 /setblock ~ ~ ~ wool 1
 
-# Equivalent using Block States:
+# ブロックステートを使った同等の例:
 /setblock ~ ~ ~ wool ["color"="orange"]
 ```
 
--   Commands using Aux values will function in older versions or in Behavior Packs with `min_engine_version` set to 1.19.63 or below.
--   Updating the `min_engine_version` to 1.19.70 or above requires transitioning to Block States.
+-   Aux 値を使うコマンドは、古いバージョンや `min_engine_version` が 1.19.63 以下に設定されたビヘイビアパックでは動作します。
+-   `min_engine_version` を 1.19.70 以上に更新するには、ブロックステートへの移行が必要です。
 
-## Syntax and Examples
+## 構文と例
 
-### Syntax
+### 構文
 
--   Block States are enclosed in square brackets (`[]`).
--   Separate multiple states with a comma (`,`).
--   Use quotation marks (`" "`) around strings (e.g., `"birch"`, `"orange"`).
--   Integer (`0`, `1`, etc.) and boolean (`true`, `false`) values should not use quotation marks.
--   Empty brackets (`[]`) or the absence of brackets default to `0` (e.g., `wool []` or simply `wool` corresponds to white wool).
+-   ブロックステートは角括弧 (`[]`) で囲みます。
+-   複数のステートはカンマ (`,`) で区切ります。
+-   文字列には引用符 (`" "`) を付けます（例: `"birch"`, `"orange"`）。
+-   整数 (`0`, `1` など) と真偽値 (`true`, `false`) には引用符を付けません。
+-   空の角括弧 (`[]`) または括弧なしの場合は `0` が既定になります（例: `wool []` や単なる `wool` は白い羊毛を意味します）。
 
-### Examples
+### 例
 
 <CodeHeader></CodeHeader>
 
@@ -55,29 +55,29 @@ Before version 1.19.70, Bedrock Edition relied on Aux values (metadata) to defin
 /setblock ~ ~ ~ wool []
 ```
 
-## Key Concepts for Beginners
+## 初心者向けの要点
 
-1. **Integers**: Whole numbers used to define ranges (e.g., `["redstone_power"=10]` for redstone strength).
-2. **Booleans**: Represent `true/false` states (e.g., `["stripped_bit"=true]` for stripped logs).
-3. **Strings**: Represent predefined text inputs (e.g., `["wood_type"="spruce"]`).
+1. **整数**: 範囲を定義するための整数値（例: レッドストーン強度を表す `["redstone_power"=10]`）。
+2. **真偽値**: `true/false` の状態を表します（例: 剥いだ原木の `["stripped_bit"=true]`）。
+3. **文字列**: あらかじめ決まったテキスト入力を表します（例: `["wood_type"="spruce"]`）。
 
-## Reference for Block States
+## ブロックステートの参照
 
-A comprehensive list of Block States is available at:
+ブロックステートの包括的な一覧は次のページにあります。
 [Block States List](https://learn.microsoft.com/en-us/minecraft/creator/reference/content/blockreference/examples/blockstateslist)
 
--   **Note**: Block States listed in `camelCase` format on the site must be converted to `snake_case` in commands.
-    -   Example: `buttonPressedBit` → `"button_pressed_bit"`
+-   **注**: サイト上で `camelCase` 形式で載っているブロックステートは、コマンドでは `snake_case` に変換する必要があります。
+    -   例: `buttonPressedBit` → `"button_pressed_bit"`
 
-## Conversion Tool
+## 変換ツール
 
-Use this [Lookup Table](https://auxval-to-blockstates.netlify.app/) by _@SmokeyStack_ to convert Aux values to Block States.
+_@SmokeyStack_ によるこの [Lookup Table](https://auxval-to-blockstates.netlify.app/) を使うと、Aux 値をブロックステートに変換できます。
 
-## Known Limitations
+## 既知の制限
 
-Commands using blocks must specify all corresponding Block States or leave the Block States field empty. Missing any required states causes the command to fail.
+ブロックを使うコマンドでは、対応するブロックステートをすべて指定するか、ブロックステート欄を空にする必要があります。必要なステートが 1 つでも欠けるとコマンドは失敗します。
 
-### Examples
+### 例
 
 <CodeHeader></CodeHeader>
 
@@ -89,12 +89,12 @@ Commands using blocks must specify all corresponding Block States or leave the B
 /execute if block ~~~ stone_button ["button_pressed_bit"=false,"facing_direction"=1] run say success
 ```
 
--   The first command works because the Block States field is empty.
--   The second command works because all relevant states (`button_pressed_bit`, `facing_direction`) are specified.
+-   最初のコマンドが動くのは、ブロックステート欄が空だからです。
+-   2つ目のコマンドが動くのは、関連するすべてのステート（`button_pressed_bit`、`facing_direction`）が指定されているからです。
 
-> **Note**: Testing a partial condition (e.g., `["button_pressed_bit"=true]`) without other states, such as `facing_direction`, will fail. Unlike entities, blocks do not yet support condition-based filtering.
+> **注**: `facing_direction` のような他のステートを指定せずに、`["button_pressed_bit"=true]` のような部分条件だけを試すと失敗します。エンティティと違い、ブロックはまだ条件ベースのフィルタリングに対応していません。
 
-### Related Bug Reports
+### 関連バグ報告
 
 -   [MCPE-133360](https://bugs.mojang.com/browse/MCPE-133360)
 -   [MCPE-168391](https://bugs.mojang.com/browse/MCPE-168391)

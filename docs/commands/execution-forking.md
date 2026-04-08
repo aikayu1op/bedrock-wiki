@@ -1,5 +1,5 @@
 ---
-title: Execution Forking
+title: 実行フォーキング
 category: Techniques
 mentions:
     - BedrockCommands
@@ -7,71 +7,71 @@ mentions:
 nav_order: 3
 tags:
     - concept
-description: Learn how to utilize Multiplicative Execution Forking (MEF) to instance commands and increase execution frequency.
+description: Multiplicative Execution Forking（MEF）を使ってコマンドをインスタンス化し、実行頻度を高める方法を学びます。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-**Execution Forking** (also known as *Instancing* or *Nesting*) is a technique used to trigger a single command multiple times within the same tick. This is achieved by leveraging selectors that target multiple entities, effectively "forking" the execution path for each target found.
+**Execution Forking**（*Instancing* や *Nesting* とも呼ばれます）は、1つのコマンドを同じティック内で複数回実行するための手法です。複数のエンティティを対象にするセレクターを活用し、見つかった対象ごとに実行経路を「分岐」させることで実現します。
 
-### The Problem: Speed vs. Efficiency
-Imagine you are creating a bullet system. To ensure the bullet doesn't pass through walls, you need to check for collisions every 1 block. If you move the bullet 1 block per tick, it will appear slow and laggy. 
+### 問題: 速度と効率
+弾丸システムを作っているとします。弾が壁をすり抜けないようにするには、1 ブロックごとに衝突判定を行う必要があります。ところが、ティックごとに 1 ブロックしか動かさないと、見た目が遅く、もたついて見えます。
 
-To make it travel 32 blocks instantly while still checking for collisions, you need to run the move-and-check logic 32 times in a single tick. Manually placing 32 command blocks is inefficient and difficult to maintain. **Execution Forking** solves this by using a single command to generate those 32 instances.
+衝突判定を維持したまま 32 ブロックを一気に進ませるには、移動と判定のロジックを 1 ティック内で 32 回実行する必要があります。これを手動で 32 個のコマンドブロックに分けるのは非効率で、保守も大変です。**Execution Forking** は、1 つのコマンドからその 32 インスタンスを生成することでこれを解決します。
 
-## Understanding Instancing
+## インスタンス化の理解
 
-In Bedrock Edition, just because you have one command block does not mean it is only running one command. When you use a selector (like `@a` or `@e`) that identifies multiple targets, you create a new **instance** of that command for every entity selected.
+Bedrock Edition では、コマンドブロックが 1 つだからといって、実行されるコマンドも 1 つとは限りません。`@a` や `@e` のように複数対象を識別するセレクターを使うと、選択されたエンティティごとにそのコマンドの新しい **インスタンス** が作成されます。
 
-Consider this command:
+次のコマンドを考えてみてください。
 
 ```yaml
 execute at @a run particle minecraft:basic_flame_particle ~ ~ ~
 ```
 
-If there are 5 players online, the `at @a` subcommand forks the execution. Instead of one particle command, it runs **5 separate instances** (one at the location of each player).
+オンラインのプレイヤーが 5 人いる場合、`at @a` サブコマンドが実行を分岐させます。1 回の粒子コマンドの代わりに、**5 つの別インスタンス** が実行されます（それぞれ各プレイヤーの位置で）。
 
 ## Multiplicative Execution Forking (MEF)
 
-By "nesting" these execution forks, you can exponentially increase the number of times a command runs. This is often called **Execute Multipliers** or **Nesting**.
+これらの実行分岐を「ネスト」すると、コマンドの実行回数を指数的に増やせます。これは **Execute Multipliers** や **Nesting** と呼ばれることがあります。
 
-When you stack multiple `as` or `at` subcommands, each new fork multiplies the existing ones.
+`as` や `at` サブコマンドを複数重ねると、新しい分岐ごとに既存の分岐数が乗算されます。
 
-### The Math of Nesting
+### ネストの数式
 
-The total number of instances created follows a simple power formula:
+作成されるインスタンスの総数は、次の簡単な累乗式に従います。
 
 ` Instances = n^x `
 
-Where ` n ` is the number of entities targeted per subcommand, and ` x ` is the number of times you nest the execution.
+ここで ` n ` は各サブコマンドで対象になるエンティティ数、` x ` は実行をネストする回数です。
 
-### Example: Stacking Branches
+### 例: 分岐を重ねる
 
 ```yaml
 execute as @e[c=2] as @e[c=2] as @e[c=2] run say hi
 ```
 
-In this example, the command will say `hi` **8 times** in a single tick:
+この例では、コマンドは 1 ティック内で `hi` を **8 回** 言います。
 
-1.  **First Fork:** The initial instance targets 2 entities $\rightarrow$ **2 instances**.
-2.  **Second Fork:** Those 2 instances each target 2 more entities $\rightarrow$ **4 instances**.
-3.  **Third Fork:** Those 4 instances each target 2 more entities $\rightarrow$ **8 instances**.
+1.  **最初の分岐:** 最初のインスタンスが 2 エンティティを対象にします $\rightarrow$ **2 インスタンス**。
+2.  **2 回目の分岐:** その 2 インスタンスがそれぞれさらに 2 エンティティを対象にします $\rightarrow$ **4 インスタンス**。
+3.  **3 回目の分岐:** その 4 インスタンスがそれぞれさらに 2 エンティティを対象にします $\rightarrow$ **8 インスタンス**。
 
 <br>
 <Card title="Execute Visualizer" link="https://komaramune.github.io/execute-visualizer/" image="/assets/images/icons/levers.png">
 
-For convenience, you can use this interactive web-tool developed by **@komaramune** to visualise MEF and command context trees.
+参考として、**@komaramune** が作成したこの対話型 Web ツールを使うと、MEF とコマンドコンテキストツリーを可視化できます。
 
 </Card>
 
-### Common Use Cases
+### 主な使用例
 
-* **Raycasting:** Forcing a "bullet" or "laser" to move forward multiple steps in one tick to prevent clipping through walls.
-* **Mass Entity Updates:** Applying complex logic to every entity in a loaded area without using multiple repeating command blocks.
-* **High-Speed Timers:** Running a scoreboard timer multiple times per tick for sub-tick precision.
+* **レイキャスト:** 「弾」や「レーザー」を 1 ティック内で複数ステップ前進させ、壁抜けを防ぎます。
+* **大量エンティティ更新:** 複数の反復コマンドブロックを使わずに、読み込まれている範囲のすべてのエンティティへ複雑なロジックを適用します。
+* **高速タイマー:** ティック未満の精度が必要なときに、スコアボードタイマーを 1 ティック内で複数回実行します。
 
 :::tip
-Always use `c=` (count) or `type=` limits when forking. If you accidentally fork `@e` (all entities) without a limit, you can create hundreds of instances instantly, leading to significant server lag or a "Command Overflow."
+分岐させるときは、必ず `c=`（count）または `type=` の制限を使ってください。制限なしで `@e`（すべてのエンティティ）を誤って分岐させると、瞬時に何百ものインスタンスが生成され、深刻なサーバーラグや「Command Overflow」を引き起こすことがあります。
 :::

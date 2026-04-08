@@ -5,190 +5,190 @@ mentions:
     - SmokeyStack
 ---
 
-This Q&A took place in the [Bedrock Add-Ons discord](https://discord.gg/uZF75ZxcJq). Nine Mojang/Microsoft employees joined us to answer questions about the custom blocks and items API. Questions were community sourced.
+この Q&A は [Bedrock Add-Ons discord](https://discord.gg/uZF75ZxcJq) で行われました。カスタムブロックとアイテムの API について答えるため、Mojang/Microsoft の社員 9 名が参加しました。質問はコミュニティから集められたものです。
 
 :::warning
-Not all messages were copied over, and some were copy-edited. If you want to see everything, join the above discord, and get the "events archive" role.
+すべての発言がそのまま転記されているわけではなく、一部は文面を整えています。全部を見たい場合は、上記の discord に参加して「events archive」ロールを取得してください。
 :::
 
-## HCF Deprecated/Removed Features Replacement?
+## HCF の非推奨/削除機能の代替は？
 
--   **Q**: Are there any plans to bring back all or some of the deprecated/removed features from the HCF experiment whether a straight up reintroduction or via a new method? Two components as an example are `minecraft:knockback_resistance` for items and `minecraft:unwalkable` for blocks.
--   **A**: When we were working through this, we prioritized the pieces of HCF that were being used, and the ones that were not, were not included with the initial work, however this should be in our backlog to go after in the future (and if it isn't, it will be after this Q&A) thank you for the feedback!
+-   **Q**: HCF 実験で非推奨・削除された機能を、復活または新しい方法で戻す予定はありますか？ 例として、item の `minecraft:knockback_resistance` や block の `minecraft:unwalkable` があります。
+-   **A**: この作業では、使われていた HCF の部分を優先しました。使われていなかった部分は初期実装には含めていませんが、将来的に取り組むバックログに入っています。もし入っていない場合でも、この Q&A の後には入れます。フィードバックありがとうございます。
 
-## Why the Recent Changes?
+## 最近の変更の理由
 
--   **Q**: How did you come up with the very interesting recent changes and what motivated you? Why was replacing hcf with custom components a good idea in your opinion?
--   **A**: HCF events had some issues with stability, expandability, and was overall (we felt) clunky to use. Eventually it was decided that we needed a completely different solution for long term support of the feature. Scripting is far more stable, easier to expand with more functionality, and is more inline with other existing features in addition to being more powerful. We iterated on several approaches to integrating scripting and JSON events which eventually led us to what we have today with custom components. We do have a few improvements coming to custom components sometime next year that we are excited to share with you all! Overall, custom components we thought provided more power to creators and had far better long term support from the Bedrock platform than HCF events did.
+-   **Q**: 最近の興味深い変更はどういう考えで決めたのですか？ なぜ HCF を custom components に置き換えるのが良いと思ったのですか？
+-   **A**: HCF events は、安定性、拡張性、使いやすさの面で課題があり、全体として使いにくいと感じていました。そこで、この機能を長期的に支えるには別の解決策が必要だと判断しました。Scripting はかなり安定していて、機能拡張もしやすく、ほかの既存機能とも整合しやすいうえ、より強力です。Scripting と JSON events をどう統合するかいくつか試行錯誤し、最終的に今の custom components にたどり着きました。custom components には来年のどこかでいくつか改善も予定していて、みなさんに共有できるのを楽しみにしています。総じて、custom components のほうが creators により多くの力を与えられ、Bedrock プラットフォームによる長期的なサポートも HCF events よりずっと良いと考えています。
 
-## Custom Tile Entities
+## カスタム Tile Entities
 
--   **Q**: Will there be such an opportunity to create your own blocks - chests?
--   **A**: That's not on our near term roadmap, but we are actively looking at all of the block behaviors that can't be replicated in data!
--   **Q**: Are there any plans of adding tile entities? Or, at least, block animations?
--   **A**: Definitely a neat area to explore. I think with custom block components (script) it makes it a _lot_ easier to "fake" this. I think most of the features of block entities can be emulated with that. One thing you can't easily do is block-specific storage (like a chest inventory) so that would be really nice to enable somehow.
+-   **Q**: 自分だけの block - chest のようなものを作れる予定はありますか？
+-   **A**: 近い将来のロードマップには入っていませんが、データでは再現できない block の挙動は積極的に検討しています。
+-   **Q**: tile entities を追加する予定はありますか？ 少なくとも block アニメーションはどうでしょう？
+-   **A**: とても面白い領域です。custom block components（script）を使うと、かなり簡単に「それっぽく」できます。block entities の機能の大半は、それで代替できると思います。ひとつ難しいのは、chest inventory のような block 固有の保存領域です。そこは何らかの形で実現できると嬉しいですね。
 
-## Item Description Component
+## アイテム説明コンポーネント
 
--   **Q**: Are there any plans to add an item component to items that allows us to add descriptions to them? A good example in vanilla are music discs and goat horns. A pretty good use-case would be for custom music discs, or an item that has a short description on how to use it. It can even be useful if we make our own potions, because this way we can list our effects using this component.
--   **A**: This is an interesting idea to explore! It is not currently in our near term roadmap though. As mentioned, the scripting API `getLore` can assist here but wont work in the creative menu
+-   **Q**: item に説明文を追加できる item component を入れる予定はありますか？ バニラでの例としては music disc や goat horn があります。カスタム music disc や、使い方を短く説明する item に便利そうです。自作 potion の効果一覧にも使えそうです。
+-   **A**: 面白い案です。ただし、現時点では近い将来のロードマップには入っていません。前述のとおり、scripting API の `getLore` が役立つことはありますが、creative menu では使えません。
 
 ## Custom Components
 
--   **Q**: Are there any plans to allow data binding to custom components instead of the has or does not have interface we have currently?
--   **A**: This is a feature we are looking forward to doing and will be coming sometime next year. We want to flatten custom components into something that looks and feels more like other components.
--   **Q**: Does this include parameters or will they be coming sooner? Parameters would make custom components much more shareable across items and blocks, as well as between projects.
--   **A**: Both custom component flattening and parameters are likely to be released together, and yes will also likely require scripting version 2.0.0. For now we are saying that both of these features will be coming sometime next year
+-   **Q**: 今の「持っている/持っていない」判定ではなく、custom components に data binding を許可する予定はありますか？
+-   **A**: これはぜひやりたい機能で、来年のどこかで来る予定です。custom components を、ほかの components に近い見た目と使い心地の形へ平坦化したいと考えています。
+-   **Q**: それには parameters も含まれますか？ それとも先に来ますか？ parameters があると、item や block、さらにプロジェクト間でも custom components を共有しやすくなります。
+-   **A**: custom component の平坦化と parameters は一緒に出る可能性が高く、はい、scripting version 2.0.0 が必要になる可能性も高いです。今のところ、この 2 つは来年のどこかで来ると考えています。
 
-## Work more with the ScriptAPI:
+## ScriptAPI でもっとやってほしいこと
 
--   **Q**: Idk about the others here what they have been doing before creating Addons, but I'm coming from a JavaScript Website Creation/ Discord Bot Creation background and I find it relatively hard to work with all those JSON files well I'm not suggesting to completely abolish them but I would love to leave the Visual Features of the Block and Items into the JSON files and move everything else that has to do with Events, Functions etc into the API, that's a common thing in developing mostly anything that the main part is in a Coding Language like JavaScript or for Minecraft Java well Java. I might make some people angry while saying that (The HCF Removal also had some hate) but yeah me as a general development found it weird and confusing when starting with Addon Creation
+-   **Q**: ほかの人が Addons を作る前に何をしていたかは分かりませんが、私は JavaScript で Web サイトや Discord Bot を作ってきました。大量の JSON ファイルを扱うのはかなり難しいです。JSON を完全に廃止してほしいわけではありませんが、block と item の見た目に関する部分だけを JSON に残し、それ以外の events や functions などは API に移したいです。JavaScript や Java のように、主要部分がコード言語にある開発ではよくある構成だと思います。そう言うと怒る人もいるかもしれませんが（HCF 廃止のときにも反発がありました）、Add-on 作成を始めたときは全体的に奇妙で分かりにくいと感じました。
 
-In my Head it would be something like this
+    私の頭の中ではこんな感じです。
 
--   Your JSON File ( Got the Basic information about your Block/ Item like Texture, Geometry, Category etc.)
--   Import that JSON file into your Script
--   Register the Block/Item
--   And use API Features. (Idk for example item.attackDamage(Int) etc. or generally everything that has nothing to do with the Visual side of it so mostly the behavior of the Block/Item)
+    -   JSON ファイルには block/item の基本情報（texture、geometry、category など）だけ入れる
+    -   その JSON を script に読み込む
+    -   block/item を登録する
+    -   そして API を使う（たとえば `item.attackDamage(Int)` のようなもの、あるいは見た目以外の要素、つまり主に block/item の挙動に関するもの）
 
--   **A**: I think in general we've been slowly moving towards "JSON is definition, scripting is logic" which I _think_ is the idea of your post (although with more "magic hookups", no need to import the JSON into script).
+-   **A**: 全体としては、私たちは少しずつ「JSON は定義、scripting はロジック」という方向に進んでいます。たぶんそれがあなたの投稿の意図に近いと思います（ただし、もっと「魔法のつなぎ込み」があり、JSON を script に import する必要はありません）。
 
-## Documentation
+## ドキュメント
 
--   **Q**: Are there plans to update MS learn or wiki.bedrock with working examples of JavaScript?
--   **A**: From my team side, we recognized the gap in some of the documentation and moving forward part of our definition of done will be to add better usage examples to the learning portal as we release more APIs. That being said, for now it will probably be TypeScript examples. I also recognize the learning curve for TypeScript can be kind of steep, so I will take this idea back to the teams to see if we could provide multiple ways (e.g. TypeScript and JavaScript) but no commitments on that yet, but really good feedback, thank you!
--   **A**: We're also working to make the scripts and samples more accessible and easy to use from the docs.. as early as next week 😉
--   **Q**: Document How Falling Blocks Work. I asked this is a question because the sand in Minecraft functions rather like an entity with gravity but when I have tried to recreate it in the past I have not been successful so it would be good to have a template file for sand so that we could create our own sand types
--   **A**: I'll take this one as a doc request, thanks!
+-   **Q**: MS Learn や wiki.bedrock に、JavaScript の動くサンプルを追加する予定はありますか？
+-   **A**: チームとして、いくつかのドキュメントに不足があることは認識しています。今後は、API を増やしていくにつれて、learning portal により良い使用例を追加するのを done の一部にします。とはいえ、当面は TypeScript の例が中心になると思います。TypeScript の学習曲線はやや急だというのも理解しているので、複数の方法（たとえば TypeScript と JavaScript）を用意できないかチームに持ち帰ります。まだ約束はできませんが、良いフィードバックをありがとうございます。
+-   **A**: script やサンプルを docs からもっと見つけやすく、使いやすくする作業も進めています。早ければ来週にも出るかもしれません😉
+-   **Q**: Falling Blocks の仕組みをドキュメント化してください。Minecraft の砂は重力のある entity のように振る舞うのに、過去に再現しようとしてうまくいきませんでした。砂のテンプレートファイルがあれば、自作の砂系 block を作れます。
+-   **A**: これは docs 要望として受け取ります。ありがとうございます。
 
 ## Custom Music Discs
 
--   **Q**: We already have the ability to make custom music discs using "minecraft:record" , but are there any plans on making the component compatible with custom music
--   **A**: This is unfortunately not in our near term roadmap 😦
+-   **Q**: すでに `minecraft:record` で custom music disc は作れますが、この component を custom music でも使えるようにする予定はありますか？
+-   **A**: 残念ながら、これは近い将来のロードマップには入っていません😦
 
 ## Waterlogging
 
--   **Q**: Any plans to add in waterlog/snowlog components for custom blocks?
--   **A**: Yes! Waterlogging is part of our short-term roadmap (6 months ~ish), while snow logging is still a part of the long-term plan (+6 months).
--   **Q**: Lava logging as well?
--   **A**: That is also part of the long-term plan <:bao_doggo_happy:939767354261372978>
+-   **Q**: custom block に waterlog / snowlog component を追加する予定はありますか？
+-   **A**: はい。waterlogging は短期ロードマップ（おおよそ 6 か月以内）に入っています。一方、snow logging は長期計画（+6 か月）です。
+-   **Q**: lava logging もですか？
+-   **A**: それも長期計画の一部です <:bao_doggo_happy:939767354261372978>
 
 ## Item Properties
 
--   **Q**: Are item properties ever going to be considered for the future? Being able to store per-item data that can be queried through the client would be really useful- if this was added only for unstackable items (like item dynamic properties currently function in script API), that would be cool 👍
--   **A**: Thanks for the requests in this area!
+-   **Q**: item properties は将来的に検討されますか？ クライアントから参照できる per-item data を保存できるとかなり便利です。これが stack できない item（今の item dynamic properties のような挙動）だけでも使えるようになれば、かなり良いと思います👍
+-   **A**: この分野の要望ありがとうございます。
 
-    We have more infrastructure likely to do in the area of items first (item stacks don't have an "identity" in the same way that blocks or entities do) that i think would be a pre-req for giving them systems kind-of like properties on blocks.. so it's probably more of a medium term thing to beef up items before we get to (the longer term) adding of new capabilities.
+    まず item の領域で追加すべき基盤がまだ多いです（item stack には block や entity のような「identity」がないので）。block にあるような properties を item に持たせるには、その前提が必要だと思っています。なので、item をまず強化するのは中期的な話で、その後に新機能を足していく流れになるでしょう。
 
-## Items with Flipbook Animations
+## Flipbook Animation 付き Item
 
--   **Q**: Will it be possible to create an item with flipbook animation or at least with several textures?
-    Like vanilla compass or watch.
--   **A**: I'll take this as a feature request. IIRC I think the flipbook stuff is more deeply intertwined with blocks such that it's probably not super easy to adapt to items. Also, there is some work we need to do in the medium term to items to "beef them up a bit" before we can begin to give them things like item properties, etc.. sorry about that, tl:dr, not in the short or medium term 😦
+-   **Q**: flipbook animation を持つ item、あるいは少なくとも複数 texture を持つ item を作れますか？
+    バニラの compass や watch のようなものです。
+-   **A**: これは feature request として受け取ります。記憶が正しければ、flipbook 系は block にかなり深く結びついているので、item へそのまま適用するのは簡単ではなさそうです。また、item properties のような機能を載せる前に、item をもっと強化する中期作業も必要です。つまり、短期でも中期でもまだ難しいです😦
 
-## A Method to Break Blocks on Contact with Water
+## 水に触れたときに block を壊す方法
 
--   **Q**: In-game examples:
+-   **Q**: ゲーム内の例:
 
-    -   Carpets
-    -   Farmable blocks/plants
+    -   carpet
+    -   農耕可能な block / plant
 
-    This is a feature I have been wanting to implement with my add-on for quite some time. I attempted at one point to build out this system using Scripting API. However, water in Minecraft behaves in a way that can be drastically manipulated in all sorts of weird shapes and patterns, which makes it impossible to detect every scenario.
+    これは、かなり前から私の add-on に入れたかった機能です。以前、Scripting API でこの仕組みを作ろうとしたことがあります。でも Minecraft の水は、さまざまな奇妙な形やパターンに大きく変形するので、すべてのケースを検出するのが不可能でした。
 
-    Thanks
+    ありがとうございます。
 
--   **A**: This will be a block component as part of our short-term roadmap (less than 6months ~ish)!
+-   **A**: これは block component として短期ロードマップ（6 か月未満くらい）に入っています。
 
 ## Redstone
 
--   **Q**: `redstone_conductivity` was a good start, but to make a true redstone device, it must be able to respond to redstone signals. And while you can read redstone power via scripting, the process in doing it is inefficient since you have to use queued ticks to constantly check. There's also no ability to generate redstone power, so for you can't make a sensor that responds to stimuli like daylight sensors.
--   **A**: Thanks for the ideas, I'll bring it to the team to discuss how it fits into our existing plans!
+-   **Q**: `redstone_conductivity` は良い始まりでしたが、本当の redstone デバイスにするには redstone signal に反応できる必要があります。 scripting で redstone power を読むことはできますが、毎回 queued tick で確認し続ける必要があり、効率が悪いです。redstone power を生成することもできないので、daylight sensor のような刺激に反応する sensor も作れません。
+-   **A**: アイデアありがとうございます。チームに持ち帰って、既存の計画とどう合うか相談します。
 
-## Future Plans for `blocks.json`
+## `blocks.json` の今後
 
--   **Q**: What are the future development plans for the `blocks.json` file? Currently, it has a few significant limitations, including its incompatibility with custom geometry blocks, which is one of the most known issues. Will this file be upgraded or replaced? Additionally, what were the original intentions behind its availability for creators? I'm intrigued!
--   **A**: short answer though is we are planning on getting rid of blocks.json, as far as the intention behind it initially, that is before my time 😆. But once it is gone, time heals all wounds
+-   **Q**: `blocks.json` の将来的な開発計画はどうなっていますか？ 現在は、custom geometry block と互換性がないなど、かなり大きな制限があります。これは最も知られた問題のひとつです。このファイルはアップグレードされるのでしょうか、それとも置き換えられるのでしょうか？ また、そもそも creators に公開された意図は何だったのでしょうか？ 興味があります。
+-   **A**: 短く言うと、blocks.json は将来的に無くす予定です。そもそもの意図については、私の前の話なので分かりません😆 ですが、無くなれば、時が傷を癒してくれるはずです。
 
-## `onBlockUpdate` and `onBlockDestroyed` (any) custom component
+## `onBlockUpdate` と `onBlockDestroyed` の any custom component
 
--   **Q**: I really wish these two events would get added as they'd make some things easier to make
-    `onBlockUpdate`, which would make connecting blocks and doors easier to make
-    `beforeBlockBroken`, for whenever the block is broken in any way including mobs or commands
--   **A**: This is something that we have looked into, unfortunately it is more complex that it appears to support. Block updates when a neighboring block changes is not in our near term roadmap. `onBlockDestroyed` before event however is a great feature request we can look into doing but is not currently on our roadmap
+-   **Q**: この 2 つのイベントはぜひ追加してほしいです。いろいろ作りやすくなります。
+    `onBlockUpdate` は block 同士や door の接続を作りやすくし、
+    `beforeBlockBroken` は mob や command を含め、どんな方法で壊されたときでも使えると嬉しいです。
+-   **A**: これは検討したことがありますが、見た目以上に対応が複雑です。隣接 block が変わったときの block 更新は、近い将来のロードマップにはありません。ただし `onBlockDestroyed` の before イベントは、ぜひ検討したい良い要望です。現時点ではまだロードマップにはありません。
 
-## Colormap in Custom Blocks
+## Custom Block の Colormap
 
--   **Q**: Are there any plans to make custom blocks use colormap, like grass and leaves?
--   **A**: Yes we have that on our internal roadmap. somewhere between medium and long term, not ready to share exact timing yet. it will be next year sometime though
+-   **Q**: grass や leaves のように、custom block に colormap を使う予定はありますか？
+-   **A**: はい、内部ロードマップには入っています。中期から長期の間くらいですが、具体的な時期はまだ出せません。来年のどこかにはなります。
 
-## Get Inventories of Items with `minecraft:storage_item` Component via ScriptAPI
+## `minecraft:storage_item` を持つ item の inventory を ScriptAPI で取得する
 
--   **Q**: Just as we can do with entities, do it with the inventory of items and have the ability to remove, add items, etc.
--   **A**: It's in the backlog! Not sure exactly when we will get to it though. Ideally in the future they will be more "coupled" and come out closer together 😄
+-   **Q**: entity のように、item の inventory も扱えて、削除・追加などができるようになりますか？
+-   **A**: backlog には入っています。いつ着手できるかはまだ分かりませんが、将来的にはもっと連動して、近いタイミングで出したいと考えています😄
 
-## Custom Creative Category and Item Groups
+## Custom Creative Category と Item Groups
 
--   **Q**: the ability to add items and blocks to an existing or new category in the creative inventory
--   **A**: You can currently create your own item groups, if you add a unique name it will bundle the items you add to it together BUT it doesn't do the cool "collapse the group and add the plus" icon, it just moves them all together.
+-   **Q**: 既存または新しい creative inventory の category に item や block を追加できるようになりますか？
+-   **A**: 現在でも自分の item group は作れます。固有名を付ければ、その group に追加した item はひとまとめになります。ただし、バニラのように「グループを折りたたんで plus アイコンを追加する」ような見た目にはなりません。単にまとめて移動されるだけです。
 
-    Bringing inline the custom group system to function like the vanilla groups do is on our short term roadmap!
+    custom group system をバニラの group のように動く形へ揃えるのは、短期ロードマップに入っています。
 
-    We don't currently have custom categories in our roadmap.
+    いまのところ、custom category はロードマップにありません。
 
-## Rotation Component for Items
+## Item の Rotation Component
 
--   **Q**: The purpose of this component is to allow players to rotate the item in their hand in x, y and z values at any angle they want (it allows to rotate items without using attachable method).
--   **A**: We have this with item display transforms for block items and for other 3d items it should be possible with attachables?
+-   **Q**: この component の目的は、プレイヤーが手に持っている item を好きな角度で x / y / z 方向に回転できるようにすることです（attachable を使わずに item を回転できるようにする）。
+-   **A**: block item には item display transform があり、ほかの 3D item なら attachable でできるはずです。
 
-## More Block Geometry Capabilities
+## Block Geometry の機能拡張
 
--   **Q**: I love working with blocks, but there are sometimes where I would really like to have some features or tools that we don't have right now. But specially regarding the block geometry these are my questions <:bao_icon_entities:937567566442922084> :
+-   **Q**: block を扱うのは好きですが、今ない機能やツールが欲しい場面があります。特に block geometry について、いくつか質問があります。
 
-    -   Will we be able to rotate bones and textures independently? using the `minecraft:transformation` component or even `minecraft:geometry` itself?
-    -   Are there any plans to improve block geometry right now? something like `item_display_transforms`.
-    -   Will it be possible to modify the block geometry via scripts in the future?
+    -   `minecraft:transformation` component か `minecraft:geometry` 自体を使って、bone と texture を独立して回転できますか？
+    -   block geometry を今後改善する計画はありますか？ `item_display_transforms` のようなものです。
+    -   将来的に script から block geometry を変更できるようになりますか？
 
--   **A**: So improving data driven geo we are actively working on, and some of the item transform work is in preview. So short answer is yes. As far as modifying geo via scripts, that currently is not in the plans
--   **Q**: `full_block` and `cross` are great. It'd be super great to get more than that, though. There are _tons_ of shapes both hobbyists and professionals would love to imitate from the base game, such as slabs and stairs. Having to incorporate these into nearly every resource pack that includes custom blocks also just feels like unnecessary bloat.
--   **A**: So currently we don't have any other vanilla geometries data driven but that's definitely one of our goals in the long term. A lot of the features like item transforms and UV lock and things have been part of an effort to reach a level of parity with vanilla functionality that would let us expose more of the vanilla geometries.
+-   **A**: data-driven geo の改善には今まさに取り組んでいますし、一部の item transform 作業はすでに preview に入っています。なので短く答えると yes です。script から geo を変更する件は、現時点では計画に入っていません。
+-   **Q**: `full_block` と `cross` は良いです。でも、それ以上があるとすごく嬉しいです。slab や stair など、趣味でもプロでもバニラから再現したい形はたくさんあります。custom block を含むほぼすべての resource pack にこれらを入れなければならないのは、無駄に肥大化している感じもします。
+-   **A**: 現時点では、ほかの vanilla geometry を data-driven にしたものはありませんが、長期的にはそれも目標のひとつです。item transforms や UV lock などの機能は、バニラ機能との整合性を高めて、より多くの vanilla geometry を公開できるようにするための取り組みの一部でした。
 
-Are there any vanilla geos you think would be particularly useful to focus on?
+    特に重点を置くと役立ちそうな vanilla geo はありますか？
 
-## Lock Mode for Blocks with Storage
+## 保存付き Block の Lock Mode
 
--   **Q**: As we know items lock mod don't work on storage blocks. any plan on changing that?
--   **A**: You could try making the block you want be placed by an item using the block_placer component.
+-   **Q**: ご存じのとおり、item の lock mode は storage block では動きません。これを変える予定はありますか？
+-   **A**: `block_placer` component を使って、item で配置される block にしてみる方法があります。
 
-    And use an attachable to have the block appearance in hand
+    それから attachable を使えば、手に持ったときの見た目も出せます。
 
-## Immovable Blocks
+## 動かせない block
 
--   **Q**: This was a thing that got removed for some reason. I would love to have a way to make blocks immovable again. this can be either with a component or event that we can cancel.
--   **A**: This is in our backlog but not sure when we'll get to it
+-   **Q**: これは何らかの理由で削除された機能でした。block を再び動かせないようにする方法がほしいです。component でも event でも、キャンセルできる形なら何でもいいです。
+-   **A**: backlog にはありますが、いつ着手できるかはまだ分かりません。
 
 ## Block Polymesh Model Support
 
--   **Q**: At the moment we have an experimental opportunity to use polymesh models only for entity models
--   **A**: polymesh is cursed. definitely no plans to extend this.
+-   **Q**: 現在、polymesh model を使えるのは entity model だけの実験的機会があります。
+-   **A**: polymesh はかなり特殊です。これを拡張する予定はまずありません。
 
 ## Custom Armour Trims
 
--   **Q**: Would like to be able to create my own templates for patterns, as well custom items as colors for patterns.
--   **A**: Hi, thanks for the request!
+-   **Q**: pattern 用のテンプレートや、pattern の色として使う custom item を自分で作りたいです。
+-   **A**: ご要望ありがとうございます。
 
-    What do you mean by "custom items as colors for patterns"?
+    「pattern の色として使う custom item」とは、どういう意味でしょうか？
 
-    We do have thoughts to expand armor trim but nothing on the roadmap in the near term.
+    armor trim を拡張したいという考えはありますが、近い将来のロードマップには入っていません。
 
-## Storing Entities in Items
+## item に entity を保存する
 
--   **Q**: It would be very useful to have items and blocks that can store entity data.
-    Examples:
+-   **Q**: entity data を保存できる item や block があるととても便利です。
+    例:
 
-    -   custom mob buckets
-    -   custom bee hives
+    -   custom mob bucket
+    -   custom bee hive
 
-    this could be handled with components and scripts
+    これは component と script で扱えそうです。
 
     ```json
     "minecraft:entity_storage": {
@@ -197,7 +197,7 @@ Are there any vanilla geos you think would be particularly useful to focus on?
     }
     ```
 
-    not sure how viable this syntax is, but something like this would be good
+    この構文がどれくらい現実的かは分かりませんが、こんな感じなら良さそうです。
 
     ```js
     const storage = block.getComponent("minecraft:entity_storage");
@@ -205,118 +205,119 @@ Are there any vanilla geos you think would be particularly useful to focus on?
     dimension.spawnEntity(block.location, stored_entity);
     ```
 
--   **A**: I really like this idea! When I've thought about this in the past I've envisioned we'd allow creators to "opaquely" snapshot blocks (Blocks + Block Entities), Items (whole item stacks), and Entities (who entity NBT) in a way that allows you to "persist" the data. But we wouldn't allow parsing/data sniffing/etc. to prevent some very spooky behavior.
+-   **A**: そのアイデアはとても良いです。以前考えたときは、creators が block（block + block entity）、item（item stack 全体）、entity（entity NBT 全体）を「透過的に」スナップショットして、データを保持できるようにするイメージを思い描いていました。ただし、変な動作を防ぐために、パースやデータの覗き見などは許可しないつもりです。
 
-## Are there plans for onEquip/onUnequip events?
+## onEquip / onUnequip イベントはある？
 
--   **Q**: It would be very helpful if the item custom components interface (or world.afterEvents) supported an event that fired when one of the `equippable` slots changed.
+-   **Q**: item custom components interface（または world.afterEvents）で、`equippable` スロットのどれかが変わったときに発火する event をサポートしてほしいです。
 
-    Perhaps `onEquip(arg: {slot: ContainerSlot})` and
-    `onUnequip(arg:{slot: ContainerSlot, previousItemStack: ItemStack})`
+    たとえば `onEquip(arg: {slot: ContainerSlot})` と
+    `onUnequip(arg:{slot: ContainerSlot, previousItemStack: ItemStack})` のようなものです。
 
-    This would enable the creation of efficient passive effects (helmet that gives night vision, etc.) without the performance impact of constantly checking each player's equippable slots using runInterval, as is required now.
+    これがあれば、各プレイヤーの equippable スロットを runInterval で常に確認する必要がなくなり、効率の良い受動効果（夜視を与えるヘルメットなど）を作れます。
 
--   **A**: We have the concept of inventory events - including equipment events. We'd want to consider this both at the "custom item component" event.
+-   **A**: inventory events の概念はあります。equipment events も含めて検討したいです。
 
-    It's not something we're working on right now but something I think we'd like to get to in the medium or longer term
+    これは今すぐ取り組んでいるものではありませんが、中期かそれ以降にはやりたいと思っています。
 
-## Custom Keybinds/Buttons Functions for Items
+## item 用のカスタム keybind / button 機能
 
--   **Q**: I would like to see the ability making an item run a script when a specific Key/button is pressed. This would be so cool when making maps, or combat add-ons!
--   **A**: We are investigating some _very primitive_ input APIs around movement. Mostly the things that "just work" for all of our input modes. Custom bindings (which would need to include touch screen UI) are on our minds but not currently in the backlog.
+-   **Q**: 特定の key / button が押されたときに item が script を実行する機能がほしいです。map 作成や combat add-on でとても面白くなりそうです。
+-   **A**: 移動まわりの、かなり原始的な input API を調べています。主に、あらゆる input mode で「そのまま動く」ものです。custom binding（touch screen UI も含める必要があります）は検討中ですが、まだ backlog には入っていません。
 
-## More Rendering Options for Blocks
+## Block の描画オプションをもっと
 
--   **Q**: Currently, we are given 4 render methods: `alpha_test`, `opaque`, `blend`, `double_sided`. Each of them comes with their ups and downs. However, blocks with transparent pixels required either `alpha_test` or `blend`. Both of these have their own issues, `alpha_test` will completely unrender when you're 70 blocks away and `blend` has some issues as well according to other people in this discord. Neither of these options to my knowledge as well allow face culling lke vanilla glass.
+-   **Q**: 現在は `alpha_test`、`opaque`、`blend`、`double_sided` の 4 つの render method があります。それぞれ長所と短所がありますが、透明ピクセルを持つ block は `alpha_test` か `blend` のどちらかが必要です。どちらにも問題があり、`alpha_test` は 70 block 離れると完全に描画されなくなり、`blend` にもこの discord のほかの人いわく問題があります。私の知る限り、どちらも vanilla glass のような face culling はできません。
 
-    Does Mojang plan to add support for blocks to change render method the further away you are such as vanilla leaves?
-    Does Mojang plan to allow block culling to occur not just when a face is covered by an opaque block allowing things like vanilla glass to occur?
+    Mojang は、vanilla leaves のように距離によって render method が変わる block 対応を追加する予定はありますか？
+    また、opaque block に face が隠されたときだけでなく、もっと一般的に block culling を行えるようにする予定はありますか？
 
--   **A**: We have a new article coming to the learning portal soon that covers that covers the render distance per render_method, so you won't have to guess.
+-   **A**: 近いうちに learning portal に新しい記事が来て、render_method ごとの render distance を説明します。もう推測しなくて大丈夫です。
 
-    The render_method that <@905553488510079026> called out will also get added to the existing learning portal page with the other methods (probably in one documentation update). For Block culling, you can totally replicate the vanilla glass functionality with the faces on a full block.
+    <@905553488510079026> が指摘した render_method も、ほかの方法と一緒に既存の learning portal ページへ追加されます（たぶん 1 回のドキュメント更新で入ります）。block culling については、full block の face を使えば vanilla glass の動作をかなり再現できます。
 
-    Replicating Glass requires two things, you need to use the render_method: alpha_test_single_side\*
+    Glass の再現には 2 つのことが必要です。render_method に `alpha_test_single_side` を使ってください
 
-    This will do the visual appearance that you are expecting when you look through the block and will cull the backfaces of the block. The culling rules will literally remove the face when next to a full face (like dirt), but the visual you want should be achievable just by changing the render_method
+    これで、block を透かして見たときの見た目が期待どおりになり、block の背面も cull されます。culling のルール自体は、隣に full face（dirt のようなもの）が来たら face を文字通り削除しますが、欲しい見た目は render_method を変えるだけで実現できるはずです。
 
-\*Editor's Note: This is a typo on Mojang's behalf, it was meant to say `alpha_test_single_sided`
 
--   **Q**: I decided to fork this into its own question. Related to https://discord.com/channels/523663022053392405/1277725678539640852/1277725678539640852:
+    *Editor's Note: これは Mojang 側の টাইपो で、本来は `alpha_test_single_sided` と書くべきでした。
 
-    -   I'm wondering if we could control our own block rendering like how vanilla leaves dynamically change their render method _based on adjacency_. For example, if a vanilla leaves block is surrounded by solid blocks on all sides, it'll change its render method to be more performant.
-    -   Thoughts on render methods like those used by barriers, light blocks, and structure voids? I have to make invisible collision-only or placeholder blocks for Marketplace all the time, and it'd be great to have some billboards floating to see where they are.
+-   **Q**: これを独立した質問として切り出しました。次の discord の投稿に関連しています: https://discord.com/channels/523663022053392405/1277725678539640852/1277725678539640852
 
--   **A**: Re render method based on adjacency: There are lots of adjacency/connection features that we are looking into and trying to figure out how best to support and this is certainly part of that.
+    -   vanilla leaves が隣接関係に応じて render method を動的に変えるように、自分たちの block rendering を制御できるようになりますか？ たとえば、vanilla leaves block が四方を solid block に囲まれたら、より軽くなるよう render method を変えます。
+    -   barrier、light block、structure void のような render method についてはどう考えていますか？ Marketplace 用に、見えない collision-only や placeholder block をよく作るので、それがどこにあるか分かる billboard のようなものが浮いていると助かります。
+
+-   **A**: 隣接に基づく render method については、隣接 / 接続まわりの機能をたくさん検討していて、どう支えるのが良いかを考えています。これはその一部です。
 
 ## PlayerInteractWithBlock
 
--   **Q**: I haven’t been involved in addons much for the last month or two, however I remember (at least then) that we couldn’t have interactions with vanilla blocks in stable - you’d have to use itemUseOn which requires a held item, as PlayerInteractWithBlock was still in beta despite being listed as stable on the docs. Has this changed and if not, should we expect to see this in stable in the future?
--   **A**: We know this one has been in beta for way longer than we intended 😕 but we're hoping PlayerInteractWithBlock should be moving into stable in an upcoming release. We feel it.
--   **Q**: Care to share what y'all found was wrong with it along the way?
--   **A**: For the player interact events we wrestle/wrestled with the issue that they repeat frequently in ways that are hard to predict or even are device dependent... it makes for an unpredictable API.
+-   **Q**: この 1、2 か月は add-on にあまり関わっていませんでしたが、少なくとも当時は、stable では vanilla block に対する interaction ができず、item を持つ必要がある itemUseOn を使わなければなりませんでした。PlayerInteractWithBlock は docs 上では stable と書かれていたのに、まだ beta でした。これは変わりましたか？ 変わっていないなら、今後 stable に入るのでしょうか？
+-   **A**: これは本来よりずっと長く beta にとどまっていたことは分かっています😕 ですが、次のリリースで PlayerInteractWithBlock が stable に移ることを期待しています。私たちもそう感じています。
+-   **Q**: 途中で何が悪かったのか、共有できますか？
+-   **A**: player interact events では、繰り返しが頻繁で予測しにくく、端末依存でもあるという問題にずっと悩まされてきました。つまり、予測しにくい API になっていたということです。
 
-    We considered a bigger refactor for the area but I think that's "risky" given all the behaviors and devices that are tied up in it. What we landed on is having additional data (an isFirst property) which can help a creator know whether it's the first interaction in a series of events. Creators will probably still need to have some sort of internal tracker for "is this the _first_ event I'm seeing" which is not awesome.
+    この領域は大きく作り直す案もありましたが、そこに紐づく挙動や端末が多すぎて「リスクが高い」と判断しました。最終的には追加データ（`isFirst` プロパティ）を持たせて、イベント列の中で最初の interaction かどうかを creators が判断しやすくする方向にしました。ただ、creators 側では「これは自分が見ている _最初_ の event か」を内部で追跡する仕組みがやはり必要になりそうで、あまり美しくはありません。
 
--   **Q**: If canceled, the block cannot be interacted, so player can be able to place blocks onto it without sneaking. This is helpful if we want to make block to be interactable only on certain condition.
+-   **Q**: cancel されると block に interaction できないので、player は sneak なしでその上に block を置けます。これは、block を特定条件でだけ interactable にしたいときに役立ちます。
 
-    For example, we can make the south face of the block to be interactable, but not the other face of the block.
+    たとえば block の south face だけ interactable にして、ほかの face は無効にする、といったことができます。
 
-    Because currently, when `onPlayerInteract` is present, the whole block becomes interactable.
+    今は `onPlayerInteract` があると block 全体が interactable になります。
 
--   **A**: The `onPlayerInteract` event is an after event, but if it was a before event we may be able to cancel the interaction. An interesting idea, unfortunately it is not currently on our roadmap but is worth a look into.
+-   **A**: `onPlayerInteract` は after event ですが、before event なら interaction をキャンセルできるかもしれません。面白い案ですが、今のところロードマップには入っていません。ただ、検討する価値はあります。
 
-## Summoning Entities with Block Arrangements
+## block 配置で entity を召喚する
 
--   **Q**: Suggest adding a feature where players can summon entities using specific block arrangements, similar to the Wither or Iron Golem. This would expand gameplay by introducing new creatures summoned through unique block patterns
--   **A**: Yeah, for this one what I'd probably recommend is something like the player place block before event (https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/playerplaceblockbeforeevent?view=minecraft-bedrock-experimental) and do a bit of pattern matching of nearby blocks to see if it matches something and then summon an entity if there is a match. Not sure we'd necessarily have a JSON "data driven" feature for that any time soon.
+-   **Q**: Wither や Iron Golem のように、特定の block 配置で entity を召喚できる機能を追加してはどうでしょうか。ユニークな block パターンで新しい creature を召喚できれば、ゲームプレイの幅が広がります。
+-   **A**: その場合は、`player place block before` event（https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/playerplaceblockbeforeevent?view=minecraft-bedrock-experimental） のようなものを使い、周囲の block を少し pattern match して、合致したら entity を召喚するのが良さそうです。JSON の「data-driven」機能としてすぐに提供する予定は今のところなさそうです。
 
-## Block Tags Java parity
+## Block Tags の Java 互換
 
--   **Q**: It would be great to get a variety of tags to make it easier to filter blocks using scripts instead of being selected individually, as well as making custom item functions easier, as custom tools, so when interacting with blocks it would be through several with some vanilla tag
--   **A**: I think we are going to poke this area soon:tm:.
+-   **Q**: script で個別に選ばずに block をフィルタしやすくするため、さまざまな tag があると便利です。custom item の機能も作りやすくなり、custom tool として block をいくつかの vanilla tag で扱えるようになります。
+-   **A**: この分野は近いうちに触ると思います:tm:。
 
-## Allows transformation -> rotation to be set in any rotation.
+## transformation -> rotation を任意角度に設定できるように
 
--   **Q**: Currently, we can only rotate blocks divisible by 90 (such as 0, 90, 180, 270, and negative values). So we can't choose to rotate them 45° for example, to make our block rotate 45° we have to create a new model that is rotated 45°. I suggest for flexibility of this field, so we don't have to create new model just to rotate our block with more precision.
--   **A**: I also think this would break Minecraft visual design guidelines. So definitely no desire to do the tech work to make this work.
+-   **Q**: 現在、block は 90 の倍数（0、90、180、270、および負の値）でしか回転できません。たとえば 45° にはできないので、45° 回転した block を作るには、45° 回転済みの新しい model を作るしかありません。このフィールドをもっと柔軟にして、block をより正確に回転させるためだけに新しい model を作らなくて済むようにしてほしいです。
+-   **A**: それは Minecraft の見た目の設計ガイドラインに反すると私も思います。なので、そのための技術作業をするつもりはまったくありません。
 
-## Texture Variation For Modelled Blocks
+## モデル化した block の texture 変化
 
--   **Q**: Are there any plans to allow custom blocks to have varying textures?
--   **A**: Texture variants for Custom Blocks using material_instances is on our long term roadmap!
+-   **Q**: custom block に可変 texture を持たせる予定はありますか？
+-   **A**: `material_instances` を使った Custom Block の texture variant は、長期ロードマップに入っています。
 
-## Support for Ambient Occlusion on/cast by full-block geometries
+## full-block geometry に対する ambient occlusion
 
--   **Q**: As it stands now, blocks utilizing the `minecraft:geometry.full_block` model (or equivalent) are not treated in the same way as a typical full block for the sake of ambient occlusion. They appear to catch shading from other blocks, but do not catch other blocks' ambient occlusion, nor cast their own shading or ambient occlusion.
+-   **Q**: 現状、`minecraft:geometry.full_block` model（または同等のもの）を使う block は、ambient occlusion の面で通常の full block と同じ扱いにはなっていません。他の block の shading は受けるようですが、ほかの block の ambient occlusion は受けず、自分の shading や ambient occlusion も出しません。
 
-    Most notably his impacts any block that needs to apply rotational states with textures per face.
+    とくに、面ごとに texture の向きが変わる block では影響が大きいです。
 
-    Here is an example created with a custom log, as compared to Vanilla's Oak Logs:
+    以下は custom log で作った例で、バニラの oak log と比べています:
     https://media.discordapp.net/attachments/1215333861362237470/1278887412747079722/Kaleidoscope_003041.gif?ex=66d27037&is=66d11eb7&hm=65795e2b03ca8de6407dc969454b49caa6858443128815294641747f61fe7301&=&width=1258&height=702
 
-    Having this fixed would enable creators to properly recreate a plethora of natural Vanilla blocks, without sacrificing that bit of immersion lost in a visual bug. (And I'd finally be able to add my beloved Redwoods!!)
+    これが修正されれば、視覚バグで失われていた没入感を犠牲にせず、多数の自然系バニラ block を creators が正しく再現できるようになります。（それに、ようやく大好きな Redwood も追加できます！）
 
--   **A**: So this actually seems like a bug to me? Would you be willing to add that block Json to this thread and I can take a look? But overall in terms of the mix of other "solidity" concepts and the full block geo, we are looking at how to split "solidity" up into more logical chunks of behavior that can be customized.
+-   **A**: これ、実際にはバグに見えます。もしよければ、その block Json をこのスレッドに追加してもらえれば確認できます。ただ、全体としては、ほかの「solidity」の概念と full block geo をどう分けるかを検討していて、より論理的にカスタマイズできる挙動のまとまりへ整理したいと考えています。
 
 ## Camera Collision Component
 
--   **Q**: Some blocks - such as glass blocks, for example - have a different rules for collision with the camera than for entities. It'd be neat to be able recreate this behavior, such as:
+-   **Q**: glass block のように、camera との collision ルールが entity とは違う block があります。こうした挙動を再現できると面白いです。たとえば:
 
     "minecraft:camera_collision": false
 
-    …Or perhaps with the same properties as the `collision_box` or `selection_box` components.
+    …あるいは `collision_box` や `selection_box` component と同じような properties で。
 
--   **A**: Oooooh, interesting.
+-   **A**: おお、面白いです。
 
-    To be clear, would you like collision rules to be more like entities or more like glass?
-    Said another way, what is the exact behavior you want to recreate?
+    確認したいのですが、collision ルールは entity のようであってほしいですか、それとも glass のようであってほしいですか？
+    言い換えると、再現したい正確な挙動は何ですか？
 
-## Custom Block Sounds and Block/Item Sound Events
+## Custom block のサウンドと block/item の sound event
 
--   **Q**: I think it's really strange that at the moment, there isn't any way to add custom sound types to `blocks.json` definitions. There are shortnames for Vanilla blocks, referencing their set of sound events triggered by gameplay ( step, break, place, etc. ).
+-   **Q**: 今のところ、`blocks.json` 定義に custom sound type を追加する方法がないのは、本当に不思議です。バニラ block には短い名前があり、gameplay で発生する sound event（step、break、place など）を参照しています。
 
-    For example:
+    たとえば:
 
     ```json
     "dirt_with_roots" : {
@@ -325,34 +326,34 @@ Are there any vanilla geos you think would be particularly useful to focus on?
     }
     ```
 
-    It would be very, very nice to able to at least define _custom_ names to use in these definitions, with links to custom sounds for the default block events.
+    少なくとも、この定義で使う _custom_ name を定義できて、デフォルトの block event に対して custom sound へのリンクを持たせられるととても良いです。
 
-    Similarly, it would be even nicer to have **custom** sound events, to reference here and in other places such as the `minecraft:record`'s `sound_event` property, and perhaps adding new similar properties included on:
+    さらに、**custom** sound event があればもっと良いです。ここや、`minecraft:record` の `sound_event` property、さらに次のような場所に新しい同種の property を追加する案も考えられます。
 
     -   `minecraft:shooter`:
-    -   A sound event for completing the use, built into the definition
+    -   使用完了時の sound event を定義内に持たせる
     -   `minecraft:food`:
-    -   Sound events for actively using and completing use, similarly to, for example, the Honey Bottle from Vanilla
+    -   たとえば Vanilla の Honey Bottle のように、使用中と使用完了時の sound event
     -   `minecraft:wearable`:
-    -   A sound event for equipping the item, similarly to, for example, the Netherite armour from Vanilla
+    -   たとえば Vanilla の Netherite armor のように、装備時の sound event
 
-    ...And perhaps a means to play attached sound events from Custom Block/Item components in the Script API?
+    …そして、Script API の Custom Block/Item component から、関連付けた sound event を再生する手段もあるといいかもしれません。
 
--   **A**: Yeah, I believe this all comes back to the ability to add custom sound events (vs. override vanilla ones), yeah? We're tracking this one... I'll take this as an additional +1. It's not on the short term roadmap though
+-   **A**: そうですね、これは結局、vanilla のものを上書きするのではなく custom sound event を追加できるようにする話に行き着くのだと思います。これ、追っています。さらに 1 票入れておきます。とはいえ、短期ロードマップには入っていません。
 
-## Multi-Collision Blocks
+## 複数 collision を持つ block
 
--   **Q**: Will there be a way in the future to have a custom hitbox, or a better way of making them.
+-   **Q**: 将来的に custom hitbox を持てるようになりますか？ あるいは、より良い作り方はありますか。
 
-    Like how stairs have a different collision box than a normal blocks
+    stairs が通常の block とは違う collision box を持つような感じです。
 
--   **A**: We know the interest in being able to do stairs that require more than the current collision (and selection) box component is capable of, so we're looking at some options that will allow us to bring that functionality to you! It's on our long term roadmap
+-   **A**: stairs のように、今の collision（および selection）box component だけでは足りないものを作りたいという需要は把握しています。なので、その機能を提供できる方法をいくつか検討しています。長期ロードマップに入っています。
 
-## Disabling Silk Touch
+## Silk Touch を無効にする
 
--   **Q**: We can already do this with scripts, but it doesn't feel "vanilla"
-    It would be nice if we had a way to disable a block dropping on silk touch, or changing the loot for silk touch
--   **A**: On a custom block this can be done in the loot table by adding a match_tool condition that includes the silk touch enchantment.
+-   **Q**: script ではすでにできますが、あまり「vanilla」らしくはありません。
+    block が silk touch で落ちないようにする、あるいは silk touch の loot を変える方法があると嬉しいです。
+-   **A**: custom block なら、silk touch enchantment を含む `match_tool` condition を loot table に追加すればできます。
     https://learn.microsoft.com/en-us/minecraft/creator/documents/loottableconditions?view=minecraft-bedrock-stable#match_tool
 
-    On our short term roadmap is a way to change a vanilla block's loot table on destroy.
+    短期ロードマップでは、vanilla block の destroy 時の loot table を変更できるようにする予定です。

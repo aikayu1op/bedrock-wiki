@@ -1,6 +1,6 @@
 ---
-title: Equipment-Based Commands
-description: Run commands when certain items are equipped.
+title: 装備ベースのコマンド
+description: 特定のアイテムが装備されたときにコマンドを実行します。
 category: Tutorials
 tags:
     - intermediate
@@ -12,15 +12,15 @@ mentions:
     - QuazChick
 ---
 
-A common concept for add-ons is implementing new armor sets with unique effects, just like the turtle shell.
-Items don't have a component for inflicting mob effects, emitting particles, etc. under certain conditions.
-However, using the `hasitem` command selector or server animations, this can easily be done!
+アドオンでよくある考え方の 1 つに、カメの甲羅のように、固有効果を持つ新しいアーマーセットを実装するものがあります。
+アイテムには、特定の条件で mob 効果を与えたり、パーティクルを出したりするコンポーネントはありません。
+しかし、`hasitem` コマンドセレクターや server animation を使えば、簡単に実現できます。
 
-## Command Selector Method
+## コマンドセレクター方式
 
-The [`hasitem`](https://minecraft.wiki/w/Target_selectors#Selecting_targets_by_item) selector parameter can be used to target entities based on the items in their equipment slots.
+[`hasitem`](https://minecraft.wiki/w/Target_selectors#Selecting_targets_by_item) セレクターパラメーターを使うと、装備スロットのアイテムに基づいてエンティティを対象にできます。
 
-You can view a list of additional slot identifiers at the [Minecraft Wiki](https://minecraft.wiki/w/Slot#Bedrock_Edition).
+追加のスロット識別子の一覧は [Minecraft Wiki](https://minecraft.wiki/w/Slot#Bedrock_Edition) で確認できます。
 
 <CodeHeader>Target Selector</CodeHeader>
 
@@ -28,9 +28,9 @@ You can view a list of additional slot identifiers at the [Minecraft Wiki](https
 @e[hasitem={item=wiki:custom_helmet,location=slot.armor.head}]
 ```
 
-By using a function that is listed in the `tick.json` file, we can run commands using this selector every tick.
+`tick.json` ファイルに登録した関数を使えば、このセレクターを毎 tick 実行できます。
 
-For example, to make a custom helmet give its wearer jump boost, the following function could be used:
+たとえば、カスタムヘルメットを装備したプレイヤーに跳躍上昇を付与するには、次の関数を使えます。
 
 <CodeHeader>RP/functions/wiki/custom_helmet_effects.mcfunction</CodeHeader>
 
@@ -46,11 +46,11 @@ effect @e[hasitem={item=wiki:custom_helmet,location=slot.armor.head}] jump_boost
 }
 ```
 
-## Server Animation Method
+## サーバーアニメーション方式
 
-Keep in mind that this requires modifying the player behavior, which is a common theme for many add-ons; thus, your add-on may not be compatible with others if you wish to do this.
+これはプレイヤーの behavior を変更する必要があるため、多くのアドオンで共通する注意点があります。そのため、この方法を使うと他のアドオンと互換性がなくなる場合があります。
 
-The first step will be to create a server animation, which is a file that runs commands or events at certain keyframes. While client animations are in the resource pack, server animations are in the behavior pack. You can read a bit more [here](/entities/timers#animation-based-timers). We can start by using the following as a template:
+最初の手順は server animation を作ることです。これは、特定のキーフレームでコマンドやイベントを実行するファイルです。client animation が resource pack にあるのに対し、server animation は behavior pack にあります。詳しくは[こちら](/entities/timers#animation-based-timers)を参照してください。まずは次のテンプレートを使えます。
 
 <CodeHeader>BP/animations/player.json</CodeHeader>
 
@@ -69,7 +69,7 @@ The first step will be to create a server animation, which is a file that runs c
 }
 ```
 
-Let's go over what's in this template and what everything does:
+このテンプレートの中身と役割を見ていきましょう。
 
 -   `animation.player.emerald_armor` is our animation's identifier; you can change this to something else, such as `animation.player.phantom_armor`.
 -   `animation_length` is how long the animation lasts; we'll use 0.05 seconds, as that's the length of an in-game tick.
@@ -84,21 +84,21 @@ We can add commands to the `0.0` array in our timeline to execute, such as an `/
 }
 ```
 
-We're not limited to `/effect`, of course. If you want to use some other command, such as `/function` or `/particle`, go right ahead!
+もちろん `/effect` だけに限りません。`/function` や `/particle` など、他のコマンドを使いたければ自由にどうぞ。
 
-After this, we're finished in our server animation, and we'll head into the behavior file for our item for a quick addition.
+これで server animation 側はひとまず完了です。次に、アイテムの behavior ファイルへ進んで少し追加します。
 
-### Applying Item Tags
+### アイテムタグの適用
 
-To actually check if our item is equipped, we can use a Molang query that checks for item tags.
+アイテムが装備されているかを実際に判定するには、item tag を確認する Molang query を使えます。
 
-You can skip this section if:
+次のどちらかに当てはまるなら、このセクションは飛ばしても構いません。
 
 -   You want check for a vanilla item instead, such as an iron armor piece through the `minecraft:iron_tier` tag
 -   You want to check for the item via `q.is_item_name_any`, which checks for an item identifier in any slot
 
-In our item's behavior, we'll have to add a tag.
-For example, if we wanted to add the `wiki:emerald_tier` tag, we would add the following to the tags component:
+アイテムの behavior にはタグを追加する必要があります。
+たとえば `wiki:emerald_tier` タグを追加したいなら、tags コンポーネントに次のように書きます。
 
 <CodeHeader>minecraft:item > components</CodeHeader>
 
@@ -108,13 +108,13 @@ For example, if we wanted to add the `wiki:emerald_tier` tag, we would add the f
 }
 ```
 
-That's it, now your item has whatever tag you assigned it! You can add more tags if you want, but this is all we need for what we're doing.
+これで、アイテムに割り当てたタグが付与されました。必要ならさらにタグを追加できますが、ここでやりたいことにはこれで十分です。
 
-### Player Behavior
+### プレイヤーの behavior
 
-Finally, we need to modify the player's behavior to run the server animation. We'll be working entirely within `description`.
+最後に、server animation を実行するためにプレイヤーの behavior を変更します。作業はすべて `description` 内で行います。
 
-First, we need to set a short name for our animation. If you have any experience with client animations, this process will be quite similar. Add `animations` to `description`, and set a short name, like such:
+まず、アニメーションの short name を設定します。client animation を触ったことがあれば、かなり似た手順です。`description` に `animations` を追加し、次のように short name を設定します。
 
 <CodeHeader>BP/entities/player.json > minecraft:entity > description</CodeHeader>
 
@@ -130,9 +130,9 @@ First, we need to set a short name for our animation. If you have any experience
 }
 ```
 
-Now with a short name set, we can run our animation.
+これで short name が設定できたので、アニメーションを実行できます。
 
-Add `scripts` to `description`, and set a Molang query to run. To check for the item, we can use one of the following:
+`description` に `scripts` を追加し、実行する Molang query を設定します。アイテムを確認するには、次のいずれかを使えます。
 
 -   `q.is_item_name_any`, to check for a given item identifier in any slot. This example will check for `wiki:totem_of_retreat` in either hand:
 
@@ -152,7 +152,7 @@ q.equipped_item_any_tag('slot.armor.head', 'wiki:emerald_tier', 'wiki:phantom_ti
 q.equipped_item_all_tags('slot.armor.head', 'wiki:ancient_tier', 'wiki:emerald_tier')
 ```
 
-Let's take a look at an example using `q.equipped_item_any_tag`:
+`q.equipped_item_any_tag` を使った例を見てみましょう。
 
 <CodeHeader>BP/entities/player.json > minecraft:entity > description</CodeHeader>
 
@@ -175,19 +175,19 @@ Let's take a look at an example using `q.equipped_item_any_tag`:
 }
 ```
 
-This example will run a server animation with the `emerald_armor` short name if an emerald-tier item is equipped in the helmet slot. You can change the Molang field to match your item tag, use a different query, or add additional queries.
+この例では、ヘルメットスロットに emerald tier のアイテムが装備されているとき、`emerald_armor` という short name の server animation を実行します。Molang の条件を自分のアイテムタグに合わせたり、別の query に変えたり、条件を追加したりできます。
 
-You can view a list of additional slot identifiers at the [Minecraft Wiki](https://minecraft.wiki/w/Slot#Bedrock_Edition).
+追加のスロット識別子の一覧は [Minecraft Wiki](https://minecraft.wiki/w/Slot#Bedrock_Edition) で確認できます。
 
-### Conclusion
+### 結論
 
-With the server animation, player behavior, and item tag all set up, your equipped item can now run commands! This technique allows for greater item customization than being restricted to item components. If you want to add more to the effect or add-on, check the next section; otherwise, congratulations, you're finished!
+server animation、プレイヤーの behavior、item tag がそろえば、装備したアイテムでコマンドを実行できます。この手法なら、アイテムコンポーネントだけに縛られるより、はるかに自由にカスタマイズできます。さらに機能を増やしたいなら次のセクションを見てください。そうでなければ、これで完了です。
 
-### Additions
+### 追加
 
-#### Multiple Required Items
+#### 複数の必須アイテム
 
-If you want to run a command when multiple of the armor set's pieces are equipped, we can expand our Molang from before:
+アーマーセットの複数部位が装備されているときにコマンドを実行したいなら、先ほどの Molang を拡張できます。
 
 <CodeHeader>BP/entities/player.json > minecraft:entity > description > scripts</CodeHeader>
 
@@ -199,11 +199,11 @@ If you want to run a command when multiple of the armor set's pieces are equippe
 ]
 ```
 
-This example will check for emerald-tier armor in all four armor slots, and run the animation if they're all equipped.
+この例では、4 つすべてのアーマースロットに emerald tier の防具があるかを確認し、すべて装備されていればアニメーションを実行します。
 
-#### Further Conditions
+#### さらなる条件
 
-The turtle shell doesn't always inflict Water Breathing, but instead only for 10 seconds when a player first enters water. If we want our emerald armor to only run our animation when we have lower health, we can add another query to our Molang:
+カメの甲羅は常に水中呼吸を与えるわけではなく、プレイヤーが最初に水に入ったときに 10 秒だけ付与します。emerald armor を体力が低いときだけ動かしたいなら、Molang に別の query を追加できます。
 
 <CodeHeader>BP/entities/player.json > minecraft:entity > description > scripts</CodeHeader>
 
@@ -215,9 +215,9 @@ The turtle shell doesn't always inflict Water Breathing, but instead only for 10
 ]
 ```
 
-This example will run the animation with 2.5 hearts or less remaining, allowing players to make a quick getaway when they're in danger.
+この例では、残り体力が 2.5 ハート以下のときにアニメーションを実行し、危険なときに素早く逃げられるようにします。
 
-We can also apply this to requiring multiple armor pieces, with even longer Molang:
+この条件は、複数のアーマー部位を要求する場合にも適用でき、Molang はさらに長くなります。
 
 <CodeHeader>BP/entities/player.json > minecraft:entity > description > scripts</CodeHeader>
 
@@ -231,11 +231,11 @@ We can also apply this to requiring multiple armor pieces, with even longer Mola
 }
 ```
 
-You can view a list of documented Molang queries at [bedrock.dev](https://bedrock.dev/docs/stable/Molang#List%20of%20Entity%20Queries).
+文書化された Molang query の一覧は [bedrock.dev](https://bedrock.dev/docs/stable/Molang#List%20of%20Entity%20Queries) で確認できます。
 
-#### Multiple Items with Effects
+#### 効果付きの複数アイテム
 
-If you want to add more items with unique effects, fret not; this is easily done. You can either create a new server animation file, or add on to the file from before, like such:
+固有の効果を持つアイテムをさらに追加したい場合も心配いりません。簡単にできます。新しい server animation ファイルを作るか、先ほどのファイルに追加するだけです。
 
 <CodeHeader>BP/animations/player.json</CodeHeader>
 
@@ -261,7 +261,7 @@ If you want to add more items with unique effects, fret not; this is easily done
 }
 ```
 
-In our player behavior, you'll have to add on to `animations` and `scripts` as well.
+プレイヤーの behavior では、`animations` と `scripts` も追加します。
 
 <CodeHeader>BP/entities/player.json > minecraft:entity > description</CodeHeader>
 

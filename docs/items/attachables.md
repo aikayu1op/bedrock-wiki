@@ -1,6 +1,6 @@
 ---
 title: Attachables
-description: Item attachables documentation.
+description: アイテム attachables のドキュメントです。
 category: Documentation
 tags:
     - beginner
@@ -13,26 +13,26 @@ mentions:
 ---
 
 ::: tip
-This document assumes you have a basic understanding of Molang, render controllers, animations, and client entity definitions. Ensure you are familiar with the basics of [client entities](/entities/entity-intro-rp)!
+このドキュメントでは、Molang、render controller、アニメーション、client entity 定義の基本を理解していることを前提にしています。まずは [client entities](/entities/entity-intro-rp) の基礎を確認してください。
 :::
 
 ## Introduction
 
-When we design a custom item or block, Minecraft will build a model from a template so the item can be displayed when held. This takes the form of the item's sprite being an extruded texture mesh, or blocks displaying with their model. By using a system called **attachables** we can design our own models to be displayed when these items are held.
+カスタムアイテムやブロックを設計すると、Minecraft はテンプレートからモデルを生成し、持ったときに表示できるようにします。これは、アイテムのスプライトを押し出したテクスチャメッシュにしたり、ブロックをそのモデルで表示したりする形になります。**attachables** と呼ばれる仕組みを使えば、こうしたアイテムを持ったときに表示する独自モデルを作成できます。
 
-Ever wanted sticks to look like spyglasses? Or to wield a big chainsaw with a spinning chain? Attachables are the way to accomplish that!
+棒を望遠鏡のように見せたいと思ったことはありませんか？ あるいは、回転する刃の大きなチェーンソーを構えたいと思ったことは？ attachables ならそれを実現できます。
 
-This document covers **two different ways** to create attachables, depending on how the geometry being used is constructed.
+このドキュメントでは、使うジオメトリの構造に応じた **2 つの異なる方法** で attachables を作る手順を説明します。
 
 ## Overview
 
-Attachables are a system of rendering entity models when an item or block is equipped. This means having the item held in the main hand, off hand, or armor slots.
+attachables は、アイテムやブロックを装備したときにエンティティモデルを描画する仕組みです。つまり、メインハンド、オフハンド、アーマースロットにアイテムを持たせることを意味します。
 
-Attachable definitions are quite similar in design to client entity definitions; they let us define textures, materials, geometries, and animations to display the attachable.
+attachable 定義は client entity 定義とよく似た設計で、attachable を表示するためのテクスチャ、マテリアル、ジオメトリ、アニメーションを定義できます。
 
 ### File Structure
 
-The attachable definition goes within the 'attachables' folder. The file layout is otherwise identical to that of custom entities.
+attachable 定義は `attachables` フォルダ内に置きます。ファイル構成は、他の点ではカスタムエンティティと同じです。
 
 <FolderView :paths="[
     'RP/animations/my_item.animation.json',
@@ -42,9 +42,9 @@ The attachable definition goes within the 'attachables' folder. The file layout 
     'RP/manifest.json'
 ]" />
 
-### Attachable Definition
+### Attachable 定義
 
-Here's a basic example of an attachable.
+以下は attachable の基本例です。
 
 <CodeHeader>RP/attachables/stick.entity.json</CodeHeader>
 
@@ -85,28 +85,28 @@ Here's a basic example of an attachable.
 }
 ```
 
-A few key things to point out with this attachable definition:
+この attachable 定義で押さえておくべき重要な点は次のとおりです。
 
--   The identifier matches an existing block or item ID. This will activate the attachable when the item is equipped, and will replace the original model that appears when held.
--   There is a material and texture listed for the enchantment glint. This is important to keep around if your item should have the glint when enchanted.
+-   識別子は既存のブロックまたはアイテム ID と一致させます。こうすると、そのアイテムを装備したときに attachable が有効になり、持ったときに表示される元のモデルを置き換えます。
+-   エンチャントのきらめき用にマテリアルとテクスチャが指定されています。エンチャント時にきらめきを表示したい場合は、これを残しておくことが重要です。
 
-Making attachables is a little more involved than making a client entity file. We need to properly rig the geometry's skeleton so that it looks correct when equipped.
+attachables の作成は、client entity ファイルを作るより少し手間がかかります。装備時に正しく見えるよう、ジオメトリの骨組みを適切にリギングする必要があります。
 
 ## Method 1 - Attached to the Skeleton
 
 <Tag name="beginner" />
 
-In this first method we will construct the attachable using a copy of the player's skeleton, by attaching your model to one of the player's bones.
+最初の方法では、プレイヤーのスケルトンを複製し、その骨の 1 つにモデルを接続することで attachable を構築します。
 
-This solution is ideal for models that are intended for scenarios involving only one type of mob/entity, especially players; and involving only one equipment slot. It is easy to view what the model will look like in Blockbench.
+この方法は、1 種類の mob/entity、特にプレイヤーに対して使うモデルや、1 つの装備スロットだけを扱う場合に向いています。Blockbench で完成形を確認しやすいのも利点です。
 
 ### Setting up the Skeleton
 
-We need to reconstruct the player's skeleton in order for our model to be parented to the correct bone, otherwise it will not be parented to anything and will float freely on the player.
+モデルを正しい bone に親子付けするには、プレイヤーのスケルトンを再構築する必要があります。そうしないと、どこにも親が付かず、プレイヤーの上で自由に浮いてしまいます。
 
-With a text editor, take the bones from the provided player skeleton file and copy them to your geometry file, then set the `rightItem` bone as the parent to the cubes from your model. Save this geometry to your resource pack.
+テキストエディタで、提供されている player skeleton ファイルの bones を geometry ファイルへコピーし、モデルの cubes の親を `rightItem` bone に設定します。その geometry を resource pack に保存してください。
 
-For convenience, such a model has been prepared here. The cubes from the player's model have already been removed:
+便宜上、このようなモデルはすでに用意されています。プレイヤーモデルの cubes はすでに削除済みです。
 
 <Button download link="/assets/packs/items/attachables/method_one/steve_head.geo.json">
     📄 Geometry File
@@ -114,11 +114,11 @@ For convenience, such a model has been prepared here. The cubes from the player'
 
 ### Display Settings
 
-Having your model floating at the player's feet is not ideal. Our next step is to create animations so we can properly display the model on the player.
+モデルがプレイヤーの足元に浮いているのは理想的ではありません。次のステップでは、プレイヤー上で正しく表示するためのアニメーションを作成します。
 
-Create two new animations, one for holding the item in first person and another for holding it in third person. Select your third-person animation, and position it however you want. Save this animation to your resource pack.
+新しいアニメーションを 2 つ作成します。1 つは一人称でアイテムを持つ用、もう 1 つは三人称で持つ用です。三人称アニメーションを選択し、好きな位置に配置してください。そのアニメーションを resource pack に保存します。
 
-Here is an example of such an animation. This also includes a first-person animation—the means of making one is detailed in the section below.
+以下はそのアニメーションの例です。ここには一人称アニメーションも含まれており、その作り方は下のセクションで説明します。
 
 <Button download link="/assets/packs/items/attachables/method_one/steve_head.animation.json">
     📄 Animation File
@@ -126,41 +126,41 @@ Here is an example of such an animation. This also includes a first-person anima
 
 ### First-person Animations
 
-To more easily create first-person animations, we need to mimic how the arm is positioned in the first person.
+一人称アニメーションを作りやすくするため、一人称視点での腕の位置を再現する必要があります。
 
 :::tip
-To add animation for player's hands, you need to use player's animations, not attachables animations.
+プレイヤーの手のアニメーションを追加するには、attachables のアニメーションではなく、プレイヤーのアニメーションを使う必要があります。
 :::
 
-Use the following guide animation and import it into Blockbench. It applies a rotation of (95, -45, 115) and a translation of (13.5, -10, 12) to the right arm bone, perfectly mimicking how the arm is positioned in first-person.
+次のガイド用アニメーションを Blockbench にインポートしてください。これは右腕の bone に (95, -45, 115) の回転と (13.5, -10, 12) の移動を適用し、一人称視点での腕の位置を正確に再現します。
 
 <Button download link="/assets/packs/items/attachables/method_one/attachable_guide.animation.json">
     📄 Attachable Guide File
 </Button>
 
 :::warning NOTE
-This is where things get tricky. Both animations will need to be played simultaneously; your first-person animation, and the guide's first-person animation.
+ここが少し難しいところです。あなたの一人称アニメーションと、ガイドの一人称アニメーションの両方を同時に再生する必要があります。
 
-Be sure you are editing your animation when making your changes. Select it first, then play the guide's first-person animation on top.
+変更を加えるときは、必ず自分のアニメーションを編集している状態にしてください。まずそれを選択し、その上にガイドの一人称アニメーションを再生します。
 :::
 
 ### Conclusion
 
-With this all set up, go through and delete the _cubes_ from the player skeleton if there are any, but keep the bones. Check the model out in-game!
+ここまで設定できたら、プレイヤースケルトンに _cubes_ が残っていれば削除し、bone は残してください。ゲーム内でモデルを確認してみましょう。
 
 ## Method 2 - Bound to a Bone
 
 <Tag name="intermediate" />
 
-In this second method, the attachable geometry will be constructed using model binding. This allows a model to be directly attached to a bone within a mob's geometry corresponding to the slot it is equipped in. Minecraft employs model binding for its attachable items, including the trident, spyglass, bow, and shield.
+2 つ目の方法では、attachable の geometry を model binding で構築します。これにより、装備スロットに対応する mob の geometry 内の bone にモデルを直接結びつけられます。Minecraft は、トライデント、望遠鏡、弓、盾などの attachable アイテムに model binding を使っています。
 
-While this method allows the attachable to apply more dynamically to other mobs and equipment slots, model binding also has strange quirks, which will be illustrated below. Some developers may find this method trickier to get working.
+この方法では、attachable を他の mob や装備スロットにより動的に適用できますが、model binding には奇妙な癖もあります。これについては下で説明します。開発者によっては、この方法の方が動作させるのが難しいと感じるかもしれません。
 
 ### Model Binding
 
-Our first step is to upgrade the model file format version to `"1.16.0"` if it is not already. If the model is a legacy file, then convert it before continuing; Blockbench has a tool to do this (File → Convert Project).
+最初の手順は、モデルファイルのフォーマットバージョンをまだなら `"1.16.0"` に更新することです。モデルが古い形式のファイルなら、続ける前に変換してください。Blockbench にはそのためのツールがあります（File → Convert Project）。
 
-Next up is modifying the root bone of our geometry to be bound to the equipment slot the item is placed in. Take note of line 4 in this excerpt from the skeleton head geometry file:
+次に、geometry のルート bone を、アイテムが配置される装備スロットに結びつけるよう変更します。skeleton head geometry ファイルの抜粋の 4 行目に注目してください。
 
 <CodeHeader>RP/models/entity/skeleton_head.geo.json</CodeHeader>
 
@@ -180,18 +180,18 @@ Next up is modifying the root bone of our geometry to be bound to the equipment 
 }
 ```
 
-The `"parent"` key in a bone accepts a string, and whichever bone name is entered will be set as the parent to the current bone; the child bones keep their positions but move relative to the parent bone.
+bone の `"parent"` キーは文字列を受け取り、入力した bone 名が現在の bone の親になります。子 bone は位置を保ったまま、親 bone を基準に移動します。
 
-The `"binding"` key on the other hand accepts Molang, and the pivot point of whichever bone name is entered is set as the _root position_ that the child bone and its children should inherit.
+一方 `"binding"` キーは Molang を受け取り、入力した bone 名の pivot point を、子 bone とその子孫が継承する _root position_ として扱います。
 
-For the value of `"binding"` we are using the Molang query `q.item_slot_to_bone_name`, which converts a slot name to a bone name, with the contextual variable `context.item_slot` as an argument. This converts the name of the equipment slot this item resides in to its corresponding bone name in the player's geometry. The conversions are as follows:
+`"binding"` の値には Molang query `q.item_slot_to_bone_name` を使います。これはスロット名を bone 名へ変換し、引数として contextual variable `context.item_slot` を受け取ります。これにより、アイテムが属する装備スロット名を、プレイヤーの geometry にある対応する bone 名へ変換します。変換は次のとおりです。
 
 -   `'main_hand'` → "rightitem"
 -   `'off_hand'` → "leftitem"
 
-Apply the model binding to your bone, and save the geometry to your resource pack.
+bone に model binding を適用し、geometry を resource pack に保存します。
 
-An example model with this binding applied is provided here:
+この binding を適用したモデル例は次のとおりです。
 
 <Button download link="/assets/packs/items/attachables/method_two/skeleton_head.geo.json">
     📄 Geometry File
@@ -199,21 +199,21 @@ An example model with this binding applied is provided here:
 
 ### Display Settings
 
-With that done, the next step is to set up animations to display the model in first person and third person.
+ここまでできたら、次は一人称と三人称でモデルを表示するためのアニメーションを設定します。
 
-Create two new animations, one for holding the item in first person and another for holding it in third person.
+新しいアニメーションを 2 つ作成します。1 つは一人称でアイテムを持つ用、もう 1 つは三人称で持つ用です。
 
-To make creating these animations easier, please do the following:
+これらのアニメーションを作りやすくするため、次の手順を行ってください。
 
--   Download the following player skeleton model. We will use this as a visual aid for positioning your model.
+-   次の player skeleton モデルをダウンロードします。モデルの位置調整の視覚補助として使います。
 
     <Button download link="/assets/packs/items/attachables/method_two/player_skeleton.geo.json">
         📄 Player Skeleton File
     </Button>
 
--   With a text editor, add the bones and cubes from your model to the player skeleton model, then import the player skeleton model into Blockbench.
--   Set your model's root bone(s) to be a child of the 'rightItem' bone in the player skeleton.
--   Download the following animation file import the `wiki.third_person_guide` animation. This will be used later to make positioning easier.
+-   テキストエディタで、モデルの bones と cubes を player skeleton モデルに追加し、その player skeleton モデルを Blockbench にインポートします。
+-   モデルの root bone を、player skeleton 内の `rightItem` bone の子に設定します。
+-   次の animation file をダウンロードし、`wiki.third_person_guide` アニメーションをインポートします。これは後で位置調整をしやすくするために使います。
 
     <Button
         download
@@ -222,17 +222,17 @@ To make creating these animations easier, please do the following:
         📄 Attachable Guide File
     </Button>
 
-These guide animations have one notable feature: they apply a -24 offset to the y-position of the right item bone to counteract a similar -24 y-position offset Minecraft applies to bound bones. We are unsure at this time why this happens.
+これらのガイドアニメーションには 1 つ特徴があります。Minecraft が bound bone に適用する -24 の y 位置オフセットを打ち消すため、right item bone の y 位置に -24 のオフセットを適用しています。なぜこうなるのかは、現時点では不明です。
 
 :::warning NOTE
-Similar to Method One, **two** animations will need to be played simultaneously for correct positioning.
+方法 1 と同様に、正しい位置にするには **2 つ** のアニメーションを同時に再生する必要があります。
 
-Be sure you are editing your animations when making your changes. Select it first, then play the guide animation on top.
+変更を加えるときは、必ず自分のアニメーションを編集している状態にしてください。まずそれを選択し、その上にガイドアニメーションを再生します。
 :::
 
-Play both animations, and position your model however you want. Save the animations to your resource pack.
+両方のアニメーションを再生し、モデルを好きな位置に配置します。そのアニメーションを resource pack に保存してください。
 
-An example animation file for this positioning:
+この位置調整用のアニメーション例はこちらです。
 
 <Button download link="/assets/packs/items/attachables/method_two/skeleton_head.animation.json">
     📄 Animation File
@@ -240,11 +240,11 @@ An example animation file for this positioning:
 
 ### First-person Animations
 
-Similar to the third-person animation, look in the Attachable Guide file and import the `wiki.first_person_guide` animation into Blockbench. Play both your animation and the guide's first-person animation together, then make your changes and save the file.
+三人称アニメーションと同様に、Attachable Guide ファイルを見て `wiki.first_person_guide` アニメーションを Blockbench にインポートします。自分のアニメーションとガイドの一人称アニメーションを同時に再生し、調整して保存します。
 
 ## Example Pack
 
-Each of these methods have been compiled into an example pack you may reference, for if you are getting stuck or simply want to see a working example.
+これらの方法はすべて、参考用のサンプルパックとしてまとめられています。詰まったときや、動作する例を見たいときに利用できます。
 
 <Button
     download

@@ -1,21 +1,21 @@
 ---
-title: Generating Patches
+title: パッチの生成
 category: Tutorials
 mentions:
     - DerpMcaddon
     - SirLich
 tags:
     - experimental
-description: Feature based surface builder is a feature that puts together a collection of blocks that serve to add variety and decoration to the Overworld surface.
+description: Feature ベースの surface builder は、オーバーワールドの地表に多様性と装飾を加えるためのブロック群をまとめて配置する機能です。
 ---
 
-Feature based surface builder is a feature that puts together a collection of blocks that serve to add variety and decoration to the Overworld surface. This tutorial will explain what is needed to create this feature, including size, frequency, generation location, and more!
+Feature ベースの surface builder は、オーバーワールドの地表に多様性と装飾を加えるためのブロック群をまとめて配置する機能です。このチュートリアルでは、サイズ、頻度、生成位置など、この機能を作るのに必要なものを説明します。
 
-## Single Block Features
+## 単一ブロックの Feature
 
-Single block features are going to be the base of our surface builder. They will define which blocks we are going to use. For this tutorial I'll be using Coarse Dirt, Podzol and Cobblestone.
+単一ブロックの feature は、surface builder の土台になります。どのブロックを使うかを定義します。このチュートリアルでは、Coarse Dirt、Podzol、Cobblestone を使います。
 
-Learn more about single block features [here](/world-generation/feature-types#single-block-features)
+単一ブロックの feature については [こちら](/world-generation/feature-types#single-block-features) を参照してください。
 
 Coarse Dirt File
 
@@ -86,11 +86,11 @@ Cobblestone File
 }
 ```
 
-## Weighted Random Features
+## 重み付きランダム Feature
 
-Weighted random features are going to be our _randomizer_ to select between each type of blocks.
+重み付きランダム feature は、各種ブロックの選択を行う _ランダム化装置_ になります。
 
-Learn more about weighted random features [here](/world-generation/feature-types#weighted-random-features)
+重み付きランダム feature については [こちら](/world-generation/feature-types#weighted-random-features) を参照してください。
 
 <CodeHeader>BP/features/select_surface_block_feature.json</CodeHeader>
 
@@ -119,11 +119,11 @@ Learn more about weighted random features [here](/world-generation/feature-types
 }
 ```
 
-## Scatter Features
+## Scatter Feature
 
-Scatter features are an important part of our surface builder. It will determine the size, shape and number of blocks in one blob.
+scatter feature は surface builder の重要な要素です。1 つの塊に含まれるブロックのサイズ、形、数を決めます。
 
-Learn more about scatter features [here](/world-generation/feature-types#scatter-features)
+scatter feature については [こちら](/world-generation/feature-types#scatter-features) を参照してください。
 
 <CodeHeader>BP/features/scatter_surface_block_feature.json</CodeHeader>
 
@@ -149,17 +149,17 @@ Learn more about scatter features [here](/world-generation/feature-types#scatter
 }
 ```
 
--   `iterations` determine how many blocks will be placed. I'm going to use the Molang `math.random_integer` function to randomize the number of blocks. In this case, it'll be 20 to 25 blocks.
+-   `iterations` は、いくつのブロックを配置するかを決めます。ここでは Molang の `math.random_integer` 関数を使ってブロック数をランダム化します。この場合は 20 から 25 ブロックになります。
 
--   `extent` use an array to determine the size of the blob. `[0, 8]` means the size is extended from 0 to 8 blocks. So, our blob would be 8 blocks long both on X and Z axis. **Only use this for X and Z distribution**.
+-   `extent` は配列を使って塊の大きさを決めます。`[0, 8]` は 0 から 8 ブロックまで広がることを意味します。つまり、塊は X 軸と Z 軸の両方で 8 ブロックの長さになります。**これは X と Z の分布にだけ使います**。
 
--   `"y": "q.heightmap(v.worldx, v.worldz) -1` means it will put the block on the highest block on the y coordinate -1. So it'll always put the feature on the surface.
+-   `"y": "q.heightmap(v.worldx, v.worldz) -1` は、Y 座標の最上位ブロックから -1 の位置にブロックを置くことを意味します。つまり、常に地表に feature を配置します。
 
--   `distribution` specifies the type of distribution to use. Available include `Gaussian`, `Inverse Gaussian`, `Uniform`,`Fixed Grid` and `Jittered Grid`
+-   `distribution` は使用する分布の種類を指定します。`Gaussian`、`Inverse Gaussian`、`Uniform`、`Fixed Grid`、`Jittered Grid` が利用できます。
 
 ## Feature Rule
 
-This is the final step for our surface builder. The feature rules for our surface builders are slightly different.
+これが surface builder の最後のステップです。surface builder の feature rule は少し特殊です。
 
 <CodeHeader>BP/feature_rules/overworld_surface_blocks_feature.json</CodeHeader>
 
@@ -176,7 +176,7 @@ This is the final step for our surface builder. The feature rules for our surfac
             "minecraft:biome_filter": {
                 "test": "has_biome_tag",
                 "operator": "==",
-                "value": "overworld" //You can change this to whatever biometag you want
+            "value": "overworld" //You can change this to whatever biometag you want
             }
         },
         "distribution": {
@@ -200,4 +200,4 @@ This is the final step for our surface builder. The feature rules for our surfac
 }
 ```
 
-And our surface builder is done! Feel free to modify and mess around with it!
+これで surface builder は完成です。自由に変更して試してみてください。

@@ -1,6 +1,6 @@
 ---
-title: Intro to World Generation
-description: Learn about modifying world generation.
+title: ワールド生成の入門
+description: ワールド生成の変更方法を学びます。
 category: General
 nav_order: 1
 tags:
@@ -18,23 +18,23 @@ mentions:
 ---
 
 :::warning
-This page is somewhat out-dated, and contains limited information. For the most up-to-date and comprehensive information, view the other pages in this section.
+このページの情報はやや古く、内容も限定的です。最新かつ包括的な情報は、このセクション内の他のページを参照してください。
 :::
 
-You can change the world's generation via Add-ons. The needed folders in the Behavior pack for these are:
+Add-on を使ってワールド生成を変更できます。必要な Behavior Pack のフォルダは次のとおりです。
 
-`structures`, `features`, `feature_rules`, `biomes`, and `worldgen`. It's quite self-explanatory: you can store your .mcstructure files from (or for) structure blocks in `structures`, biome files in `biomes`, jigsaw structure files in `worldgen` and its subfolders, terrain features, like ores, in `features` and the rules for their generation in `feature_rules`. Let's go over adding a custom biome first.
+`structures`、`features`、`feature_rules`、`biomes`、`worldgen` です。名前からほぼ分かるとおり、構造ブロックから作成した `.mcstructure` ファイルは `structures` に、バイオームファイルは `biomes` に、ジグソー構造ファイルは `worldgen` とそのサブフォルダに、鉱石などの地形特徴は `features` に、その生成ルールは `feature_rules` に保存します。まずはカスタムバイオームの追加から見ていきましょう。
 
-_Note: it might be easier to create biomes using bridge., a Visual software for Add-on creation (also linked in Links and Contact), since the official Documentation is rather incomplete. You can also generate all example files of vanilla biomes, features and feature rules for reference, like shown here:_
+_注: 公式ドキュメントはかなり不完全なので、Add-on 作成用のビジュアルソフトである bridge. を使ってバイオームを作成すると簡単かもしれません (リンクと連絡先にもあります)。ここに示すように、参考用にバニラのバイオーム、特徴、feature rule のサンプルファイルをすべて生成することもできます。_
 
 ![](gen_coal_ore.png)
-_Generating a coal_ore feature using bridge._
+_bridge. を使って coal_ore 特徴を生成しています。_
 
-However, bridge. is not required.
+ただし、bridge. は必須ではありません。
 
 ---
 
-## Custom Biomes
+## カスタムバイオーム
 
 <CodeHeader>BP/biomes/cold_biome.json</CodeHeader>
 
@@ -77,36 +77,36 @@ However, bridge. is not required.
 }
 ```
 
--   Set `format_version` to 1.26.10: it's the latest biome file version as of the current release.
--   `description` takes only one value: `identifier`.
--   `components` is just what you'd expect: something applied to the biome at default. let's look through them:
--   `minecraft:climate` controls everything climate-wise.
--   `downfall` is how often it'll be raining or snowing. 0.0 is for absolutely no rain (like a desert) and 1.0 should mean constant rain.
--   `temperature` is used to define things like water freezing and rain turning into snow.
+-   `format_version` は 1.26.10 に設定します。これは現行リリース時点での最新のバイオームファイルバージョンです。
+-   `description` には `identifier` 1 つだけを指定します。
+-   `components` は名前のとおり、バイオームに適用される要素です。中身を見ていきましょう。
+-   `minecraft:climate` は気候に関するすべてを制御します。
+-   `downfall` は雨や雪がどれくらいの頻度で降るかです。`0.0` は完全に雨なし (砂漠のような状態)、`1.0` は常に雨が降る状態を意味します。
+-   `temperature` は、水が凍るかどうかや、雨が雪に変わるかどうかなどを決めるために使われます。
 
-**You can generate default biome files for reference using bridge.**
+**bridge. を使うと、参考用のデフォルトバイオームファイルを生成できます。**
 
--   `overworld_surface` controls blocks generated.
--   `floor_depth` is how deep down lakes and rivers go in blocks.
--   `sea_floor_material` defines the material to be used when generating the river and lake's floor.
--   `foundation_material` is the material to be used approximately between y=5 and y=50. For a desert, for example, it's stone.
--   `sea_material` is the material used as show liquid in lakes, rivers, oceans, etc. For example, in all Overworld biomes, this is set to "minecraft:water".
--   `top_material` defines the material for the highest level. E.g for Plains it's grass.
--   `mid_material` is the layer between 'top' and 'foundation'. For Plains it's dirt.
--   `overworld_height` defines how the Biome will look terrain-wise.
+-   `overworld_surface` は生成されるブロックを制御します。
+-   `floor_depth` は、湖や川の底がブロックでどれだけ深くなるかです。
+-   `sea_floor_material` は、川や湖の底を生成するときに使う素材を定義します。
+-   `foundation_material` は、おおよそ y=5 から y=50 の間で使われる素材です。たとえば砂漠では石になります。
+-   `sea_material` は、湖や川、海などの液体として使われる素材です。たとえば、すべてのオーバーワールドのバイオームでは `minecraft:water` に設定されています。
+-   `top_material` は最上層の素材を定義します。たとえば Plains では草です。
+-   `mid_material` は `top` と `foundation` の間の層です。Plains では土です。
+-   `overworld_height` は、そのバイオームが地形的にどう見えるかを定義します。
 
-DO NOT use both `noise_type` and `noise_params` at the same time. `noise_params` is an array of the top level of noise and the lowest level of noise allowed in the biome.
+`noise_type` と `noise_params` を同時に使わないでください。`noise_params` は、ノイズの最上位とバイオーム内で許可される最下位のノイズを表す配列です。
 
 ![](non_smooth_noise_transition.jpg)
-_A non-smooth transition between the same biome, generated with noise_params as [0.1, 0,1] and then [1.0, 1.0]._
+_同じバイオーム内での滑らかでない遷移。`noise_params` を [0.1, 0,1] にした場合と [1.0, 1.0] にした場合の比較です。_
 
--   If you want to use `noise_type`, however, you will be presented with a few pre-generated types of noise. You will probably know how some of them look from the Vanilla game. Here's the list:
+-   ただし `noise_type` を使う場合は、いくつかの事前生成済みノイズタイプから選ぶことになります。バニラゲームで見覚えのあるものもあるはずです。以下が一覧です。
 
 `beach, default, extreme, taiga, ocean, mountains, default_mutated, deep_ocean, lowlands, less_extreme, stone_beach, swamp, river, mushroom`.
 
--   `minecraft:replace_biomes` is the most important component of all. It tells the game where to place custom biomes in replacement of vanilla biomes at a percentage rate.
+-   `minecraft:replace_biomes` は、何よりも重要な要素です。バニラのバイオームをどの割合でカスタムバイオームに置き換えるかをゲームに伝えます。
 
--   And, last but not least, BIOME TAGS! They're very simple, but useful. You can set however many of the vanilla or custom tags you want by adding them in this format in the `minecraft:tags` component:
+-   そして最後に、バイオームタグです。とても単純ですが便利です。`minecraft:tags` コンポーネントに次の形式で追加することで、バニラまたはカスタムのタグを好きなだけ設定できます。
 
 <CodeHeader>minecraft:biome > components</CodeHeader>
 
@@ -119,32 +119,32 @@ _A non-smooth transition between the same biome, generated with noise_params as 
 }
 ```
 
-Then, you can test for your tag in _environment_sensors_, _filters_, _has_biome_ tests, _spawn rules_, and more.
+その後、そのタグを _environment_sensors_、_filters_、_has_biome_ テスト、_spawn rules_ などで判定できます。
 
-Your custom biome is now complete!
+これでカスタムバイオームは完成です！
 
 ---
 
-## Features and Feature Rules
+## Features と Feature Rules
 
-Features and Feature Rules are used to generate everything from ores to grass and flowers, vegetation to granite or clay patches.
-It is even possible to create custom structures using those, but as it is very grindy and will be much easier after the mentioned update, we won't talk about it just yet.
+Features と Feature Rules は、鉱石から草や花、植生、花崗岩や粘土の塊まで、あらゆるものを生成するために使われます。
+これらを使ってカスタム構造物を作ることも可能ですが、とても手間がかかり、前述の更新後ならもっと簡単になるため、ここではまだ扱いません。
 
-Now, it's worthwhile to mention that the easiest way to generate Custom Structures is this [auto generator](https://machine-builder.itch.io/frg-v2) by [MACHINE_BUILDER](https://www.youtube.com/channel/UC8FBQgo4AWwKFX97h60NKOQ), you should note that this tool has a free version with limited functionality and to enjoy the full functionality use the payware version. However, we'll still learn some other manual feature generation here, because some things like Ores are much more efficient to generate as `ore_feature`s and not `structure_template_feature`s.
+ここで触れておくと、カスタム構造物を生成する最も簡単な方法は、[MACHINE_BUILDER](https://www.youtube.com/channel/UC8FBQgo4AWwKFX97h60NKOQ) による [自動生成ツール](https://machine-builder.itch.io/frg-v2) です。このツールには機能制限付きの無料版があり、すべての機能を使うには有料版を利用する必要があります。ただし、鉱石のような一部の要素は `structure_template_feature` より `ore_feature` として生成するほうがはるかに効率的なので、ここでは手動での生成方法も学びます。
 
-Let's make our `wiki:blocky` custom block generate as an ore for the tutorial's sake. I'll do it the easy way, like this:
+チュートリアルのために、`wiki:blocky` のカスタムブロックを鉱石として生成するようにしてみましょう。手順は簡単です。
 
-1. Open _bridge._, choose your Add-on.
-1. _Add new file>features>diamond_ore and Add new file>feature_rules>diamond_ore_.
-1. Now I'll save the files and open them in my Code Editor and make the necessary modifications.
+1. _bridge._ を開いて、対象の Add-on を選びます。
+1. `_Add new file>features>diamond_ore` と `_Add new file>feature_rules>diamond_ore_` を追加します。
+1. 次に、ファイルを保存し、コードエディタで開いて必要な変更を加えます。
 
-_You could've easily just written the files from scratch or copied them from somewhere without using bridge. in case you are having trouble installing it. **One place to find the Vanilla Files are the [Example Packs](https://www.minecraft.net/en-us/addons), another, a more complete one is [bridge.'s repository](https://github.com/bridge.-core/bridge../tree/master/static/vanilla)**._
+_bridge. を使わずに、ファイルを最初から書いたり、どこかからコピーしたりしても問題ありません。bridge. の導入で困っている場合はその方法でも構いません。**バニラファイルを見つける場所の 1 つは [Example Packs](https://www.minecraft.net/en-us/addons) で、より完全なものは [bridge. のリポジトリ](https://github.com/bridge.-core/bridge../tree/master/static/vanilla) です**。_
 
 ## Features
 
-Features are located in `BP/features` and are basically a group of blocks stored in the game's files, which can be placed with a _feature_rule_. The **file name** of a _feature_ **must match** the **identifier** as well.
+Features は `BP/features` に配置され、基本的にはゲームファイル内に保存されるブロックのまとまりで、_feature_rule_ を使って配置できます。_feature_ の **ファイル名** は **identifier** と一致していなければなりません。
 
-You can find their Documentation on [bedrock.dev/r/Features](https://bedrock.dev/r/Features)
+[bedrock.dev/r/Features](https://bedrock.dev/r/Features) にドキュメントがあります。
 
 <CodeHeader>BP/features/blocky_ore_feature.json</CodeHeader>
 
@@ -205,15 +205,15 @@ You can find their Documentation on [bedrock.dev/r/Features](https://bedrock.dev
 }
 ```
 
--   `minecraft_ore_feature` is type of the specific feature that places ores automatically. Each feature type has it's own specific syntax. (There's also `single_block_feature` that places a single block instead of an ore group, etc)
--   `identifier` doesn't require a namespace in this scenario. The namespace is optional, and is not to be added in the filename.
--   `count` is how big the ore "cluster" will be at maximum, or how many actual ore blocks will generate together.
--   `places_block` takes the identifier of the block to be placed as the value.
--   `may_replace` takes all the blocks that the feature can replace as arguments. If it generates over one of the blocks not included in here, the block will remain where it was without being replaced.
+-   `minecraft_ore_feature` は、鉱石を自動で配置する特定の feature の種類です。feature の種類ごとに固有の構文があります (`single_block_feature` のように、鉱石のまとまりではなく単一ブロックを配置するものもあります)。
+-   このシナリオでは `identifier` に namespace は不要です。namespace は任意で、ファイル名にも含めません。
+-   `count` は、鉱石の「クラスター」が最大でどれくらい大きくなるか、あるいは実際の鉱石ブロックがいくつ一緒に生成されるかを表します。
+-   `places_block` は、配置するブロックの identifier を値として受け取ります。
+-   `may_replace` は、その feature が置き換え可能なブロックをすべて引数として受け取ります。ここに含まれていないブロックの上に生成された場合、そのブロックは置き換えられず、そのまま残ります。
 
 ## Feature Rules
 
-**Feature Rules** control where and how _features_ (and, in the future, _structures_) are placed.
+**Feature Rules** は、_features_ (将来的には _structures_ も) をどこに、どのように配置するかを制御します。
 
 <CodeHeader>BP/feature_rules/overworld_underground_blocky_ore_feature.json</CodeHeader>
 
@@ -265,40 +265,40 @@ You can find their Documentation on [bedrock.dev/r/Features](https://bedrock.dev
 ```
 
 -   `description`
-    -   `identifier` needs no namespace, but the filename needs to match.
-    -   `places_feature` takes the identifier of the feature that is controlled by this rule as the value.
+    -   `identifier` に namespace は不要ですが、ファイル名は一致している必要があります。
+    -   `places_feature` は、このルールで制御される feature の identifier を値として受け取ります。
 -   `conditions`
-    -   `placement_pass` HOW the feature will be passed.
-    -   `biome_filter` tests for biome tags where the feature will generate, exactly as a spawn rule.
+    -   `placement_pass` は、その feature がどの段階で配置されるかを示します。
+    -   `biome_filter` は、spawn rule と同様に、その feature が生成されるバイオームタグを判定します。
 -   `distribution`
-    -   `iterations` basically chance. I set mine to 100 to make it generate everywhere, but for a diamond_ore, this is set to 1.
-    -   The next four components show in which directions the ore will be 'dragged' towards.
-        _Needs more clarification_
+    -   `iterations` は、基本的には生成回数です。私は 100 にしてどこでも生成されるようにしていますが、`diamond_ore` の場合は 1 にします。
+    -   次の 4 つの項目は、鉱石がどの方向へ「引っ張られる」かを示します。
+        _さらに説明が必要_
 
-The easiest way to test wether your ores generated is /fill ~15 ~5 ~15 ~-15 ~-15 ~-15 air 0 replace stone using this command at a low y level. it'll keep everything BUT stone in the selected area, like this:
+鉱石が生成されたかを確認する最も簡単な方法は、低い y 座標で次のコマンドを使うことです。`/fill ~15 ~5 ~15 ~-15 ~-15 ~-15 air 0 replace stone` とすると、選択範囲内の stone 以外をすべて残せます。結果は次のようになります。
 
 ![](ore_gen_sans_stone.jpg)
 
-And yes, 100 as "iterations" is definitely waaay too much ;)
+そして、`iterations` を 100 にするのは確かに多すぎます ;)
 
-It's a good idea to proceed checking out other feature and feature_rule vanilla files to learn further techniques. However, the ones you were just walked through are enough to create most of what needs to be generated.
+さらに技術を学ぶには、他の feature と feature_rule のバニラファイルを確認していくとよいです。ただし、ここで説明した内容だけでも、生成したいものの大半は作れます。
 
 ---
 
-## Custom Structures
+## カスタム構造物
 
 ### Structure Template Features
 
-As of MCBE v1.16.20, **Custom Generated structures are possible**
-A simple way to generate Structures is [this](https://machine-builder.itch.io/frg-v2) auto generator by MACHINE_BUILDER, mentioned earlier. It generates all three of the required files for your structure: `feature_rules/mystructure.feature_rule.json`, `feature_rules/mystructure.feature.json` and `structures/mystructure.mcstructure.` You can learn more about defining `.mcstructures` with Structure Blocks in Minecraft itself [here](/nbt/mcstructure).
+MCBE v1.16.20 以降、**カスタム生成された構造物が可能** になりました。
+構造物を生成する簡単な方法は、先ほど触れた MACHINE_BUILDER の [自動生成ツール](https://machine-builder.itch.io/frg-v2) です。これにより、構造物に必要な 3 つのファイル `feature_rules/mystructure.feature_rule.json`、`feature_rules/mystructure.feature.json`、`structures/mystructure.mcstructure` が生成されます。Minecraft 内の Structure Block を使った `.mcstructure` の作成方法については、[こちら](/nbt/mcstructure) を参照してください。
 
 ---
 
-Now that you have your `.mcstructure`, time to write your `feature` and `feature rule`. The last is the same as with ores (see the beginning of this article). Let's continue to the **Feature**.
+`.mcstructure` ができたら、`feature` と `feature rule` を書きます。後者は鉱石の場合と同じです (この記事の冒頭を参照)。では **Feature** に進みましょう。
 
--   Remember that the namespace is not required and that the filename must match the identifier, excluding the namespace. So if you have a feature rule with the identifier `wiki:myfeaturerule` or simply `myfeaturerule`, the file name can be be `myfeaturerule.json` in both cases.
+-   namespace は必須ではなく、ファイル名は namespace を除いた identifier と一致している必要があることを忘れないでください。たとえば、identifier が `wiki:myfeaturerule` でも単に `myfeaturerule` でも、ファイル名はどちらの場合も `myfeaturerule.json` にできます。
 
-Here's an code example from the [Features Documentation](https://bedrock.dev/r/Features#minecraft:structure_template_feature):
+以下は、[Features ドキュメント](https://bedrock.dev/r/Features#minecraft:structure_template_feature) のコード例です。
 
 <CodeHeader></CodeHeader>
 
@@ -322,23 +322,23 @@ Here's an code example from the [Features Documentation](https://bedrock.dev/r/F
 }
 ```
 
--   `structure_name` is the structure's identifier, the one you saved via a Structure Block.
+-   `structure_name` は構造物の identifier で、Structure Block で保存したものです。
 
-### Jigsaw Structures
+### ジグソー構造物
 
-Jigsaw structures can be very small or very large, up to 256 blocks across!
+ジグソー構造物は、非常に小さくも非常に大きくもでき、最大で横 256 ブロックまで対応します。
 
-Jigsaws allow for large randomize structures like villages or trail ruins which can generate across the world and be located by `/locate` unlike structure features.
-They are very powerful and more information about them can be found [here](/world-generation/jigsaw-structures).
+ジグソーは、村や Trail Ruins のような大規模なランダム構造物を扱えます。これらはワールド全体に生成でき、structure feature とは違って `/locate` で見つけられます。
+とても強力なので、詳しい情報は [こちら](/world-generation/jigsaw-structures) で確認できます。
 
-That's pretty much it! Now you're able to generate your own custom Structures in the world.
+これでほぼ完了です。これで、自分だけのカスタム構造物をワールドに生成できるようになりました。
 
-## Your Progress So Far
+## ここまでの進捗
 
-**What you've done:**
+**ここまでに行ったこと:**
 
--   [x] Created you very first biome.
--   [x] Made your very first ore generate naturally.
--   [x] Learned to use bridge. for vanilla files generation and referencing.
--   [x] Learned about other Custom Generation methods.
--   [x] Created custom structures.
+-   [x] 最初のバイオームを作成した。
+-   [x] 最初の鉱石を自然生成させた。
+-   [x] バニラファイルの生成と参照に bridge. を使えるようになった。
+-   [x] 他のカスタム生成手法について学んだ。
+-   [x] カスタム構造物を作成した。

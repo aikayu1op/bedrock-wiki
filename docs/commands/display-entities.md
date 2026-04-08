@@ -1,5 +1,5 @@
 ---
-title: FMBE - A New Way to Create Display Entities
+title: FMBE - 表示エンティティを作る新しい方法
 category: Techniques
 tags:
     - intermediate
@@ -9,33 +9,33 @@ mentions:
     - zheaEvyline
     - szea-ll14
 nav_order: 5
-description: A guide to creating block display entities on Bedrock purely using commands.
+description: Bedrock でコマンドだけを使ってブロック表示エンティティを作るためのガイドです。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-In this page, we will learn how to create block display entities in Minecraft Bedrock purely using commands.
+このページでは、Minecraft Bedrock でコマンドだけを使ってブロック表示エンティティを作る方法を学びます。
 
-The first person to develop such a technique was [u/Maxed_Out10](https://www.reddit.com/user/Maxed_Out10/), who used only Vanilla commands. His technique offers less flexibility but is much simpler, using armor stands. To check out his method, you may refer to the ["MBE - Max's Block Entity"](/commands/block-entities) page.
+この手法を最初に開発したのは [u/Maxed_Out10](https://www.reddit.com/user/Maxed_Out10/) で、Vanilla コマンドだけを使っていました。彼の手法は柔軟性は低いものの、アーマースタンドを使うためかなり単純です。彼の方法については、["MBE - Max's Block Entity"](/commands/block-entities) のページを参照してください。
 
-Inspired by Max's Block Entity (MBE), command experts @pipi_Spamton, @siratama, and their team from the [Japanese Commanders Gathering](https://discord.gg/xFZH6QJfSB), have devised a new technique for creating block display entities in Minecraft Bedrock which offers more flexibility and customization. This method is based on the same principles as MBE, but instead of armor stands, it effectively uses the bone structure of foxes to render the block displays.
+Max's Block Entity (MBE) に着想を得て、コマンドの専門家である @pipi_Spamton、@siratama、そして [Japanese Commanders Gathering](https://discord.gg/xFZH6QJfSB) のチームは、Minecraft Bedrock でブロック表示エンティティを作る新しい手法を考案しました。こちらはより柔軟で、カスタマイズ性も高くなっています。MBE と同じ原理に基づいていますが、アーマースタンドの代わりに、キツネの骨格を使ってブロック表示を描画します。
 
-In a traditional sense, you may refer to them as block display entities or simply "display entities". However, in recognition of [u/Maxed_Out10](https://www.reddit.com/user/Maxed_Out10/), they are more popularly known as "Fox MBE" (FMBE) in the Bedrock communities.
+一般的には block display entities、あるいは単に "display entities" と呼べます。ただし [u/Maxed_Out10](https://www.reddit.com/user/Maxed_Out10/) への敬意から、Bedrock コミュニティではより一般に "Fox MBE"（FMBE）として知られています。
 
-:::info NOTE
+:::info 注
 
--   This method uses 1 fox per block display. Therefore, too many foxes (like any entity) can contribute to server lag.
--   Players will still be able to pass through them, as well as interact with them (if not restricted)
+-   この方法では、ブロック表示 1 つにつきキツネ 1 匹を使います。そのため、キツネが多すぎると（ほかのエンティティと同様に）サーバーラグの原因になります。
+-   プレイヤーはその中を通り抜けられますし、制限しなければ干渉もできます。
 
 :::
 
-## Video Demonstration
+## 動画デモ
 
 <YouTubeEmbed id="FVRd2n7JX3k" />
 
-## System
+## システム
 
 <CodeHeader>BP/functions/wiki/fmbe/render.mcfunction</CodeHeader>
 
@@ -62,85 +62,85 @@ playanimation @e[tag=wiki:fmbe] animation.parrot.dance none 0 "v.dance.x=-v.zpos
 
 ![Chain of 8 Command Blocks](/assets/images/commands/command-block-chain/8.png)
 
-Note: Providing a controller name allows us to stack animations without overwriting the previous one. Example:
+注: コントローラー名を指定すると、前のアニメーションを上書きせずに重ねられます。例:
 
 -   `wiki:scale` (where `wiki` is a namespace).
 
-Please ensure the controller name in the first command is `controller.animation.fox.move`.
+最初のコマンドのコントローラー名は `controller.animation.fox.move` にしてください。
 
-For rest of the commands, using the same controller names above isn't required. However, it can help avoid collisions with other playanimation commands.
+残りのコマンドでは、上記と同じコントローラー名を使う必要はありません。ただし、ほかの playanimation コマンドとの衝突を避けるのに役立ちます。
 
-## How to Use FMBE
+## FMBE の使い方
 
-Once you have the system above active, follow the steps and instructions given below:
+上のシステムを有効にしたら、以下の手順に従ってください。
 
-### Setup
+### セットアップ
 
-_Type the following commands in Chat:_
+_チャットに次のコマンドを入力します。_
 
-1. Summon a fox and use the `/replaceitem` command to give it the item model you want in its main hand.
+1. キツネを召喚し、`/replaceitem` コマンドでメインハンドに表示したいアイテムモデルを持たせます。
     - `/summon fox ~~~ ~ ~ minecraft:as_adult "wiki:fmbe"`
     - `/replaceitem entity @e[name="wiki:fmbe",c=1] slot.weapon.mainhand 0 <itemID>`
-    - To change the held item dynamically, refer to the section **[here](/commands/display-entities#changing-fmbe-block-display-dynamically)**.
-2. Then, assign it the tag `wiki:fmbe`. This should make the fox appear like an actual block.
+    - 持たせるアイテムを動的に変えたい場合は、**[こちら](/commands/display-entities#changing-fmbe-block-display-dynamically)** の節を参照してください。
+2. 次に `wiki:fmbe` タグを付けます。これでキツネが実際のブロックのように見えるはずです。
     - `/tag @e[name="wiki:fmbe"] add wiki:fmbe`
 
-### Variables
+### 変数
 
-With FMBE, you can edit the display position, size, angle, and more using client animations. The variables are as follows:
+FMBE では、クライアントアニメーションを使って表示位置・サイズ・角度などを編集できます。変数は次のとおりです。
 
--   For Position:
+-   位置:
     -   `v.xpos`
     -   `v.ypos`
     -   `v.zpos`
--   For Rotation:
+-   回転:
     -   `v.xrot`
     -   `v.yrot`
     -   `v.zrot`
--   For Scale:
-    -   `v.scale` — adjusts overall size.
-    -   `v.xzscale` — adjusts size along the XZ axis.
-    -   `v.yscale` — adjusts size along the Y axis.
--   For Base Position:
+-   スケール:
+    -   `v.scale` — 全体のサイズを調整します。
+    -   `v.xzscale` — XZ 軸方向のサイズを調整します。
+    -   `v.yscale` — Y 軸方向のサイズを調整します。
+-   基準位置:
     -   `v.xbasepos`
     -   `v.ybasepos`
     -   `v.zbasepos`
 
-:::tip NOTE
+:::tip 注
 
--   `basepos` variables move the position without affecting the center of rotation, meaning they are dependent on angles. (e.g., `v.zbasepos=16` behaves like `^^^1` in relative coordinates).
--   `pos` and `basepos` values are measured in 1/16 block units (16 = 1 full block).
+-   `basepos` 変数は、回転の中心を変えずに位置だけを動かします。つまり、角度に依存します（例: `v.zbasepos=16` は相対座標で `^^^1` のように振る舞います）。
+-   `pos` と `basepos` の値は 1/16 ブロック単位で測られます（16 = 1 ブロック）。
 
 :::
 
-### Editing Values
+### 値の編集
 
-To edit values, use the following command structure:
+値を編集するには、次のコマンド構成を使います。
 
 -   `/playanimation @e[tag=wiki:fmbe] animation.player.attack.positions none 0 "" wiki:setvariable`
 
-Write the molang code for the variable you want to edit inside the double quotes and assign the value.
+編集したい変数の Molang コードを二重引用符の中に書き、値を代入します。
 
-Example, to set `xrot` to 35, `ypos` to 16, and `scale` to 1.5:
+例として、`xrot` を 35、`ypos` を 16、`scale` を 1.5 に設定する場合:
 
 -   `/playanimation @e[tag=wiki:fmbe] animation.player.attack.positions none 0 "v.xrot=35;v.ypos=16;v.scale=1.5;" wiki:setvariable`
 
-Molang also allows for more complex animations using various queries and operators. To learn more about Molang, refer to the **[Molang Documentation](https://bedrock.dev/docs/stable/Molang)**.
+Molang では、さまざまなクエリや演算子を使って、より複雑なアニメーションも作れます。詳しくは **[Molang Documentation](https://bedrock.dev/docs/stable/Molang)** を参照してください。
 
-### Saving & Loading FMBE
+### FMBE の保存と読み込み
 
-1. To save, run:
+1. 保存するには、次を実行します。
 
     - `/execute at @e[tag=wiki:fmbe,c=1] run structure save wiki:fmbe ~~~ ~~~ true disk false`
 
-2. To load, run:
+2. 読み込むには、次を実行します。
     - `/structure load wiki:fmbe <to: x y z>`
 
-Note: The structure name `wiki:fmbe` can be changed to your preference.
+注: 構造物名 `wiki:fmbe` は好みに合わせて変更できます。
 
-### Stopping FMBE Sounds
+### FMBE の音を止める
 
-To remove fox sounds from the FMBE, you may use these commands:
+FMBE からキツネの音を消すには、次のコマンドを使えます。
 
 <CodeHeader>BP/functions/wiki/fmbe/stopsound.mcfunction</CodeHeader>
 
@@ -159,22 +159,22 @@ stopsound @a mob.fox.aggro
 
 ![Chain of 10 Command Blocks](/assets/images/commands/command-block-chain/10.png)
 
-### Changing FMBE Block Display Dynamically
+### FMBE のブロック表示を動的に変更する
 
 ![Demonstration GIF](change-fmbe-block-dynamically.gif)
 
-1. Summon an armor stand named "`wiki:fmbe_pickaxe`" in a secure area accessible only to operators and place a silk touch pickaxe in it's main hand.
-2. Ensure this area remains loaded at all times using a **[ticking area](https://learn.microsoft.com/en-us/minecraft/creator/documents/tickingareacommand)**.
-3. Use the following command to dynamically change the block displayed by the target FMBE without manually specifying the item ID:
+1. オペレーターだけが入れる安全な場所に、"`wiki:fmbe_pickaxe`" という名前のアーマースタンドを召喚し、メインハンドにシルクタッチ付きのツルハシを持たせます。
+2. **[ticking area](https://learn.microsoft.com/en-us/minecraft/creator/documents/tickingareacommand)** を使って、その場所が常に読み込まれるようにします。
+3. 次のコマンドを使うと、アイテム ID を手で指定せずに、対象 FMBE の表示ブロックを動的に変更できます。
     ```yaml
     ## Change the Target FMBE's Display to the Block Below It
     execute as @e[name="wiki:fmbe_pickaxe"] at @e[tag=wiki:fmbe,name="wiki:test_target"] run loot replace entity @e[c=1] slot.weapon.mainhand 0 mine ~~-1~ mainhand
     ```
     ![One Repeating Command Block](/assets/images/commands/command-block-chain/1.png)
 
-## Simplified FMBE
+## 簡略版 FMBE
 
-This is a compressed three-command version of the system above. If you do not wish to alter the FMBE `xzscale` and `yscale`, this could be a slight optimization.
+これは、上のシステムを 3 コマンドに圧縮した版です。FMBE の `xzscale` と `yscale` を変更したくない場合は、少しだけ最適化できます。
 
 <CodeHeader>BP/functions/wiki/fmbe/render.compressed.mcfunction</CodeHeader>
 
@@ -189,7 +189,7 @@ playanimation @e[tag=wiki:fmbe] animation.ender_dragon.neck_head_movement none 0
 
 ![Chain of 3 Command Blocks](/assets/images/commands/command-block-chain/3.png)
 
-## Video Guides
+## 動画ガイド
 
 **Part I:**
 
@@ -203,37 +203,37 @@ playanimation @e[tag=wiki:fmbe] animation.ender_dragon.neck_head_movement none 0
 
 <YouTubeEmbed id="-5N8yVGR1MA" />
 
-## Community Creations
+## コミュニティ作品
 
-**FMBE Creation Tool by @Marmalade:**
+**@Marmalade による FMBE 作成ツール:**
 
 <YouTubeEmbed id="d4HOGFrmxhs" />
 
-**Other Notable Creations:**
+**他の注目作品:**
 
 -   ⭐ **[Orbital Laser by @FantasyTheCommander](https://youtu.be/DRy0J6u1qvo)**
 -   ⭐ **[Animated Waterfalls by @FantasyTheCommander](https://youtu.be/AELTWr7akOQ)**
 -   ⭐ **[Wither Storm by @GuppyDuck](https://youtu.be/drf1wUN0Su4)**
 
-## Advanced FMBE Diagonal Transformation - BETA
+## 高度な FMBE 対角変換 - BETA
 
-This is the beta version of a new, slightly more advanced FMBE, which reduces the total number of command blocks required to 5, while also allowing for more complex transformations.
+これは、新しい少し高度な FMBE のベータ版です。必要なコマンドブロック数を 5 つに減らしつつ、より複雑な変換も可能にします。
 
 ![Advanced FMBE Diagonal Transformation Demo GIF](advanced-fmbe-diagonal-transformation.gif)
 
-It is still under development and may change over time, so use it with caution.
+まだ開発中で、今後変更される可能性があります。注意して使ってください。
 
-**Original documentation source (Japanese): [Discussion #5 on GitHub](https://github.com/szea-ll14/mcbe-cmd-memo/discussions/5)**
+**元のドキュメント（日本語）: [GitHub の Discussion #5](https://github.com/szea-ll14/mcbe-cmd-memo/discussions/5)**
 
-### Advanced FMBE Display Categories
+### 高度な FMBE 表示カテゴリ
 
-The way the fox holds an item slightly changes depending on the type of item, and the position where the model is displayed also varies.
-Please use the command that is best suited for the type of item you wish to display from the three available categories:
+キツネのアイテムの持ち方は、アイテムの種類によって少し変わります。また、モデルが表示される位置も変わります。
+表示したいアイテムの種類に合わせて、次の 3 つのカテゴリから最適なコマンドを使ってください。
 
--   **3D Blocks** (e.g., stone, anvil)
--   **2D Blocks** (e.g., ladder, coral, flower)
--   **Items** (e.g., diamond, bone meal, door)
-    -   **Exceptions**:
+-   **3D ブロック**（例: stone, anvil）
+-   **2D ブロック**（例: ladder, coral, flower）
+-   **アイテム**（例: diamond, bone meal, door）
+    -   **例外**:
         -   Trident
         -   Spyglass
         -   Bow
@@ -243,22 +243,22 @@ Please use the command that is best suited for the type of item you wish to disp
         -   Conduit
         -   Decorated Pot
         -   Button
-    -   **Unsupported**:
+    -   **非対応**:
         -   Shield
 
-### Advanced FMBE Variables
+### 高度な FMBE 変数
 
-| Variable         | Description                               |
+| 変数 | 説明 |
 | ---------------- | ----------------------------------------- |
-| `v.extend_scale` | Extends the block in a specific direction |
-| `v.extend_xrot`  | Direction of extension (x axis rotation)  |
-| `v.extend_yrot`  | Direction of extension (y axis rotation)  |
+| `v.extend_scale` | ブロックを特定方向に伸ばします |
+| `v.extend_xrot`  | 伸ばす方向（x 軸回転） |
+| `v.extend_yrot`  | 伸ばす方向（y 軸回転） |
 
-(v.xzscale and v.yscale have been removed)
+（`v.xzscale` と `v.yscale` は削除されています）
 
-### Advanced FMBE Systems
+### 高度な FMBE システム
 
-<Spoiler title="Display Category: 3D Blocks">
+<Spoiler title="表示カテゴリ: 3D ブロック">
 
 <CodeHeader>BP/functions/wiki/fmbe/render.3d_blocks.mcfunction</CodeHeader>
 
@@ -274,7 +274,7 @@ Please use the command that is best suited for the type of item you wish to disp
 
 </Spoiler>
 
-<Spoiler title="Display Category: 2D Blocks">
+<Spoiler title="表示カテゴリ: 2D ブロック">
 
 <CodeHeader>BP/functions/wiki/fmbe/render.2d_blocks.mcfunction</CodeHeader>
 
@@ -290,7 +290,7 @@ Please use the command that is best suited for the type of item you wish to disp
 
 </Spoiler>
 
-<Spoiler title="Display Category: Items">
+<Spoiler title="表示カテゴリ: アイテム">
 
 <CodeHeader>BP/functions/wiki/fmbe/render.items.mcfunction</CodeHeader>
 
@@ -306,14 +306,14 @@ Please use the command that is best suited for the type of item you wish to disp
 
 </Spoiler>
 
-### Advanced FMBE Simulator
+### 高度な FMBE シミュレーター
 
-You can preview and experiment with variables using the 3D simulator here (Note: It's in Japanese):<br>
+ここでは 3D シミュレーターを使って変数の確認や試行ができます（注: 日本語です）:<br>
 🔗 **[Open Simulator (Desmos)](https://www.desmos.com/3d/mzzzuxssx7)**
 
-### Advanced FMBE Planned Additions
+### 高度な FMBE の今後の追加予定
 
--   Allow rotation using matrix calculations
--   Create a version compatible with Nintendo Switch (split version)
--   Add a usage guide
--   Add technical explanations
+-   行列計算を使った回転に対応する
+-   Nintendo Switch 対応版（分割版）を作成する
+-   使い方ガイドを追加する
+-   技術的な解説を追加する

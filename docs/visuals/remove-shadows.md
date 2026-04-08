@@ -1,5 +1,5 @@
 ---
-title: Remove Entity Shadows
+title: エンティティの影を消す
 tags:
     - intermediate
 category: Tutorials
@@ -10,16 +10,16 @@ mentions:
     - MedicalJewel105
     - SmokeyStack
     - ThomasOrs
-description: Get rid of that annoying shadow.
+description: あの邪魔な影を消す方法です。
 ---
 
-There are quite a few ways to remove shadows from entities, and nearly all of them have undesirable effects. There is no foolproof way to perfectly remove shadows from specific entities, without causing side effects.
+エンティティの影を消す方法はいくつもありますが、そのほとんどには望ましくない副作用があります。特定のエンティティだけの影を、副作用なしで完璧に消す確実な方法はありません。
 
-This document will showcase some of the various ways to remove shadows, and any possible effects from doing this.
+このドキュメントでは、影を消すためのいくつかの方法と、それによって起こりうる影響を紹介します。
 
-## Small Collision Box
+## 小さな当たり判定
 
-One possibility is to make the size of the collision component very small. This will make it hard to interact/hit the entity, but it will make the shadow disappear!
+ひとつの方法は、collision component のサイズを非常に小さくすることです。これによりエンティティとのやり取りや攻撃は難しくなりますが、影は消えます。
 
 <CodeHeader>minecraft:entity > components</CodeHeader>
 
@@ -30,7 +30,7 @@ One possibility is to make the size of the collision component very small. This 
 }
 ```
 
-You can also add the [custom hit test component](https://bedrock.dev/docs/stable/Entities#minecraft:custom_hit_test). The `custom_hit_test` component will allow you to hit the entity, although you will not be able to interact with it. The `custom_hit_test` will not create a shadow.
+[`custom hit test component`](https://bedrock.dev/docs/stable/Entities#minecraft:custom_hit_test) を追加することもできます。`custom_hit_test` component を使うと、エンティティを攻撃できるようになりますが、操作することはできません。`custom_hit_test` では影は作成されません。
 
 <CodeHeader>minecraft:entity > components</CodeHeader>
 
@@ -47,9 +47,9 @@ You can also add the [custom hit test component](https://bedrock.dev/docs/stable
 }
 ```
 
-## Render when Invisible
+## 非表示時にも描画する
 
-Another method is to give the entity the effect of invisibility (which hides the entity's shadow) and apply the `"minecraft:renders_when_invisible"` component.
+別の方法は、エンティティに透明化効果を付与して（これでエンティティの影も隠れます）、`"minecraft:renders_when_invisible"` component を適用することです。
 
 <CodeHeader>minecraft:entity > components</CodeHeader>
 
@@ -66,30 +66,30 @@ Another method is to give the entity the effect of invisibility (which hides the
 }
 ```
 
-## Teleport Underground
+## 地中にテレポートする
 
-If you have a dummy entity (invisible) that you need to interact with, you can teleport like `/teleport @x ~ ~-0.01 ~`. This will slightly insert the entity into the ground, and stop shadows from showing.
+操作が必要なダミーエンティティ（不可視）がある場合、`/teleport @x ~ ~-0.01 ~` のようにテレポートできます。これによりエンティティが少し地面にめり込み、影が表示されなくなります。
 
-## Using Runtime Identifiers
+## Runtime Identifier を使う
 
-Some entities don't have shadows, or very small shadows at least. By using the runtime identifier of these entities, we can remove the shadows. The downside is taking on that entities hard-coded behaviors, which can sometimes be very problematic. See the [runtime identifiers document](/entities/runtime-identifier) for more information.
+一部のエンティティには影がないか、あっても非常に小さいものがあります。これらの runtime identifier を使えば、影を消せます。欠点は、そのエンティティ固有のハードコードされた挙動も引き継ぐことです。これが問題になることもあります。詳しくは [runtime identifier のドキュメント](/entities/runtime-identifier) を参照してください。
 
-## Using Materials
+## Material を使う
 
 :::danger
-This method is no longer supported. With the advent of render-dragon, materials like this no longer function. Please do not attempt to use this code in a serious way, and definitely do not attempt it on a marketplace map.
+この方法はすでにサポートされていません。Render Dragon の登場により、このような material は機能しなくなりました。真面目に使おうとしないでください。特に Marketplace マップで試すのは避けてください。
 :::
 
 :::warning
 
--   This folder is NOT included in the vanilla RP Pack examples and must be exported from a APK files or added by hand.
--   This has not been tested for blocks and has only been verified for entities. If you find it works on blocks too please let us know so we can add that in.
+-   このフォルダーはバニラ RP パックの例には含まれておらず、APK ファイルから書き出すか手動で追加する必要があります。
+-   これはブロックでは未検証で、エンティティでのみ確認されています。ブロックでも動くことを確認できた場合は、追加できるよう知らせてください。
 
 :::
 
 <Spoiler title="Removing shadows via Materials.">
 
-#### Working shadow code: Shadows for ALL entities:
+#### 動作する影コード: すべてのエンティティに影を付ける場合
 
 <CodeHeader>RP/materials/shadows.material</CodeHeader>
 
@@ -113,7 +113,7 @@ This method is no longer supported. With the advent of render-dragon, materials 
 }
 ```
 
-#### Disabled shadow code: No Shadows for ALL entities:
+#### 影を無効化するコード: すべてのエンティティから影を消す場合
 
 <CodeHeader></CodeHeader>
 
@@ -139,6 +139,6 @@ This method is no longer supported. With the advent of render-dragon, materials 
 
 </Spoiler>
 
-#### Geometry + Materials Workaround
+#### Geometry + Material の回避策
 
-You can hide entity shadows if you apply a model on your entity to cover the shadow and use `"banner_pole"` material.
+エンティティに影を覆うモデルを適用し、`"banner_pole"` material を使うことで、エンティティの影を隠せます。

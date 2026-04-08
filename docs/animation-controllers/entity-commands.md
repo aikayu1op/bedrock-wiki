@@ -14,24 +14,24 @@ mentions:
     - cda94581
     - ThijsHankelMC
     - QuazChick
-description: Trigger slash commands from entities.
+description: エンティティからスラッシュコマンドを発火します。
 ---
 
 :::tip EVENT RESPONSE
-A much easier method of running entity commands is through the `queue_command` entity event response.
+エンティティコマンドを実行するもっと簡単な方法は、`queue_command` のエンティティイベントレスポンスを使うことです。
 :::
 
-## Animation Controllers
+## アニメーションコントローラー
 
-To trigger slash commands, we are going to use Behavior Pack animation controllers. Animation controllers should be placed like: `animation_controllers/some_controller.json`. You can [learn more about animation controllers on the entity events section of bedrock.dev](https://bedrock.dev/docs/stable/Entity%20Events).
+スラッシュコマンドを発火するには、Behavior Pack のアニメーションコントローラーを使います。アニメーションコントローラーは `animation_controllers/some_controller.json` のように配置します。詳しくは [bedrock.dev の entity events セクションでアニメーションコントローラーについて学べます](https://bedrock.dev/docs/stable/Entity%20Events)。
 
-In short, animation controllers allow us to trigger events from behavior packs.
+要するに、アニメーションコントローラーを使うと、Behavior Pack からイベントを発火できます。
 
 -   Slash commands (like `/say`)
 -   Molang ( `v.foo += 1;` )
 -   Entity Events (such as `@s wiki:my_event`)
 
-Here is an example animation controller:
+アニメーションコントローラーの例を示します。
 
 <CodeHeader>BP/animation_controllers/entity_commands.ac.json</CodeHeader>
 
@@ -57,19 +57,19 @@ Here is an example animation controller:
 }
 ```
 
-This animation controller will run the command `/say I have been summoned` as soon as the entity is summoned into the world. If you are confused about how this works, please review Molang, Animations, and Entity Events.
+このアニメーションコントローラーは、エンティティがワールドに召喚された瞬間に `/say I have been summoned` コマンドを実行します。仕組みがよくわからない場合は、Molang、Animations、Entity Events を見直してください。
 
-In short, there are `states`, which can trigger events in their `on_entry` clause. We use queries to move between different states. By default, entities will be inside of the `default` state, unless an `initial_state` value has been defined.
+要するに、`states` があり、それぞれの `on_entry` 節でイベントを発火できます。状態の切り替えにはクエリを使います。`initial_state` が定義されていない限り、エンティティは既定で `default` 状態に入ります。
 
 ::: warning
-Queries are re-run when the world/chunk reloads. This means the line `"/say I have been summoned"` will actually run each time the entity "loads" - not only when it is summoned.
+クエリはワールドやチャンクが再読み込みされるたびに再実行されます。つまり、`"/say I have been summoned"` の行は、エンティティが召喚されたときだけでなく、実際には読み込まれるたびに実行されます。
 :::
 
-If you need to stop this from happening, you need to add additional queries, such as a `skin_id` query. The first time the entity spawns, check for `skin_id = 0`, and then _also_ add some higher `skin_id`, such as `skin_id = 1`. Then, when the entity reloads, it won't be able to run those commands. This is shown further down in the document.
+これを止めたい場合は、`skin_id` クエリのような追加クエリを入れる必要があります。エンティティが最初にスポーンしたときは `skin_id = 0` を確認し、そのあとで `skin_id = 1` のようなより高い `skin_id` も追加します。そうすれば、エンティティが再読み込みされてもそのコマンドを実行できなくなります。これは文書の後半で示します。
 
-## Using Animation Controllers
+## アニメーションコントローラーを使う
 
-To add this animation controller to our entity, we can use the following code in the entity definition description:
+このアニメーションコントローラーをエンティティに追加するには、エンティティ定義の description に次のコードを使います。
 
 <CodeHeader>BP/entities/entity_commands.se.json</CodeHeader>
 
@@ -87,15 +87,15 @@ To add this animation controller to our entity, we can use the following code in
 }
 ```
 
-Once again, if you are confused about any of this step, please review the [Entity Events documentation](https://bedrock.dev/r/Entity%20Events).
+ここでも、どの手順かわからない場合は [Entity Events documentation](https://bedrock.dev/r/Entity%20Events) を確認してください。
 
-## Triggering Commands using Events:
+## イベントでコマンドを発火する
 
-Animation transitions are created using queries. You can read about queries [here](https://bedrock.dev/docs/stable/MoLang#List%20of%20Entity%20Queries). In our first example, our query was simply `true`, which means the commands run automatically. We can use more complicated queries to create more interesting effect. A really convenient method is using components as Molang filters to trigger the commands.
+アニメーション遷移はクエリを使って作成します。クエリについては [here](https://bedrock.dev/docs/stable/MoLang#List%20of%20Entity%20Queries) で確認できます。最初の例では、クエリは単純に `true` でした。つまりコマンドは自動で実行されます。より複雑なクエリを使えば、もっと面白い効果を作れます。かなり便利なのは、コンポーネントを Molang フィルターとして使ってコマンドを発火する方法です。
 
-I personally like using [skin_id](https://docs.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entityproperties/minecraftproperty_skin_id).
+個人的には [skin_id](https://docs.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entityproperties/minecraftproperty_skin_id) を使うのが好きです。
 
-We can update our animation controller to trigger based on `skin_id`:
+アニメーションコントローラーを更新して、`skin_id` を条件に発火させることができます。
 
 <CodeHeader>BP/animation_controllers/entity_commands.ac.json</CodeHeader>
 
@@ -144,15 +144,15 @@ We can update our animation controller to trigger based on `skin_id`:
 }
 ```
 
-This animation controller has two command states now: The first is triggered by `skin_id = 1`, and the second by `skin_id = 2`. Notice that `==` and `!=` was used. `==` tests for equality, do NOT use a single `=`. `!` means NOT, so `!=` tests to make sure it is NOT equal to a specific value. Additionally, note how I've added the `@s execute_no_commands` syntax at the end of each command list. We will create `execute_no_commands` later. It will allow us to set the skin_id back to 0, and re-use our commands.
+このアニメーションコントローラーには、今や 2 つのコマンド状態があります。1 つ目は `skin_id = 1`、2 つ目は `skin_id = 2` で発火します。`==` と `!=` を使っている点に注目してください。`==` は等価比較で、単一の `=` は使わないでください。`!` は NOT を意味するので、`!=` は特定の値と等しくないことを確認します。さらに、各コマンドリストの末尾に `@s execute_no_commands` 構文を追加している点にも注目してください。`execute_no_commands` は後で作成します。これにより `skin_id` を 0 に戻し、コマンドを再利用できるようになります。
 
-The syntax is `@s` followed by the name of an entity event. This allows us to add/remove components from within the animation controller.
+構文は、`@s` の後にエンティティイベント名を続ける形です。これによって、アニメーションコントローラー内からコンポーネントの追加・削除ができます。
 
-## Setting Component Groups
+## コンポーネントグループの設定
 
-Back in our entity file, we can set the `skin_id` using the `skin_id` component.
+エンティティファイルに戻り、`skin_id` コンポーネントを使って `skin_id` を設定できます。
 
-The `skin_id` component looks like this:
+`skin_id` コンポーネントは次のようになります。
 
 <CodeHeader></CodeHeader>
 
@@ -162,7 +162,7 @@ The `skin_id` component looks like this:
 }
 ```
 
-We can add component groups that contains skin_ids:
+`skin_id` を含むコンポーネントグループを追加できます。
 
 <CodeHeader>BP/entities/entity_commands.se.json</CodeHeader>
 
@@ -186,9 +186,9 @@ We can add component groups that contains skin_ids:
 }
 ```
 
-## Adding Events
+## イベントの追加
 
-Now let's create events so we can easily add these groups:
+それでは、これらのグループを簡単に追加できるようにイベントを作成しましょう。
 
 <CodeHeader>BP/entities/entity_commands.se.json</CodeHeader>
 
@@ -225,13 +225,13 @@ Now let's create events so we can easily add these groups:
 }
 ```
 
-## Triggering Events
+## イベントの発火
 
-There are loads of ways to trigger events in Minecraft. As stated earlier, you can use animation controllers to trigger events. Additionally, let's look at two specific examples:
+Minecraft でイベントを発火する方法はたくさんあります。前述のとおり、アニメーションコントローラーを使ってイベントを発火できます。加えて、2 つの具体例を見てみましょう。
 
-### Interact Component:
+### Interact コンポーネント
 
-This component will spawn zombies whenever you click on him.
+このコンポーネントは、そのエンティティをクリックするたびにゾンビをスポーンします。
 
 <CodeHeader>BP/entities/entity_commands.se.json</CodeHeader>
 
@@ -255,7 +255,7 @@ This component will spawn zombies whenever you click on him.
 
 ### Timer
 
-This component will trigger the example command every 10 seconds:
+このコンポーネントは、10 秒ごとにサンプルコマンドを発火します。
 
 <CodeHeader>BP/entities/entity_commands.se.json</CodeHeader>
 
@@ -269,19 +269,19 @@ This component will trigger the example command every 10 seconds:
 }
 ```
 
-By adding these (and similar!) components to our entity, we can control when the `skin_id` changes, and therefore which events run.
+これらの（ほかにも同様の）コンポーネントをエンティティに追加すれば、`skin_id` がいつ変わるか、ひいてはどのイベントが実行されるかを制御できます。
 
-## Review:
+## まとめ
 
-Here is how it all works:
+全体の流れは次のとおりです。
 
--   Run `example_command` using a component like interact or timer.
--   This adds the `example_command` component group
--   This adds the `skin_id` component
--   This sets the entities `skin_id`, which can be queried in the animation controller
--   The animation controller notices this `skin_id`, and moves to the `example_command` state
--   The animation controller runs the `/say` command
--   The animation controller runs the entity event `@s execute_no_command`
--   `execute_no_command` event sets the `skin_id` to 0
--   The animation controllers sees this, and transitions to the default state
--   Now the animation controller waits for a new `skin_id`
+-   interact や timer のようなコンポーネントを使って `example_command` を実行します。
+-   これで `example_command` コンポーネントグループが追加されます。
+-   これで `skin_id` コンポーネントが追加されます。
+-   これでエンティティの `skin_id` が設定され、アニメーションコントローラーから参照できます。
+-   アニメーションコントローラーがこの `skin_id` を検知し、`example_command` 状態へ移行します。
+-   アニメーションコントローラーが `/say` コマンドを実行します。
+-   アニメーションコントローラーがエンティティイベント `@s execute_no_command` を実行します。
+-   `execute_no_command` イベントが `skin_id` を 0 に設定します。
+-   アニメーションコントローラーがこれを検知し、既定状態へ遷移します。
+-   これでアニメーションコントローラーは新しい `skin_id` を待ちます。

@@ -1,7 +1,7 @@
 ---
-title: Create a Custom Item
+title: カスタムアイテムの作成
 category: Guide
-description: How to create your first custom item.
+description: 最初のカスタムアイテムの作り方。
 nav_order: 5
 prefix: "5. "
 mentions:
@@ -20,31 +20,31 @@ mentions:
     - QuazChick
 ---
 
-In Minecraft, we can create custom items, which can be dropped, traded, crafted, and otherwise used like a normal item. There is a lot of power in the system, including the ability to make food, fuel, and tools.
+Minecraft では、ドロップ、取引、クラフト、その他通常のアイテムと同じように使えるカスタムアイテムを作れます。ここには大きな可能性があり、食料、燃料、道具まで作成できます。
 
-In this tutorial we are going to learn how to create a simple "ectoplasm" item, which we will later use as a loot-table drop for our ghost entity.
+このチュートリアルでは、シンプルな `ectoplasm` アイテムの作り方を学びます。これは後でゴーストエンティティのルートテーブルのドロップとして使います。
 
 <WikiImage src="ectoplasm_view.png" width="150" />
 
-Conceptually, items are made up of two parts:
+アイテムは概念的に 2 つの部分で構成されます。
 
--   The visuals (texture, name)
--   The behaviors (how the item should behave)
+-   見た目（テクスチャ、名前）
+-   挙動（アイテムがどう振る舞うか）
 
-First, we will learn how to create a new simple item & define its behaviors. In the next section we will assign a texture to this item, so you can see it in game.
+まずは、新しいシンプルなアイテムを作成し、その挙動を定義する方法を学びます。次のセクションでは、このアイテムにテクスチャを割り当て、ゲーム内で見えるようにします。
 
-## Item Behavior
+## アイテムの挙動
 
-To make an item we will need a way to identify it and define how we want it to behave. To do this we will be making a file which tell Minecraft to apply certain behaviors to a specific item of our choice.
+アイテムを作るには、アイテムを識別し、どう振る舞わせたいかを定義する方法が必要です。そのために、Minecraft に特定のアイテムへ指定した挙動を適用させるファイルを作成します。
 
-At the end of this section we will have fully defined the behavior of our item.
+このセクションの最後には、アイテムの挙動を完全に定義した状態になります。
 
-### Components
+### コンポーネント
 
-Different items behave differently; you can eat a porkchop, enchanted items glow & eggs can only stack to 16. These are all examples of how the item behaves.
-We are able to define how our custom item will behave by using behavior components.
+アイテムごとに挙動は異なります。豚肉は食べられ、エンチャントされたアイテムは光り、卵は 16 個までしかスタックできません。これらはすべて、アイテムの挙動の例です。
+コンポーネントを使うことで、カスタムアイテムの挙動を定義できます。
 
-<Spoiler title="Example Components">
+<Spoiler title="コンポーネントの例">
 
 <CodeHeader>minecraft:item > components</CodeHeader>
 
@@ -55,33 +55,33 @@ We are able to define how our custom item will behave by using behavior componen
 
 </Spoiler>
 
-Components contain information which tells the game what our item should do. For example the component [`"minecraft:glint"`](/items/item-components#glint) determines whether the item should have an enchanted glint to it, so setting it to `true` will apply it.
-All components have a `value` attached to it which we can edit to get the behavior we want.
+コンポーネントには、ゲームにアイテムの動作を伝える情報が入っています。たとえば [`"minecraft:glint"`](/items/item-components#glint) コンポーネントは、アイテムにエンチャントのきらめきを付けるかどうかを決めるので、`true` にするとそれが適用されます。
+すべてのコンポーネントには `value` があり、望む挙動になるように編集できます。
 
-For our ectoplasm, we will set it to have a stack size of 16, similar to eggs. To do this we use the component [`"minecraft:max_stack_size"`](/items/item-components#max-stack-size) and set its value to `16`.
+今回の ectoplasm では、卵と同じように 16 個までスタックできるように設定します。そのために [`"minecraft:max_stack_size"`](/items/item-components#max-stack-size) コンポーネントを使い、値を `16` にします。
 
-### Identifier
+### 識別子
 
-In order for the game to apply the correct components to the correct item, we need to be able to tell the game which item is ours. We do this by defining an identifier for our item.
+ゲームが正しいコンポーネントを正しいアイテムに適用できるようにするには、どのアイテムが自分のものかをゲームに伝える必要があります。これを実現するため、アイテムの識別子を定義します。
 
-An identifier is a name unique to this item. For a vanilla minecraft egg it's identifier is `minecraft:egg`. An identifier is made of two parts,
+識別子は、そのアイテムに固有の名前です。たとえばバニラの Minecraft の卵の識別子は `minecraft:egg` です。識別子は 2 つの部分から成ります。
 
--   The namespace (`minecraft`)
--   The id (`egg`)
+-   namespace（`minecraft`）
+-   id（`egg`）
 
-The namespace is unique to your add-on and you will use it throughout the project. This is to reduce issues if someone adds two packs to your game which both add an ectoplasm item; the namespace reduces the chance of the identifier being the same.
-The namespace that Minecraft use is `minecraft`. Your namespace should be unique to you, for example the authors initials or an abbreviation of the pack name. We will use the namespace `wiki` in our example; for more information on making a namespace check out our page [here](/concepts/namespaces).
+namespace はアドオン固有のもので、プロジェクト全体で使います。これは、たとえば 2 つのパックをゲームに入れてどちらにも ectoplasm アイテムがある場合などに、識別子の重複による問題を減らすためです。
+Minecraft が使う namespace は `minecraft` です。あなたの namespace は、作成者のイニシャルやパック名の略称など、固有のものにしてください。ここでは例として `wiki` を使います。namespace の作り方については [ここ](/concepts/namespaces) を参照してください。
 
-The id is an informative shorthand name for your item. Here we will use `ectoplasm`.
+id は、アイテムを表すわかりやすい短い名前です。ここでは `ectoplasm` を使います。
 
-Together our custom identifier becomes `wiki:ectoplasm`. Note that we use a colon, `:`, to spilt the namespace and id. When we want to reference our item we will use this identifier, for example using the `/give` command.
+これらを合わせると、カスタム識別子は `wiki:ectoplasm` になります。namespace と id を区切るには `:` を使います。アイテムを参照したいときは、たとえば `/give` コマンドでこの識別子を使います。
 
-### Item File
+### アイテムファイル
 
-Now that we have our components and identifier, we can now start defining our item. We define an item by creating an item definition file in our behavior pack. This is where all our information will go.
+コンポーネントと識別子がそろったので、いよいよアイテムを定義できます。アイテム定義ファイルを behavior pack に作成して、ここに情報を書きます。
 
-All item definitions go in `BP/items/`. The name of your file doesn't affect anything, but for ease of navigation it's recommend to name it after your id.
-We will create a file `BP/items/ectoplasm.json`. Here is the the basic layout of the file:
+すべてのアイテム定義は `BP/items/` に置きます。ファイル名は何でも構いませんが、見つけやすいように id に合わせて命名するのがおすすめです。
+ここでは `BP/items/ectoplasm.json` を作成します。基本構成は次のとおりです。
 
 <CodeHeader>BP/items/ectoplasm.json</CodeHeader>
 
@@ -95,12 +95,12 @@ We will create a file `BP/items/ectoplasm.json`. Here is the the basic layout of
 }
 ```
 
-Most files in your pack will have 2 top level definitions, `"format_version"` and `"minecraft:<file_type>"`.
-The format version defines which version of the add-on system Minecraft will use to read this file. For our item, we will be using `1.26.10` to allow us to use the newest features. For more information on format versions you can check [here](/guide/format-version).
+パック内の多くのファイルには、トップレベル定義が 2 つあります。`"format_version"` と `"minecraft:<file_type>"` です。
+format version は、Minecraft がこのファイルを読む際に使うアドオンシステムのバージョンを定義します。今回は新しい機能を使えるように `1.26.10` を使います。format version の詳細は [ここ](/guide/format-version) で確認できます。
 
-The second definitions defines what kind of file this is. In our case, as this is an item definition, it is `minecraft:item`. Under this is where we will put all our information. This will always contain a `description` key.
+2 つ目の定義は、このファイルの種類を示します。今回はアイテム定義なので `minecraft:item` です。その下にすべての情報を入れます。ここには必ず `description` キーが含まれます。
 
-Let us look closer at the `"description"`:
+`description` をもう少し詳しく見てみましょう。
 
 <CodeHeader>ectoplasm.json > minecraft:item</CodeHeader>
 
@@ -113,11 +113,11 @@ Let us look closer at the `"description"`:
 },
 ```
 
-The description key contains the `identifier` and any other information required. The `identifier` allows the file to know which item to apply the components to.
-The `category` key defines which tab of the creative inventory / recipe book the item would show up in. There are four tabs to choose from: `"construction"`, `"equipment"`, `"items"` and `"nature"`. If this key is not included, then the item will not show in the creative inventory, but you can still get the item by using `/give`.
+description キーには `identifier` と、必要なほかの情報が入ります。`identifier` によって、そのコンポーネントをどのアイテムに適用するかをファイルが判断できます。
+`category` キーは、クリエイティブインベントリやレシピブックのどのタブにアイテムを表示するかを決めます。選べるタブは `"construction"`、`"equipment"`、`"items"`、`"nature"` の 4 つです。このキーがない場合、アイテムはクリエイティブインベントリに表示されませんが、`/give` を使えば入手できます。
 
-Now we can actually define the behavior of our item, under `components`. Here we simply place any components we want our item to have.
-This will be our `"minecraft:max_stack_size"` component. For other components you can use, check out our more in depth guide on Items [here](/items/item-components).
+ここで `components` の下に、実際の挙動を定義できます。ここには、アイテムに持たせたいコンポーネントを入れます。
+今回は `"minecraft:max_stack_size"` コンポーネントを使います。ほかに使えるコンポーネントは、より詳しい Items のガイド [ここ](/items/item-components) を参照してください。
 
 <CodeHeader>ectoplasm.json > minecraft:item</CodeHeader>
 
@@ -127,7 +127,7 @@ This will be our `"minecraft:max_stack_size"` component. For other components yo
 }
 ```
 
-With that, we have now fully defined our item's behavior. This is what your file should currently look like.
+これで、アイテムの挙動は完全に定義できました。現在のファイルは次のようになっているはずです。
 
 <CodeHeader>BP/items/ectoplasm.json</CodeHeader>
 
@@ -148,41 +148,41 @@ With that, we have now fully defined our item's behavior. This is what your file
 }
 ```
 
-If you open a world with your add-on, your item should be in the correct menu but invisible and have a strange name.
+このアドオンでワールドを開くと、アイテムは正しいメニューに表示されますが、見た目はなく、妙な名前が付いているはずです。
 
-This is because we haven't defined the visuals yet. However, you should see that it does stack as expected. In the next section, we will define the items texture and assign it to our item.
+まだ見た目を定義していないからです。ただし、想定どおりスタックできることは確認できるはずです。次のセクションでは、アイテムのテクスチャを定義し、それをアイテムに割り当てます。
 
-## Item Visuals
+## アイテムの見た目
 
-Now that we have an item that works, we want to add a texture and name to it.
+動作するアイテムができたので、そこにテクスチャと名前を追加します。
 
-Textures are stored in the resource pack under `RP/textures` as images. In order for Minecraft to know which texture to use where, we need to assign a shortname to it, so we can access it.
+テクスチャは resource pack の `RP/textures` に画像として保存されます。Minecraft にどのテクスチャを使うかを理解させるには、短い名前を割り当てて、その名前で参照できるようにする必要があります。
 
-### Texture
+### テクスチャ
 
-To start we need a texture for our item. For our ectoplasm, we will be using this image.
+まず、アイテム用のテクスチャが必要です。今回の ectoplasm では、この画像を使います。
 
 ![ectoplasm.png](https://raw.githubusercontent.com/Bedrock-OSS/bedrock-examples/main/resources/guide/rp/textures/wiki/items/ectoplasm.png)
 
 <Button link="https://raw.githubusercontent.com/Bedrock-OSS/bedrock-examples/main/resources/guide/rp/textures/wiki/items/ectoplasm.png">
-    Download texture here
+    ここからテクスチャをダウンロード
 </Button>
 
-All item textures are stored in `RP/textures/wiki/items/`, where `wiki` should be replaced by your own namespace. From here, you can create any subdirectories you wish.
-It's best to name your texture image files with the items' _id_, in our case it will be `ectoplasm.png`.
-It is recommended to have your images in `.png` format and be of size `16x16`, though Minecraft will accept other formats such as `.jpg` or `.tga`.
+すべてのアイテムテクスチャは `RP/textures/wiki/items/` に保存します。`wiki` は自分の namespace に置き換えてください。ここからさらに好きなサブディレクトリを作れます。
+テクスチャ画像はアイテムの _id_ に合わせて命名するのが最適です。今回なら `ectoplasm.png` です。
+画像形式は `.png`、サイズは `16x16` が推奨ですが、Minecraft は `.jpg` や `.tga` など他の形式も受け付けます。
 
-Your folder layout should look like this:
+フォルダー構成は次のようになります。
 
 <FolderView :paths="[
     'RP/textures/wiki/items/ectoplasm.png'
 ]" />
 
-### Shortname
+### 短い名前
 
-A shortname is essentially a name that is assigned to the folder path of the texture, so whenever we want to use a texture somewhere, we will use its shortname instead of its folder path.
+shortname は、テクスチャのフォルダーへのパスに付ける名前のようなもので、どこかでテクスチャを使いたいときに、フォルダーパスの代わりにこれを使います。
 
-All item shortnames are stored in one file called `item_texture.json` which is in `RP/textures`. This contains a list of shortnames and its assigned textures.
+すべてのアイテム shortname は `item_texture.json` という 1 つのファイルにまとめます。これは `RP/textures` にあります。ここに shortname の一覧と対応するテクスチャを記述します。
 
 <CodeHeader>RP/textures/item_texture.json</CodeHeader>
 
@@ -192,9 +192,9 @@ All item shortnames are stored in one file called `item_texture.json` which is i
 }
 ```
 
-Here we have a top level definition, `texture_data`, which is where we will define our shortnames.
+ここにはトップレベル定義 `texture_data` があり、その中で shortname を定義します。
 
-Under `texture_data` will our list of item shortname definitions. An example definition looks like this:
+`texture_data` の下に、アイテム shortname 定義の一覧を置きます。例は次のとおりです。
 
 <CodeHeader>RP/textures/item_texture.json/texture_data</CodeHeader>
 
@@ -204,13 +204,13 @@ Under `texture_data` will our list of item shortname definitions. An example def
 }
 ```
 
-Here `wiki:ectoplasm` is our shortname and under `textures` we have the path to our item. Notice that this is relative to the resource pack, and does not include the file extension. Your shortname should be short and unique. We recommend setting it as the namespace and id for the item we are assigning it to.
+ここで `wiki:ectoplasm` が shortname で、`textures` にはアイテムへのパスがあります。これは resource pack からの相対パスで、拡張子は含みません。shortname は短く、かつ固有であるべきです。割り当て先のアイテムの namespace と id にするのをおすすめします。
 
-Now whenever we want to refer our image, we will use the shortname `wiki:ectoplasm`.
+以後、この画像を参照するときは shortname `wiki:ectoplasm` を使います。
 
-### Icon
+### アイコン
 
-To finally apply our texture to our item, we add the `minecraft:icon` component to our item definition and set its value to our shortname.
+最後に、このアイテムへテクスチャを適用するために、アイテム定義へ `minecraft:icon` コンポーネントを追加し、その値に shortname を設定します。
 
 <CodeHeader>ectoplasm.json/minecraft:item/</CodeHeader>
 
@@ -221,13 +221,13 @@ To finally apply our texture to our item, we add the `minecraft:icon` component 
 }
 ```
 
-Now your texture should appear on your item.
+これで、アイテムにテクスチャが表示されるはずです。
 
-### Item Name
+### アイテム名
 
-The last thing to add is a nice name to your item. Currently it will look like `item.wiki:ectoplasm`. This is the translation key for your item name, and it is used to allow for [localization](/text/text-intro). To set it, we just have to define it in our language files.
+最後に追加するのは、アイテムの見やすい名前です。今は `item.wiki:ectoplasm` のように表示されるはずです。これはアイテム名の翻訳キーで、[ローカライズ](/text/text-intro) のために使います。設定するには、言語ファイルに定義するだけです。
 
-We already created these files when making our `RP` and `BP`, so we just need to add to them.
+このファイルは `RP` と `BP` を作ったときにすでに作成済みなので、そこへ追加するだけです。
 
 <CodeHeader>RP/texts/en_US.lang</CodeHeader>
 
@@ -235,13 +235,13 @@ We already created these files when making our `RP` and `BP`, so we just need to
 item.wiki:ectoplasm=Ectoplasm
 ```
 
-Now when you enter your world, your item should have a name.
+これで、ワールドに入るとアイテムに名前が付きます。
 
-## Overview
+## 概要
 
-Now your first custom item, Ectoplasm, is complete! If everything has been done correctly, the item should now be obtainable through the `/give` command in-game, as well as appearing in your creative inventory.
+これで最初のカスタムアイテム Ectoplasm は完成です。すべて正しくできていれば、ゲーム内の `/give` コマンドで入手でき、クリエイティブインベントリにも表示されます。
 
-Your folder structure should look like this:
+フォルダー構成は次のようになります。
 
 <FolderView :paths="[
     'RP/texts/en_US.lang',
@@ -257,7 +257,7 @@ Your folder structure should look like this:
     'BP/pack_icon.png',
 ]" />
 
-<Spoiler title="Full ectoplasm.json">
+<Spoiler title="完全版 ectoplasm.json">
 
 <CodeHeader>BP/items/ectoplasm.json</CodeHeader>
 
@@ -281,7 +281,7 @@ Your folder structure should look like this:
 
 </Spoiler>
 
-<Spoiler title="Full item_texture.json">
+<Spoiler title="完全版 item_texture.json">
 
 <CodeHeader>RP/textures/item_texture.json</CodeHeader>
 
@@ -297,20 +297,20 @@ Your folder structure should look like this:
 
 </Spoiler>
 
-If you're having some trouble, check the [Troubleshooting page](/items/troubleshooting-items). If that doesn't help, compare your results with the [example files](https://github.com/Bedrock-OSS/bedrock-examples/tree/main/guide).
+困ったときは [トラブルシューティングページ](/items/troubleshooting-items) を確認してください。それでも解決しない場合は、[サンプルファイル](https://github.com/Bedrock-OSS/bedrock-examples/tree/main/guide) と結果を見比べてください。
 
-## Your Progress So Far
+## ここまでの進捗
 
-:::tip What you have learned
+:::tip 学んだこと
 
--   [x] Setup your pack
--   [x] Create a custom item
--   [x] How to format the behavior and resource files for an item
--   [x] What components are and how to use them
--   [x] How to set an items texture
--   [ ] Create a custom entity
--   [ ] Create the entity's loot, spawn rules, and a custom recipe
+-   [x] パックをセットアップした
+-   [x] カスタムアイテムを作成した
+-   [x] アイテムの behavior ファイルと resource ファイルの書式
+-   [x] コンポーネントとは何か、どう使うか
+-   [x] アイテムのテクスチャ設定方法
+-   [ ] カスタムエンティティを作成する
+-   [ ] エンティティのルート、スポーンルール、カスタムレシピを作成する
 
 :::
 
-<Button link="/guide/custom-entity">Next: Custom Entity</Button>
+<Button link="/guide/custom-entity">次へ: カスタムエンティティ</Button>

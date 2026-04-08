@@ -1,6 +1,6 @@
 ---
-title: Custom Commands
-description: Learn how to create your own commands that can be used in chat, command blocks and elsewhere using scripts.
+title: カスタムコマンド
+description: スクリプトを使って、チャットや command block などで使える自分の command を作る方法を学びます。
 category: Tutorials
 mentions:
     - cda94581
@@ -22,16 +22,16 @@ mentions:
     - nperma
 ---
 
-Who doesn't want cool custom commands? In this tutorial, you will learn how to create your own commands that can be used in chat, command blocks and elsewhere using scripts.
+便利な custom command を欲しがらない人はいないでしょう。このチュートリアルでは、スクリプトを使ってチャットや command block などで使える自分の command を作る方法を学びます。
 
-## Pack Setup
+## Pack のセットアップ
 
 :::tip
-Before creating a script, it is recommended to learn the basics of JavaScript, add-ons, and the Script API.
-To see what the Script API can do, see the [Microsoft Docs](https://learn.microsoft.com/minecraft/creator/scriptapi)
+script を作る前に、JavaScript、add-on、Script API の基本を学んでおくことをおすすめします。
+Script API で何ができるかは、[Microsoft Docs](https://learn.microsoft.com/minecraft/creator/scriptapi) を参照してください。
 :::
 
-Assuming you have understood the basics of scripting, let's start creating the pack.
+script の基本を理解している前提で、pack の作成を始めましょう。
 
 Below is an example manifest, make sure that you **generate your own UUIDs**.
 
@@ -75,14 +75,14 @@ The dependency allows us to import the native `@minecraft/server` module into ou
     'BP/pack_icon.png'
 ]" />
 
-## Registering Custom Commands
+## Custom Command の登録
 
-Now comes the fun part — creating your custom command.
+ここからが楽しい部分です。custom command を作成します。
 
-### Command Name
+### Command 名
 
-First, you'll need to come up with a name for your command.
-This name must have a namespace and should only include lowercase letters e.g. `wiki:goto`.
+まず command の名前を考える必要があります。
+この名前には namespace が必要で、小文字だけを使うべきです。例: `wiki:goto`
 
 :::danger NAMESPACES
 Minecraft will automatically register a version of your custom command without the provided namespace (e.g. `/goto` as well as `/wiki:goto`).
@@ -92,9 +92,9 @@ This feature was added to make custom commands more convenient to type into chat
 Doing so will cause command blocks, functions, etc. to stop working if another add-on adds a command with the same name (without the namespace).
 :::
 
-### Command Description
+### Command の説明
 
-You also need to provide a description for the command which will appear next to the command's name in autocompletion.
+command 名の横に自動補完で表示される説明も用意する必要があります。
 
 <!--
 
@@ -108,9 +108,9 @@ commands.wiki:goto.description=Teleport to a specific location.
 
 -->
 
-### Command Permission Level
+### Command の権限レベル
 
-The permission level of your command is important as it ensures that players that should not have access to potentially dangerous commands cannot run them.
+command の権限レベルは重要です。危険な command にアクセスすべきでない player が実行できないようにするためです。
 
 Below are the different permission levels that a command may be set to:
 
@@ -120,9 +120,9 @@ Below are the different permission levels that a command may be set to:
 -   `Host` — restricts the command to the player hosting the world.
 -   `Owner` — restricts the command to the server console.
 
-### Command Parameters
+### Command パラメーター
 
-Below are the different parameter types that can be used in custom commands:
+custom command で使える parameter type は次のとおりです。
 
 -   `BlockType`
 -   `Boolean`
@@ -138,17 +138,17 @@ Below are the different parameter types that can be used in custom commands:
 
 Custom commands can have a maximum of 8 parameters.
 
-#### Mandatory Parameters
+#### 必須パラメーター
 
-Mandatory parameters must be specified in order for the command to run.
+command を実行するには、必須パラメーターを順番どおりに指定する必要があります。
 
-#### Optional Parameters
+#### 任意パラメーター
 
-Optional parameters do not need to be specified and will always follow mandatory parameters.
+任意パラメーターは指定しなくてもよく、必ず必須パラメーターのあとに続きます。
 
 ### Command Callback
 
-This is the function that is called (in [read-only mode](/scripting/privileges#read-only-mode)) every time the command is executed.
+これは command が実行されるたびに、[read-only mode](/scripting/privileges#read-only-mode) で呼ばれる function です。
 
 The callback always gets the command origin as its first parameter, the rest of the parameters are based on the `mandatoryParameters` and `optionalParameters` you provide.
 The number of parameters passed to the callback matches the number of parameters defined in the command, so if you have a command with 3 different parameters your callback would look like this:
@@ -173,9 +173,9 @@ customCommandRegistry.registerCommand(
 );
 ```
 
-## Teleport Command Example
+## テレポート command の例
 
-In this example, we will create a custom slash command `/wiki:goto` that allows players to teleport to predefined locations: `spawn`, `shop`, or `arena`.
+この例では、プレイヤーをあらかじめ決めた場所 `spawn`、`shop`、`arena` にテレポートできる custom slash command `/wiki:goto` を作ります。
 
 In command autocompletion, its syntax is the following:
 
@@ -243,12 +243,12 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
 });
 ```
 
-## Restricting Command Execution to Players
+## command 実行を player に限定する
 
-By default, the "any" command permission level allows sources that are not players to run the command, which isn't suitable for commands that should only be ran by players.
+既定では、"any" の command permission level は player 以外の source でも command を実行できます。player だけが実行すべき command には向きません。
 
-In this example, we will create a custom slash command `/wiki:heal` that can only be executed by players (not the server console or command blocks).
-This command will restore the player's health back to full.
+この例では、player だけが実行できる custom slash command `/wiki:heal` を作ります（server console や command block では実行できません）。
+この command は player の health を全回復します。
 
 <CodeHeader>BP/scripts/main.js</CodeHeader>
 

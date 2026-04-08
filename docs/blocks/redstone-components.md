@@ -1,6 +1,6 @@
 ---
-title: Redstone Components
-description: Learn about the different types of components that can make up a redstone circuit.
+title: レッドストーンコンポーネント
+description: レッドストーン回路を構成するさまざまな種類のコンポーネントについて学びます。
 category: Documentation
 tags:
     - intermediate
@@ -10,23 +10,23 @@ mentions:
 ---
 
 :::tip FORMAT VERSION 1.26.10
-Using the latest format version when creating custom blocks provides access to the newest redstone features.
+カスタムブロックを作成する際に最新の format version を使うと、最新のレッドストーン機能にアクセスできます。
 :::
 
-This page will help you learn about the different types of components that can make up a redstone circuit.
-Only types of components that can be created with add-ons are documented.
+このページでは、レッドストーン回路を構成するさまざまな種類のコンポーネントについて学べます。
+ここで記載するのは、アドオンで作成できるコンポーネントだけです。
 
-## Redstone Insulators
+## レッドストーン絶縁体
 
 :::tip
-Generally, if a vanilla block is not full and opaque, it will act as an insulator.
-However, it is important to remember that a block's functionality is not determined by its appearance so there can be exceptions.
-For example, despite being translucent, slime blocks are not insulators and will instead [conduct](#redstone-conductors) redstone power.
+一般に、バニラブロックが完全な立方体ではなく不透明でもあれば、絶縁体として扱われます。
+ただし、ブロックの機能は見た目だけで決まるわけではないので、例外があることに注意してください。
+たとえば、半透明であってもスライムブロックは絶縁体ではなく、代わりにレッドストーン電力を [導通](#redstone-conductors) します。
 :::
 
-While they technically do not form part of a circuit, **redstone insulators** are very useful when building compact redstone circuits as they do _not_ conduct a redstone signal when powered.
+厳密には回路の一部ではありませんが、**レッドストーン絶縁体** は、電力がかかってもレッドストーン信号を _導通しない_ ため、コンパクトな回路を組むときに非常に役立ちます。
 
-In the diagram below, the powered repeater on the left is strongly powering the stonecutter block. However, given that the stonecutter is a redstone insulator, the repeater to the right of it is not connected to the circuit so remains unpowered.
+下の図では、左の通電したリピーターが石切台ブロックへ強い電力を与えています。しかし、石切台はレッドストーン絶縁体なので、その右側のリピーターは回路につながらず、通電しません。
 
 <WikiImage
     src="insulator.png"
@@ -35,18 +35,18 @@ In the diagram below, the powered repeater on the left is strongly powering the 
     pixelated
 />
 
-### Creating Redstone Insulators
+### レッドストーン絶縁体の作成
 
-Creating custom redstone insulators couldn't be easier, since that's how custom blocks behave by default!
+カスタムレッドストーン絶縁体を作るのは簡単です。カスタムブロックは既定でそのように動作するからです。
 
-You don't need to add anything to your block's JSON definition.
+ブロックの JSON 定義に何かを追加する必要はありません。
 
-### Preventing Wire Step-Down
+### ワイヤの段差降下を防ぐ
 
-By default, wires of redstone dust are allowed to step down the side of insulators to carry power downwards.
-However, unlike other insulators such as glass, vanilla slabs do not allow wire to step down the side of them.
+既定では、レッドストーンダストのワイヤは絶縁体の側面を下って電力を下方向に伝えられます。
+ただし、ガラスなどのほかの絶縁体と違い、バニラのハーフブロックはワイヤが側面を降りることを許しません。
 
-You can prevent wire from stepping down your own block by using the [redstone conductivity](/blocks/block-components#redstone-conductivity) component.
+[redstone conductivity](/blocks/block-components#redstone-conductivity) コンポーネントを使うと、自分のブロックでワイヤが降りるのを防げます。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -56,23 +56,23 @@ You can prevent wire from stepping down your own block by using the [redstone co
 }
 ```
 
-## Redstone Conductors
+## レッドストーン導体
 
 :::tip
-Generally, if a vanilla block is full and opaque, it will act as a conductor.
-However, it is important to remember that a block's functionality is not determined by its appearance so there can be exceptions.
-For example, despite being full and opaque, observers are [insulators](#redstone-insulators) so will not conduct redstone power.
+一般に、バニラブロックが完全で不透明なら、導体として扱われます。
+ただし、ブロックの機能は見た目だけで決まるわけではないので、例外があることに注意してください。
+たとえば、完全で不透明でも、観察者は [絶縁体](#redstone-insulators) なのでレッドストーン電力を導通しません。
 :::
 
-**Redstone conductors** are the opposite of insulators, they _do_ conduct a redstone signal to adjacent blocks when powered.
+**レッドストーン導体** は絶縁体の逆で、通電すると隣接ブロックへレッドストーン信号を _導通します_。
 
--   **Strongly powering** a conductor (using a [redstone producer](#redstone-producers)) will connect adjacent redstone dust and components to the circuit, causing them to receive the power that was conducted.
+-   **強く通電する** 場合（[redstone producer](#redstone-producers) を使う）は、隣接するレッドストーンダストやコンポーネントが回路に接続され、導通した電力を受け取ります。
 
--   **Weakly powering** a conductor (by powering redstone dust that is on top of or pointing into the conductor) will connect adjacent redstone components to the circuit, causing them to receive the power that was conducted without connecting adjacent redstone dust.
+-   **弱く通電する** 場合（導体の上にある、または導体へ向いているレッドストーンダストを通電する場合）は、隣接するレッドストーンコンポーネントが回路に接続され、隣接するレッドストーンダストを接続せずに導通した電力を受け取ります。
 
-If a block is a redstone conductor, it will **prevent wire from stepping down** to the block directly below it, cutting the wire off from that part of the circuit.
+ブロックがレッドストーン導体であれば、その真下のブロックへの **ワイヤの段差降下を防ぎます**。これにより、その部分の回路からワイヤが切り離されます。
 
-In the diagram below, the powered repeater on the left is strongly powering the concrete block. Given that concrete is a redstone conductor, the repeater to the right of it is connected to the circuit so also becomes powered.
+下の図では、左の通電したリピーターがコンクリートブロックへ強い電力を与えています。コンクリートはレッドストーン導体なので、その右側のリピーターも回路につながり、通電します。
 
 <WikiImage
     src="conductor.png"
@@ -81,9 +81,9 @@ In the diagram below, the powered repeater on the left is strongly powering the 
     pixelated
 />
 
-### Creating Redstone Conductors
+### レッドストーン導体の作成
 
-To create custom redstone conductors, you'll need to include the [redstone conductivity](/blocks/block-components#redstone-conductivity) component in your block.
+カスタムレッドストーン導体を作るには、ブロックに [redstone conductivity](/blocks/block-components#redstone-conductivity) コンポーネントを含める必要があります。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -94,8 +94,8 @@ To create custom redstone conductors, you'll need to include the [redstone condu
 ```
 
 :::danger REDSTONE CONSUMERS ([MCPE-232715](https://bugs.mojang.com/browse/MCPE-232715))
-Applying the `minecraft:redstone_consumer` component to the block will prevent it from conducting redstone, while retaining other properties of redstone conductors such as wire cutting.
-In order to make a redstone consumer actually conduct redstone in the same way as regular blocks, you must set the `propagates_power` parameter to `true`{lang=json}:
+ブロックに `minecraft:redstone_consumer` コンポーネントを適用すると、ワイヤの切断などレッドストーン導体としてのほかの性質を保ったまま、レッドストーンを導通しなくなります。
+通常のブロックと同じようにレッドストーンコンシューマーが実際にレッドストーンを導通するようにするには、`propagates_power` パラメータを `true`{lang=json} に設定する必要があります。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -110,11 +110,11 @@ In order to make a redstone consumer actually conduct redstone in the same way a
 
 :::
 
-## Redstone Consumers
+## レッドストーンコンシューマー
 
-A block that activates when supplied redstone power is known as a **redstone consumer**.
+レッドストーン電力が供給されると動作するブロックは、**レッドストーンコンシューマー** と呼ばれます。
 
-In the diagram below, the redstone lamp is acting a redstone consumer and is being powered by the redstone torch, which is a redstone producer.
+下の図では、レッドストーンランプがレッドストーンコンシューマーとして動作しており、レッドストーントーチ（レッドストーンプロデューサー）から電力を受けています。
 
 <WikiImage
     src="consumer.png"
@@ -123,13 +123,13 @@ In the diagram below, the redstone lamp is acting a redstone consumer and is bei
     pixelated
 />
 
-### Creating Redstone Consumers
+### レッドストーンコンシューマーの作成
 
-To create custom redstone consumers, you'll need to include the [redstone consumer](/blocks/block-components#redstone-producer) component in your block, along with a custom component that reacts to redstone updates.
+カスタムレッドストーンコンシューマーを作るには、ブロックに [redstone consumer](/blocks/block-components#redstone-producer) コンポーネントと、レッドストーン更新に反応するカスタムコンポーネントを含める必要があります。
 
 :::danger REDSTONE UPDATES
-Redstone updates are not only caused by changes to the redstone power level received by a block.
-They can also be triggered by the block being placed or the chunk containing the block being loaded, meaning it is currently impossible to create a block that functions like doors.
+レッドストーン更新は、ブロックが受け取るレッドストーン電力レベルの変化だけで発生するわけではありません。
+ブロックの設置や、そのブロックを含むチャンクの読み込みでも発生するため、ドアのように動作するブロックを作ることは現在できません。
 :::
 
 <CodeHeader>minecraft:block > components</CodeHeader>
@@ -161,15 +161,15 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
 });
 ```
 
-## Redstone Producers
+## レッドストーンプロデューサー
 
-A block that supplies redstone power to a circuit is known as a **redstone producer**.
-Other redstone components can connect to producers to receive their power in the directions that the producer allows.
+回路へレッドストーン電力を供給するブロックは、**レッドストーンプロデューサー** と呼ばれます。
+ほかのレッドストーンコンポーネントは、プロデューサーが許可する方向からその電力を受け取るために、プロデューサーへ接続できます。
 
-Excluding redstone blocks, all producers also strongly power one direction. This strong power can be conducted by [redstone conductors](#redstone-conductors) to add more components to the circuit.
+レッドストーンブロックを除き、すべてのプロデューサーは 1 方向に強い電力も供給します。この強い電力は [レッドストーン導体](#redstone-conductors) によって導通され、回路にさらに多くのコンポーネントを追加できます。
 
-In the diagram below, the redstone torch is acting as the redstone producer of the circuit and can be connected to from all directions except down.
-Additionally, it is strongly powering the block above it.
+下の図では、レッドストーントーチが回路のレッドストーンプロデューサーとして機能しており、下方向以外のすべての方向から接続できます。
+さらに、その上のブロックへ強い電力を供給しています。
 
 <WikiImage
     src="producer.png"
@@ -178,11 +178,11 @@ Additionally, it is strongly powering the block above it.
     pixelated
 />
 
-### Creating Redstone Producers
+### レッドストーンプロデューサーの作成
 
-To create custom redstone producers, you'll need to include the [redstone producer](/blocks/block-components#redstone-producer) component in your block.
+カスタムレッドストーンプロデューサーを作るには、ブロックに [redstone producer](/blocks/block-components#redstone-producer) コンポーネントを含める必要があります。
 
-Here's how the redstone producer component of the lit redstone torch in the above diagram would look:
+上の図の点灯したレッドストーントーチのレッドストーンプロデューサーコンポーネントは次のようになります。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 

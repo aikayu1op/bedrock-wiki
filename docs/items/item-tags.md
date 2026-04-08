@@ -1,6 +1,6 @@
 ---
-title: Item Tags
-description: Item tags are used when checking for multiple types of item and can enable vanilla functionality.
+title: アイテムタグ
+description: アイテムタグは、複数の種類のアイテムを判定するときに使われ、バニラの機能を有効にできます。
 category: General
 nav_order: 3
 related:
@@ -12,10 +12,10 @@ mentions:
     - QuazChick
 ---
 
-Item tags are used when checking for multiple types of item and can enable vanilla functionality.
-For a list of vanilla item tags and their functionality, visit [this page](/items/vanilla-item-tags).
+アイテムタグは、複数の種類のアイテムを判定するときに使われ、バニラの機能を有効にできます。
+バニラのアイテムタグとその機能の一覧は、[このページ](/items/vanilla-item-tags) を参照してください。
 
-## Applying Tags
+## タグの適用
 
 <CodeHeader>BP/items/example_item.json</CodeHeader>
 
@@ -35,9 +35,9 @@ For a list of vanilla item tags and their functionality, visit [this page](/item
 }
 ```
 
-## Testing for Tags
+## タグの判定
 
-### Entity Filter
+### エンティティフィルター
 
 <CodeHeader>Entity Filter</CodeHeader>
 
@@ -50,12 +50,12 @@ For a list of vanilla item tags and their functionality, visit [this page](/item
 }
 ```
 
-### Entity Molang
+### エンティティ Molang
 
 -   `q.equipped_item_all_tags(slot, ...tags)`{lang=molang}
-    -   Returns whether the item at the specified location has all of the listed tags.
+    -   指定した位置のアイテムが、列挙したタグをすべて持っているかを返します。
 -   `q.equipped_item_any_tag(slot, ...tags)`{lang=molang}
-    -   Returns whether the item at the specified location has at least one of the listed tags.
+    -   指定した位置のアイテムが、列挙したタグのうち少なくとも 1 つを持っているかを返します。
 
 <CodeHeader>minecraft:client_entity > description</CodeHeader>
 
@@ -67,12 +67,12 @@ For a list of vanilla item tags and their functionality, visit [this page](/item
 }
 ```
 
-### Item Descriptor
+### アイテムディスクリプタ
 
 -   `q.all_tags(...tags)`{lang=molang}
-    -   Returns whether the item has all of the listed tags.
+    -   アイテムが列挙したタグをすべて持っているかを返します。
 -   `q.any_tag(...tags)`{lang=molang}
-    -   Returns whether the item has at least one of the listed tags.
+    -   アイテムが列挙したタグのうち少なくとも 1 つを持っているかを返します。
 
 <CodeHeader>Item Descriptor</CodeHeader>
 
@@ -82,7 +82,7 @@ For a list of vanilla item tags and their functionality, visit [this page](/item
 }
 ```
 
-### Recipe Ingredient
+### レシピの材料
 
 <CodeHeader>minecraft:recipe_shapeless</CodeHeader>
 

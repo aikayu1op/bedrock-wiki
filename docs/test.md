@@ -1,6 +1,6 @@
 ---
-title: Wiki Developer's Test Page
-description: A page with a description just for being a page with a description.
+title: Wiki開発者用テストページ
+description: ただ説明があるページとして存在するための、説明付きページです。
 outline_depth: 6
 hidden: true
 mentions:
@@ -12,40 +12,40 @@ mentions:
 ---
 
 :::danger SECRET
-This is the special place thats used by the developers to develop new features and find bugs. Don't worry if this place is really messy, it doesn't need to look good!
+ここは開発者が新機能を開発し、バグを見つけるために使う特別な場所です。かなり散らかっていても気にしないでください。見た目を整える必要はありません！
 :::
 
-Hey, what are you doing here? How did you get here? Get back to editing the wiki!
+ねえ、ここで何をしているんですか？ どうやってここに来たんですか？ wiki の編集に戻ってください！
 
-## Blockquotes
+## 引用
 
-You can make a space using `>`:
+`>` を使うとスペースを作れます:
 
-> Moved?
+> 移動しましたか？
 >
-> > Double
+> > 二重
 
-Not actually moved
+実際には移動していません
 
-Indentation works like `code`:
+インデントは `code` のように機能します:
 
-    Not actually moved
+    実際には移動していません
 
-## Buttons
+## ボタン
 
-### Default
+### デフォルト
 
-<Button link="#buttons">Some Text</Button>
+<Button link="#buttons">テキスト</Button>
 
-### Colored
+### 色付き
 
 <Button link="#buttons" color="red">
-    Some Text
+    テキスト
 </Button>
 
-## Code Blocks
+## コードブロック
 
-### Code Header
+### コードヘッダー
 
 <CodeHeader>
     loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong.json
@@ -83,7 +83,7 @@ execute if score initialized world matches 0 run say New world created!
 scoreboard players set initialized world 1
 ```
 
-### No Line Numbers
+### 行番号なし
 
 ```json
 {
@@ -91,31 +91,31 @@ scoreboard players set initialized world 1
 }
 ```
 
-## Comments
+## コメント
 
-Can you see the text (no)?
+このテキストが見えますか（いいえ）？
 
-<!-- Comment! 👀 -->
+<!-- コメント！ 👀 -->
 
-## Containers
+## コンテナ
 
-:::info Header?!
-You can make info containers like this
+:::info 見出し!?
+このように情報コンテナを作れます
 :::
 
-:::tip Header?!
-You can make tip containers like this
+:::tip 見出し!?
+このようにヒントコンテナを作れます
 :::
 
-:::warning Header?!
-You can make warning containers like this
+:::warning 見出し!?
+このように警告コンテナを作れます
 :::
 
-:::danger Header?!
-You can make danger containers like this
+:::danger 見出し!?
+このように危険コンテナを作れます
 :::
 
-## Folder Views
+## フォルダビュー
 
 <FolderView :paths="[
     'path/to/folder/with/file.mcfunction',
@@ -123,49 +123,49 @@ You can make danger containers like this
     'get/out/of/my/swamp.mcstructure'
 ]" />
 
-## Heading 2
+## 見出し 2
 
-Text
+テキスト
 
-### Heading 3
+### 見出し 3
 
-Text
+テキスト
 
-#### Heading 4
+#### 見出し 4
 
-Text
+テキスト
 
-##### Heading 5
+##### 見出し 5
 
-Text
+テキスト
 
-###### Heading 6
+###### 見出し 6
 
-Text
+テキスト
 
-## Horizontal Rule
+## 水平線
 
-Some text...
+テキスト...
 
 ---
 
-...and some more!
+...そしてさらに！
 
-## Lists
+## リスト
 
-### Checked
+### チェック済み
 
 -   [x] a
 -   [x] b
 -   [ ] c
 
-### Ordered
+### 順序付き
 
 1. a
 2. b
 3. c
 
-### Unordered
+### 順不同
 
 -   a
 -   b
@@ -246,13 +246,13 @@ texture.my_value
 ;
 ```
 
-## Snippets
+## スニペット
 
 `Ctrl + Space`
 
 ![](/assets/images/contribute/snippets/snippets.png)
 
-## Spoilers
+## ネタバレ
 
 <Spoiler title="Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Title">
 
@@ -266,6 +266,6 @@ texture.my_value
 
 </Spoiler>
 
-## Tables
+## テーブル
 
 <Table data="my_table.json" />

@@ -1,6 +1,6 @@
 ---
-title: GameTests
-description: Learn how to use the GameTest Framework to test whether game mechanics from your map or add-on work.
+title: GameTest
+description: マップや add-on の game mechanic が動くかどうかを、GameTest Framework で確認する方法を学びます。
 category: Tutorials
 tags:
     - experimental
@@ -20,12 +20,12 @@ mentions:
 ---
 
 :::warning BETA APIS
-The Script API is currently in active development, and breaking changes are frequent. This page assumes the format of Minecraft 1.20.40
+Script API は現在も活発に開発されており、破壊的変更が頻繁にあります。このページは Minecraft 1.20.40 の形式を前提としています。
 :::
 
-The GameTest Framework allows us to create unit tests ("GameTests") which make it easier to test if game mechanics work.
+GameTest Framework を使うと、unit test（"GameTest"）を作成でき、game mechanic が動くかどうかを簡単に確認できます。
 
-GameTests can be used with the `/gametest` command.
+GameTest は `/gametest` command で使えます。
 
 -   `/gametest runthis` - Runs the nearest GameTest in range.
 -   `/gametest runthese` - Runs all GameTests in range.
@@ -36,14 +36,14 @@ GameTests can be used with the `/gametest` command.
 -   `/gametest create <testName: string> [width: int] [height: int] [depth: int]` - Creates a blank GameTest area with the specified dimensions.
 -   `/reload` - Reloads all function and script files from all behavior packs. (1.19+)
 
-Since 1.19.40, vanilla GameTests have not been included in the Minecraft game files, so you cannot run any GameTests without adding your own custom behavior pack.
-You can find vanilla GameTests in the [minecraft-gametests](https://github.com/microsoft/minecraft-gametests/tree/main/js-gametests/behavior_packs/JsGameTests) GitHub repository.
+1.19.40 以降、vanilla GameTest は Minecraft の game file に含まれていないため、自分の custom behavior pack を追加しないと GameTest は実行できません。
+vanilla GameTest は [minecraft-gametests](https://github.com/microsoft/minecraft-gametests/tree/main/js-gametests/behavior_packs/JsGameTests) GitHub repository にあります。
 
-## Getting Started with GameTest
+## GameTest を始める
 
-To get started, you'll want to begin with your own behavior pack and decent knowledge of scripting and API. If you're getting started check out [this article](/scripting/scripting-intro).
+始めるには、自分の behavior pack と scripting / API の基礎知識が必要です。これから始めるなら [この記事](/scripting/scripting-intro) を参照してください。
 
-To use the GameTest Framework, the `@minecraft/server-gametest` module is required. The GameTest API module also requires the `@minecraft/server` module, so in your dependency in your manifest.json requires the following:
+GameTest Framework を使うには `@minecraft/server-gametest` module が必要です。GameTest API module は `@minecraft/server` module も必要なので、`manifest.json` の dependency は次のようになります。
 
 <CodeHeader>BP/manifest.json/</CodeHeader>
 
@@ -60,7 +60,7 @@ To use the GameTest Framework, the `@minecraft/server-gametest` module is requir
 ]
 ```
 
-To run a GameTest, a structure file is required on your behavior pack and the command needs to be registered via `register` function.
+GameTest を実行するには、behavior pack に structure file が必要で、command は `register` function で登録する必要があります。
 
 <CodeHeader>BP/scripts/Main.js</CodeHeader>
 
@@ -89,6 +89,6 @@ GameTest.register(
     .structureName("wiki:test"); // References "BP/structures/wiki/test.mcstructure"
 ```
 
-The test function is locked when the command is registered, meaning the test function can not access to variables outside the test function after the command is registered.
+command を登録すると test function は固定されるため、登録後は test function の外の変数にアクセスできません。
 
-If you're having issues with the Script API, consider checking out the [Building your first GameTest](https://learn.microsoft.com/minecraft/creator/documents/gametestbuildyourfirstgametest) guide on Microsoft Learn, or joining the **Bedrock Add-Ons** Discord server for support, which you can find alongside a vast array of other resources on the [Useful Links](/meta/useful-links#discord-links) page!
+Script API で問題がある場合は、Microsoft Learn の [Building your first GameTest](https://learn.microsoft.com/minecraft/creator/documents/gametestbuildyourfirstgametest) ガイドを確認するか、サポート用の **Bedrock Add-Ons** Discord server に参加してください。その他の多くの資料と一緒に、[Useful Links](/meta/useful-links#discord-links) で見つけられます。

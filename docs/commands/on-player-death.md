@@ -1,5 +1,5 @@
 ---
-title: On Player Death
+title: プレイヤー死亡時
 category: On Event Systems
 tags:
     - easy
@@ -7,70 +7,70 @@ mentions:
     - BedrockCommands
     - zheaEvyline
 nav_order: 4
-description: This system will run your desired commands on the event that a player dies.
+description: プレイヤーが死亡したときに、目的のコマンドを実行するシステムです。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-This system will run your desired commands on the event that a player dies.
+このシステムは、プレイヤーが死亡したときに目的のコマンドを実行します。
 
-## Setup
+## セットアップ
 
-_Type the following command in Chat:_
+_チャットに次のコマンドを入力してください：_
 
 `/scoreboard objectives add wiki:q.is_alive dummy`
 
-If you are working with functions and prefer to have the objective added automatically on world initialization, follow the process outlined in [On First World Load](/commands/on-first-world-load).
+functions を使っていて、ワールド初期化時に目標を自動で追加したい場合は、[ワールドの初回読み込み時](/commands/on-first-world-load) に記載されている手順に従ってください。
 
-## System
+## システム
 
 <CodeHeader>BP/functions/wiki/events/player/on_death.mcfunction</CodeHeader>
 
 ```yaml
-## State Machine
-### Mark all players (@a) as 'dead' (State 0) if not marked already (State -1)
+## 状態マシン
+### まだ設定されていない場合、すべてのプレイヤー (@a) を「死亡」（状態 0）としてマーク
 scoreboard players set @a[scores={wiki:q.is_alive=!-1}] wiki:q.is_alive 0
-### Mark all alive players (@e[type=player]) as 'alive' (State 1)
+### すべての生存プレイヤー (@e[type=player]) を「生存」（状態 1）としてマーク
 scoreboard players set @e[type=player] wiki:q.is_alive 1
 
-## Your Commands Here (Example):
-### Runs only once when player enters 'dead' state
+## ここにコマンドを入れます（例）:
+### プレイヤーが「死亡」状態に入ったときに 1 回だけ実行
 execute as @a[scores={wiki:q.is_alive=0}] run say I died
-### Runs every tick after player is dead
+### プレイヤーが死亡後、毎ティック実行
 execute as @a[scores={wiki:q.is_alive=..0}] at @s run particle minecraft:soul_particle ~~~
 
-## Update State
-### Move from state 0 to state -1 for dead players to stop the "once" command from looping
+## 状態を更新
+### 1 回だけ実行するコマンドがループしないよう、死亡プレイヤーの状態 0 を -1 に移す
 scoreboard players set @a[scores={wiki:q.is_alive=0}] wiki:q.is_alive -1
 ```
 
 ![Chain of 5 Command Blocks](/assets/images/commands/command-block-chain/4.png)
 
-Here, we have used an `/execute - say` command as an example, but you can use any command you prefer and as many as you need.
+ここでは例として `/execute - say` コマンドを使っていますが、好きなコマンドを必要な数だけ使えます。
 
-Just make sure to follow the given order and properly apply the `scores={wiki:q.is_alive=0}` selector argument as shown for your desired commands.
+ただし、必ず示された順序を守り、目的のコマンドには `scores={wiki:q.is_alive=0}` セレクター引数を正しく適用してください。
 
-## Explanation
+## 解説
 
--   **`wiki:q.is_alive=0`** player is _not_ alive (dead).
--   **`wiki:q.is_alive=1`** player is alive.
--   **`wiki:q.is_alive=2`** player is dead and we have executed our desired commands on/from them.
+-   **`wiki:q.is_alive=0`** プレイヤーは _生存していない_（死亡）。
+-   **`wiki:q.is_alive=1`** プレイヤーは生存中。
+-   **`wiki:q.is_alive=2`** プレイヤーは死亡しており、目的のコマンドはすでに実行済みです。
 
-**Purpose of Each Command:**
+**各コマンドの役割:**
 
-1. **Command 1:** All players will be marked as _not_ alive (0) by default.
-    - We will ignore score `2`, else the commands that we want to run when the player dies will trigger more than once.
-2. **Command 2:** All alive players will be marked as 'alive' (1).
-    - `@e` selector allows us to exclusively target players who are alive.
-    - `@a` selector will target all players, whether they are alive or not.
-3. **Command 3:** Now that alive players have a score of 1 and non-alive players have a score of 0, we will use this knowledge to run our desired commands when the player becomes dead (0).
-4. **Command 4:** Since we want to execute our desired commands only once when the player dies, we will set their score to `2`. As not doing this will cause the commands to repeat till they respawn.
+1. **コマンド 1:** すべてのプレイヤーを既定で _生存していない_（0）としてマークします。
+    - スコア `2` は無視します。そうしないと、プレイヤー死亡時に実行したいコマンドが複数回発火してしまいます。
+2. **コマンド 2:** すべての生存プレイヤーを「生存」（1）としてマークします。
+    - `@e` セレクターは生存中のプレイヤーだけを対象にできます。
+    - `@a` セレクターは、生死を問わずすべてのプレイヤーを対象にします。
+3. **コマンド 3:** 生存プレイヤーが 1、非生存プレイヤーが 0 になったので、この情報を使って、プレイヤーが死亡（0）したときに目的のコマンドを実行します。
+4. **コマンド 4:** プレイヤーが死んだときに目的のコマンドを 1 回だけ実行したいので、スコアを `2` に設定します。これをしないと、リスポーンするまでコマンドが繰り返されます。
 
 ## Tick JSON
 
-If you are using functions instead of command blocks, the `on_death` function must be added to the `tick.json` in order to loop and run it continuously. Multiple files can be added to the `tick.json` by placing a comma after each string. Refer to [Functions](/commands/mcfunctions#tick-json) documentation for further info.
+コマンドブロックの代わりに関数を使う場合は、`on_death` 関数を `tick.json` に追加して、ループさせながら継続実行させる必要があります。`tick.json` には各文字列の後ろにカンマを付けることで複数ファイルを追加できます。詳しくは [Functions](/commands/mcfunctions#tick-json) のドキュメントを参照してください。
 
 <CodeHeader>BP/functions/tick.json</CodeHeader>
 ```json
@@ -81,7 +81,7 @@ If you are using functions instead of command blocks, the `on_death` function mu
 }
 ```
 
-If using functions, your pack folder structure will be as follows:
+functions を使う場合、パックのフォルダ構成は次のようになります。
 
 <FolderView
 	:paths="[
@@ -97,44 +97,44 @@ If using functions, your pack folder structure will be as follows:
 ]"
 ></FolderView>
 
-## Alternative Method
+## 代替手段
 
-This method was possible after the introduction of the new `/execute` syntax in Minecraft `1.19.50`.
+この方法は、Minecraft `1.19.50` で新しい `/execute` 構文が導入されたあとに可能になりました。
 
-:::warning Known Issue:
-If two or more players are teleported to the same point and one of them dies but the remaining players do not move, the system will fail to execute the commands.
+:::warning 既知の問題:
+2 人以上のプレイヤーが同じ地点にテレポートされ、そのうち 1 人が死亡しても残りのプレイヤーが動かない場合、このシステムはコマンドの実行に失敗します。
 :::
 
--   Make sure you add the `wiki:q.is_dead` scoreboard objective:
+-   `wiki:q.is_dead` のスコアボード目標を追加してください:
     -   `/scoreboard objectives add wiki:q.is_dead dummy`
 
 <CodeHeader>BP/functions/detect/player/is_dead.mcfunction</CodeHeader>
 
 ```yaml
-## Set Player States
-### Not dead
+## プレイヤーの状態を設定
+### 死亡していない
 scoreboard players set @e[type=player] wiki:q.is_dead 0
-### Dead
+### 死亡
 execute as @a at @s unless entity @e[type=player,r=0.01] run scoreboard players add @s wiki:q.is_dead 1
 
-## Your Commands Here (examples)
-### Summon armor stand at death position
+## ここにコマンドを入れます（例）
+### 死亡地点にアーマースタンドを召喚
 execute as @a[scores={wiki:q.is_dead=1}] at @s run summon armor_stand "Corpse" ~~~
-### Death message in chat
+### チャットに死亡メッセージを表示
 execute as @a[scores={wiki:q.is_dead=1..}] run say I died and haven't respawned yet..
 ```
 
 ![Chain of Four Command Blocks](/assets/images/commands/command-block-chain/4.png)
 
-**States:**
+**状態:**
 
--   **`wiki:q.is_dead=0`** player is _not_ dead (alive).
--   **`wiki:q.is_dead=1`** player just died. (used for 'trigger' actions)
--   **`wiki:q.is_dead=1..`** player is still dead. (used for repeating actions)
+-   **`wiki:q.is_dead=0`** プレイヤーは _死亡していない_（生存中）。
+-   **`wiki:q.is_dead=1`** プレイヤーがちょうど死亡した状態です（「トリガー」用）。
+-   **`wiki:q.is_dead=1..`** プレイヤーはまだ死亡中です（繰り返し用）。
 
-**Purpose of Each Command:**
+**各コマンドの役割:**
 
-1. **Command 1:** All alive players are marked as _not_ dead (0)
-2. **Command 2:** If there is no alive player within a 0.01 block radius of a player, they will be marked as dead (1)
-    - The logic is that only the player themselves can be present within such a small radius from them. The probability of two or more players to precisely stand at the same point by themselves (without `/tp` command) is close to zero.
-3. **Command 3, 4:** These are example commands (for each state) which can be modified / expanded.
+1. **コマンド 1:** すべての生存プレイヤーを _死亡していない_（0）としてマークします。
+2. **コマンド 2:** プレイヤーの 0.01 ブロック以内に生存プレイヤーがいなければ、そのプレイヤーを死亡（1）としてマークします。
+    - このロジックは、そのような小さい半径の中に入れるのは本人だけだという前提に基づきます。`/tp` コマンドなしで 2 人以上のプレイヤーがまったく同じ位置に立つ確率はほぼ 0 です。
+3. **コマンド 3, 4:** これらは状態ごとの例のコマンドで、変更・拡張できます。

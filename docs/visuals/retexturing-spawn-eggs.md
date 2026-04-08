@@ -1,6 +1,6 @@
 ---
-title: Retexturing Spawn Eggs
-description: Change the default texture of an entity's spawn egg.
+title: スポーンエッグの再テクスチャ
+description: エンティティのスポーンエッグの既定テクスチャを変更します。
 category: Tutorials
 tags:
     - beginner
@@ -12,28 +12,28 @@ mentions:
     - QuazChick
 ---
 
-Custom entities will automatically be given a spawn egg.
-This spawn egg can be found inside of the creative menu, with a name like `item.spawn_egg.entity.wiki:custom_entity.name`.
-If you want to rename your spawn egg as well as set a texture, you can do so in the lang files.
+カスタムエンティティには、スポーンエッグが自動的に付与されます。
+このスポーンエッグはクリエイティブメニュー内にあり、`item.spawn_egg.entity.wiki:custom_entity.name` のような名前で表示されます。
+スポーンエッグの名前もテクスチャも変更したい場合は、lang ファイルで設定できます。
 
-In this tutorial we are going to retexture the spawn egg so it looks more like your spawned item, and less like an egg.
+このチュートリアルでは、スポーンエッグを再テクスチャして、卵らしさを減らし、スポーンさせる対象により近い見た目にします。
 
-## Creating the Texture
+## テクスチャを作成する
 
-You can easily take a screenshot of your entity using the Blockbench software. Load the mode, and select export screenshot from the drop-down.
+Blockbench を使えば、エンティティのスクリーンショットを簡単に撮れます。モデルを読み込み、ドロップダウンからスクリーンショットの書き出しを選びます。
 
-If you don't want an image like this, you can also create your own pixel art, or use any image you like, as long as the image is square.
+このような画像が不要なら、自分でピクセルアートを作っても、好きな画像を使ってもかまいません。正方形であることだけ注意してください。
 
-## Adding the Texture
+## テクスチャを追加する
 
-Add the texture file under `RP/textures`.
-It is highly recommended to have a dedicated folder for the textures in your add-on to avoid incompatibility with other add-ons.
+テクスチャファイルは `RP/textures` の下に追加します。
+他のアドオンとの互換性問題を避けるため、アドオン内でテクスチャ専用のフォルダーを分けておくことを強くおすすめします。
 
-On the wiki, we keep our textures in the `RP/textures/wiki` folder, so the texture could be located at `RP/textures/wiki/items/spawn_egg/custom_entity.png`.
+この wiki ではテクスチャを `RP/textures/wiki` フォルダーに置いているため、テクスチャの場所は `RP/textures/wiki/items/spawn_egg/custom_entity.png` のようになります。
 
-## Giving the Texture a Name
+## テクスチャに名前を付ける
 
-Now we need to give our texture a short-name. This can be done in the item texture atlas file:
+次に、テクスチャの短い名前を付けます。これは item texture atlas ファイルで設定できます。
 
 <CodeHeader>RP/textures/item_texture.json</CodeHeader>
 
@@ -41,25 +41,25 @@ Now we need to give our texture a short-name. This can be done in the item textu
 {
     "texture_data": {
         "wiki:custom_entity_spawn_egg": {
-            // "wiki:custom_entity_spawn_egg" is the short-name of the texture, which we can reference later
+            // "wiki:custom_entity_spawn_egg" はテクスチャの short-name で、後で参照できます
             "textures": "textures/wiki/items/spawn_egg/custom_entity"
         }
-        // Add more spawn egg textures here
+        // ここに他のスポーンエッグテクスチャを追加できます
     }
 }
 ```
 
-## Using the new texture:
+## 新しいテクスチャを使う
 
-Now we can use our new texture inside of the Resource Pack entity file:
+これで、Resource Pack の entity ファイル内で新しいテクスチャを使えます。
 
 <CodeHeader>RP/entity/custom_entity.json#description</CodeHeader>
 
 ```json
 "spawn_egg": {
-    "texture": "wiki:custom_entity_spawn_egg", // "wiki:custom_entity_spawn_egg" should match the texture short-name we created in step 1.
+    "texture": "wiki:custom_entity_spawn_egg", // "wiki:custom_entity_spawn_egg" は手順 1 で作成したテクスチャの short-name と一致させます
     "texture_index": 0
 }
 ```
 
-Go and test it now!
+さっそくテストしてみましょう。

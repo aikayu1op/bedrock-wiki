@@ -1,5 +1,5 @@
 ---
-title: Subpacks
+title: サブパック
 mentions:
     - SirLich
     - solvedDev
@@ -8,35 +8,35 @@ mentions:
     - SmokeyStack
     - MedicalJewel105
     - TheItsNameless
-description: Subpacks allow you to select between different add-on 'configurations'.
+description: サブパックを使うと、異なるアドオンの「構成」を切り替えられます。
 ---
 
-## What are Subpacks?
+## サブパックとは？
 
-Subpacks allow you to select between different add-on 'configurations'.
+サブパックを使うと、異なるアドオンの「構成」を切り替えられます。
 
-They are intended for texture resolutions to load on different memory capacities, but can also be used to create file variations in behavior and resource packs. These variations can be selected by clicking the gear icon and adjusting the slider.
+本来は、異なるメモリ容量向けにテクスチャ解像度を切り替えるための仕組みですが、動作やリソースパックのファイル差分を作る用途にも使えます。こうした差分は、歯車アイコンをクリックしてスライダーを調整することで選択できます。
 
-## How do Subpacks work?
+## サブパックはどう動くの？
 
-Files placed in you subpack folder will override files placed in your main add-on folder, if the subpack is selected. For example, if your add-on contains both `RP/textures/wiki/entities/ghost.png` and `RP/subpacks/pack_1/textures/wiki/entities/ghost.png`, the second image file will replace the first, if subpack `pack_1` is selected.
+サブパックを選択している場合、サブパック用フォルダーに置いたファイルは、メインのアドオンフォルダーに置いたファイルを上書きします。たとえば、アドオンに `RP/textures/wiki/entities/ghost.png` と `RP/subpacks/pack_1/textures/wiki/entities/ghost.png` の両方がある場合、サブパック `pack_1` が選択されていれば、後者の画像ファイルが前者を置き換えます。
 
-For more information about how files override each other, please see our page on [overriding vanilla assets](/concepts/overwriting-assets).
+ファイルが互いにどのように上書きされるかの詳細は、[vanilla アセットの上書き](/concepts/overwriting-assets) のページを参照してください。
 
-## Creating Subpacks
+## サブパックの作成
 
--   To start adding a subpack you need to create a `subpacks` folder inside the root of your `BP`/`RP`.
--   Then inside the `subpacks` folder add a folder for each subpack you want to have
-    e.g.
+-   サブパックを追加するには、まず `BP`/`RP` のルート内に `subpacks` フォルダーを作成します。
+-   その後、`subpacks` フォルダーの中に、必要なサブパックごとのフォルダーを追加します。
+    例:
 
 <FolderView :paths="[
     'RP/subpacks/subpack_1',
     'RP/subpacks/subpack_2'
 ]" />
 
--   Inside each of these folders you can add the content of each subpack.
-    This can be anything that normally goes in your behavior or resource pack.
-    e.g.
+-   それぞれのフォルダーの中に、各サブパックの内容を入れられます。
+    これは、通常ならビヘイビアパックやリソースパックに入るものなら何でも構いません。
+    例:
 
 <FolderView :paths="[
     'RP/subpacks/subpack_1/textures/wiki/blocks/dirt.png',
@@ -45,11 +45,11 @@ For more information about how files override each other, please see our page on
     'RP/subpacks/subpack_2/textures/wiki/items/example_item.png'
 ]" />
 
-## Manifest Part
+## マニフェスト部分
 
-To register the subpacks in the manifest you need to add `subpacks` and this contains an array of subpacks.
+マニフェストでサブパックを登録するには、`subpacks` を追加します。ここにはサブパックの配列が入ります。
 
-Example:
+例:
 
 <CodeHeader>RP/manifest.json</CodeHeader>
 
@@ -85,16 +85,16 @@ Example:
 }
 ```
 
--   `name` - name that will show when selecting subpacks.
+-   `name` - サブパック選択時に表示される名前です。
 
--   `memory_tier`- amount of RAM that device must have to enable this subpack. 1 memory tier = 0.25 GB.
+-   `memory_tier` - このサブパックを有効にするために端末が持っていなければならない RAM 容量です。1 memory tier = 0.25 GB です。
 
--   `folder_name` - name of the folder to be used for this subpack, for example in the examples above this would be `subpack_1` or `subpack_2`.
+-   `folder_name` - このサブパックに使うフォルダー名です。上の例では `subpack_1` または `subpack_2` になります。
 
-## Known Things
+## 既知の事項
 
-If you add only one subpack, there will be 2 options at the subpacks selection section, however the second resolution (no subpack) does **not** make content in the root folder override subpacks.
+サブパックを 1 つだけ追加した場合でも、サブパック選択欄には 2 つの विकल्पが表示されます。ただし、2 つ目の解像度（サブパックなし）は、**ルートフォルダーの内容でサブパックを上書きすることはありません**。
 
-The default subpack chosen on a device will be the subpack using the highest memory tier available for the device. If there are multiple subpacks of the same memory tier, the selected subpack will be the last subpack in the subpack array of that memory tier.
+端末でデフォルトとして選ばれるサブパックは、その端末で利用可能な最も高い memory tier のものです。同じ memory tier のサブパックが複数ある場合、その tier の配列の中で最後にあるサブパックが選択されます。
 
-To change the active subpack, go to resource pack settings and find the resource pack. Press the gear/settings icon and slide the slider to change the active subpack.
+アクティブなサブパックを変更するには、リソースパック設定を開いて対象のリソースパックを見つけます。歯車/設定アイコンを押し、スライダーを動かしてアクティブなサブパックを切り替えてください。

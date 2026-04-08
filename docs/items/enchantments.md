@@ -1,6 +1,6 @@
 ---
-title: Enchantments
-description: Enchantments documentation for items.
+title: エンチャント
+description: アイテム向けのエンチャントに関するドキュメントです。
 category: Documentation
 nav_order: 5
 show_outline: false

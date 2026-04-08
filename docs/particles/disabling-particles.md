@@ -1,6 +1,6 @@
 ---
-title: Disabling Particles
-description: Remove vanilla particles from displaying in-game.
+title: パーティクルを無効化する
+description: バニラのパーティクルをゲーム内で表示されないようにします。
 category: Tutorials
 show_outline: false
 tags:
@@ -11,9 +11,9 @@ mentions:
     - MedicalJewel105
 ---
 
-In the event that you want to disable a particle, it is recommended to do so from the particle file itself as opposed to simply making the particle texture transparent in `particles.png`. Additionally, disabling a particle might offer a slight performance boost compared to making it transparent, as transparent particles are still emitted (but not visible).
+パーティクルを無効化したい場合は、`particles.png` で単にパーティクルのテクスチャを透明にするのではなく、パーティクルファイル自体から無効化することをおすすめします。さらに、透明化するよりも無効化したほうが、わずかなパフォーマンス向上が期待できる場合があります。透明なパーティクルは、見えなくなるだけで実際にはまだ発生しているためです。
 
-The basic idea of disabling a particle from emitting is as follows:
+パーティクルの発生を無効化する基本的な考え方は次のとおりです。
 
 <CodeHeader>RP/particles/some_vanilla_particle.json</CodeHeader>
 

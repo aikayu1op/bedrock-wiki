@@ -1,6 +1,6 @@
 ---
-title: Recipes
-description: Recipes are the means of handling several item transactions, namely those occurring in crafting tables, furnaces, campfires, and brewing stands.
+title: レシピ
+description: レシピは、クラフトテーブル、かまど、焚き火、醸造台で行われるさまざまなアイテム取引を扱う仕組みです。
 category: Documentation
 nav_order: 3
 mentions:
@@ -12,19 +12,19 @@ mentions:
     - QuazChick
 ---
 
-Recipes are the means of handling several item transactions, namely those occurring in crafting tables, furnaces, campfires, and brewing stands.
+レシピは、クラフトテーブル、かまど、焚き火、醸造台で行われるさまざまなアイテム取引を扱う仕組みです。
 
 ![](recipe.png)
 
 ::: tip
-Anvil interactions are handled within an [item definition](/items/item-components), not via recipe files. Loom transactions are currently unavailable.
+金床でのやり取りはレシピファイルではなく、[アイテム定義](/items/item-components) 内で扱われます。機織り機の取引は現在利用できません。
 :::
 
-No experimental toggles are required to use recipes or any of their features.
+レシピやその機能を使うために、実験的機能の切り替えは必要ありません。
 
-### Registration
+### 登録
 
-All recipes are stored in the `recipes` folder in the behavior pack root. The files can be named and organized under any folder hierarchy as desired.
+すべてのレシピは、behavior pack ルートの `recipes` フォルダに保存されます。ファイル名や配置は、任意のフォルダ階層で自由に整理できます。
 
 This arbitrary structure is used for the paths in this document:
 
@@ -37,7 +37,7 @@ This arbitrary structure is used for the paths in this document:
     'BP/recipes/illumination_potion.json'
 ]" />
 
-As an example, a "cold steel sword" might be crafted using the following [shaped recipe](#shaped-recipes):
+例として、次の [形状付きレシピ](#shaped-recipes) で「cold steel sword」を作れます。
 
 <CodeHeader>BP/recipes/crafting/weapons/cold_steel_sword.json</CodeHeader>
 
@@ -71,11 +71,11 @@ As an example, a "cold steel sword" might be crafted using the following [shaped
 }
 ```
 
-## Shared Properties and Structures
+## 共通プロパティと構造
 
-### Format Version
+### フォーマットバージョン
 
-The [format version](/guide/format-version) is intended to version the schema used for the body of a recipe. It is provided with the top-level `"format_version"` property.
+[format version](/guide/format-version) は、レシピ本体で使われるスキーマの版を示すためのものです。最上位の `"format_version"` プロパティで指定します。
 
 <CodeHeader>#/</CodeHeader>
 
@@ -83,15 +83,15 @@ The [format version](/guide/format-version) is intended to version the schema us
 "format_version": "1.17.41"
 ```
 
-In practice, the format version can be set to any value or even omitted.
+実際には、フォーマットバージョンは任意の値にでき、省略もできます。
 
 ::: warning
-It's strongly recommended to include a format version anyway, choosing a value that represents an actual Minecraft version to help future-proof the code. Consider using the current release version or last major release version.
+それでもフォーマットバージョンは含めることを強く推奨します。実際の Minecraft バージョンを表す値にしておくと、将来の互換性確保に役立ちます。現在のリリース版か、直近のメジャーリリース版を使うとよいでしょう。
 :::
 
-### Description
+### 説明
 
-The `"description"` object, required within any recipe type, holds the identifier of a recipe.
+どのレシピ型にも必須の `"description"` オブジェクトには、レシピの識別子が入ります。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -101,15 +101,15 @@ The `"description"` object, required within any recipe type, holds the identifie
 }
 ```
 
-Its only child is the required `"identifier"` property, which is designed to uniquely identify a recipe across all packs applied to a world. There are no namespacing requirements for recipe identifiers except that no two full recipe identifiers in a single pack may match.
+その唯一の子である必須の `"identifier"` プロパティは、ワールドに適用されたすべてのパックを通してレシピを一意に識別するためのものです。レシピ識別子に対する名前空間の要件は特になく、同一パック内で完全なレシピ識別子が重複しないことだけが条件です。
 
 ::: warning
-It's strongly recommended to use a namespace. Namespaces are a standard in other add-on domains and assist in logically scoping the recipe to a pack, lessening possibilities of collisions for players wanting to use multiple behavior packs in their world.
+名前空間の使用を強く推奨します。名前空間は他のアドオン分野では標準であり、レシピをパック内で論理的に区切る助けになり、ワールドで複数の behavior pack を使う際の衝突を減らせます。
 :::
 
-### Tags
+### タグ
 
-Recipes are linked to crafting interfaces using the required `"tags"` array property, which must be placed within any recipe type. These tags will make the recipe be shared across different blocks that uses the `minecraft:crafting_table` component. When the recipe does not include the `crafting_table` tag, or any vanilla tag, but a tag from your custom block, the recipe will only be shared to that custom block and not the crafting table/stonecutter/etc. At least one tag must be provided.
+レシピは、必須の `"tags"` 配列プロパティを使ってクラフト用インターフェースに関連付けられます。このプロパティはどのレシピ型にも含める必要があります。これらのタグによって、`minecraft:crafting_table` コンポーネントを使う異なるブロック間でレシピを共有できます。レシピに `crafting_table` タグやバニラタグがなく、代わりにカスタムブロックのタグだけがある場合、そのレシピはそのカスタムブロックにだけ共有され、クラフトテーブルや石切り台などには共有されません。少なくとも 1 つのタグが必要です。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -117,19 +117,19 @@ Recipes are linked to crafting interfaces using the required `"tags"` array prop
 "tags": ["crafting_table", "altar"]
 ```
 
-Vanilla interfaces are exposed to tags for each set of recipe types.
+バニラのインターフェースは、各レシピ種別ごとにタグが公開されています。
 
-Crafting:
+クラフト:
 
 -   `crafting_table`
 -   `stonecutter`
 -   `smithing_table`
 
 ::: warning
-Note that if you want to make a smithing recipe, you will need to use `<namespace>:netherite_ingot` for the second slot, though using a different identifier will not work. **This no longer works after 1.18.30**.
+鍛冶台レシピを作りたい場合、2 つ目のスロットには `<namespace>:netherite_ingot` を使う必要があります。別の識別子では動作しません。**これは 1.18.30 以降では動作しません**。
 :::
 
-Cooking and Smelting:
+調理と精錬:
 
 -   `furnace`
 -   `blast_furnace`
@@ -137,25 +137,25 @@ Cooking and Smelting:
 -   `campfire`
 -   `soul_campfire`
 
-Brewing:
+醸造:
 
 -   `brewing_stand`
 
-Education:
+教育:
 
 -   `material_reducer`
 
 ::: tip
-Additionally, [custom crafting tables](/blocks/block-components#crafting-table) can declare a custom tag for crafting recipes to use. Custom cooking and smelting blocks and custom brewing stands are not currently available.
+さらに、[カスタムクラフトテーブル](/blocks/block-components#crafting-table) は、クラフトレシピ用の独自タグを宣言できます。カスタムの調理・精錬ブロックやカスタム醸造台は、現在は利用できません。
 :::
 
 ::: tip
-To effectively disable a recipe (useful for [overriding](#overrides) a prior recipe), set the tag array to `[""]`.
+レシピを実質的に無効化したい場合（以前のレシピを[上書き](#overrides)するときに便利です）、タグ配列を `[""]` にします。
 :::
 
-### Recipe Unlocking
+### レシピのアンロック
 
-Minecraft 1.20.30 added recipe unlocking to the game. In order to have your recipes use this function, your `manifest.json` must have a `min_engine_version` of 1.20.11 (1.20.30 is recommender). You also need to add the `unlock` array with its objects to your recipe.
+Minecraft 1.20.30 でレシピのアンロック機能が追加されました。レシピでこの機能を使うには、`manifest.json` の `min_engine_version` を 1.20.11 にする必要があります（1.20.30 が推奨です）。また、レシピに `unlock` 配列とそのオブジェクトを追加する必要があります。
 
 ```json
 "unlock": [
@@ -172,15 +172,15 @@ Minecraft 1.20.30 added recipe unlocking to the game. In order to have your reci
   ]
 ```
 
-Each object in this array contains `"item"` and this tells the recipe what item the player needs in their inventory in order for this recipe to be unlocked. It also accepts data values. `"context"` is used to determine what event unlocks this recipe. `"PlayerInWater"` will unlock this recipe when the player enters water. This is also the only known context for recipes.
+この配列内の各オブジェクトには `"item"` があり、レシピをアンロックするためにプレイヤーのインベントリに必要なアイテムを示します。data 値も受け付けます。`"context"` は、このレシピをアンロックするイベントを決めるために使います。`"PlayerInWater"` は、プレイヤーが水に入るとこのレシピをアンロックします。これはレシピで知られている唯一の context でもあります。
 
-### Item Descriptors
+### アイテム記述子
 
-Working with recipes entails referencing items across a number of properties. Items may be provided in one of two formats: a string reference or an item object. Both formats have means of handling data values, but only the item object may be used to specify a count for that item (usable in recipe outputs). For recipe inputs, if no data value is provided, items with any data value under that identifier will be usable for that input. The data value for an output defaults to `0` if one is not explicitly provided. Selecting recipe inputs by item tags is not supported.
+レシピを扱うには、さまざまなプロパティでアイテムを参照する必要があります。アイテムは、文字列参照かアイテムオブジェクトのどちらかで指定できます。どちらの形式も data 値を扱えますが、count を指定できるのはアイテムオブジェクトだけです（レシピの出力で使えます）。レシピ入力では、data 値を指定しない場合、その識別子に属する任意の data 値のアイテムがその入力に使えます。出力の data 値は、明示しなければ `0` が既定値です。アイテムタグによるレシピ入力の選択には対応していません。
 
-#### String Reference
+#### 文字列参照
 
-Generally, a string reference is just the namespace and identifier combination for that item:
+一般に、文字列参照はそのアイテムの namespace と identifier を組み合わせたものです。
 
 <CodeHeader>#/minecraft:recipe_shapeless/ingredients/0</CodeHeader>
 
@@ -188,7 +188,7 @@ Generally, a string reference is just the namespace and identifier combination f
 "minecraft:planks"
 ```
 
-String references additionally support specification of a data value as a suffix:
+文字列参照では、末尾に data 値を付けることもできます。
 
 <CodeHeader>#/minecraft:recipe_shapeless/ingredients/0</CodeHeader>
 
@@ -196,9 +196,9 @@ String references additionally support specification of a data value as a suffix
 "minecraft:planks:2"
 ```
 
-#### Item Object
+#### アイテムオブジェクト
 
-The item object is a more explicit construct for referencing items.
+アイテムオブジェクトは、アイテムをより明示的に参照するための構造です。
 
 <CodeHeader>#/minecraft:recipe_shapeless/ingredients/0</CodeHeader>
 
@@ -210,7 +210,7 @@ The item object is a more explicit construct for referencing items.
 }
 ```
 
-The required `"item"` property functions the same as the string reference format. Although an explicit data field is available, the data suffix string format is still supported in the `"item"` property. However, unlike the suffix form, `"data"` can accept Molang. The Molang here is evaluated once on world load, not per-crafting attempt. Variables cannot be used to pass data between properties in a recipe. Furthermore, the nature of input items cannot be queried. Currently, the only known usable query in the `"data"` property is `q.get_actor_info_id`, used to look up the ID of an entity's spawn egg by its identifier, however this can also be achieved by simply setting the `"item"` to the spawn egg's ID (e.g. `minecraft:chicken_spawn_egg`).
+必須の `"item"` プロパティは、文字列参照形式と同じように機能します。明示的な data フィールドも使えますが、文字列末尾の data 指定も `"item"` プロパティで引き続き使えます。ただし接尾辞形式と違い、`"data"` には Molang を入れられます。この Molang はワールド読み込み時に 1 回だけ評価され、クラフト試行ごとには評価されません。変数を使って、レシピ内のプロパティ間でデータを受け渡すことはできません。さらに、入力アイテムの性質を問い合わせることもできません。現在、`"data"` プロパティで使えることが知られている唯一のクエリは `q.get_actor_info_id` で、entity のスポーンエッグ ID をその識別子から調べるために使いますが、これは `"item"` にスポーンエッグの ID を直接設定することでも実現できます（例: `minecraft:chicken_spawn_egg`）。
 
 <CodeHeader>#/minecraft:recipe_shapeless/result</CodeHeader>
 
@@ -221,19 +221,19 @@ The required `"item"` property functions the same as the string reference format
 }
 ```
 
-The optional integer `"count"` property may be used to stack items. It defaults to `1`. Currently, setting the count only functions in [crafting](#crafting) and [furnace](#heating) recipe outputs and [shapeless recipe ingredients](#ingredients). A provided count is ignored in other locations.
+オプションの整数 `"count"` プロパティは、アイテムをスタックするために使えます。既定値は `1` です。現在、count の設定が機能するのは [crafting](#crafting) と [furnace](#heating) のレシピ出力、および [shapeless recipe ingredients](#ingredients) だけです。指定した count は他の場所では無視されます。
 
 ::: tip NOTE
-If a count greater than `1` is provided for an item that does not stack, an error will be thrown. There is no way to force single-return recipe outputs, like those in shapeless recipes or brewing mixes, to return multiple items in one transaction.
+スタックできないアイテムに `1` を超える count を指定すると、エラーになります。形状なしレシピや醸造ミックスのような、1 個だけ返すレシピ出力を 1 回の処理で複数個返すように強制する方法はありません。
 :::
 
 ::: warning
-Despite having similarities to trade [table item descriptors](/loot/trade-tables#items), recipe item descriptors cannot use functions.
+トレードの [table item descriptors](/loot/trade-tables#items) に似ていますが、レシピの item descriptor では functions を使えません。
 :::
 
-#### Identifier Additions
+#### 追加識別子
 
-Additional identifiers not typically usable are available to recipes to describe basic potions.
+基本的なポーションを表すために、通常は使えない追加の識別子がレシピで利用できます。
 
 <CodeHeader>#/minecraft:recipe_brewing_mix/input</CodeHeader>
 
@@ -241,7 +241,7 @@ Additional identifiers not typically usable are available to recipes to describe
 "minecraft:potion_type:strength"
 ```
 
-These identifiers are not usable in the object notation, only the string notation. Variants are unavailable for splash and lingering potions. All such identifiers follow the format: <code>minecraft:potion_type:<em>potion_effect</em></code>, where <code><em>potion_effect</em></code> can be one of the following:
+これらの識別子はオブジェクト記法では使えず、文字列記法でのみ使えます。スプラッシュポーションと残留ポーションではバリアントは使えません。これらの識別子はすべて <code>minecraft:potion_type:<em>potion_effect</em></code> の形式で、<code><em>potion_effect</em></code> には次のいずれかを指定できます。
 
 -   `water`
 -   `awkward`
@@ -268,12 +268,12 @@ These identifiers are not usable in the object notation, only the string notatio
 -   `weaving`
 -   `wind_charged`
 
-Where supported, `long_` and `strong_` prefixes may be used to designate modified potions, such as `minecraft:potion_type:strong_poison`.
+対応している場合は、`long_` と `strong_` の接頭辞を使って修正版ポーションを表せます。たとえば `minecraft:potion_type:strong_poison` です。
 
-## Crafting
+## クラフト
 
-Crafting operations instantly transform inputs to outputs using crafting grids. Two crafting recipe types are available: [shapeless recipes](#shapeless-recipes), whose inputs may be arranged in any way, and [shaped recipes](#shaped-recipes), used to define strict arrangements of inputs.
-Crafting recipes support both crafting tables and stonecutters:
+クラフト操作は、クラフトグリッドを使って入力を即座に出力へ変換します。クラフトレシピには 2 種類あり、入力を自由に並べられる [shapeless recipes](#shapeless-recipes) と、入力の厳密な配置を定義する [shaped recipes](#shaped-recipes) があります。
+クラフトレシピは、クラフトテーブルと石切り台の両方に対応しています。
 
 <CodeHeader>#/minecraft:recipe_shapeless/</CodeHeader>
 
@@ -281,11 +281,11 @@ Crafting recipes support both crafting tables and stonecutters:
 "tags": ["crafting_table", "stonecutter"]
 ```
 
-`"crafting_table"` applies to both vanilla crafting tables and the player 2 × 2 crafting grid in their inventory. There is currently no way to opt into one but not the other. Crafting recipes additionally support custom tags, linking recipes to a [crafting grid provided by a custom block](/blocks/block-components#crafting-table).
+`"crafting_table"` は、バニラのクラフトテーブルと、インベントリ内のプレイヤー用 2 × 2 クラフトグリッドの両方に適用されます。現在、どちらか一方だけを対象にする方法はありません。クラフトレシピはカスタムタグにも対応しており、レシピを [カスタムブロックが提供するクラフトグリッド](/blocks/block-components#crafting-table) に関連付けられます。
 
-### Shapeless Recipes
+### 形状なしレシピ
 
-Shapeless recipes simply bind a collection of inputs to a single output on a crafting grid.
+形状なしレシピは、クラフトグリッド上で入力の集合を 1 つの出力にまとめるだけのレシピです。
 
 ![](shapeless_recipe.png)
 
@@ -327,9 +327,9 @@ Shapeless recipes simply bind a collection of inputs to a single output on a cra
 }
 ```
 
-#### Ingredients
+#### 材料
 
-The required `"ingredients"` array property lists the items required as inputs for the crafting recipe.
+必須の `"ingredients"` 配列プロパティには、そのクラフトレシピに必要な入力アイテムを列挙します。
 
 <CodeHeader>#/minecraft:recipe_shapeless/</CodeHeader>
 
@@ -343,11 +343,11 @@ The required `"ingredients"` array property lists the items required as inputs f
 ]
 ```
 
-Each entry is an [item descriptor](#item-descriptors). If an ingredient provides a count, that count must be expressed across multiple crafting grid slots. Using stacked items in a single grid slot to yield a product is unsupported. If the items required for crafting are available but the count of ingredients is greater than the crafting interface being used supports, the recipe will automatically be made unavailable in the recipe book.
+各エントリーは [item descriptor](#item-descriptors) です。材料に count がある場合、その count は複数のクラフトグリッドスロットにまたがって表現する必要があります。1 つのスロットに積み重ねたアイテムを使って製品を作ることはできません。クラフトに必要なアイテムが揃っていても、材料数が使用中のクラフトインターフェースで扱える数を超えると、そのレシピはレシピブック上で自動的に利用不可になります。
 
-#### Shapeless Results
+#### 形状なしレシピの結果
 
-Shapeless recipe outputs are expressed using the required `"result"` property and may be expressed as either an [item descriptor](#item-descriptors) or an array of a single item descriptor.
+形状なしレシピの出力は、必須の `"result"` プロパティで表し、[item descriptor](#item-descriptors) か、その単一要素の配列として指定できます。
 
 <CodeHeader>#/minecraft:recipe_shapeless/</CodeHeader>
 
@@ -358,9 +358,9 @@ Shapeless recipe outputs are expressed using the required `"result"` property an
 }
 ```
 
-### Shaped Recipes
+### 形状付きレシピ
 
-Shaped recipes enforce that the ingredients used during crafting conform to a strict shape.
+形状付きレシピは、クラフト時に使う材料が厳密な形に従うことを要求します。
 
 ![](shaped_recipe.png)
 
@@ -403,9 +403,9 @@ Shaped recipes enforce that the ingredients used during crafting conform to a st
 }
 ```
 
-#### Patterns
+#### パターン
 
-The required `"pattern"` array property establishes the shape used for the recipe.
+必須の `"pattern"` 配列プロパティは、そのレシピで使う形を定義します。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -417,17 +417,17 @@ The required `"pattern"` array property establishes the shape used for the recip
 ]
 ```
 
-Each entry in the array is a string representing a row in the crafting grid. Each character in each string represents a slot within that row. Spaces by default represent slots that should be empty.
+配列内の各要素は、クラフトグリッドの 1 行を表す文字列です。各文字はその行内の 1 スロットを表します。スペースは既定で空にするスロットを意味します。
 
-Characters act as a shorthand to visually describe an item. Each distinct character is matched with a [key](#keys) that dictates what item should be present in that slot.
+文字は、アイテムを視覚的に表すための略記として機能します。各文字は [key](#keys) に対応し、そのスロットに置くべきアイテムを指定します。
 
 ::: tip
-If the pattern is only comprised of spaces, empty crafting interfaces able to fit that pattern's size will constantly match the recipe. A player may retrieve an infinite amount of the crafting output, including immediately filling their inventory to the limit upon shift-retrieving the result.
+パターンがスペースだけで構成されている場合、そのサイズに合う空のクラフトインターフェースは常にそのレシピに一致します。プレイヤーはクラフト出力を無限に取り出せ、Shift で回収すると即座にインベントリ上限まで埋まります。
 :::
 
-##### Row Normalization
+##### 行の正規化
 
-The pattern grid must be at most 3 × 3 but may be smaller. If string lengths are mismatched, Minecraft will automatically extend shorter strings, implying spaces in filled slots. The following two are equivalent:
+パターングリッドは最大で 3 × 3 ですが、それより小さくてもかまいません。文字列の長さが揃っていない場合、Minecraft は短い文字列を自動的に延長し、空きスロットにはスペースがあるものとして扱います。次の 2 つは等価です。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -450,12 +450,12 @@ The pattern grid must be at most 3 × 3 but may be smaller. If string lengths ar
 ```
 
 ::: tip NOTE
-Currently, no crafting grids, including those configurable from custom blocks, may be larger than 3 × 3. If the expressed pattern is unusable within the current crafting interface, the recipe will automatically be unavailable in the recipe book.
+現在、カスタムブロックで設定できるものを含め、どのクラフトグリッドも 3 × 3 を超えられません。示されたパターンが現在のクラフトインターフェースで使えない場合、そのレシピはレシピブックで自動的に利用不可になります。
 :::
 
-##### Grid Freedom
+##### グリッドの自由度
 
-Spaces are not automatically implied to fill in any remaining slots in the 3 × 3 space. If a provided pattern is smaller than the crafting grid being used, the pattern can be used anywhere so long as the structure and contents are maintained. As an example, consider the following pattern on a crafting table:
+スペースは、3 × 3 の余白を自動で埋めるものとしては扱われません。提示されたパターンが使用中のクラフトグリッドより小さい場合、構造と内容が保たれている限り、そのパターンはどこにでも配置できます。例として、クラフトテーブル上で次のパターンを考えます。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -466,11 +466,11 @@ Spaces are not automatically implied to fill in any remaining slots in the 3 × 
 ]
 ```
 
-The "L" shape isn't restricted to the upper-left corner of the crafting grid. Using a 3 × 3 grid as an example, the pattern would be usable with any of these configurations:
+この "L" 字形は、クラフトグリッドの左上隅に限定されません。3 × 3 グリッドを例にすると、このパターンは次のいずれの配置でも使えます。
 
 <Spoiler title="Possible Configurations">
 
-_Underscores represent empty slots._
+_アンダースコアは空きスロットを表します。_
 
 ```
 O__
@@ -498,7 +498,7 @@ _OO
 
 </Spoiler>
 
-To restrict placements to a particular location, use explicit spaces, which enforce empty slots in certain locations. The following is only usable in the upper-left corner of a grid:
+配置を特定の場所に限定したい場合は、明示的なスペースを使い、特定の位置を空きスロットとして強制します。次のパターンは、グリッドの左上隅でのみ使えます。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -510,9 +510,9 @@ To restrict placements to a particular location, use explicit spaces, which enfo
 ]
 ```
 
-##### Symmetry
+##### 対称性
 
-All shaped recipes are innately horizontally symmetric:
+すべての形状付きレシピは、もともと左右対称です。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -524,7 +524,7 @@ All shaped recipes are innately horizontally symmetric:
 ]
 ```
 
-The preceding recipe may also be used by a player as though it were set to:
+前のレシピは、プレイヤーにとって次のように設定されているのと同じものとしても使えます。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -536,9 +536,9 @@ The preceding recipe may also be used by a player as though it were set to:
 ]
 ```
 
-#### Keys
+#### キー
 
-Keys provide meaning to characters in a [pattern](#patterns), done via the required `"key"` object property, which maps key names to [item descriptors](#item-descriptors).
+キーは、[pattern](#patterns) 内の文字に意味を与えます。必須の `"key"` オブジェクトプロパティで行い、キー名を [item descriptors](#item-descriptors) に対応付けます。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -549,7 +549,7 @@ Keys provide meaning to characters in a [pattern](#patterns), done via the requi
 }
 ```
 
-Every key present in the pattern should be accounted for here. Keys names are case-sensitive. If an item supports multiple data values and no data value is provided, any item of that identifier will be usable for that key. Any `"count"` property present in an item descriptor is ignored and regarded as `1`; stacked items in a crafting grid slot are only consumable one at a time.
+pattern に含まれる各キーはここで定義しておく必要があります。キー名は大文字小文字を区別します。あるアイテムが複数の data 値を持ち、data 値が指定されていない場合、その識別子の任意のアイテムがそのキーに使えます。item descriptor に `"count"` プロパティがあっても無視され、`1` として扱われます。クラフトグリッドのスロット内の積み重なったアイテムは、1 個ずつしか消費されません。
 
 ::: tip NOTE
 Any unicode character from `U+0020` to `U+07FF` may be used as a key name. If a key name has more than one character, only the first character is considered. Since spaces are by default used to signify empty slots on a grid and there's no way to re-designate a key for a blank slot, it's not recommended to use them as a key.
@@ -559,9 +559,9 @@ Any unicode character from `U+0020` to `U+07FF` may be used as a key name. If a 
 If a character in the pattern is not present in the key map, it will be treated as though it were a space, a designated empty tile.
 :::
 
-#### Shaped Results
+#### 形状付きレシピの結果
 
-Shaped crafting recipe outputs behave very similarly to their [shapeless counterparts](#shapeless-results). Unlike array results for shapeless recipes, however, shaped recipe result arrays may contain more than one [item descriptor](#item-descriptors).
+形状付きクラフトレシピの出力は、[形状なしレシピの対応物](#shapeless-results) と非常によく似ています。ただし、形状なしレシピの配列結果と違い、形状付きレシピの結果配列には複数の [item descriptor](#item-descriptors) を含められます。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -575,29 +575,29 @@ Shaped crafting recipe outputs behave very similarly to their [shapeless counter
 ]
 ```
 
-The first entry in the array will be used as the visible output of the crafting block. All other values are automatically placed in the player's inventory upon removing the visible result from the output slot. There does not seem to be a limit on the number of items that may be returned from a crafting action.
+配列の最初の要素は、クラフトブロックに表示される出力として使われます。表示された結果を出力スロットから取り出すと、他の値は自動的にプレイヤーのインベントリに入ります。1 回のクラフト操作で返せるアイテム数に上限はないようです。
 
 ::: tip NOTE
-Any items not able to fit in the player's inventory are instead placed in the input slots of the crafting table left-to-right and then top-to-bottom. Anything not able to fit there is then thrown from the player as though they had used the "Drop Item" action.
+プレイヤーのインベントリに収まりきらないアイテムは、クラフトテーブルの入力スロットの左から右、次に上から下の順で配置されます。そこにも収まらないものは、プレイヤーが "Drop Item" アクションを使ったかのように投げ出されます。
 :::
 
-### Recipe Book
+### レシピブック
 
-The recipe book automatically indexes and displays available recipes to the player, intelligently accounting for [ingredient counts](#ingredients) in shapeless recipes or [pattern constraints](#patterns) in shaped recipes. When multiple recipes point to the same output, the recipe book uses its own unique prioritization system.
+レシピブックは、利用可能なレシピを自動で索引化してプレイヤーに表示し、形状なしレシピの [材料数](#ingredients) や形状付きレシピの [パターン制約](#patterns) を賢く考慮します。複数のレシピが同じ出力を指す場合、レシピブックは独自の優先順位付けを使います。
 
-When both recipes being compared are shapeless recipes, the following rules determine prioritization in order:
+比較対象の両方が形状なしレシピの場合、優先順位は次の順で決まります。
 
--   Lower ingredient count of the _first_ listed ingredient
--   More negative [priority](#priority)
--   Lower-valued identifier string
+-   最初に列挙された材料の数が少ないもの
+-   より負の [優先度](#priority)
+-   識別子文字列の値が小さいもの
 
-For shaped recipes, recipes with "lesser" identifiers, when compared as strings, are always prioritized.
+形状付きレシピでは、文字列比較で "より小さい" 識別子のレシピが常に優先されます。
 
-When comparing a shaped recipe to a shapeless recipe, the rules for comparing shapeless recipes are used; however, the interpreted count of ingredients for the shaped recipe is different from its actual ingredient count. Exactly how the ingredient count for a shaped recipe is determined is unknown.
+形状付きレシピと形状なしレシピを比較する場合は、形状なしレシピを比較するときのルールが使われます。ただし、形状付きレシピについて解釈される材料数は、実際の材料数とは異なります。形状付きレシピの材料数がどのように決まるのかは正確には分かっていません。
 
-### Grouping
+### グルーピング
 
-This section is included informatively. Groups are present in crafting recipes in vanilla definitions, given with the optional `"group"` string property.
+この節は参考情報です。グループは、バニラ定義のクラフトレシピに、任意の `"group"` 文字列プロパティとして存在します。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -605,11 +605,11 @@ This section is included informatively. Groups are present in crafting recipes i
 "group": "slingshots"
 ```
 
-It is currently unknown what, if anything, this property achieves. Presumably, it would be used with the [recipe book](#recipe-book). Neither using new custom groups nor reusing groups from vanilla definitions appear to achieve anything.
+このプロパティが何をするのか、あるいは何もしないのかは、現在のところ不明です。おそらく [レシピブック](#recipe-book) と一緒に使うものだと思われますが、新しいカスタムグループを使っても、バニラ定義のグループを再利用しても、特に変化はないようです。
 
-### Priority
+### 優先度
 
-Crafting recipes support an additional property for handling input collisions, `"priority"`, which primarily acts as a [tiebreaker](#prioritization) when multiple recipes could possibly apply to the given situation. Priorities are provided directly within the crafting recipe type object.
+クラフトレシピは、入力の競合を処理するための追加プロパティ `"priority"` に対応しており、主に、複数のレシピがその状況に適用されうるときの [タイブレーク](#prioritization) として機能します。優先度は、クラフトレシピ型オブジェクト内で直接指定します。
 
 <CodeHeader>#/minecraft:recipe_shaped/</CodeHeader>
 
@@ -617,11 +617,11 @@ Crafting recipes support an additional property for handling input collisions, `
 "priority": 2
 ```
 
-Crafting recipes with lower priority values take precedence. So, if all else is equal, a recipe with a priority of `0` would be used over a recipe with priority `1`. Priorities may be negative if necessary. If `"priority"` is not provided, a priority of `0` is implied.
+優先度の値が低いクラフトレシピが優先されます。つまり、他の条件がすべて同じなら、優先度 `0` のレシピが優先度 `1` のレシピより使われます。必要なら優先度は負の値にできます。`"priority"` が指定されていない場合、優先度 `0` があるものとして扱われます。
 
-## Heating
+## 加熱
 
-Furnace recipes are used to transform an item using a heat source over a period of time. A slight misnomer, furnace recipes are used with any interface that involves a heat source, including campfires.
+かまどレシピは、熱源を使って一定時間かけてアイテムを変換するために使います。やや名乗りが不正確ですが、かまどレシピは焚き火を含む、熱源を使うあらゆるインターフェースで使われます。
 
 ![](furnace_recipe.png)
 
@@ -644,7 +644,7 @@ Furnace recipes are used to transform an item using a heat source over a period 
 }
 ```
 
-All vanilla heating blocks are supported via tags.
+すべてのバニラの加熱ブロックは、タグ経由でサポートされています。
 
 <CodeHeader>#/minecraft:recipe_furnace/</CodeHeader>
 
@@ -652,9 +652,9 @@ All vanilla heating blocks are supported via tags.
 "tags": ["furnace", "blast_furnace", "smoker", "campfire", "soul_campfire"]
 ```
 
-### Heating Transactions
+### 加熱トランザクション
 
-Furnace recipes bind exactly one input [item descriptor](#item-descriptors) to exactly one output item descriptor.
+かまどレシピは、ちょうど 1 つの入力 [item descriptor](#item-descriptors) を、ちょうど 1 つの出力 item descriptor に結び付けます。
 
 <CodeHeader>#/minecraft:recipe_furnace/</CodeHeader>
 
@@ -666,13 +666,13 @@ Furnace recipes bind exactly one input [item descriptor](#item-descriptors) to e
 }
 ```
 
-Any count given in the input is ignored. XP returns and fuel sources for a cooking and smelting recipe cannot be altered. The time required to heat an item is set by the used block and is unchangeable.
+入力に指定された count は無視されます。調理・精錬レシピの XP 返却量や燃料源は変更できません。アイテムを加熱するのに必要な時間は、使用するブロックで決まり、変更できません。
 
-## Brewing
+## 醸造
 
-Brewing recipes are used to transform an item using another item as a catalyst. Two brewing recipe types are available: [brewing mixes](#brewing-mixes), which do not transition data from input to output, and [brewing containers](#brewing-containers), which do.
+醸造レシピは、別のアイテムを触媒として使い、アイテムを変換するために使います。醸造レシピには 2 種類あり、入力から出力へ data を引き継がない [醸造ミックス](#brewing-mixes) と、引き継ぐ [醸造コンテナー](#brewing-containers) があります。
 
-Only one interface supports brewing recipes:
+醸造レシピに対応しているインターフェースは 1 つだけです。
 
 <CodeHeader>#/minecraft:recipe_brewing_container/</CodeHeader>
 
@@ -680,9 +680,9 @@ Only one interface supports brewing recipes:
 "tags": ["brewing_stand"]
 ```
 
-### Brewing Transactions
+### 醸造トランザクション
 
-Brewing transactions are similar to [heating transactions](#heating-transactions), requiring an input and output, each pointing to a single [item descriptor](#item-descriptors). Brewing recipes, however, also require the `"reagent"` property as a catalyst, which also can only point to a single item descriptor.
+醸造トランザクションは [加熱トランザクション](#heating-transactions) に似ており、入力と出力をそれぞれ 1 つの [item descriptor](#item-descriptors) で指定します。ただし醸造レシピでは、触媒として `"reagent"` プロパティも必要で、これも 1 つの item descriptor しか指定できません。
 
 <CodeHeader>#/minecraft:recipe_brewing_mix/</CodeHeader>
 
@@ -692,21 +692,21 @@ Brewing transactions are similar to [heating transactions](#heating-transactions
 "output": "wiki:insanity_resistance"
 ```
 
-Provided count values are ignored in these brewing properties. Items are meant to transform one at a time in a brew.
+これらの醸造プロパティでは、指定した count 値は無視されます。アイテムは 1 回の醸造で 1 つずつ変化することを意図しています。
 
 ::: warning
-If the input item for a brewing recipe has the ability to stack, the _entire_ stack will be consumed in the transformation. There are currently no workarounds to avoid this.
+醸造レシピの入力アイテムがスタック可能な場合、変換時にスタック _全体_ が消費されます。これを回避する方法は現在ありません。
 :::
 
-After the brewing time has passed, the catalyst is consumed, and output items directly replace input items.
+醸造時間が経過すると、触媒は消費され、出力アイテムが入力アイテムを直接置き換えます。
 
 ::: warning
-Currently, the stackability of the produced output is bugged, regardless of whether a data value was specified. In particular, the output is incompatible and will not stack with items of the same identifier and data value.
+現在、生成される出力のスタック可否には不具合があり、data 値を指定したかどうかに関係なく発生します。特に、出力は同じ識別子と data 値を持つアイテムと互換性がなく、スタックしません。
 :::
 
-### Brewing Mixes
+### 醸造ミックス
 
-Brewing mixes are simple brewing recipes theoretically designed to isolate the data value of the input from the data value of the output.
+醸造ミックスは、理論上は入力の data 値を出力の data 値から分離するように設計された、シンプルな醸造レシピです。
 
 ![](brewing_mix_recipe.png)
 
@@ -728,21 +728,21 @@ Brewing mixes are simple brewing recipes theoretically designed to isolate the d
 ```
 
 ::: warning
-Unfortunately, assigned data values are broken for brewing mix recipes.
+残念ながら、醸造ミックスレシピでは、割り当てた data 値に不具合があります。
 
-In general, a brewing recipe will never work if a data value is supplied to the input. The only exceptions are if the input is one of the following:
+一般に、入力に data 値が指定されていると、醸造レシピは動作しません。例外は、入力が次のいずれかの場合だけです。
 
 -   `minecraft:potion`
 -   `minecraft:splash_potion`
 -   `minecraft:lingering_potion`
 -   [Potion identifier additions](#identifier-additions)
 
-If a data value is specified for a reagent using the `"data"` property format, a brew occurs when any item with the given identifier is placed as a reagent for that recipe, regardless of data value. However, the brew only succeeds if the correct data value is matched. If it’s not, the brew will appear to succeed, but the input will not be transformed into the output; despite the brew failing, the reagent and a percentage of the blaze powder fuel are consumed anyway.
+`"data"` プロパティ形式で reagent に data 値を指定すると、そのレシピの reagent として該当識別子のアイテムが置かれたとき、data 値に関係なく醸造は発生します。ただし、正しい data 値が一致した場合にのみ成功します。一致しない場合、醸造は成功したように見えますが、入力は出力に変換されません。失敗しても、reagent と blaze powder 燃料の一定割合は消費されます。
 :::
 
-### Brewing Containers
+### 醸造コンテナー
 
-Brewing containers are designed to pass the data value of an input to the transformed output.
+醸造コンテナーは、入力の data 値を変換後の出力に引き継ぐように設計されています。
 
 ![](brewing_container_recipe.png)
 
@@ -763,32 +763,33 @@ Brewing containers are designed to pass the data value of an input to the transf
 }
 ```
 
-Brewing containers are stricter than [brewing mixes](#brewing-mixes) about their inputs. Only the following item types are allowed in a brewing container recipe:
+醸造コンテナーは、入力について [brewing mixes](#brewing-mixes) より厳格です。醸造コンテナーレシピで許可されるアイテム種別は、次のものだけです。
 
 -   `minecraft:potion`
 -   `minecraft:splash_potion`
 -   `minecraft:lingering_potion`
 -   [Potion identifier additions](#identifier-additions)
 
-Because the data value is carried downstream from input to output in a brewing container recipe, assigned data values in `"input"` and `"output"` are ignored.
+醸造コンテナーレシピでは data 値が入力から出力へ引き継がれるため、`"input"` と `"output"` に指定した data 値は無視されます。
 
-## Overrides
+## 上書き
 
-As with all domains in add-ons, the pack order in the behavior pack list affects how Minecraft chooses files to use during gameplay. Higher-listed behavior pack entries take priority over lower-listed ones, including the base vanilla pack.
+アドオンの他の領域と同様に、behavior pack の並び順は、ゲームプレイ中に Minecraft がどのファイルを使うかに影響します。リストの上にある behavior pack のエントリーは、下にあるものやベースのバニラパックより優先されます。
 
-To override a recipe in a lower-listed pack, the recipe type and identifiers must both match. The override file can be named and located in any way — only the contents matter. Partial overrides are not accepted in recipes; the entire recipe must be redefined.
+下位にあるパックのレシピを上書きするには、レシピ型と識別子の両方を一致させる必要があります。上書き用ファイルの名前や配置は自由で、内容だけが重要です。レシピでは部分的な上書きは認められず、レシピ全体を再定義する必要があります。
 
 ::: warning
-Overrides only work if the recipe type is an _exact_ match. In most cases, a mismatch results in a new recipe created alongside the existing one.
+上書きが機能するのは、レシピ型が _完全に_ 一致するときだけです。ほとんどの場合、不一致だと既存のものとは別に新しいレシピが作られます。
 
-If attempting to construct an override that converts between the two crafting recipe types, an error will be thrown. To circumvent this, first copy the vanilla definition into the pack. Next, set the `"tags"` for that file to `[""]`; this effectively disables the recipe. Finally, set up a new file as the other crafting recipe type, choosing a different identifier to avoid the error.
+2 つのクラフトレシピ型の間で変換する上書きを作ろうとすると、エラーになります。これを回避するには、まずバニラ定義をパックにコピーします。次に、そのファイルの `"tags"` を `[""]` に設定します。これでレシピは実質的に無効になります。最後に、別のクラフトレシピ型として新しいファイルを用意し、エラーを避けるために別の識別子を選びます。
 :::
 
-## Prioritization
+## 優先順位付け
 
-After considering [overrides](#overrides), if multiple recipes would apply based on the inputs, the outputs are selected using the following tiebreakers, considered in order:
+[上書き](#overrides) を考慮したうえで、入力に基づいて複数のレシピが適用される場合、出力は次のタイブレークを順に使って選ばれます。
 
 -   Recipes declared in higher-ordered packs in the world behavior packs list
 -   If for crafting recipes, _lower_-valued [priority properties](#priority)
 -   If for crafting recipes, [shaped recipes](#shaped-recipes) over [shapeless ones](#shapeless-recipes)
 -   "Lesser" identifiers, as interpreted by string comparison
+

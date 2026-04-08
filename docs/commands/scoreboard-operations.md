@@ -1,5 +1,5 @@
 ---
-title: Scoreboard Operations
+title: スコアボードの操作
 category: General
 tags:
     - easy
@@ -8,12 +8,12 @@ mentions:
     - Lufurrius
     - MedicalJewel105
     - Hatchibombotar
-description: Scoreboards can be used to perform complex operations, similar to MoLang. Operations come in two flavors - mathematical, and logical.
+description: スコアボードを使うと、Molang のような複雑な演算を行えます。演算には数学的なものと論理的なものの 2 種類があります。
 ---
 
-Scoreboards can be used to perform complex operations, similar to [Molang](/concepts/molang). Operations come in two flavors: mathematical, and logical.
+スコアボードを使うと、[Molang](/concepts/molang) のような複雑な演算を行えます。演算には数学的なものと論理的なものの 2 種類があります。
 
-## Overview
+## 概要
 
 Operations are performed using the `/scoreboard players operation` command. The full syntax is laid out below:
 
@@ -21,19 +21,19 @@ Operations are performed using the `/scoreboard players operation` command. The 
 /scoreboard players operation <targetScore> <objective> <operation> <sourceScore> <objective>
 ```
 
-The command consists of two score holders: The target score, and the source score. The target score is the value being operated on, and the source score is the value affecting the operation. The result of the operation is written into the target score, and the source score's value is not touched, save for [one operation](/commands/scoreboard-operations#swap-operator).
+このコマンドは 2 つのスコア保持者で構成されます。ターゲットスコアとソーススコアです。ターゲットスコアは操作対象の値、ソーススコアは操作に影響する値です。演算結果はターゲットスコアに書き込まれ、ソーススコアの値は [1 つの演算](/commands/scoreboard-operations#swap-operator) を除いて変更されません。
 
-## Mathematical Operators
+## 数学演算子
 
-Mathematical operators use arithmetic to affect the target score. There are five mathematical operations available: addition, subtraction, multiplication, floor division, and floor modulo division.
+数学演算子は、算術を使ってターゲットスコアに作用します。利用できる数学演算は 5 つあります。加算、減算、乗算、切り捨て除算、切り捨て剰余です。
 
 For each of the following examples below, assume that score holder `.A wiki:var` equals 25, and `.B wiki:var` equals 10.
 
-### Addition
+### 加算
 
 Operator: **+=**
 
-This operation adds the target score and source scores together, then stores the sum into the target score.
+この演算はターゲットスコアとソーススコアを足し合わせ、その合計をターゲットスコアに保存します。
 
 ```yaml
 /scoreboard players operation .A wiki:var += .B wiki:var
@@ -41,11 +41,11 @@ This operation adds the target score and source scores together, then stores the
 
 `.A = .A + .B`, and as such `25 + 10 = 35`.
 
-### Subtraction
+### 減算
 
 Operator: **-=**
 
-This operation subtracts the target score by the source score, then stores the difference into the target score.
+この演算はターゲットスコアからソーススコアを引き、その差をターゲットスコアに保存します。
 
 ```yaml
 /scoreboard players operation .A wiki:var -= .B wiki:var
@@ -53,11 +53,11 @@ This operation subtracts the target score by the source score, then stores the d
 
 `.A = .A - .B`, and as such `25 - 10 = 15`.
 
-### Multiplication
+### 乗算
 
 Operator: **\*=**
 
-This operation multiplies the target score by the source score, then stores the product into the target score.
+この演算はターゲットスコアにソーススコアを掛け、その積をターゲットスコアに保存します。
 
 ```yaml
 /scoreboard players operation .A wiki:var *= .B wiki:var
@@ -65,11 +65,11 @@ This operation multiplies the target score by the source score, then stores the 
 
 `.A = .A * .B`, and as such `25 * 10 = 250`.
 
-### Floored Division
+### 切り捨て除算
 
 Operator: **/=**
 
-This operation divides the target score by the source score, then stores the quotient into the target score. Because score values can only be integers, the value is floored, or rounded down.
+この演算はターゲットスコアをソーススコアで割り、その商をターゲットスコアに保存します。スコア値は整数しか扱えないため、値は切り捨てられます。
 
 ```yaml
 /scoreboard players operation .A wiki:var /= .B wiki:var
@@ -77,11 +77,11 @@ This operation divides the target score by the source score, then stores the quo
 
 `.A = floor(.A / .B)`, and as such `floor(25 / 10) = 2`.
 
-### Floored Modulo Division
+### 切り捨て剰余
 
 Operator: **%=**
 
-This operation also divides the target score by the source score, but instead returns the remainder after the division into the target score. This is also floored.
+この演算もターゲットスコアをソーススコアで割りますが、割り算の余りをターゲットスコアに保存します。これも切り捨てです。
 
 ```yaml
 /scoreboard players operation .A wiki:var %= .B wiki:var
@@ -89,17 +89,17 @@ This operation also divides the target score by the source score, but instead re
 
 `.A = floor(mod(.A, .B))`, and as such `floor(mod(25, 10)) = 5`.
 
-## Logical Operators
+## 論理演算子
 
-Logical operations use logic gates and assignments to affect the target score. There are four logical operations available: assignment, less than, greater than, and swap.
+論理演算は、論理ゲートと代入を使ってターゲットスコアに作用します。利用できる論理演算は 4 つあります。代入、小なり、大なり、入れ替えです。
 
 Similar to the above, assume that score holder `.A wiki:var` equals 25, and `.B wiki:var` equals 10.
 
-### Assignment Operator
+### 代入演算子
 
 Operator: **=**
 
-This operation sets the target score equal to the source score.
+この演算はターゲットスコアをソーススコアと同じ値にします。
 
 ```yaml
 /scoreboard players operation .A wiki:var = .B wiki:var
@@ -107,11 +107,11 @@ This operation sets the target score equal to the source score.
 
 `.A = .B`, and as such the result is `10`.
 
-### Minimum Operator
+### 最小演算子
 
 Operator: **<**
 
-This operation returns the smallest of the input scores, and stores it into the target score.
+この演算は入力スコアのうち最小のものを返し、ターゲットスコアに保存します。
 
 ```yaml
 /scoreboard players operation .A wiki:var < .B wiki:var
@@ -119,11 +119,11 @@ This operation returns the smallest of the input scores, and stores it into the 
 
 `.A = min(.A, .B)`, and as such `min(25, 10) = 10`.
 
-### Maximum Operator
+### 最大演算子
 
 Operator: **>**
 
-This operation returns the largest of the input scores, and stores it into the target score.
+この演算は入力スコアのうち最大のものを返し、ターゲットスコアに保存します。
 
 ```yaml
 /scoreboard players operation .A wiki:var > .B wiki:var
@@ -131,29 +131,29 @@ This operation returns the largest of the input scores, and stores it into the t
 
 `.A = max(.A, .B)`, and as such `max(25, 10) = 25`.
 
-### Swap Operator
+### 入れ替え演算子
 
 Operator: **><**
 
-This operation swaps the target score and source scores with each other. This is the only operation that affects the source score.
+この演算はターゲットスコアとソーススコアを入れ替えます。ソーススコアに影響するのはこの演算だけです。
 
 ```yaml
 /scoreboard players operation .A wiki:var >< .B wiki:var
 ```
 
-The above command would swap the values of .A and .B e.g.
+上のコマンドは、たとえば `.A` と `.B` の値を入れ替えます。
 
 Before: .A = 10; .B = 25;
 
 After: .A = 25; .B = 10;
 
-This can be seen as three operations: `.Temp = .A; .A = .B; .B = .Temp;`, and as such `.A wiki:var = 10` and `.B wiki:var = 25`.
+これは `.Temp = .A; .A = .B; .B = .Temp;` の 3 つの操作と考えられるため、`.A wiki:var = 10`、`.B wiki:var = 25` になります。
 
-## Useful Creations
+## 便利な作成例
 
-#### Check If Values are Equal
+#### 値が等しいか確認する
 
-If you want to check in scoreboard, whether one value equals another value, you can use the following command:
+スコアボードで 1 つの値が別の値と等しいかを確認したい場合は、次のコマンドを使えます。
 
 <CodeHeader></CodeHeader>
 
@@ -162,6 +162,6 @@ scoreboard objectives add wiki:temp dummy
 execute if score .Steve wiki:temp = .Alex wiki:temp run say Steve's score matches Alex's score.
 ```
 
-#### Scoreboard Initialization
+#### スコアボードの初期化
 
-If you want to initialize a scoreboard value to 0, but only if it doesn't exists, you can use `scoreboard players add <score holder> <objective> 0`. It will set the value to 0, if it doesn't exist on the entity and do nothing, if it already exist.
+スコアボードの値を 0 に初期化したいが、まだ存在しない場合にだけ行いたいなら、`scoreboard players add <score holder> <objective> 0` を使えます。対象に値がなければ 0 を設定し、すでに存在する場合は何もしません。

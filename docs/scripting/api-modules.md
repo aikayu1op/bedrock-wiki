@@ -1,5 +1,5 @@
 ---
-title: API Modules
+title: API モジュール
 category: General
 nav_order: 3
 mentions:
@@ -7,9 +7,9 @@ mentions:
     - conmaster2112
 ---
 
-## Overview
+## 概要
 
-Script API has modules for developers to interact with Minecraft. Additionally, manifest dependencies will need to be set based on the modules used within your add-on.
+Script API には、開発者が Minecraft とやり取りするための module があります。また、manifest の依存関係は、アドオン内で使う module に応じて設定する必要があります。
 
 | Module Name                         | UUID                                   | Previous Names Aliases          | First Module Version |
 | ----------------------------------- | -------------------------------------- | ------------------------------- | -------------------- |
@@ -23,61 +23,61 @@ Script API has modules for developers to interact with Minecraft. Additionally, 
 | `@minecraft/server-editor-bindings` | `8518d9c7-a1f5-4bf3-acc7-78e87df595fc` |                                 | `Engine 1.19.80`     |
 | `@minecraft/server-editor`          | `1d565354-296d-11ed-a261-0242ac120002` |                                 | `Engine 1.19.80`     |
 
-## Module Descriptions
+## Module の説明
 
 ### `@minecraft/common`
 
-Has few stable releases, this module can be imported without being mentioned in dependencies. It is a module with basic sources such as error classes or interfaces.
+stable release は少なめですが、この module は dependencies に書かなくても import できます。error class や interface のような基本要素を含む module です。
 
 ### `@minecraft/debug-utilities`
 
-An experimental module. This module provides debugging tools but should not be used in the public release of the addon.
+実験的な module です。デバッグ用ツールを提供しますが、アドオンの公開版では使わないほうがよいです。
 
 ### `@minecraft/server`
 
-Has a lot of stable releases, but is still being actively developed. The cornerstone for addons scripting on the server side, it is intended for interaction between the script engine and your world, such as blocks, entities, items, players, and other world resources.
+stable release は多いですが、今も活発に開発されています。サーバー側アドオン scripting の要であり、script engine とワールドの間で、ブロック、エンティティ、アイテム、プレイヤー、その他のワールドリソースをやり取りするための module です。
 
 ### `@minecraft/server-ui`
 
-A somewhat smaller module, but very useful for the interaction between the server and the end user of your package. This is a module that provides the possibility of sending data to the player through customizable forms.
+比較的小さな module ですが、サーバーとパッケージの最終利用者とのやり取りにとても役立ちます。カスタマイズ可能な form を通じてプレイヤーにデータを送る機能を提供します。
 
 ### `@minecraft/server-gametest`
 
-This is the oldest module that currently exists, yet there is not a single stable version of this module. This module is used to test vanilla experiments, for compatibility with other custom content, catching edge cases, or making sure repeatability is possible. This module is not intended for content creators and there is no need to guarantee backward compatibility with stable versions.
+現在存在する中で最も古い module ですが、stable 版は 1つもありません。vanilla の experiment のテスト、他の custom content との互換性確認、edge case の検出、再現性の確認などに使われます。content creator 向けではなく、stable 版との後方互換を保証する必要もありません。
 
 ### `@minecraft/server-net`
 
-This is a module that is only allowed on [Bedrock Dedicated Servers](https://www.minecraft.net/en-us/download/server/bedrock) because it could threaten the safety of the user of common addon packages. This is a module has access to the internet through web requests such as GET, SET, POST and others. This module exists only in experimental form.
+これは、一般的なアドオン利用者の安全を脅かす可能性があるため、[Bedrock Dedicated Servers](https://www.minecraft.net/en-us/download/server/bedrock) でのみ許可される module です。GET、SET、POST などの web request を通じて internet にアクセスできます。実験版のみ存在します。
 
 ### `@minecraft/server-admin`
 
-This module is also only allowed on [Bedrock Dedicated Servers](https://www.minecraft.net/en-us/download/server/bedrock). this module is responsible for processing basic data stored in JSON admin files, which is intended for setting the behavior of a pack without interfering with the original pack. This module exists only in experimental form.
+この module も [Bedrock Dedicated Servers](https://www.minecraft.net/en-us/download/server/bedrock) でのみ使えます。JSON admin files に保存された基本データを処理する役割があり、元の pack に干渉せずに pack の動作を設定するために使われます。実験版のみ存在します。
 
 ### `@minecraft/server-editor-bindings`
 
-This is a special set of native functions for the editor module, this module is undocumented and should not be used by creators, however this module can be imported if you reference it in dependencies but it can only be used in worlds that are created as editor projects.
+これは editor module 用の特別な native function 群です。未文書で、creator が使うべきものではありません。ただし dependencies に書けば import はできますが、editor project として作成されたワールドでしか使えません。
 
 ### `@minecraft/server-editor`
 
-This module is exceptional because its implementation is not native but it is a JS module, although it is implemented in JS so its existence is hardcoded, it can be referenced in dependencies but it can only be used in worlds that are created as editor projects.
+この module は例外的です。実装は native ではなく JS module です。JS で実装されていますが存在自体は hardcode されています。dependencies に書くことはできますが、editor project として作成されたワールドでしか使えません。
 
-## Alpha Versions
+## Alpha 版
 
-Alpha version is an outdated version of modules, this version should not be used in current addons and is marked as experimental, only two modules have this alpha version, `@minecraft/server` then known as `mojang-minecraft` and `@minecraft/server` -gametest`then known as`mojang-gametest`. If you want to try to use this version, keep in mind that they should only be imported under these names.
+Alpha 版は古い module 版で、現在のアドオンでは使うべきではなく、experimental 扱いです。Alpha 版があるのは 2つの module だけで、`@minecraft/server`（当時の名称は `mojang-minecraft`）と `@minecraft/server-gametest`（当時の名称は `mojang-gametest`）です。使う場合は、これらの名前でのみ import する必要があります。
 
 ### Alpha 2.X
 
-Now you can also notice the new alpha `2.X` series, but this is different from the original alpha version, but it is also an experimental version, but it can easily be imported under the names known today, keep in mind that this version breaks compatibility with the previous serial `1.X` .
+新しい alpha `2.X` 系列もありますが、これは元の alpha 版とは別物です。ただしこれも experimental 版で、現在知られている名前で簡単に import できます。この版は以前の `1.X` 系列との互換性を壊す点に注意してください。
 
-## Module Referencing
+## Module の参照
 
-Module referencing is required for ability to import module in your JS code.
+JS コード内で module を import するには、module の参照が必要です。
 
 ::: warning
-Do not use both `"uuid"` and `"module_name"` properties into dependency, pick one or the other.
+dependency では `"uuid"` と `"module_name"` を両方使わず、どちらか一方を選んでください。
 :::
 
-Example for `@minecraft/server` with version of `1.13.0`.
+`@minecraft/server` の version `1.13.0` の例です。
 
 <CodeHeader>BP/manifest.json#dependencies[0]</CodeHeader>
 
@@ -88,7 +88,7 @@ Example for `@minecraft/server` with version of `1.13.0`.
 }
 ```
 
-Required capability to mark your pack as Editor Extension, in that case editor modules are allowed.
+pack を Editor Extension として扱うために必要な capability です。この場合、editor module が許可されます。
 
 <CodeHeader>BP/manifest.json</CodeHeader>
 

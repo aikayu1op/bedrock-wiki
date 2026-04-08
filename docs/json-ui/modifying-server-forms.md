@@ -1,26 +1,26 @@
 ---
-title: Modifying Server Forms
+title: サーバーフォームの変更
 category: Tutorials
 tags:
     - intermediate
 mentions:
     - TheoristMC
-description: In this tutorial, you will learn how to efficiently modify server forms.
+description: このチュートリアルでは、サーバーフォームを効率よく変更する方法を学びます。
 ---
 
-## Introduction
+## はじめに
 
 :::warning
-This page is intended for people with a basic understanding of JSON-UI, you may check the [JSON UI Documentation](/json-ui/json-ui-documentation) if you haven't already.
+このページは、JSON-UI の基礎を理解している人向けです。まだ確認していなければ、[JSON UI Documentation](/json-ui/json-ui-documentation) を参照してください。
 :::
 
-When editing server forms, it's important to make sure they're compatible with each other. This tutorial will show you how to do just that.
+サーバーフォームを編集するときは、互いに互換性があることを確認するのが重要です。このチュートリアルでは、その方法を説明します。
 
-In this tutorial, we will be implementing this inside the `ui/server_form.json`.
+このチュートリアルでは、`ui/server_form.json` の中で実装します。
 
-### Action Form
+### アクションフォーム
 
-First we need to modify the controls of `main_screen_content` in order to add our custom made one.
+まず、独自に作成したフォームを追加するために `main_screen_content` の controls を変更します。
 
 <CodeHeader>RP/ui/server_form.json</CodeHeader>
 ```json
@@ -32,10 +32,10 @@ First we need to modify the controls of `main_screen_content` in order to add ou
         "operation": "insert_back",
         "value": [
           {
-            "wiki_server_form_factory": { // Name can be anything but cannot be the same as "server_form_factory"
+              "wiki_server_form_factory": { // 名前は何でもよいですが、"server_form_factory" と同じにはできません
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form
+                "name": "server_form_factory", // 必須です。この名前は long_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel"
                 }
@@ -49,7 +49,7 @@ First we need to modify the controls of `main_screen_content` in order to add ou
 }
 ```
 
-You can do this multiple times but it's advised to do it once since we can just reference a main panel inside `"long_form"` which contains all our custom made forms.
+これを複数回行うこともできますが、`"long_form"` 内でカスタムフォームをまとめた main panel を参照できるので、1 回だけにしておくのが推奨です。
 
 <CodeHeader>RP/ui/server_form.json</CodeHeader>
 ```json
@@ -61,10 +61,10 @@ You can do this multiple times but it's advised to do it once since we can just 
         "operation": "insert_back",
         "value": [
           {
-            "wiki_server_form_factory": { // Name can be anything but cannot be the same as "server_form_factory"
+            "wiki_server_form_factory": { // 名前は任意ですが、"server_form_factory" と同じにはできません
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form
+                "name": "server_form_factory", // 必須。この名前は long_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel"
                 }
@@ -72,10 +72,10 @@ You can do this multiple times but it's advised to do it once since we can just 
             }
           },
           {
-            "wiki_server_form_factory_2": { // Name can be anything but cannot be the same as "server_form_factory" or same as the sibling element
+            "wiki_server_form_factory_2": { // 名前は任意ですが、"server_form_factory" と同じにはできません or same as the sibling element
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form
+                "name": "server_form_factory", // 必須。この名前は long_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel_2"
                 }
@@ -89,20 +89,20 @@ You can do this multiple times but it's advised to do it once since we can just 
 }
 ```
 
-Now we need to define the element `"our_long_form_panel"` which contains our all custom made forms.
+次に、すべてのカスタムフォームを含む `"our_long_form_panel"` 要素を定義します。
 
 <CodeHeader>RP/ui/server_form.json</CodeHeader>
 ```json
 {
   "our_long_form_panel": {
-    "type": "panel", // We can use any types but we will use panels for simplicity
+    "type": "panel", // 任意の型を使えますが、ここでは分かりやすく panel を使います
     "bindings": [
       {
-        "binding_name": "#title_text" // We define the title text inside the parent so we don't need to call it every time we use it
+        "binding_name": "#title_text" // タイトルテキストを親側で定義しておくと、使うたびに呼び出さずに済みます
       }
     ],
     "controls": [
-      // You can reference your forms here but for now we will use an image of apple as an example
+      // ここにフォームを参照できますが、ここでは例としてリンゴの画像を使います
       {
         "our_custom_made_long_form": {
           "type": "image",
@@ -111,11 +111,11 @@ Now we need to define the element `"our_long_form_panel"` which contains our all
             32,
             32
           ],
-          "$title_needs_to_contain": "wiki_form:", // What the action form title needs to contain in order for this apple to show
+          "$title_needs_to_contain": "wiki_form:", // このリンゴを表示するために、アクションフォームのタイトルに含まれている必要がある文字列
           "bindings": [
             {
               "binding_type": "view",
-              "source_control_name": "our_long_form_panel", // The name of our parent where we could get the #title_text binding
+              "source_control_name": "our_long_form_panel", // #title_text バインディングを取得できる親の名前
               "source_property_name": "(not ((#title_text - $title_needs_to_contain) = #title_text))",
               "target_property_name": "#visible"
             }
@@ -131,10 +131,10 @@ Now we need to define the element `"our_long_form_panel"` which contains our all
         "operation": "insert_back",
         "value": [
           {
-            "wiki_server_form_factory": { // Name can be anything but cannot be the same as "server_form_factory"
+            "wiki_server_form_factory": { // 名前は任意ですが、"server_form_factory" と同じにはできません
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form
+                "name": "server_form_factory", // 必須。この名前は long_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel"
                 }
@@ -148,7 +148,7 @@ Now we need to define the element `"our_long_form_panel"` which contains our all
 }
 ```
 
-If you've tried this, you might notice it overlaps with the normal action form. To fix this, we need to define the binding in the normal long form as well.
+これを試すと、通常のアクションフォームと重なってしまうことがあります。これを直すには、通常のロングフォーム側にもバインディングを定義する必要があります。
 
 <CodeHeader>RP/ui/server_form.json</CodeHeader>  
 ```json
@@ -164,8 +164,8 @@ If you've tried this, you might notice it overlaps with the normal action form. 
           },
           {
             "binding_type": "view",
-            "source_property_name": "((#title_text - 'wiki_form:') = #title_text)", // We need to define the title we added on $title_needs_to_contain
-            // By the way, you can also put the title of your forms as much as you want like this -> (#title_text - 'form_1' - 'form_2' - 'form_3')
+            "source_property_name": "((#title_text - 'wiki_form:') = #title_text)", // $title_needs_to_contain で追加したタイトル条件をここでも定義します
+            // ちなみに、フォームタイトルはこのように複数指定できます -> (#title_text - 'form_1' - 'form_2' - 'form_3')
             "target_property_name": "#visible"
           }
         ]
@@ -173,14 +173,14 @@ If you've tried this, you might notice it overlaps with the normal action form. 
     ]
   },
   "our_long_form_panel": {
-    "type": "panel", // We can use any types but we will use panels for simplicity
+    "type": "panel", // 型は任意ですが、ここでは分かりやすさのため panel を使います
     "bindings": [
       {
-        "binding_name": "#title_text" // We define the title text inside the parent so we don't need to call it every time we use it
+        "binding_name": "#title_text" // タイトルテキストを親側で定義しておくと、使うたびに呼び出さずに済みます
       }
     ],
     "controls": [
-      // You can reference your forms here but for now we will use an image of apple as an example
+      // ここにフォームを参照できますが、ここでは例としてリンゴの画像を使います
       {
         "our_custom_made_long_form": {
           "type": "image",
@@ -189,11 +189,11 @@ If you've tried this, you might notice it overlaps with the normal action form. 
             32,
             32
           ],
-          "$title_needs_to_contain": "wiki_form:", // What the action form title needs to contain in order for this apple to show
+          "$title_needs_to_contain": "wiki_form:", // このリンゴを表示するために、アクションフォームのタイトルに含まれている必要がある文字列
           "bindings": [
             {
               "binding_type": "view",
-              "source_control_name": "our_long_form_panel", // The name of our parent where we could get the #title_text binding
+              "source_control_name": "our_long_form_panel", // #title_text バインディングを取得できる親の名前
               "source_property_name": "(not ((#title_text - $title_needs_to_contain) = #title_text))",
               "target_property_name": "#visible"
             }
@@ -209,10 +209,10 @@ If you've tried this, you might notice it overlaps with the normal action form. 
         "operation": "insert_back",
         "value": [
           {
-            "wiki_server_form_factory": { // Name can be anything but cannot be the same as "server_form_factory"
+            "wiki_server_form_factory": { // 名前は任意ですが、"server_form_factory" と同じにはできません
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form
+                "name": "server_form_factory", // 必須。この名前は long_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel"
                 }
@@ -226,13 +226,13 @@ If you've tried this, you might notice it overlaps with the normal action form. 
 }
 ```
 
-And there you have it, now it shows an image of an apple without it overlapping with the normal long form.
+これで、通常のロングフォームと重ならずにリンゴの画像が表示されるようになります。
 
-### Modal Forms
+### モーダルフォーム
 
-Editing the modal forms is the same as editing long form but we need to modify multiple things. Modal Forms are called Custom Forms inside `server_form.json`.
+モーダルフォームの編集はロングフォームの編集と同じですが、いくつかの部分を変更する必要があります。`server_form.json` 内ではモーダルフォームはカスタムフォームと呼ばれます。
 
-First we need to modify the controls of `main_screen_content` in order to add our custom made one.
+まず、独自に作成したフォームを追加するために `main_screen_content` の controls を変更します。
 
 <CodeHeader>RP/ui/server_form.json</CodeHeader>
 ```json
@@ -244,10 +244,10 @@ First we need to modify the controls of `main_screen_content` in order to add ou
         "operation": "insert_back",
         "value": [
           {
-            "wiki_server_form_factory": { // Name can be anything but cannot be the same as "server_form_factory"
+            "wiki_server_form_factory": { // 名前は任意ですが、"server_form_factory" と同じにはできません
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form and custom_form
+                "name": "server_form_factory", // 必須。この名前は long_form と custom_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel",
                   "custom_form": "@server_form.our_custom_form_panel"
@@ -262,7 +262,7 @@ First we need to modify the controls of `main_screen_content` in order to add ou
 }
 ```
 
-You can do this multiple times but it's advised to do it once since we can just reference a main panel inside `"custom_form"` which contains all our custom made forms.
+これを複数回行うこともできますが、`"custom_form"` 内でカスタムフォームをまとめた main panel を参照できるので、1 回だけにしておくのが推奨です。
 
 <CodeHeader>RP/ui/server_form.json</CodeHeader>
 ```json
@@ -274,10 +274,10 @@ You can do this multiple times but it's advised to do it once since we can just 
         "operation": "insert_back",
         "value": [
           {
-            "wiki_server_form_factory": { // Name can be anything but cannot be the same as "server_form_factory"
+            "wiki_server_form_factory": { // 名前は任意ですが、"server_form_factory" と同じにはできません
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form and custom_form
+                "name": "server_form_factory", // 必須。この名前は long_form と custom_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel",
                   "custom_form": "@server_form.our_custom_form_panel"
@@ -286,10 +286,10 @@ You can do this multiple times but it's advised to do it once since we can just 
             }
           },
           {
-            "wiki_server_form_factory_2": { // Name can be anything but cannot be the same as "server_form_factory" or same as the sibling element
+            "wiki_server_form_factory_2": { // 名前は任意ですが、"server_form_factory" と同じにはできません or same as the sibling element
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form and custom_form
+                "name": "server_form_factory", // 必須。この名前は long_form と custom_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel_2",
                   "custom_form": "@server_form.our_custom_form_panel_2"
@@ -304,20 +304,20 @@ You can do this multiple times but it's advised to do it once since we can just 
 }
 ```
 
-Now we need to define the element `"our_custom_form_panel"` which contains our all custom made forms.
+次に、すべてのカスタムフォームを含む `"our_custom_form_panel"` 要素を定義します。
 
 <CodeHeader>RP/ui/server_form.json</CodeHeader>
 ```json
 {
   "our_custom_form_panel": {
-    "type": "panel", // We can use any types but we will use panels for simplicity
+    "type": "panel", // 型は任意ですが、ここでは分かりやすさのため panel を使います
     "bindings": [
       {
-        "binding_name": "#title_text" // We define the title text inside the parent so we don't need to call it every time we use it
+        "binding_name": "#title_text" // タイトルテキストを親側で定義しておくと、使うたびに呼び出さずに済みます
       }
     ],
     "controls": [
-      // You can reference your forms here but for now we will use an image of apple as an example
+      // ここでフォームを参照できますが、ここでは例としてリンゴの画像を使います
       {
         "our_custom_made_custom_form": {
           "type": "image",
@@ -326,11 +326,11 @@ Now we need to define the element `"our_custom_form_panel"` which contains our a
             32,
             32
           ],
-          "$title_needs_to_contain": "wiki_form:", // What the modal form title needs to contain in order for this apple to show
+          "$title_needs_to_contain": "wiki_form:", // このリンゴを表示するために、モーダルフォームのタイトルに含まれている必要がある文字列
           "bindings": [
             {
               "binding_type": "view",
-              "source_control_name": "our_custom_form_panel", // The name of our parent where we could get the #title_text binding
+              "source_control_name": "our_custom_form_panel", // #title_text バインディングを取得できる親の名前
               "source_property_name": "(not ((#title_text - $title_needs_to_contain) = #title_text))",
               "target_property_name": "#visible"
             }
@@ -346,10 +346,10 @@ Now we need to define the element `"our_custom_form_panel"` which contains our a
         "operation": "insert_back",
         "value": [
           {
-            "wiki_server_form_factory": { // Name can be anything but cannot be the same as "server_form_factory"
+            "wiki_server_form_factory": { // 名前は任意ですが、"server_form_factory" と同じにはできません
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form and custom_form
+                "name": "server_form_factory", // 必須。この名前は long_form と custom_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel",
                   "custom_form": "@server_form.our_custom_form_panel"
@@ -364,7 +364,7 @@ Now we need to define the element `"our_custom_form_panel"` which contains our a
 }
 ```
 
-If you've tried this, you might notice it overlaps with the normal modal form. To fix this, we need to define the binding in the normal custom form as well.
+これを試すと、通常のモーダルフォームと重なってしまうことがあります。これを直すには、通常のカスタムフォーム側にもバインディングを定義する必要があります。
 
 <CodeHeader>RP/ui/server_form.json</CodeHeader>  
 ```json
@@ -380,8 +380,8 @@ If you've tried this, you might notice it overlaps with the normal modal form. T
           },
           {
             "binding_type": "view",
-            "source_property_name": "((#title_text - 'wiki_form:') = #title_text)", // We need to define the title we added on $title_needs_to_contain
-            // By the way, you can also put the title of your forms as much as you want like this -> (#title_text - 'form_1' - 'form_2' - 'form_3')
+            "source_property_name": "((#title_text - 'wiki_form:') = #title_text)", // $title_needs_to_contain で追加したタイトル条件をここでも定義します
+            // ちなみに、フォームタイトルはこのように複数指定できます -> (#title_text - 'form_1' - 'form_2' - 'form_3')
             "target_property_name": "#visible"
           }
         ]
@@ -389,14 +389,14 @@ If you've tried this, you might notice it overlaps with the normal modal form. T
     ]
   },
   "our_custom_form_panel": {
-    "type": "panel", // We can use any types but we will use panels for simplicity
+    "type": "panel", // 型は任意ですが、ここでは分かりやすさのため panel を使います
     "bindings": [
       {
-        "binding_name": "#title_text" // We define the title text inside the parent so we don't need to call it every time we use it
+        "binding_name": "#title_text" // タイトルテキストを親側で定義しておくと、使うたびに呼び出さずに済みます
       }
     ],
     "controls": [
-      // You can reference your forms here but for now we will use an image of apple as an example
+      // ここでフォームを参照できますが、ここでは例としてリンゴの画像を使います
       {
         "our_custom_made_custom_form": {
           "type": "image",
@@ -405,11 +405,11 @@ If you've tried this, you might notice it overlaps with the normal modal form. T
             32,
             32
           ],
-          "$title_needs_to_contain": "wiki_form:", // What the modal form title needs to contain in order for this apple to show
+          "$title_needs_to_contain": "wiki_form:", // このリンゴを表示するために、モーダルフォームのタイトルに含まれている必要がある文字列
           "bindings": [
             {
               "binding_type": "view",
-              "source_control_name": "our_custom_form_panel", // The name of our parent where we could get the #title_text binding
+              "source_control_name": "our_custom_form_panel", // #title_text バインディングを取得できる親の名前
               "source_property_name": "(not ((#title_text - $title_needs_to_contain) = #title_text))",
               "target_property_name": "#visible"
             }
@@ -425,10 +425,10 @@ If you've tried this, you might notice it overlaps with the normal modal form. T
         "operation": "insert_back",
         "value": [
           {
-            "wiki_server_form_factory": { // Name can be anything but cannot be the same as "server_form_factory"
+            "wiki_server_form_factory": { // 名前は任意ですが、"server_form_factory" と同じにはできません
               "type": "panel",
               "factory": {
-                "name": "server_form_factory", // Required, this name is bound to the data given to long_form and custom_form
+                "name": "server_form_factory", // 必須。この名前は long_form と custom_form に渡されるデータに紐づきます
                 "control_ids": {
                   "long_form": "@server_form.our_long_form_panel",
                   "custom_form": "@server_form.our_custom_form_panel"
@@ -443,4 +443,4 @@ If you've tried this, you might notice it overlaps with the normal modal form. T
 }
 ```
 
-And there you have it, now it shows an image of an apple without it overlapping with the normal custom form.
+これで、通常のカスタムフォームと重ならずにリンゴの画像が表示されるようになります。

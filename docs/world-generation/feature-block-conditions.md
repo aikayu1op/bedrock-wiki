@@ -1,5 +1,5 @@
 ---
-title: Block Conditions for Features
+title: Feature のブロック条件
 category: Tutorials
 tags:
     - experimental
@@ -7,20 +7,20 @@ mentions:
     - PavelDobCZ23
     - SmokeyStack
     - ThomasOrs
-description: Learn how to use block conditions.
+description: ブロック条件の使い方を学びます。
 ---
 
-Sometimes you might need to place any feature conditionally depending on what blocks are below or above it for example. Not many features have the option to conditionally place them like so, but with a simple trick we can use it on anything we want.
+たとえば、下や上にあるブロックに応じて feature を条件付きで配置したいことがあります。こんなふうに条件付きで配置できる feature は多くありませんが、簡単な工夫を使えば、どんな feature にでも応用できます。
 
 :::tip
 This technique utilizes `aggregate_feature` and `single_block_feature` features. If you want to learn more about those, visit [Feature Types](/world-generation/feature-types) article.
 :::
 
-## Files
+## ファイル
 
-### Features
+### Feature
 
-This feature places a `single_block_feature` which can be specified with the conditions we need for some other feature. The block can be kept there if it doesn't interrupt your desired features, but we will replace it with air in the next feature so that it doesn't cause any issues later on. This feature acts as a "dummy" feature because we only want its condition part but we don't need it to actually place anything.
+この feature は、別の feature に必要な条件を指定できる `single_block_feature` を配置します。目的の feature を邪魔しないならそのままでも構いませんが、後で問題にならないよう、次の feature で空気に置き換えます。この feature は、実際に何かを置く必要はなく、条件部分だけが欲しいので「ダミー」feature として機能します。
 
 <CodeHeader>BP/features/block_condition_feature.json</CodeHeader>
 
@@ -44,7 +44,7 @@ This feature places a `single_block_feature` which can be specified with the con
 //This "dummy" feature will only allow the feature to generate in the air, right above a grass block.
 ```
 
-This next feature is the one that is going to replace the cobblestone with the original air block that was there, however it can be omitted if you choose a block you actually want there or if it won't cause you any issues later.
+次の feature は、コブルストーンを元々そこにあった空気ブロックに置き換えるものです。ただし、そこに実際に置きたいブロックを選ぶ場合や、後で問題にならない場合は省略できます。
 
 <CodeHeader>BP/features/block_replacement_feature.json</CodeHeader>
 
@@ -64,7 +64,7 @@ This next feature is the one that is going to replace the cobblestone with the o
 //This feature will replace the block with air that originally was there so it won't cause us any issue.
 ```
 
-This is a feature that places the condition "dummy" feature, the feature that gets rid of the "dummy" block placed by the condition and after that the actual features we want to conditionally place. It uses `early_out` with value `first_failure` to make the aggregate stop if the conditional placement fails. It is the feature placed by a feature rule.
+これは、条件付きの「ダミー」feature を置き、その後に条件で置かれた「ダミー」ブロックを取り除き、さらに本当に条件付きで置きたい feature を配置するための feature です。`early_out` に `first_failure` を指定し、条件付き配置が失敗したら aggregate を止めるようにしています。これは feature rule から配置される feature です。
 
 <CodeHeader>BP/features/aggregate_placement_rock_feature.json</CodeHeader>
 
@@ -87,7 +87,7 @@ This is a feature that places the condition "dummy" feature, the feature that ge
 //This is a feature that places all the features one by one in order and is placed by the feature rule.
 ```
 
-This is the actual feature we want to be conditionally placed. It is `ore_feature` which doesn't have actual condition for us to allow it to only be placed in air and on a grass block, so this technique has helped us achieve that.
+これが、実際に条件付きで配置したい feature です。`ore_feature` には、空気中かつ草ブロックの上だけに配置するための条件が直接ないので、この手法でそれを実現しています。
 
 <CodeHeader>BP/features/rock_ore_feature.json</CodeHeader>
 
@@ -174,12 +174,12 @@ If you want to learn more about ore features, you can visit [Generating Custom O
 }
 ```
 
-## Summary
+## まとめ
 
-After reading this tutorial you should be able to use block conditions on any feature you want. This was a very basic example as this can be used for far more complex creations and can be used with any feature.
+このチュートリアルを読めば、任意の feature にブロック条件を使えるようになっているはずです。これは非常に基本的な例ですが、もっと複雑な作成にも使え、あらゆる feature に応用できます。
 
-Like that we have made a rock feature that can only be placed in air blocks and above grass blocks.
+こうして、空気ブロック内かつ草ブロックの上にだけ配置できる rock feature を作成しました。
 
-Generation screenshot:
+生成スクリーンショット:
 
 ![](rock_feature.png)

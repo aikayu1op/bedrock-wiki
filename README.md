@@ -1,35 +1,35 @@
 # Bedrock Wiki
 
-Welcome to the GitHub repository for the Bedrock Wiki!
+Bedrock Wiki の GitHub リポジトリへようこそ。
 
-🔗 [View the Site](https://wiki.bedrock.dev/) 🔗
+🔗 [サイトを見る](https://wiki.bedrock.dev/) 🔗
 
-✉️ [Join the Discord](https://discord.gg/XjV87YN) ✉️
+✉️ [Discord に参加する](https://discord.gg/XjV87YN) ✉️
 
-This wiki is a knowledge-sharing website for technical features of Minecraft Bedrock, containing documentation, tutorials, and general how-to information.
+この wiki は Minecraft Bedrock の技術的な機能を共有するためのサイトで、ドキュメント、チュートリアル、一般的な手順解説を掲載しています。
 
-## Contributing
+## 貢献する
 
-Have you found a typo, been frustrated by an overly complicated guide or just want to write your own guide to help other users create their own add-ons?
-Well, you've come to the right place!
+誤字を見つけた、複雑すぎるガイドに困った、あるいは他のユーザーが自分のアドオンを作る助けになるガイドを書いてみたい、そんなことはありませんか？
+それなら、ここがぴったりです。
 
-Our Bedrock Wiki is fully open-source and is maintained by our lovely community, which keeps growing!
-If you want to be part of this community, get help on add-ons or just want to expand our wiki, you can join our Discord servers:
+Bedrock Wiki は完全にオープンソースで、成長を続ける素敵なコミュニティによって保守されています。
+このコミュニティに参加したい、アドオンの助けが欲しい、あるいは wiki をもっと広げたいなら、Discord サーバーに参加できます。
 
--   [Bedrock OSS](https://discord.gg/XjV87YN) — for wiki contributing and cool projects,
--   [Bedrock Add-Ons](https://discord.gg/pytC8zKHPn) — for help with add-ons.
+-   [Bedrock OSS](https://discord.gg/XjV87YN) - wiki への貢献やクールなプロジェクト向け
+-   [Bedrock Add-Ons](https://discord.gg/pytC8zKHPn) - アドオンのサポート向け
 
-If you want to help us create more complex things, like adding a new page or fixing some typos yourself, we have a dedicated [contributing guide](https://wiki.bedrock.dev/contribute) on our wiki which describes every step you need to follow.
-If you have some questions, there are some really nice people in our [Discord server](https://discord.gg/XjV87YN).
+新しいページを追加したり、誤字を自分で直したりといった、もう少し複雑な作業を手伝いたい場合は、wiki 内に専用の [貢献ガイド](https://wiki.bedrock.dev/contribute) があります。そこに、従うべき手順がすべて書かれています。
+質問があれば、[Discord サーバー](https://discord.gg/XjV87YN) に親切な人たちがいます。
 
-### Code & Platform
+### コードとプラットフォーム
 
-The wiki uses a custom [VitePress theme](https://vitepress.dev), and is statically generated from the `wiki` branch to the `generated` branch.
+この wiki はカスタムの [VitePress テーマ](https://vitepress.dev) を使っており、`wiki` ブランチから `generated` ブランチへ静的生成されています。
 
-If you are interested in helping us maintain the core platform, as opposed to the Markdown articles, [join the Discord](https://discord.gg/XjV87YN)!
+Markdown 記事ではなく、基盤となるプラットフォームの保守に興味があるなら、[Discord に参加](https://discord.gg/XjV87YN) してください。
 
-### Running Locally
+### ローカルでの実行
 
 -   `npm install`
--   `npm run dev` (run in dev mode)
--   `npm run build` (test a release mode bundle)
+-   `npm run dev` (開発モードで実行)
+-   `npm run build` (リリースモードのバンドルをテスト)

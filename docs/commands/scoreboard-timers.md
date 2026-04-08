@@ -1,32 +1,32 @@
 ---
-title: Scoreboard Timers
+title: スコアボードタイマー
 category: Scoreboard Systems
 mentions:
     - BedrockCommands
     - zheaEvyline
 nav_order: 5
-description: Create world timers or entity timers using scoreboards.
+description: スコアボードを使ってワールドタイマーやエンティティタイマーを作成します。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-This system allows you to run your desired commands at precise intervals, allowing for customizable delays as per your requirements.
+このシステムを使うと、目的のコマンドを正確な間隔で実行でき、必要に応じて遅延を自由に調整できます。
 
-**Some Examples:**
+**例:**
 
--   Sending a message in chat every 2 hours.
--   Running a 'lag clear' function every 10 minutes.
--   Effecting players with 'speed' every 30 seconds.
+-   2 時間ごとにチャットメッセージを送る。
+-   10 分ごとに 'lag clear' 関数を実行する。
+-   30 秒ごとにプレイヤーに 'speed' を付与する。
 
-This system is particularly useful for managing multiple timers in your world. When working with command blocks, you may use the [Tick Delay](/commands/intro-to-command-blocks#command-block-tick-delay) option to delay the time taken for your commands to run. However, when working with functions, you will need to use a system like this.
+このシステムは、ワールド内で複数のタイマーを管理するときに特に便利です。コマンドブロックでは [Tick Delay](/commands/intro-to-command-blocks#command-block-tick-delay) を使ってコマンド実行を遅らせられますが、関数を使う場合はこのようなシステムが必要になります。
 
-It is recommended to use this system while working with command blocks, as well if you wish to run all your world-timers in sync with one another, i.e., with the same start time.
+コマンドブロックを使う場合でも、このシステムを使うのがおすすめです。ワールドのタイマーをすべて同じ開始時刻で同期させたいときにも役立ちます。
 
-## Setup
+## セットアップ
 
-_Type the following commands in Chat:_
+_チャットに次のコマンドを入力します。_
 
 <CodeHeader></CodeHeader>
 
@@ -35,9 +35,9 @@ _Type the following commands in Chat:_
 /scoreboard objectives add wiki:events dummy
 ```
 
-After creating these objectives, the next step is to define the interval for each repeating event using the `ticks` objective.
+これらの目標を作成したら、次は `ticks` 目標を使って各繰り返しイベントの間隔を定義します。
 
-To do that, first, you must know that 1 second is approximately 20 game-ticks in Minecraft. Based on this knowledge, you will need to do some basic calculations to obtain the equivalent ticks for each interval you want to define.
+そのためには、まず Minecraft では 1 秒がおよそ 20 ゲームティックであることを知っておく必要があります。この知識をもとに、定義したい各間隔に対応するティック数を基本的な計算で求めます。
 
 <CodeHeader></CodeHeader>
 
@@ -52,65 +52,65 @@ To do that, first, you must know that 1 second is approximately 20 game-ticks in
 /scoreboard players set .30s wiki:ticks 600
 ```
 
-With the scoreboard data set, we can now operate our timers based on the intervals defined.
+スコアボードのデータを設定できたので、ここからは定義した間隔に基づいてタイマーを動かせます。
 
-## System
+## システム
 
 <CodeHeader>BP/functions/wiki/scoreboard/world_timer.mcfunction</CodeHeader>
 
 ```yaml
-## World Timer/Clock
+## ワールドタイマー / 時計
 ### Increment +1 tick
 scoreboard players add .Timer wiki:ticks 1
 ### Apply current ticks passed to all events
 scoreboard players operation * wiki:events = .Timer wiki:ticks
 
-## Chat Message (every 2h)
+## チャットメッセージ（2 時間ごと）
 scoreboard players operation .ChatMessage wiki:events %= .2h wiki:ticks
 execute if score .ChatMessage wiki:events matches 0 run say Technoblade never dies!
 
-## Lag Clear (every 10m)
+## ラグクリア（10 分ごと）
 scoreboard players operation .LagClear wiki:events %= .10m wiki:ticks
 execute if score .LagClear wiki:events matches 0 run function clear_lag
 
-## Speed Effect (every 30s)
+## スピード効果（30 秒ごと）
 scoreboard players operation .SpeedEffect wiki:events %= .30s wiki:ticks
 execute if score .SpeedEffect wiki:events matches 0 run effect @a speed 10 2 true
 ```
 
 ![Chain of 8 Command Blocks](/assets/images/commands/command-block-chain/8.png)
 
-Here, we have taken 3 examples to show how to implement them, but you can add any timer you prefer and as many as you need.
+ここでは実装例として 3 つ挙げていますが、好きなタイマーを必要な数だけ追加できます。
 
-Just make sure to follow the given order and properly apply the `/execute if score` condition as shown for your desired commands.
+ただし、必ず示された順序を守り、目的のコマンドには `/execute if score` 条件を正しく適用してください。
 
-## Explanation
+## 解説
 
-**`wiki:events`** — On this objective, we label all the repeating events we want on our world:
+**`wiki:events`** — この目標では、ワールドで使いたい繰り返しイベントをすべてラベル付けします。
 
 -   `.ChatMessage`
 -   `.LagClear`
 -   `.SpeedEffect`
 
-_Note: All 3 are score holders in the objective._
+_注: これら 3 つはすべて、その目標内のスコア保持者です。_
 
-**`wiki:ticks`** — On this objective, we define all the intervals for our events and also run our scoreboard timer:
+**`wiki:ticks`** — この目標では、イベントの間隔を定義し、スコアボードタイマーも動かします。
 
 -   `.2h` interval (static score: 144000)
 -   `.10m` interval (static score: 12000)
 -   `.30s` interval (static score: 600)
 -   `.Timer` clock (variable score: n+1)
 
-_Note: All 4 are score holders in the objective._
+_注: これら 4 つはすべて、その目標内のスコア保持者です。_
 
-**Command 1:** This command adds +1 score every tick to the score holder `.Timer` indicating a tick has passed in the game. This is basically our scoreboard timer/clock which we will use for all the repeating events on our world.
+**コマンド 1:** このコマンドは、スコア保持者 `.Timer` に毎ティック +1 を加え、ゲーム内で 1 ティック経過したことを示します。これが、ワールド上のすべての繰り返しイベントに使うスコアボードタイマー / 時計です。
 
-**Command 2:** Here, we copy '.Timer' score to all our events using the `*` wildcard selector. This will allow us to perform operations to determine if the interval has been reached to run the commands for that particular event. Example:
+**コマンド 2:** ここでは、`*` ワイルドカードセレクターを使って `.Timer` のスコアをすべてのイベントにコピーします。これにより、各イベントの間隔に達したかどうかを判定できます。例:
 
--   If `.Timer` score is 1200, it means 1200 game-ticks have passed.
--   This command makes it so all our events score holders (`.ChatMessage`, `.LagClear`, `.SpeedEffect`) scores are also 1200.
+-   `.Timer` のスコアが 1200 なら、1200 ゲームティックが経過したことを意味します。
+-   このコマンドにより、すべてのイベントのスコア保持者（`.ChatMessage`、`.LagClear`、`.SpeedEffect`）のスコアも 1200 になります。
 
-**Command 3:** We will use the `%=` modulo operation to check if our event scores are divisible by their assigned interval. i.e., if the remainder is equal to 0.
+**コマンド 3:** `%=` の剰余演算を使い、イベントスコアが割り当てられた間隔で割り切れるかを確認します。つまり、余りが 0 かどうかを見ます。
 
 -   Chat Message: `1200/144000`
     -   Q=0, R=1200 — _interval not reached._
@@ -120,17 +120,17 @@ _Note: All 4 are score holders in the objective._
     -   Q=2, R=0 — _interval reached._
     -   Hence, commands for the `.SpeedEffect` event can be executed.
 
-Here, we can note that the `.ChatMessage` and `.LagClear` events are yet to happen, but the `.SpeedEffect` event is happening for the second time.
+ここでは、`.ChatMessage` と `.LagClear` のイベントはまだ発生しておらず、`.SpeedEffect` のイベントは 2 回目の発生です。
 
-Note: In Minecraft, scoreboard division is floored, i.e., it's only calculated up to whole numbers and decimal values are ignored.
+注: Minecraft のスコアボード除算は切り捨てです。つまり、小数点以下は無視され、整数だけで計算されます。
 
-**Command 4:** the remainder obtained from the calculation is applied to the corresponding event's score holder. Based on this knowledge, we can run our commands if it's score is equal to `0`.
+**コマンド 4:** 計算で得られた余りを、対応するイベントのスコア保持者に適用します。これを使って、スコアが `0` のときにコマンドを実行できます。
 
-The remaining commands follow the same structure, with only the event labels and interval durations modified.
+残りのコマンドも同じ構造で、イベント名と間隔だけが変わります。
 
-## Defining Events with Limited Occurrences
+## 回数制限付きイベントの定義
 
-To limit how many times an event occurs, you need to create a new objective called `wiki:occurrences` and define how many times that event should occur, as shown below.
+イベントの発生回数を制限するには、`wiki:occurrences` という新しい目標を作成し、以下のようにそのイベントが何回起きるかを定義します。
 
 <CodeHeader></CodeHeader>
 
@@ -140,23 +140,23 @@ To limit how many times an event occurs, you need to create a new objective call
 /scoreboard players set .SpeedEffect wiki:occurrences 10
 ```
 
-Once you have done that, modify your system as shown below.
+それができたら、以下のようにシステムを修正します。
 
 <CodeHeader>BP/functions/wiki/scoreboard/world_timer.mcfunction</CodeHeader>
 
 ```yaml
-## World Timer/Clock
-### Increment +1 tick
+## ワールドタイマー / 時計
+### +1 ティック加算
 scoreboard players add .Timer wiki:ticks 1
-### Apply current time to all events
+### 現在の経過時間をすべてのイベントに適用
 scoreboard players operation * wiki:events = .Timer wiki:ticks
 
-## Chat Message (every 10m)
+## チャットメッセージ（10 分ごと）
 scoreboard players operation .ChatMessage wiki:events %= .2h wiki:ticks
 execute if score .ChatMessage wiki:events matches 0 if score .ChatMessage wiki:occurrences matches 1.. run say Technoblade never dies!
 execute if score .ChatMessage wiki:events matches 0 if score .ChatMessage wiki:occurrences matches 1.. run scoreboard players remove .ChatMessage wiki:occurrences 1
 
-## Speed Effect (every 30s)
+## スピード効果（30 秒ごと）
 scoreboard players operation .SpeedEffect wiki:events %= .30s wiki:ticks
 execute if score .SpeedEffect wiki:events matches 0 if score .SpeedEffect wiki:occurrences matches 1.. run effect @a speed 10 2 true
 execute if score .SpeedEffect wiki:events matches 0 if score .SpeedEffect wiki:occurrences matches 1.. run scoreboard players remove .SpeedEffect wiki:occurrences 1
@@ -164,9 +164,9 @@ execute if score .SpeedEffect wiki:events matches 0 if score .SpeedEffect wiki:o
 
 ![Chain of 8 Command Blocks](/assets/images/commands/command-block-chain/8.png)
 
-## Executing Commands During Intervals
+## 間隔中にコマンドを実行する
 
-To run commands continuously between the intervals of an event, you may use the technique shown below.
+イベントの間隔の間ずっとコマンドを継続実行したい場合は、以下の手法を使えます。
 
 <CodeHeader></CodeHeader>
 
@@ -178,15 +178,15 @@ execute if score .SpeedEffect wiki:events matches 0 if score .SpeedEffect wiki:o
 execute if score .SpeedEffect wiki:events matches 0 if score .SpeedEffect wiki:occurrences matches 1.. run scoreboard players remove .SpeedEffect wiki:occurrences 1
 ```
 
-As shown in line 3, to run commands while the timer is running, all you need to do is remove the `if score` condition testing if all occurrences took place. And instead, only test if any occurrence remains, to run our commands.
+3 行目にあるように、タイマーが動いている間にコマンドを実行したいなら、`if score` のうち「すべての発生が終わったか」を確認する条件を外すだけです。その代わり、発生回数がまだ残っているかだけを確認します。
 
-Let's say we had set the `wiki:occurrences` for this event to `10`. Then players would've also had a particle trail for 300 seconds as repeating a 30s event 10 times will total 300 seconds.
+たとえば、このイベントの `wiki:occurrences` を `10` に設定したとします。その場合、30 秒のイベントを 10 回繰り返すので、合計 300 秒の粒子トレイルが表示されます。
 
-## Entity Timers
+## エンティティタイマー
 
-In some cases, such as an entity despawn event, you will need to run timers for each entity separately rather than a synchronized timer which could cause the event to trigger too soon. In such cases, an Async Timer can be helpful.
+エンティティのデスポーンイベントのような場合は、同期タイマーではイベントが早すぎるタイミングで発火してしまうことがあるため、各エンティティごとに別々のタイマーを動かす必要があります。そのようなときは Async Timer が役立ちます。
 
-Let's say we want to perform the following actions:
+たとえば、次のような処理をしたいとします。
 
 1. kill all entities named "wiki:station" 5 minutes after they've been summoned.
 2. play a shulker particle around them during that timeframe.
@@ -198,28 +198,28 @@ Let's say we want to perform the following actions:
 <CodeHeader>BP/functions/wiki/scoreboard/players/entity_timer.mcfunction</CodeHeader>
 
 ```yaml
-## Running the Timer
+## タイマーを動かす
 scoreboard players add @e[name="wiki:station",scores={wiki:ticks=0..}] wiki:ticks 1
 
-# Executing Commands While Timer Is Running
+# タイマー動作中にコマンドを実行
 execute as @e[name="wiki:station",scores={wiki:ticks=0..}] at @s run particle minecraft:shulker_bullet ~~~
 
-# Executing Commands Within a Timeframe
+# ある期間内にコマンドを実行
 execute as @e[name="wiki:station",scores={wiki:ticks=0..200}] at @s run particle minecraft:basic_flame_particle ~~~
 
-# Executing Commands at Precise Intervals
+# 正確な間隔でコマンドを実行
 execute as @e[name="wiki:station",scores={wiki:ticks=3600}] at @s run playsound note.pling @a[r=10]
 
-# Stopping the Timer
+# タイマーを停止
 execute as @e[name="wiki:station"] at @s if entity @e[family=pacified,r=10,c=1] run scoreboard players set @s ticks -1
 
-# Looping the Timer
+# タイマーをループ
 execute as @e[name="wiki:station",scores={wiki:ticks=6000}] at @s if entity @e[family=monster,r=10,c=1] run scoreboard players set @s ticks 0
 
-# End of Timer
+# タイマー終了
 kill @e[name="wiki:station",scores={wiki:ticks=6000}]
 ```
 
 ![Chain of 7 Command Blocks](/assets/images/commands/command-block-chain/7.png)
 
-As shown, setting the score to `0` when it completes the timeframe will loop the timer. And setting the score to `-1` will stop/disable it. You can still set the score to `0` to start the timer again.
+示したとおり、期間が終わったときにスコアを `0` にするとタイマーはループします。`-1` にすると停止 / 無効化できます。再度 `0` に設定すれば、また開始できます。

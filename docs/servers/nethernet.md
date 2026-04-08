@@ -1,25 +1,25 @@
 ---
-title: NetherNet Protocol
+title: NetherNet プロトコル
 category: Protocols
 mentions:
     - theaddonn
     - bedrock-crustaceans
-description: NetherNet protocol for Bedrock.
+description: Bedrock 向けの NetherNet プロトコルです。
 ---
 
-Minecraft Bedrock uses multiple different protocols under the hood, one of them is NetherNet.
-NetherNet is the main protocol used for xbox live sessions, and is based on web-rtc.
+Minecraft Bedrock は内部で複数の異なるプロトコルを使っており、その 1 つが NetherNet です。
+NetherNet は xbox live セッションで使われる主要プロトコルで、web-rtc を基盤としています。
 
 ::: tip
-NetherNet is quite new and not finished, it is not as well known and understood as RakNet is.
+NetherNet はかなり新しく、まだ完成していません。RakNet ほどよく知られておらず、理解も進んでいません。
 :::
 
-Since we do not know too much about NetherNet, I can only refer to the [documentation made by df-mc](https://github.com/df-mc/nethernet-spec).
+NetherNet についてはまだわかっていないことが多いため、[df-mc が作成したドキュメント](https://github.com/df-mc/nethernet-spec) を参照することしかできません。
 
-## Implementations
+## 実装
 
-Not everything can be explained in great detail via documentation, that's why looking at existing implementations is very helpful.
-Here is list of NetherNet implementations
+ドキュメントだけですべてを細かく説明することはできないため、既存実装を見るのがとても役立ちます。
+NetherNet の実装一覧はこちらです。
 
 | Name                                                                              | Description                                                       | Language               |
 | --------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ---------------------- |
@@ -27,4 +27,4 @@ Here is list of NetherNet implementations
 | [bedrock-crustaceans/nethernet](https://github.com/bedrock-crustaceans/nethernet) | NetherNet implementation in Rust                                  | Rust                   |
 | [node-nethernet](https://github.com/PrismarineJS/node-nethernet)                  | NetherNet implementation in NodeJS                                | JavaScript, TypeScript |
 
-This page is a WIP, feel free to contribute as it is still being worked on.
+このページは作成中です。まだ作業中なので、ぜひ貢献してください。

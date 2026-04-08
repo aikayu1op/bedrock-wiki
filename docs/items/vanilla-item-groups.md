@@ -1,6 +1,6 @@
 ---
-title: Vanilla Item Groups
-description: Learn about the expandable item catalog groups included in each category of the vanilla creative menu.
+title: バニラのアイテムグループ
+description: バニラのクリエイティブメニュー各カテゴリに含まれる、展開可能なアイテムカタロググループについて学びます。
 category: Documentation
 related:
     - /items/item-catalog
@@ -9,21 +9,21 @@ mentions:
     - QuazChick
 ---
 
-Under each heading on this page, you will find a list of the expandable item groups included in that category of the vanilla creative menu.
-By default, the groups are sorted in the order that they appear in-game.
+このページの各見出しの下には、そのカテゴリに含まれる展開可能なアイテムグループの一覧があります。
+既定では、グループはゲーム内に表示される順で並んでいます。
 
-## Construction
+## 建築
 
 <Table data="construction_groups.json" />
 
-## Equipment
+## 装備
 
 <Table data="equipment_groups.json" />
 
-## Items
+## アイテム
 
 <Table data="items_groups.json" />
 
-## Nature
+## 自然
 
 <Table data="nature_groups.json" />

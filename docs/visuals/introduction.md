@@ -1,5 +1,5 @@
 ---
-title: Introduction to Entity Visuals
+title: エンティティのビジュアル入門
 nav_order: 1
 tags:
     - guide
@@ -8,10 +8,10 @@ mentions:
     - SirLich
     - MedicalJewel105
     - Overload1252
-description: Introduction to Entity Visuals.
+description: エンティティの見た目についての入門です。
 ---
 
-## What is this section about?
+## このセクションは何について？
 
-Welcome, stranger. You have entered entity visuals section.
-Here you can learn how to improve visual part of your content. This section is important as good expression is mostly formed of how everything looks in add-on.
+ようこそ、旅人。ここはエンティティのビジュアルに関するセクションです。
+ここでは、コンテンツの見た目を改善する方法を学べます。アドオンでは、全体の印象の多くが見た目で決まるため、このセクションは重要です。

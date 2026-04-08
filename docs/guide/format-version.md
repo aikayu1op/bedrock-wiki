@@ -1,6 +1,6 @@
 ---
-title: Format Versions
-description: Learn what format versions are and how to choose the right one for each of your files.
+title: フォーマットバージョン
+description: format version とは何か、各ファイルにどのバージョンを選ぶべきかを学びます。
 category: Extra
 prefix: "e. "
 nav_order: 5
@@ -12,51 +12,51 @@ mentions:
     - QuazChick
 ---
 
-Format versions are an important part of Minecraft: Bedrock Edition's add-on system. They appear at the top of most files, formatted like this: `"format_version": "1.21.0"`. You can think of this as the "version number" of the file, and the number you select here is really important! The format version you select will define which syntax and features are available to you, in that particular file.
+Format version は、Minecraft: Bedrock Edition のアドオンシステムで重要な要素です。多くのファイルの先頭に次のような形で書かれています。`"format_version": "1.21.0"`。これはファイルの「バージョン番号」のようなものだと考えるとよく、ここで選ぶ数字はとても重要です。選んだ format version によって、そのファイルで使える構文や機能が決まります。
 
 :::tip
-Selecting the wrong format version is a common source of errors. When troubleshooting, people may ask you questions like 'what format version is your item'. Ensure that you know how to answer that question.
+間違った format version を選ぶのは、よくあるエラーの原因です。トラブルシューティングの場面では、「そのアイテムの format version は何ですか？」のように聞かれることがあります。その質問に答えられるようにしておきましょう。
 :::
 
-## Why Do Format Versions Exist?
+## なぜ Format Version があるのか？
 
-Format versions exist to _version_ the Add-on system, and allow Minecraft to introduce new features into the add-on system, without breaking old Add-ons. For example, a `1.8.0` format version RP Entity file has very different syntax than a `1.10.0` format version RP Entity file. By using the 'format*version' key in the json \_you* can decide which version you want to use.
+Format version はアドオンシステムに _バージョン_ を付けるために存在し、Minecraft が新機能を追加しても古いアドオンを壊さないようにする仕組みです。たとえば、`1.8.0` の format version を持つ RP の Entity ファイルと、`1.10.0` の format version を持つ RP の Entity ファイルでは、構文がかなり異なります。json の `format_version` キーを使うことで、どのバージョンを使うかを自分で決められます。
 
-By using format versions _per file_, Minecraft gives you a lot of control over how your add-on will be interpreted by the game. It is completely possible and expected to mix different format versions in your add-on.
+ファイルごとに format version を指定できるので、Minecraft はあなたのアドオンをかなり柔軟に解釈できます。異なる format version をアドオン内で混在させることは、完全に可能であり、想定された使い方でもあります。
 
-## Format Version Is Not Game Version
+## Format Version はゲームバージョンではない
 
-It is really important to understand that format version is _per subsystem_, and is generally not equal to the base game version. This simply means that every type of file (item, rp entity, bp entity, recipe) will use a different versioning system.
+format version は _サブシステムごと_ のもので、基本的にはゲーム本体のバージョンとは一致しない、という点を理解することがとても重要です。つまり、ファイルの種類ごと（item、rp entity、bp entity、recipe）に、別々のバージョニングシステムが使われます。
 
-For example: `"format_version": "1.8.0"` in an RP entity file means "use version `1.8.0` of the _item system_". It does _not_ mean "use version `1.8.0` of the _add-on system_".
+たとえば、RP entity ファイルの `"format_version": "1.8.0"` は「_item system_ の `1.8.0` を使う」という意味です。「_アドオンシステム_ の `1.8.0` を使う」という意味ではありません。
 
-For this reason, some file types will have very "old" format versions. Do not be tempted to replace this version with the latest game version, such as `1.17.0`.
+そのため、ファイル形式によってはとても「古い」format version が使われています。これを最新のゲームバージョン、たとえば `1.17.0` に置き換えたくなるかもしれませんが、そうしないでください。
 
-## Format Version Fixing
+## Format Version の修正
 
-Minecraft has a system that will "fix" your format version if you've written it wrong. This system isn't well understood, isn't enabled for all systems, and shouldn't be relied upon. But it's important to note that an incorrect format version will often "regress" downwards until it hits a valid format version. For example a `1.11.0` RP entity file will simply be interpreted as `1.10.0`, and cause no errors.
+Minecraft には、format version を間違えて書いた場合にそれを「修正」する仕組みがあります。この仕組みはよく理解されているわけではなく、すべてのシステムで有効でもなく、頼るべきでもありません。ただし、間違った format version は、有効な version に当たるまでしばしば「下方向に」補正されることがあります。たとえば `1.11.0` の RP entity ファイルは、単に `1.10.0` として解釈され、エラーにならないことがあります。
 
-This system is useful, as it means you are less likely to generate a broken file, by selecting the wrong format version.
+この仕組みは、間違った format version を選んだとしても壊れたファイルを作る可能性が下がるという意味で役立ちます。
 
-## Picking a Format Version
+## Format Version の選び方
 
-Generally speaking, there is a cool tricky to pick the correct format version, for any file type.
+一般的には、どのファイル形式でも正しい format version を選ぶための簡単なコツがあります。
 
-For example, imagine you are creating a Recipe file:
+たとえば Recipe ファイルを作っていると想像してください。
 
-1.  Install the [Vanilla Packs](/guide/download-packs).
-2.  Look at some recipe files, to judge which format version is most used, or the most recent
-3.  Use this format version in your file
+1.  [Vanilla Packs](/guide/download-packs) をインストールします。
+2.  いくつかの recipe ファイルを見て、どの format version が最も多く使われているか、または最新かを確認します。
+3.  その format version を自分のファイルで使います。
 
-This simple trick will help you select a valid format version for your file.
+この単純な手順で、そのファイルに有効な format version を選びやすくなります。
 
-## Format Versions per Asset Type
+## アセット種類ごとの Format Version
 
-This section will list the format versions used in the vanilla game, alongside how many times it appears.
+このセクションでは、バニラゲームで使われている format version を、それぞれの出現回数とともに一覧表示します。
 
--   The '⭐' marks the recommended version.
+-   `⭐` は推奨 version を示します。
 
-_Last Updated for 1.21.50_
+_最終更新: 1.21.50_
 
 ### Resource Pack
 

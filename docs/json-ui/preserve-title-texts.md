@@ -1,6 +1,6 @@
 ---
-title: Preserve Title Texts
-description: Learn how to create reusable UI elements that preserve binding data, updating only when a specific keyword is detected in the data.
+title: タイトルテキストの保持
+description: 特定のキーワードがデータ内で見つかったときだけ更新され、バインディングデータを保持する再利用可能な UI 要素の作成方法を学びます。
 category: Tutorials
 tags:
     - intermediate
@@ -10,23 +10,23 @@ mentions:
     - pedrodenovo
 ---
 
-In this tutorial, you will learn how to create a robust and reusable UI component that preserves binding data. The element will listen for incoming data (like a title or subtitle) and only update its display when that data contains a specific keyword, ignoring all other data.
+このチュートリアルでは、バインディングデータを保持できる堅牢で再利用可能な UI コンポーネントの作り方を学びます。この要素は、タイトルやサブタイトルのような入力データを監視し、そのデータに特定のキーワードが含まれている場合だけ表示を更新し、それ以外のデータは無視します。
 
-## Overview
+## 概要
 
-Passing data to the UI via titles, subtitles, or scoreboards is a very common technique. However, you often need a UI element to only react to specific information, not every single title command that is run.
+タイトル、サブタイトル、スコアボードを使って UI にデータを渡すのは、非常によく使われる手法です。ただし、多くの場合は、実行されたすべての title コマンドに反応するのではなく、特定の情報だけに反応する UI 要素が必要になります。
 
-This guide demonstrates how to build a component that "listens" for a keyword. When it sees it, it saves the associated text and displays it. The key is creating a component that is self-contained and can be used multiple times on the same screen without conflicts.
+このガイドでは、キーワードを「監視」するコンポーネントの作り方を示します。キーワードを見つけると、その関連テキストを保存して表示します。重要なのは、自己完結していて、同じ画面上で複数回使っても競合しないコンポーネントにすることです。
 
-The old methods for this often had bugs or used `global` variables, which is not ideal for reusable components. The method below uses a **`property_bag`** to ensure each component instance has its own local "memory", making it truly modular.
+この種の古い実装はバグが多かったり、`global` 変数を使っていたりして、再利用可能なコンポーネントには向いていませんでした。以下の方法では **`property_bag`** を使い、各コンポーネントのインスタンスごとに独自のローカルな「記憶」を持たせることで、真にモジュール化された構成にしています。
 
-## The Reusable Component
+## 再利用可能なコンポーネント
 
-The following JSON creates a `label` element that is controlled by a hidden child panel. This panel handles all the logic for detecting the keyword, saving the text, and making it available to the parent label.
+以下の JSON は、非表示の子パネルによって制御される `label` 要素を作成します。このパネルが、キーワードの検出、テキストの保存、そして親のラベルから参照できるようにする処理のすべてを担当します。
 
-### The Code
+### コード
 
-This code can be placed in any UI screen file, such as `hud_screen.json`.
+このコードは、`hud_screen.json` のような任意の UI スクリーンファイルに配置できます。
 
 <CodeHeader>RP/ui/hud_screen.json</CodeHeader>
 
@@ -72,33 +72,33 @@ This code can be placed in any UI screen file, such as `hud_screen.json`.
 }
 ```
 
-### How It Works
+### 仕組み
 
-This component is divided into two main parts: the visible **`label`** (`preserved_title_display`) and a hidden **`panel`** (`data_control`) that acts as the brain.
+このコンポーネントは、表示される **`label`** (`preserved_title_display`) と、頭脳の役割を果たす非表示の **`panel`** (`data_control`) の 2 つの主要部分に分かれています。
 
-#### The `data_control` Logic
+#### `data_control` のロジック
 
-This invisible panel does all the heavy lifting.
+この不可視パネルが、主要な処理をすべて担います。
 
-1.  **`property_bag`**: This is the key to making the component reusable.
+1.  **`property_bag`**: これが、コンポーネントを再利用可能にするための鍵です。
 
-    -   `"#preserved_text": ""` creates and initializes a **local variable** called `#preserved_text`.
-    -   Because it's not `global`, every instance of `preserved_title_display` gets its own private `#preserved_text`, so they don't interfere with each other. This fixes the major flaw in older methods.
+    -   `"#preserved_text": ""` は、`#preserved_text` という **ローカル変数** を作成して初期化します。
+    -   `global` ではないため、`preserved_title_display` の各インスタンスはそれぞれ独自の `#preserved_text` を持ち、互いに干渉しません。これで、従来の方法の大きな欠点が解消されます。
 
-2.  **`visibility_changed` Binding**: This binding is the trigger for saving data. When the `data_control` panel's visibility changes, it instantly copies the current title (`#hud_title_text_string`) into our local `#preserved_text` variable.
+2.  **`visibility_changed` バインディング**: このバインディングが、データ保存のトリガーです。`data_control` パネルの表示状態が変わると、現在のタイトル (`#hud_title_text_string`) をローカル変数 `#preserved_text` に即座にコピーします。
 
-3.  **Visibility Condition**: This binding makes the panel "flicker" (become visible for a single frame) only when the right conditions are met. Both must be true:
+3.  **表示条件**: このバインディングは、条件が満たされたときだけパネルを「ちらつかせる」(1 フレームだけ表示する) ようにします。次の両方が真である必要があります。
 
-    -   `not (#hud_title_text_string = #preserved_text)`: Is the incoming title **different** from the one we already have saved? (Prevents running on the same title).
-    -   `not ((#hud_title_text_string - $update_string) = #hud_title_text_string)`: Does the incoming title **contain** our keyword (`$update_string`)?
+    -   `not (#hud_title_text_string = #preserved_text)`: 入力されたタイトルは、すでに保存済みのものと **異なる** か？ (同じタイトルで再実行されるのを防ぎます)
+    -   `not ((#hud_title_text_string - $update_string) = #hud_title_text_string)`: 入力されたタイトルに、こちらのキーワード (`$update_string`) が **含まれている** か？
 
-When a new title with the keyword arrives, the panel becomes visible, `visibility_changed` fires and saves the text, and then the visibility condition immediately becomes false again, hiding the panel.
+キーワードを含む新しいタイトルが届くと、パネルが表示され、`visibility_changed` が発火してテキストを保存し、その後すぐに表示条件が false に戻ってパネルが隠れます。
 
-#### The `preserved_title_display` Binding
+#### `preserved_title_display` のバインディング
 
-The main label element has a simple job. It just reads the text from its child `data_control`.
+メインのラベル要素の役割は単純です。子要素の `data_control` からテキストを読み取るだけです。
 
--   `"source_control_name": "data_control"`: Tells the label to look at its child for data.
--   `source_property_name`: `(#preserved_text - $update_string)`: It takes the text saved in our local `#preserved_text` variable and removes the keyword (`$update_string`) before displaying it.
+-   `"source_control_name": "data_control"`: ラベルに、データを子要素から取得するよう指示します。
+-   `source_property_name`: `(#preserved_text - $update_string)`: ローカル変数 `#preserved_text` に保存されたテキストからキーワード (`$update_string`) を取り除いて表示します。
 
-This creates a clean, efficient, and fully reusable component for your UI.
+これにより、UI 向けのきれいで効率的、かつ完全に再利用可能なコンポーネントが作れます。

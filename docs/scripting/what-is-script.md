@@ -1,5 +1,5 @@
 ---
-title: What is Script API?
+title: Script API とは？
 category: General
 nav_order: 2
 mentions:
@@ -9,31 +9,31 @@ mentions:
     - SmokeyStack
     - ThomasOrs
     - gdm3
-description: What the heck are scripts!?
+description: スクリプトって一体何なの？
 ---
 
 ::: warning
-The Script API is currently in active development, and breaking changes are frequent. This page assumes the format of Minecraft 1.21.20
+Script API は現在も活発に開発されており、破壊的変更が頻繁にあります。このページは Minecraft 1.21.20 の形式を前提としています。
 :::
 
 ## API
 
-API stands for (Application Programming Interface), and it is a way of establishing contacts between two applications. The term application contains a lot more than you might imagine. An application can be a simple script, a game, or an entire operating system.
+API は Application Programming Interface の略で、2つのアプリケーション間でやり取りを成立させるための仕組みです。「アプリケーション」という言葉は、想像以上に幅広いものを含みます。単純なスクリプト、ゲーム、あるいは OS 全体もアプリケーションになりえます。
 
-An example of an API that you encounter all the time is right in front of you, and that API is between the application and your operating system. It is the cursor on the screen. Why is that related to an API? Because applications can find out through an API that your operating system provides where the cursor is on the screen without having to implement their own cursors. This allows a program such as Minecraft to use the API system so that we can see the application.
+日常的に触れている API の例は、まさに目の前にあります。それはアプリケーションと OS の間にある API です。画面上のカーソルがその例です。なぜ API と関係があるのでしょうか。アプリケーションは、OS が提供する API を通じてカーソルが画面のどこにあるかを把握でき、自前でカーソルを実装する必要がないからです。これにより、Minecraft のようなプログラムも API を利用して動作できます。
 
-Summary: An API is a kind of mutual or one-sided interaction between two or more applications!
+要するに、API は 2つ以上のアプリケーション間で行われる相互または一方向のやり取りの仕組みです。
 
 ## Script API
 
-Maybe you have already heard the term "Script API" somewhere. It is important to know what is hidden under this name.
+「Script API」という言葉をどこかで聞いたことがあるかもしれません。この名前の下に何があるのかを知ることは重要です。
 
-When hearing this term, a lot of people imagine different things such as programs, scripts, or even programming languages, (`Mysterious Experiments in Minecraft? :]` ), but in reality, it is only an API. APIs are a set of functions that allow us to interact with Minecraft as such. We can receive events, read blocks, modify entities, create particles, and more! This API is also well documented on the [official web site](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/minecraft-server)!
+この言葉を聞くと、多くの人はプログラムやスクリプト、あるいはプログラミング言語まで連想するかもしれません（`Mysterious Experiments in Minecraft? :]` ）。しかし実際には、これはただの API です。API は Minecraft とやり取りするための関数群です。イベントを受け取り、ブロックを読み取り、エンティティを変更し、パーティクルを生成する、といったことができます。この API は [公式サイト](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/minecraft-server) にも詳しいドキュメントがあります。
 
 ## API Modules?
 
-The API is divided into other sub-modules according to functionality. Some API functions may not be so safe for basic users, so they are only allowed on servers or they cannot work on some devices. For that we have different packages of API functions that we call Modules.
+API は機能ごとにいくつかのサブモジュールに分かれています。API の一部の関数は一般ユーザー向けには安全でない場合があるため、サーバーでのみ使えたり、特定の端末では動作しなかったりします。そのため、API 関数を用途別に分けたパッケージを Module と呼んでいます。
 
-Modules should be named after the functionality they contain.
+Module 名は、含まれる機能にちなんだものにするべきです。
 
 [Original Credits](https://github.com/JaylyDev/ScriptAPI/tree/main/docs/MinecraftApi#readme) - Written by [ConMaster2112](https://github.com/conmaster2112)

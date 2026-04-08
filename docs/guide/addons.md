@@ -1,7 +1,7 @@
 ---
-title: Add-Ons Explained
+title: アドオンの解説
 category: Guide
-description: The basics of Add-Ons
+description: アドオンの基本
 nav_order: 2
 prefix: "2. "
 mentions:
@@ -19,56 +19,56 @@ mentions:
     - QuazChick
 ---
 
-## What are add-ons?
+## アドオンとは？
 
-Add-ons allow us to modify the contents of our Minecraft Experience by _modifying_ or _removing_ existing content and _adding_ our own. Add-ons are very powerful and allow us to create custom entities, items, and blocks, as well as things like custom loot tables and crafting recipes. Your imagination is the limit!
+アドオンを使うと、Minecraft の内容を _変更_ したり、既存のコンテンツを _削除_ したり、自分の要素を _追加_ したりして、Minecraft の体験を拡張できます。アドオンは非常に強力で、カスタムエンティティ、アイテム、ブロックに加え、カスタムの loot table やクラフトレシピなども作成できます。想像力しだいです！
 
-Add-ons are primarily written in [json](/guide/understanding-json), which is a structured data-format. An add-on is essentially a collection of json files, images, and sounds, which modify or add to the game in some way.
+アドオンは主に [json](/guide/understanding-json) で記述されます。json は構造化されたデータ形式です。アドオンとは基本的に、ゲームに何らかの変更や追加を行う json ファイル、画像、音声の集合です。
 
 :::tip Scripting API
-Since this guide was written, the definition of 'Add-On' has expanded to include the Javascript scripting API. You can learn more about this API elsewhere on this site.
+このガイドを書いた当時から、'Add-On' の定義は JavaScript の scripting API まで含むようになりました。この API については、このサイトの別の場所で詳しく学べます。
 :::
 
-## What's the difference between a Behavior Pack & a Resource Pack?
+## Behavior Pack と Resource Pack の違いは？
 
-Add-ons are split into two pack types: Resource Packs, and Behavior Packs. Both can function independently, but they are most commonly used together. When you have both a Resource Pack and Behavior Pack, this is referred to as an _add-on_.
+アドオンは 2 種類のパックに分かれます。Resource Pack と Behavior Pack です。どちらも単独で機能しますが、一般的には一緒に使います。Resource Pack と Behavior Pack の両方がそろっているものを _アドオン_ と呼びます。
 
 ### Resource Pack
 
-The Resource Pack, also known as the _client_, or RP, is responsible for the _visuals_ and _sounds_ in your add-on. This includes things like:
+Resource Pack は _クライアント_ または RP とも呼ばれ、アドオンの _見た目_ と _音_ を担当します。たとえば次のようなものです。
 
--   Textures
--   Sounds
--   Geometry
--   Animations
--   Particles
+-   テクスチャ
+-   音
+-   ジオメトリ
+-   アニメーション
+-   パーティクル
 
 ### Behavior Pack
 
-The Behavior Pack, also known as the _server_, or BP, is responsible for the _logic_ of your add-on. This can include things like:
+Behavior Pack は _サーバー_ または BP とも呼ばれ、アドオンの _ロジック_ を担当します。たとえば次のようなものです。
 
--   How your entity acts
--   Crafting recipes
--   Loot tables
--   Custom functions
+-   エンティティの動作
+-   クラフトレシピ
+-   loot table
+-   カスタム関数
 
-### Communication between packs
+### パック間の通信
 
-In most cases, you will have both a RP and a BP together. These packs can communicate with or will require each other for them to function properly, in the sense that assets defined in one can be accessed in the other. For example, when creating a custom entity, you need two files:
+ほとんどの場合、RP と BP は両方セットで使います。これらのパックは、片方で定義したアセットをもう片方から参照できるという意味で、互いに通信したり、正しく動作するために相手を必要としたりします。たとえば、カスタムエンティティを作るには 2 つのファイルが必要です。
 
--   An RP entity definition, which describes how your entity will _look_
--   A BP entity definition, which describes how your entity will _act_
+-   RP のエンティティ定義。エンティティの _見た目_ を説明するもの
+-   BP のエンティティ定義。エンティティの _動作_ を説明するもの
 
-## Next
+## 次へ
 
-:::tip What you have learned
+:::tip 学んだこと
 
--   [x] Add-ons modify Minecraft content or add their own
--   [x] Add-ons are mostly written in JSON
--   [x] An add-on is split into the **Resource Pack** and the **Behavior Pack**:
-    -   Resource Packs contain textures, sounds, … and control how the game looks
-    -   Behavior Packs contain entity behavior, crafting recipes, … and control the logic of your game
+-   [x] アドオンは Minecraft のコンテンツを変更したり、自分の要素を追加したりする
+-   [x] アドオンは主に JSON で書かれる
+-   [x] アドオンは **Resource Pack** と **Behavior Pack** に分かれる
+    -   Resource Pack にはテクスチャ、音などが含まれ、ゲームの見た目を制御する
+    -   Behavior Pack にはエンティティの挙動、クラフトレシピなどが含まれ、ゲームのロジックを制御する
 
 :::
 
-<Button link="/guide/software-preparation">Next: Software & Preparation</Button>
+<Button link="/guide/software-preparation">次へ: ソフトウェアと準備</Button>

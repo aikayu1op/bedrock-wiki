@@ -1,6 +1,6 @@
 ---
-title: Block Culling
-description: Block culling rules allow you to remove parts of a model based on the surrounding blocks.
+title: ブロックのカリング
+description: ブロックのカリングルールを使うと、周囲のブロックに応じてモデルの一部を非表示にできます。
 category: Visuals
 tags:
     - intermediate
@@ -12,15 +12,15 @@ mentions:
     - QuazChick
 ---
 
-:::tip CREATE YOUR MODEL
-Before you start, make sure you've [created a model](/blocks/block-models) for your block. Otherwise you'll have nothing to apply culling rules to!
+:::tip モデルを作成してください
+始める前に、ブロック用の [モデルを作成](/blocks/block-models) しておいてください。そうしないと、カリングルールを適用する対象がありません。
 :::
 
-## Applying Culling Rules
+## カリングルールの適用
 
-Block culling rules allow you to remove parts of a model based on the surrounding blocks. This can help to improve the game's performance as resources aren't wasted on unnecessarily rendering hidden parts of your block.
+ブロックのカリングルールを使うと、周囲のブロックに応じてモデルの一部を非表示にできます。これは、隠れている部分を不要に描画しないことで、ゲームのパフォーマンス向上に役立ちます。
 
-Culling rules are added in your resource pack's `block_culling` folder and appear in the format shown below:
+カリングルールはリソースパックの `block_culling` フォルダに追加し、次のような形式で記述します。
 
 <CodeHeader>RP/block_culling/lamp.json</CodeHeader>
 
@@ -36,7 +36,7 @@ Culling rules are added in your resource pack's `block_culling` folder and appea
 }
 ```
 
-They are then applied to block models in your block's [`minecraft:geometry`](/blocks/block-components#geometry) component:
+その後、ブロックの [`minecraft:geometry`](/blocks/block-components#geometry) コンポーネントでブロックモデルに適用します。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -47,9 +47,9 @@ They are then applied to block models in your block's [`minecraft:geometry`](/bl
 }
 ```
 
-## Culling Entire Bones
+## 骨全体のカリング
 
-This type of rule should be used if a bone is only visible from one direction, meaning the entire bone can be culled rather than individual cube faces.
+この種類のルールは、骨が 1 方向からしか見えない場合に使います。個別のキューブ面ではなく、骨全体をカリングできます。
 
 <CodeHeader>minecraft:block_culling_rules > rules</CodeHeader>
 
@@ -62,9 +62,9 @@ This type of rule should be used if a bone is only visible from one direction, m
 }
 ```
 
-## Culling Cube Faces
+## キューブ面のカリング
 
-This type of rule should be used when you want to hide specific faces of cubes that are abutting full, opaque blocks.
+この種類のルールは、完全に不透明なブロックに接しているキューブの特定面を隠したいときに使います。
 
 <CodeHeader>minecraft:block_culling_rules > rules</CodeHeader>
 
@@ -79,10 +79,10 @@ This type of rule should be used when you want to hide specific faces of cubes t
 }
 ```
 
-## Culling Conditions
+## カリング条件
 
-Culling rules will cull against full, opaque faces of adjacent blocks by default.
-However, they can also cull against other types of blocks based on the rule's `condition` parameter.
+カリングルールは、既定では隣接ブロックの完全な不透明面に対してカリングします。
+ただし、ルールの `condition` パラメータに応じて、ほかの種類のブロックに対してもカリングできます。
 
 <CodeHeader>minecraft:block_culling_rules > rules</CodeHeader>
 
@@ -97,14 +97,14 @@ However, they can also cull against other types of blocks based on the rule's `c
 }
 ```
 
-### Same Block
+### 同じブロック
 
-When the `"same_block"`{lang=json} condition is used, the specified geometry part is also culled if the adjacent block has the same identifier as the block.
+`"same_block"`{lang=json} 条件を使うと、隣接ブロックが同じ識別子を持つ場合にも、指定した geometry パーツがカリングされます。
 
-### Same Block Permutation
+### 同じブロックのパーミュテーション
 
-When the `"same_block_permutation"`{lang=json} condition is used, the specified geometry part is also culled if the adjacent block has the same identifier and state values as the block.
+`"same_block_permutation"`{lang=json} 条件を使うと、隣接ブロックが同じ識別子と状態値を持つ場合にも、指定した geometry パーツがカリングされます。
 
-### Same Culling Layer
+### 同じカリングレイヤー
 
-When the `"same_culling_layer"`{lang=json} condition is used, the specified geometry part is also culled if the adjacent block has the same `culling_layer` identifier as the block.
+`"same_culling_layer"`{lang=json} 条件を使うと、隣接ブロックが同じ `culling_layer` 識別子を持つ場合にも、指定した geometry パーツがカリングされます。

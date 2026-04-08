@@ -1,6 +1,6 @@
 ---
-title: Applying Effects
-description: This tutorial aims to show how to apply status effects to entities that are within a certain radius of your block.
+title: 効果の適用
+description: このチュートリアルでは、ブロックの一定半径内にいるエンティティへステータス効果を適用する方法を紹介します。
 category: Tutorials
 tags:
     - easy
@@ -15,16 +15,16 @@ mentions:
 ---
 
 ::: tip FORMAT VERSION 1.26.10
-This tutorial assumes a basic understanding of blocks, including [block events](/blocks/block-events).
-Check out the [blocks guide](/blocks/blocks-intro) before starting.
+このチュートリアルでは、[ブロックイベント](/blocks/block-events)を含むブロックの基本的な理解を前提としています。
+始める前に [ブロックガイド](/blocks/blocks-intro) を確認してください。
 :::
 
-This tutorial aims to show how to apply status effects to entities that are within a certain radius of your block.
+このチュートリアルでは、ブロックの一定半径内にいるエンティティへステータス効果を適用する方法を紹介します。
 
-## Block JSON
+## ブロック JSON
 
-To match the vanilla Beacon block, our custom block should apply effects every 4 seconds.
-This can be achieved by causing the block to "tick" every 80 ticks.
+バニラのビーコンブロックに合わせるには、カスタムブロックは 4 秒ごとに効果を適用する必要があります。
+これは、ブロックを 80 ティックごとに「ティック」させることで実現できます。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -35,8 +35,8 @@ This can be achieved by causing the block to "tick" every 80 ticks.
 }
 ```
 
-Next, we need to register our custom component to hook onto the [tick](/blocks/block-events#tick) event.
-This component should apply effects to entities within a specified area, so we're going to call it `wiki:radial_effects`.
+次に、[tick](/blocks/block-events#tick) イベントに接続するためのカスタムコンポーネントを登録します。
+このコンポーネントは指定した範囲内のエンティティに効果を適用するため、`wiki:radial_effects` と名付けます。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -57,7 +57,7 @@ This component should apply effects to entities within a specified area, so we'r
 ]
 ```
 
-## Custom Component Script
+## カスタムコンポーネントスクリプト
 
 <CodeHeader>BP/scripts/radialEffects.js</CodeHeader>
 
@@ -92,9 +92,9 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
 });
 ```
 
-## Example JSON
+## 例の JSON
 
-<Spoiler title="Example Wither Block">
+<Spoiler title="Wither ブロックの例">
 
 <CodeHeader>BP/blocks/wither_block.json</CodeHeader>
 

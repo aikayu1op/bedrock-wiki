@@ -6,45 +6,40 @@ mentions:
     - yanasakana
     - MedicalJewel105
     - SIsilicon
-description: Shaders for MCBE.
+description: MCBE 用シェーダー。
 ---
 
 :::warning
-The shaders on this page are incompatible with [Render Dragon](https://help.minecraft.net/hc/en-us/articles/360052771272-About-the-1-16-200-Update-for-Windows-10-). That means that they will not work on Windows and Console devices past 1.16.200, nor other devices past 1.18.30!
+このページのシェーダーは [Render Dragon](https://help.minecraft.net/hc/en-us/articles/360052771272-About-the-1-16-200-Update-for-Windows-10-) と互換性がありません。つまり、1.16.200 以降の Windows とコンソール端末、さらに 1.18.30 以降の他の端末では動作しません。
 :::
 
-## Overview
+## 概要
 
-Shaders are divided into 2 folders: `glsl` and `hlsl`. For shaders to work on every device,
-you need to code shaders in both languages. For testing on Windows, `hlsl` is enough.
-When rewriting shaders from one language to another, there are few things to change,
-like HLSL `float3` is `vec3` in GLSL. Mapping between those languages can be found [here](https://anteru.net/blog/2016/mapping-between-HLSL-and-GLSL/)
+シェーダーは `glsl` と `hlsl` の 2 つのフォルダーに分かれています。すべての端末で動かすには、両方の言語でシェーダーを書く必要があります。Windows でのテストなら `hlsl` だけで十分です。
 
-## Materials
+ある言語から別の言語へ書き換えるときに変えるべき点は少しだけです。たとえば、HLSL の `float3` は GLSL では `vec3` になります。言語間の対応表は [こちら](https://anteru.net/blog/2016/mapping-between-HLSL-and-GLSL/) で確認できます。
 
-Vertex, fragments, and sometimes geometry shaders are combined with some options
-as materials and are required for custom shaders. To create new material,
-you need to create a file, which matches the name of the .material file in the vanilla resource pack.
-For example: `materials/particles.material`. Materials support inheritance by adding parent
-material after a colon. For example: `entity_alpha:entity_base`
+## マテリアル
 
-### Common material definition fields
+頂点シェーダー、フラグメントシェーダー、場合によってはジオメトリシェーダーを、いくつかのオプションと組み合わせたものがマテリアルで、カスタムシェーダーには必須です。新しいマテリアルを作るには、バニラのリソースパック内にある `.material` ファイル名と一致するファイルを作成する必要があります。たとえば `materials/particles.material` です。マテリアルは、コロンの後ろに親マテリアルを追加することで継承をサポートします。たとえば `entity_alpha:entity_base` です。
 
-| **Field name**   | **Description**                                                       | **Example value**                                        | **Notes**                                                                                                                                         |
-| ---------------- | --------------------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `vertexShader`   | Path to the shader relative to hlsl/glsl folder                       |                                                          | For HLSL shader, `.hlsl` suffix is added.                                                                                                         |
-| `fragmentShader` | Path to the shader relative to hlsl/glsl folder                       |                                                          | For HLSL shader, `.hlsl` suffix is added.                                                                                                         |
-| `vertexFields`   | An array of fields passed to vertex shader                            |                                                          | It's better to copy this field from vanilla material.                                                                                             |
-| `variants`       | An array of objects, which define variants of the material            |                                                          | It's better to copy this field from vanilla material.                                                                                             |
-| `+defines`       | An array of `#define` directives to add to the shader source          |                                                          | Useful for reusing shader, but changing some minor setting.                                                                                       |
-| `+states`        | An array of states to enable                                          | `["Blending", "DisableAlphaWrite", "DisableDepthWrite"]` | For OpenGL implementation, this is equivalent to [glEnable](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glEnable.xml) call.      |
-| `-defines`       | An array of `#defines` directives to remove from inherited `+defines` |                                                          |                                                                                                                                                   |
-| `+samplerStates` | An array of objects, defining how texture at certain index is treated | `{ "samplerIndex": 0, "textureFilter": "Point" }`        | `textureFilter` specifies how to sample the texture and `textureWrap` specifies the behavior, when accessing outside of the texture dimensions.   |
-| `msaaSupport`    | Multisample anti-aliasing support                                     | `Both`                                                   |                                                                                                                                                   |
-| `blendSrc`       | Specifies how the color source blending factors are computed          | `One`                                                    | For OpenGL implementation, this is equivalent to [glBlendFunc](https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBlendFunc.xhtml) call. |
-| `blendDst`       | Specifies how the color destination blending factors are computed     | `One`                                                    | For OpenGL implementation, this is equivalent to [glBlendFunc](https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBlendFunc.xhtml) call. |
+### 一般的なマテリアル定義フィールド
 
-Example:
+| **フィールド名** | **説明** | **例の値** | **備考** |
+| ---------------- | -------- | ---------- | -------- |
+| `vertexShader` | `hlsl`/`glsl` フォルダーからの相対パスでシェーダーを指定 |  | HLSL では `.hlsl` 拡張子が追加されます。 |
+| `fragmentShader` | `hlsl`/`glsl` フォルダーからの相対パスでシェーダーを指定 |  | HLSL では `.hlsl` 拡張子が追加されます。 |
+| `vertexFields` | 頂点シェーダーに渡すフィールド配列 |  | バニラのマテリアルからコピーするのがよいです。 |
+| `variants` | マテリアルのバリアントを定義するオブジェクト配列 |  | バニラのマテリアルからコピーするのがよいです。 |
+| `+defines` | シェーダーソースに追加する `#define` ディレクティブ配列 |  | シェーダーを再利用しつつ一部設定だけ変えたいときに便利です。 |
+| `+states` | 有効にする state の配列 | `[`"Blending"`, `"DisableAlphaWrite"`, `"DisableDepthWrite"`]` | OpenGL 実装では [glEnable](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glEnable.xml) 呼び出しと同等です。 |
+| `-defines` | 継承された `+defines` から削除する `#define` ディレクティブ配列 |  |  |
+| `+samplerStates` | 特定インデックスのテクスチャの扱いを定義するオブジェクト配列 | `{ "samplerIndex": 0, "textureFilter": "Point" }` | `textureFilter` はサンプリング方法を、`textureWrap` はテクスチャ境界の外へアクセスしたときの挙動を指定します。 |
+| `msaaSupport` | マルチサンプルアンチエイリアシング対応 | `Both` |  |
+| `blendSrc` | 色のソース側ブレンド係数の計算方法を指定 | `One` | OpenGL 実装では [glBlendFunc](https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBlendFunc.xhtml) 呼び出しと同等です。 |
+| `blendDst` | 色の出力先ブレンド係数の計算方法を指定 | `One` | OpenGL 実装では [glBlendFunc](https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glBlendFunc.xhtml) 呼び出しと同等です。 |
+
+例:
 
 <CodeHeader></CodeHeader>
 
@@ -71,32 +66,32 @@ Example:
 }
 ```
 
-For all the details about material files and possible field values, check [material file JSON schema](https://github.com/stirante/bedrock-shader-schema/blob/master/materials.schema.json).
+マテリアルファイルと各フィールド値の詳細は、[material file JSON schema](https://github.com/stirante/bedrock-shader-schema/blob/master/materials.schema.json) を参照してください。
 
-## Troubleshooting
+## トラブルシューティング
 
-### Shader doesn’t change
+### シェーダーが変わらない
 
-Every time there is a change in the shader, you need to restart Minecraft to recompile the shader completely.
+シェーダーを変更したら、そのたびに Minecraft を再起動してシェーダーを完全に再コンパイルする必要があります。
 
-### Compilation error
+### コンパイルエラー
 
-When there is a shader compilation error, a line number is usually specified where the error occurred. You need to check a few lines above the one set in error because Minecraft adds `#define` directives before compilation.
+シェーダーのコンパイルエラーが出た場合、通常はエラーが発生した行番号が示されます。Minecraft はコンパイル前に `#define` ディレクティブを追加するので、エラー行の少し上も確認してください。
 
-### Couldn’t find constant buffer named: $Globals
+### `Couldn’t find constant buffer named: $Globals`
 
-I couldn’t accurately find the actual cause of this error, but it seems to be somehow connected to global variables. Removing them (initializing them in the `main` function or changing them to `#define` directives) seems to fix the problem.
+このエラーの正確な原因は特定できませんでしたが、グローバル変数に何らかの形で関係しているようです。変数を削除するか、`main` 関数内で初期化するか、`#define` ディレクティブに बदलすと解決するようです。
 
-## Tips and tricks
+## ヒントとコツ
 
-### Passing variables to the shader
+### 変数をシェーダーへ渡す
 
-You can pass variables to the shader from a particle or an entity by changing entity color.
-Input color is clamped to `<0.0, 1.0>`. To pass more significant values, you need to divide by max value (or at least some considerable number).
+エンティティの色を変えることで、パーティクルやエンティティからシェーダーへ変数を渡せます。
+入力色は `<0.0, 1.0>` にクランプされます。より大きな値を渡したい場合は、最大値で割るか、少なくとも十分に大きな数で割る必要があります。
 
-### Using time in shader
+### シェーダー内で時間を使う
 
-`TIME` variable is a number of seconds as `float` and is global for all shaders. For time-based on particle lifetime, you need to pass this:
+`TIME` 変数は秒単位の `float` で、すべてのシェーダーで共通です。パーティクルの寿命に基づく時間を使いたい場合は、次を渡します。
 
 <CodeHeader></CodeHeader>
 
@@ -106,13 +101,13 @@ Input color is clamped to `<0.0, 1.0>`. To pass more significant values, you nee
 }
 ```
 
-Then in the shader, use `PSInput.color.r` as time, where `0.0` is particle birth and `1.0` is particle death.
+そのあとシェーダー内では、`PSInput.color.r` を時間として使います。`0.0` がパーティクル誕生、`1.0` がパーティクル消滅です。
 
-### Camera direction towards the entity
+### エンティティへのカメラ方向
 
-For entity shaders, you can make the shader dependent on the camera direction towards the entity.
+エンティティ用シェーダーでは、カメラがエンティティに向いている方向に応じてシェーダーを変化させられます。
 
--   Add to `PS_Input` in vertex and fragment shader new field
+-   頂点シェーダーとフラグメントシェーダーの `PS_Input` に新しいフィールドを追加します
 
 <CodeHeader></CodeHeader>
 
@@ -120,7 +115,7 @@ For entity shaders, you can make the shader dependent on the camera direction to
 float3 viewDir: POSITION;
 ```
 
--   After that, add to vertex shader this line
+-   そのあと、頂点シェーダーに次の行を追加します
 
 <CodeHeader></CodeHeader>
 
@@ -128,11 +123,11 @@ float3 viewDir: POSITION;
 PSInput.viewDir = normalize((mul(WORLD, mul(BONES[VSInput.boneId], float4(VSInput.position, 1)))).xyz);
 ```
 
--   In the fragment shader, use `PSInput.viewDir` to make changes depending on camera rotation
+-   フラグメントシェーダーでは、`PSInput.viewDir` を使ってカメラ回転に応じた変更を加えます
 
-### Debugging values
+### 値のデバッグ
 
-The easiest way to debug a value is to turn it into color and render it like this.
+値をデバッグする最も簡単な方法は、色に変換してこのように描画することです。
 
 <CodeHeader></CodeHeader>
 
@@ -140,10 +135,10 @@ The easiest way to debug a value is to turn it into color and render it like thi
 PSOutput.color = float4(PSInput.uv, 0., 1.);
 ```
 
-This should create a red-green gradient, showing that the values of `uv` are between `<0, 0>` and `<1, 1>`.
+これで赤から緑へのグラデーションが作られ、`uv` の値が `<0, 0>` から `<1, 1>` の間にあることが分かります。
 
-You can use the debug shader I wrote [based on this shader](http://mew.cx/drawtext/drawtext).
-Right now, this shader will display values of the color passed to the shader. To display another value, change line 70 in hlsl shader to
+このシェーダーをもとに私が書いたデバッグシェーダー [based on this shader](http://mew.cx/drawtext/drawtext) を使うこともできます。
+このシェーダーは、現在は渡された色の値を表示します。別の値を表示したい場合は、hlsl シェーダーの 70 行目を次のように変更します。
 
 <CodeHeader></CodeHeader>
 
@@ -151,8 +146,8 @@ Right now, this shader will display values of the color passed to the shader. To
 int ascii = getFloatCharacter( cellIndex, <float4 vector here> );
 ```
 
-GLSL version of debugging shader may crash Minecraft, use only for debugging.
+GLSL 版のデバッグシェーダーは Minecraft をクラッシュさせる可能性があるため、デバッグ用途のみに使ってください。
 
-[Download debug shader](http://files.stirante.com/debugShader.zip)
+[デバッグシェーダーをダウンロード](http://files.stirante.com/debugShader.zip)
 
 ![](debugShader.gif)

@@ -1,5 +1,5 @@
 ---
-title: Materials
+title: Material
 tags:
     - expert
 category: General
@@ -8,23 +8,23 @@ mentions:
     - Joelant05
     - MedicalJewel105
     - Lufurrius
-description: Learn about materials in Minecraft Bedrock.
+description: Minecraft Bedrock の Material について学びます。
 ---
 
 :::warning
-Materials are not for the faint of heart. Be prepared for potential crashes, content log errors, and long loading times.
+Material は扱いが難しいです。クラッシュ、コンテンツログエラー、長い読み込み時間が起こりうることを覚悟してください。
 :::
 
-## Overview
+## 概要
 
-Materials are used to specify the shaders that render the different parts of the game, along with states and settings the shaders should consider for each element.
-At the moment, most things in the game are hard-coded to use specific material and may not be assigned new ones. The only way to change how these elements are rendered is by editing their materials directly (potentially having unintentional effects on other parts) or creating new shaders (an old experimental feature no longer officially supported by Mojang). The only elements that allow default or custom materials to be assigned or removed are entities and particles.
+Material は、ゲームのさまざまな部分を描画する shader と、その各要素が考慮すべき状態や設定を指定するために使われます。
+現時点では、ゲーム内のほとんどのものは特定の material を使うようハードコードされており、新しいものを割り当てられない場合があります。これらの見た目を変える唯一の方法は、material を直接編集するか（他の部分に意図しない影響が出る可能性があります）、新しい shader を作ることです（これは昔の実験機能で、現在は Mojang による正式サポートはありません）。デフォルトまたはカスタム material を割り当てたり外したりできるのは、エンティティとパーティクルだけです。
 
-If you are not prepared to go in-depth with the ins and outs, material presets can be found [here](/documentation/materials).
+仕組みを深く掘り下げる準備ができていない場合は、material プリセットを [こちら](/documentation/materials) で確認できます。
 
-## Syntax and Structure
+## 構文と構造
 
-Most materials inherit the settings of previously defined materials, then further building off of them. This is written in the following format:
+ほとんどの material は、既存の material の設定を継承して、その上にさらに構築します。書式は次のとおりです。
 
 <CodeHeader>RP/materials/name.material</CodeHeader>
 
@@ -40,10 +40,10 @@ Most materials inherit the settings of previously defined materials, then furthe
 ```
 
 :::warning
-Although it may look similar, do not confuse material format files in packs. There are no namespaces used in materials.
+見た目は似ていますが、パック内の material 形式ファイルと混同しないでください。material では namespace は使われません。
 :::
 
-Some material files contain extensive branching trees of materials. For example, nearly all of the materials used by default entities are ultimately derivatives of the material `entity_static` in the entity.material file. If we look at the material used by the current villagers:
+一部の material ファイルには、material の分岐ツリーが広く含まれています。たとえば、既定のエンティティが使う material のほとんどは、最終的に entity.material ファイル内の `entity_static` から派生しています。現在の村人に使われている material を見てみると:
 
 <CodeHeader></CodeHeader>
 
@@ -53,8 +53,8 @@ Some material files contain extensive branching trees of materials. For example,
 },
 ```
 
-We can see that the material's name is `villager_v2_masked` and builds off the material named `entity_multitexture_masked`.
-Scrolling up in the file, we can find "entity_multitexture_masked" inheriting the settings from "entity_alphatest" and building further onto it:
+この material の名前が `villager_v2_masked` で、`entity_multitexture_masked` という material を基にしていることが分かります。
+ファイルを上にたどると、`entity_multitexture_masked` が `entity_alphatest` の設定を継承して、さらにその上に積み重ねていることが分かります。
 
 <CodeHeader></CodeHeader>
 
@@ -76,7 +76,7 @@ Scrolling up in the file, we can find "entity_multitexture_masked" inheriting th
 }
 ```
 
-"entity_alphatest" can then be followed to "entity_nocull"
+その `entity_alphatest` は `entity_nocull` へたどれます。
 
 <CodeHeader></CodeHeader>
 
@@ -95,7 +95,7 @@ Scrolling up in the file, we can find "entity_multitexture_masked" inheriting th
 }
 ```
 
-which can be followed to plain "entity"
+これは通常の `entity` へとつながります。
 
 <CodeHeader></CodeHeader>
 
@@ -107,7 +107,7 @@ which can be followed to plain "entity"
 }
 ```
 
-which can then finally be followed to "entity_static"
+そして最終的に `entity_static` へとつながります。
 
 <CodeHeader></CodeHeader>
 
@@ -121,7 +121,7 @@ which can then finally be followed to "entity_static"
 
 ```
 
-"entity_static" doesn't have a colon followed by another material, indicating that it's the bottom of this inheritance tree.
+`entity_static` にはコロンの後に別の material が続いていません。これは、この継承ツリーの最下部にあることを示しています。
 
 <CodeHeader></CodeHeader>
 
@@ -202,13 +202,13 @@ which can then finally be followed to "entity_static"
 }
 ```
 
-## 1.16.100+ Notes
+## 1.16.100+ の注意
 
-Warning for anybody who uses custom materials!
+カスタム material を使う人向けの注意です。
 
-Custom material inheriting is no longer valid and causes content log errors the workaround Is to define the material fully custom with just the prefix and material name.
+カスタム material の継承は現在無効で、コンテンツログエラーの原因になります。回避策は、接頭辞と material 名だけを使って material を完全にカスタム定義することです。
 
-This was not an issue before 1.16.100.
+これは 1.16.100 以前には問題ではありませんでした。
 
 ```json
 {

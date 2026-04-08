@@ -1,6 +1,6 @@
 ---
-title: Item Catalog
-description: Learn how to specify where items appear in the creative menu and recipe book, as well as how to add your own expandable groups to the creative menu.
+title: アイテムカタログ
+description: アイテムをクリエイティブメニューやレシピブックのどこに表示するかを指定する方法と、クリエイティブメニューに独自の展開可能なグループを追加する方法を学びます。
 category: General
 related:
     - /items/vanilla-item-groups
@@ -10,10 +10,10 @@ mentions:
     - QuazChick
 ---
 
-The crafting item catalog file is used to specify where items appear in the creative menu and recipe book.
+crafting item catalog ファイルは、アイテムをクリエイティブメニューやレシピブックのどこに表示するかを指定するために使います。
 
-First of all, you need to create a file named `crafting_item_catalog.json` in the `item_catalog` folder of your behavior pack.
-Below is the basic JSON format which you should include in the file:
+まず、behavior pack の `item_catalog` フォルダに `crafting_item_catalog.json` というファイルを作成する必要があります。
+以下は、このファイルに含める基本的な JSON 形式です。
 
 <CodeHeader>BP/item_catalog/crafting_item_catalog.json</CodeHeader>
 
@@ -26,19 +26,19 @@ Below is the basic JSON format which you should include in the file:
 }
 ```
 
-## Adding Items
+## アイテムの追加
 
-First, you need to decide which category your items should be placed into.
-This determines which tab the items are under in the creative menu and recipe book.
+まず、アイテムをどのカテゴリに入れるかを決める必要があります。
+これによって、クリエイティブメニューとレシピブックのどのタブに表示されるかが決まります。
 
-The four available categories are:
+使用できるカテゴリは次の 4 つです。
 
 -   `"construction"`{lang=json}
 -   `"equipment"`{lang=json}
 -   `"items"`{lang=json}
 -   `"nature"`{lang=json}
 
-For example, if we were adding items to the "Nature" tab, a new entry would be created in the `categories` array specifying `"nature"`{lang=json} as the `category_name`:
+例えば、"Nature" タブにアイテムを追加する場合は、`categories` 配列に新しい項目を作成し、`category_name` として `"nature"`{lang=json} を指定します。
 
 <CodeHeader>BP/item_catalog/crafting_item_catalog.json</CodeHeader>
 
@@ -56,11 +56,11 @@ For example, if we were adding items to the "Nature" tab, a new entry would be c
 }
 ```
 
-Items are added to each category of the item catalog in groups.
-To add a new group of items, you'll need to make a new entry in the category's `groups` array.
+アイテムは、アイテムカタログの各カテゴリにグループ単位で追加されます。
+新しいアイテムグループを追加するには、そのカテゴリの `groups` 配列に新しい項目を作成する必要があります。
 
-The following example adds two custom ore blocks to the "Nature" category.
-Note that custom groups in the item catalog will appear after vanilla groups.
+次の例では、2 つのカスタム鉱石ブロックを "Nature" カテゴリに追加しています。
+アイテムカタログ内のカスタムグループは、バニラのグループの後に表示される点に注意してください。
 
 <CodeHeader>minecraft:crafting_items_catalog > categories</CodeHeader>
 
@@ -75,15 +75,15 @@ Note that custom groups in the item catalog will appear after vanilla groups.
 }
 ```
 
-### Expandable Groups
+### 展開可能なグループ
 
-For creative mode players, you have the option to make groups of items expandable and collapsible.
-This can be achieved by adding the `group_identifier` parameter to the group.
+クリエイティブモードのプレイヤー向けに、アイテムグループを展開・折りたたみできるようにすることができます。
+これは、グループに `group_identifier` パラメーターを追加することで実現できます。
 
--   `icon` determines the item to display as the group's icon.
--   `name` is the localization key to use as the name of the group. It can also be used to reference the group in the `menu_category` parameter of items and blocks.
+-   `icon` は、グループのアイコンとして表示するアイテムを指定します。
+-   `name` は、グループ名として使うローカライズキーです。アイテムやブロックの `menu_category` パラメーターでグループを参照するためにも使えます。
 
-Let's use the `group_identifier` parameter to make our custom ore group take up less space in the creative menu!
+`group_identifier` パラメーターを使って、カスタム鉱石グループがクリエイティブメニューで占めるスペースを減らしてみましょう。
 
 <CodeHeader>minecraft:crafting_items_catalog > categories</CodeHeader>
 
@@ -108,4 +108,4 @@ Let's use the `group_identifier` parameter to make our custom ore group take up 
 wiki:itemGroup.name.ore=Custom Ores
 ```
 
-And that's it! You now know how to add a custom group for your items to the item catalog.
+これで完了です。これで、アイテムカタログにアイテム用のカスタムグループを追加する方法が分かりました。

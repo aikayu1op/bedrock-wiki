@@ -1,5 +1,5 @@
 ---
-title: Binary in Commands
+title: コマンドにおける二進数
 category: Techniques
 mentions:
     - BedrockCommands
@@ -7,18 +7,18 @@ mentions:
 nav_order: 4
 tags:
     - concept
-description: Master the use of binary systems to optimize command efficiency and handle large-scale data.
+description: 二進数を活用してコマンドを最適化し、大規模なデータを扱う方法を学びます。
 ---
 
-## Introduction
+## はじめに
 
-**Binary** (Base-2) is a mathematical system that allows you to represent any integer using only two states: `0` (Off/False) and `1` (On/True). 
+**二進数**（Base-2）は、`0`（Off/False）と `1`（On/True）の2つの状態だけで任意の整数を表現できる数体系です。
 
-While humans typically use Base-10 (0–9), computers use Binary to perform complex tasks. In a way, they can also be used in command systems like bulk item selling or coordinate detection—with significantly fewer commands than linear methods would require.
+人間は通常 10 進数（0〜9）を使いますが、コンピューターは複雑な処理を行うために二進数を使います。コマンドの世界でも、まとめ売りや座標検出のような処理に応用でき、直列的な方法よりもはるかに少ないコマンドで済みます。
 
-## How Binary Works
+## 二進数の仕組み
 
-In a binary system, each digit is called a **bit**. Each bit's position represents a specific power of 2, increasing from right to left.
+二進数では、各桁を **bit** と呼びます。各 bit の位置は 2 の累乗を表し、右から左へ向かって値が大きくなります。
 
 | Bit Position | Power | Value |
 | :--- | :--- | :--- |
@@ -28,52 +28,52 @@ In a binary system, each digit is called a **bit**. Each bit's position represen
 | 4th | `2^3` | **8** |
 | 5th | `2^4` | **16** |
 
-### Conversion Example
+### 変換例
 
-To convert the binary number `1101` to a standard number, you sum the values of the positions where a `1` is present:
+二進数 `1101` を通常の数に変換するには、`1` が立っている桁の値を足し合わせます。
 
-- **1** in the 8s place (`2^3`)
-- **1** in the 4s place (`2^2`)
-- **0** in the 2s place (`2^1`)
-- **1** in the 1s place (`2^0`)
+- **1** は 8 の位 (`2^3`)
+- **1** は 4 の位 (`2^2`)
+- **0** は 2 の位 (`2^1`)
+- **1** は 1 の位 (`2^0`)
 
 `8 + 4 + 0 + 1 = 13`
 
-## Implementation in Bedrock Commands
+## Bedrock コマンドでの実装
 
-The primary advantage of binary in commands is **optimization**. Instead of running 64 commands to check if a player has 1 to 64 items, you can use just **7 binary steps** ($2^0$ through $2^6$).
+コマンドで二進数を使う最大の利点は **最適化** です。プレイヤーが 1 個から 64 個までのアイテムを持っているかを確認するのに 64 個のコマンドを走らせる代わりに、**7 つの二進ステップ**（$2^0$ から $2^6$）だけで済みます。
 
-### Example: Binary Shop System
-This system clears items from a player's inventory and rewards them with a scoreboard currency. By checking for the largest possible power of 2 first, the system "deconstructs" any stack size efficiently.
+### 例: 二進数ショップシステム
+このシステムはプレイヤーのインベントリからアイテムを取り除き、スコアボード通貨を付与します。最初に可能な最大の 2 の累乗を確認することで、どんなスタック数でも効率よく「分解」できます。
 
 <CodeHeader></CodeHeader>
 
 ```yaml
-## Check For 64 (2^6)
+## 64 を確認 (2^6)
 execute as @a[hasitem={item=bread,quantity=64..}] run scoreboard players add @s wiki:money 64
 execute as @a[hasitem={item=bread,quantity=64..}] run clear @s bread 0 64
 
-## Check For 32 (2^5)
+## 32 を確認 (2^5)
 execute as @a[hasitem={item=bread,quantity=32..}] run scoreboard players add @s wiki:money 32
 execute as @a[hasitem={item=bread,quantity=32..}] run clear @s bread 0 32
 
-## Check For 16 (2^4)
+## 16 を確認 (2^4)
 execute as @a[hasitem={item=bread,quantity=16..}] run scoreboard players add @s wiki:money 16
 execute as @a[hasitem={item=bread,quantity=16..}] run clear @s bread 0 16
 
-## Check For 8 (2^3)
+## 8 を確認 (2^3)
 execute as @a[hasitem={item=bread,quantity=8..}] run scoreboard players add @s wiki:money 8
 execute as @a[hasitem={item=bread,quantity=8..}] run clear @s bread 0 8
 
-## Check For 4 (2^2)
+## 4 を確認 (2^2)
 execute as @a[hasitem={item=bread,quantity=4..}] run scoreboard players add @s wiki:money 4
 execute as @a[hasitem={item=bread,quantity=4..}] run clear @s bread 0 4
 
-## Check For 2 (2^1)
+## 2 を確認 (2^1)
 execute as @a[hasitem={item=bread,quantity=2..}] run scoreboard players add @s wiki:money 2
 execute as @a[hasitem={item=bread,quantity=2..}] run clear @s bread 0 2
 
-## Check For 1 (2^0)
+## 1 を確認 (2^0)
 execute as @a[hasitem={item=bread,quantity=1..}] run scoreboard players add @s wiki:money 1
 execute as @a[hasitem={item=bread,quantity=1..}] run clear @s bread 0 1
 ```
@@ -81,16 +81,16 @@ execute as @a[hasitem={item=bread,quantity=1..}] run clear @s bread 0 1
 ![Chain of 14 Command Blocks](/assets/images/commands/command-block-chain/14.png)
 
 > [!TIP]
-> **Why use this?** If a player has 50 bread, the system clears 32, then 16, then 2 ($32+16+2=50$). This process takes only 3 successful checks, whereas a linear system would take 50.
+> **なぜ使うのか?** プレイヤーがパンを 50 個持っている場合、このシステムは 32、16、2 の順で消費します（$32+16+2=50$）。この処理は成功判定 3 回で済みますが、直列方式なら 50 回必要になります。
 
-## Advanced Use Cases
+## 応用例
 
-### Get Coordinate as Scores
+### 座標をスコアとして取得する
 
-Detecting a player's exact X, Y, or Z coordinate is performed using a **Binary Search Tree**. Instead of checking every possible coordinate, you use a series of `execute` commands to narrow down the player's position relative to a fixed point.
+プレイヤーの正確な X、Y、Z 座標を検出するには、**二分探索木** を使います。考えられる座標をすべて調べるのではなく、一連の `execute` コマンドで固定点から見た位置を絞り込みます。
 
-By checking if a player is within a volume of 32,768 blocks, then 16,384, and so on down to 1 block, you can pinpoint their exact position across the world in just **16 steps**. This is the most performance-efficient way to convert spatial data into scoreboard integers for use in calculations or teleports.
+プレイヤーが 32,768 ブロック、次に 16,384 ブロック、その次は ... と 1 ブロックまでの範囲内にいるかを確認していけば、**16 ステップ** だけでワールド全体の正確な位置を特定できます。これは、空間データを計算やテレポートに使えるスコアボード整数へ変換する最も高効率な方法です。
 
-### Implementation With MEF
+### MEF での実装
 
-You can also incorporate a binary tree into **[Multiplicative Execution Forking (MEF)](/commands/execution-forking)** to create complex geometries, terrain, or custom generations, such as a village or backrooms, **with a single command!**
+**[Multiplicative Execution Forking (MEF)](/commands/execution-forking)** に二分木を組み込めば、村やバックルームのような複雑な形状、地形、カスタム生成を **1つのコマンドだけで** 作れます。

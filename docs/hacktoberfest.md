@@ -1,6 +1,6 @@
 ---
 title: Hacktoberfest
-description: Participate in Hacktoberfest and contribute to the Wiki!
+description: Hacktoberfest に参加して Wiki に貢献しよう！
 show_contributors: false
 show_outline: false
 hidden: true
@@ -11,97 +11,97 @@ hidden: true
     dark: 'hf10_horz_fcl_rgb.png',
     light: 'hf10_horz_fcd_rgb.png'
   }"
-  alt="Hacktoberfest Logo"
+  alt="Hacktoberfest ロゴ"
   width="600"
 />
 
-Hacktoberfest is a month-long celebration of open source celebration dedicated to the improvement and growth of the open source technology. Throughout the month of October, everyone is invited to join open-source software enthusiasts, beginners, and the developer community by contributing to open-source projects.
-This annual event plays a huge role in encouraging meaningful contributions to the open-source ecosystem, promoting open-source projects, and supporting a healthy community that welcomes all.
+Hacktoberfest は、オープンソース技術の改善と成長に向けた、1 か月間のオープンソース祝賀イベントです。10 月のあいだ、オープンソースソフトウェアの愛好者、初心者、開発者コミュニティの誰もが、オープンソースプロジェクトへ貢献する形で参加できます。
+この年次イベントは、意味のある貢献をオープンソースのエコシステムに促し、オープンソースプロジェクトを広め、誰でも歓迎する健全なコミュニティを支えるうえで大きな役割を果たしています。
 
-We as a bedrock OSS want to help as well and are looking for contributors for the open source projects, see project you can help on in the [Where to contribute section](#where-to-contribute). If you don't know how to help, we suggest reading [How to get started](#how-to-get-started).
+私たち bedrock OSS も力になりたいと考えており、オープンソースプロジェクトの貢献者を募集しています。手伝えるプロジェクトは [どこに貢献するか](#where-to-contribute) を見てください。どう手伝えばよいかわからない場合は、[始め方](#how-to-get-started) を読むことをおすすめします。
 
-:::warning Attention!
-After ten years the Hacktoberfest is moving from the historical t-shirt reward to a digital reward kit, you can learn more [here](https://hacktoberfest.com/about/#digital-rewards).
+:::warning 注意！
+10 年を経て、Hacktoberfest は従来の T シャツ報酬からデジタル報酬キットへ移行しています。詳しくは [こちら](https://hacktoberfest.com/about/#digital-rewards) をご覧ください。
 :::
 
-## How to Get Started
+## 始め方
 
-Read the official [Hacktoberfest guide](https://hacktoberfest.com/participation/#beginner-resources) to get started. After that, check out the organizations/projects bellow. If you have any doubts you can [join the discord](https://discord.gg/XjV87YN) to get in touch, we are friendly people!
+まずは公式の [Hacktoberfest ガイド](https://hacktoberfest.com/participation/#beginner-resources) を読んで始めてください。そのあと、下の組織やプロジェクトを確認しましょう。疑問があれば [discord に参加](https://discord.gg/XjV87YN) して連絡してください。親切な人たちがいます！
 
-## Where to Contribute
+## どこに貢献するか
 
-Below is a list of organizations and their projects that are participating in Hacktoberfest.
+以下は、Hacktoberfest に参加している組織とそのプロジェクトの一覧です。
 
 <CardGrid>
 <Card title="Bedrock OSS" link="https://github.com/Bedrock-OSS" image="bedrockoss.png">
 
 [Bedrock Loot Gen](https://github.com/Bedrock-OSS/bedrock-loot-gen) —
-A website for creating Bedrock Edition loot tables.
+Bedrock Edition のルートテーブルを作成するための Web サイト。
 
 [Bedrock Wiki](https://github.com/Bedrock-OSS/bedrock-wiki) —
-A knowledge-sharing website for technical features of Minecraft Bedrock.
+Minecraft Bedrock の技術的な機能についての知識共有サイト。
 
 [Regolith](https://github.com/Bedrock-OSS/regolith) —
-An add-on compiler for the Bedrock Edition of Minecraft.
+Bedrock Edition の Minecraft 向けアドオンコンパイラ。
 
-_See all participating Bedrock OSS projects [here](https://github.com/orgs/Bedrock-OSS/repositories?q=topic%3Ahacktoberfest)._
+_参加中の Bedrock OSS プロジェクトの一覧は [こちら](https://github.com/orgs/Bedrock-OSS/repositories?q=topic%3Ahacktoberfest) から確認できます。_
 
 </Card>
 <Card title="Blockception" link="https://github.com/Blockception" image="blockception.png">
   
 [Minecraft Error Codes](https://github.com/Blockception/Minecraft-Error-Codes) —
-Every error code the plugin can throw, with explanations of the error
+プラグインが投げうるすべてのエラーコードと、その説明。
 
 [Minecraft JSON Schemas](https://github.com/Blockception/Minecraft-bedrock-json-schemas) —
-The JSON validation schema files for Minecraft Bedrock.
+Minecraft Bedrock 用の JSON 検証スキーマファイル。
 
 [VSCode Development Extension](https://github.com/Blockception/VSCode-Bedrock-Development-Extension) —
-An extension that is used for Minecraft Bedrock Development.
+Minecraft Bedrock 開発に使う拡張機能。
 
-_See all participating Bedrock OSS projects [here](https://github.com/orgs/Blockception/repositories?q=topic%3Ahacktoberfest)._
+_参加中の Bedrock OSS プロジェクトの一覧は [こちら](https://github.com/orgs/Blockception/repositories?q=topic%3Ahacktoberfest) から確認できます。_
 
 </Card>
 <Card title="SirLich" link="https://github.com/SirLich" image="sirlich.png">
   
 [Bedrock Schema Docs](https://github.com/SirLich/bedrock-schema-docs) —
-Auto-generated documentation from the schemas by Blockception.
+Blockception のスキーマから自動生成されたドキュメント。
 
 [Reticulator](https://github.com/SirLich/reticulator) —
-Minecraft Bedrock pack-access library.
+Minecraft Bedrock の pack-access ライブラリ。
 
-_See all participating projects by SirLich [here](https://github.com/SirLich/repositories?q=topic%3Ahacktoberfest)._
+_SirLich の参加中プロジェクトの一覧は [こちら](https://github.com/SirLich/repositories?q=topic%3Ahacktoberfest) から確認できます。_
 
 </Card>
 <Card title="MCDevKit" link="https://github.com/MCDevKit" image="mcdevkit.png">
   
 [jsonte](https://github.com/MCDevKit/jsonte) —
-JSON Templating Engine for generating JSON files easily for Minecraft Bedrock Add-On development.
+Minecraft Bedrock Add-On 開発向けに JSON ファイルを簡単に生成できる JSON テンプレートエンジン。
 
-_See all participating MCDevKit projects [here](https://github.com/orgs/MCDevKit/repositories?q=topic%3Ahacktoberfest)._
+_MCDevKit の参加中プロジェクトの一覧は [こちら](https://github.com/orgs/MCDevKit/repositories?q=topic%3Ahacktoberfest) から確認できます。_
 
 </Card>
 <Card title="bridge." link="https://github.com/bridge-core" image="bridge.png">
   
 [bridge. Documentation](https://github.com/bridge-core/docs) —
-Documentation aiming to introduce users to bridge. and its features.
+bridge. とその機能を紹介することを目的としたドキュメント。
 
 [bridge. Editor](https://github.com/bridge-core/editor) —
-bridge. is an IDE designed for creating Minecraft Bedrock Add-Ons.
+bridge. は Minecraft Bedrock Add-On 作成向けに設計された IDE です。
 
 [Dash Compiler](https://github.com/bridge-core/dash-compiler) —
-The Dash compiler is a fast, reliable and platform agnostic compiler for Minecraft Bedrock Edition.
+Dash コンパイラは、Minecraft Bedrock Edition 向けの高速で信頼性が高く、プラットフォーム非依存のコンパイラです。
 
 [Deno Dash Compiler](https://github.com/bridge-core/deno-dash-compiler) —
-A standalone implementation of the Dash compiler inside of [Deno](https://deno.land/).
+[Deno](https://deno.land/) 内で動く、Dash コンパイラのスタンドアロン実装です。
 
 [Molang Parser](https://github.com/bridge-core/molang) —
-A fast Molang parser for JavaScript and TypeScript applications.
+JavaScript と TypeScript アプリケーション向けの高速な Molang パーサー。
 
-_See all participating bridge. projects [here](https://github.com/orgs/bridge-core/repositories?q=topic%3Ahacktoberfest)._
+_bridge. の参加中プロジェクトの一覧は [こちら](https://github.com/orgs/bridge-core/repositories?q=topic%3Ahacktoberfest) から確認できます。_
 
 </Card>
 </CardGrid>
 
-## Thank you
+## お礼
 
-If you are reading this, that means that you're interested in contributing to open source projects, and that's awesome! We hope you have a great time contributing to the projects listed above, and we hope to see you become a part of our community!
+これを読んでいるということは、オープンソースプロジェクトへの貢献に興味があるということです。それは素晴らしいことです。上に挙げたプロジェクトへの貢献を楽しんでもらえたらうれしいですし、いずれあなたが私たちのコミュニティの一員になることを願っています。

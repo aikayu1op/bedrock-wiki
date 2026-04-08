@@ -1,39 +1,39 @@
 ---
-title: Custom Crafting
+title: カスタムクラフト
 category: Useful Creations
 tags:
     - easy
 mentions:
     - TwigYT
     - zheaEvyline
-description: Command to simulate a crafting table using droppers.
+description: ドロッパーを使ってクラフトテーブルを再現するコマンドです。
 ---
 
-## Introduction
+## はじめに
 
-In this guide, you will learn how to simulate a crafting table using droppers to essentially create a "custom crafting" system with only one command! Some use cases include: A way to craft weapons with enchantments or a custom name for a server or an adventure map.
+このガイドでは、ドロッパーを使ってクラフトテーブルを再現し、実質的に 1 つのコマンドだけで「カスタムクラフト」システムを作る方法を学びます。用途の例としては、サーバーやアドベンチャーマップで、エンチャント付きの武器やカスタム名付きアイテムをクラフトする方法があります。
 
-Note: The position of the custom crafter in this guide is fixed. For a more dynamic approach which allows you to place it anywhere in the world, you may check out @CrunchyCookie's video on [Custom Crafting](https://www.youtube.com/watch?v=pzQzldaSORs) on YouTube.
+注: このガイドにおけるカスタムクラフターの位置は固定です。ワールドのどこにでも配置できる、より動的な方法については、@CrunchyCookie の [Custom Crafting](https://www.youtube.com/watch?v=pzQzldaSORs) の YouTube 動画を参照してください。
 
 :::tip
-To create custom crafting recipes that use the crafting table, see [this](/loot/recipes) wiki page.
+クラフトテーブルを使うカスタムクラフトレシピを作成する場合は、[こちら](/loot/recipes) の wiki ページを参照してください。
 :::
 
 ## Setup
 
-For this system, you will require two droppers per custom recipe item you want to add:
+このシステムでは、追加したいカスタムレシピアイテムごとに 2 つのドロッパーが必要です。
 
-1. Dropper containing the Recipe.
-2. Dropper containing the Recipe Output.
+1. レシピを入れたドロッパー。
+2. レシピの出力を入れたドロッパー。
 
-Example:
+例:
 
 <WikiImage src="recipe.png" alt="Custom Recipe" width="200" pixelated />
 <WikiImage src="recipe-output.png" alt="Custom Recipe Output" width="200" pixelated />
 
-These two droppers are normally placed near your command blocks, or in a place which cannot be accessed by players other than operators.
+この 2 つのドロッパーは通常、コマンドブロックの近くか、オペレーター以外のプレイヤーがアクセスできない場所に置きます。
 
-To complete the setup, place down one final dropper where you want players to be able to perform custom crafting. This will be used as your custom **crafter**.
+セットアップを完了するには、プレイヤーにカスタムクラフトを行わせたい場所に最後のドロッパーを 1 つ置きます。これがカスタム **クラフター** になります。
 
 ## System
 
@@ -46,16 +46,16 @@ execute if blocks <recipe> <recipe> <crafter> masked run clone <recipe_output> <
 
 ![One repeating Command Block](/assets/images/commands/command-block-chain/1.png)
 
-**Definitions:**
+**定義:**
 
--   `<crafter>` — input (x,y,z) coordinates for the dropper that will be used as the **crafter**.
--   `<recipe>` — input (x,y,z) coordinates for the dropper which contains your **recipe**.
--   `<recipe_output>` — input (x,y,z) coordinates for the dropper which contains the **output** for your recipe.
+-   `<crafter>` — **クラフター** として使うドロッパーの入力座標 (x,y,z)。
+-   `<recipe>` — **レシピ** を入れたドロッパーの入力座標 (x,y,z)。
+-   `<recipe_output>` — レシピの **出力** を入れたドロッパーの入力座標 (x,y,z)。
 
-For convenience, you may download the .mcstructure sample shared by @TwigYT:
+必要であれば、@TwigYT が共有した .mcstructure のサンプルをダウンロードできます。
 
 <Button link="/assets/packs/commands/custom-crafting/custom_crafter_example.mcstructure" download>
-    Download Sample MCSTRUCTURE
+    サンプル MCSTRUCTURE をダウンロード
 </Button>
 
 <WikiImage
@@ -64,11 +64,11 @@ For convenience, you may download the .mcstructure sample shared by @TwigYT:
     width=800
 />
 
-> Note: After importing the structure using a structure block, you will still need to replace the values in the command blocks as defined above.
+> 注: 構造ブロックで構造物を取り込んだあとも、上で定義したとおりにコマンドブロック内の値を置き換える必要があります。
 
-## Tips
+## ヒント
 
-You may add a playsound command to slightly enhance the crafting experience like so:
+次のように `playsound` コマンドを追加すると、クラフト体験を少しだけ向上させられます。
 
 <CodeHeader>BP/functions/wiki/custom_crafting.mcfunction</CodeHeader>
 
@@ -81,4 +81,4 @@ execute if blocks <recipe> <recipe> <crafter> masked run clone <recipe_out> <rec
 
 ![Chain of Two Command Blocks](/assets/images/commands/command-block-chain/2.png)
 
-To take it a step further, you may also use [MBE](/commands/block-entities) or [Fox MBE](/commands/display-entities) to give the dropper the texture of a crafting table or a smithing table as an overlay.
+さらに進めるなら、[MBE](/commands/block-entities) や [Fox MBE](/commands/display-entities) を使って、ドロッパーにクラフトテーブルや鍛冶台の見た目をオーバーレイとして与えることもできます。

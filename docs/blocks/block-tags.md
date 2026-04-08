@@ -1,6 +1,6 @@
 ---
-title: Block Tags
-description: Block tags are used when checking for multiple types of block and can enable vanilla functionality.
+title: ブロックタグ
+description: ブロックタグは、複数種類のブロックを判定するときに使われ、バニラ機能を有効にできます。
 category: General
 nav_order: 3
 related:
@@ -21,12 +21,12 @@ mentions:
     - Xterionix
 ---
 
-Block tags are used when checking for multiple types of block and can enable vanilla functionality.
-For a list of vanilla block tags and their functionality, visit [this page](/blocks/vanilla-block-tags).
+ブロックタグは、複数種類のブロックを判定するときに使われ、バニラ機能を有効にできます。
+利用可能なバニラのブロックタグとその機能については、[このページ](/blocks/vanilla-block-tags) を参照してください。
 
-## Applying Tags
+## タグの適用
 
-Block tags can be applied in the block's `components`, prefixed with `tag:`, as seen below:
+ブロックタグは、次のように `tag:` を前置してブロックの `components` に適用できます。
 
 <CodeHeader>BP/blocks/tree_stump.json</CodeHeader>
 
@@ -49,14 +49,14 @@ Block tags can be applied in the block's `components`, prefixed with `tag:`, as 
 }
 ```
 
-## Testing for Tags
+## タグのテスト
 
-### Block Descriptor
+### ブロック記述子
 
 -   `q.all_tags(...tags)`{lang=molang}
-    -   Returns whether the block has all of the listed tags.
+    -   指定したタグをすべて持っているかを返します。
 -   `q.any_tag(...tags)`{lang=molang}
-    -   Returns whether the block has at least one of the listed tags.
+    -   指定したタグのうち少なくとも 1 つを持っているかを返します。
 
 <CodeHeader>Block Descriptor</CodeHeader>
 
@@ -66,16 +66,16 @@ Block tags can be applied in the block's `components`, prefixed with `tag:`, as 
 }
 ```
 
-### Entity Molang
+### エンティティ Molang
 
 -   `q.block_has_all_tags(x, y, z, ...tags)`{lang=molang}
-    -   Returns whether the block at the specified coordinates has all of the listed tags.
+    -   指定座標のブロックが、列挙したタグをすべて持っているかを返します。
 -   `q.block_has_any_tag(x, y, z, ...tags)`{lang=molang}
-    -   Returns whether the block at the specified coordinates has at least one of the listed tags.
+    -   指定座標のブロックが、列挙したタグのうち少なくとも 1 つを持っているかを返します。
 -   `q.relative_block_has_all_tags(x, y, z, ...tags)`{lang=molang}
-    -   Returns whether the block at the specified offset from the entity has all of the listed tags.
+    -   エンティティからの相対オフセット位置のブロックが、列挙したタグをすべて持っているかを返します。
 -   `q.relative_block_has_any_tag(x, y, z, ...tags)`{lang=molang}
-    -   Returns whether the block at the specified offset from the entity has at least one of the listed tags.
+    -   エンティティからの相対オフセット位置のブロックが、列挙したタグのうち少なくとも 1 つを持っているかを返します。
 
 <CodeHeader>minecraft:client_entity > description</CodeHeader>
 
@@ -87,16 +87,16 @@ Block tags can be applied in the block's `components`, prefixed with `tag:`, as 
 }
 ```
 
-### Additional Queries
+### 追加のクエリ
 
-**NOTE:** The following query functions have no known use cases.
+**注意:** 次のクエリ関数に既知の用途はありません。
 
 -   `q.block_neighbor_has_all_tags(x, y, z, ...tags)`{lang=molang}
 -   `q.block_neighbor_has_any_tag(x, y, z, ...tags)`{lang=molang}
 
-### Digger Example
+### 採掘ツールの例
 
-Example of an item querying a block's tags:
+ブロックのタグを参照するアイテムの例です。
 
 <CodeHeader>BP/items/custom_pickaxe.json</CodeHeader>
 

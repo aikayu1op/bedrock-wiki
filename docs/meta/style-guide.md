@@ -1,6 +1,6 @@
 ---
-title: Style Guide
-description: A guide for keeping Minecraft creations consistent.
+title: スタイルガイド
+description: Minecraft の制作物を一貫させるためのガイドです。
 mentions:
     - SirLich
     - solvedDev
@@ -10,20 +10,20 @@ mentions:
     - QuazChick
 ---
 
-This document will present the Bedrock Wiki style guide for add-on creation. This guide aims to promote best practices while creating add-ons and create a consistent format for everyone to follow.
+この文書では、Bedrock Wiki のアドオン制作向けスタイルガイドを紹介します。このガイドは、アドオン制作中のベストプラクティスを促し、誰もが従える一貫した形式を作ることを目的としています。
 
 :::tip
-The style guide is a living, breathing document, which will evolve as add-on creation evolves. Please get in touch if you think something needs to be updated or changed!
+スタイルガイドは生きている文書であり、アドオン制作の変化に合わせて進化します。更新や変更が必要だと思ったら、ぜひ連絡してください！
 :::
 
-## Folder Structure
+## フォルダー構成
 
--   No spaces in your file paths. `use_underscores`.
--   No `CAPITALS` in your identifiers, file names, or folder names. 'BP' and 'RP' folder names may use capitals.
--   The total character length of any path must not exceed 80 characters (console limitation).
--   Content folders should use consistent pluralization: Stick with names that are either all plural or all singular, don't mix and match. Example:
+-   ファイルパスにスペースを入れないでください。`use_underscores` を使いましょう。
+-   識別子、ファイル名、フォルダー名に `CAPITALS` を使わないでください。ただし `'BP'` と `'RP'` のフォルダー名は大文字でも構いません。
+-   どのパスも全体の文字数は 80 文字を超えないようにしてください（コンソールの制限）。
+-   コンテンツフォルダーは、複数形と単数形の使い方を統一してください。すべて複数形にするか、すべて単数形にするかのどちらかにして、混ぜないでください。例:
 
-✅️ **Consistent**:
+✅️ **統一されている**:
 
 ```
 BP/functions/wiki/ability/ice_blast.mcfunction
@@ -32,10 +32,10 @@ BP/functions/wiki/event/players/on_death.mcfunction
 BP/functions/wiki/event/worlds/on_initialize.mcfunction
 ```
 
--   All content folders `ability` and `event` are consistently singular.
--   The content folders in `event` are also consistent, as both `players` and `worlds` are plural.
+-   コンテンツフォルダー `ability` と `event` はどちらも単数形で統一されています。
+-   `event` フォルダー内のコンテンツフォルダーも、`players` と `worlds` の両方が複数形なので統一されています。
 
-❌️ **Inconsistent**:
+❌️ **統一されていない**:
 
 ```
 BP/functions/wiki/abilities/ice_blast.mcfunction
@@ -44,47 +44,47 @@ BP/functions/wiki/event/players/on_death.mcfunction
 BP/functions/wiki/event/world/on_initialize.mcfunction
 ```
 
--   Only `abilities` content folder is pluralized while `event` is singular.
--   Also, in the `event` folder, the `players` folder is plural while `world` is singular.
+-   `abilities` のコンテンツフォルダーだけが複数形で、`event` は単数形になっています。
+-   さらに `event` フォルダー内でも、`players` は複数形なのに `world` は単数形です。
 
-## Identifiers
+## 識別子
 
-Do not use identifiers that begin with a number, and especially don't use an identifier that is _only_ a number. This applies to entities, component_groups, events, and anything else that takes a `namespace:name` pair.
+数字で始まる識別子は使わないでください。特に、_数字だけ_ の識別子は避けてください。これは entities、component_groups、events、その他 `namespace:name` ペアを使うすべてに当てはまります。
 
-## File and Folder Names
+## ファイル名とフォルダー名
 
-| Concept               | Example                                                           |
-| --------------------- | ----------------------------------------------------------------- |
-| Behavior Pack         | dragons_BP                                                        |
-| Resource Pack         | dragons_RP                                                        |
-| Geometry              | dragon.geo.json                                                   |
-| Animations            | dragon.animation.json<br>dragon.anim.json                         |
-| Animation Controllers | dragon.animation_controllers.json<br>dragon.ac.json               |
-| Entity                | dragon.behavior.json<br>dragon.se.json<br>_(se: server entity)_   |
-| Client Entity         | dragon.entity.json<br>dragon.client_entity.json<br>dragon.ce.json |
-| Item                  | dragon_tooth.item.json                                            |
-| Legacy Item (BP)      | dragon_tooth.item.bp.json                                         |
-| Legacy Item (RP)      | dragon_tooth.item.rp.json                                         |
-| Render Controllers    | dragon.render_controllers.json<br>dragon.rc.json                  |
-| Loot Table            | dragon.json                                                       |
-| Recipe                | dragon_saddle.recipe.json                                         |
-| Spawn Rules           | dragon.spawn.json                                                 |
-| Trade Table           | dragon.json                                                       |
-| Particle Effect       | dragon_magic.particle.json                                        |
-| Texture               | dragon.png                                                        |
-| Script                | dragonFlight.js                                                   |
+| 概念 | 例 |
+| ---- | -- |
+| Behavior Pack | dragons_BP |
+| Resource Pack | dragons_RP |
+| Geometry | dragon.geo.json |
+| Animations | dragon.animation.json<br>dragon.anim.json |
+| Animation Controllers | dragon.animation_controllers.json<br>dragon.ac.json |
+| Entity | dragon.behavior.json<br>dragon.se.json<br>_(se: server entity)_ |
+| Client Entity | dragon.entity.json<br>dragon.client_entity.json<br>dragon.ce.json |
+| Item | dragon_tooth.item.json |
+| Legacy Item (BP) | dragon_tooth.item.bp.json |
+| Legacy Item (RP) | dragon_tooth.item.rp.json |
+| Render Controllers | dragon.render_controllers.json<br>dragon.rc.json |
+| Loot Table | dragon.json |
+| Recipe | dragon_saddle.recipe.json |
+| Spawn Rules | dragon.spawn.json |
+| Trade Table | dragon.json |
+| Particle Effect | dragon_magic.particle.json |
+| Texture | dragon.png |
+| Script | dragonFlight.js |
 
 ## Namespaces
 
-A suitable namespace should be unique to you or your team. Something like `mob` or `cars` or `content` or `custom` would be a **bad** namespace since another developer might come up with the same namespace as you.
+適切な namespace は、自分自身かチームだけに固有であるべきです。`mob`、`cars`、`content`、`custom` のような namespace は、他の開発者も同じ namespace を思いつく可能性があるため、**よくありません**。
 
-The `minecraft` namespace is reserved for vanilla content so cannot be used unless overriding vanilla content.
+`minecraft` namespace はバニラコンテンツ専用なので、バニラコンテンツを上書きする場合以外には使えません。
 
-For personal projects, use a convenient version of your player name, and for team projects, use a suitable version of your team name.
+個人プロジェクトでは自分の名前を少し変えたものを、チームプロジェクトではチーム名を少し変えたものを使ってください。
 
-When multiple developers work on a project together, the namespace should always be shared. If credit is required, use sub-indexing: `ascent.wiki:dragon`
+複数の開発者が同じプロジェクトで作業するときは、namespace は常に共有されるべきです。クレジットを区別したい場合はサブインデックスを使います。例: `ascent.wiki:dragon`
 
-Where to use namespaces:
+namespace を使う場所:
 
 -   Biomes
     -   Tags
@@ -103,9 +103,9 @@ Where to use namespaces:
     -   Tags
 -   Particles
 
-### Namespace Folders
+### Namespace フォルダー
 
-Some content is identified by its file path. Therefore, it should be included in a folder that acts as the namespace:
+いくつかのコンテンツはファイルパスで識別されます。そのため、namespace として機能するフォルダーに入れるべきです。
 
 <FolderView :paths="[
     'BP/functions/<namespace>/*.mcfunction',
@@ -116,65 +116,65 @@ Some content is identified by its file path. Therefore, it should be included in
     'RP/textures/<namespace>/*.png',
 ]" />
 
-Other folders should not contain namespaces.
+他のフォルダーには namespace を含めないでください。
 
-## Sub-Indexing
+## サブインデックス
 
-Sub indexing is the use of `.` to separate chained concepts. Sub-indexing should go in descending order from big to small:
+サブインデックスとは、連結された概念を区切るために `.` を使うことです。サブインデックスは、大きいものから小さいものへ降順で並べます。
 
 ✔️ `animation.controller.dragon.flying.taking_off`
 
 ❌ `animation.controller.dragon_take_off_flying`
 
-When using sub-indexing, use `_` as space, not another `.`.
+サブインデックスでは、スペースの代わりに `.` ではなく `_` を使います。
 
 ✔️ `animation.controller.dragon.flying.taking_off`
 
 ❌ `animation.controller.dragon.flying.taking.off`
 
-You can use sub-indexing in your entities: `wiki:dragon.drake`
+entities にもサブインデックスを使えます。例: `wiki:dragon.drake`
 
-## Groups and Events Should Complement Each Other
+## グループとイベントは互いに補完するべき
 
-| Group     | Event               |
-| --------- | ------------------- |
+| Group | Event |
+| ----- | ----- |
 | wiki:wild | ✔️ wiki:become_wild |
-| wiki:wild | ❌ wiki:wild        |
-| wiki:tame | ✔️ wiki:on_tame     |
-| wiki:tame | ❌ wiki:tame        |
+| wiki:wild | ❌ wiki:wild |
+| wiki:tame | ✔️ wiki:on_tame |
+| wiki:tame | ❌ wiki:tame |
 
-## Short-Names Should Be Generic
+## Short-Name は汎用的にする
 
-Short-names are file-specific identifiers, which are used to map between an identifier and a pretty name. They are handy because they allow us to re-use animation controllers and render controllers. For this reason, your short-names should be generic.
+Short-name はファイル固有の識別子で、識別子と表示名を対応付けるために使われます。アニメーションコントローラーや render controller を再利用できるので便利です。そのため、short-name は汎用的であるべきです。
 
 ✔️ `"sit": "animation.dragon.sit"`
 
 ❌ `"dragon_sitting": "animation.dragon.sit"`
 
-When we make short-names of this form, we can use a generic "sit" animation controller for all of them since we can use the `sit` short-name to play the sit animation.
+この形式の short-name を使うと、`sit` short-name を使って sit アニメーションを再生できるので、すべてに共通の "sit" アニメーションコントローラーを使えます。
 
 ## Functions
 
-1. All your `.mcfunction` files must be go in a namespaced root-folder within the functions folder. On Bedrock Wiki, we use the `wiki` namespace. However, you may choose a namespace based on your name or project. For more info, refer to the [namespaces](/concepts/namespaces) page.
+1. すべての `.mcfunction` ファイルは、functions フォルダー内の namespace 付きルートフォルダーに置く必要があります。Bedrock Wiki では `wiki` namespace を使いますが、あなたは自分の名前やプロジェクトに基づく namespace を選んでも構いません。詳細は [namespaces](/concepts/namespaces) のページを参照してください。
     - ✅️ `BP/functions/wiki/random_number.mcfunction`
     - ❌️ `BP/functions/random_number.mcfunction`
-2. They must be properly nested:
+2. 正しくネストされていなければなりません。
     - ✅️ `BP/functions/wiki/teleport/zone/hell.mcfunction`
-    - ❌ `BP/functions/wiki/teleport_hellzone.mcfunction`
-3. The names must follow an `action_object` structure. Meaning verbs should come before subjects.
+    - ❌️ `BP/functions/wiki/teleport_hellzone.mcfunction`
+3. 名前は `action_object` 構造に従う必要があります。つまり、動詞は対象の前に来るべきです。
     - ✅️ `add_all`
     - ❌️ `all_add`
     - ✅️ `shuffle_position`
     - ❌️ `position_shuffle`
 
-### Comments in Functions
+### Functions 内のコメント
 
--   When working with functions that contain many commands, it's helpful to keep them organized by using multiple hashtags in comments to indicate different header levels.
--   _Optionally_, to further distinguish these levels, you can apply different styles:
+-   多数のコマンドを含む functions を扱うときは、コメント内で複数の `#` を使って見出しレベルを分けると整理しやすくなります。
+-   _任意で_、これらのレベルをさらに区別するために、次のようなスタイルを使えます。
     -   level 1 headers - **# UPPERCASE**
     -   level 2 headers - **## Title Case**
     -   level 3 headers - **### Sentence case**
--   Try to avoid the use of more than three header levels or too many headers overall, as this can make the code look cluttered. For your reference, see the example file below:
+-   コードが散らかって見えるので、見出しレベルを 3 つ以上使ったり、見出しを増やしすぎたりするのは避けましょう。参考用に、下の例ファイルを見てください。
 
 <Spoiler title="Example Function File">
 
@@ -207,52 +207,52 @@ scoreboard players remove @a [scores={wiki:ability.fire_trail=1..}] wiki:ability
 
 </Spoiler>
 
-Note the use of two lines of spacing before level 1 headers and one line of spacing before level 2 headers for improved readability.
+可読性を高めるため、level 1 見出しの前には 2 行、level 2 見出しの前には 1 行の空行を入れる点に注意してください。
 
-This practice helps create a consistent format, making it easier for everyone to follow, and maintain uniformity across your functions.
+このやり方は、一貫した形式を作って誰もが従いやすくし、functions 全体で統一性を保つのに役立ちます。
 
-## Scoreboard Objectives & Tags
+## Scoreboard Objectives と Tags
 
--   Must begin with a namespace and use `snake_case`.
-    -   This prevents conflicts with packs using identical tags or objectives.
--   Only use lowercase letters (a–z), underscores (`_`), and dots (`.`) as special characters.
+-   namespace で始め、`snake_case` を使う必要があります。
+    -   これにより、同じタグや objective を使うパックとの衝突を防げます。
+-   特殊文字として使えるのは小文字（a-z）、アンダースコア（`_`）、ドット（`.`）だけにしてください。
 
-**Example Objectives:**
+**Objective の例:**
 
 -   `wiki:blocks_traveled.overworld`
 -   `wiki:q.is_sneaking`
 -   `wiki:q.is_armed_any`
 
-**Example Tags:**
+**Tag の例:**
 
 -   `wiki:inventory.full`
 -   `wiki:inventory.empty`
 -   `wiki:is_flying`
 
 :::info NOTE:
-Tags describe a definite state—if a tag exists, its condition is true. This is why Molang queries represented as tags in a similar manner do not use the `q.` prefix.
+Tags は明確な状態を表します。つまり、タグが存在するなら、その条件は true です。これが、同様の形で表現された Molang query に `q.` プレフィックスが付かない理由です。
 :::
 
-### Score Holders
+### Score Holder
 
--   Must be prefixed with either a dot (`.`) or hashtag (`#`) and use `PascalCase`.
-    -   This prevents conflicts with gamertags using identical names and provides a clear visual distinction since score holders are used closely with objectives.
-    -   A prefix is used instead of a namespace to keep it concise, as the namespaced objective already prevents conflicts with other packs.
--   No special characters other than dots (`.`).
+-   ドット（`.`）またはハッシュ（`#`）を先頭に付け、`PascalCase` を使う必要があります。
+    -   これにより、同名の gamertag との衝突を防ぎ、score holder が objective と密接に使われることから見た目でも区別しやすくなります。
+    -   namespace の代わりにプレフィックスを使うのは、名前空間付き objective がすでに他のパックとの衝突を防いでいるため、簡潔さを保つためです。
+-   ドット（`.`）以外の特殊文字は使えません。
 
-**Examples:**
+**例:**
 
 -   `.Ores.Iron`
 -   `.Ores.DeepslateIron`
 -   `.200`
 
 :::tip **TIP:**
-Score holders prefixed with a hashtag (`#`) will not be displayed on the scoreboard sidebar. However, they must be enclosed in double quotes (`" "`) to avoid a syntax error.
+ハッシュ（`#`）を付けた score holder は、scoreboard のサイドバーに表示されません。ただし、構文エラーを避けるためにダブルクォート（`" "`）で囲む必要があります。
 :::
 
-## Group Animations Files when Possible
+## 可能ならアニメーションファイルをまとめる
 
-Example:
+例:
 
 <CodeHeader></CodeHeader>
 
@@ -267,7 +267,7 @@ Example:
 }
 ```
 
-## Split Textures by Path, Not Name
+## テクスチャは名前ではなくパスで分ける
 
 ✔️ `RP/textures/wiki/dragon/red`
 
@@ -277,54 +277,54 @@ Example:
 
 ❌ `RP/textures/wiki/npc/dragon_hunter_archer`
 
-## .lang File Comments
+## `.lang` ファイルのコメント
 
-Comments intended for the localizer should always be in-line, in the following format:
+ローカライザー向けのコメントは、必ず次の形式で行末に入れてください。
 
 ```lang
 the.key=The string	## Comment, intended for the one localizing.
 ```
 
-**Note that the whitespace preceding inline comments must be a tab character, not spaces.**
+**行末コメントの前にある空白は、スペースではなくタブでなければなりません。**
 
-Own-line comments can be used for organizational purposes but should not store localization-critical information.
+行単位のコメントは整理のために使って構いませんが、ローカライズに重要な情報を入れるべきではありません。
 
-## Abbreviations
+## 略語
 
-### Pack Types
+### パックの種類
 
-| Abbreviation | Pack Type     |
-| ------------ | ------------- |
-| BP           | Behavior Pack |
-| RP           | Resource Pack |
-| SP           | Skin Pack     |
+| 略語 | パック種別 |
+| ---- | ---------- |
+| BP | Behavior Pack |
+| RP | Resource Pack |
+| SP | Skin Pack |
 
-### Languages
+### 言語
 
-| Abbreviation | Language                   |
-| ------------ | -------------------------- |
-| JS           | JavaScript                 |
-| JSON         | JavaScript Object Notation |
-| NBT          | Named Binary Tag           |
-| TS           | TypeScript                 |
+| 略語 | 言語 |
+| ---- | ---- |
+| JS | JavaScript |
+| JSON | JavaScript Object Notation |
+| NBT | Named Binary Tag |
+| TS | TypeScript |
 
-### Other
+### その他
 
-| Abbreviation | Concept                            |
-| ------------ | ---------------------------------- |
-| AC           | Animation Controller               |
-| RPAC         | Resource Pack Animation Controller |
-| BPAC         | Behavior Pack Animation Controller |
-| BDS          | Bedrock Dedicated Server           |
-| HUD          | Heads-Up Display                   |
-| IDE          | Integrated Development Environment |
-| OSS          | Open-Source Software               |
-| UI           | User Interface                     |
-| VS Code      | Visual Studio Code                 |
+| 略語 | 概念 |
+| ---- | ---- |
+| AC | Animation Controller |
+| RPAC | Resource Pack Animation Controller |
+| BPAC | Behavior Pack Animation Controller |
+| BDS | Bedrock Dedicated Server |
+| HUD | Heads-Up Display |
+| IDE | Integrated Development Environment |
+| OSS | Open-Source Software |
+| UI | User Interface |
+| VS Code | Visual Studio Code |
 
-## Definition Format Orders
+## 定義フォーマットの順序
 
-Blocks, entities and items should follow the format order below.
+ブロック、エンティティ、アイテムは、以下の順序に従う必要があります。
 
 ### Blocks
 
@@ -367,10 +367,10 @@ Blocks, entities and items should follow the format order below.
             -   `group`
     -   `components`
 
-## Custom Components
+## カスタムコンポーネント
 
-### Variable Names
+### 変数名
 
-PascalCase should be used with `Block` or `Item` as a prefix and `Component` as a suffix. As an example, `const BlockMeltableComponent = { ... }` rather than `const meltable = { ... }`.
+PascalCase を使い、`Block` または `Item` を接頭辞に、`Component` を接尾辞にしてください。たとえば `const BlockMeltableComponent = { ... }` のようにし、`const meltable = { ... }` のようにはしません。
 
-This helps to differentiate what we're using in `registerCustomComponent` and what we're using as values elsewhere.
+これにより、`registerCustomComponent` で使っているものと、他の場所で使っている値を区別しやすくなります。

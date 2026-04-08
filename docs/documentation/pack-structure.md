@@ -1,6 +1,6 @@
 ---
-title: Pack Folder Structure
-description: Pack folder structure example.
+title: パックのフォルダー構成
+description: パックのフォルダー構成の例です。
 show_outline: false
 mentions:
     - SirLich

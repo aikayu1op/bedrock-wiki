@@ -1,6 +1,6 @@
 ---
-title: Block Tinting
-description: Learn how to apply a color tint to your block's texture and map color.
+title: ブロックの着色
+description: ブロックのテクスチャと地図色に色のティントを適用する方法を学びます。
 category: Visuals
 tags:
     - easy
@@ -9,12 +9,12 @@ mentions:
     - QuazChick
 ---
 
-## Static Tinting
+## 静的な着色
 
-In the [terrain atlas file](/concepts/texture-atlases), the following parameters can be used on a texture to tint it in two different ways:
+[terrain atlas file](/concepts/texture-atlases) では、次のパラメータをテクスチャに使って、2 通りの方法で着色できます。
 
--   [`tint_color`](/concepts/texture-atlases#tint-color) applies a basic multiply tint to a texture.
--   [`overlay_color`](/concepts/texture-atlases#overlay-color) applies a tint to a texture, using the alpha channel of the texture to determine tint intensity.
+-   [`tint_color`](/concepts/texture-atlases#tint-color) は、テクスチャに基本的な乗算ティントを適用します。
+-   [`overlay_color`](/concepts/texture-atlases#overlay-color) は、テクスチャの alpha チャネルを使ってティント強度を決めつつ、テクスチャにティントを適用します。
 
 <CodeHeader>RP/textures/terrain_texture.json</CodeHeader>
 
@@ -31,26 +31,26 @@ In the [terrain atlas file](/concepts/texture-atlases), the following parameters
 }
 ```
 
-## Tint Methods
+## ティント方法
 
-Tint methods can be used to tint a block based on the biome it is placed in.
+ティント方法を使うと、ブロックが置かれるバイオームに基づいて色を付けられます。
 
-### Texture Tinting
+### テクスチャの着色
 
-Tinting is applied to textures by specifying the `tint_method` parameter for the relevant [material instance](/blocks/block-components#material-instances).
-Different material instances of a block can use different tint methods.
-When the block is an item, textures will be tinted as if the block were placed in a plains biome.
+関連する [material instance](/blocks/block-components#material-instances) に `tint_method` パラメータを指定すると、テクスチャにティントを適用できます。
+ブロック内の異なる material instance に、異なるティント方法を使うこともできます。
+ブロックがアイテムのとき、テクスチャは草原バイオームに置かれた場合と同じようにティントされます。
 
-Similarly to the static texture tinting mentioned previously, tint methods can be applied to textures in two different ways:
+先ほどの静的なテクスチャ着色と同様に、ティント方法は次の 2 通りで適用できます。
 
--   If `alpha_masked_tint` is set to `false`{lang=json} (default), each color channel of the texture will be multiplied by the color of the tint.
-    -   This is equivalent to the [`tint_color`](/concepts/texture-atlases#tint-color) parameter in texture atlas files.
--   If `alpha_masked_tint` is set to `true`{lang=json}, the alpha channel of the texture is not multiplied and is instead used to determine the intensity of the tint.
-    -   This can be used to restrict the tint to certain pixels in a texture.
-    -   This results in the texture becoming opaque.
-    -   This is equivalent to the [`overlay_color`](/concepts/texture-atlases#overlay-color) parameter in texture atlas files.
+-   `alpha_masked_tint` が `false`{lang=json}（既定）の場合、テクスチャの各色チャンネルはティント色で乗算されます。
+    -   これはテクスチャアトラスファイルの [`tint_color`](/concepts/texture-atlases#tint-color) パラメータに相当します。
+-   `alpha_masked_tint` が `true`{lang=json} の場合、テクスチャの alpha チャネルは乗算されず、代わりにティントの強さを決めるために使われます。
+    -   テクスチャ内の特定ピクセルだけにティントを限定したいときに使えます。
+    -   その結果、テクスチャは不透明になります。
+    -   これはテクスチャアトラスファイルの [`overlay_color`](/concepts/texture-atlases#overlay-color) パラメータに相当します。
 
-Here's how the material instances of a grass block would look:
+草ブロックの material instance は次のようになります。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -71,11 +71,11 @@ Here's how the material instances of a grass block would look:
 }
 ```
 
-### Map Color Tinting
+### 地図色の着色
 
-If your texture has tinting applied, the chances are, you'll want maps to display your block with that tint too.
+テクスチャにティントが適用されているなら、地図にも同じティントでブロックを表示したくなるはずです。
 
-Tint methods can be applied to the block's map color, not just its textures!
+ティント方法はテクスチャだけでなく、ブロックの地図色にも適用できます。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -86,7 +86,7 @@ Tint methods can be applied to the block's map color, not just its textures!
 }
 ```
 
-### List of Tint Methods
+### ティント方法一覧
 
 <Table data="tint_methods.json" />
 

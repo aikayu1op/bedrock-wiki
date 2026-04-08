@@ -1,32 +1,32 @@
 ---
-title: Adding HUD Elements
+title: HUD 要素の追加
 category: Tutorials
 tags:
     - beginner
 mentions:
     - shanewolf38
     - SmokeyStack
-description: In this tutorial, you will learn how to add elements to the hud screen.
+description: このチュートリアルでは、hud 画面に要素を追加する方法を学びます。
 ---
 
-In this tutorial, you will learn how to add elements to the hud screen.
+このチュートリアルでは、hud 画面に要素を追加する方法を学びます。
 
-## Overview
+## 概要
 
-The hud screen, which is shown the majority of the time in the game, displays critical information for the player. There are plenty of times you'll want to add elements onto this screen, such as pop-up text after completing certain events, a stamina bar showing how much energy the player has, a speedometer showing the player's speed, and much more!
+ゲーム中の大半で表示される hud 画面には、プレイヤーにとって重要な情報が表示されます。特定のイベント完了後のポップアップテキスト、プレイヤーのエネルギー量を示すスタミナバー、プレイヤーの速度を示すスピードメーターなど、この画面に要素を追加したい場面はたくさんあります。
 
-To add an element you've created onto the hud screen, you'll need to use the `modification` parameter to add a new `control` (element) to the `root_panel`. The root panel is a panel type element which contains nearly all of the elements displayed on the hud.
+作成した要素を hud 画面に追加するには、`modification` パラメータを使って `root_panel` に新しい `control` (要素) を追加する必要があります。root panel は、hud に表示されるほぼすべての要素を含む panel 型の要素です。
 
-## Individual Elements
+## 個別の要素
 
-The following code creates an image element that displays a black square at the top of the screen, creates a label element which displays the text "hud text" at the top-right of the screen, and performs a modification to the `root_panel` which adds the image and label elements to the hud screen.
+次のコードは、画面上部に黒い四角を表示する image 要素と、画面右上に「hud text」を表示する label 要素を作成し、さらに `root_panel` に変更を加えてそれらを hud 画面に追加します。
 
 <CodeHeader>RP/ui/hud_screen.json</CodeHeader>
 
 ```json
 "hud_square": {
 	"type": "image",
-	"texture": "textures/ui/Black",   // vanilla texture
+	"texture": "textures/ui/Black",   // バニラのテクスチャ
 	"anchor_from": "top_middle",
 	"anchor_to": "top_middle",
 	"size": [ 64, 64 ],
@@ -55,11 +55,11 @@ The following code creates an image element that displays a black square at the 
 },
 ```
 
-All of the elements added to the hud screen are listed out in the `value` section of the root panel `modifications`. The namespace specified in the added elements (e.g. `@hud.hud_square`) can be changed if adding elements which exist in another namespace. If the `hud_square` element was created in the scoreboards.json UI page under the `scoreboard` namespace, for example, you would put `@scoreboard.hud_square` when adding the element to the root panel.
+hud 画面に追加されるすべての要素は、root panel の `modifications` の `value` セクションに列挙されます。追加する要素に指定する名前空間 (例: `@hud.hud_square`) は、別の名前空間に存在する要素を追加する場合は変更できます。たとえば、`hud_square` 要素が `scoreboard` 名前空間の scoreboards.json UI ページで作成されているなら、root panel に追加するときは `@scoreboard.hud_square` を使います。
 
-## Combined Elements
+## 組み合わせた要素
 
-It is often helpful for organizational purposes to not add many elements to the root panel individually. The following code wraps the previously defined `hud_square` and `hud_text` elements (not shown) in a panel element called `hud_elements_panel` and then adds that element to the root panel of the hud screen. Effect is the same as the Individual Elements code.
+整理の都合上、たくさんの要素を root panel に個別で追加しない方がよい場合があります。次のコードでは、先ほど定義した `hud_square` と `hud_text` の要素 (表示は省略) を `hud_elements_panel` という panel 要素にまとめ、その要素を hud 画面の root panel に追加しています。結果は「個別の要素」の例と同じです。
 
 <CodeHeader>RP/ui/hud_screen.json</CodeHeader>
 ```json
@@ -85,5 +85,5 @@ It is often helpful for organizational purposes to not add many elements to the 
 
 ```
 
-The `hud_elements_panel` does not have its size parameter directly defined so that it will inherit its parent's (`root_panel`) size. This allows child anchoring, % size, etc. to work relative to the hud screen.
+`hud_elements_panel` には size パラメータを直接定義していないため、親 (`root_panel`) の size を継承します。これにより、子のアンカー指定や `%` サイズなどが hud 画面を基準に動作します。
 ```

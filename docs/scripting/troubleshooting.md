@@ -1,28 +1,28 @@
 ---
-title: Troubleshooting JavaScript
+title: JavaScript のトラブルシューティング
 category: Documentation
 mentions:
     - Herobrine643928
     - JaylyDev
     - SmokeyStack
     - ThomasOrs
-description: JS troubleshooting.
+description: JS のトラブルシューティングです。
 ---
 
-This article teaches you the basic workflow for debugging any JavaScript issue.
+この記事では、あらゆる JavaScript の問題をデバッグするための基本的な流れを学べます。
 
-## Error Reference
+## エラーリファレンス
 
-These errors can be a helpful debugging your code, but the reported problem isn't always immediately clear. Most of these errors are common in JavaScript engines, so they can be found with a search on a search engine (e.g. Google Search).
+これらのエラーはコードのデバッグに役立ちますが、報告された問題がすぐに明確になるとは限りません。これらのエラーの多くは JavaScript engine で一般的なので、検索エンジン（例: Google 検索）で見つけられます。
 
-You can learn more about each Error class in `MDN` by clicking the link below each error names.
+各 Error class の詳細は、各エラー名の下にあるリンクをクリックすると `MDN` で確認できます。
 
 -   [`EvalError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError)
     -   Creates an instance representing an error that occurs regarding the global function `eval()`.
 -   [`RangeError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError)
     -   Creates an instance representing an error that occurs when a numeric variable or parameter is outside its valid range.
 -   [`ReferenceError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError)
-    -   Creates an instance representing an error that occurs when de-referencing an invalid reference. In Minecraft Script Engine, there is a reference error with no clear reason of why this error triggers:
+    -   無効な参照を逆参照したときに発生するエラーのインスタンスを表します。Minecraft Script Engine では、このエラーが発生する明確な理由がない参照エラーがあります。
     -   Native object bound to prototype does not exist.
 -   [`SyntaxError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError)
     -   Creates an instance representing a syntax error.
@@ -33,21 +33,21 @@ You can learn more about each Error class in `MDN` by clicking the link below ea
 -   [`AggregateError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError)
     -   Creates an instance representing several errors wrapped in a single error when multiple errors need to be reported by an operation, for example by `Promise.any()`.
 -   [`InternalError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError)
-    -   Creates an instance representing an error that occurs when an internal error in the JavaScript engine is thrown. In Minecraft JS, the errors are the following:
+    -   JavaScript エンジン内部でエラーが投げられたときに発生するエラーのインスタンスを表します。Minecraft JS では、次のエラーがあります。
         -   stack overflow
         -   out of memory
 
-## Minecraft JS Errors
+## Minecraft JS のエラー
 
-Since Minecraft Bedrock Edition uses a their own version of JavaScript, which is based on QuickJS, there are some errors that only exist in Minecraft and these errors are quite common since the API is built on native C++.
+Minecraft Bedrock Edition は QuickJS ベースの独自 JavaScript 版を使っているため、Minecraft にしか存在しないエラーがいくつかあります。API がネイティブ C++ で作られているので、これらのエラーはかなりよく起こります。
 
 ### InternalError: out of memory
 
-This error occurs when the combined memory usage exceeds 250 megabytes.
+このエラーは、合計メモリ使用量が 250 メガバイトを超えたときに発生します。
 
-This saves and shuts down the world by Watchdog termination and cannot be canceled using `BeforeWatchdogTerminateEvent`.
+これは Watchdog による終了としてワールドを保存・停止し、`BeforeWatchdogTerminateEvent` ではキャンセルできません。
 
-The memory limit can be adjusted in `server.properties` by modifying `script-watchdog-memory-limit`. (Setting this value to 0 disables the limit.)
+メモリ制限は、`server.properties` の `script-watchdog-memory-limit` を変更して調整できます。`0` にすると制限は無効になります。
 
 ### InternalError: stack overflow
 
@@ -66,49 +66,49 @@ loop(0);
 
 ### InternalError: interrupted
 
-Occurs when runtime has a negligible cost. This happens depend on how your script is setup.
+ランタイムのコストがごく小さい場合に発生します。これはスクリプトの構成によって起こります。
 
 ### TypeError: no setter for property
 
-This occurs when trying to set a new value to a property, for which only a getter is defined.
+getter だけが定義されたプロパティに新しい値を設定しようとしたときに発生します。
 
-This is common when attempting to set property on native objects from native modules.
+これは、ネイティブモジュールからネイティブオブジェクトのプロパティを設定しようとしたときによく起こります。
 
 ### TypeError: value is not iterable
 
-This occurs when an iteration happens over a value that is not an iterable object.
+反復可能オブジェクトではない値に対して反復しようとしたときに発生します。
 
 Click [**here**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/is_not_iterable) for more information.
 
 ### TypeError: not a function
 
-This occurs when there was an attempt to call a value from a function, but the value is not actually a function. This is very common as script API constantly remove or rename methods without mentioning them in Minecraft changelog.
+関数として値を呼び出そうとしたが、その値が実際には関数ではないときに発生します。Script API は Minecraft の changelog で触れられないままメソッドが削除・改名されることがあるため、よく起こります。
 
 Click [**here**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Not_a_function) for more information.
 
 ### TypeError: Native Type Conversion Failed
 
-This error occurs when you input the wrong type of value into a required parameter in a native method.
+ネイティブメソッドの必須パラメーターに、誤った型の値を入れたときに発生します。
 
 ### TypeError: Native Variant Type Conversion Failed
 
-This error occurs when you input the wrong type of value into an optional parameter in a native method.
+ネイティブメソッドの任意パラメーターに、誤った型の値を入れたときに発生します。
 
 ### TypeError: Object did not have a native handle
 
 ::: warning
-This error is not documented publicly, so the explanation is an estimate.
+このエラーは公式に公開されていないため、説明は推測です。
 :::
 
-The error throws when the script tries to fetch a native handle from a JavaScript object, but the handle instance was cleared.
+このエラーは、スクリプトが JavaScript オブジェクトから native handle を取得しようとしたが、その handle インスタンスが解放されていたときに発生します。
 
 ### ReferenceError: Native object bound to prototype does not exist.
 
 ::: warning
-This error is not documented publicly, so the explanation is an estimate.
+このエラーは公式に公開されていないため、説明は推測です。
 :::
 
-This error throws when a method is not supported by native codebase due to unexpected reasons. In some circumstances restarting the game should fix the issue.
+このエラーは、予期しない理由で native codebase がそのメソッドをサポートしていないときに発生します。状況によっては、ゲームを再起動すると解決します。
 
 ## Debugging
 
@@ -124,13 +124,13 @@ Debugging allows you to find the exact point where you made a mistake on your Ja
 
 -   **[Scripting][Warning]**
 
-    This outputs a warning message in both Content Log GUI and Content log file. The following text is displayed when the function is triggered.
+    これにより、Content Log GUI と content log ファイルの両方に警告メッセージが出力されます。関数が呼ばれたとき、次のテキストが表示されます。
 
     `00:00:00-[Scripting][Warning]-`: This text is triggered when `console.warn()` is used.
 
 -   **[Scripting][Error]**
 
-    This outputs an error message in both Content Log GUI and Content log file. The following text is displayed when the function is triggered.
+    これにより、Content Log GUI と content log ファイルの両方にエラーメッセージが出力されます。関数が呼ばれたとき、次のテキストが表示されます。
 
     `00:00:00-[Scripting][Error]-`: This text is triggered when `console.error()` is used.
 
@@ -138,7 +138,7 @@ Debugging allows you to find the exact point where you made a mistake on your Ja
 
 A stack trace is a list of the functions, in order, that lead to a breakpoint in a software program.
 
-This is useful to find the cause of the problem in your code.
+これは、コード内の問題の原因を見つけるのに役立ちます。
 
 Example:
 

@@ -1,20 +1,20 @@
 ---
-title: Contributing to the Bedrock Wiki
-description: The Bedrock Wiki needs your contributions!
+title: Bedrock Wiki への貢献
+description: Bedrock Wiki にはあなたの貢献が必要です！
 show_contributors: false
 show_outline: false
 hidden: true
 ---
 
-Hello there!
+こんにちは！
 
-Have you spotted a typo? Got stuck following one of our guides? Want to contribute something new? Then you've come to the right place!
+誤字を見つけましたか？ ガイドの途中で行き詰まりましたか？ 新しい何かを追加したいですか？ それなら、ここがぴったりの場所です！
 
-## Contributing
+## 貢献について
 
-The Bedrock wiki is a fully open source project and is maintained by the Bedrock OSS Organization, and our lovely community.
+Bedrock Wiki は完全なオープンソースプロジェクトであり、Bedrock OSS Organization と素晴らしいコミュニティによって維持されています。
 
-To contribute to our wiki, you don't need to be part of Bedrock OSS. The members of this organization have experience in editing the wiki and can answer your questions at any time. Please join our [discord server](https://discord.gg/XjV87YN) if you want to get in touch.
+Wiki に貢献するのに、Bedrock OSS の一員である必要はありません。この組織のメンバーは Wiki の編集経験があり、いつでも質問に答えられます。連絡を取りたい場合は、[Discord サーバー](https://discord.gg/XjV87YN) に参加してください。
 
 <CardGrid>
 <Card
@@ -23,42 +23,42 @@ To contribute to our wiki, you don't need to be part of Bedrock OSS. The members
     image="/assets/images/misc/github.png"
 >
 
-The Wiki is hosted and edited on GitHub, and we process edits through the pull-request process.
+Wiki は GitHub 上でホスト・編集されており、編集内容はプルリクエストの手順で処理されます。
 
-You are more than welcome to directly suggest edits for our approval.
+直接編集案を送っていただくのも大歓迎です。
 
 </Card>
 <Card
-    title="Contact Us"
+    title="お問い合わせ"
     link="https://discord.gg/XjV87YN"
     image="/assets/images/discord/oss.png"
 >
 
-Bedrock OSS is a programming-focused creators discord for Bedrock, where all wiki edits are discussed.
+Bedrock OSS は、Bedrock 向けのプログラミングに重点を置いた creators 向け Discord で、Wiki の編集内容はすべてそこで議論されます。
 
-Here you can report wiki issues, collaborate on new articles, or simply get in touch with the authors of various pages.
+ここでは、Wiki の問題を報告したり、新しい記事の作業を共同で進めたり、各ページの著者と気軽に連絡を取ったりできます。
 
 </Card>
 <Card
-    title="Learn How"
+    title="やり方を学ぶ"
     link="/contribute-how-to"
     image="/assets/images/icons/compass.png"
 >
 
-Don't quite know what to do?
+何をすればいいのかわからないですか？
 
-For more information on how to contribute to the wiki, including setting up your working environment and using GitHub, view our guide!
+作業環境のセットアップや GitHub の使い方を含め、Wiki への貢献方法の詳細は、ガイドをご覧ください！
 
 </Card>
 <Card
-    title="Page Editing"
+    title="ページ編集"
     link="/contribute-style"
     image="/assets/images/icons/logo.png"
 >
 
-Keeping the style is very important, it allows us to keep guides easy to learn and attractive. Let's write all pages in one style.
+スタイルを維持することはとても重要です。そうすることで、ガイドを学びやすく魅力的なまま保てます。すべてのページを統一したスタイルで書きましょう。
 
-Here you can learn how to use special components and style our wiki.
+ここでは、特別なコンポーネントの使い方や、Wiki のスタイル調整を学べます。
 
 </Card>
 </CardGrid>

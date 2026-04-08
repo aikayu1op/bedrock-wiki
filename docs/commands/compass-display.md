@@ -1,23 +1,23 @@
 ---
-title: Compass Display
+title: コンパス表示
 category: Useful Creations
 tags:
     - easy
 mentions:
     - BedrockCommands
     - fantasy9967
-description: Create a compass display using commands.
+description: コマンドを使ってコンパス表示を作成します。
 ---
 
-## Introduction
+## はじめに
 
-[Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
+[Bedrock Commands Community (BCC) Discord が出典です](https://bedrockcommands.org/)
 
-Create a compass display on the actionbar using commands.
+コマンドを使って、アクションバーにコンパス表示を出します。
 
-![Demonstration GIF](demo.gif)
+![デモ GIF](demo.gif)
 
-## Commands
+## コマンド
 
 <CodeHeader>BP/functions/wiki/displays/compass.mcfunction</CodeHeader>
 
@@ -34,10 +34,10 @@ title @a[rym=22.5,ry=67.5] actionbar Southwest (SW)
 
 ![Chain of 8 Command Blocks](/assets/images/commands/command-block-chain/8.png)
 
-To understand how rotation selector arguments 'ry' and 'rym' work, refer to this page **[here](/commands/selectors#rotation)**.
+回転セレクター引数 `ry` と `rym` の仕組みを理解するには、**[こちら](/commands/selectors#rotation)** を参照してください。
 
 :::tip
 
-You may use the above commands in combination with **[Crouch Detection](/commands/detect-movements#is-sneaking)** or the **[hasitem](/commands/selectors#items)** selector argument to apply additional conditions in order for the display to activate.
+上記のコマンドは、**[しゃがみ判定](/commands/detect-movements#is-sneaking)** や **[hasitem](/commands/selectors#items)** セレクター引数と組み合わせることで、表示の発動条件を追加できます。
 
 :::

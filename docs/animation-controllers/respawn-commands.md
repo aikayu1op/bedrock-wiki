@@ -1,5 +1,5 @@
 ---
-title: Respawn Commands
+title: リスポーン時コマンド
 mentions:
     - SirLich
     - solvedDev
@@ -8,14 +8,14 @@ mentions:
     - SmokeyStack
     - MedicalJewel105
     - cda94581
-description: Run command when entity respawns.
+description: エンティティがリスポーンしたときにコマンドを実行します。
 ---
 
 <Button link="animation-controllers-intro">Learn more about Animation Controllers</Button>
 
-This animation controller can be used to run commands, such as re-adding potion effects or giving items when the player respawns.
+このアニメーションコントローラーは、プレイヤーがリスポーンしたときにポーション効果を付け直したり、アイテムを与えたりするコマンドの実行に使えます。
 
-Simply add the following animation controller to the `player.json`, and you'll be all done!
+次のアニメーションコントローラーを `player.json` に追加するだけで完了です。
 
 <CodeHeader>BP/animation_controllers/respawn.ac.json</CodeHeader>
 

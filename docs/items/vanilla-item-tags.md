@@ -1,6 +1,6 @@
 ---
-title: Vanilla Item Tags
-description: Learn about item tags that are built into the game and applied to vanilla items.
+title: バニラのアイテムタグ
+description: ゲームに組み込まれていて、バニラアイテムに適用されるアイテムタグについて学びます。
 category: Documentation
 related:
     - /items/item-tags
@@ -11,6 +11,6 @@ mentions:
 
 <Table data="tags.json" />
 
-## Tags per Item
+## アイテムごとのタグ
 
 <Table data="tags_per_item.json" />

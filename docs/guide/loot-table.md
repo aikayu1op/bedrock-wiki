@@ -1,7 +1,7 @@
 ---
-title: Adding a Loot Table, Spawn Rule & Crafting Recipe
+title: ルートテーブル、スポーンルール、クラフトレシピの追加
 category: Guide
-description: How to add your first Loot Table, Spawn Rule and Crafting Recipe
+description: 最初のルートテーブル、スポーンルール、クラフトレシピを追加する方法
 nav_order: 8
 prefix: "8. "
 mentions:
@@ -18,11 +18,11 @@ mentions:
     - QuazChick
 ---
 
-Next, we'll enhance the custom Ghost entity by adding some more basic mechanics to it:
+次は、カスタム Ghost エンティティに、さらに基本的な仕組みを追加していきます。
 
-## Loot Tables
+## ルートテーブル
 
-First, we'll make the ghost drop Ectoplasm upon death: create the following file:
+まず、ゴーストが死亡時に Ectoplasm をドロップするようにします。次のファイルを作成してください。
 
 <CodeHeader>BP/loot_tables/entities/ghost.json</CodeHeader>
 
@@ -52,19 +52,19 @@ First, we'll make the ghost drop Ectoplasm upon death: create the following file
 }
 ```
 
--   Loot Tables consist of `"pools"`. Each pool defines a different loot. A pool consists of 3 parts, `"rolls"`, `"entries"` and `"conditions"`. The `"conditions"` are optional and won't be covered in this guide. To learn more about conditions, look at [Loot Tables](/loot/loot-tables).
--   The `"rolls"` section defines how many times a random entry will be chosen from the following `"entries"`object.
--   The `"entries"` part defines the items, from which the loot table can choose. Each roll a new item will be chosen.
--   `"type"` defines what will be chosen. You can set it to `"item"` or `"loot_table"` to either chose an item or an different loot table.
--   `"name"` will be set to an item identifier with its namespace. It defines which item will be selected.
--   `"weight"` is optional and defines how likely it is, that this item will be selected. If there is more than one item in the `"entries"` section, the `"weight"` attribute can be used to make the probability of one item more or less likely. If it isn't set, it defaults to 1.
--   `"functions"` provide a powerful way of customizing the item that will be returned. They can add enchantments to an item, setting an items' name or simply setting the number of items that will be dropped. To define the number of items, we use `"set_count"`. It takes the `"count"` attribute, which sets the maximum and minimum amount of items that will be dropped.
+-   ルートテーブルは `"pools"` で構成されます。各プールは別のルートを定義します。プールは `"rolls"`、`"entries"`、`"conditions"` の 3 部分から成ります。`"conditions"` は省略可能で、このガイドでは扱いません。条件について詳しく知りたい場合は、[Loot Tables](/loot/loot-tables) を参照してください。
+-   `"rolls"` は、後続の `"entries"` オブジェクトからランダムな項目を何回選ぶかを定義します。
+-   `"entries"` は、ルートテーブルが選択対象にするアイテムを定義します。ロールごとに新しいアイテムが選ばれます。
+-   `"type"` は、何を選ぶかを定義します。`"item"` か `"loot_table"` を設定でき、それぞれアイテムか別のルートテーブルを選べます。
+-   `"name"` には、名前空間付きのアイテム識別子が入ります。どのアイテムを選ぶかを定義します。
+-   `"weight"` は省略可能で、このアイテムがどれくらい選ばれやすいかを定義します。`"entries"` に複数のアイテムがある場合、`"weight"` 属性を使って、あるアイテムが選ばれる確率を高くしたり低くしたりできます。設定しない場合は 1 が既定値です。
+-   `"functions"` は、返されるアイテムを柔軟にカスタマイズする強力な仕組みです。アイテムにエンチャントを付与したり、名前を設定したり、単純にドロップする個数を設定したりできます。個数を定義するには `"set_count"` を使います。これには `"count"` 属性を渡し、ドロップされるアイテム数の最大値と最小値を設定します。
 
-For more information on loot tables, see our extended guide: [Loot Tables](/loot/loot-tables)!
+ルートテーブルの詳細については、拡張ガイドの [Loot Tables](/loot/loot-tables) を参照してください。
 
-## Spawn Rules
+## スポーンルール
 
-Next, we'll make the ghost spawn in deserts at night:
+次は、ゴーストが夜の砂漠にスポーンするようにします。
 
 <CodeHeader>BP/spawn_rules/ghost.json</CodeHeader>
 
@@ -106,22 +106,22 @@ Next, we'll make the ghost spawn in deserts at night:
 }
 ```
 
--   You already know what `"format_version"`does.
--   Inside the `"minecraft:spawn_rules"` part we define our spawn rules.
--   The `"description"` defines the basic properties of the file. The `"identifier"` is used to define on which entity this spawn rule applies on. `"population_control"` is used to limit the amount of entities that will be spawned. Once the pool that is defined inside of `"population_control"` is full, no more entities will be spawned.
--   With `"conditions"` we can define rules that limit the spawning of this entity to special cases. We will shortly describe each condition used here, but you can learn more conditions and how to use them [here](/entities/vanilla-usage-spawn-rules).
-    -   `"spawns_on_surface"` allows the mob to only spawn on surfaces.
-    -   `"minecraft:brightness_filter"` limits the spawning to areas with a lighting level thats between the defined values. If `"adjust_for_weather"` is `true`, the light level decrease during rain and storms will be ignored.
-    -   `"minecraft:difficulty_filter"` defines the difficulty level needed to spawn the entity.
-    -   `"weight"` defines how often this entity will spawn. The higher this value, the more often the mob will spawn.
-    -   `"minecraft:herd"`defines how many entities will be spawned at once.
-    -   With `"minecraft:biome_filter"` we define the biomes in which the entity is able to spawn.
+-   `"format_version"` については、すでに知っているはずです。
+-   `"minecraft:spawn_rules"` の部分で、スポーンルールを定義します。
+-   `"description"` は、このファイルの基本プロパティを定義します。`"identifier"` は、このスポーンルールがどのエンティティに適用されるかを定義するために使います。`"population_control"` は、スポーンするエンティティ数を制限するために使います。`"population_control"` 内で定義されたプールがいっぱいになると、それ以上エンティティはスポーンしません。
+-   `"conditions"` では、このエンティティのスポーンを特定のケースに制限するルールを定義できます。ここで使う各条件はすぐに説明しますが、より多くの条件と使い方は [こちら](/entities/vanilla-usage-spawn-rules) を参照してください。
+    -   `"spawns_on_surface"` は、モブを地表にのみスポーンさせます。
+    -   `"minecraft:brightness_filter"` は、定義した値の間にある明るさの場所にのみスポーンを制限します。`"adjust_for_weather"` が `true` なら、雨や嵐での光量低下は無視されます。
+    -   `"minecraft:difficulty_filter"` は、エンティティのスポーンに必要な難易度を定義します。
+    -   `"weight"` は、このエンティティがどれくらいの頻度でスポーンするかを定義します。値が高いほど、モブはより頻繁にスポーンします。
+    -   `"minecraft:herd"` は、一度に何体のエンティティがスポーンするかを定義します。
+    -   `"minecraft:biome_filter"` で、このエンティティがスポーンできるバイオームを定義します。
 
-To learn more about spawn rules, take a look on our guide on [Vanilla spawn rules](/entities/vanilla-usage-spawn-rules).
+スポーンルールについてさらに詳しく知りたい場合は、[Vanilla spawn rules](/entities/vanilla-usage-spawn-rules) のガイドを参照してください。
 
-## Crafting Recipes
+## クラフトレシピ
 
-And finally, as an introduction to recipes, we'll make the Ectoplasm craftable into Slime Blocks:
+最後に、レシピの導入として、Ectoplasm を Slime Block にクラフトできるようにします。
 
 <CodeHeader>BP/recipes/ectoplasm_slime_blocks.json</CodeHeader>
 
@@ -156,32 +156,32 @@ And finally, as an introduction to recipes, we'll make the Ectoplasm craftable i
 }
 ```
 
--   `"format_version"` is already known.
--   With `"recipe_shaped"` we define, that each ingredient has a set place in the crafting grid. There are some other types that can be used, you can find more information [here](/loot/recipes).
--   Inside `"description"` we define the `"identifier"` of this recipe, which is the name of the recipe.
--   `"tags"` is a list of benches (crafting table, furnace, etc) that are able to use this recipe. After version b1.16.100 it was possible to use custom benches, created by an add-on.
--   `"pattern"` defines the arrangement of the items inside the crafting grid. Each `#` represents the item that is set under `"key"`. In this case, the whole 3x3 grid has to be filled with `"wiki:ectoplasm"`, our own item. It is possible to define more items, just add an entry to `"key"` and set the key to a character, that you can use inside `"pattern"`.
--   `"result"` contains an `"item"`, which is set to the item that will be the output of this recipe.
+-   `"format_version"` はすでに知っています。
+-   `"recipe_shaped"` を使うと、各材料の配置がクラフトグリッド上で固定されることを定義できます。他にも使える種類がいくつかあるので、詳しくは [こちら](/loot/recipes) を参照してください。
+-   `"description"` の中で、このレシピの `"identifier"` を定義します。これがレシピ名になります。
+-   `"tags"` は、このレシピを使える作業台（crafting table、furnace など）の一覧です。b1.16.100 以降は、アドオンで作成したカスタム作業台も使えるようになりました。
+-   `"pattern"` は、クラフトグリッド内のアイテム配置を定義します。各 `#` は `"key"` で定義されたアイテムを表します。この例では、3×3 の全マスを自作アイテム `"wiki:ectoplasm"` で埋める必要があります。さらにアイテムを定義することもでき、`"key"` に項目を追加して、`"pattern"` 内で使う文字をキーとして設定します。
+-   `"result"` は、このレシピの出力となる `"item"` を含みます。
 
-For more information on this topic, visit our page about [recipes](/loot/recipes)!
+このトピックの詳細は、[recipes](/loot/recipes) のページを参照してください。
 
-## What You Have Learned
+## 学んだこと
 
-:::tip What you have learned:
+:::tip 学んだこと:
 
--   How to create a loot table and define which items a mob is able to drop
--   How to set the rules for a mob to spawn
--   How to create new crafting recipes
+-   モブがドロップできるアイテムを定義するルートテーブルの作り方
+-   モブのスポーンルールを設定する方法
+-   新しいクラフトレシピの作り方
 
 :::
 
-## Your Progress So Far
+## ここまでの進捗
 
-**What you've done:**
+**やったこと:**
 
--   [x] Setup your pack
--   [x] Create a custom item
--   [x] Create a custom entity
--   [x] Create the entity's loot, spawn rules, and a custom recipe
+-   [x] パックをセットアップした
+-   [x] カスタムアイテムを作成した
+-   [x] カスタムエンティティを作成した
+-   [x] エンティティのルート、スポーンルール、カスタムレシピを作成した
 
-Congratulations! you have finished the Guide and created your first Add-on. 🎉
+おめでとうございます。これでガイドを完了し、最初の Add-on を作成できました。🎉

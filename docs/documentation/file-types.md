@@ -1,64 +1,64 @@
 ---
-title: File Types
-description: File types that are supported by Minecraft.
+title: ファイル形式
+description: Minecraft が対応しているファイル形式です。
 mentions:
     - Ciosciaa
     - SirLich
 ---
 
-A number of file types exist for _Minecraft_, all for importing content. All _Minecraft_ files are ZIP archives renamed to use a `mc…` extension. These archives can currently be divided into three sets:
+_Minecraft_ には、コンテンツを取り込むためのさまざまなファイル形式があります。_Minecraft_ のファイルはすべて、`mc…` 拡張子に変更された ZIP アーカイブです。これらのアーカイブは、現在次の 3 種類に分けられます。
 
--   **Levels (`mcworld` and `mcproject`)**: level data and associated resources for worlds and projects
--   **Assets (`mcpack` and `mctemplate`)**: cosmetics or supporting assets for worlds
--   **Composites (`mcaddon` and `mceditoraddon)`**: used to import up to one world or project and any number of asset types
+-   **レベル (`mcworld` と `mcproject`)**: ワールドやプロジェクトのレベルデータと関連リソース
+-   **アセット (`mcpack` と `mctemplate`)**: ワールド用の見た目や補助アセット
+-   **複合アーカイブ (`mcaddon` と `mceditoraddon`)**: 1つまでのワールドまたはプロジェクトと、任意数のアセット種別を取り込むために使います
 
-All file types for Minecraft can be opened as any file, launching Minecraft and importing the content. When packages are imported, they are automatically unpacked into their constituent files and directories. If it was not already open, most file types will launch Minecraft in normal mode; `mcproject` and `mceditoraddon` will instead launch Minecraft into Editor mode.
+Minecraft の各ファイル形式は、任意のファイルとして開くことで Minecraft を起動し、コンテンツを取り込めます。パッケージは取り込まれると、自動的に構成ファイルとフォルダーに展開されます。すでに起動していなければ、ほとんどの形式は通常モードで Minecraft を起動しますが、`mcproject` と `mceditoraddon` は Editor モードで起動します。
 
-## Levels
+## レベル
 
-Levels represent save data and resources for regular worlds and Editor projects. All levels, regardless of mode, are imported to `minecraftWorlds` in the `com.mojang` directory.
+レベルは、通常のワールドや Editor プロジェクトのセーブデータとリソースを表します。モードに関係なく、すべてのレベルは `com.mojang` ディレクトリ内の `minecraftWorlds` に取り込まれます。
 
-Importing an exact duplicate of an existing saved level will create a duplicate saved level. Composite archives will only import one level if multiple are included, including across nested composite archives.
+既存の保存済みレベルと完全に同一のものを取り込むと、重複した保存済みレベルが作成されます。複合アーカイブに複数のレベルが含まれている場合、ネストされた複合アーカイブを含めて、取り込まれるレベルは1つだけです。
 
-### Worlds
+### ワールド
 
 `mcworld`
-Archive encapsulating an individual world
+個別のワールドをまとめたアーカイブ
 
-World archives can be created a few different ways:
+ワールドアーカイブは、いくつかの方法で作成できます。
 
--   Zipping the _contents_ of a world directory and renaming the extension from `zip` to `mcworld`
--   Using the "Export World" button on the Game settings screen for a world
--   In Editor mode, exporting the world from the File → Export as → Playable world menu option. The world will be saved to the `projectbackups` directory in the `com.mojang` folder.
--   In Editor mode, running the `/project export world` command. The world will be saved to the `projectbackups` directory in the `com.mojang` folder.
+-   ワールドディレクトリの _中身_ を ZIP 化し、拡張子を `zip` から `mcworld` に変更する
+-   ワールドのゲーム設定画面にある "Export World" ボタンを使う
+-   Editor モードで、File → Export as → Playable world のメニューからワールドを書き出す。ワールドは `com.mojang` フォルダー内の `projectbackups` ディレクトリに保存されます。
+-   Editor モードで、`/project export world` コマンドを実行する。ワールドは `com.mojang` フォルダー内の `projectbackups` ディレクトリに保存されます。
 
-Importing a world package while _Minecraft_ is launched in Editor mode will import the world as a project. The imported world will then be inaccessible outside Editor mode and will need to be re-exported as a world for playing. Editor extension packs bundled in a world archive will be retained on import outside Editor mode.
+_Minecraft_ が Editor モードで起動している状態でワールドパッケージを取り込むと、ワールドはプロジェクトとして取り込まれます。取り込まれたワールドは Editor モード以外では使えなくなるため、プレイ用にワールドとして再書き出しする必要があります。ワールドアーカイブに同梱された Editor 拡張パックは、Editor モード外での取り込みでも保持されます。
 
-### Projects
+### プロジェクト
 
 `mcproject`
-Archive encapsulating an individual Editor project
+個別の Editor プロジェクトをまとめたアーカイブ
 
-Project archives can be created two different ways:
+プロジェクトアーカイブは、2つの方法で作成できます。
 
--   Zipping the _contents_ of a project directory and renaming the extension from `zip` to `mcproject`.
--   Using the "Export Project" button on the Game settings screen for a world
--   In Editor mode, running the `/project export project` command. The world will be saved to the `projectbackups` directory in the `com.mojang` folder.
+-   プロジェクトディレクトリの _中身_ を ZIP 化し、拡張子を `zip` から `mcproject` に変更する。
+-   ワールドのゲーム設定画面にある "Export Project" ボタンを使う
+-   Editor モードで、`/project export project` コマンドを実行する。ワールドは `com.mojang` フォルダー内の `projectbackups` ディレクトリに保存されます。
 
-If _Minecraft_ is not open, launching a `mcproject` file will open Editor mode. Importing a `mcproject` will fail if _Minecraft_ is open but not in Editor mode.
+_Minecraft_ が起動していなければ、`mcproject` ファイルを開くと Editor モードが起動します。_Minecraft_ が起動していても Editor モードでない場合、`mcproject` の取り込みは失敗します。
 
-## Assets
+## アセット
 
-Asset archives represent a singular instance of a number of non-level contents:
+アセットアーカイブは、レベル以外のさまざまなコンテンツを 1つずつまとめたものです。
 
--   Behavior packs
--   Resource packs
--   Skin packs
--   World templates
+-   ビヘイビアパック
+-   リソースパック
+-   スキンパック
+-   ワールドテンプレート
 
-All asset archives include a manifest describing their contents. An asset archive will fail to import if its manifest UUID and version exactly matches an existing asset archive of the same type. Note that behavior and resource packs share the same UUID/version space. Behavior and resource packs self-contained within a world, project, or template will not count as duplicates for the sake of importing.
+すべてのアセットアーカイブには、内容を説明する manifest が含まれています。同じ種類の既存アセットアーカイブと、manifest の UUID と version が完全に一致すると、取り込みは失敗します。なお、ビヘイビアパックとリソースパックは UUID / version の空間を共有します。ワールド、プロジェクト、テンプレート内に自己完結しているビヘイビアパックとリソースパックは、取り込み時の重複判定には含まれません。
 
-Both asset extensions, `mcpack` and `mctemplate`, appear to functionally behave the same. It's best practice to use `mcpack` for behavior, resource, and skin packs and `mctemplate` for world templates to make it more clear what's being installed. Any number of asset archives may be included in a composite archive.
+`mcpack` と `mctemplate` のどちらも、機能的には同じように動作するようです。何がインストールされているのか分かりやすくするため、ビヘイビアパック、リソースパック、スキンパックには `mcpack` を、ワールドテンプレートには `mctemplate` を使うのが推奨です。複合アーカイブには、任意数のアセットアーカイブを含められます。
 
 ### Packs
 

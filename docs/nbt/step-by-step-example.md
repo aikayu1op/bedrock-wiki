@@ -1,15 +1,15 @@
 ---
-title: Reading NBT Example
+title: NBT 読み取りの例
 category: NBT in Depth
 mentions:
     - conmaster2112
 tags:
     - expert
-description: NBT reading step by step.
+description: NBT の読み取りを段階的に説明します。
 ---
 
-Before going through this example, it is necessary to first familiarize yourself with NBT in its full beauty. See _[NBT in Depth](/nbt/nbt-in-depth)_.
-Now we will show you how to read NBT, step by step, the format of what we will read will look something like this:
+この例に進む前に、まず NBT の全体像に慣れておく必要があります。_[NBT を深く知る](/nbt/nbt-in-depth)_ を参照してください。
+これから、NBT を段階的に読み取る方法を示します。読み取るデータの形式は、だいたい次のようになります。
 
 ```json
 "":{
@@ -18,67 +18,70 @@ Now we will show you how to read NBT, step by step, the format of what we will r
 }
 ```
 
-When we don't know what to read, then we read the next byte.
+何を読めばよいかわからないときは、次の 1 バイトを読みます。
 
 ![](step1.png)
 
-What did we read? We read number 10 and that means we will read compoud. We also know that we are at the root element property of this file now, so we need to read the name of our root element property. Name is string, so first we have to read the length of the text in bytes, and that is written by Int16 _(Short)_.
+何を読んだのでしょうか。数値 10 を読みました。これは compound を読むという意味です。また、今はこのファイルの root 要素プロパティにいるとわかっているので、root 要素プロパティの名前も読む必要があります。名前は文字列なので、まずテキストの長さをバイト数で読みます。これは Int16 _(Short)_ で書かれています。
 
 ![](step2.png)
 
-The name size of our root element property is zero so we won't read any more bytes. We don't know what to read, so let's read another byte.
+root 要素プロパティの名前サイズは 0 なので、これ以上のバイトは読みません。次に何を読むかまだわからないので、もう 1 バイト読みましょう。
 
 ![](step3.png)
 
-We already know that the next property in our root compound is type of string, but before we read our property value, we first read its name written such as string. So we read another 2 bytes to get the length of the string name of our property.
+root compound の次のプロパティが string 型であることはすでにわかっていますが、プロパティ値を読む前に、まずその名前を string として読みます。そこで、さらに 2 バイト読んで、プロパティ名の文字列長を取得します。
 
 ![](step4.png)
 
-We see that length of property name, it is 6 bytes long. So let's read the next 6 bytes.
+プロパティ名の長さが 6 バイトだとわかりました。では、次の 6 バイトを読みましょう。
 
 ![](step5.png)
 
-So we have read the Name of our property, which we can get in text form using UTF-8 encoding, that is: `myText`, then remember that the type of our property is string, so we repeat the process.
-I'll read the next Int16 (2 bytes) again and we'll find out the length of our string value.
+これでプロパティ名を読み取れました。UTF-8 エンコードを使えばテキストとして `myText` と取得できます。そして、このプロパティの型は string なので、同じ手順を繰り返します。
+次の Int16（2 バイト）をもう一度読み、文字列値の長さを確認します。
 
 ![](step6.png)
 
-The string length of our property is 0x0B, so 11, so read another 11 bytes.
+このプロパティの文字列長は 0x0B、つまり 11 なので、さらに 11 バイト読みます。
 
 ![](step7.png)
 
-When we push our read bytes through UTF-8 encoding, it again returns the value: `My NBT text`,
-what now? You don't know? So read the next byte to find out what to do next.
+読み取ったバイト列を UTF-8 エンコードに通すと、再び `My NBT text` という値が返ります。
+次は何をすればいいのでしょうか。わからないなら、次のバイトを読んで確認しましょう。
 
 ![](step8.png)
 
-So we read type 3, the 3 type is Int16 which contains 4 bytes. But before we read our number We have to find out the name of this property again. So?
-Read the next two bytes to get the length of the name for this property.
+ここでは type 3 を読みます。3 は Int16 で、4 バイトを含みます。ただし数値を読む前に、このプロパティ名をもう一度確認しなければなりません。では、次の 2 バイトを読んで、このプロパティ名の長さを取得します。
 
 ![](step9.png)
 
-So we know the length of the name 0x0f (15), Let's read the next 15 bytes and push it through UTF-8 encoding.
+名前の長さが 0x0f（15）だとわかりました。では、次の 15 バイトを読み、UTF-8 エンコードに通します。
 
 ![](step10.png)
 
-Now we have the name of this property: `my Int32 Number`. Next let's read that Int32 => 4 bytes.
+これでこのプロパティ名は `my Int32 Number` です。次に、この Int32、つまり 4 バイトを読みます。
 
 ![](step11.png)
 
-We read an Int32 that has the value `0x01c8` (456).
-Again You don't know what to do next? Then just read another type of next property, so? 1 byte.
+値 `0x01c8`（456）の Int32 を読みました。
+次に何をすればよいかわからない場合は、次のプロパティの型を表す 1 バイトをもう一度読みます。
 
 ![](step12.png)
 
-We read 0x00 (an empty byte), and that marks the end of the root compound. Then the reading of the compound ends, and since it is the **_root_** compound, we can finish reading it completely and have the entire NBT file read.
+0x00（空のバイト）を読みました。これで root compound の終わりです。compound の読み取りは終了し、しかもそれが **_root_** compound なので、これで全体の読み取りが完了します。
 
-### NBT Example File
+### NBT のサンプルファイル
 
-This is file what we use here for this example.
+これは、この例で使っているファイルです。
 
 <Button link="/assets/nbt/nbt_example_file.nbt" download>
-    Download NBT File
+    NBT ファイルをダウンロード
 </Button>
 
-:::tip Important points to keep in mind - The file may contain an NBT Bedrock Header, so be aware that such a situation may occur. See [NBT in Depth](/nbt/nbt-in-depth)>[NBT Bedrock Headers](/nbt/nbt-in-depth#bedrock-nbt-file-header). - The closing null byte does not terminate the reading of the NBT as such, but merely marks the end of the current compound. - All the numbers you read need to be read with little-endian, See [NBT in Depth](/nbt/nbt-in-depth)>[little-endian](/nbt/nbt-in-depth#little-endian). - The first root NBT element in a file can only be a compound or a list. The root element/property in NBT files also has its own name, even though it is mostly empty, but it still needs to be read and avoid complications.
+:::tip 覚えておきたい重要な点
+- ファイルには NBT Bedrock Header が含まれている場合があります。その可能性を覚えておいてください。[NBT を深く知る](/nbt/nbt-in-depth)>[NBT Bedrock Headers](/nbt/nbt-in-depth#bedrock-nbt-file-header) を参照してください。
+- 終端の null バイトは NBT の読み取りそのものを終了するのではなく、現在の compound の終わりを示すだけです。
+- 読み取る数値はすべて little-endian で読む必要があります。[NBT を深く知る](/nbt/nbt-in-depth)>[little-endian](/nbt/nbt-in-depth#little-endian) を参照してください。
+- ファイル内の最初の root NBT 要素は compound か list に限られます。NBT ファイルの root 要素/プロパティにも名前があります。ほとんど空でも、読み取っておかないと扱いがややこしくなります。
 :::

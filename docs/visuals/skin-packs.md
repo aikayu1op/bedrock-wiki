@@ -1,18 +1,18 @@
 ---
-title: Skin Packs
+title: スキンパック
 mentions:
     - MedicalJewel105
     - SirLich
     - Joelant05
     - TheItsNameless
 category: General
-description: Create your own skin pack.
+description: 自分だけのスキンパックを作成します。
 ---
 
-Many people wrongly assume that skin packs are only available for creation to Marketplace Partners. No! It's a very easy process, which can easily be fully automated by python. But that's not it. Let's learn how to make a skin pack!
+多くの人が、スキンパックは Marketplace Partner しか作れないと誤解しています。でも違います。実はとても簡単で、python で完全自動化もできます。では、スキンパックの作り方を見ていきましょう。
 
 :::warning
-The `development_skin_packs` doesn't seem to function correctly. You need to use `skin_packs` folder and reload Minecraft every time you made a change.
+`development_skin_packs` は正しく動作していないようです。`skin_packs` フォルダーを使い、変更するたびに Minecraft を再読み込みする必要があります。
 :::
 
 ## What is needed

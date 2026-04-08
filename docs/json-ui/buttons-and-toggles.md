@@ -1,26 +1,26 @@
 ---
-title: Buttons and Toggles
+title: ボタンとトグル
 category: Tutorials
 tags:
     - beginner
 mentions:
     - TheoristMC
-description: In this tutorial, you will learn how toggles works.
+description: このチュートリアルでは、トグルの仕組みを学びます。
 ---
 
-## Introduction
+## はじめに
 
 :::warning
-This page is intended for people with a basic understanding of JSON-UI, you may check the [JSON UI Documentation](/json-ui/json-ui-documentation) if you haven't already.
+このページは、JSON-UI の基礎を理解している人向けです。まだ確認していなければ、[JSON UI Documentation](/json-ui/json-ui-documentation) を参照してください。
 :::
 
-Creating custom buttons or toggles is a common question regarding JSON-UI. This guide explains how they work and provides step-by-step instructions for creating them.
+カスタムボタンやトグルの作成は、JSON-UI に関するよくある話題です。このガイドでは、それらの仕組みと作成手順を順を追って説明します。
 
-For this tutorial, we will use the existing vanilla buttons and toggles for simplicity.
+このチュートリアルでは、簡単にするため、既存のバニラのボタンとトグルを使用します。
 
-### Toggles
+### トグル
 
-In this example, we will reference `ui/ui_template_toggles.json`
+この例では、`ui/ui_template_toggles.json` を参照します。
 
 <CodeHeader>RP/ui/your_file.json</CodeHeader>
 ```json
@@ -31,15 +31,15 @@ In this example, we will reference `ui/ui_template_toggles.json`
       32
     ],
     "$button_text": "Click me!",
-    "$toggle_name": "wiki_toggle", // Required, but it has no effect unless a hardcoded toggle name is used.
-    "$toggle_view_binding_name": "wiki_toggle_state" // The toggle name that allows us to retrieve data.
+    "$toggle_name": "wiki_toggle", // 必須ですが、ハードコード済みのトグル名を使わない限り効果はありません。
+    "$toggle_view_binding_name": "wiki_toggle_state" // データ取得に使うトグル名です。
   }
 }
 ```
 
-And that's it! You now have a working toggle. You can test it by adding it to any screen.
+これで完了です。これで動作するトグルができました。任意の画面に追加してテストできます。
 
-Additionally, you can utilize toggles to control the visibility of UI elements.
+さらに、トグルを使って UI 要素の表示・非表示を制御できます。
 
 <CodeHeader>RP/ui/your_file.json</CodeHeader>
 ```json
@@ -50,8 +50,8 @@ Additionally, you can utilize toggles to control the visibility of UI elements.
       32
     ],
     "$button_text": "Click me!",
-    "$toggle_name": "wiki_toggle", // Required, but it has no effect unless a hardcoded toggle name is used.
-    "$toggle_view_binding_name": "wiki_toggle_state" // The toggle name that allows us to retrieve data.
+    "$toggle_name": "wiki_toggle", // 必須ですが、ハードコード済みのトグル名を使わない限り効果はありません。
+    "$toggle_view_binding_name": "wiki_toggle_state" // データ取得に使うトグル名です。
   },
   "our_image": {
     "type": "image",
@@ -67,8 +67,8 @@ Additionally, you can utilize toggles to control the visibility of UI elements.
     "bindings": [
       {
         "binding_type": "view",
-        "source_control_name": "wiki_toggle_state", // // The toggle name specified in the $toggle_view_binding_name
-        "source_property_name": "#toggle_state", // The binding data that returns the toggle state as a boolean value
+        "source_control_name": "wiki_toggle_state", // $toggle_view_binding_name で指定したトグル名
+        "source_property_name": "#toggle_state", // トグル状態を真偽値で返すバインディングデータ
         "target_property_name": "#visible"
       }
     ]
@@ -76,11 +76,11 @@ Additionally, you can utilize toggles to control the visibility of UI elements.
 }
 ```
 
-### Buttons
+### ボタン
 
-Generally, buttons have limited functionality, as they are primarily used in hardcoded instances, such as navigating to a screen or opening a dialog.
+一般に、ボタンの機能は限定的です。主に、画面への移動やダイアログの表示といったハードコードされた用途で使われます。
 
-In this example, we will reference `ui/ui_template_buttons.json`
+この例では、`ui/ui_template_buttons.json` を参照します。
 
 <CodeHeader>RP/ui/your_file.json</CodeHeader>
 ```json
@@ -91,20 +91,20 @@ In this example, we will reference `ui/ui_template_buttons.json`
       32
     ],
     "$button_text": "Click me!",
-    "$pressed_button_name": "button.menu_exit" // Required, you can put in any global button names or hardcoded button names.
+    "$pressed_button_name": "button.menu_exit" // 必須。任意のグローバルボタン名またはハードコード済みボタン名を指定できます。
   }
 }
 ```
 
-And that's it! You now have a working button, clicking on it exits you to the current screen you're in. You can test it by adding it to any screen.
+これで完了です。これで動作するボタンができました。クリックすると、現在の画面から抜けます。任意の画面に追加してテストできます。
 
-## Advanced Buttons and Toggles
+## 発展的なボタンとトグル
 
-### Hover Text
+### ホバー時のテキスト
 
-In order to make buttons that shows a text when you hover into it, we will need to use **Content Buttons**.
+ボタンにカーソルを重ねたときにテキストを表示したい場合は、**Content Buttons** を使う必要があります。
 
-In this example, we will reference `ui/ui_template_buttons.json` and `ui/ui_common.json`
+この例では、`ui/ui_template_buttons.json` と `ui/ui_common.json` を参照します。
 
 <CodeHeader>RP/ui/your_file.json</CodeHeader>
 ```json
@@ -114,8 +114,8 @@ In this example, we will reference `ui/ui_template_buttons.json` and `ui/ui_comm
       18,
       18
     ],
-    "$button_content": "namespace.our_button_content_panel", // Reference our content element.
-    "$pressed_button_name": "button.menu_exit" // Required, you can put in any global button names or hardcoded button names.
+    "$button_content": "namespace.our_button_content_panel", // 作成したコンテンツ要素を参照します。
+    "$pressed_button_name": "button.menu_exit" // 必須。任意のグローバルボタン名またはハードコード済みボタン名を指定できます。
   },
   "our_button_content_panel": {
     "type": "panel",
@@ -131,11 +131,11 @@ In this example, we will reference `ui/ui_template_buttons.json` and `ui/ui_comm
         }
       },
       {
-        // You can use any element but we'll just use the hover text when you hover an item in-game.
+        // 任意の要素を使えますが、ここではゲーム内アイテムにカーソルを合わせたときのホバーテキストを使います。
         "our_hover_text@common.hover_text": {
-          "ignored": "$default_state", // Required, this will make the element not visible if the button is in a default state or isn't hovered.
+          "ignored": "$default_state", // 必須。ボタンがデフォルト状態、またはホバーされていない場合に非表示になります。
           "property_bag": {
-            "#hover_text": "" // You can put your text here. It doesn't support localizing so if that's what you are looking to do, create a custom hover text.
+            "#hover_text": "" // ここに表示テキストを入れます。ローカライズは非対応なので、必要なら独自のホバーテキストを作成してください。
           }
         }
       }
@@ -144,11 +144,11 @@ In this example, we will reference `ui/ui_template_buttons.json` and `ui/ui_comm
 }
 ```
 
-### Play Animation
+### アニメーションの再生
 
-If you want to play an animation when you click a button, you have to use `$pressed_button_name` in your animation's `play_event` property.
+ボタンをクリックしたときにアニメーションを再生したい場合は、アニメーションの `play_event` プロパティで `$pressed_button_name` を使う必要があります。
 
-For example:
+例:
 
 <CodeHeader>RP/ui/your_file.json</CodeHeader>
 ```json
@@ -168,7 +168,7 @@ For example:
         "play_event": "button.example_button_id"
     },
     "example_button@common_buttons.light_text_button": {
-        "$pressed_button_name": "button.example_button_id", // use this button id in play_event property of your animation
+        "$pressed_button_name": "button.example_button_id", // アニメーション側の play_event プロパティでこのボタンIDを使います
         "$button_text": "Play Animation",
         "size": [
             80,
@@ -179,7 +179,7 @@ For example:
         "type": "label",
         "text": "Example Text",
         "anims": [
-            "@namespace.example_animation" // add your animation here
+            "@namespace.example_animation" // ここにアニメーションを追加します
         ],
         "anchor_from": "top_right",
         "anchor_to": "top_right"

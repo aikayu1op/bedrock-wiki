@@ -13,10 +13,10 @@ mentions:
     - TheItsNameless
     - SmokeyStack
     - ThomasOrs
-description: Create smooth and breathtaking animations with Math.
+description: 数式を使って滑らかで印象的なアニメーションを作成します。
 ---
 
-Math animations are a powerful alternative to keyframe animations. Generally speaking, `math-based animations` is the concept of using Molang expressions to animate entity geometry. All vanilla animations are math-based, here is an example:
+Math アニメーションは、キーフレームアニメーションの強力な代替手段です。一般的に `math-based animations` とは、Molang 式を使ってエンティティのジオメトリをアニメーションさせる考え方を指します。バニラのアニメーションはすべて math-based で、例を挙げると次のようになります。
 
 <CodeHeader></CodeHeader>
 
@@ -26,49 +26,49 @@ Math animations are a powerful alternative to keyframe animations. Generally spe
 },
 ```
 
-As you can see, math-based animations can be quite complicated and difficult to understand. Thus, they should be treated as a _specialized-alternative_ to using key-frames - not a _total_ replacement.
+ご覧のとおり、math-based animations はかなり複雑で、理解しづらいことがあります。そのため、キーフレームの _完全な_ 置き換えではなく、_特殊用途の代替手段_ として扱うべきです。
 
-This is the cost of the smooth and ideal loop of the animation.
+これが、滑らかで理想的なループアニメーションを得るためのコストです。
 
 ![](animation-1.gif)
 
-## Writing Math-Animations
+## Math アニメーションを書く
 
-### By Hand
+### 手動で書く
 
-To write such an animation by hand, simply create an animation file and substitute keyframes for singular arrays of values; strings values are accepted, and it is in a string that one may place a math expression. The Vanilla files can prove an invaluable reference for these types of animations, and it is **strongly** recommended you download and preview them!
+このようなアニメーションを手で書くには、アニメーションファイルを作成し、キーフレームを単一の値配列に置き換えます。文字列値も使えるので、その中に数式を書けます。バニラのファイルはこの種のアニメーションの非常に有用な参考資料になるため、ダウンロードして確認することを **強く** おすすめします。
 
-As an important tip for those who wish to _visualise_ their processes, the tool, [Molang Grapher](https://jannisx11.github.io/molang-grapher/) from [Jannis](https://twitter.com/jannisx11) may simulate expressions on a proper graph!
+処理を _視覚化_ したい人への重要なヒントとして、[Jannis](https://twitter.com/jannisx11) の [Molang Grapher](https://jannisx11.github.io/molang-grapher/) は、式を適切なグラフ上でシミュレートできます。
 
-### In Blockbench
+### Blockbench で作る
 
-Blockbench allows - to a degree - for the creation and live-previewing of most math-based animations.
-To begin, first create a new keyframe at frame 0 in your timeline. You may then add and edit Molang expressions in the keyframe panel on the left sidebar. Mixing keyframes and math is supported.
-**Remember**, you should always omit quotation marks around expressions; they are only required in raw JSON-editing!
+Blockbench では、ある程度まで、ほとんどの math-based animations を作成し、その場でプレビューできます。
+まず、タイムラインの 0 フレームに新しいキーフレームを作成します。その後、左サイドバーのキーフレームパネルで Molang 式を追加・編集できます。キーフレームと数式の混在も可能です。
+**覚えておいてください**。式を囲む引用符は常に省略します。引用符が必要なのは、生の JSON を直接編集するときだけです。
 
-Do mind that not all Molang queries are supported in Blockbench in part due to missing game-context. If you wish to preview an animation that uses a context-specific query, you may add it to the Variable Placeholders section, just underneath the keyframe panel, to simulate a value.
-For example, adding `q.modified_distance_moved = time*8` simulates the `modified_distance_moved` query with a speed of 8 blocks per second.
+すべての Molang query が Blockbench で使えるわけではありません。これは、ゲーム内コンテキストが不足しているためです。コンテキスト依存の query を使うアニメーションをプレビューしたい場合は、キーフレームパネルのすぐ下にある Variable Placeholders セクションに値を追加してシミュレートできます。
+たとえば `q.modified_distance_moved = time*8` を追加すると、`modified_distance_moved` query を 1 秒あたり 8 ブロックの速度でシミュレートできます。
 
-## Using Queries
+## Query を使う
 
-The largest and most useful of tools in our mathematical repertoire is the wide array of Molang "Queries". Queries can be used to add outside information into your math expression.
+数学的な表現の中で最も大きく便利な道具は、多種多様な Molang の "Query" です。Query を使うと、外部情報を数式に取り込めます。
 
-Common Queries include:
+よく使う Query は次のとおりです。
 
 -   `q.modified_distance_moved`
 -   `q.modified_move_speed`
 -   `q.anim_time`
 -   `q.life_time`
 
-These are utilized in animations to draw things such as the attack-time or distance-moved from the game-world to provide a more dynamic and synced flow.
+これらは、攻撃時間や移動距離のようなゲーム世界の情報を取り込み、より動的で同期した動きを作るために使われます。
 
-### Avoiding Animation Controllers
+### アニメーションコントローラーを避ける
 
-By using queries, you can avoid the need to create animation controllers. If the entity's speed is directly related to the speed of the walk animation, then by default, an entity that isn't moving won't be animated.
+Query を使えば、アニメーションコントローラーを作らずに済みます。エンティティの速度が歩行アニメーションの速度に直接関係しているなら、動いていないエンティティは既定でアニメーションしません。
 
-## Example
+## 例
 
-A specific application example of a Math-Based animation may be found below. The example utilizes the Molang Query, `"q.modified_distance_moved"`:
+Math-based animation の具体的な適用例を以下に示します。この例では、Molang Query `"q.modified_distance_moved"` を使っています。
 
 <CodeHeader></CodeHeader>
 
@@ -92,6 +92,6 @@ A specific application example of a Math-Based animation may be found below. The
 }
 ```
 
-In this example, the model's bones, `front_wheels` and `back_wheels`, are rotated on the X-axis based on information passed from `q.modified_distance_moved`, then multiplied by -30.
+この例では、モデルの bone `front_wheels` と `back_wheels` が、`q.modified_distance_moved` から渡された情報をもとに X 軸周りに回転し、その後 -30 が掛けられます。
 
-This means that a car at _rest_ **will not** spin, and a car that is _driving_ **will spin** - doing so at a rate proportional to the car's movement speed.
+つまり、_停止中_ の車は **回転せず**、_走行中_ の車は **回転する** ということです。その回転速度は、車の移動速度に比例します。

@@ -1,5 +1,5 @@
 ---
-title: Intro to Scripting
+title: スクリプト入門
 category: General
 nav_order: 1
 mentions:
@@ -12,28 +12,28 @@ mentions:
     - QuazChick
     - jeanmajid
     - AndroAGENT
-description: Learn how to modify your world through the use of JavaScript files.
+description: JavaScript ファイルを使ってワールドを変更する方法を学びます。
 ---
 
 ::: tip
-This script API page assumes basic knowledge of pack setup for add-ons. For information on how to set up behavior packs, please see the [Introduction to Add-Ons](/guide/introduction) page.
+この Script API のページは、アドオンのパック設定についての基本知識があることを前提としています。ビヘイビアパックの設定方法については、[アドオン入門](/guide/introduction) を参照してください。
 :::
 
 ::: warning
-The Script API is currently in active development, and breaking changes are frequent. This page assumes the format of Minecraft 1.21.114.
+Script API は現在も活発に開発されており、破壊的変更が頻繁にあります。このページは Minecraft 1.21.114 の形式を前提としています。
 :::
 
-## Overview
+## 概要
 
-The Script API (formerly GameTest Framework) is a feature that allows for a new variety of creations, these are built with JavaScript files in the behavior pack folder. Most parts of the Script API are not experimental.
+Script API（旧 GameTest Framework）は、新しい種類の作品を作れる機能です。これらはビヘイビアパックフォルダー内の JavaScript ファイルで構成されます。Script API の大部分は実験機能ではありません。
 
-This page will give you an introduction to the 80% of Minecraft's Creator API concepts that you will use on a daily basis.
+このページでは、Minecraft の Creator API 概念のうち、日常的に使う 80% を紹介します。
 
-## Create Your First Project
+## 最初のプロジェクトを作る
 
-Currently, scripts can only be used in behavior packs.
+現時点では、スクリプトはビヘイビアパックでのみ使用できます。
 
-In the behavior pack manifest, you need to add a `script` module and set an `entry` point for your script project. Currently, only `"javascript"` is supported as a valid language.
+ビヘイビアパックの manifest では、`script` module を追加し、スクリプトプロジェクトの `entry` point を設定する必要があります。現在、有効な言語としてサポートされているのは `"javascript"` のみです。
 
 <CodeHeader>BP/manifest.json#modules[0]</CodeHeader>
 
@@ -47,7 +47,7 @@ In the behavior pack manifest, you need to add a `script` module and set an `ent
 }
 ```
 
-Additionally, dependencies will need to be set based on modules used. To import and use script API modules, you must specify dependencies using the `module_name` and `version`. In this example, the `@minecraft/server` module is used.
+さらに、使用する module に応じて dependencies を設定する必要があります。Script API module を import して使うには、`module_name` と `version` を使って依存関係を指定しなければなりません。この例では `@minecraft/server` module を使っています。
 
 <CodeHeader>BP/manifest.json</CodeHeader>
 
@@ -83,9 +83,9 @@ Additionally, dependencies will need to be set based on modules used. To import 
 }
 ```
 
-If your project needs other module to run your code, add the other dependencies that follow the format above.
+コードの実行に他の module が必要な場合は、上の形式に従ってその依存関係も追加してください。
 
-**Stable API modules**, these do not require the Beta APIs experiment to be turned on. Most features are included in stable APIs, and will not break or be changed when Minecraft is updated.
+**Stable API modules** は、Beta APIs 実験を有効にする必要がありません。機能の多くは stable API に含まれており、Minecraft の更新で壊れたり変更されたりしません。
 
 -   `@minecraft/server`:
 
@@ -122,10 +122,10 @@ If your project needs other module to run your code, add the other dependencies 
     -   [`1.1.0`](https://www.npmjs.com/package/@minecraft/server-ui/v/1.1.0) (Requires `@minecraft/server@1.2.0` or above)
     -   [`1.0.0`](https://www.npmjs.com/package/@minecraft/server-ui/v/1.0.0) (Requires `@minecraft/server@1.2.0`)
 
-**Beta API modules** require the "Beta APIs" experiment to be turned on in world settings. These APIs can be changed, removed, or added to with very little warning, and are prone to breaking. Be warned!
+**Beta API modules** は、ワールド設定で "Beta APIs" 実験を有効にする必要があります。これらの API は、ほとんど警告なく変更・削除・追加される可能性があり、壊れやすいです。注意してください。
 
 ::: tip
-As of v1.21.120, you are now able to set the dependency `version` property to `"beta"`{lang=json} to always choose the latest beta version of each native module.
+v1.21.120 以降は、依存関係の `version` プロパティを `"beta"`{lang=json} に設定して、各ネイティブ module の最新 beta 版を常に選べます。
 :::
 
 -   `@minecraft/server`:
@@ -178,7 +178,7 @@ As of v1.21.120, you are now able to set the dependency `version` property to `"
 
     -   [`1.0.0-beta`](https://www.npmjs.com/package/@minecraft/debug-utilities/v/1.0.0-beta.1.21.114-stable) (1.21.114)
 
-In order to use the `eval()` function or `Function()` constructors within your code, you can add the following in the manifest capabilities:
+コード内で `eval()` 関数や `Function()` コンストラクターを使うには、manifest の capabilities に次の内容を追加できます。
 
 <CodeHeader>BP/manifest.json</CodeHeader>
 
@@ -188,50 +188,50 @@ In order to use the `eval()` function or `Function()` constructors within your c
 }
 ```
 
-The entry point file can contain scripts and/or imports to other script files. Only one entry point file can be specified.
+entry point ファイルには、スクリプトそのものや他のスクリプトファイルへの import を含められます。指定できる entry point ファイルは 1つだけです。
 
-## Writing Scripts with JS
+## JS でスクリプトを書く
 
-Minecraft's scripting engine only runs JavaScript, like any other JavaScript projects. Check out [Scripting with TypeScript](/scripting/typescript#script-api) for compiling TS directly to JavaScript.
+Minecraft の scripting engine は、他の JavaScript プロジェクトと同じように JavaScript しか実行しません。TS を直接 JavaScript にコンパイルする方法は、[TypeScript でのスクリプト作成](/scripting/typescript#script-api) を参照してください。
 
 <CodeHeader>BP/scripts/main.js</CodeHeader>
 
 ```js
-// This file demonstrates that the code is working by
-// Spamming the chat with "Hello World"
+// このファイルは、コードが動作していることを
+// チャットに "Hello World" を連投して示します
 
-// Import world & system component from "@minecraft/server", for world & game logic.
+// ワールドとゲームロジック用に "@minecraft/server" から world と system を import します。
 import { world, system } from "@minecraft/server";
 
-// Create & run an interval that is called every Minecraft tick
+// Minecraft の tick ごとに呼ばれる interval を作成して実行します
 system.runInterval(() => {
-    // Spams the chat with "Hello World" with world.sendMessage function from the API
+    // API の world.sendMessage 関数で "Hello World" をチャットに連投します
     world.sendMessage("Hello World");
 }, 1);
 ```
 
 ## Script API 2.0.0
 
-With Script API Version 2, scripts now by default execute before the world has loaded. This means that we now have to wait until the world is loaded to run most functions.
+Script API Version 2 では、スクリプトは既定でワールドの読み込み前に実行されるようになりました。つまり、ほとんどの関数を実行するには、ワールドの読み込みを待つ必要があります。
 
 <CodeHeader>BP/scripts/main.js</CodeHeader>
 
 ```js
 import { world } from "@minecraft/server";
 
-// wait until the world is loaded
+// ワールドの読み込みを待ちます
 world.afterEvents.worldLoad.subscribe(() => {
-    // Send a message in chat
+    // チャットにメッセージを送ります
     world.sendMessage("World has loaded");
 
-    // import other js files
+    // 他の js ファイルを import します
     import("./path/to/file.js");
 });
 ```
 
-## Reference Documentation
+## 参考ドキュメント
 
-Official documentation are hosted on Microsoft Learn and can be found here:
+公式ドキュメントは Microsoft Learn で公開されており、こちらで確認できます。
 
 -   [`@minecraft/server`](https://learn.microsoft.com/minecraft/creator/scriptapi/mojang-minecraft/mojang-minecraft)
 -   [`@minecraft/server-gametest`](https://learn.microsoft.com/minecraft/creator/scriptapi/mojang-gametest/mojang-gametest)
@@ -240,7 +240,7 @@ Official documentation are hosted on Microsoft Learn and can be found here:
 -   [`@minecraft/server-net`](https://learn.microsoft.com/minecraft/creator/scriptapi/mojang-net/mojang-net)
 -   [`@minecraft/debug-utilities`](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/debug-utilities/minecraft-debug-utilities)
 
-Official typescript declarations for the latest Beta API modules in Minecraft Preview can be found here:
+Minecraft Preview の最新 Beta API modules 用の公式 TypeScript 宣言は、こちらで確認できます。
 
 -   [`@minecraft/server`](https://www.npmjs.com/package/@minecraft/server/v/beta)
 -   [`@minecraft/server-gametest`](https://www.npmjs.com/package/@minecraft/server-gametest/v/beta)
@@ -249,12 +249,12 @@ Official typescript declarations for the latest Beta API modules in Minecraft Pr
 -   [`@minecraft/server-net`](https://www.npmjs.com/package/@minecraft/server-net/v/beta)
 -   [`@minecraft/debug-utilities`](https://www.npmjs.com/package/@minecraft/debug-utilities/v/beta)
 
-These allow for enhanced auto-completions and validation when used inside of your editor.
+これらを使うと、エディター内で補完と検証が強化されます。
 
--   bridge. v2: Ships with GameTest support built-in.
--   Visual Studio Code: Install Node.js and npm, then run the following in command line:
+-   bridge. v2: GameTest サポートを標準搭載しています。
+-   Visual Studio Code: Node.js と npm をインストールしてから、コマンドラインで次を実行してください。
 
-Latest beta API modules:
+最新 beta API modules:
 
 ```bash
 npm i @minecraft/server@2.3.0-beta.1.21.114-stable
@@ -265,7 +265,7 @@ npm i @minecraft/server-net@1.0.0-beta.1.21.114-stable
 npm i @minecraft/debug-utilities@1.0.0-beta.1.21.114-stable
 ```
 
-Latest stable API modules:
+最新 stable API modules:
 
 ```bash
 npm i @minecraft/server

@@ -1,5 +1,5 @@
 ---
-title: On Player Join
+title: プレイヤー参加時
 category: On Event Systems
 tags:
     - easy
@@ -7,62 +7,62 @@ mentions:
     - BedrockCommands
     - zheaEvyline
 nav_order: 2
-description: This system will run your desired commands on the event that a player joins the world.
+description: プレイヤーがワールドに参加したときに、指定したコマンドを実行するシステムです。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-This system will run your desired commands on the event that a player joins the world.
+このシステムは、プレイヤーがワールドに参加したときに、指定したコマンドを実行します。
 
-## Setup
+## セットアップ
 
-_Type the following command in Chat:_
+_次のコマンドをチャットで入力します。_
 
 `/scoreboard objectives add wiki:joined dummy`
 
-If you are working with functions and prefer to have the objective added automatically on world initialization, follow the process outlined in [On First World Load](/commands/on-first-world-load).
+functions を使っていて、ワールド初期化時に objective を自動追加したい場合は、[ワールドの初回読み込み時](/commands/on-first-world-load) に記載された手順に従ってください。
 
-## System
+## システム
 
 <CodeHeader>BP/functions/wiki/event/players/on_join.mcfunction</CodeHeader>
 
 ```yaml
-## Register Players to 'wiki:joined' Objective Who Joined For First Time or Were Cleared from 'wiki:joined' Previously
+## 初参加または `wiki:joined` を以前消去されたプレイヤーを `wiki:joined` objective に登録する
 scoreboard players add @a wiki:joined 0
 
-## Your Commands Here (Example)
+## ここにコマンドを入れる（例）
 tp @a[scores={wiki:joined=0}] 0 65 0
 
-### Mark Players as Joined
-### Clear 'joined' score of online and offline players
+### プレイヤーを参加済みとして記録
+### オンライン・オフライン両方のプレイヤーの `joined` スコアを消去
 scoreboard players reset * wiki:joined
-### Set online players score to 1
+### オンラインのプレイヤーのスコアを 1 に設定
 scoreboard players set @a wiki:joined 1
 ```
 
 ![Chain of 4 Command Blocks](/assets/images/commands/command-block-chain/4.png)
 
-Here, we have used a `/tp` command as an example, but you can use any command you prefer and as many as you need.
+ここでは `/tp` コマンドを例として使っていますが、好きなコマンドを必要な数だけ使えます。
 
-Just make sure to follow the given order and properly apply the `scores={wiki:joined=0}` selector argument as shown for your desired commands.
+ただし、示された順序を守り、目的のコマンドに `scores={wiki:joined=0}` セレクター引数を正しく適用してください。
 
-## Explanation
+## 解説
 
-When the player joins, a score of `0` is added to their `wiki:joined` objective. This allows us to run commands from them using the `scores` selector argument.
+プレイヤーが参加すると、その `wiki:joined` objective に `0` のスコアが追加されます。これにより、`scores` セレクター引数を使ってそのプレイヤーを対象にコマンドを実行できます。
 
-Immediately after the commands are run, we reset all the scores on the objective using wildcard **`*`**. And only the players who stayed online will have their score set to `1`.
+コマンドを実行した直後に、ワイルドカード **`*`** を使ってその objective の全スコアをリセットします。すると、オンラインのままだったプレイヤーだけがスコア 1 に設定されます。
 
-This way, since our commands only target players with a score of `0`, the commands won't repeat for the players who stayed, unless they leave and rejoin or if we run:
+この方法では、コマンドはスコア 0 のプレイヤーだけを対象にするため、残ったプレイヤーには繰り返されません。再参加するか、次のコマンドを実行しない限りはそうです。
 
 <br>`/scoreboard players set <player> joined 0`
 
-This is because _adding_ a score of 0 to a score of 1 will have no change. But adding a score of 0 to players with no score will set their score to 0.
+これは、スコア 1 にスコア 0 を _加えても_ 変化しないからです。一方で、まだスコアを持たないプレイヤーにスコア 0 を加えると、そのスコアは 0 に設定されます。
 
 ## Tick JSON
 
-If you are using functions instead of command blocks, the `on_join` function must be added to the `tick.json` in order to loop and run it continuously. Multiple files can be added to the `tick.json` by placing a comma after each string. Refer to [Functions](/commands/mcfunctions#tick-json) documentation for further info.
+コマンドブロックの代わりに functions を使う場合、`on_join` 関数を `tick.json` に追加して、ループさせて継続実行する必要があります。`tick.json` には文字列ごとにカンマを付ければ複数ファイルを追加できます。詳しくは [Functions](/commands/mcfunctions#tick-json) のドキュメントを参照してください。
 
 <CodeHeader>BP/functions/tick.json</CodeHeader>
 ```json
@@ -73,7 +73,7 @@ If you are using functions instead of command blocks, the `on_join` function mus
 }
 ```
 
-If using functions, your pack folder structure will be as follows:
+functions を使う場合、パックのフォルダ構成は次のようになります。
 
 <FolderView
 	:paths="[

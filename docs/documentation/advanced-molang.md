@@ -1,32 +1,32 @@
 ---
-title: Advanced Molang
-description: Learn about more advanced topics within Molang.
+title: 高度な Molang
+description: Molang のより高度なトピックを学びます。
 mentions:
     - Ciosciaa
     - TheItsNameless
     - QuazChick
 ---
 
-## Values
+## 値
 
--   All expressions in Molang return a value for the sake of checks against equality. Most expressions return `0`. Notably, assignments return the value assigned and loops return the resolved value of the looping statements, if one would exist.
--   All values in Molang are effectively single-precision floats.
--   `this` is used to refer to the field's current value as it accumulated during evaluation. It is only observed to be usable in animations, but it may be usable elsewhere. As an example, if the accumulated transformations on the `x` `scale` of a bone would yield `62`, a final animation with a `x` `scale` of `-this` would resolve to `-62`, unsetting the prior transformations. This is used in vanilla animations in a number of places. Outside of animation contexts, `this` appears to always resolve to `0`.
+-   Molang のすべての式は、等価比較のために値を返します。ほとんどの式は `0` を返します。特に、代入は代入した値を返し、ループは、もし存在すればループ文の解決値を返します。
+-   Molang のすべての値は、実質的に単精度浮動小数点です。
+-   `this` は、評価中に蓄積されたフィールドの現在値を参照するために使われます。アニメーションでしか使えないように見えますが、他でも使えるかもしれません。たとえば、ボーンの `x` `scale` に蓄積された変換が `62` を生む場合、最後のアニメーションで `x` `scale` を `-this` にすると `-62` になり、以前の変換を打ち消せます。これはバニラアニメーションのさまざまな箇所で使われています。アニメーション外では、`this` は常に `0` を返すようです。
 
-### Booleans
+### 真偽値
 
--   Booleans are usable in Molang. `true` resolves to `1`, and `false` resolves to `0`.
+-   Molang では真偽値を使えます。`true` は `1`、`false` は `0` に解決されます。
 
-### Numbers
+### 数値
 
--   You can use leading `0`s in front of numbers, for example, to line them up better in your code.
--   Numbers can use exponential notation, such as `2.5e2`, which would be equal to 250. `e` can be suffixed with `+` or `-` to direct the power.
--   Numbers may be suffixed with a single `f`, often used to denote a floating point value. This can be found across vanilla code, but it is not believed to have any functionality.
+-   数値の前に `0` を付けて、コード上で見やすく揃えることができます。
+-   数値には `2.5e2` のような指数表記を使えます。これは 250 と同じです。`e` の後に `+` や `-` を付けて指数の向きを指定できます。
+-   数値の末尾に `f` を 1つ付けることがあります。これは浮動小数点値を示すのによく使われます。バニラコードのあちこちで見られますが、機能はないと思われます。
 
-### Strings
+### 文字列
 
--   Strings use `\` (`\\` in escaped JSON) as some sort of escape or perhaps something else. It is unknown what functionality this has. It is known that the subsequent 2 characters are handed off to their own sub-parser, which does not exit correctly on a closing `'`; this means the Molang string `"v.type = '\\x';"` is invalid. `'`, which is normally disallowed on its own as it would represent the end of the string, is allowed in the 2 characters following a `\`.
--   String values are (mostly) incremental as they are represented against floats. It is possible to compare 2 individual character strings using equality or comparison operators or even to effectively "adjust" the contents of a single-character string. Multi-character behavior of such is unknown.
+-   文字列では `\`（JSON では `\\`）が何らかのエスケープ、あるいは別の用途として使われます。これが何に使われるのかは分かっていません。`'` で正しく終了しない専用のサブパーサーに、後続の 2 文字が渡されることは分かっています。そのため、Molang の文字列 `"v.type = '\\x';"` は無効です。通常は文字列の終わりを表すため単独では使えない `'` も、`\` の後ろ 2 文字の中では使えます。
+-   文字列値は、float として表現されるため、（ほとんど）増分的です。1 文字の文字列なら、等価演算子や比較演算子で比較でき、事実上その内容を「調整」することもできます。複数文字の挙動は不明です。
 
 ## Operators
 

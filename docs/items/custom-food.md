@@ -1,6 +1,6 @@
 ---
-title: Custom Food
-description: Learn how to create custom foods that, when consumed, grant effects to the player (like the golden apple).
+title: カスタムフード
+description: 食べるとプレイヤーに効果を与えるカスタムフードの作り方を学びます（たとえば金のリンゴのように）。
 category: Tutorials
 tags:
     - easy
@@ -11,14 +11,14 @@ mentions:
     - QuazChick
 ---
 
-:::tip FORMAT VERSION 1.26.10
-This page requires a basic understanding of custom items.
-Check out the [items guide](/items/items-intro) before starting!
+:::tip フォーマットバージョン 1.26.10
+このページでは、カスタムアイテムの基本的な理解が必要です。
+始める前に [items guide](/items/items-intro) を確認してください。
 :::
 
-On this page, you will learn how to create custom foods that, when consumed, grant effects to the player (like the golden apple).
+このページでは、食べるとプレイヤーに効果を与えるカスタムフードの作り方を学びます（金のリンゴのようなものです）。
 
-## Basic Item JSON
+## 基本のアイテム JSON
 
 <CodeHeader>BP/items/custom_food.json</CodeHeader>
 
@@ -57,9 +57,9 @@ On this page, you will learn how to create custom foods that, when consumed, gra
 }
 ```
 
-If you already know how to place a texture in the correct path, you can skip down, but if you don't, it's not enough to simply place the texture file in the `RP/textures/items` folder.
+テクスチャを正しい場所に置く方法をすでに知っているなら飛ばしても構いませんが、知らない場合は、単にテクスチャファイルを `RP/textures/items` フォルダに入れるだけでは不十分です。
 
-We now need to create an object with the name defined in the `minecraft:icon` component above in the `RP/textures/item_texture.json` file of our resource pack.
+ここで、resource pack の `RP/textures/item_texture.json` ファイル内に、上の `minecraft:icon` コンポーネントで定義した名前のオブジェクトを作成する必要があります。
 
 <CodeHeader>RP/textures/item_texture.json</CodeHeader>
 
@@ -73,12 +73,12 @@ We now need to create an object with the name defined in the `minecraft:icon` co
 }
 ```
 
-## Applying Effects
+## 効果の適用
 
-In order to apply effects to the player when the food is consumed, we'll need to make use of [custom components](/items/item-events).
+フードを食べたときにプレイヤーへ効果を適用するには、[custom components](/items/item-events) を使う必要があります。
 
-In this tutorial, our custom component will be `wiki:food_effects`.
-Make sure to change the namespace to something that uniquely identifies your add-on.
+このチュートリアルでは、カスタムコンポーネントを `wiki:food_effects` にします。
+namespace は、自分のアドオンを一意に識別できるものに変更してください。
 
 <CodeHeader>minecraft:item > components</CodeHeader>
 
@@ -97,9 +97,9 @@ Make sure to change the namespace to something that uniquely identifies your add
 ]
 ```
 
-### Custom Component Script
+### カスタムコンポーネントのスクリプト
 
-In the scripts file, just use a single event after using a specific item, and after using this item the player will acquire one or more effects, as in the code below.
+スクリプトファイルでは、特定のアイテムを使ったあとに 1 つのイベントを使うだけで、下のコードのようにプレイヤーへ 1 つ以上の効果を付与できます。
 
 <CodeHeader>BP/scripts/main.js</CodeHeader>
 

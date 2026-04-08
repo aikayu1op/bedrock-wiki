@@ -1,6 +1,6 @@
 ---
-title: Block Placement Prevention
-description: Prevent block placement via scripts.
+title: ブロック配置の防止
+description: スクリプトでブロック配置を防ぎます。
 category: Tutorials
 tags:
     - experimental
@@ -10,14 +10,14 @@ mentions:
 ---
 
 :::warning BETA APIs
-Beta versions of the Script API are in active development and breaking changes are frequent. This page assumes the format of Minecraft 1.21.120.
+Script API の beta 版は現在も活発に開発されており、破壊的変更が頻繁にあります。このページは Minecraft 1.21.120 の形式を前提としています。
 :::
 
-Have you ever needed to prevent a specific block from being placed? Sometimes players may acquire dangerous blocks so you can use this script to keep your world or server safe!
+特定のブロックの配置を防ぎたいと思ったことはありますか？プレイヤーが危険なブロックを入手することもあるので、このスクリプトを使えばワールドやサーバーを安全に保てます。
 
-## Setup
+## セットアップ
 
-Just like other scripts, you need the dependency in your `manifest.json`. We are using the `@minecraft/server` module, specifically the latest `-beta` version.
+他のスクリプトと同様に、`manifest.json` に dependency が必要です。ここでは `@minecraft/server` module、特に最新の `-beta` 版を使います。
 
 <CodeHeader>BP/manifest.json</CodeHeader>
 
@@ -55,7 +55,7 @@ Just like other scripts, you need the dependency in your `manifest.json`. We are
 }
 ```
 
-In our manifest, we have added script module. The `entry` is where our script file is stored. This is within the `scripts` folder of the behavior pack. The dependency allows us to use the required script module in our code.
+manifest には script module を追加しています。`entry` は script file の保存場所で、behavior pack の `scripts` フォルダー内です。dependency により、コード内で必要な script module を使えます。
 
 <FolderView
 	:paths="[
@@ -69,9 +69,9 @@ In our manifest, we have added script module. The `entry` is where our script fi
 
 Even if you are going to use another block, if this is your first time creating this script, follow the tutorial exactly. After you are sure you made the script correctly, you can change the block.
 
-This is because blocks often have an identifier different from what you may think. For example, Glow Item Frames are known internally as `minecraft:glow_frame`.
+これは、ブロックの identifier が想像と違うことが多いためです。たとえば Glow Item Frame は内部では `minecraft:glow_frame` として扱われます。
 
-We will start by adding the module imports we will be using in the code.
+まず、コードで使う module imports を追加します。
 
 <CodeHeader>BP/scripts/main.js</CodeHeader>
 
@@ -100,21 +100,21 @@ world.beforeEvents.playerPlaceBlock.subscribe((event) => {
 });
 ```
 
-This is the main function to execute our code. `world.beforeEvents.playerPlaceBlock.subscribe()` will run before any block is placed.
+これが、コードを実行する主要な関数です。`world.beforeEvents.playerPlaceBlock.subscribe()` は、ブロックが置かれる前に実行されます。
 
 -   `const player = event.source`{lang=js} defines the variable `player` as whatever the source of the event is (the one who is placing the block). `const` is used over `var` or `let` to say that the source _cannot_ be changed, and is constant.
 -   The `if` statement requires the criteria to evaluate to true in order for the code within the brackets to run.
     -   `event.permutationToPlace.type.id === "minecraft:bedrock"`{lang=js} verifies that the block being placed is 'minecraft:bedrock'.
 -   `event.cancel = true`{lang=js} cancels the placement action that would be performed by this event.
 -   `system.run()`{lang=js} is a system call that tells minecraft to push the code being ran to the next tick.
-    This is necessary as before events cannot modify the state of the world (in our case, sending a message to the player), and using system run makes the code unbound by this limitation.
+before events はワールドの状態を変更できないため、これが必要です（この場合はプレイヤーへのメッセージ送信）。`system.run` を使うことで、この制限の影響を受けないコードにできます。
     More information on system callbacks & loops can be found [here](https://learn.microsoft.com/minecraft/creator/documents/scripting/system-run-guide).
 -   `player.sendMessage()`{lang=js} sends a message to the player letting them know that they cannot place that block.
 
 ## Conclusion
 
-The message "You cannot place Bedrock" can be modified or replaced with your own logic as needed.
+メッセージ `"You cannot place Bedrock"` は、必要に応じて独自のロジックに変更または置き換えられます。
 
-You can also change the identifier of the block being checked in `event.permutationToPlace.type.id === "minecraft:bedrock"`{lang=js}. Put the identifier (with its namespace) in place of `minecraft:bedrock`.
+`event.permutationToPlace.type.id === "minecraft:bedrock"`{lang=js} で判定するブロックの identifier も変更できます。`minecraft:bedrock` の代わりに、対象の identifier を namespace 付きで入れてください。
 
 To learn more about Script API, you can check out the [wiki](/scripting/scripting-intro) or the [Microsoft Docs](https://learn.microsoft.com/en-us/minecraft/creator/documents/scriptdevelopertools)

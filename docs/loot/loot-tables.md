@@ -1,33 +1,33 @@
 ---
-title: Loot Tables
+title: ルートテーブル
 category: Documentation
 nav_order: 1
 mentions:
     - Ciosciaa
     - Etanarvazac
     - SmokeyStack
-description: All about loot tables.
+description: ルートテーブルについての解説。
 ---
 
 ::: warning
-This document is a work in progress.
+この文書は作成途中です。
 :::
 
-Loot tables are used to select a set of items from a declared collection. Loot tables can be used from:
+ルートテーブルは、宣言されたコレクションからアイテムの集合を選択するために使われます。ルートテーブルは次の場面で使用できます。
 
--   The `/loot` command
--   Container contents
--   Block drops
--   Fishing
--   Mob drops
--   Equipment on spawned mobs
--   Other various mob actions
+-   `/loot` コマンド
+-   コンテナーの中身
+-   ブロックのドロップ
+-   釣り
+-   Mob のドロップ
+-   スポーンした Mob の装備
+-   その他さまざまな Mob の動作
 
-A different collection of items may be chosen each instance the same loot table would be used, based on [external conditions](#), and [innate randomness](#). Such variation is crucial for playability and adventuring, especially in more RPG-driven systems.
+同じルートテーブルが使われるたびに、[外部条件](#)と[本質的なランダム性](#)に基づいて、別のアイテム集合が選ばれることがあります。この変化は、特に RPG 色の強いシステムでは、遊びや冒険性を成り立たせるうえで重要です。
 
-## Integration
+## 統合
 
-Loot tables are not registered add-on entries and are instead referenced by path from the above sources. Loot tables may be placed anywhere within a behavior pack, but it's recommended to place them under the top-level `loot_tables` directory, following vanilla convention.
+ルートテーブルは登録されるアドオン項目ではなく、上記のソースからパスで参照されます。ルートテーブルは behavior pack 内のどこに置いてもかまいませんが、バニラの慣例に従って、最上位の `loot_tables` ディレクトリ以下に置くことを推奨します。
 
 <FolderView
 	:paths="[
@@ -37,9 +37,9 @@ Loot tables are not registered add-on entries and are instead referenced by path
 	]"
 />
 
-## Structure
+## 構造
 
-Loot tables are represented as JSON objects with a single required `"pools"` array property.
+ルートテーブルは、必須の `"pools"` 配列プロパティを 1 つ持つ JSON オブジェクトとして表されます。
 
 <CodeHeader>#</CodeHeader>
 
@@ -51,11 +51,11 @@ Loot tables are represented as JSON objects with a single required `"pools"` arr
 }
 ```
 
-The loot returned from a loot table invocation will be the _collective sum_ of the yields of all pools provided here.
+ルートテーブルの呼び出しで返されるルートは、ここで指定されたすべてのプールの結果の _合計_ になります。
 
-### Pools
+### プール
 
-Pools act as isolated constructs for selecting items; the results of pools cannot be influenced by other pools.
+プールは、アイテムを選択するための独立した構造として機能します。あるプールの結果が別のプールに影響されることはありません。
 
 <CodeHeader>#</CodeHeader>
 
@@ -72,11 +72,11 @@ Pools act as isolated constructs for selecting items; the results of pools canno
 }
 ```
 
-Two types of pools are available: general-purpose [weighted random pools](#weighted-random-pools) and [tiered pools](#tiered-pools), the latter of which is traditionally used for selecting mob equipment.
+プールには 2 種類あります。汎用の [重み付きランダムプール](#weighted-random-pools) と [階層型プール](#tiered-pools) です。後者は、従来 Mob の装備選択に使われてきました。
 
-#### Weighted Random Pools
+#### 重み付きランダムプール
 
-A traditional weighted random pool selects items based on relative weight, choosing a number of yields based on a configured roll count.
+従来型の重み付きランダムプールは、相対的な重みに基づいてアイテムを選択し、設定されたロール回数に応じた数の結果を選びます。
 
 <CodeHeader>artifacts.json/pools/0</CodeHeader>
 
@@ -107,38 +107,38 @@ A traditional weighted random pool selects items based on relative weight, choos
 }
 ```
 
-##### Rolls
+##### ロール
 
-###### Bonus Rolls
+###### ボーナスロール
 
-The roll count for a weighted random pool may be altered based on the player's luck using the optional `"bonus_rolls"` property.
+重み付きランダムプールのロール回数は、オプションの `"bonus_rolls"` プロパティを使って、プレイヤーの運に応じて変化させることができます。
 
 ```json
 "bonus_rolls": 3,
 "bonus_chance": 0.095
 ```
 
-##### Entry Weighting
+##### エントリーの重み付け
 
-The weight is the chance of this entry being chosen. The higher the weight in comparison to other entries in this "entries" array, the higher the chance of the entry being chosen.
+重みは、そのエントリーが選ばれる確率です。この `"entries"` 配列内の他のエントリーと比べて重みが高いほど、そのエントリーが選ばれる確率も高くなります。
 
 ```json
 "weight": 3
 ```
 
-###### Quality
+###### クオリティ
 
-The weight of an entry can be changed based on the player's luck using the quality property.
+エントリーの重みは、`quality` プロパティを使ってプレイヤーの運に応じて変更できます。
 
 ```json
 "quality": 2
 ```
 
-Currently, luck is only expressed when fishing with a fishing rod enchanted with Luck of the Sea.
+現在、運は「海の幸運」が付与された釣り竿で釣りをしたときにのみ反映されます。
 
-#### Tiered Pools
+#### 階層型プール
 
-Tiered pools are used to select exactly one entry from a collection.
+階層型プールは、コレクションからちょうど 1 つのエントリーを選択するために使われます。
 
 ```json
 {
@@ -174,7 +174,7 @@ Tiered pools are used to select exactly one entry from a collection.
 }
 ```
 
-A pool becomes tiered with the inclusion of the `"tiers"` object property:
+プールに `"tiers"` オブジェクトプロパティを含めると、階層型になります。
 
 ```json
 "tiers": {
@@ -185,25 +185,25 @@ A pool becomes tiered with the inclusion of the `"tiers"` object property:
 }
 ```
 
-Entries in a tiered pool are _ordered_. The selected entry for a tiered pool is based on its index. To determine this index, a starting index is randomly rolled and then a batch of success rolls attempt to increment this starting index.
+階層型プール内のエントリーは _順序付き_ です。階層型プールで選ばれるエントリーは、そのインデックスに基づきます。このインデックスを決めるには、まず開始インデックスをランダムに振り、その後の成功ロール群でその開始インデックスを増やそうとします。
 
-The starting index is decided by rolling a random integer between 1 and the integer property `"initial_range"`. If no initial range is provided, it defaults to `1`, forcing a starting index of 1.
+開始インデックスは、1 から整数プロパティ `"initial_range"` までの乱数を振って決まります。初期範囲が指定されない場合は `1` が既定値となり、開始インデックスは 1 に固定されます。
 
-Next, attempts are made to advanced the index using additional rolls. The count of these roll attempts is given as an integer to `"bonus_rolls"`. The chance that any such roll succeeds is given via `"bonus_chance"`. Chances for `"bonus_chance"` are out of 1, meaning `0.5` would be a 50% chance for any bonus roll to succeed. Each successful roll increases the index by 1. Both of these properties default to `0`, meaning both must be provided to use this additional rolls mechanic.
+次に、追加ロールでインデックスを進める試みが行われます。このロール試行回数は `"bonus_rolls"` に整数で指定します。各ロールの成功確率は `"bonus_chance"` で指定します。`"bonus_chance"` は 1 を基準とした値で、`0.5` ならボーナスロールが成功する確率は 50% です。成功したロールごとにインデックスは 1 増えます。これら 2 つのプロパティはどちらも既定値が `0` であり、この追加ロールの仕組みを使うには両方を指定する必要があります。
 
-The final determined index is used to select the corresponding entry as that pool's yield. Indices in tiered pools are one-indexed, meaning the first entry has an index of 1, the second has an index of 2, and so forth. If the determined index is larger than the entry count for that pool, no yield will be provided.
+最終的に決定されたインデックスが、そのプールの結果として対応するエントリーを選ぶために使われます。階層型プールのインデックスは 1 始まりで、最初のエントリーのインデックスは 1、2 番目は 2、以下同様です。決定されたインデックスがそのプールのエントリー数を超える場合、結果は何も返されません。
 
 ::: warning
-All [conditions](#) on entries in a tiered pool are ignored. Conditions on the pool itself are still allowed.
+階層型プールのエントリーに付けたすべての [conditions](#) は無視されます。プール自体の条件は引き続き使用できます。
 :::
 
-### Entries
+### エントリー
 
-Entries are the selectable units of a pool. Three different types of entries are available.
+エントリーは、プール内で選択される単位です。3 種類のエントリーがあります。
 
-#### Item Entries
+#### アイテムエントリー
 
-Item entries are the fundamental entry type for selecting loot. Item entries refer to
+アイテムエントリーは、ルートを選択するための基本的なエントリー型です。アイテムエントリーは次を指します。
 
 ```json
 "type": "item",
@@ -211,9 +211,9 @@ Item entries are the fundamental entry type for selecting loot. Item entries ref
 "weight": 1
 ```
 
-#### Loot Table Entries
+#### ルートテーブルエントリー
 
-Loot hierarchies can be formed using loot table entries.
+ルートテーブルエントリーを使うと、ルートの階層構造を作れます。
 
 ```json
 "type": "loot_table",
@@ -221,20 +221,20 @@ Loot hierarchies can be formed using loot table entries.
 "weight": 1
 ```
 
-#### Empty Entries
+#### 空エントリー
 
-When selected, empty entries won't yield any loot for that roll.
+空エントリーが選ばれた場合、そのロールではルートは何も生成されません。
 
 ```json
 "type": "empty",
 "weight": 4
 ```
 
-Empty entries can generally be mimicked using [a roll count](#) whose range includes 0, [random chance conditions](#), or [count functions](#) that could randomly select 0. Their primary advantage is readability when using [weighted random pools](#): denoting by weight when a roll won't yield an entry may be easier to understand.
+空エントリーは一般に、範囲に 0 を含む [roll count](#)、[random chance conditions](#)、または 0 をランダムに選べる [count functions](#) で代用できます。主な利点は、[重み付きランダムプール](#)での可読性です。ロールがエントリーを返さないことを重みで示すほうが、理解しやすい場合があります。
 
-### Functions
+### 関数
 
-Functions are what makes loot tables so powerful. They can do a wide range of tasks for each entry in your loot table. For example, they can change the amount of an item is dropped, what enchantments are present (even on items that normally cannot be enchanted), the item name, it's lore, and it can even write books! View [item functions](/loot/item-functions) for a full list of functions and how they're used.
+関数こそが、ルートテーブルを強力にしている要素です。ルートテーブル内の各エントリーに対して、幅広い処理を行えます。たとえば、ドロップ数の変更、付与されるエンチャントの変更（通常はエンチャント不可のアイテムにも対応）、アイテム名やその lore の変更、さらには本の書き込みまで可能です。関数の一覧と使い方は [item functions](/loot/item-functions) を参照してください。
 
 <CodeHeader>artifacts.json/pools/entries</CodeHeader>
 
@@ -259,9 +259,9 @@ Functions are what makes loot tables so powerful. They can do a wide range of ta
 }
 ```
 
-### Conditions
+### 条件
 
-Conditions check to see if a certain criteria is met. Examples: "Was Zombie killed by Player", "Did the sword have the Looting enchantment on it? If so, what level?"
+条件は、特定の基準を満たしているかどうかを確認します。例: 「Zombie は Player によって倒されたか」「その剣に Looting エンチャントは付いているか。付いているならレベルはいくつか」
 
 <CodeHeader>artifacts.json/pools/entries</CodeHeader>
 
@@ -298,4 +298,4 @@ Conditions check to see if a certain criteria is met. Examples: "Was Zombie kill
 }
 ```
 
-## Overrides
+## 上書き

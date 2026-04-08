@@ -1,0 +1,191 @@
+import { resolveComponent, withCtx, createTextVNode, useSSRContext } from "vue";
+import { ssrRenderAttrs, ssrRenderAttr, ssrRenderComponent, ssrRenderStyle } from "vue/server-renderer";
+import { _ as _export_sfc } from "./plugin-vue_export-helper.1tPrXgE0.js";
+const _imports_0 = "/assets/images/commands/rearrange-positions/2d-visualization.gif";
+const __pageData = JSON.parse('{"title":"マルチプレイヤー位置入れ替え","description":"選択した対象を互いにランダムに入れ替え、元の位置に残る対象が 1 つもないようにします。","frontmatter":{"title":"マルチプレイヤー位置入れ替え","category":"Useful Creations","mentions":["BedrockCommands","zheaEvyline","jeanmajid"],"tags":["function"],"description":"選択した対象を互いにランダムに入れ替え、元の位置に残る対象が 1 つもないようにします。"},"headers":[{"level":2,"title":"はじめに","slug":"はじめに","link":"#はじめに","children":[]},{"level":2,"title":"Steps Involved in This Method","slug":"steps-involved-in-this-method","link":"#steps-involved-in-this-method","children":[]},{"level":2,"title":"Functions","slug":"functions","link":"#functions","children":[]},{"level":2,"title":"Tick JSON","slug":"tick-json","link":"#tick-json","children":[]},{"level":2,"title":"Folder Structure","slug":"folder-structure","link":"#folder-structure","children":[]},{"level":2,"title":"Download Function Pack","slug":"download-function-pack","link":"#download-function-pack","children":[]}],"relativePath":"commands/rearrange-positions.md","filePath":"commands/rearrange-positions.md"}');
+const _sfc_main = { name: "commands/rearrange-positions.md" };
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  const _component_CodeHeader = resolveComponent("CodeHeader");
+  const _component_FolderView = resolveComponent("FolderView");
+  const _component_Card = resolveComponent("Card");
+  _push(`<div${ssrRenderAttrs(_attrs)}><h2 id="はじめに" tabindex="-1">はじめに <a class="header-anchor" href="#はじめに" aria-label="Permalink to &quot;はじめに&quot;">​</a></h2><p><a href="https://bedrockcommands.org/" target="_blank" rel="noreferrer">Sourced by the Bedrock Commands Community (BCC) Discord</a></p><p>@ZheaEvyline が作成した Multiplayer Position Rearrangement function、より正確には Multiplayer Position Derangement function は、選択した対象を互いにランダムに入れ替え、どの対象も元の位置に残らないようにします。</p><p>derangement とは、<code class="shiki"><span>N</span></code> 個の要素の順列で、どの要素も元の位置に現れないものを指します。</p><p>たとえば、Player1 が <code class="shiki"><span>(0, 0, 1)</span></code>、Player2 が <code class="shiki"><span>(0, 0, 2)</span></code>、Player3 が <code class="shiki"><span>(0, 0, 3)</span></code> にいた場合、Player1 は <code class="shiki"><span>(0, 0, 2)</span></code> か <code class="shiki"><span>(0, 0, 3)</span></code> にしか移動できません。同じルールは他のプレイヤーにも適用されます。</p><br><p><strong>この Function Pack の主な特徴:</strong></p><ol><li>1 ゲームティックで derangement を保証。</li><li>反復（繰り返し / ループ）回数を最小化。</li><li>次元をまたいだ互換性。</li></ol><p>This function pack is designed to support an unlimited number of targets. However, due to Bedrock limitations, it will halt once the <code class="shiki"><span>10,000</span></code> function execution limit is reached.</p><p>For instance, deranging the positions of 100 targets requires only 4-6 iterations, with 7 commands executed during initialization and 9 per iteration. This totals approximately 60 commands, significantly below the function limit.</p><br><p>The number of iterations increases proportionally with the number of elements.</p><p>For reference, here is the number of derangements possible for elements ranging from 1 to 10:</p><table tabindex="0"><thead><tr><th>Number of Elements (N)</th><th>Number of Derangements Possible (D(N))</th></tr></thead><tbody><tr><td>1</td><td>0</td></tr><tr><td>2</td><td>1</td></tr><tr><td>3</td><td>2</td></tr><tr><td>4</td><td>9</td></tr><tr><td>5</td><td>44</td></tr><tr><td>6</td><td>265</td></tr><tr><td>7</td><td>1,854</td></tr><tr><td>8</td><td>14,833</td></tr><tr><td>9</td><td>133,496</td></tr><tr><td>10</td><td>1,334,961</td></tr></tbody></table><p>The number of derangement possibilities increases rapidly as the number of elements grows.</p><h2 id="steps-involved-in-this-method" tabindex="-1">Steps Involved in This Method <a class="header-anchor" href="#steps-involved-in-this-method" aria-label="Permalink to &quot;Steps Involved in This Method&quot;">​</a></h2><ol><li>Relocate each target to the position of a random one (other than its original position).</li><li>If multiple targets are relocated to the same position, assign it to one of them and repeat the process for the remaining targets.</li><li>If final target is left with no available position except its original, relocate the target in it&#39;s current position to it&#39;s original position, assigning the now freed position to the final target.</li></ol><p><strong>Example Visualization:</strong></p><p><img${ssrRenderAttr("src", _imports_0)} alt="Position of Five Players Being Deranged"></p><h2 id="functions" tabindex="-1">Functions <a class="header-anchor" href="#functions" aria-label="Permalink to &quot;Functions&quot;">​</a></h2><p>An ID system is required to index the position of all targets from 1 to N, allowing us to track the original position of each target. We will run this file in the <code class="shiki"><span>tick.json</span></code> to automatically assign the IDs.</p>`);
+  _push(ssrRenderComponent(_component_CodeHeader, null, {
+    default: withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`BP/functions/wiki/scoreboard/players/id.mcfunction`);
+      } else {
+        return [
+          createTextVNode("BP/functions/wiki/scoreboard/players/id.mcfunction")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`<div class="language-yaml vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">yaml</span><pre class="shiki shiki-themes dark-plus light-plus vp-code" tabindex="0"><code><span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Register New Players to ID Objective</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">scoreboard players add @a wiki:id 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Create New ID</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute if entity @a[scores={wiki:id=0}] run scoreboard players add .Total wiki:id 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Assign the New ID</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">scoreboard players operation @r[scores={wiki:id=0}] wiki:id = .Total wiki:id</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><br><p>This is the function you run (once) each time you need to derange the positions of all targets:</p><ul><li><code class="shiki"><span>/function wiki/derange_position/initiate</span></code></li></ul>`);
+  _push(ssrRenderComponent(_component_CodeHeader, null, {
+    default: withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`BP/functions/wiki/derange_position/initiate.mcfunction`);
+      } else {
+        return [
+          createTextVNode("BP/functions/wiki/derange_position/initiate.mcfunction")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`<div class="language-yaml vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">yaml</span><pre class="shiki shiki-themes dark-plus light-plus vp-code" tabindex="0"><code><span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Summon Position Marker</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute at @a run summon armor_stand &quot;wiki:position_marker&quot; ~~~</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Save Original Position to Ignore</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute as @a at @s run scoreboard players operation @e[type=armor_stand,name=&quot;wiki:position_marker&quot;,r=0.01,c=1] wiki:id = @s wiki:id</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Initiate Position Derangement Process for All Targets</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">function wiki/derange_position/process</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Run Process One Last Time if Final Player Has a Valid Position Available</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute if score .Players.NotAllocated wiki:count matches 1 unless score @a[tag=!wiki:pos.allocated,c=1] wiki:id = @e[type=armor_stand,name=&quot;wiki:position_marker&quot;,c=1] wiki:id run function wiki/derange_position/process</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Resolve Collision if Final Player Has No Valid Position Available</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">### relocate the allocated player to their colliding player&#39;s original position to free their position for the colliding player</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute as @a[tag=!wiki:pos.allocated] at @s run tp @r[tag=wiki:pos.allocated,r=0.01] @e[type=armor_stand,name=&quot;wiki:position_marker&quot;,c=1]</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">### remove colliding player&#39;s position marker and tag</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">kill @e[type=armor_stand,name=&quot;wiki:position_marker&quot;]</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">tag @a[tag=wiki:pos.allocated] remove wiki:pos.allocated</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>In case a single target is left with no available position except its original, the final 3 commands will resolve the collision. We call it a collision because when this occurs, the target will be at the allocated position of another target.</p><br><p>The actual randomized derangement process will be performed by this function below:</p>`);
+  _push(ssrRenderComponent(_component_CodeHeader, null, {
+    default: withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`BP/functions/wiki/derange_position/process.mcfunction`);
+      } else {
+        return [
+          createTextVNode("BP/functions/wiki/derange_position/process.mcfunction")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`<div class="language-yaml vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">yaml</span><pre class="shiki shiki-themes dark-plus light-plus vp-code" tabindex="0"><code><span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Move to a Different Position</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute as @a[tag=!wiki:pos.allocated] at @s run function wiki/derange_position/teleport</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## If Returned to Original Position: Move Again</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute as @a[tag=!wiki:pos.allocated] at @s if score @s wiki:id = @e[type=armor_stand,name=&quot;wiki:position_marker&quot;,r=0.01,c=1] wiki:id run function wiki/derange_position/teleport</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Add Tag to Ignore Players with a Position Allocated</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute as @e[type=armor_stand,name=&quot;wiki:position_marker&quot;] at @s run tag @a[tag=!wiki:pos.allocated,r=0.01,c=1] add wiki:pos.allocated</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Remove Allocated Position Markers</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute as @a[tag=wiki:pos.allocated] at @s run kill @e[type=armor_stand,name=&quot;wiki:position_marker&quot;,r=0.01,c=1]</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}"># ENTITY COUNTER</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Get Player Count of Players Without a Position Allocated</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">scoreboard players set .Players.NotAllocated wiki:count 0</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute as @a[tag=!wiki:pos.allocated] run scoreboard players add .Players.NotAllocated wiki:count 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## If 2+ Players Are Not Allocated a Position: Loop Function</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute if score .Players.NotAllocated wiki:count matches 2.. run function wiki/derange_position/process</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><br><ul><li>❌️ <code class="shiki"><span>tp @s @r[type=armor_stand,name=&quot;wiki:position_marker&quot;,rm=0.01]</span></code></li></ul><p>Directly using this command to teleport to a new position only works within the current dimension. Therefore, instead of that, we use the following three-command function for cross-dimensional compatibility:</p>`);
+  _push(ssrRenderComponent(_component_CodeHeader, null, {
+    default: withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`BP/functions/wiki/derange_position/teleport.mcfunction`);
+      } else {
+        return [
+          createTextVNode("BP/functions/wiki/derange_position/teleport.mcfunction")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`<div class="language-yaml vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">yaml</span><pre class="shiki shiki-themes dark-plus light-plus vp-code" tabindex="0"><code><span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">tag @e[type=armor_stand,name=&quot;wiki:position_marker&quot;,r=0.01] add wiki:pos.ignored</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">tp @s @r[type=armor_stand,name=&quot;wiki:position_marker&quot;,tag=!wiki:pos.ignored]</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">tag @e remove wiki:pos.ignored</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><br><p>Now, for our functions to actually work, we will need to add the following objectives on our world:</p>`);
+  _push(ssrRenderComponent(_component_CodeHeader, null, {
+    default: withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`BP/functions/wiki/scoreboard/objectives/add_all.mcfunction`);
+      } else {
+        return [
+          createTextVNode("BP/functions/wiki/scoreboard/objectives/add_all.mcfunction")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`<div class="language-yaml vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">yaml</span><pre class="shiki shiki-themes dark-plus light-plus vp-code" tabindex="0"><code><span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">scoreboard objectives add wiki:id dummy</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">scoreboard objectives add wiki:count dummy</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><br><p>If you wish to add the objectives automatically as soon as you load the world, you may create the function file below:</p>`);
+  _push(ssrRenderComponent(_component_CodeHeader, null, {
+    default: withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`BP/functions/wiki/event/worlds/on_initialize.mcfunction`);
+      } else {
+        return [
+          createTextVNode("BP/functions/wiki/event/worlds/on_initialize.mcfunction")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`<div class="language-yaml vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">yaml</span><pre class="shiki shiki-themes dark-plus light-plus vp-code" tabindex="0"><code><span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Initialization</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">### Add objective</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">scoreboard objectives add wiki:world dummy</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">### Register to objective</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">scoreboard players add .Initialized wiki:world 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Commands to Execute</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">execute if score .Initialized wiki:world matches 0 run function wiki/scoreboard/objectives/add_all</span></span>
+<span class="line"></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#6A9955", "--shiki-light": "#008000" })}">## Mark As Initialized</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">scoreboard players set .Initialized wiki:world 1</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h2 id="tick-json" tabindex="-1">Tick JSON <a class="header-anchor" href="#tick-json" aria-label="Permalink to &quot;Tick JSON&quot;">​</a></h2><p>Finally, create your <code class="shiki"><span>tick.json</span></code> file:</p>`);
+  _push(ssrRenderComponent(_component_CodeHeader, null, {
+    default: withCtx((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`BP/functions/tick.json`);
+      } else {
+        return [
+          createTextVNode("BP/functions/tick.json")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`<div class="language-json vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">json</span><pre class="shiki shiki-themes dark-plus light-plus vp-code" tabindex="0"><code><span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#D4D4D4", "--shiki-light": "#000000" })}">{</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#9CDCFE", "--shiki-light": "#0451A5" })}">    &quot;values&quot;</span><span style="${ssrRenderStyle({ "--shiki-dark": "#D4D4D4", "--shiki-light": "#000000" })}">: [</span><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#A31515" })}">&quot;wiki/event/worlds/on_initialize&quot;</span><span style="${ssrRenderStyle({ "--shiki-dark": "#D4D4D4", "--shiki-light": "#000000" })}">, </span><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#A31515" })}">&quot;wiki/scoreboard/players/id&quot;</span><span style="${ssrRenderStyle({ "--shiki-dark": "#D4D4D4", "--shiki-light": "#000000" })}">]</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#D4D4D4", "--shiki-light": "#000000" })}">}</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="folder-structure" tabindex="-1">Folder Structure <a class="header-anchor" href="#folder-structure" aria-label="Permalink to &quot;Folder Structure&quot;">​</a></h2>`);
+  _push(ssrRenderComponent(_component_FolderView, { paths: [
+    "BP/functions/wiki/derange_position/initiate.mcfunction",
+    "BP/functions/wiki/derange_position/process.mcfunction",
+    "BP/functions/wiki/derange_position/teleport.mcfunction",
+    "BP/functions/wiki/event/worlds/on_initialize.mcfunction",
+    "BP/functions/wiki/scoreboard/objectives/add_all.mcfunction",
+    "BP/functions/wiki/scoreboard/players/id.mcfunction",
+    "BP/functions/tick.json",
+    "BP/manifest.json",
+    "BP/pack_icon.png"
+  ] }, null, _parent));
+  _push(`<h2 id="download-function-pack" tabindex="-1">Download Function Pack <a class="header-anchor" href="#download-function-pack" aria-label="Permalink to &quot;Download Function Pack&quot;">​</a></h2><p>For convenience, you can download the <code class="shiki"><span>.mcpack</span></code> for the Function Pack here:</p>`);
+  _push(ssrRenderComponent(_component_Card, {
+    image: "/assets/images/discord/bcc.png",
+    title: "Download",
+    link: "https://github.com/BedrockCommands/developer-packs/releases/download/mpd/Multiplayer_Position_Derangement.FP.mcpack"
+  }, null, _parent));
+  _push(`<p>Simply activate the pack on your world and run once (each time you need) the following command in multiplayer:</p><div class="language-yaml vp-adaptive-theme line-numbers-mode"><button title="Copy Code" class="copy"></button><span class="lang">yaml</span><pre class="shiki shiki-themes dark-plus light-plus vp-code" tabindex="0"><code><span class="line"><span style="${ssrRenderStyle({ "--shiki-dark": "#CE9178", "--shiki-light": "#0000FF" })}">/function wiki/derange_position/initiate</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br></div></div></div>`);
+}
+const _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("commands/rearrange-positions.md");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const rearrangePositions = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
+export {
+  __pageData,
+  rearrangePositions as default
+};

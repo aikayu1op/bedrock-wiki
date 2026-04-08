@@ -1,7 +1,7 @@
 ---
-title: Understanding JSON
+title: JSON の理解
 category: Extra
-description: A first peek into JSON
+description: JSON への最初の一歩
 nav_order: 1
 prefix: "a. "
 mentions:
@@ -15,29 +15,29 @@ mentions:
 ---
 
 ::: tip
-This is an appendix page. You can start the guide from the beginning [here](/guide/introduction).
+これは付録ページです。ガイドの最初から始めるなら[ここ](/guide/introduction)です。
 :::
 
-JSON is a simple format for writing text files, in a way that is understandable to both Humans and Computers. Bedrock uses .json files as the "language" of Add-Ons, so you will need a solid understand of how to read and write json! If you have never heard of JSON before, you are encouraged to read through [this tutorial](https://www.digitalocean.com/community/tutorials/an-introduction-to-json). It will teach you everything you need to know about writing valid JSON files.
+JSON は、テキストファイルを書くためのシンプルな形式で、人間にもコンピューターにも理解しやすいように作られています。Bedrock では .json ファイルが Add-On の「言語」として使われるため、JSON を読み書きする方法をしっかり理解しておく必要があります。JSON を初めて聞いたなら、[このチュートリアル](https://www.digitalocean.com/community/tutorials/an-introduction-to-json) を読むことをおすすめします。正しい JSON ファイルの書き方に必要なことがひと通り学べます。
 
-## Valid JSON
+## 正しい JSON
 
-The important thing to remember when writing JSON is that it must be _completely error free_, or it won't work at all. Even one wrong character, or one extra comma will cause the entire file to fail. For this reason, it's super important you write valid JSON.
+JSON を書くときに大事なのは、_完全にエラーがない_ 必要があることです。そうでなければ、まったく動きません。1 文字でも間違っていたり、余分なカンマが 1 つあるだけで、ファイル全体が失敗します。そのため、正しい JSON を書くことはとても重要です。
 
-We can use an online tool called [json lint](https://jsonlint.com/) to tell us whether our JSON is valid. Simply paste your code into the website, and press `Validate JSON`. You will get a response indicating whether your code is correct or not, as well as the location and type of any errors.
+[json lint](https://jsonlint.com/) というオンラインツールを使えば、JSON が正しいかどうかを判定できます。コードをサイトに貼り付けて `Validate JSON` を押すだけです。コードが正しいかどうかに加えて、エラーの場所と種類も表示されます。
 
-## Data Structures
+## データ構造
 
-In JSON, data can be written in a number of formats. Each format is specialized for the kind of data it wants to represent. Here are the structures we have available:
+JSON では、データをいくつかの形式で書けます。それぞれの形式は、表現したいデータの種類に特化しています。使える構造は次のとおりです。
 
 | Name   | Example  | Explanation                            |
 | ------ | -------- | -------------------------------------- |
-| String | "hello!" | Words, or characters. Requires quotes. |
-| Int    | 15       | A number. No quotes.                   |
-| Float  | 1.2      | A fractional number. No quotes.        |
-| Bool   | true     | Either true or false. No quotes.       |
+| String | "hello!" | 単語や文字。引用符が必要です。         |
+| Int    | 15       | 数値。引用符は不要です。               |
+| Float  | 1.2      | 小数。引用符は不要です。               |
+| Bool   | true     | true か false のどちらかです。引用符は不要です。 |
 
-And now, in .json format:
+それでは、.json 形式ではこうなります。
 
 ```json
 {
@@ -48,20 +48,20 @@ And now, in .json format:
 }
 ```
 
-In addition to these simple structures, we also have access to two special structures. Special structures are used to _nest_ other data together.
+これらの単純な構造に加えて、特別な構造も 2 つあります。特別な構造は、ほかのデータを _入れ子_ にするときに使います。
 
-### Arrays
+### 配列
 
-Arrays are written as two square brackets `[]`. They represent a _list_. We can put _other data structures_ inside of the list. Each _element_ of the list should be separated by a comma.
+配列は 2 つの角かっこ `[]` で書きます。これは _一覧_ を表します。中に _ほかのデータ構造_ を入れられます。各 _要素_ はカンマで区切る必要があります。
 
-Some examples:
+例:
 
 | Structure       | Comment                               |
 | --------------- | ------------------------------------- |
-| [1, 2, 3]       | A list of integers.                   |
-| ["Red", "blue"] | A list of strings. Notice the quotes! |
+| [1, 2, 3]       | 整数の一覧。                           |
+| ["Red", "blue"] | 文字列の一覧。引用符に注目してください！ |
 
-And now, in .json format:
+それでは、.json 形式ではこうなります。
 
 ```json
 {
@@ -70,13 +70,13 @@ And now, in .json format:
 }
 ```
 
-### Objects
+### オブジェクト
 
-Objects are written as two curly-brackets `{}`. Objects are a special syntax which contains _named_ data structures. The name is called a `key`, and the structure is called a `value`. The examples earlier in this page was a _dictionary_ containing examples of the other data types.
+オブジェクトは 2 つの波かっこ `{}` で書きます。オブジェクトは、_名前付き_ のデータ構造を含む特別な構文です。名前は `key` と呼ばれ、構造は `value` と呼ばれます。このページの前半の例は、ほかのデータ型の例を含んだ _dictionary_ でした。
 
-This key-value syntax looks like this: `"<key>": <any structure>`. Notice the quotes around the key, and the colon.
+この key-value 構文は次のように書きます。`"<key>": <any structure>`。key を囲む引用符と、コロンに注目してください。
 
-Here is an example of an object, which contains a few _key-value-pairs_.
+ここに、いくつかの _key-value-pairs_ を含む object の例があります。
 
 <CodeHeader></CodeHeader>
 
@@ -87,15 +87,15 @@ Here is an example of an object, which contains a few _key-value-pairs_.
 }
 ```
 
-We need to separate each key-value pair with a comma.
+各 key-value pair はカンマで区切る必要があります。
 
-We call the key-value pairs of an object as its _child_ or as being _inside_ the object.
+object の key-value pair は、その object の _子_ である、または object の中に _入っている_ と表現します。
 
-## JSON Structure
+## JSON の構造
 
-In Minecraft, JSON files always begin with an _object_, which you can remember is two curly brackets:`{}`. We call this the _top level object_. We write our code _inside_ of this object, in the form of key-value pairs.
+Minecraft では、JSON ファイルは常に _object_ から始まります。これは 2 つの波かっこ `{}` で表されることを覚えておきましょう。これを _最上位 object_ と呼びます。私たちはこの object の _内側_ に、key-value pair の形でコードを書きます。
 
-Here is an example of a simple json file, used for Minecraft add-ons:
+Minecraft アドオンで使われる、簡単な json ファイルの例を見てみましょう。
 
 <CodeHeader></CodeHeader>
 
@@ -119,34 +119,34 @@ Here is an example of a simple json file, used for Minecraft add-ons:
 }
 ```
 
-Take a careful look at the format. You will see that the entire structure is built out the data-structures that we have already learned. If you want to practice your json skills, try to answer these questions:
+形式をよく見てください。すでに学んだデータ構造だけで、全体が組み立てられているのがわかるはずです。JSON の練習をしたいなら、次の質問に答えてみてください。
 
--   How many keys are there in the _top level object_. Can you name them?
--   What is the value of `format_version`?
--   What kind of data is stored in the `"loop"` key? (string, boolean, etc)
+-   _最上位 object_ にはキーがいくつありますか。名前を挙げられますか？
+-   `format_version` の値は何ですか？
+-   `"loop"` キーにはどの種類のデータが入っていますか？（string、boolean など）
 
-## Troubleshooting Examples
+## トラブルシューティングの例
 
-Here are a few examples, to help you understand feedback you might receive on the discord or online. We tend to use technical jargon when talking about errors in JSON, so hopefully this section helps familiarize you with the terms:
-
----
-
-You wrote: `"format_version": 1.12`
-
-They said: "_The value for format_version is the wrong type. It should be a string._
-
-Remember that `type` means one of the structures: `String`, `Int`, `Float`, `Array` or `Object`. If we examine our code, we will see that we put `format_version` to a `Float`, instead of a `String`. We can fix this problem by adding quotes around the `"1.12"`.
+Discord やオンラインで受け取るフィードバックを理解する助けになるよう、いくつか例を紹介します。JSON のエラーについて話すときは専門用語を使うことが多いので、このセクションで用語に慣れておきましょう。
 
 ---
 
-You wrote: `[1 2 5 6]`
+あなたはこう書きました: `"format_version": 1.12`
 
-They said: "_Your array is missing commas._"
+相手はこう言いました: _format_version の値の型が違います。文字列であるべきです。_
 
-Remember that array elements need to be separated by commas. Your array should look like this: `[1, 2, 5, 6]`
+`type` は、`String`、`Int`、`Float`、`Array`、`Object` のどれかの構造を指すことを覚えてください。コードを見ると、`format_version` に `String` ではなく `Float` を入れているのがわかります。`"1.12"` の周りに引用符を付ければ修正できます。
 
 ---
 
-They said: _"You accidentally put the format version inside your description. It should go outside at the top level_".
+あなたはこう書きました: `[1 2 5 6]`
 
-This means that the key-value pair for `"format_version"` as a _child_ of the description. You should copy/paste the key-value pair out from the description object, and place it at the top level.
+相手はこう言いました: _配列のカンマが足りません。_
+
+配列の要素はカンマで区切る必要があります。配列は `[1, 2, 5, 6]` のようになるはずです。
+
+---
+
+相手はこう言いました: _「format version を description の中に入れてしまっています。最上位の外側に置く必要があります。」_
+
+これは、`"format_version"` の key-value pair が description の _子_ になっているという意味です。key-value pair を description object からコピーして、最上位に置いてください。

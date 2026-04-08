@@ -1,5 +1,5 @@
 ---
-title: Dynamic Displays
+title: 動的表示
 category: Techniques
 tags:
     - intermediate
@@ -8,60 +8,60 @@ mentions:
     - zheaEvyline
     - mittens4all
 nav_order: 9
-description: Learn how to create custom and dynamic displays with commands.
+description: コマンドを使って、カスタムで動的な表示を作る方法を学びます。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-In this guide, you will learn how to display custom, dynamic text to players based on scores, using commands. This is an effective alternative to using individual `/tellraw` or `/titleraw` messages for each possible outcome.
+このガイドでは、スコアに応じてプレイヤーへカスタムで動的なテキストを表示する方法を学びます。これは、結果ごとに個別の `/tellraw` や `/titleraw` を使う代替手段として有効です。
 
 :::info NOTE:
-This technique is primarily used when a player's score exceeds 9. For a simplified version using only score ranges of 1-9, see **[here](/text/rawtext#ordering-with)**
+この手法は、主にプレイヤーのスコアが 9 を超える場合に使います。1〜9 のスコア範囲だけを使う簡略版は **[こちら](/text/rawtext#ordering-with)** を参照してください。
 
-To get the most out of this guide, ensure you have a baseline understanding of **[Raw Text](/text/rawtext)**.
+このガイドを最大限活用するには、**[Raw Text](/text/rawtext)** の基本を理解しておくことをおすすめします。
 :::
 
-## Video Demonstration
+## 動画デモ
 
 <YouTubeEmbed id="s8QGwsHuEk4" />
 
-## Key Concepts
+## 重要な概念
 
 :::tip
 
-Think of this system like a library: `wiki:array` picks the bookshelf (1-9), and `wiki:element` picks the specific book on that shelf (1-9). This allows you to store 81 different 'texts' total.
+このシステムを図書館にたとえると、`wiki:array` が本棚（1〜9）を選び、`wiki:element` がその棚の特定の本（1〜9）を選びます。これにより、合計 81 個の異なる「テキスト」を保存できます。
 
 :::
 
-| **Term**                 | **What it is**       | **Why we use it**                                                                            |
+| **用語**                 | **内容**             | **使う理由**                                                                                 |
 | :----------------------- | :------------------- | :------------------------------------------------------------------------------------------- |
-| **`translate`**          | Text component       | Acts as a "container" for your list of custom messages.                                      |
-| **`with`**               | Argument List        | The list of "slots" where your text or scores are inserted.                                  |
-| **`score`**              | Data Fetcher         | Gets a player's score and turns it into text for the command.                                |
-| **`wiki:var`**           | Input Score          | The actual rank or level number you want to turn into text.                                  |
-| **`wiki:q.var_changed`** | Query Score          | Detects updates to the input score to trigger scoreboard operations only when value changes. |
-| **`wiki:delta_var`**     | Difference Score     | Detects if the player's score has changed since the last update.                             |
-| **`wiki:element`**       | "The Book"           | A score (1-9) that selects the specific message within a group.                              |
-| **`wiki:array`**         | "The Shelf"          | A score (1-9) that selects a group of 9 possible messages.                                   |
-| **`%%%%s`**              | Placeholder          | A technical trick that lets a score choose which message to display.                         |
+| **`translate`**          | テキストコンポーネント | カスタムメッセージ一覧の「入れ物」として機能します。                                      |
+| **`with`**               | 引数リスト            | テキストやスコアを差し込む「スロット」の一覧です。                                          |
+| **`score`**              | データ取得器          | プレイヤーのスコアを取得して、コマンド用のテキストに変換します。                            |
+| **`wiki:var`**           | 入力スコア            | テキストに変換したい実際のランクやレベルの数値です。                                        |
+| **`wiki:q.var_changed`** | クエリスコア          | 入力スコアの更新を検出し、値が変わったときだけスコアボード操作を起動します。              |
+| **`wiki:delta_var`**     | 差分スコア            | 前回の更新以降にプレイヤーのスコアが変わったかを検出します。                              |
+| **`wiki:element`**       | 「本」                | グループ内の特定メッセージを選ぶ 1〜9 のスコアです。                                       |
+| **`wiki:array`**         | 「棚」                | 9 個の候補メッセージのグループを選ぶ 1〜9 のスコアです。                                   |
+| **`%%%%s`**              | プレースホルダー      | スコアにどのメッセージを表示するかを選ばせるための技法です。                               |
 
-**System Logic Breakdown**
+**システムの論理分解**
 
-- The Inputs & Query: `wiki:var`, `wiki:delta_var`, and `wiki:q.var_changed` track **when** the text needs to update.
-- The Math: `wiki:array` and `wiki:element` calculate **where** the specific text is located in your list.
+- 入力とクエリ: `wiki:var`、`wiki:delta_var`、`wiki:q.var_changed` が、テキストを **いつ** 更新すべきかを追跡します。
+- 数学: `wiki:array` と `wiki:element` が、一覧の中で特定のテキストが **どこ** にあるかを計算します。
 
 :::warning
 
-  - Only single-digit positive integers (1-9) are used in the format specifier `%%#`. When creating your system, make sure player scores are positive integers.
-  - This command block system covers a range of 1-81. For larger ranges, see the function setup **[here](/commands/dynamic-displays#function-setup)**.
+  - 書式指定子 `%%#` では、1 桁の正の整数（1〜9）だけを使います。システムを作るときは、プレイヤーのスコアが正の整数になっていることを確認してください。
+  - このコマンドブロックシステムで扱える範囲は 1〜81 です。より大きい範囲については、**[こちら](/commands/dynamic-displays#function-setup)** の関数セットアップを参照してください。
 
 :::
 
-## Setup
+## セットアップ
 
-_Type the following commands in Chat:_
+_チャットに次のコマンドを入力します。_
 
 <CodeHeader></CodeHeader>
 
@@ -83,12 +83,12 @@ _Type the following commands in Chat:_
 /scoreboard players set .9 wiki:const 9
 ```
 
-## System
+## システム
 
 <CodeHeader>BP/functions/wiki/rawtext/display_logic.mcfunction</CodeHeader>
 
 ```yaml
-## Detect Change in Main Score to Trigger Calculations
+## メインスコアの変化を検出して計算を起動
 ### Set score change query state to false (0) by default
 scoreboard players set @a[scores={wiki:q.var_changed=1}] wiki:q.var_changed 0
 ### Set score change query state to true (1) if current score does not match score from previous tick
@@ -120,7 +120,7 @@ execute as @a unless score @s wiki:delta_var = @s wiki:var run scoreboard player
 
 **Note:** Place the titleraw command last in the command block chain if you plan to run the command continuously.
 
-## Titleraw Template
+## Titleraw テンプレート
 
 <CodeHeader></CodeHeader>
 
@@ -129,7 +129,7 @@ titleraw @a actionbar {"rawtext":[{"translate":"%%%%s","with":{"rawtext":[{"scor
 ```
 
 :::tip
-For convenience, work with this file provided below. Once you have finalized your changes, use the **[JSON Minifier](https://codebeautify.org/jsonminifier)** to compress the code before pasting it into your `/titleraw` command.
+便利なように、下のファイルを使って作業してください。変更を確定したら、`/titleraw` コマンドへ貼る前に **[JSON Minifier](https://codebeautify.org/jsonminifier)** でコードを圧縮してください。
 :::
 
 <Spoiler title="Titleraw Template Readable JSON">
@@ -264,11 +264,11 @@ For convenience, work with this file provided below. Once you have finalized you
 
 </Spoiler>
 
-## Function Method
+## 関数方式
 
-This method uses nested translates to allow scores greater than 81. It uses a slightly modified `display_logic.mcfunction` and an additional score holder is set to 81.
+この方式では、ネストされた translate を使うことで 81 を超えるスコアに対応します。少し修正した `display_logic.mcfunction` を使い、追加のスコア保持者を 81 に設定します。
 
-### Function Setup
+### 関数セットアップ
 
 <CodeHeader>BP/functions/wiki/scoreboard/objectives/add_all.mcfunction</CodeHeader>
 
@@ -318,7 +318,7 @@ execute unless score .World wiki:q.is_initialised matches 1 run function wiki/ev
 execute as @a unless score @s wiki:delta_var = @s wiki:var run function wiki/rawtext/display_logic
 ```
 
-### Function TICK.JSON
+### 関数 TICK.JSON
 
 <CodeHeader>BP/functions/tick.json</CodeHeader>
 
@@ -330,7 +330,7 @@ execute as @a unless score @s wiki:delta_var = @s wiki:var run function wiki/raw
 }
 ```
 
-### Function System
+### 関数システム
 
 <CodeHeader>BP/functions/wiki/rawtext/display_logic.mcfunction</CodeHeader>
 
@@ -391,19 +391,19 @@ titleraw @a actionbar {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"sco
 titleraw @a actionbar {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:array"}}, {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:element"}}, {"text":"163"}, {"text":"164"}, {"text":"165"}, {"text":"166"}, {"text":"167"}, {"text":"168"}, {"text":"169"}, {"text":"170"}, {"text":"171"}]}}]}, {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:element"}}, {"text":"172"}, {"text":"173"}, {"text":"174"}, {"text":"175"}, {"text":"176"}, {"text":"177"}, {"text":"178"}, {"text":"179"}, {"text":"180"}]}}]}, {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:element"}}, {"text":"181"}, {"text":"182"}, {"text":"183"}, {"text":"184"}, {"text":"185"}, {"text":"186"}, {"text":"187"}, {"text":"188"}, {"text":"189"}]}}]}, {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:element"}}, {"text":"190"}, {"text":"191"}, {"text":"192"}, {"text":"193"}, {"text":"194"}, {"text":"195"}, {"text":"196"}, {"text":"197"}, {"text":"198"}]}}]}, {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:element"}}, {"text":"199"}, {"text":"200"}, {"text":"201"}, {"text":"202"}, {"text":"203"}, {"text":"204"}, {"text":"205"}, {"text":"206"}, {"text":"207"}]}}]}, {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:element"}}, {"text":"208"}, {"text":"209"}, {"text":"210"}, {"text":"211"}, {"text":"212"}, {"text":"213"}, {"text":"214"}, {"text":"215"}, {"text":"216"}]}}]}, {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:element"}}, {"text":"217"}, {"text":"218"}, {"text":"219"}, {"text":"220"}, {"text":"221"}, {"text":"222"}, {"text":"223"}, {"text":"224"}, {"text":"225"}]}}]}, {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:element"}}, {"text":"226"}, {"text":"227"}, {"text":"228"}, {"text":"229"}, {"text":"230"}, {"text":"231"}, {"text":"232"}, {"text":"233"}, {"text":"234"}]}}]}, {"rawtext":[{"translate":"%%%%s", "with":{"rawtext":[{"score":{"name":"*", "objective":"wiki:element"}}, {"text":"235"}, {"text":"236"}, {"text":"237"}, {"text":"238"}, {"text":"239"}, {"text":"240"}, {"text":"241"}, {"text":"242"}, {"text":"243"}]}}]}]}}]}
 ```
 
-## Multiple Nested Translates (MNT)
+## 多段ネスト翻訳（MNT）
 
-This method uses multiple nested translates in a single titleraw command to allow scores greater than 81. It uses a modified `display_logic.mcfunction`.
+この方式では、1 つの titleraw コマンドの中で複数のネストされた translate を使い、81 を超えるスコアに対応します。修正版の `display_logic.mcfunction` を使います。
 
 :::warning
 
-It is unknown how many characters can exist in a single titleraw before the game engine lags. It is also more difficult to edit and manage.
+1 つの titleraw にどれだけの文字数を含められるかは、ゲームエンジンが重くなるまでの上限が分かっていません。また、編集や管理も難しくなります。
 
-Therefore, it is recommended to use the function setup **[here](/commands/dynamic-displays#function-setup)**
+そのため、**[こちら](/commands/dynamic-displays#function-setup)** の関数セットアップを使うことをおすすめします。
 
 :::
 
-### MNT Setup
+### MNT セットアップ
 
 <CodeHeader>BP/functions/wiki/scoreboard/objectives/add_all.mcfunction</CodeHeader>
 
@@ -468,11 +468,11 @@ execute as @a unless score @s wiki:delta_var = @s wiki:var run function wiki/raw
 }
 ```
 
-### MNT System
+### MNT システム
 
-For scores 1 to 729, use the 3 dimensional MNT system.
+1〜729 のスコアには、3 次元 MNT システムを使います。
 
-For scores 1 to 6,561, use the 4 dimensional MNT system.
+1〜6,561 のスコアには、4 次元 MNT システムを使います。
 
 <CodeHeader>BP/functions/wiki/rawtext/display_logic.mcfunction</CodeHeader>
 
@@ -547,11 +547,11 @@ scoreboard players operation @s wiki:delta_var = @s wiki:var
 
 </Spoiler>
 
-### MNT Titleraw Templates
+### MNT Titleraw テンプレート
 
-- **3 Dimensional MNT Downloads:**
+- **3 次元 MNT ダウンロード:**
     - **[3d_MNT_template.mcfunction](https://github.com/BedrockCommands/developer-packs/releases/download/dd/3d_mnt_template.mcfunction)**
     - **[3d_MNT_readable_template.json](https://github.com/BedrockCommands/developer-packs/releases/download/dd/3d_mnt_readable_template.json)**
-- **4 Dimensional MNT Downloads:**
+- **4 次元 MNT ダウンロード:**
     - **[4d_MNT_template.mcfunction](https://github.com/BedrockCommands/developer-packs/releases/download/dd/4d_mnt_template.mcfunction)**
     - **[4d_MNT_readable_template.json](https://github.com/BedrockCommands/developer-packs/releases/download/dd/4d_mnt_readable_template.json)**

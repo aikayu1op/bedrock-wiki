@@ -1,35 +1,35 @@
 ---
-title: Item Drop Detection
+title: アイテムドロップの検出
 category: Detection Systems
 tags:
     - easy
 mentions:
     - BedrockCommands
     - PipiSpamton
-description: This technique allows you to differentiate player dropped items from other dropped items.
+description: この手法を使うと、プレイヤーがドロップしたアイテムとそれ以外のドロップアイテムを区別できます。
 ---
 
-## Introduction
+## はじめに
 
-[Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
+[Bedrock Commands Community (BCC) Discord が出典です](https://bedrockcommands.org/)
 
-This technique allows you to differentiate player dropped items from other dropped items.
+この手法を使うと、プレイヤーがドロップしたアイテムとそれ以外のドロップアイテムを区別できます。
 
-## Commands
+## コマンド
 
 <CodeHeader>BP/functions/wiki/detect/item/is_dropped_by.mcfunction</CodeHeader>
 
 ```yaml
-## Tag Items From Other
-### Facing precisely 0° south
+## それ以外のアイテムにタグ付け
+### ちょうど南向き 0°
 tag @e[type=item,ry=0,rym=0,tag=!wiki:source.player] add wiki:source.other
 
-## Tag Items Dropped by Players
+## プレイヤーがドロップしたアイテムにタグ付け
 tag @e[type=item,tag=!wiki:source.other] add wiki:source.player
 ```
 
 ![Chain of 2 Command Blocks](/assets/images/commands/command-block-chain/2.png)
 
-:::tip NOTE
-Interestingly, even items dropped by players facing 0° south will correctly be tagged 'wiki:source.player'
+:::tip 注
+興味深いことに、南向き 0° のプレイヤーがドロップしたアイテムでも、正しく `wiki:source.player` としてタグ付けされます。
 :::

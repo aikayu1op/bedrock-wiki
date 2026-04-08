@@ -1,10 +1,10 @@
 ---
-title: Fog IDs
+title: Fog ID
 mentions:
     - SirLich
     - MedicalJewel105
     - TheItsNameless
-description: Fog IDs documentation.
+description: Fog ID のドキュメントです。
 show_outline: false
 ---
 
@@ -84,6 +84,6 @@ show_outline: false
 | minecraft:fog_warm_ocean                       | warm_ocean                       |
 | minecraft:fog_warped_forest                    | warped_forest                    |
 
-_Last updated for 1.21.60_
+_1.21.60 時点で更新済み_
 
 <!-- page_dumper_end -->

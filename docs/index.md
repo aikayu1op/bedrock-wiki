@@ -8,83 +8,83 @@ show_outline: false
 <div class="home">
 <header>
 
-<WikiImage src="/assets/images/icons/logo.png" alt="Bedrock Wiki Logo" />
+<WikiImage src="/assets/images/icons/logo.png" alt="Bedrock Wiki ロゴ" />
 
 # Bedrock Wiki
 
-This wiki is a knowledge-sharing website for technical features of Minecraft Bedrock, containing documentation, tutorials, and general how-to information.
+この Wiki は、Minecraft Bedrock の技術的な機能に関する知識を共有するためのサイトで、ドキュメント、チュートリアル、一般的な手順解説を収録しています。
 
 </header>
 <CardGrid>
-<Card title="Beginner's Guide" link="/guide/introduction" image="/assets/images/icons/crafting_table.png">
+<Card title="初心者ガイド" link="/guide/introduction" image="/assets/images/icons/crafting_table.png">
 
-Our collection of step-by-step tutorials intended as your first contact with add-ons.
+アドオンとの最初の出会いとして用意した、手順付きチュートリアル集です。
 
-Learn how to set up your own project and get started developing.
+自分のプロジェクトをセットアップし、開発を始める方法を学べます。
 
 </Card>
 <Card title="Discord" link="/discord" image="/assets/images/icons/book.png">
 
-Join our Discord server to learn about add-ons and seek help from other add-on creators.
+Discord サーバーに参加して、アドオンについて学んだり、他の制作者に助けを求めたりできます。
 
 </Card>
-<Card title="Commands" link="/commands/intro-to-command-blocks" image="/assets/images/icons/command_block.png">
+<Card title="コマンド" link="/commands/intro-to-command-blocks" image="/assets/images/icons/command_block.png">
     
-[Beginner's Guide](/commands/intro-to-command-blocks) —
-Learn about command block basics.
+[初心者ガイド](/commands/intro-to-command-blocks) —
+コマンドブロックの基本を学びましょう。
 
-[Functions](/commands/mcfunctions) —
-Get started with functions, a faster and more powerful way to code commands!
-
-</Card>
-<Card title="Blocks" link="/blocks/blocks-intro" image="/assets/images/icons/diamond_ore.png">
-
-[Beginner's Guide](/blocks/blocks-intro) —
-A "Hello world!" guide in creating your first block.
-
-[Block Components](/blocks/block-components) —
-Learn about the capabilities of custom blocks, such as collision.
+[関数](/commands/mcfunctions) —
+コマンドをより速く、より強力に記述できる関数の使い方を学びましょう！
 
 </Card>
-<Card title="Entities" link="/entities/entity-intro-bp" image="/assets/images/icons/parrot.png">
+<Card title="ブロック" link="/blocks/blocks-intro" image="/assets/images/icons/diamond_ore.png">
 
-[Beginner's Guide](/entities/entity-intro-bp) —
-Learn about the structure of behavior pack entity files.
+[初心者ガイド](/blocks/blocks-intro) —
+最初のブロックを作るための「Hello world!」ガイドです。
 
-[Troubleshooting](/entities/troubleshooting-entities) —
-Learn to troubleshoot common issues when creating entities, such as invisible textures.
+[ブロックコンポーネント](/blocks/block-components) —
+当たり判定など、カスタムブロックが持つ機能について学びましょう。
 
 </Card>
-<Card title="Items" link="/items/items-intro" image="/assets/images/icons/iron_pickaxe.png">
+<Card title="エンティティ" link="/entities/entity-intro-bp" image="/assets/images/icons/parrot.png">
 
-[Beginner's Guide](/items/items-intro) —
-A "Hello world!" guide in creating your first item.
+[初心者ガイド](/entities/entity-intro-bp) —
+ビヘイビアパックのエンティティファイル構造について学びましょう。
 
-[Item Components](/items/item-components) —
-Learn about the capabilities of custom items, such as durability.
+[トラブルシューティング](/entities/troubleshooting-entities) —
+見えないテクスチャなど、エンティティ作成時によくある問題の解決方法を学びましょう。
+
+</Card>
+<Card title="アイテム" link="/items/items-intro" image="/assets/images/icons/iron_pickaxe.png">
+
+[初心者ガイド](/items/items-intro) —
+最初のアイテムを作るための「Hello world!」ガイドです。
+
+[アイテムコンポーネント](/items/item-components) —
+耐久度など、カスタムアイテムが持つ機能について学びましょう。
 
 </Card>
 <Card
-  title="Scripting"
+  title="スクリプト"
   image="/assets/images/icons/levers.png"
   link="/scripting/scripting-intro"
 >
 
-[Beginner's Guide](/scripting/scripting-intro) —
-Learn the basics of the Script APIs that Minecraft offers.
+[初心者ガイド](/scripting/scripting-intro) —
+Minecraft が提供する Script API の基本を学びましょう。
 
-[Custom Commands](/scripting/custom-commands) —
-Learn how to use scripting to create your own commands!
-
-</Card>
-<Card title="World Generation" link="/world-generation/world-generation-intro" image="/assets/images/icons/structure.png">
-
-[Beginner's Guide](/world-generation/world-generation-intro) — Learn about the creation of custom structures, ores, trees and other generation features.
+[カスタムコマンド](/scripting/custom-commands) —
+スクリプトを使って自分だけのコマンドを作る方法を学びましょう！
 
 </Card>
-<Card title="Contribute" link="/contribute" image="/assets/images/icons/writable_book.png">
+<Card title="ワールド生成" link="/world-generation/world-generation-intro" image="/assets/images/icons/structure.png">
 
-This wiki is built and maintained by a community! If you feel you can improve the wiki, or have questions or feedback, please get in touch.
+[初心者ガイド](/world-generation/world-generation-intro) — カスタム構造物、鉱石、木、その他の生成要素の作成について学びましょう。
+
+</Card>
+<Card title="貢献する" link="/contribute" image="/assets/images/icons/writable_book.png">
+
+この Wiki はコミュニティによって作られ、維持されています！ Wiki を改善したいと思ったり、質問やフィードバックがあれば、ぜひご連絡ください。
 
 </Card>
 </CardGrid>

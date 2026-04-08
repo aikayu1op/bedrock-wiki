@@ -1,6 +1,6 @@
 ---
-title: Blocks as Items
-description: Learn about items that represent blocks in the UI, in containers and when dropped on the ground.
+title: ブロックをアイテムとして扱う
+description: UI、コンテナ内、地面にドロップされたときにブロックを表すアイテムについて学びます。
 category: General
 tags:
     - intermediate
@@ -9,23 +9,23 @@ mentions:
     - QuazChick
 ---
 
-## Automatic Block Items
+## 自動生成されるブロックアイテム
 
-When you hold a block in your hand, what you're really holding is an item that places the block. When a custom block is registered to the game, Minecraft also automatically registers a new item to represent that block in the inventory.
+手にブロックを持っているとき、実際に持っているのはそのブロックを配置するアイテムです。カスタムブロックがゲームに登録されると、Minecraft はそのブロックをインベントリ内で表す新しいアイテムも自動的に登録します。
 
-This item uses the menu category and display name defined by the block, but no other components of the auto-block-item can be modified.
-In order to apply other components, such as a 2D icon for your block, you'll need to replace the block's item with your own.
+このアイテムはブロックで定義されたメニューカテゴリと表示名を使いますが、自動生成されたブロックアイテムのほかのコンポーネントは変更できません。
+2D アイコンなど他のコンポーネントを適用したい場合は、ブロックのアイテムを自分で置き換える必要があります。
 
-## Replacing Block Items
+## ブロックアイテムの置き換え
 
-In order to replace a block item, you will need to create a new item JSON file that has the same identifier as the block.
+ブロックアイテムを置き換えるには、ブロックと同じ識別子を持つ新しいアイテム JSON ファイルを作成する必要があります。
 
-Your new item will also need the [block placer](/items/item-components#block-placer) component which will allow the item to place the block.
-The block placer component will also give the item the 3D appearance of the block by default, however this can be overridden with the [icon](/items/item-components#icon) component to display a 2D sprite.
+新しいアイテムには [block placer](/items/item-components#block-placer) コンポーネントも必要です。これにより、アイテムでブロックを配置できるようになります。
+block placer コンポーネントは既定でアイテムにブロックの 3D 見た目も与えますが、[icon](/items/item-components#icon) コンポーネントで上書きして 2D スプライトを表示できます。
 
-### Custom Flower Example
+### カスタム花の例
 
-One example of a situation where replacing the block item is necessary is with flower blocks, which should display as an icon in item form rather than being 3D.
+ブロックアイテムの置き換えが必要になる例として、花ブロックがあります。これは 3D ではなく、アイテム形態ではアイコンとして表示するのが望ましいです。
 
 <CodeHeader>BP/blocks/daffodil.json</CodeHeader>
 

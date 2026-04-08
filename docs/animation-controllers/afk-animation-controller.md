@@ -1,19 +1,19 @@
 ---
-title: AFK Detector
+title: AFK検出器
 mentions:
     - SirLich
     - BlueFrog130
     - SmokeyStack
     - Keyyard
     - Ultr4Anubis
-description: Run commands when player is AFK.
+description: プレイヤーがAFKのときにコマンドを実行します。
 ---
 
-### AFK Detector Animation Controller
+### AFK検出アニメーションコントローラー
 
-<Button link="animation-controllers-intro">Learn more about Animation Controllers</Button>
+<Button link="animation-controllers-intro">Animation Controller について詳しく見る</Button>
 
-Here's an example that can be used to track AFK players.
+AFK のプレイヤーを追跡するために使える例です。
 
 <CodeHeader>BP/animation_controllers/afk.ac.json</CodeHeader>
 
@@ -57,10 +57,10 @@ Here's an example that can be used to track AFK players.
 }
 ```
 
--   "controller.animation.player.afk" is, of course, the identifier.
--   If the [Molang](https://bedrock.dev/r/MoLang) query `!q.is_moving` returns false (the player isn't moving), the state transits to the "stand_still" state.
--   "stand_still" state checks if player doesn't move in 30 seconds to transmit to "afk", if not return to "default"
--   When the state "afk" gets entered, "on_entry" gets triggered, which runs the following slash commands.
--   "animations" includes the Behavior Animation's shortname that is to be ran during the whole time the state is active, just like in [Resource Animation Controllers](#animation-controller).
--   If the player is moving again, the state will transit to "default" again.
-    The commands "on_exit" will be executed.
+-   `"controller.animation.player.afk"` は、もちろん識別子です。
+-   [Molang](https://bedrock.dev/r/MoLang) のクエリ `!q.is_moving` が false を返すと（プレイヤーが動いていないと）、状態は `"stand_still"` に移ります。
+-   `"stand_still"` 状態では、プレイヤーが30秒間動かなければ `"afk"` に移り、そうでなければ `"default"` に戻ります。
+-   `"afk"` 状態に入ると `"on_entry"` が発火し、次のスラッシュコマンドが実行されます。
+-   `"animations"` には、状態が有効な間ずっと再生されるビヘイビアアニメーションの短い名前が入ります。これは[リソースアニメーションコントローラー](#animation-controller)と同様です。
+-   プレイヤーが再び動くと、状態はもう一度 `"default"` に移ります。
+    `"on_exit"` のコマンドが実行されます。

@@ -1,0 +1,455 @@
+# Bedrock Wiki - AI Readable Documentation
+
+This file provides an overview of the Bedrock Wiki documentation structure for AI consumption.
+
+The Bedrock Wiki is a knowledge-sharing website for technical features of Minecraft Bedrock, containing documentation, tutorials, and general how-to information.
+
+- Website: https://wiki.bedrock.dev
+- Repository: https://github.com/Bedrock-OSS/bedrock-wiki (branch: wiki)
+
+## URL Transformation Recipe
+
+To access the raw Markdown source of any page (which is easier to process), transform the page URL using this formula:
+
+1. Take the page URL (e.g., https://wiki.bedrock.dev/blocks/blocks-intro)
+2. Replace the base URL `https://wiki.bedrock.dev/` with `https://raw.githubusercontent.com/Bedrock-OSS/bedrock-wiki/refs/heads/wiki/docs/`
+3. Append `.md` to the path
+
+**Examples:**
+
+- Page URL: https://wiki.bedrock.dev/blocks/blocks-intro
+  Source URL: https://raw.githubusercontent.com/Bedrock-OSS/bedrock-wiki/refs/heads/wiki/docs/blocks/blocks-intro.md
+
+- Page URL: https://wiki.bedrock.dev/guide/introduction
+  Source URL: https://raw.githubusercontent.com/Bedrock-OSS/bedrock-wiki/refs/heads/wiki/docs/guide/introduction.md
+
+- Page URL: https://wiki.bedrock.dev/entities/entity-intro-bp
+  Source URL: https://raw.githubusercontent.com/Bedrock-OSS/bedrock-wiki/refs/heads/wiki/docs/entities/entity-intro-bp.md
+
+---
+
+# Table of Contents
+
+## Beginner's Guide
+
+### Guide
+
+- [はじめに](/guide/introduction)
+- [アドオンの解説](/guide/addons)
+- [ソフトウェアと準備](/guide/software-preparation)
+- [プロジェクトのセットアップ](/guide/project-setup)
+- [カスタムアイテムの作成](/guide/custom-item)
+- [Create a Custom Entity](/guide/custom-entity)
+- [Blockbench: モデリング、テクスチャ作成、アニメーション](/guide/blockbench)
+- [ルートテーブル、スポーンルール、クラフトレシピの追加](/guide/loot-table)
+
+### Extra
+
+- [JSON の理解](/guide/understanding-json)
+- [サンプルパックのダウンロード](/guide/download-packs)
+- [トラブルシューティング](/guide/troubleshooting)
+- [高度なマニフェスト](/guide/advancedmanifest)
+- [フォーマットバージョン](/guide/format-version)
+- [Project Setup Android](/guide/project-setup-android)
+
+## Animation Controllers
+
+- [アニメーションコントローラー入門](/animation-controllers/animation-controllers-intro)
+- [Entity Commands](/animation-controllers/entity-commands)
+- [AFK検出器](/animation-controllers/afk-animation-controller)
+- [Death Commands](/animation-controllers/death-commands)
+- [Molangをスコアボードへ](/animation-controllers/molang-into-scoreboard)
+- [リスポーン時コマンド](/animation-controllers/respawn-commands)
+
+## Blocks
+
+### General
+
+- [ブロック入門](/blocks/blocks-intro)
+- [Block Components](/blocks/block-components)
+- [ブロックタグ](/blocks/block-tags)
+- [ブロックの状態](/blocks/block-states)
+- [ブロックの trait](/blocks/block-traits)
+- [ブロックのパーミュテーション](/blocks/block-permutations)
+- [Block Events](/blocks/block-events)
+- [Block Event Migration](/blocks/block-event-migration)
+- [ブロックのトラブルシューティング](/blocks/troubleshooting-blocks)
+- [ブロックをアイテムとして扱う](/blocks/blocks-as-items)
+
+### Visuals
+
+- [Block Models](/blocks/block-models)
+- [ブロックのカリング](/blocks/block-culling)
+- [ブロックのテクスチャアニメーション](/blocks/flipbook-textures)
+- [ブロックのテクスチャ変種](/blocks/block-texture-variation)
+- [ブロックの着色](/blocks/block-tinting)
+
+### Tutorials
+
+- [Block Orientation](/blocks/block-orientation)
+- [Fake Blocks](/blocks/fake-blocks)
+- [Intercardinal Orientation](/blocks/intercardinal-orientation)
+- [Tool-Based Destruction](/blocks/tool-based-destruction)
+- [効果の適用](/blocks/applying-effects)
+- [鉱石のルートテーブル](/blocks/ore-loot-tables)
+- [状態数の上限を避ける](/blocks/avoiding-state-limit)
+
+### Vanilla Re-Creations
+
+- [Custom Crops](/blocks/custom-crops)
+- [Custom Glazed Terracotta](/blocks/custom-glazed-terracotta)
+- [Custom Heads](/blocks/custom-heads)
+- [Custom Trapdoors](/blocks/custom-trapdoors)
+- [カスタムガラス](/blocks/custom-glass-blocks)
+
+### Documentation
+
+- [Block Format History](/blocks/block-format-history)
+- [Block Shapes](/blocks/block-shapes)
+- [Block Sounds](/blocks/block-sounds)
+- [バニラのブロックタグ](/blocks/vanilla-block-tags)
+- [バニラのブロックモデル](/blocks/vanilla-block-models)
+- [バニラのボクセル形状](/blocks/vanilla-voxel-shapes)
+- [レッドストーンコンポーネント](/blocks/redstone-components)
+
+## Commands
+
+### General
+
+- [Intro to Command Blocks](/commands/intro-to-command-blocks)
+- [セレクターの理解](/commands/selectors)
+- [Functions](/commands/mcfunctions)
+- [Giving NBT Items](/commands/giving-nbt-items)
+- [スコアボードの操作](/commands/scoreboard-operations)
+- [ブロックステート](/commands/block-states)
+- [座標系](/commands/relative-coordinates)
+
+### Commands
+
+- [Damage](/commands/damage)
+- [Execute](/commands/new-execute)
+- [Playanimation](/commands/playanimation)
+- [Playsound](/commands/playsound)
+
+### On Event Systems
+
+- [ワールドの初回読み込み時](/commands/on-first-world-load)
+- [プレイヤーの初回参加時](/commands/on-first-join)
+- [プレイヤー参加時](/commands/on-player-join)
+- [プレイヤー退出時](/commands/on-player-leave)
+- [プレイヤー死亡時](/commands/on-player-death)
+- [プレイヤーリスポーン時](/commands/on-player-respawn)
+
+### Scoreboard Systems
+
+- [エンティティカウンター](/commands/entity-counter)
+- [スコアボードタイマー](/commands/scoreboard-timers)
+- [Comparing And Retrieving Scores](/commands/comparing-scores)
+
+### Detection Systems
+
+- [Look Detection](/commands/detect-looking)
+- [Movement Detections](/commands/detect-movements)
+- [アイテムドロップの検出](/commands/detect-item-drop)
+- [雨の検出](/commands/detect-rain)
+
+### Techniques
+
+- [execute での論理ゲート](/commands/logic-gates)
+- [ブロックバリアント上で実行](/commands/execute-at-block)
+- [実行フォーキング](/commands/execution-forking)
+- [MBE - Max's Block Entity](/commands/block-entities)
+- [コマンドにおける二進数](/commands/binary-logic)
+- [FMBE - 表示エンティティを作る新しい方法](/commands/display-entities)
+- [動的表示](/commands/dynamic-displays)
+- [軌道カメラ](/commands/orbital-camera)
+
+### Useful Creations
+
+- [Sphere Command](/commands/sphere-command)
+- [カスタムクラフト](/commands/custom-crafting)
+- [コンパス表示](/commands/compass-display)
+- [マルチプレイヤー位置入れ替え](/commands/rearrange-positions)
+
+## Concepts
+
+- [contents.json](/concepts/contents)
+- [Molang](/concepts/molang)
+- [Shaders](/concepts/shaders)
+- [Texture Atlases](/concepts/texture-atlases)
+- [textures_list.json](/concepts/textures-list)
+- [アセットの上書き](/concepts/overwriting-assets)
+- [サウンド](/concepts/sounds)
+- [サブパック](/concepts/subpacks)
+- [名前空間](/concepts/namespaces)
+
+## Documentation
+
+- [Fog ID](/documentation/fog-ids)
+- [Molang クエリ](/documentation/queries)
+- [Shared Constructs](/documentation/shared-constructs)
+- [Sound Definitions](/documentation/sound-definitions)
+- [パックのフォルダー構成](/documentation/pack-structure)
+- [バニラ Material](/documentation/materials)
+- [ファイル形式](/documentation/file-types)
+- [マテリアル設定の説明](/documentation/material-config-description)
+- [高度な Molang](/documentation/advanced-molang)
+
+## Entities
+
+### General
+
+- [Intro to Entities BP](/entities/entity-intro-bp)
+- [Intro to Entities RP](/entities/entity-intro-rp)
+- [Troubleshooting Entities](/entities/troubleshooting-entities)
+- [Entity Events](/entities/entity-events)
+- [Entity Properties](/entities/entity-properties)
+- [NPC Dialogue](/entities/npc-dialogue)
+- [Render Controllers](/entities/render-controllers)
+- [Spawn Rules](/entities/spawn-rules)
+
+### Tutorials
+
+- [Area Effect Clouds](/entities/area-effect-clouds)
+- [Coordinate Space Conversion](/entities/coordinate-space-conversion)
+- [Creating Boats](/entities/boat-entities)
+- [Detecting Other Entities](/entities/detecting-other-entities)
+- [Disabling Team Damage](/entities/disabling-team-damage)
+- [Dummy Entities](/entities/dummy-entities)
+- [Entity Attacks](/entities/entity-attack)
+- [Entity Movement](/entities/entity-movement)
+- [Entity Timers](/entities/timers)
+- [Holding Items](/entities/holding-items)
+- [Invulnerable Entities](/entities/invulnerable-entities)
+- [Look at Entity](/entities/look-at-entity)
+- [Riding Flying Entities](/entities/flying-entities)
+- [Sleeping Entities](/entities/sleeping-entities)
+- [Solid Entities](/entities/solid-entities)
+- [Spawning Tamed Entities](/entities/spawning-tamed-entities)
+- [Village Mechanic](/entities/village-mechanic)
+
+### Documentation
+
+- [Dummy Components](/entities/dummy-components)
+- [Non-Mob Runtime Identifiers](/entities/non-mob-runtime-identifiers)
+- [Projectiles](/entities/projectiles)
+- [Runtime Identifiers](/entities/runtime-identifier)
+- [Vanilla Usage Components](/entities/vanilla-usage-components)
+- [Vanilla Usage Spawn Rules](/entities/vanilla-usage-spawn-rules)
+
+## Items
+
+### General
+
+- [アイテム入門](/items/items-intro)
+- [Item Components](/items/item-components)
+- [アイテムタグ](/items/item-tags)
+- [アイテムイベント](/items/item-events)
+- [アイテムイベントの移行](/items/item-event-migration)
+- [アイテムカタログ](/items/item-catalog)
+- [アイテムのトラブルシューティング](/items/troubleshooting-items)
+
+### Tutorials
+
+- [アイテムのスポーン](/items/spawning-items)
+- [カスタムアーマー](/items/custom-armor)
+- [カスタムフード](/items/custom-food)
+- [カスタム陶片](/items/custom-pottery-sherds)
+- [カスタム武器](/items/custom-weapons)
+- [装備ベースのコマンド](/items/equipped-item-commands)
+- [投げられるアイテム](/items/throwable)
+
+### Documentation
+
+- [エンチャント](/items/enchantments)
+- [Attachables](/items/attachables)
+- [Numerical Item IDs](/items/numerical-item-ids)
+- [アイテム形式の履歴](/items/item-format-history)
+- [バニラのアイテムグループ](/items/vanilla-item-groups)
+- [バニラのアイテムタグ](/items/vanilla-item-tags)
+- [バニラの使用コンポーネント](/items/vanilla-usage-items)
+
+## JSON UI
+
+### General
+
+- [JSON UI の概要](/json-ui/json-ui-intro)
+- [ベストプラクティス](/json-ui/best-practices)
+
+### Tutorials
+
+- [Aseprite アニメーション](/json-ui/aseprite-animations)
+- [HUD 要素の追加](/json-ui/add-hud-elements)
+- [サーバーフォームの変更](/json-ui/modifying-server-forms)
+- [タイトルテキストの保持](/json-ui/preserve-title-texts)
+- [ボタンとトグル](/json-ui/buttons-and-toggles)
+- [文字列から数値へ](/json-ui/string-to-number)
+
+### Documentation
+
+- [JSON UIドキュメント](/json-ui/json-ui-documentation)
+
+## Loot, Recipes & Trading
+
+### General
+
+- [取引の動作](/loot/trading-behavior)
+
+### Documentation
+
+- [ルートテーブル](/loot/loot-tables)
+- [Trade Tables](/loot/trade-tables)
+- [レシピ](/loot/recipes)
+- [アイテム関数](/loot/item-functions)
+
+### Tutorials
+
+- [ランダム化された構造物のルート](/loot/randomized-structure-loot)
+
+## Meta
+
+- [アドオンのパフォーマンス](/meta/addon-performance)
+- [スキーマの使い方](/meta/using-schemas)
+- [スタイルガイド](/meta/style-guide)
+- [バージョン管理](/meta/version-control)
+- [便利なリンク](/meta/useful-links)
+
+### Q&A
+
+- [Blocks and Items Q&A 2024/08/30](/meta/blocks-items-qna)
+- [Deferred Technical Preview Q&A 2024/02/23](/meta/deferred-qna)
+- [GameTest Q&A 2021/08/06](/meta/gametest-qna)
+- [Scripting and Editor Q&A 2023/09/22](/meta/scripting-editor-qna)
+- [World Generation Q&A 2024/11/15](/meta/world-gen-qna)
+
+## NBT
+
+### General
+
+- [.mcstructure](/nbt/mcstructure)
+
+### Tutorials
+
+- [NBTを編集して実験機能を有効にする](/nbt/enabling-experiments)
+- [構造物サイズ上限の拡張](/nbt/structure-limits)
+
+### NBT in Depth
+
+- [About NBT (Named Binary Tag)](/nbt/nbt-in-depth)
+- [NBT Libraries](/nbt/libraries)
+- [NBT 読み取りの例](/nbt/step-by-step-example)
+
+## Particles
+
+### General
+
+- [パーティクル入門](/particles/particles)
+
+### Tutorials
+
+- [パーティクルを無効化する](/particles/disabling-particles)
+
+### Documentation
+
+- [Vanilla Particles](/particles/vanilla-particles)
+
+## Scripting
+
+### General
+
+- [スクリプト入門](/scripting/scripting-intro)
+- [Script API とは？](/scripting/what-is-script)
+- [API モジュール](/scripting/api-modules)
+
+### Tutorials
+
+- [GameTest](/scripting/game-tests)
+- [Script Request API](/scripting/script-net)
+- [Script のコア機能](/scripting/script-server)
+- [Script の権限](/scripting/privileges)
+- [カスタムコマンド](/scripting/custom-commands)
+- [サーバー向けフォーム](/scripting/server-forms)
+- [ブロック配置の防止](/scripting/placement-prevention)
+
+### Documentation
+
+- [JavaScript のトラブルシューティング](/scripting/troubleshooting)
+- [Script Resources](/scripting/resources)
+- [Script Watchdog](/scripting/script-watchdog)
+- [TypeScript](/scripting/typescript)
+- [エンジン環境](/scripting/api-environment)
+
+## Servers
+
+### Software
+
+- [Bedrock サーバーソフトウェア](/servers/server-software)
+- [Bedrock のサーバーソフトウェア](/servers/bedrock)
+
+### Protocols
+
+- [NetherNet プロトコル](/servers/nethernet)
+- [RakNet プロトコル](/servers/raknet)
+
+## Text & Localization
+
+### General
+
+- [テキストとローカライズの入門](/text/text-intro)
+- [Raw Text](/text/rawtext)
+- [スプラッシュテキスト](/text/splashes)
+
+### Emojis & Symbols
+
+- [Fonts](/text/fonts)
+- [絵文字の入門](/text/emojis)
+- [カスタム絵文字](/text/custom-emojis)
+- [入力キー](/text/input-keys)
+
+## Visuals
+
+### General
+
+- [エンティティのビジュアル入門](/visuals/introduction)
+- [Bedrock Modeling](/visuals/bedrock-modeling)
+- [Material](/visuals/materials)
+- [Material Creations](/visuals/material-creations)
+- [Math-Based Animations](/visuals/math-based-animations)
+- [アニメーション内のエフェクト](/visuals/animation-effects)
+- [カスタム死亡アニメーション](/visuals/death-animations)
+- [スキンパック](/visuals/skin-packs)
+
+### Tutorials
+
+- [Player Geometry](/visuals/player-geometry)
+- [エンティティのテクスチャアニメーション](/visuals/animated-entity-texture)
+- [エンティティの影を消す](/visuals/remove-shadows)
+- [スポーンエッグの再テクスチャ](/visuals/retexturing-spawn-eggs)
+- [リード位置](/visuals/leash-position)
+- [発光するエンティティのテクスチャ](/visuals/glowing-texture)
+- [被ダメージアニメーション](/visuals/custom-hurt-animations)
+
+### Ideas
+
+- [構造物のプレゼンテーション](/visuals/structure-presentation)
+
+## World Generation
+
+### General
+
+- [ワールド生成の入門](/world-generation/world-generation-intro)
+- [Biomes](/world-generation/biomes)
+- [Feature Types](/world-generation/feature-types)
+- [Jigsaw Structures](/world-generation/jigsaw-structures)
+
+### Tutorials
+
+- [Feature のブロック条件](/world-generation/feature-block-conditions)
+- [Generating Custom Ores](/world-generation/generating-custom-ores)
+- [Generating Custom Structures](/world-generation/structure-features)
+- [Heightmap Noise](/world-generation/heightmap-noise)
+- [パッチの生成](/world-generation/surface-builder)
+
+### Documentation
+
+- [バイオームタグ](/world-generation/biome-tags)

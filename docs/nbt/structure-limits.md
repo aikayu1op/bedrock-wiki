@@ -1,11 +1,11 @@
 ---
-title: Extending Structure Limits
+title: 構造物サイズ上限の拡張
 category: Tutorials
 mentions:
     - MedicalJewel105
 tags:
     - easy
-description: Extend structure limits.
+description: 構造物のサイズ上限を拡張します。
 ---
 
 [structure]: /assets/images/nbt/structure.png
@@ -14,19 +14,19 @@ description: Extend structure limits.
 [compound]: /assets/images/nbt/compound.png
 [string]: /assets/images/nbt/string.png
 
-:::warning DEPRECATED
-This method no longer works after 1.20.50 update.
+:::warning 廃止済み
+この方法は 1.20.50 のアップデート以降は動作しません。
 :::
 
-By default, Minecraft doesn't allow you to save structures that are more than 64x255x64 in size.
-In this guide you will learn how to extend structure box size for structure blocks.
+既定では、Minecraft は 64x255x64 を超える構造物を保存できません。
+このガイドでは、ストラクチャーブロックの構造物ボックスサイズを拡張する方法を学びます。
 
-## Editing NBT
+## NBT の編集
 
-1. Put a structure block into structure and export it.
-2. Open your structure with NBT editor (NBT Studio in our case) and find your structure block.
+1. ストラクチャーブロックを構造物に含めてエクスポートします。
+2. NBT エディタ（ここでは NBT Studio）で構造物を開き、ストラクチャーブロックを探します。
 
-If the only block you have in your structure is structure block, you will find its data here:
+構造物内のブロックがストラクチャーブロックだけなら、そのデータはここにあります。
 
 ![][structure] extending_structure_block.mcstructure
 
@@ -42,12 +42,12 @@ If the only block you have in your structure is structure block, you will find i
 
 ![](nbt-screenshot-1.png)
 
-3. Set `xStructureSize`, `yStructureSize` and `zStructureSize` values to what you want.
-4. Save the structure and load it in game.
+3. `xStructureSize`、`yStructureSize`、`zStructureSize` の値を希望の値に設定します。
+4. 構造物を保存し、ゲーム内で読み込みます。
 
 ![](result.png)
 
-## Tips
+## ヒント
 
-You can get this structure block to your inventory by pressing mouse scroll button while holding Ctrl.
-It is recommended to use structure loading animations (Place by Block) when loading a huge structure. This will minimize lags.
+Ctrl を押しながらマウスホイールボタンを押すと、このストラクチャーブロックをインベントリに入れられます。
+巨大な構造物を読み込むときは、構造物の読み込みアニメーション（Place by Block）を使うのがおすすめです。これでラグを最小限に抑えられます。

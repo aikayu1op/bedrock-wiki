@@ -1,7 +1,7 @@
 ---
-title: Troubleshooting
+title: トラブルシューティング
 category: Extra
-description: A simple guide for troubleshooting add-ons.
+description: アドオンの問題を解決するためのシンプルなガイドです。
 prefix: "c. "
 nav_order: 3
 tags:
@@ -17,69 +17,69 @@ mentions:
     - QuazChick
 ---
 
-Creating add-ons for Minecraft is a relatively straightforward process _once you get the hang of it_. The first time is usually a frustrating, bug-prone process. This document contains some tips and tricks for fixing those dastardly bugs, as well as best practice information.
+Minecraft でアドオンを作るのは、_慣れてしまえば_ 比較的わかりやすい作業です。最初のうちは、たいてい苛立ちやバグが多い過程になります。この文書には、厄介なバグを直すためのヒントやコツ、そしてベストプラクティスがまとめられています。
 
-Please read the whole page, before jumping into troubleshooting tips for a specific domain.
+特定の分野のトラブルシューティングに入る前に、ページ全体を読んでください。
 
-## Reload
+## リロード
 
-First, you should always reload Minecraft. That means fully closing the game and then reopening it. This can catch many errors, especially those related to assets that are accessed via a filepath, such as textures or loot tables.
+まず、Minecraft を必ず再読み込みしてください。つまり、ゲームを完全に終了してから再起動します。これは多くのエラーを見つける助けになります。特に、テクスチャや loot table のようにファイルパス経由で参照されるアセットに関するエラーに有効です。
 
-## The Environment
+## 環境
 
-The best way to prevent nasty bugs is by working in the right environment. You should review the [software preparation document](/guide/software-preparation) for editor recommendations.
+厄介なバグを防ぐ最善の方法は、正しい環境で作業することです。エディターのおすすめについては、[ソフトウェア準備ドキュメント](/guide/software-preparation) を確認してください。
 
-The most important part is getting a JSON-linter, (or using an [online JSON-linter](https://jsonlint.com/)), and storing your packs in `development_behavior_packs` and `development_resource_packs`.
-If you have your add-ons in the normal folders, you can run into "pack caching" issues, where you edit the files in one location, but the game is still using the old files.
+最も重要なのは、JSON リンターを用意すること（または [オンライン JSON リンター](https://jsonlint.com/) を使うこと）と、パックを `development_behavior_packs` と `development_resource_packs` に置くことです。
+パックを通常のフォルダーに置いたままだと、「pack caching」問題が起こることがあります。これは、一方の場所でファイルを編集しているのに、ゲーム側が古いファイルを使い続けてしまう現象です。
 
 ## Content Log
 
-:::warning Use the Content Log!
-Content log is the best tool you have for debugging your add-ons. Please don't skip this step!
+:::warning Content Log を使いましょう！
+Content log は、アドオンをデバッグするために使える最良のツールです。この手順は飛ばさないでください！
 :::
 
 :::tip
-Errors are not cleared between world loads, so the errors you see in the content log may be _old_ errors from prior loads.
+エラーはワールドの読み込みごとに消去されないため、Content log に表示されるエラーは以前の読み込み時の _古い_ エラーである場合があります。
 :::
 
-The 'Content Log' is a list of issues found in your pack. Minecraft will generate this list every time your load your world or change your global resource packs.
+「Content Log」は、パック内で見つかった問題の一覧です。Minecraft は、ワールドを読み込むたび、またはグローバル Resource pack を変更するたびに、この一覧を生成します。
 
-It can catch issues such as:
+次のような問題を検出できます。
 
--   Wrong texture path
--   Misspelled component
--   Incorrect JSON format
+-   テクスチャパスが間違っている
+-   コンポーネント名のスペルミス
+-   JSON 形式が正しくない
 
-Content log can be turned on in in `Settings > Creator`. The content log will show in-game on load up, and if more errors occur during gameplay.
+Content log は `Settings > Creator` で有効にできます。Content log は読み込み時にゲーム内へ表示され、プレイ中にさらにエラーが発生した場合も表示されます。
 
 ![](/assets/images/guide/content_log.png)
 
-### Content Log File
+### Content Log のファイル
 
-The content log is saved in `.txt` format inside your files:
+Content log は `.txt` 形式で次の場所に保存されます。
 
 -   Windows: `%APPDATA%\logs`
 -   Android: `/storage/emulated/0/Android/data/com.mojang.minecraftpe/files/games/com.mojang/logs`
 
-## Using Vanilla Samples
+## バニラサンプルの利用
 
-You can find the vanilla resource and behavior pack [here](https://github.com/Mojang/bedrock-samples).
-Comparing your code with vanilla could help you identify any issues!
+バニラの resource pack と behavior pack は [ここ](https://github.com/Mojang/bedrock-samples) で見つけられます。
+バニラと自分のコードを比較すると、問題の特定に役立つかもしれません！
 
-## JSON Schemas
+## JSON スキーマ
 
-JSON Schemas are a valuable tool for file validation. You can learn more about JSON Schemas [here](/meta/using-schemas).
+JSON Schema はファイル検証に役立つツールです。JSON Schema については [こちら](/meta/using-schemas) で詳しく学べます。
 
-## Troubleshooting Your Add-On
+## アドオンのトラブルシューティング
 
-### Blocks
+### ブロック
 
-<Button link="/blocks/troubleshooting-blocks">Troubleshoot Your Blocks</Button>
+<Button link="/blocks/troubleshooting-blocks">ブロックのトラブルシューティング</Button>
 
-### Entities
+### エンティティ
 
-<Button link="/entities/troubleshooting-entities">Troubleshoot Your Entities</Button>
+<Button link="/entities/troubleshooting-entities">エンティティのトラブルシューティング</Button>
 
-### Items
+### アイテム
 
-<Button link="/items/troubleshooting-items">Troubleshoot Your Items</Button>
+<Button link="/items/troubleshooting-items">アイテムのトラブルシューティング</Button>

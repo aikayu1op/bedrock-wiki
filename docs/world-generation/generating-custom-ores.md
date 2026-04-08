@@ -8,18 +8,18 @@ mentions:
     - SirLich
     - 7dev7urandom
     - Chikorita-Lover
-description: How to set up proper custom ore generation.
+description: カスタム鉱石生成を適切に設定する方法です。
 ---
 
-`ore_feature`'s are basic but important features! They can form clusters of blocks by replacing blocks where they are generated. This tutorial will show you how to make mineral ores that naturally generate.
+`ore_feature` は基本的ですが重要な feature です。生成先のブロックを置き換えることで、ブロックの塊を作れます。このチュートリアルでは、自然生成する鉱石を作る方法を紹介します。
 
-The use of features and feature rules requires Creation of Custom Biomes to be enabled in your world settings. If your block doesn't generate, make sure it's enabled!
+feature と feature rule を使うには、ワールド設定で Creation of Custom Biomes を有効にする必要があります。ブロックが生成されない場合は、これが有効になっているか確認してください。
 
 :::tip
 For this tutorial, I'll be using 2 custom blocks, Titanite Ore and Deepslate Titanite Ore. For how to make custom blocks, visit the [Blocks Intro](/blocks/blocks-intro) page.
 :::
 
-## The Feature File
+## Feature ファイル
 
 <CodeHeader>BP/features/titanite_ore_feature.json</CodeHeader>
 
@@ -47,7 +47,7 @@ For this tutorial, I'll be using 2 custom blocks, Titanite Ore and Deepslate Tit
 }
 ```
 
-## The Feature Rule
+## Feature Rule
 
 <CodeHeader>BP/feature_rules/overworld_underground_titanite_ore_feature.json</CodeHeader>
 
@@ -102,9 +102,9 @@ For this tutorial, I'll be using 2 custom blocks, Titanite Ore and Deepslate Tit
 }
 ```
 
-## Testing
+## テスト
 
-You can look for the ore by exploring caves, but if your ores are rare, you can use commands instead to check if they're generating. Simply place this command into a repeating command block, then fly around:
+鉱石は洞窟を探索して見つけることもできますが、レアな場合はコマンドで生成を確認できます。繰り返し実行のコマンドブロックに次のコマンドを入れて、周囲を飛び回ってください。
 
 -   `execute @a ~ ~ ~ fill ~8 ~8 ~8 ~-8 ~-8 ~-8 air 0 replace wiki:titanite_ore`
 

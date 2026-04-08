@@ -1,6 +1,6 @@
 ---
-title: Item Events
-description: Item events trigger when certain conditions are met. Creators can hook into these events to modify the game world when events are triggered.
+title: アイテムイベント
+description: アイテムイベントは、特定の条件を満たすと発生します。作成者はこれらのイベントに処理を組み込み、イベント発生時にゲーム世界を変更できます。
 category: General
 nav_order: 4
 tags:
@@ -11,17 +11,17 @@ mentions:
     - QuazChick
 ---
 
-:::tip FORMAT VERSION 1.26.10
-Using the latest format version when creating custom items provides access to fresh features and improvements. The wiki aims to share up-to-date information about custom items, and currently targets format version 1.26.10.
+:::tip フォーマットバージョン 1.26.10
+カスタムアイテムを作成する際に最新のフォーマットバージョンを使うと、新しい機能や改善を利用できます。wiki ではカスタムアイテムに関する最新情報を共有することを目指しており、現在はフォーマットバージョン 1.26.10 を対象にしています。
 :::
 
-## Registering Custom Components
+## カスタムコンポーネントの登録
 
-Item events trigger when certain conditions are met and can be "listened" to in **custom components** which are registered in scripts before the world is loaded.
+アイテムイベントは、特定の条件を満たすと発生し、ワールドが読み込まれる前にスクリプトで登録した **カスタムコンポーネント** で「受け取る」ことができます。
 
-Within each custom component, event handler functions (such as [`onBeforeDurabilityDamage`](#before-durability-damage)) are listed to configure what you want to happen when each event is triggered.
+各カスタムコンポーネントでは、[`onBeforeDurabilityDamage`](#before-durability-damage) のようなイベントハンドラー関数を定義して、各イベントが発生したときに何を起こすかを設定します。
 
-_This example prevents the item from taking durability damage when hitting an entity:_
+_この例では、アイテムがエンティティに当たったときに耐久値ダメージを受けないようにしています。_
 
 <CodeHeader>BP/scripts/unbreakable.js</CodeHeader>
 
@@ -40,11 +40,11 @@ system.beforeEvents.startup.subscribe(({ itemComponentRegistry }) => {
 });
 ```
 
-## Applying Custom Components
+## カスタムコンポーネントの適用
 
-To bind a custom component to an item, simply list it in the `components` of your item JSON.
+カスタムコンポーネントをアイテムに紐づけるには、アイテム JSON の `components` にそのまま記述します。
 
-_Requires format version [1.21.90](/items/item-format-history#_1-21-90) or later._
+_フォーマットバージョン [1.21.90](/items/item-format-history#_1-21-90) 以降が必要です。_
 
 <CodeHeader>minecraft:item</CodeHeader>
 
@@ -54,11 +54,11 @@ _Requires format version [1.21.90](/items/item-format-history#_1-21-90) or later
 }
 ```
 
-## List of Events
+## イベント一覧
 
-### Before Durability Damage
+### 耐久ダメージ前
 
-This event will be called when an item containing this component is hitting an entity and about to take durability damage.
+このイベントは、このコンポーネントを持つアイテムがエンティティに当たり、耐久値ダメージを受けようとしたときに呼び出されます。
 
 <CodeHeader>Custom Component</CodeHeader>
 
@@ -71,13 +71,13 @@ onBeforeDurabilityDamage(event) {
 }
 ```
 
-### Complete Use
+### 使用完了
 
-:::tip DEPENDENCY
-The complete use event requires the [`minecraft:use_modifiers`](/items/item-components#use-modifiers) component to be active on your item to trigger.
+:::tip 依存関係
+使用完了イベントを発生させるには、アイテムで [`minecraft:use_modifiers`](/items/item-components#use-modifiers) コンポーネントが有効になっている必要があります。
 :::
 
-This event will be called when the use duration of the item containing this component is completed.
+このイベントは、このコンポーネントを持つアイテムの使用時間が完了したときに呼び出されます。
 
 <CodeHeader>minecraft:item > components</CodeHeader>
 
@@ -96,12 +96,12 @@ onCompleteUse(event) {
 }
 ```
 
-### Consume
+### 消費
 
-This event will be called when an item containing this component is eaten by an entity.
+このイベントは、このコンポーネントを持つアイテムがエンティティに食べられたときに呼び出されます。
 
-:::tip DEPENDENCIES
-The complete use event requires the [`minecraft:use_modifiers`](/items/item-components#use-modifiers) and the [`minecraft:food`](/items/item-components#food) component to be active on your item to trigger.
+:::tip 依存関係
+使用完了イベントを発生させるには、アイテムで [`minecraft:use_modifiers`](/items/item-components#use-modifiers) と [`minecraft:food`](/items/item-components#food) コンポーネントが有効になっている必要があります。
 :::
 
 <CodeHeader>minecraft:item > components</CodeHeader>
@@ -122,9 +122,9 @@ onConsume(event) {
 }
 ```
 
-### Hit Entity
+### エンティティに命中
 
-This function will be called when an item containing this component is used to hit another entity.
+この関数は、このコンポーネントを持つアイテムで別のエンティティを攻撃したときに呼び出されます。
 
 <CodeHeader>Custom Component</CodeHeader>
 
@@ -137,9 +137,9 @@ onHitEntity(event) {
 }
 ```
 
-### Mine Block
+### ブロック採掘
 
-This function will be called when an item containing this component is used to mine a block.
+この関数は、このコンポーネントを持つアイテムでブロックを採掘したときに呼び出されます。
 
 <CodeHeader>Custom Component</CodeHeader>
 
@@ -152,9 +152,9 @@ onMineBlock(event) {
 }
 ```
 
-### Use
+### 使用
 
-This function will be called when an item containing this component is used by a player.
+この関数は、このコンポーネントを持つアイテムがプレイヤーに使われたときに呼び出されます。
 
 <CodeHeader>Custom Component</CodeHeader>
 
@@ -165,9 +165,9 @@ onUse(event) {
 }
 ```
 
-### Use On
+### ブロックに使用
 
-This function will be called when an item containing this component is used on a block.
+この関数は、このコンポーネントを持つアイテムがブロックに使われたときに呼び出されます。
 
 <CodeHeader>Custom Component</CodeHeader>
 

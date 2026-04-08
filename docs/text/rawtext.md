@@ -1,6 +1,6 @@
 ---
 title: Raw Text
-description: Understanding raw text JSON components used in the /tellraw and /titleraw commands.
+description: "`/tellraw` と `/titleraw` で使う raw text JSON コンポーネントを理解します。"
 category: General
 mentions:
     - BedrockCommands
@@ -10,138 +10,138 @@ mentions:
     - QuazChick
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
 ![](tellraw.png)
 
-Raw text is used to send and display rich text to players. This can be used in a `/tellraw` or `/titleraw` command.
+Raw text は、プレイヤーにリッチテキストを送信・表示するために使います。`/tellraw` や `/titleraw` コマンドで利用できます。
 
-Inside the squared brackets `[]`, this is where you will list multiple text objects of your choice.
+角括弧 `[]` の中に、好きな複数のテキストオブジェクトを並べます。
 
 ```json
 { "rawtext": [] }
 ```
 
-You can combine components by adding a comma `,` at the end of a component.
+コンポーネントの末尾にカンマ `,` を付けることで、複数のコンポーネントを組み合わせられます。
 
-## Text Component
+## Text コンポーネント
 
-Displays a regular string of text. Used inside the quotation marks.
+通常の文字列を表示します。文字列は引用符の中に書きます。
 
-**Syntax:**
+**構文:**
 
 ```json
 { "text": "<Your Text Here>" }
 ```
 
-**Example:**
+**例:**
 
-Send a "Hello everyone!" message to all players in chat:
+チャットで全プレイヤーに「Hello everyone!」と送信します。
 
 ```json
 /tellraw @a { "rawtext": [{ "text": "Hello everyone!" }] }
 ```
 
-### Escapes, Line Breaks, And Unicodes
+### エスケープ、改行、Unicode
 
-1. Escapes are accessed as `\` and are used in order to use quotation marks `"` within components. Example:
+1. エスケープは `\` で行います。コンポーネント内で引用符 `"` を使いたいときに使います。例:
 
     ```json
     /tellraw @a { "rawtext": [{ "text": "He said, \"I like apples\"..." }] }
-    #Output in chat:
+    #チャットでの表示:
     #    He said, "I like apples"...
     ```
 
-2. Line breaks are used as `\n` to go down a line. Example:
+2. 改行は `\n` を使います。例:
 
     ```json
     /tellraw @a { "rawtext": [{ "text": "Hello\nNext line" }] }
-    #Output in chat:
+    #チャットでの表示:
     #    Hello
     #    Next line
     ```
 
-3. Unicodes provides a unique number that displays an icon/emoji. Example:
+3. Unicode は、アイコンや絵文字を表示するための固有の番号を提供します。例:
 
     ```json
     /tellraw @a { "rawtext": [{ "text": "\ue100" }] }
     ```
 
-    - Output in chat:
+    - チャットでの表示:
 
         ![](/assets/images/text/emojis/hud/shank.png)
 
-    Note: the unicode symbol will display as it's corresponding icon/emoji in Minecraft only.
+    注: Unicode 記号は、Minecraft 内でのみ対応するアイコン/絵文字として表示されます。
 
-    For more info and the full list of unicodes available in Bedrock, refer to the [Emojis & Symbols](/text/emojis) page.
+    詳しい情報と Bedrock で使える Unicode の一覧は、[Emojis & Symbols](/text/emojis) のページを参照してください。
 
-## Selector Component
+## Selector コンポーネント
 
-Displays the name of a target of your choice. Target Selector arguments are allowed.
+任意の対象の名前を表示します。ターゲットセレクターの引数を使えます。
 
-**Syntax:**
+**構文:**
 
 ```json
 { "selector": "<target>" }
 ```
 
-**Examples:**
+**例:**
 
-1. Send name of all players in chat:
+1. チャットで全プレイヤーの名前を送信します。
 
 ```json
 /tellraw @a { "rawtext": [{ "selector": "@a" }] }
 ```
 
-2. Send name of all players tagged 'wiki:winner' in chat:
+2. `wiki:winner` タグが付いた全プレイヤーの名前をチャットで送信します。
 
 ```json
 /tellraw @a { "rawtext": [{ "selector": "@a[tag=wiki:winner]" }] }
 ```
 
-## Score Component
+## Score コンポーネント
 
-Displays a score from a scoreboard objective.
+スコアボードの objective からスコアを表示します。
 
-**Syntax:**
+**構文:**
 
 ```json
 { "score": { "name": "<name>", "objective": "<score>" } }
 ```
 
--   **`name`** - This can be any selector like `@p` or a player's name.
-    -   You can also use the **`*`** wildcard to display the reader's own score.
--   **`objective`** - The name of the scoreboard you want to display the score from.
+-   **`name`** - `@p` のようなセレクターやプレイヤー名を指定できます。
+    -   **`*`** ワイルドカードを使って、読み手自身のスコアを表示することもできます。
+-   **`objective`** - スコアを表示したいスコアボードの名前です。
 
-Both are required when using the score component.
+score コンポーネントを使うには、両方が必要です。
 
-**Examples:**
+**例:**
 
-1. Display the `wiki:points` score of the closest player in chat:
+1. 最も近いプレイヤーの `wiki:points` スコアをチャットに表示します。
 
 ```json
 /tellraw @a { "rawtext": [{ "score": { "name": "@p", "objective": "wiki:points" } }] }
 ```
 
-2. Display the `wiki:money` score of the reader in chat:
+2. 読み手の `wiki:money` スコアをチャットに表示します。
 
 ```json
 /titleraw @a title { "rawtext": [{ "score": { "name": "*", "objective": "wiki:money" } }] }
 ```
 
-## Translate Component
+## Translate コンポーネント
 
-Allows creators to display localized text to users. The list of the strings to translate is inside in the language files. Refer to the [text guide](https://wiki.bedrock.dev/text/text-intro) page for more info.
+制作者がローカライズされたテキストをユーザーに表示できるようにします。翻訳対象の文字列一覧は言語ファイル内にあります。詳しくは [text guide](https://wiki.bedrock.dev/text/text-intro) を参照してください。
 
-**Syntax:**
+**構文:**
 
 ```json
 { "translate": "<string>" }
 ```
 
-**Example:**
+**例:**
 
 ```json
 /tellraw @a { "rawtext": [{ "translate": "multiplayer.player.joined" }] }
@@ -149,7 +149,7 @@ Allows creators to display localized text to users. The list of the strings to t
 #    %s joined the game
 ```
 
-In the example above, it outputs "`%s joined the game`". For a name to appear instead of `%s`, `with` needs to be specified as well. Requires an array `[]` instead of curly brackets `{}`
+上の例では、`%s joined the game` が出力されます。`%s` の代わりに名前を表示するには、`with` も指定する必要があります。波括弧 `{}` ではなく配列 `[]` が必要です。
 
 ```json
 /tellraw @a { "rawtext": [{ "translate": "multiplayer.player.joined", "with": ["Steve"] }] }
@@ -161,7 +161,7 @@ In the example above, it outputs "`%s joined the game`". For a name to appear in
 
 ### %%s
 
-`translate` and `%s` can be used without a matching string in the localization files. For example:
+`translate` と `%s` は、ローカライズファイルに対応する文字列がなくても使えます。たとえば:
 
 ```json
 /tellraw @a { "rawtext": [{ "translate": "Hello %%s", "with": ["Steve"] }] }
@@ -169,9 +169,9 @@ In the example above, it outputs "`%s joined the game`". For a name to appear in
 #    Hello Steve
 ```
 
-### Multiple %%s
+### 複数の %%s
 
-`%%s` can be used multiple times. They are filled in the order as shown.
+`%%s` は複数回使えます。表示される順番に埋められます。
 
 ```json
 /tellraw @a { "rawtext": [{ "translate": "Hello %%s and %%s", "with": ["Steve","Alex"] }] }
@@ -179,9 +179,9 @@ In the example above, it outputs "`%s joined the game`". For a name to appear in
 #    Hello Steve and Alex
 ```
 
-### Ordering with %%#
+### %%# で順序を変える
 
-The order to fill in `%s` can be changed by replacing `s` with a number at the end. For example, to swap the position of Steve and Alex in the above example:
+`%s` を埋める順序は、末尾の `s` を数字に置き換えることで変えられます。たとえば、上の例で Steve と Alex の位置を入れ替えるには次のようにします。
 
 ```json
 /tellraw @a { "rawtext": [{ "translate": "Hello %%2 and %%1", "with": ["Steve","Alex"] }] }
@@ -189,7 +189,7 @@ The order to fill in `%s` can be changed by replacing `s` with a number at the e
 #    Hello Alex and Steve
 ```
 
-And instead of an array, you can use a rawtext component, like so.
+配列の代わりに rawtext コンポーネントを使うこともできます。たとえば次のようにします。
 
 ```json
 /tellraw @a { "rawtext": [{ "translate": "Hello %%s and %%s", "with": { "rawtext": [{ "text":"Steve" }, { "translate": "item.apple.name" }] } }] }
@@ -197,25 +197,25 @@ And instead of an array, you can use a rawtext component, like so.
 #    Hello Steve and Apple
 ```
 
-_Additional example shared by @CornyFlex:_
+_@CornyFlex による追加例:_
 
 ```json
 /tellraw @a { "rawtext": [{ "translate": "Role: %%%%s", "with": { "rawtext": [{ "score": { "name": "*", "objective": "wiki:role" } }, { "text":"Member" }, { "text": "Moderator" }, { "text": "Admin" }] } }] }
 ```
 
-This structure allows you to display different text to the selected players based on scores.
+この構造を使うと、スコアに応じて選択したプレイヤーに異なるテキストを表示できます。
 
-Note: Score must be a positive integer.
+注: スコアは正の整数である必要があります。
 
--   Output in chat:
+-   チャットでの表示:
 
     -   Member - When 'wiki:role' score of the player equals 1.
     -   Moderator - When 'wiki:role' score of the player equals 2.
     -   Admin - When 'wiki:role' score of the player equals 3.
 
-**How It Works:**
+**仕組み:**
 
--   At "`%%%%s`", the first `%%` is left invalid because no argument (either "s" or an integer) is provided. As a result, it cannot display a value from the array.
--   For the second `%%`, the argument "s" is provided, which displays the first slot in the array (a `{score}`).
--   Since there is no space between the first `%%` and the `{score}` (`%%s`), the `{score}` is interpreted as the integer argument for the first `%%`, making it valid.
--   This allows the score to dynamically change the index of the slot to be displayed.
+-   `%%%%s` では、引数 (`s` または整数) が与えられていないため、最初の `%%` は無効のままです。そのため、配列の値を表示できません。
+-   2 つ目の `%%` では引数 `s` が指定されているので、配列の最初のスロット (`{score}`) が表示されます。
+-   最初の `%%` と `{score}` の間にスペースがない (`%%s`) ため、`{score}` は最初の `%%` の整数引数として解釈され、これで有効になります。
+-   これにより、スコアによって表示するスロットのインデックスを動的に変えられます。

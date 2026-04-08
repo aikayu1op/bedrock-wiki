@@ -1,75 +1,75 @@
 ---
-title: Privacy Policy
-description: Bedrock Wiki Privacy Policy.
+title: プライバシーポリシー
+description: Bedrock Wiki のプライバシーポリシーです。
 show_contributors: false
 hidden: true
 ---
 
-[wiki.bedrock.dev](/) is created and maintained by the Bedrock-OSS organization. This privacy policy will explain how our organization uses the personal data we collect from you when you use our website. By using the wiki.bedrock.dev site, you agree to this policy.
+[wiki.bedrock.dev](/) は、Bedrock-OSS 組織によって作成・管理されています。このプライバシーポリシーでは、当サイトの利用時に収集した個人データを、組織がどのように使用するかを説明します。wiki.bedrock.dev を利用することで、このポリシーに同意したものとみなされます。
 
-## What data do we collect?
+## どのようなデータを収集しますか？
 
-Bedrock-OSS collects the following information:
+Bedrock-OSS は次の情報を収集します。
 
--   First two fields of your IP address (e.g. 8.8.0.0 instead of 8.8.8.8)
--   Date and time
--   Title and URL of the page visited
--   URL of the referring page
--   Screen resolution
--   Timezone
--   Files downloaded from the site
--   Links to an outside domain clicked
--   Time taken for pages to load
--   Approximate location and region
--   Browser language
--   Browser User-Agent
+-   IP アドレスの先頭 2 つのフィールド（例: 8.8.8.8 ではなく 8.8.0.0）
+-   日時
+-   閲覧したページのタイトルと URL
+-   参照元ページの URL
+-   画面解像度
+-   タイムゾーン
+-   サイトからダウンロードしたファイル
+-   クリックした外部ドメインへのリンク
+-   ページの読み込みにかかった時間
+-   おおよその所在地と地域
+-   ブラウザー言語
+-   ブラウザーの User-Agent
 
-## How do we collect your data?
+## どのようにデータを収集しますか？
 
-You directly provide us with all the data we collect. We collect data when you:
+収集するデータは、すべてユーザーが直接提供するものです。次の操作を行うとデータを収集します。
 
--   Open any page on the wiki.bedrock.dev domain
--   Click any external link
+-   wiki.bedrock.dev ドメイン上の任意のページを開く
+-   任意の外部リンクをクリックする
 
-## How will we use your data?
+## データはどのように使われますか？
 
-Bedrock-OSS collects your data for the purpose of improving the site and evaluating the popularity of different pages and the site as a whole over time.
+Bedrock-OSS は、サイトを改善し、時間の経過に伴う各ページおよびサイト全体の人気を評価する目的でデータを収集します。
 
--   Location, region and language are recorded to compare the use of the site in different languages
--   Page visited is used to evaluate the popularity of pages and influence future work on the site
--   Screen resolution is used to help prioritize development for different target devices
+-   位置、地域、言語は、異なる言語でのサイト利用を比較するために記録されます
+-   閲覧されたページは、各ページの人気を評価し、今後の作業方針に反映するために使われます
+-   画面解像度は、対象デバイスごとの開発優先度を判断するのに役立ちます
 
-Bedrock-OSS does not share your data with any other entities except in broad numbers, such as the total number of views a page has received in a week.
+Bedrock-OSS は、1 週間にページが受けた閲覧数の合計のような大まかな数値を除き、データを他の組織と共有しません。
 
-## How do we store your data?
+## データはどのように保管されますか？
 
-Bedrock-OSS stores all analytics data on a private server accessible only to organization leaders.
+Bedrock-OSS は、すべての分析データを、組織リーダーだけがアクセスできるプライベートサーバーに保存します。
 
-Your data remains on our servers for 6 months, after which it is erased.
+データは 6 か月間サーバーに残り、その後削除されます。
 
-## What are your data protection rights?
+## あなたのデータ保護の権利は何ですか？
 
-At Bedrock-OSS, we would like to ensure you are fully aware of your data protection rights.
+Bedrock-OSS では、ユーザーのデータ保護権を十分に理解していただけるようにしたいと考えています。
 
-In the collection of your data, we do not separate individual users, but store each request separately.
+データ収集では個々のユーザーを区別せず、各リクエストを個別に保存しています。
 
 <iframe
     style="width:100%"
     src="https://hopper.bedrock.dev/wikihopper/index.php?module=CoreAdminHome&action=optOut&language=en&backgroundColor=4d4d4d&fontColor=ffffff&fontSize=&fontFamily="
 ></iframe>
 
-## How do we use cookies?
+## Cookie はどのように使いますか？
 
-Our site uses cookies to improve user experience, such as storing the user's preferred color scheme. We do not use any cookies for tracking or analytics, unless you have prevented the site from tracking you above, in which case we use a cookie to remember your choice.
+当サイトでは、ユーザーの希望する配色を保存するなど、ユーザー体験を向上させるために Cookie を使用しています。あなたが上記の追跡を拒否していない限り、追跡や分析のための Cookie は使用しません。拒否している場合は、その選択を記憶するために Cookie を使用します。
 
-## Privacy Policies of other websites
+## 他のウェブサイトのプライバシーポリシー
 
-Our site contains links to other sites, which operate under different policies. We are not responsible for the privacy policies of other sites.
+当サイトには、異なるポリシーのもとで運営されている他サイトへのリンクが含まれています。私たちは、他のサイトのプライバシーポリシーについて責任を負いません。
 
-## Changes to our Privacy Policy
+## プライバシーポリシーの変更
 
-We try to keep our privacy policy updated. This page was last updated on 18 January 2022.
+私たちは、プライバシーポリシーを最新に保つよう努めています。このページの最終更新日は 2022 年 1 月 18 日です。
 
-## Contact us
+## お問い合わせ
 
-To contact us, join our [discord server](/discord) or send an email to [SirLich.business@gmail.com](mailto:SirLich.business@gmail.com).
+お問い合わせは、[Discord サーバー](/discord) に参加するか、[SirLich.business@gmail.com](mailto:SirLich.business@gmail.com) へメールを送ってください。

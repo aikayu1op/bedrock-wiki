@@ -1,5 +1,5 @@
 ---
-title: On Player Leave
+title: プレイヤー退出時
 category: On Event Systems
 tags:
     - easy
@@ -7,80 +7,80 @@ mentions:
     - BedrockCommands
     - zheaEvyline
 nav_order: 3
-description: This system will run your desired commands on the event that a player leaves the world.
+description: プレイヤーがワールドを退出したときに、指定したコマンドを実行するシステムです。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community Discord](https://bedrockcommands.org/)
 
-This system will run your desired commands on the event that a player leaves the world.
+このシステムは、プレイヤーがワールドを退出したときに、指定したコマンドを実行します。
 
-> **Note:** You cannot execute commands on _players_ that leave using target selectors. However, you can use the [On Player Join](/commands/on-player-join) system to execute commands when they rejoin.
+> **注:** ターゲットセレクターを使って、退出した _プレイヤー_ に対してコマンドを実行することはできません。ただし、再参加したときにコマンドを実行するには、[プレイヤー参加時](/commands/on-player-join) システムを使えます。
 
-## Setup
+## セットアップ
 
-_Type the following command in Chat:_
+_チャットに次のコマンドを入力してください：_
 
 `/scoreboard objectives add wiki:player_count dummy`
 
-If you are working with functions and prefer to have the objective added automatically when the world initializes, follow the process outlined in [On First World Load](/commands/on-first-world-load).
+関数を使っていて、ワールド初期化時に目標を自動で追加したい場合は、[ワールドの初回読み込み時](/commands/on-first-world-load) に記載されている手順に従ってください。
 
-## System
+## システム
 
 <CodeHeader>BP/functions/wiki/event/players/on_leave.mcfunction</CodeHeader>
 
 ```yaml
-## Get Current Tick Player Count
-### Reset score
+## 現在のティックのプレイヤー数を取得
+### スコアをリセット
 scoreboard players reset .CurrentTick wiki:player_count
-### Tally score
+### スコアを集計
 execute as @a run scoreboard players add .CurrentTick wiki:player_count 1
 
-## Get Difference (Current - Previous)
+## 差分を取得（現在 - 前回）
 scoreboard players operation .CurrentTick wiki:player_count -= .PreviousTick wiki:player_count
 
-## Your Commands Here (Example)
-### Message if there is a difference of -1 or less
+## ここにコマンドを入れます（例）
+### 差が -1 以下ならメッセージを表示
 execute if score .CurrentTick wiki:player_count matches ..-1 run say One or more players have left the world
 
-## Save Current Tick Player Count to Compare Next Game Tick
-### Reset score
+## 次のゲームティックと比較するために現在のティックの人数を保存
+### スコアをリセット
 scoreboard players reset .PreviousTick wiki:player_count
-### Tally score
+### スコアを集計
 execute as @a run scoreboard players add .PreviousTick wiki:player_count 1
 ```
 
 ![Chain of 6 Command Blocks](/assets/images/commands/command-block-chain/6.png)
 
-Here, we have used a `/say` command as an example, but you can use any command you prefer and as many as you need.
+ここでは例として `/say` コマンドを使っていますが、好きなコマンドを必要な数だけ使えます。
 
-Just make sure to follow the given order and properly apply the `/execute if score` condition as shown for your desired commands.
+ただし、必ず示された順序を守り、目的のコマンドには `/execute if score` 条件を正しく適用してください。
 
-## Explanation
+## 解説
 
-Since `.PreviousTick` score is updated at the end of the command loop, it can be used at the start of the next game tick to compare with the score of `.CurrentTick`.
+`.PreviousTick` のスコアはコマンドループの最後に更新されるため、次のゲームティックの冒頭で `.CurrentTick` のスコアと比較するのに使えます。
 
-The player count is obtained using the [Entity Counter](/commands/entity-counter) system. Reading that page is recommended to better understand this system.
+プレイヤー数は [Entity Counter](/commands/entity-counter) システムを使って取得します。このシステムをよりよく理解するには、そちらのページを読むことをおすすめします。
 
-By subtracting `.PreviousTick` score from `.CurrentTick` score, we can determine if the player count has:
+`.CurrentTick` のスコアから `.PreviousTick` のスコアを引くことで、プレイヤー数が次のどれに当てはまるかを判定できます。
 
--   Decreased (`..-1`)
--   Increased (`1..`)
--   Remains unchanged (`0`)
+-   減少した（`..-1`）
+-   増加した（`1..`）
+-   変化しなかった（`0`）
 
-If it has decreased, it means one or more players have left the game.
-Using this, we can execute commands when `.CurrentTick` is `-1` or lower.
+減少していれば、1 人以上のプレイヤーがゲームを退出したことを意味します。
+これを使って、`.CurrentTick` が `-1` 以下のときにコマンドを実行できます。
 
--   For example, if there were 10 players and one leaves:
+-   例えば、10 人のプレイヤーがいて 1 人が退出した場合:
 
     -   `.CurrentTick - .PreviousTick = 9 - 10 = -1`
-    -   We detect this using `..-1`
+    -   これは `..-1` で検出できます
 
--   `.CurrentTick` is obtained first, subtraction is performed next, commands are executed based on the result, and finally, `.PreviousTick` is updated to be used in the next game tick.
+-   まず `.CurrentTick` を取得し、次に減算を行い、その結果に基づいてコマンドを実行します。最後に `.PreviousTick` を更新して、次のゲームティックで使えるようにします。
 
 :::tip
-All commands in a command-block chain or function will execute sequentially but within the same game tick, regardless of the number of commands involved. This system works because commands execute at the end of a game tick after all events (such as player join, leave, death, etc.) occur.
+コマンドブロックチェーンや関数内のすべてのコマンドは、数に関係なく、同じゲームティック内で順番に実行されます。このシステムが機能するのは、プレイヤーの参加・退出・死亡などのイベントがすべて発生したあと、ゲームティックの最後にコマンドが実行されるためです。
 
 <WikiImage
     src="/assets/images/commands/intro-to-command-blocks/game-tick.png"
@@ -91,7 +91,7 @@ All commands in a command-block chain or function will execute sequentially but 
 
 ## Tick JSON
 
-If you are using functions instead of command blocks, the `on_leave` function must be added to `tick.json` to ensure continuous execution. Multiple files can be added to `tick.json` by placing a comma after each string. Refer to the [Functions](/commands/mcfunctions#tick-json) documentation for more details.
+コマンドブロックの代わりに関数を使う場合は、`on_leave` 関数を `tick.json` に追加して継続実行させる必要があります。`tick.json` には各文字列の後ろにカンマを付けることで複数ファイルを追加できます。詳しくは [Functions](/commands/mcfunctions#tick-json) のドキュメントを参照してください。
 
 <CodeHeader>BP/functions/tick.json</CodeHeader>
 ```json
@@ -102,7 +102,7 @@ If you are using functions instead of command blocks, the `on_leave` function mu
 }
 ```
 
-If using functions, your pack folder structure should be as follows:
+関数を使う場合、パックのフォルダ構成は次のようになります。
 
 <FolderView
 	:paths="[

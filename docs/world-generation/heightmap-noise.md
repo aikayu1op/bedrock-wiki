@@ -6,18 +6,18 @@ tags:
 mentions:
     - Apex360
     - SirLich
-description: Noise based terrain.
+description: ノイズベースの地形です。
 ---
 
 :::tip
-This tutorial assumes you have a basic understanding of molang, features and feature rules.
+このチュートリアルでは、Molang、feature、feature rule の基本を理解していることを前提としています。
 :::
 
-In this tutorial we're gonna see how we can make noise based terrain using the `q.noise` molang query.
+このチュートリアルでは、Molang の `q.noise` クエリを使ってノイズベースの地形を作る方法を見ていきます。
 
-## Single Block Feature
+## 単一ブロックの Feature
 
-First we will define the single block feature. It will define the block that is going to be generated. For this tutorial I'll use stone.
+まず、単一ブロックの feature を定義します。ここで、生成されるブロックを決めます。このチュートリアルでは stone を使います。
 
 <CodeHeader>BP/features/stone_feature.json</CodeHeader>
 
@@ -37,7 +37,7 @@ First we will define the single block feature. It will define the block that is 
 
 ## Scatter Feature
 
-The scatter feature is the main feature which we'll be using to generate the terrain.
+scatter feature が、地形生成の中心になります。
 
 <CodeHeader>BP/features/column.json</CodeHeader>
 
@@ -60,13 +60,13 @@ The scatter feature is the main feature which we'll be using to generate the ter
 }
 ```
 
-Let me explain whats happening in the `iterations`:
-In the iterations we've defined a temp `t.height` in which we've defined our main noise function.
-In `t.height` the value that we're adding first is the base height, basically the height at which the function starts.
-After that we're querying perlin using the `q.noise` query which returns values ranging from -1 to 1 and dividing that by a value which smooths out the function.
-Then we're multiplying the whole function by a value which in simple words is basically the variation in the terrain.
+`iterations` で何が起きているのか説明します。
+`iterations` の中では、一時変数 `t.height` を定義し、そこでメインのノイズ関数を作っています。
+`t.height` では、まずベースの高さを足しています。これは、関数が始まる基準の高さです。
+その後、`q.noise` クエリで Perlin ノイズを取得します。返る値は `-1` から `1` の範囲なので、それを平滑化する値で割っています。
+最後に、地形の変化量にあたる値を掛けています。
 
-So what's happening here is that we are getting values from the `t.height` temp and assigning them to the y extent ranging from -64 to the value thus generating a column. Now this value is going to vary column by column but not in a random way as `q.noise` queryies Perlin noise, meaning the values are relative to each other. So instead of getting values like 64,69,45,100,7,56 we are getting values like 64,65,66,68,69,68,66,65 and so on.
+つまりここでは、`t.height` の値を取り出して、`-64` からその値までの Y 範囲に割り当て、縦の柱を生成しています。この値は列ごとに変わりますが、`q.noise` は Perlin ノイズを使うため完全なランダムではなく、値同士が関連しています。なので、`64,69,45,100,7,56` のような値ではなく、`64,65,66,68,69,68,66,65` のような値になります。
 
 ## Feature Rule
 
@@ -111,6 +111,6 @@ So what's happening here is that we are getting values from the `t.height` temp 
 }
 ```
 
-In this we have set the `iteration` to 256 as the area of a whole chunk is 256 (16x16) to make the columns generate in the whole chunk.
+ここでは、チャンク全体の面積が 256 (16x16) なので、列がチャンク全体に生成されるように `iterations` を 256 に設定しています。
 
-And our custom noise based terrain is finished! Feel free to mess with the values.
+これでカスタムのノイズベース地形は完成です。値をいろいろいじってみてください。

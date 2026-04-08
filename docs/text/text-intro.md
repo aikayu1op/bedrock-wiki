@@ -1,6 +1,6 @@
 ---
-title: Intro to Text & Localization
-description: Minecraft is a game with fully localized text in languages all over the world.
+title: テキストとローカライズの入門
+description: Minecraft は、世界中のさまざまな言語に完全対応したテキストを持つゲームです。
 category: General
 nav_order: 1
 mentions:
@@ -18,13 +18,13 @@ mentions:
     - QuazChick
 ---
 
-Minecraft is a game with fully localized text in languages all over the world. To achieve this, Minecraft employs a system where internal **translation keys** are assigned values on a per-language basis. Minecraft will generate translation keys for custom entities, items, and blocks, and it is up to us to assign them a localized name in our resource pack.
+Minecraft は、世界中のさまざまな言語に完全対応したテキストを持つゲームです。これを実現するために、Minecraft では内部の **翻訳キー** に対して、言語ごとに値を割り当てる仕組みが使われています。Minecraft はカスタムエンティティ、アイテム、ブロック用の翻訳キーを生成するので、それらにリソースパック内でローカライズされた名前を割り当てるのは私たちの役割です。
 
-## Language Files
+## 言語ファイル
 
-### File Location
+### 保存場所
 
-Language files typically go within the resource pack in the "texts" folder as files with the `.lang` file extension. These files can be placed in the behavior pack, but the only translatable text it can change is the pack manifest's name and description.
+言語ファイルは通常、リソースパック内の "texts" フォルダに `.lang` 拡張子のファイルとして配置します。これらのファイルはビヘイビアパックにも置けますが、その場合に翻訳できるテキストは、パックマニフェストの名前と説明だけです。
 
 <FolderView :paths="[
   'RP/texts/en_US.lang',
@@ -33,21 +33,21 @@ Language files typically go within the resource pack in the "texts" folder as fi
 ]"
 ></FolderView>
 
-Minecraft supports 29 languages currently, as described in [§ Vanilla Languages](/text/text-intro#vanilla-languages).
+Minecraft は現在 29 言語をサポートしており、詳しくは [§ バニラの言語](/text/text-intro#vanilla-languages) を参照してください。
 
-### Format
+### 形式
 
-The format for a language file is rather straightforward. Translations are supplied as key-value pairs separated by an equals sign (`=`), the key being a translation key and the value being a string. Values cannot contain newline characters.
+言語ファイルの形式はかなり単純です。翻訳は `=` で区切られたキーと値のペアとして記述し、キーが翻訳キー、値が文字列になります。値に改行文字を含めることはできません。
 
 ```lang
 wiki.example_translation.line_1=The first line!
 wiki.example_translation.line_2=Some more information following the first line.
 ```
 
-Comments may be added with two pound signs (`##`), either as line comments or in-line comments. All text after the pound signs are a comment until the next line.
+コメントは、2 つの `#` (`##`) を使って、行コメントとしてもインラインコメントとしても追加できます。`#` 以降のすべてのテキストは、次の行までコメントとして扱われます。
 
 :::warning
-Trailing spaces are not trimmed for in-line comments. If you want to indent a comment, use the Tab character.
+インラインコメントの末尾の空白は削除されません。コメントを字下げしたい場合は、Tab キーを使ってください。
 :::
 
 ```lang
@@ -55,33 +55,33 @@ Trailing spaces are not trimmed for in-line comments. If you want to indent a co
 item.flint_and_steel.name=Flint and Steve	##[sic]
 ```
 
-A translation can contain substitutions in place of text. Substitutions can either be ordered (`%1`, `%2`, etc.) or not ordered (`%s`). Vanilla translations have their values filled in by the game, while players can manually set the substitutions' values with commands that use the raw JSON text format, like with [`/tellraw`](/text/rawtext).
+翻訳には、テキストの代わりに置換記号を含めることができます。置換記号は、順序付き (`%1`, `%2` など) にも、順序なし (`%s`) にもできます。バニラの翻訳では値はゲームが埋めますが、プレイヤーは [`/tellraw`](/text/rawtext) のような生の JSON テキスト形式を使うコマンドで、置換記号の値を手動で設定できます。
 
 ```lang
 commands.op.success=Opped: %s
 immersive_reader.book_page_header=Page %1 of %2
 ```
 
-### Usage
+### 用途
 
-Localization can be done just about anywhere text can be used, including (but not limited to):
+ローカライズは、テキストを使えるほぼあらゆる場所で行えます。たとえば次のような場所です。
 
--   Pack name and description
--   Entity, item, or block names
--   Pages in a book
--   Lines on a sign
--   `/tellraw` and `/titleraw` commands
--   Text in dialogue
+-   パック名と説明
+-   エンティティ、アイテム、またはブロックの名前
+-   本のページ
+-   看板の行
+-   `/tellraw` と `/titleraw` コマンド
+-   ダイアログ内のテキスト
 
-Some text cannot be translated however, such as for an item renamed in an anvil.
+ただし、金床で改名したアイテムなど、一部のテキストは翻訳できません。
 
-## Localization
+## ローカライズ
 
 :::tip
-It is good practice create a copy of your language file for each major language your pack supports. For example, to support full English one should create both an `en_US.lang` and an `en_GB.lang` file, to cover English in both the United States and Great Britain countries, respectively.
+パックが対応する主要言語ごとに、言語ファイルのコピーを用意するのがよい習慣です。たとえば英語を完全にサポートするなら、`en_US.lang` と `en_GB.lang` の両方を作成し、それぞれ米国英語と英国英語をカバーします。
 :::
 
-When editing language files one must also add a `languages.json` file in the `texts` folder containing an array with each of the languages you plan to change. This lets Minecraft know that it should apply localization for these languages.
+言語ファイルを編集するときは、`texts` フォルダに `languages.json` ファイルも追加し、翻訳対象にする各言語を配列で記述する必要があります。これによって、Minecraft はその言語にローカライズを適用すべきだと認識します。
 
 <CodeHeader>RP/texts/languages.json</CodeHeader>
 
@@ -89,11 +89,11 @@ When editing language files one must also add a `languages.json` file in the `te
 ["en_US", "en_GB", "fr_FR"]
 ```
 
-### Custom Languages
+### カスタム言語
 
-With a global resource pack, custom languages may be introduced through the `languages.json` and `language_names.json` files. Once the pack is applied globally the language can be changed in the "Language" tab of the in-game settings.
+グローバルリソースパックでは、`languages.json` と `language_names.json` ファイルを使ってカスタム言語を導入できます。パックをグローバルに適用すると、ゲーム内設定の「言語」タブで言語を変更できるようになります。
 
-For the following examples, lets assume that we have 2 fully functional language files, one named `xx_XX.lang`, and another named `yy_YY.lang`.
+以下の例では、2 つの完全に機能する言語ファイル、`xx_XX.lang` と `yy_YY.lang` があると仮定します。
 
 <CodeHeader>RP/texts/languages.json</CodeHeader>
 
@@ -101,7 +101,7 @@ For the following examples, lets assume that we have 2 fully functional language
 ["xx_XX", "yy_YY"]
 ```
 
-`language_names.json` is an array as well, but this time to define the names to display for the languages.
+`language_names.json` も配列ですが、こちらは言語の表示名を定義するためのものです。
 
 <CodeHeader>RP/texts/language_names.json</CodeHeader>
 
@@ -113,52 +113,52 @@ For the following examples, lets assume that we have 2 fully functional language
 ```
 
 :::warning
-Whenever using a custom language, make sure to switch away from the language before you disable the resource pack that it is a part of, otherwise Minecraft will crash.
+カスタム言語を使っている場合は、その言語から別の言語に切り替えてから、属しているリソースパックを無効化してください。そうしないと Minecraft がクラッシュします。
 :::
 
-### Tools
+### ツール
 
-If Microsoft are localizing your .lang file there are specific technical requirements that your .lang must follow.
+Microsoft があなたの `.lang` ファイルをローカライズする場合、`.lang` ファイルには満たすべき特定の技術要件があります。
 
--   Ensure that you have &lt;tab&gt;# before comments (**not** spaces).
--   Ensure line breaks are the Windows style (CR+LF), not Unix style.
--   Must not contain duplicate keys.
--   Strings must be commented to ease translation.
+-   コメントの前には &lt;tab&gt;# を入れてください (**スペースではありません**)。
+-   改行は Unix 形式ではなく、Windows 形式 (CR+LF) にしてください。
+-   重複したキーを含めてはいけません。
+-   翻訳しやすいように、文字列にはコメントを付けてください。
 
-You can use the free browser-based [LangUtil tool](https://langutil.bedrockexplorer.com) to assist with this.
+これを補助するために、無料のブラウザベースの [LangUtil ツール](https://langutil.bedrockexplorer.com) を使えます。
 
-### Vanilla Languages
+### バニラの言語
 
-The following is a table of the 29 languages Minecraft supports by default.
+以下は、Minecraft が標準でサポートしている 29 言語の一覧です。
 
-| Language ID | Language Name         | Country        |
-| ----------- | --------------------- | -------------- |
-| id_ID       | Indonesian            | Indonesia      |
-| da_DK       | Danish                | Denmark        |
-| de_DE       | German                | Germany        |
-| en_GB       | English               | Great Britain  |
-| en_US       | English               | North America  |
-| es_ES       | Spanish               | Spain          |
-| es_MX       | Mexican Spanish       | Mexico         |
-| fr_CA       | Canadian French       | Canada         |
-| fr_FR       | French                | France         |
-| it_IT       | Italian               | Italy          |
-| hu_HU       | Hungarian             | Hungary        |
-| nl_NL       | Dutch                 | Netherlands    |
-| nb_NO       | Bokmål                | Norway         |
-| pl_PL       | Polish                | Poland         |
-| pt_BR       | Brazilian Portuguese  | Brazil         |
-| pt_PT       | Portuguese            | Portugal       |
-| sk_SK       | Slovak                | Slovakia       |
-| fi_FI       | Finnish               | Finland        |
-| sv_SE       | Swedish               | Sweden         |
-| tr_TR       | Turkish               | Turkey         |
-| cs_CZ       | Czech                 | Czech Republic |
-| el_GR       | Greek                 | Greece         |
-| bg_BG       | Bulgarian             | Bulgaria       |
-| ru_RU       | Russian               | Russia         |
-| uk_UA       | Ukrainian             | Ukraine        |
-| ja_JP       | Japanese              | Japan          |
-| zh_CN       | Chinese (Simplified)  | China          |
-| zh_TW       | Chinese (Traditional) | Taiwan         |
-| ko_KR       | Korean                | Korea          |
+| 言語 ID | 言語名                | 国            |
+| ------- | --------------------- | ------------- |
+| id_ID   | インドネシア語        | インドネシア  |
+| da_DK   | デンマーク語          | デンマーク    |
+| de_DE   | ドイツ語              | ドイツ        |
+| en_GB   | 英語                  | イギリス      |
+| en_US   | 英語                  | 北米          |
+| es_ES   | スペイン語            | スペイン      |
+| es_MX   | メキシコスペイン語    | メキシコ      |
+| fr_CA   | カナダフランス語      | カナダ        |
+| fr_FR   | フランス語            | フランス      |
+| it_IT   | イタリア語            | イタリア      |
+| hu_HU   | ハンガリー語          | ハンガリー    |
+| nl_NL   | オランダ語            | オランダ      |
+| nb_NO   | ブークモール語        | ノルウェー    |
+| pl_PL   | ポーランド語          | ポーランド    |
+| pt_BR   | ブラジルポルトガル語  | ブラジル      |
+| pt_PT   | ポルトガル語          | ポルトガル    |
+| sk_SK   | スロバキア語          | スロバキア    |
+| fi_FI   | フィンランド語        | フィンランド  |
+| sv_SE   | スウェーデン語        | スウェーデン  |
+| tr_TR   | トルコ語              | トルコ        |
+| cs_CZ   | チェコ語              | チェコ共和国  |
+| el_GR   | ギリシャ語            | ギリシャ      |
+| bg_BG   | ブルガリア語          | ブルガリア    |
+| ru_RU   | ロシア語              | ロシア        |
+| uk_UA   | ウクライナ語          | ウクライナ    |
+| ja_JP   | 日本語                | 日本          |
+| zh_CN   | 中国語（簡体字）      | 中国          |
+| zh_TW   | 中国語（繁体字）      | 台湾          |
+| ko_KR   | 韓国語                | 韓国          |

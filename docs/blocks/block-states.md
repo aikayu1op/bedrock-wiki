@@ -1,6 +1,6 @@
 ---
-title: Block States
-description: Block states allow your blocks to have variants, each with its own functionality and appearance through use of permutations.
+title: ブロックの状態
+description: ブロックの状態を使うと、パーミュテーションを通じてそれぞれ固有の機能と見た目を持つバリアントを作れます。
 category: General
 nav_order: 4
 related:
@@ -13,18 +13,18 @@ mentions:
 ---
 
 :::tip FORMAT VERSION 1.26.10
-When working with block states, ensure that the `min_engine_version` in your pack manifest is 1.20.20 or higher.
+ブロック状態を扱うときは、パックの manifest にある `min_engine_version` が 1.20.20 以上であることを確認してください。
 :::
 
-Block states allow your blocks to have variants, each with its own functionality and appearance through use of [permutations](/blocks/block-permutations).
+ブロックの状態を使うと、[パーミュテーション](/blocks/block-permutations) によって、それぞれ固有の機能と見た目を持つバリアントを作れます。
 
-## Defining States
+## 状態の定義
 
-Valid state values can be defined as a boolean, integer or string array - or as an integer range by using an object. The first item in the values array is used as the default.
+有効な状態値は、真偽値、整数、文字列の配列として定義できます。また、オブジェクトを使って整数範囲として定義することもできます。値配列の最初の項目が既定値として使われます。
 
-Each state may have up to 16 valid values defined. For integer range states, this means that the `max` value cannot be more than 15 higher than the `min` value.
+各状態に定義できる有効値は最大 16 個です。整数範囲の状態では、`max` は `min` より 15 以上大きくできません。
 
-_Requires format version [1.19.70](/blocks/block-format-history#_1-19-70) or later._
+_format version [1.19.70](/blocks/block-format-history#_1-19-70) 以降が必要です。_
 
 <CodeHeader>BP/blocks/custom_block.json</CodeHeader>
 
@@ -49,13 +49,13 @@ _Requires format version [1.19.70](/blocks/block-format-history#_1-19-70) or lat
 }
 ```
 
-## Getting State Values
+## 状態値の取得
 
-Listed below are ways to get the current value of block states in different contexts.
+各コンテキストでブロック状態の現在値を取得する方法を以下に示します。
 
-### Molang Query Function
+### Molang クエリ関数
 
-State values are returned by the `q.block_state()`{lang=molang} query function.
+状態値は `q.block_state()`{lang=molang} クエリ関数で取得できます。
 
 <CodeHeader>Molang Expression</CodeHeader>
 
@@ -63,9 +63,9 @@ State values are returned by the `q.block_state()`{lang=molang} query function.
 q.block_state('wiki:string_state_example') == 'blue'
 ```
 
-### Command Argument
+### コマンド引数
 
-The [block states argument](/commands/block-states) is included in commands such as `execute` and `testforblock`, and can be used to check the value of block states.
+[block states argument](/commands/block-states) は `execute` や `testforblock` などのコマンドに含まれ、ブロック状態の値を確認するために使えます。
 
 <CodeHeader>Command</CodeHeader>
 
@@ -75,7 +75,7 @@ execute if block ~~~ wiki:custom_block["wiki:string_state_example"="blue", "wiki
 
 ### Script API
 
-The [`BlockPermutation.getState()`{lang=js}](https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server/blockpermutation#getstate) method allows you to get the current value of different states.
+[`BlockPermutation.getState()`{lang=js}](https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server/blockpermutation#getstate) メソッドを使うと、さまざまな状態の現在値を取得できます。
 
 <CodeHeader>Script</CodeHeader>
 
@@ -83,11 +83,11 @@ The [`BlockPermutation.getState()`{lang=js}](https://learn.microsoft.com/minecra
 customBlock.permutation.getState("wiki:integer_state_example") === 3;
 ```
 
-## Setting State Values
+## 状態値の設定
 
-### Command Argument
+### コマンド引数
 
-The [block states argument](/commands/block-states) is included in commands such as `setblock` and `fill`, and can be used to change states away from their default values.
+[block states argument](/commands/block-states) は `setblock` や `fill` などのコマンドに含まれ、状態を既定値から変更するために使えます。
 
 <CodeHeader>Command</CodeHeader>
 
@@ -97,7 +97,7 @@ setblock ~~~ wiki:custom_block["wiki:string_state_example"="blue", "wiki:integer
 
 ### Script API
 
-The [`BlockPermutation.withState()`{lang=js}](https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server/blockpermutation#withstate) method returns a new block permutation with the specified state value changed. This permutation can be applied to the block using the [`Block.setPermutation()`{lang=js}](https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server/block#setpermutation) method, as seen below.
+[`BlockPermutation.withState()`{lang=js}](https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server/blockpermutation#withstate) メソッドは、指定した状態値を変更した新しいブロックパーミュテーションを返します。このパーミュテーションは、次のように [`Block.setPermutation()`{lang=js}](https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server/block#setpermutation) メソッドでブロックに適用できます。
 
 <CodeHeader>Script</CodeHeader>
 

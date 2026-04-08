@@ -1,6 +1,6 @@
 ---
-title: Troubleshooting Items
-description: Troubleshooting guide to items.
+title: アイテムのトラブルシューティング
+description: アイテムに関するトラブルシューティングガイドです。
 category: General
 tags:
     - help
@@ -15,25 +15,25 @@ mentions:
 ---
 
 :::tip
-This page contains troubleshooting information about _items_. You should read our [global troubleshooting](/guide/troubleshooting) document before continuing here.
+このページには _items_ に関するトラブルシューティング情報があります。続ける前に、[global troubleshooting](/guide/troubleshooting) のドキュメントを読んでください。
 :::
 
-## Start Here
+## まずここから
 
-> "I followed a tutorial or tried to make my own item and something's wrong!"
+> 「チュートリアルに従ったのに、あるいは自分でアイテムを作ろうとしたら、何かがおかしい！」
 
-No need to panic! This page will help debug common issues.
+慌てる必要はありません。このページがよくある問題のデバッグを手伝います。
 
-### Item Doesn't Exist
+### アイテムが存在しない
 
--   Confirm that your pack is actually applied to your world
--   Confirm that your item is in the folder `BP/items/`
--   Confirm that your item is valid, according to [jsonlint](https://jsonlint.com/).
--   Confirm that your identifier is all lowercase, and looks similar to this: `wiki:my_item`
+-   パックが実際にワールドへ適用されていることを確認する
+-   アイテムが `BP/items/` フォルダにあることを確認する
+-   [jsonlint](https://jsonlint.com/) で、アイテムが有効な JSON であることを確認する
+-   識別子がすべて小文字で、`wiki:my_item` のような形になっていることを確認する
 
-### Missing Textures
+### テクスチャが見つからない
 
-Navigate to your `item_texture.json` file. Ensure that it is properly named, and in the correct folder. Some examples of wrong names:
+`item_texture.json` ファイルを確認してください。名前が正しく、適切なフォルダにあることを確認します。間違った名前の例:
 
 -   ⚠️ `texture/item_texture.json`
 -   ⚠️ `textures/Item_texture.json`
@@ -53,7 +53,7 @@ Here is an example file to compare against:
 }
 ```
 
-Next, navigate to your items BP file. Place the `minecraft:icon` component in your item file under the components section. Ensure that it is properly named.
+次に、アイテムの BP ファイルを確認します。アイテムファイルの components セクションに `minecraft:icon` コンポーネントを配置してください。名前が正しいことも確認します。
 
 <CodeHeader>BP/items/your_item.json</CodeHeader>
 
@@ -74,8 +74,8 @@ Next, navigate to your items BP file. Place the `minecraft:icon` component in yo
 }
 ```
 
-If you followed this properly, your item should now have a texture.
+ここまで正しく行えていれば、アイテムにテクスチャが表示されるはずです。
 
-## What now?
+## では次は？
 
-You've reached the end of the guide. If you still have any problems, feel free to [join the discord server](/discord) and ask your question there.
+これでガイドは終わりです。それでも問題がある場合は、[discord server](/discord) に参加して質問してください。

@@ -1,7 +1,7 @@
 ---
-title: Introduction
+title: はじめに
 category: Guide
-description: Introduction to our "Getting Started" Guide
+description: "「はじめに」ガイドの概要"
 tags:
     - guide
 nav_order: 1
@@ -20,53 +20,53 @@ mentions:
     - QuazChick
 ---
 
-## What Are Add-Ons?
+## アドオンとは？
 
-An add-on is the Minecraft: Bedrock Edition (_Android, Chromebook, Console, Windows, iOS_) equivalent to Java Edition mods.
+アドオンは、Minecraft: Bedrock Edition（_Android、Chromebook、コンソール、Windows、iOS_）における Java Edition の MOD に相当するものです。
 
-In contrast to Java Edition however, Bedrock Edition APIs are officially maintained by Mojang instead of the community and have backwards compatibility, meaning add-ons made for older versions of Minecraft will continue to work in future versions.
+ただし Java Edition とは異なり、Bedrock Edition の API はコミュニティではなく Mojang が公式に管理しており、後方互換性があります。つまり、古いバージョンの Minecraft 向けに作られたアドオンは、将来のバージョンでも引き続き動作します。
 
-In general, you can think of _mods_ as _modifying_ the game, and _add-ons_ as _adding onto_ the game, following the development opportunities provided by Mojang.
-While directly modifying vanilla content is supported, it can lead to incompatibilities if multiple add-ons modify the same thing and is therefore not recommended.
+一般的には、_MOD_ はゲームを _修正する_ もの、_アドオン_ はゲームに _追加する_ ものだと考えるとよいでしょう。これは Mojang が提供する開発の方向性に沿ったものです。
+バニラの内容を直接変更することも可能ですが、複数のアドオンが同じ要素を変更すると互換性の問題が起きる場合があるため、推奨されません。
 
-:::tip ALTERNATIVE RESOURCES
-Although we're very pleased with this guide, it's not the only option for getting started.
-Mojang maintains their own [getting started guide](https://learn.microsoft.com/minecraft/creator/documents/gettingstarted) on the Creator Platform, which you can consider following if you need alternative explanations.
+:::tip 代替リソース
+このガイドにも自信はありますが、始め方はこれだけではありません。
+Mojang は Creator Platform 上で独自の [はじめ方ガイド](https://learn.microsoft.com/minecraft/creator/documents/gettingstarted) を公開しているので、別の説明が必要ならそちらも参考にできます。
 :::
 
-## What Will I Learn?
+## 何が学べるの？
 
-This guide is a beginner tutorial, intended to walk you through the first stages of add-on creation.
-You will create your very own fully-functional Ghost entity, as well as an Ectoplasm item, and some other associated files.
+このガイドは初心者向けのチュートリアルで、アドオン作成の最初の段階を順を追って学べるように構成されています。
+ここでは、完全に動作する独自の Ghost エンティティ、Ectoplasm アイテム、そして関連するいくつかのファイルを作成します。
 
-By the end of this guide, you will have created an entire add-on all by yourself, which you can play with and modify!
+このガイドを終えるころには、ひとりでアドオン一式を作り上げ、実際に遊んだり改造したりできるようになります。
 
-## Is the Guide Up-to-Date?
+## このガイドは最新？
 
-This guide is written for the most recent _stable_ release of Minecraft: Bedrock Edition.
-Many things won't work in previous versions, and some will be changed in later ones.
+このガイドは、Minecraft: Bedrock Edition の最新の _安定版_ 向けに書かれています。
+古いバージョンでは動作しない内容が多く、今後のバージョンで変更される部分もあります。
 
-We will keep the guide as up-to-date as possible, so no need to worry.
+できるだけ最新の状態を保つようにしていますので、心配はいりません。
 
-## Appendix Pages
+## 付録ページ
 
-Alongside the step-by-step guide, we have a few other pages here in this section, which you can browse at your convenience.
+この手順ガイドに加えて、このセクションにはいくつかの追加ページがあります。必要に応じて自由に参照してください。
 
--   [Understanding JSON](/guide/understanding-json)
--   [Downloading Example Packs](/guide/download-packs)
--   [Troubleshooting](/guide/troubleshooting)
+-   [JSON の理解](/guide/understanding-json)
+-   [サンプルパックのダウンロード](/guide/download-packs)
+-   [トラブルシューティング](/guide/troubleshooting)
 
-## After Finishing the Guide
+## ガイドを終えたら
 
-At the end of the guide section, your first add-on will be done! To further expand your knowledge, consider doing these:
+ガイドセクションの最後まで進めば、最初のアドオンが完成します。さらに知識を広げるために、次のことも試してみてください。
 
--   Start your own project!
--   Dive into the other aspects of adding onto MCBE (Minecraft: Bedrock Edition), by using the different sections' sub guides listed in the appendix.
+-   自分のプロジェクトを始めてみましょう！
+-   付録にある各セクションのサブガイドを使って、MCBE（Minecraft: Bedrock Edition）に追加する他の要素も学んでみましょう。
 
-    This includes (but is not limited to) blocks, biomes, items, animation controllers, and even scripting with JavaScript.
+    たとえば、ブロック、バイオーム、アイテム、アニメーションコントローラー、さらには JavaScript によるスクリプトまで含まれます。
 
-    Some sections provide more technical in-depth tutorials and documents for each relevant topic.
+    一部のセクションでは、各トピックについてより技術的で詳細なチュートリアルや資料も用意されています。
 
-## Next
+## 次へ
 
-<Button link="/guide/addons">Next: Add-Ons Explained</Button>
+<Button link="/guide/addons">次へ: アドオンの解説</Button>

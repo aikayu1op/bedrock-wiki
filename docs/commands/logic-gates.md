@@ -1,5 +1,5 @@
 ---
-title: Execute Logic Gates
+title: execute での論理ゲート
 category: Techniques
 mentions:
     - BedrockCommands
@@ -8,76 +8,76 @@ mentions:
 nav_order: 1
 tags:
     - concept
-description: Logic gates are devices that take one or more binary inputs and, as the name suggests, performs logical boolean operations to give a single binary output (either 'true' or 'false').
+description: 論理ゲートは1つ以上の二進入力を取り、名前のとおり論理演算を行って 1 つの二進出力（`true` または `false`）を返す仕組みです。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-Logic gates are devices that take one or more binary inputs and, as the name suggests, performs logical boolean operations to give a single binary output (either `true` or `false`).
+論理ゲートは、1つ以上の二進入力を取り、名前のとおり論理演算を行って 1 つの二進出力（`true` または `false`）を返す仕組みです。
 
-They are what a computer uses to perform any function. These devices are very helpful for programming, and using them is a crucial step in creating optimized command systems. In this page you will learn how you can utilize any of the logic gates in your systems with the help of the `/execute` command!
+コンピューターはあらゆる機能を実行するためにこれを使っています。プログラミングでは非常に役立ち、最適化されたコマンドシステムを作るうえでも重要です。このページでは、`/execute` コマンドを使って論理ゲートをシステムに組み込む方法を学びます。
 
-## Logic Gates
+## 論理ゲート
 
-**Chart:**
+**図表:**
 
 ![Logic Gates Table with Diagram](table-with-diagram.jpg)
 
-**Converted to Commands:**
+**コマンドへの変換例:**
 
--   Buffer:
+-   バッファ:
     -   `/execute if entity @s[tag=red] run <command>`
--   (Inverter) NOT Gate:
+-   （インバーター）NOT ゲート:
     -   `/execute if entity @s[tag=!red] run <command>`
--   AND Gate:
+-   AND ゲート:
     -   `/execute if entity @s[tag=red,tag=green] run <command>`
--   (NOT AND) NAND Gate:
+-   （NOT AND）NAND ゲート:
     -   `/execute unless entity @s[tag=red,tag=green] run <command>`
--   OR Gate:
+-   OR ゲート:
     -   `/execute unless entity @s[tag=!red,tag=!green] run <command>`
--   NOR Gate:
+-   NOR ゲート:
     -   `/execute if entity @s[tag=!red,tag=!green] run <command>`
--   XOR Gate:
+-   XOR ゲート:
     -   `/execute unless entity @s[tag=!red,tag=!green] unless entity @s[tag=red,tag=green] run <command>`
--   XNOR Gate:
+-   XNOR ゲート:
     -   `/execute unless entity @s[tag=red,tag=!green] unless entity @s[tag=!red,tag=green] run <command>`
 
-## Explanation
+## 解説
 
-_Explanation provided by @Champ0401:_
+_解説提供: @Champ0401_
 
 **AND Gate:**
 
 -   `/execute as @p[tag=red,tag=green] run say success`
 
-The AND gate takes at least two inputs. In this case, if the player meets both requirements (having the 'red' and 'green' tags), the command will run. The AND gate is the most commonly used gate in Minecraft commands.
+AND ゲートは少なくとも 2 つの入力を受け取ります。この場合、プレイヤーが両方の条件（`red` と `green` のタグ）を満たしていればコマンドが実行されます。AND ゲートは Minecraft コマンドで最もよく使われるゲートです。
 
 **NOT Gate:**
 
 -   `/execute as @p[tag=!red] run say success` or:
 -   `/execute as @p unless entity @s[tag=red] run say success`
 
-The NOT gate inverses the input. In this case, the command will only run if the player does NOT have the tag red. The NOT gate is also very commonly used in Minecraft commands.
+NOT ゲートは入力を反転します。この場合、プレイヤーが `red` タグを持っていないときだけコマンドが実行されます。NOT ゲートも Minecraft コマンドで非常によく使われます。
 
 **OR Gate:**
 
 -   `/execute as @p unless entity @s[tag=!red,tag=!green] run say success`
 
-The OR gate takes two or more inputs. If the player has at least one of the requirements, the command will run. In this case, the player can either have the tag red, or the tag green, or both. The OR gate is not natural to Minecraft commands, but with the addition of the `/execute unless`, you can perform it yourself. It may seem a little confusing as to how the OR gate works. You can think about it like this: the command runs UNLESS you have neither tag. This produces the same output table as the OR gate. Try it out in the game yourself!
+OR ゲートは 2 つ以上の入力を受け取ります。プレイヤーが条件のうち 1 つでも満たしていればコマンドが実行されます。この場合、プレイヤーは `red` か `green` のどちらか、あるいは両方のタグを持っていればかまいません。OR ゲートは Minecraft コマンドにそのままは存在しませんが、`/execute unless` を加えることで自分で実現できます。OR ゲートの動きは少しわかりにくいかもしれませんが、「どちらのタグも持っていない場合を除いて実行される」と考えるとわかりやすいです。結果の表は OR ゲートと同じになります。ゲーム内で試してみてください。
 
 **XOR Gate:**
 
 -   `/execute as @p unless entity @s[tag=!red,tag=!green] unless entity @s[tag=red,tag=green] run say success`
 
-The XOR gate takes two inputs. If the player has exactly _one_ of the requirements, the command will run. In this case, the player can have either the tag red or the tag green, but if they have both tags the command will not run. The XOR gate is also not natural to Minecraft Commands, but this workaround will allow you to perform the function.
+XOR ゲートは 2 つの入力を受け取ります。プレイヤーが条件のうち _ちょうど1つ_ だけを満たしている場合にコマンドが実行されます。この場合、プレイヤーは `red` か `green` のどちらか一方のタグを持てますが、両方持っているとコマンドは実行されません。XOR ゲートも Minecraft コマンドにそのままはありませんが、この回避策で実現できます。
 
-The remaining gates are simply the inverse of the others, which you can change by flipping the `if` / `unless` in the command, or refer the above logic gates for examples.
+残りのゲートは、ほかのゲートの反転形です。コマンド内の `if` / `unless` を入れ替えることで作れます。例は上記の論理ゲートを参照してください。
 
-## Example Commands
+## 例のコマンド
 
-Here is a list of target selector arguments that can be used in the execute logic gates:
+`execute` の論理ゲートで使えるターゲットセレクター引数の一覧です。
 
 -   `type`
 -   `scores`
@@ -86,23 +86,23 @@ Here is a list of target selector arguments that can be used in the execute logi
 -   `family`
 -   `hasitem`
 
-> Note, all of these use the OR gate as example, but any of the logic gates will work, as long as the syntax/order given above are followed in a similar fashion.
+> 注: ここではすべて OR ゲートを例にしていますが、上で示した構文と順序を同じように守れば、どの論理ゲートでも使えます。
 
-**Examples:**
+**例:**
 
 -   `/execute unless entity @e[type=!chicken, type=!cow] run <command>`
-    -   Run the command if the entity is either a chicken or a cow.
+    -   エンティティがニワトリかウシのどちらかであればコマンドを実行します。
 -   `/execute unless entity @p[scores={objective.a=!5, objective.b=!5}] run <command>`
-    -   Run the command if the player has a score of 5 in either scoreboard `objective.a` or `objective.b`.
+    -   プレイヤーがスコアボード `objective.a` または `objective.b` のどちらかで 5 のスコアを持っていればコマンドを実行します。
 -   `/execute unless entity @p[hasitem=[{item=diamond_sword,quantity=0},{item=iron_sword,quantity=0}]] run <command>`
-    -   Run the command if the player has either a diamond sword or an iron sword.
+    -   プレイヤーがダイヤモンドの剣または鉄の剣のどちらかを持っていればコマンドを実行します。
 
-> Note: You may use more than two inputs (selector arguments) for the OR gate, and the command will execute if it meets any one or more of the inputs.
+> 注: OR ゲートでは 2 つより多い入力（セレクター引数）を使え、いずれか 1 つ以上を満たせばコマンドは実行されます。
 
-Combining any of the different argument selectors will also work. Examples:
+異なる引数セレクターを組み合わせることもできます。例:
 
 -   `/execute unless entity @p[tag=!red, scores={objective.a=!1..5}] run <command>`
 -   `/execute unless entity @p[name=!player, hasitem=[{item=iron_sword, quantity=0}]] run <command>`
 -   `/execute unless entity @e[type=!chicken,tag=!green, scores={objective.b=!5}, family=!mob}] run <command>`
 
-For any doubts or queries, you may join our Discord linked above and any of our community experts will be glad to assist you.
+不明点があれば、上記の Discord に参加してください。コミュニティの有識者が喜んで手伝ってくれます。

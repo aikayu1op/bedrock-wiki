@@ -1,6 +1,6 @@
 ---
 title: Texture Atlases
-description: A texture atlas (also known as a spritesheet) is an image that contains many smaller textures.
+description: テクスチャアトラス（スプライトシートとも呼ばれる）は、複数の小さなテクスチャをまとめた画像です。
 tags:
     - intermediate
 license: true
@@ -8,68 +8,68 @@ mentions:
     - QuazChick
 ---
 
-A texture atlas (also known as a spritesheet) is an image that contains many smaller textures.
-The use of atlases reduces the number of textures that the game loads, which improves performance and reduces the likelihood of reaching the texture limit.
-For example, rather than loading each block texture separately, the [terrain texture atlas](#terrain) loads as one large texture.
+Texture atlas（スプライトシートとも呼ばれる）は、多数の小さなテクスチャを 1 枚にまとめた画像です。
+アトラスを使うと、ゲームが読み込むテクスチャ数を減らせるため、性能が向上し、テクスチャ上限に達しにくくなります。
+たとえば、各ブロックテクスチャを個別に読み込む代わりに、[terrain texture atlas](#terrain) は 1 枚の大きなテクスチャとして読み込まれます。
 
-If an atlas contains too many sub textures, Minecraft will decrease the resolution of textures in the atlas until they all fit.
+アトラスにサブテクスチャが多すぎると、Minecraft はすべてが収まるまでアトラス内テクスチャの解像度を下げます。
 
-Below is a section of the vanilla [item texture atlas](#items) which Minecraft generates from entries in the `Vanilla RP/textures/item_texture.json` file.
-The full atlas contains many more textures, including custom item textures!
+以下は、Minecraft が `Vanilla RP/textures/item_texture.json` ファイルの項目から生成する、バニラの [item texture atlas](#items) の一部です。
+完全なアトラスには、カスタムアイテムテクスチャを含め、もっと多くのテクスチャが入っています！
 
 <WikiImage
-    alt="A collection of vanilla item textures."
+    alt="バニラのアイテムテクスチャの集まり。"
     src="item_atlas_sample.png"
     width="496"
     pixelated
 />
 
 :::tip PADDING
-Notice the stretched pixels between the book textures? That's called [padding](#padding) and helps to prevent graphical issues!
+本のテクスチャの間にある引き伸ばされたピクセルに気づきましたか？ これは [padding](#padding) と呼ばれ、描画上の問題を防ぐのに役立ちます！
 :::
 
-## List of Atlases
+## アトラス一覧
 
 ### Banner
 
 `atlas.banner`
 
--   Contains banner textures, including banner patterns and the Ominous Banner texture.
--   The list of textures included in this atlas cannot be modified.
+-   バナーのパターンや Ominous Banner のテクスチャを含むバナー関連テクスチャを含みます。
+-   このアトラスに含まれるテクスチャ一覧は変更できません。
 
 ### Items
 
 `atlas.items`
 
--   Contains item textures, including equipment slot placeholders, trimmed armor and the shield texture.
--   Textures can be added to this atlas via the `item_texture.json` file.
+-   装備スロットのプレースホルダー、トリム付き防具、盾のテクスチャを含むアイテムテクスチャを含みます。
+-   `item_texture.json` ファイルからこのアトラスへテクスチャを追加できます。
 
 ### Shield
 
 `atlas.shield`
 
--   Contains shield banner pattern textures.
--   The list of textures included in this atlas cannot be modified.
+-   盾のバナーパターンテクスチャを含みます。
+-   このアトラスに含まれるテクスチャ一覧は変更できません。
 
 ### Terrain
 
 `atlas.terrain`
 
--   Contains block textures, including those with flipbook animations.
--   Has mipmapping and padding applied by default.
--   Textures can be added to this atlas via the `terrain_texture.json` file.
+-   フリップブックアニメーション付きのものを含むブロックテクスチャを含みます。
+-   既定で mipmapping と padding が適用されます。
+-   `terrain_texture.json` ファイルからこのアトラスへテクスチャを追加できます。
 
 ## Mipmapping
 
-[Mipmaps](https://en.wikipedia.org/wiki/Mipmap) are used by Minecraft to reduce the resolution of textures as they get further away from the camera. This reduces aliasing of distant textures and may provide some performance benefits.
+[Mipmaps](https://en.wikipedia.org/wiki/Mipmap) は、カメラから遠ざかるにつれてテクスチャ解像度を下げるために Minecraft で使われます。これにより、遠景テクスチャのエイリアシングが減り、性能面でも多少の利点があります。
 
 ### Mip Levels
 
-The number of mip levels for a texture atlas is determined by the `num_mip_levels` parameter.
+テクスチャアトラスの mip level 数は `num_mip_levels` パラメーターで決まります。
 
-At each mip level, the resolution of the texture is halved.
+各 mip level で、テクスチャの解像度は半分になります。
 
-By default, block textures in `atlas.terrain` have 4 mip levels:
+既定では、`atlas.terrain` のブロックテクスチャには 4 つの mip level があります。
 
 <CodeHeader>Vanilla RP/textures/terrain_texture.json</CodeHeader>
 
@@ -81,44 +81,44 @@ By default, block textures in `atlas.terrain` have 4 mip levels:
 }
 ```
 
-For a 16&times;16 texture, this would produce textures similar to the following:
+16&times;16 テクスチャの場合、次のようなテクスチャになります。
 
-<WikiImage alt="A 16 by 16 log texture" src="log_oak_top_1.png" width="64" pixelated />
+<WikiImage alt="16x16 のログテクスチャ" src="log_oak_top_1.png" width="64" pixelated />
 
-<WikiImage alt="An 8 by 8 log texture" src="log_oak_top_2.png" width="64" pixelated />
+<WikiImage alt="8x8 のログテクスチャ" src="log_oak_top_2.png" width="64" pixelated />
 
-<WikiImage alt="A 4 by 4 log texture" src="log_oak_top_3.png" width="64" pixelated />
+<WikiImage alt="4x4 のログテクスチャ" src="log_oak_top_3.png" width="64" pixelated />
 
-<WikiImage alt="A 2 by 2 log texture" src="log_oak_top_4.png" width="64" pixelated />
+<WikiImage alt="2x2 のログテクスチャ" src="log_oak_top_4.png" width="64" pixelated />
 
-### Comparison
+### 比較
 
 <WikiImage
     src="screenshot_with_mipmapping.jpeg"
-    caption="Screenshot of a world with 4 mip levels."
+    caption="4 つの mip level があるワールドのスクリーンショット。"
     width="516"
     style="margin-right: 1em"
 />
 
 <WikiImage
     src="screenshot_without_mipmapping.jpeg"
-    caption="Screenshot of a world without mipmapping."
+    caption="Mipmapping なしのワールドのスクリーンショット。"
     width="516"
 />
 
 ## Padding
 
-Padding refers to the stretched out area around textures that prevents them from bleeding into each other due to imprecise rendering.
+Padding とは、精密でない描画によってテクスチャ同士がにじみ合わないように、テクスチャの周囲に設けられる引き伸ばし領域のことです。
 
-The width of the padding can be adjusted using the `padding` parameter. The value of this parameter must be at least $2^{n-1}$, where $n$ represents `num_mip_levels`. For instance, if an atlas has 6 mip levels, it requires a minimum padding of 32 texels ($2^5$).
+padding の幅は `padding` パラメーターで調整できます。このパラメーターの値は少なくとも $2^{n-1}$ である必要があり、ここで $n$ は `num_mip_levels` を表します。たとえば、6 つの mip level があるアトラスなら、最小で 32 texel（$2^5$）の padding が必要です。
 
-By default, there are 8 texels of padding around each block texture:
+既定では、各ブロックテクスチャの周囲に 8 texel の padding があります。
 
-<WikiImage alt="A padded Oak Log texture" src="log_oak_top_padded.png" width="128" pixelated />
+<WikiImage alt="padding された Oak Log テクスチャ" src="log_oak_top_padded.png" width="128" pixelated />
 
 ## Textures
 
-An object where each key is a shortname that can be used to reference an area in the texture atlas.
+テクスチャアトラス内の領域を参照するための shortname をキーにしたオブジェクトです。
 
 <CodeHeader>Texture Atlas</CodeHeader>
 
@@ -142,36 +142,36 @@ An object where each key is a shortname that can be used to reference an area in
 
 ### Path
 
-A string relative to the root folder of the resource pack that points to a file with one of the following extensions:
+リソースパックのルートフォルダーからの相対パス文字列で、次のいずれかの拡張子を持つファイルを指します。
 
--   `.texture_set.json` (requires `pbr` capability)
-    -   If a texture set is referenced, all included textures (such as `color` and `heightmap`) are added to the atlas.
+-   `.texture_set.json`（`pbr` capability が必要）
+    -   texture set が参照されると、`color` や `heightmap` など含まれるすべてのテクスチャがアトラスに追加されます。
 -   `.tga`
 -   `.png`
 -   `.jpg`
 -   `.jpeg`
 
-The path string must not include the texture's file extension.
+パス文字列には、テクスチャの拡張子を含めてはいけません。
 
-Textures that are not square will be stretched to be square when added to the atlas.
-Only the first frame of textures containing multiple frames will be added to the atlas.
+正方形でないテクスチャは、アトラスに追加される際に正方形へ引き伸ばされます。
+複数フレームを含むテクスチャは、最初のフレームだけがアトラスに追加されます。
 
 ### Tint Color
 
-#### Vanilla Usage
+#### バニラでの使い方
 
-In vanilla, `tint_color` is used to apply a green tint to the Lily Pad texture.
+バニラでは、`tint_color` は Lily Pad テクスチャに緑の色味を加えるために使われます。
 
-<WikiImage alt="Grey Lily Pad" src="waterlily.png" width="64" pixelated />
+<WikiImage alt="灰色の Lily Pad" src="waterlily.png" width="64" pixelated />
 
-<WikiImage alt="Green-tinted Lily Pad" src="waterlily_tinted.png" width="64" pixelated />
+<WikiImage alt="緑がかった Lily Pad" src="waterlily_tinted.png" width="64" pixelated />
 
 #### Tint Blending
 
-_The following calculations assume that color channel values are floats (0-1)._
+_以下の計算では、色チャンネルの値が float（0-1）であると仮定します。_
 
--   The color channels of the texel ($r_1$, $g_1$, $b_1$) are multiplied by those of the `tint_color` ($r_2$, $g_2$, $b_2$).
--   The alpha channel of the texel ($a$) is preserved..
+-   テクセルの色チャンネル（$r_1$, $g_1$, $b_1$）は、`tint_color` の色チャンネル（$r_2$, $g_2$, $b_2$）と掛け合わされます。
+-   テクセルの alpha チャンネル（$a$）は保持されます。
 
 $$
 \begin{aligned}
@@ -184,46 +184,46 @@ $$
 
 ### Overlay Color
 
-This parameter is similar to `tint_color`, but discards the alpha (opacity) channel of the texture and instead uses its value to determine the intensity of the tint.
+このパラメーターは `tint_color` に似ていますが、テクスチャの alpha（不透明度）チャンネルを破棄し、その値を色味の強さとして使います。
 
--   This results in an opaque texture, even if the original texture included transparency.
--   For opaque textures, this parameter produces the same results as `tint_color`.
+-   そのため、元のテクスチャに透明部分があっても、不透明なテクスチャになります。
+-   不透明テクスチャでは、このパラメーターは `tint_color` と同じ結果になります。
 
-#### Vanilla Usage
+#### バニラでの使い方
 
-In vanilla, `overlay_color` is used to apply a green tint to part of the Grass Block's side texture, without tinting the dirt texture green too!
+バニラでは、`overlay_color` は Grass Block の側面テクスチャの一部に緑の色味を付けるために使われます。しかも土のテクスチャまで緑にしません！
 
-Below you can see the original grass side texture, a version of it without an alpha channel (revealing the hidden dirt texture) and a version with `overlay_color` applied.
+以下で、元の草ブロック側面テクスチャ、alpha チャンネルを取り除いた版（隠れていた土のテクスチャが見えます）、`overlay_color` を適用した版を確認できます。
 
-<WikiImage alt="Vanilla grass side texture" src="grass_side.png" width="64" pixelated />
+<WikiImage alt="バニラの草ブロック側面テクスチャ" src="grass_side.png" width="64" pixelated />
 
 <WikiImage
-    alt="Grass side texture without an alpha channel"
+    alt="alpha チャンネルなしの草ブロック側面テクスチャ"
     src="grass_side_without_alpha.png"
     width="64"
     pixelated
 />
 
-<WikiImage alt="Tinted grass side texture" src="grass_side_tinted.png" width="64" pixelated />
+<WikiImage alt="色味を付けた草ブロック側面テクスチャ" src="grass_side_tinted.png" width="64" pixelated />
 
 :::danger TRANSPARENT PIXELS
 
-Many image editors will not save RGB values for pixels with an alpha value of 0.
-In order to created untinted areas of a texture, you'll need these values to be saved.
+多くの画像編集ソフトは、alpha 値が 0 のピクセルに対する RGB 値を保存しません。
+テクスチャの色味を付けない領域を作るには、それらの値が保存されるようにする必要があります。
 
-Here's how to ensure that they are saved in GIMP:
+GIMP で確実に保存するには、次の設定を使ってください。
 
-![GIMP 'save color values from transparent pixels' export setting.](gimp_export_settings.png)
+![GIMP の「save color values from transparent pixels」書き出し設定。](gimp_export_settings.png)
 
 :::
 
 #### Overlay Blending
 
-_The following calculations assume that color channel values are floats (0-1)._
+_以下の計算では、色チャンネルの値が float（0-1）であると仮定します。_
 
--   The color channels of the texel ($r_1$, $g_1$, $b_1$) are multiplied by those of the `overlay_color` ($r_2$, $g_2$, $b_2$).
--   A portion of the texel's original color is added based on its inverse alpha value ($1 - a$).
--   The alpha channel of the texel ($a$) becomes 1.
+-   テクセルの色チャンネル（$r_1$, $g_1$, $b_1$）は、`overlay_color` の色チャンネル（$r_2$, $g_2$, $b_2$）と掛け合わされます。
+-   テクセルの元の色の一部が、その逆 alpha 値（$1 - a$）に基づいて加算されます。
+-   テクセルの alpha チャンネル（$a$）は 1 になります。
 
 $$
 \begin{aligned}
@@ -236,25 +236,25 @@ $$
 
 ### Additive
 
-Layers the specified `textures` on top of each other to create a new combined texture.
-Translucent texels fully override previous layers.
+指定した `textures` を互いの上に重ねて、新しい合成テクスチャを作ります。
+半透明のテクセルは、それ以前のレイヤーを完全に上書きします。
 
-Overlay color only works when placed in the first `textures` entry and affects all layers.
+Overlay color は、最初の `textures` エントリに置いた場合のみ機能し、すべてのレイヤーに影響します。
 
 ### Quad
 
-A boolean determining whether only the top left quadrant of the texture should be displayed.
+テクスチャの左上 1/4 だけを表示するかどうかを決めるブール値です。
 
-This parameter only changes the area in the atlas covered by this shortname, the entire texture is included in the atlas.
+このパラメーターは、アトラス内でこの shortname が占める領域だけを変え、テクスチャ全体はアトラスに含まれます。
 
-May also be set to a number, where `0` represents `false` and all other numbers represent `true`.
+数値でも指定でき、`0` は `false` を、その他の数値はすべて `true` を表します。
 
-## Additional Parameters
+## 追加パラメーター
 
--   `default_leather_color`: HEX String
-    -   Determines the default color of leather armor when undyed.
--   `default_leather_horse_armor_color`: HEX String
-    -   Determines the default color of leather horse armor when undyed.
+-   `default_leather_color`: HEX 文字列
+    -   未染色の革防具の既定色を決定します。
+-   `default_leather_horse_armor_color`: HEX 文字列
+    -   未染色の革の馬鎧の既定色を決定します。
 
 <CodeHeader>RP/textures/item_texture.json</CodeHeader>
 

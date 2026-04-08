@@ -1,5 +1,5 @@
 ---
-title: Entity Counter
+title: エンティティカウンター
 category: Scoreboard Systems
 tags:
     - easy
@@ -7,76 +7,76 @@ mentions:
     - BedrockCommands
     - zheaEvyline
 nav_order: 3
-description: This system allows you to track the total number of players/entities on your world and subsequently execute your desired commands based on the values obtained.
+description: ワールド内のプレイヤーやエンティティの総数を追跡し、その値に応じて目的のコマンドを実行できるシステムです。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-This system allows you to track the total number of players/entities on your world and subsequently execute your desired commands based on the values obtained.
+このシステムを使うと、ワールド内のプレイヤーやエンティティの総数を追跡し、その値に応じて目的のコマンドを実行できます。
 
-> Note: Entities in unloaded chunks will not be tracked. However, players can be tracked regardless.
+> 注: 読み込まれていないチャンク内のエンティティは追跡されません。ただし、プレイヤーは常に追跡できます。
 
-## Setup
+## セットアップ
 
-_Type the following command in Chat:_
+_チャットに次のコマンドを入力してください：_
 
 `/scoreboard objectives add wiki:count dummy`
 
-If you are working with functions and prefer to have the objective added automatically on world initialization, follow the process outlined in [On First World Load](/commands/on-first-world-load).
+functions を使っていて、ワールド初期化時に目標を自動で追加したい場合は、[ワールドの初回読み込み時](/commands/on-first-world-load) に記載されている手順に従ってください。
 
-## System
+## システム
 
 <CodeHeader>BP/functions/wiki/scoreboard/players/tally_count.mcfunction</CodeHeader>
 
 ```yaml
-## Reset Previous Count
+## 前回のカウントをリセット
 scoreboard players set * wiki:count 0
 
-## Get Current Count (Examples)
-### Alive players
+## 現在のカウントを取得（例）
+### 生存しているプレイヤー
 execute as @e[type=player] run scoreboard players add .Players.Alive wiki:count 1
-### Creeper
+### クリーパー
 execute as @e[type=creeper] run scoreboard players add .Creeper wiki:count 1
 
-## Your Commands Here (Examples)
-### Message if 4+ alive players
+## ここにコマンドを入れます（例）
+### 生存プレイヤーが 4 人以上ならメッセージを表示
 execute if score .Players.Alive wiki:count matches 4.. run title @a actionbar There are more than 4 players on the world.
-### Message if 3 or less creeper
+### クリーパーが 3 匹以下ならメッセージを表示
 execute if score .Creeper wiki:count matches ..3 run title @a actionbar There are less than 3 creeper on the world.
 ```
 
 ![Chain of 5 Command Blocks](/assets/images/commands/command-block-chain/5.png)
 
-Here, we are tracking alive players and creeper as examples, but you can track any entity you like and as many as you need. You may also alter the score holder names to your preference. Example: '.Players.Alive' to just 'Players'.
+ここでは例として生存プレイヤーとクリーパーを追跡していますが、好きなエンティティを必要な数だけ追跡できます。スコア保持者名も自由に変更できます。たとえば `.Players.Alive` を単に `Players` にすることもできます。
 
-Similarly, we're running `/title` commands as examples:
+同様に、ここでは `/title` コマンドを例として実行しています。
 
 -   a) when there are 4 or more players `4..`
 -   b) when there are 3 .Creeper or less `..3`
 
-You can modify/expand these as well. Example: a `/kill` command instead of a `/title` command.
+これらも変更・拡張できます。たとえば `/title` の代わりに `/kill` を使うこともできます。
 
-## Explanation
+## 解説
 
-1. **Command 1:** Sets the score to `0` for all score holder names in the `wiki:count` scoreboard objective, including that of any tracked players and entities.
-2. **Command 2, 3:** From each target that you want to track the count of, a score will be added to their corresponding score holder name. Thus, obtaining their total count.
-    - Example: Creeper mobs to '.Creeper' score holder name.
-3. **Command 4, 5:** These are example commands which can be modified / expanded.
-    - Based on the total count obtained, we can use the `/execute if score` condition to run our desired commands when certain values are met.
-        - **`n`** any number _n_
-        - **`n..`** any number _n_ and above
-        - **`..n`** any number _n_ and below
-        - **`n..n1`** any number _n_ to any number _n1_. (smaller number first)
+1. **コマンド 1:** `wiki:count` のスコアボード目標にあるすべてのスコア保持者名を `0` に設定します。追跡対象のプレイヤーやエンティティも含まれます。
+2. **コマンド 2, 3:** カウントしたい各対象について、その対応するスコア保持者名にスコアを加算します。こうして総数を取得します。
+    - 例: クリーパーモブを `.Creeper` のスコア保持者名に対応させる。
+3. **コマンド 4, 5:** これらは変更・拡張できる例のコマンドです。
+    - 取得した総数に基づいて、`/execute if score` 条件を使い、特定の値になったときに目的のコマンドを実行できます。
+        - **`n`** 任意の数 `n`
+        - **`n..`** `n` 以上の任意の数
+        - **`..n`** `n` 以下の任意の数
+        - **`n..n1`** `n` から `n1` までの任意の数（小さい数を先に書く）
 
-:::info NOTE:
-When working with numerous score holders across multiple objectives, it is advisable to reset previous score to zero for each score holder individually rather than using the wildcard (`*`), for better performance.
+:::info 注:
+複数の目標にまたがる多数のスコア保持者を扱う場合は、パフォーマンス向上のため、ワイルドカード (`*`) を使うよりも、各スコア保持者ごとに前回のスコアを 0 にリセットすることをおすすめします。
 :::
 
 ## Tick JSON
 
-If you are using functions instead of command blocks, the `tally_count` function must be added to the `tick.json` in order to loop and run it continuously. Multiple files can be added to the `tick.json` by placing a comma after each string. Refer to [Functions](/commands/mcfunctions#tick-json) documentation for further info.
+コマンドブロックの代わりに関数を使う場合は、`tally_count` 関数を `tick.json` に追加して、ループさせながら継続実行させる必要があります。`tick.json` には各文字列の後ろにカンマを付けることで複数ファイルを追加できます。詳しくは [Functions](/commands/mcfunctions#tick-json) のドキュメントを参照してください。
 
 <CodeHeader>BP/functions/tick.json</CodeHeader>
 ```json
@@ -87,7 +87,7 @@ If you are using functions instead of command blocks, the `tally_count` function
 }
 ```
 
-If using functions, your pack folder structure will be as follows:
+functions を使う場合、パックのフォルダ構成は次のようになります。
 
 <FolderView
 	:paths="[
@@ -104,4 +104,4 @@ If using functions, your pack folder structure will be as follows:
 ]"
 ></FolderView>
 
-In this setup, the `tally_count` function is called by `main.mcfunction`, which is executed every tick via `tick.json`.
+この構成では、`tally_count` 関数は `main.mcfunction` から呼び出され、`tick.json` を通じて毎ティック実行されます。

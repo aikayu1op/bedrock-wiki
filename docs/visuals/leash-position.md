@@ -1,5 +1,5 @@
 ---
-title: Leash Position
+title: リード位置
 category: Tutorials
 mentions:
     - MedicalJewel105
@@ -7,47 +7,47 @@ mentions:
     - Overload1252
 tags:
     - easy
-description: Adjust position of a leash on your entity.
+description: エンティティ上のリードの位置を調整します。
 ---
 
-Have you ever wanted to change position of a leash on your entity?
-If so, this page is for you!
+エンティティ上のリードの位置を変えたいと思ったことはありませんか？
+もしそうなら、このページが役立ちます。
 
-## Blockbench Part
+## Blockbench の手順
 
-To set a leash position, we will use Blockbench.
-Open your model, in this case it will be a llama model.
+リード位置を設定するには、Blockbench を使います。
+モデルを開きます。この例ではラマのモデルです。
 
-_Don't mind strange bones rotation, mojang likes to render models correctly through animations._
+_骨の回転が少し変でも気にしないでください。Mojang はアニメーション経由で正しくモデルを描画するのが好きです。_
 
 ![](model-1.png)
 
-Now search for locator `lead`.
+次に、locator `lead` を探します。
 
 ![](model-2.png)
 
-If it doesn't exist, you can
+存在しない場合は、次の手順で作成できます。
 
-<Spoiler title="create it">
+<Spoiler title="作成する">
 
-1. Select a group.
-2. Right-click on it.
-3. Choose "Add Locator" option.
+1. グループを選択します。
+2. それを右クリックします。
+3. "Add Locator" を選びます。
    ![](locator-1.png)
-4. Rename it to `lead`
+4. `lead` に名前を変更します。
 
 </Spoiler>
 
-The last thing will be to move the locator where you want and save the model.
+最後に、locator を好きな位置へ移動してモデルを保存します。
 
 ![](model-3.png)
 
-## Testing
+## テスト
 
-Before:
+変更前:
 
 ![](result-0.png)
 
-After:
+変更後:
 
 ![](result-1.png)

@@ -1,6 +1,6 @@
 ---
-title: Entity Texture Animation
-description: Learn how to make an animated texture for an entity that works similarly to flipbook texture for blocks.
+title: エンティティのテクスチャアニメーション
+description: ブロックのフリップブックテクスチャに似た、エンティティ用のアニメーションテクスチャを作る方法を学びます。
 category: Tutorials
 mentions:
     - MedicalJewel105
@@ -12,17 +12,17 @@ tags:
     - intermediate
 ---
 
-From this page you will learn how to make an animated texture for an entity that works similarly to flipbook texture for blocks.
+このページでは、ブロックのフリップブックテクスチャに似た、エンティティ用のアニメーションテクスチャを作る方法を学びます。
 
-## Source
+## 出典
 
-This page is based on content by [AgentMindStorm](https://www.youtube.com/channel/UC-ljddYkFdTQl-MVEaVvbuQ).
+このページは [AgentMindStorm](https://www.youtube.com/channel/UC-ljddYkFdTQl-MVEaVvbuQ) の内容をもとにしています。
 
 <YouTubeEmbed id="F6e-w1rCEi4" />
 
-## Textures
+## テクスチャ
 
-First let's draw some new texture frames for our entity. In this tutorial it will be a cow, which is looking around.
+まず、エンティティ用の新しいテクスチャフレームを描きます。このチュートリアルでは、周囲を見回す牛を使います。
 
 <WikiImage
     src="cow.png"
@@ -31,17 +31,17 @@ First let's draw some new texture frames for our entity. In this tutorial it wil
     pixelated
 />
 
-We need to place our textures vertically, like for blocks in flipbook textures.
-In this case we have 4 frames.
+テクスチャは、ブロックのフリップブックテクスチャと同じように縦に並べます。
+この例では 4 フレームです。
 
-## Animated Material
+## アニメーション付き Material
 
-### Creating the Material
+### Material を作成する
 
-We will need to modify materials in this guide. However due to render dragon materials became outdated, so **use it at your own risk**.
+このガイドでは material を変更する必要があります。ただし Render Dragon により material は古くなっているため、**自己責任で使ってください**。
 
-To use animated texture, we need to change the entity material to one, that has `USE_UV_ANIM` property.
-Let's simply add a new material:
+アニメーションテクスチャを使うには、エンティティの material を `USE_UV_ANIM` property を持つものに変更する必要があります。
+新しい material を追加してみましょう。
 
 <CodeHeader>RP/materials/entity.material</CodeHeader>
 
@@ -56,7 +56,7 @@ Let's simply add a new material:
 }
 ```
 
-Or you can add this to existing ones, check default material file.
+または、既存の material に追加することもできます。既定の material file を確認してください。
 
 <CodeHeader></CodeHeader>
 
@@ -71,13 +71,13 @@ Or you can add this to existing ones, check default material file.
 </Button>
 
 :::warning
-It is not that easy for every entity!
-Some entities have multiple materials and if you want to make its texture animated, you will need to add this property to all materials of this entity.
+すべてのエンティティで簡単にできるわけではありません。
+一部のエンティティは複数の material を持つため、テクスチャをアニメーションさせたい場合は、そのエンティティのすべての material にこの property を追加する必要があります。
 :::
 
-### Applying the Material
+### Material を適用する
 
-Before we go next, we need to define a new material in our client entity file.
+次に進む前に、client entity file に新しい material を定義する必要があります。
 
 <CodeHeader>minecraft:client_entity > description</CodeHeader>
 
@@ -89,7 +89,7 @@ Before we go next, we need to define a new material in our client entity file.
 
 ## Render Controller
 
-After that all, we need to edit a render controller.
+そのあとで render controller を編集します。
 
 Here we will add `uv_anim` component with offset and scale properties:
 
@@ -102,16 +102,16 @@ Here we will add `uv_anim` component with offset and scale properties:
 }
 ```
 
-…where `frames_per_second` is a count of frames you want to change in one second and `frame_count` is a total frame count.
-This formula calculates the offset and the size of the texture depending on life time.
+ここで `frames_per_second` は 1秒あたりに切り替えたいフレーム数、`frame_count` は総フレーム数です。
+この式は、life time に応じて texture の offset とサイズを計算します。
 
-## Result
+## 結果
 
-Now, it is time to test your creation!
+さあ、作ったものをテストしましょう。
 
 ![](result.gif)
 
-## Download Example Pack
+## サンプル Pack をダウンロード
 
 <Button link="https://github.com/Bedrock-OSS/bedrock-examples/releases/download/download/animated_entity_texture.mcpack">
     Download MCPACK

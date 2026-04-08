@@ -1,6 +1,6 @@
 ---
-title: Custom Pottery Sherds
-description: Learn how to make custom pottery sherds.
+title: カスタム陶片
+description: カスタム陶片の作り方を学びます。
 category: Tutorials
 tags:
     - easy
@@ -10,23 +10,23 @@ mentions:
     - QuazChick
 ---
 
-:::tip FORMAT VERSION 1.26.10
-This page requires a basic understanding of custom items.
-Check out the [items guide](/items/items-intro) and [item tags](/items/item-tags) before starting!
+:::tip フォーマットバージョン 1.26.10
+このページでは、カスタムアイテムの基本的な理解が必要です。
+始める前に [items guide](/items/items-intro) と [item tags](/items/item-tags) を確認してください。
 :::
 
-Minecraft Bedrock allows us to add custom pottery sherds that can be used to craft Decorated Pots.
-This article will cover how to create them.
+Minecraft Bedrock では、Decorated Pot のクラフトに使えるカスタム陶片を追加できます。
+このページでは、その作り方を説明します。
 
-## Registering Pottery Sherds
+## 陶片の登録
 
-Pottery sherds are controlled by an [item tag](/items/item-tags)!
-To allow an item to be used to craft a Decorated Pot, we need to apply the `minecraft:decorated_pot_sherds` tag to our item.
+陶片は [item tag](/items/item-tags) で管理されています。
+アイテムを Decorated Pot のクラフトに使えるようにするには、そのアイテムに `minecraft:decorated_pot_sherds` タグを付ける必要があります。
 
-:::warning ITEM NAME
+:::warning アイテム名
 
-The tooltip that displays the pottery sherds used to craft a Decorated Pot will assume that the item's localization key is in the format `item.<identifier>.name`{lang=xml}.
-Therefore, you will need to change your item's display name to be in this format.
+Decorated Pot のクラフトに使う陶片を表示するツールチップは、アイテムのローカライズキーが `item.<identifier>.name`{lang=xml} 形式だと想定しています。
+そのため、アイテムの表示名をこの形式に変更する必要があります。
 
 <CodeHeader>RP/texts/en_US.lang</CodeHeader>
 
@@ -62,16 +62,16 @@ item.wiki:custom_pottery_sherd.name=Custom Pottery Sherd
 }
 ```
 
-Now that we have registered our sherd, we can test it by putting the sherd in a crafting table.
-If you applied the tag correctly, the crafting table should output a decorated pot!
+陶片を登録できたので、作業台に置いてテストできます。
+タグが正しく付いていれば、作業台から Decorated Pot が出力されるはずです。
 
 ![Custom pottery sherd item being used to craft a Decorated Pot](crafting.png)
 
-However, the decorated pot still will not display the sherd itself. This is because we haven't told the decorated pot what image to display!
+ただし、Decorated Pot にはまだ陶片そのものは表示されません。どの画像を表示するかをまだ伝えていないからです。
 
-## Defining Pattern Textures
+## パターンテクスチャの定義
 
-Here's an example pottery pattern texture that we will use for this tutorial:
+このチュートリアルで使う陶片パターンテクスチャの例です。
 
 <WikiImage
     src="custom_pottery_pattern.png"
@@ -79,8 +79,8 @@ Here's an example pottery pattern texture that we will use for this tutorial:
     pixelated
 />
 
-To tell the game to display the texture, we need to edit the decorated pot's client entity file.
-Add the following JSON file to your resource pack:
+ゲームにテクスチャを表示させるには、Decorated Pot の client entity ファイルを編集する必要があります。
+次の JSON ファイルを resource pack に追加してください。
 
 <CodeHeader>RP/entity/decorated_pot.json</CodeHeader>
 
@@ -99,14 +99,14 @@ Add the following JSON file to your resource pack:
 }
 ```
 
-If you've done everything right, your decorated pot will now display your sherd instead of being a blank pot!
+すべて正しくできていれば、Decorated Pot は空の壺ではなく、陶片を表示するようになります。
 
 ![Decorated Pot with a custom pattern on one face](decorated_pot.png)
 
-## Additional Notes
+## 補足
 
-**Question**: Will editing the client entity file make my add-on incompatible with other add-ons that add pottery sherds?
+**質問**: client entity ファイルを編集すると、陶片を追加する他のアドオンと互換性がなくなりますか？
 
-**Answer**: It does not! Client entity files actually merge definitions together.
-As long as your item identifier is unique, other add-ons won't override them!
-If you're concerned that your item identifier without a namespace is not unique, prefix your identifier with your namespace e.g. `wiki:wiki_custom_pottery_sherd`.
+**答え**: なりません。client entity ファイルは実際には定義をマージします。
+アイテム識別子が一意である限り、他のアドオンに上書きされることはありません。
+namespace なしのアイテム識別子が一意でないのが心配なら、`wiki:wiki_custom_pottery_sherd` のように namespace を前置してください。

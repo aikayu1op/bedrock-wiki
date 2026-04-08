@@ -1,26 +1,26 @@
 ---
-title: Material Configuration Description
+title: マテリアル設定の説明
 tags:
     - expert
 mentions:
     - MedicalJewel105
     - SmokeyStack
-description: This article will introduce the structure and configuration of the material file in detail.
+description: この記事では、マテリアルファイルの構造と設定を詳しく紹介します。
 ---
 
 :::warning
-Materials are not for the faint of heart. Be prepared for potential crashes, content log errors, and long loading times.
+Materials は気軽に扱うものではありません。クラッシュ、content log のエラー、長い読み込み時間に備えてください。
 :::
 
-## Foreword
+## はじめに
 
-This article is translated from https://mc.163.com/dev/mcmanual/mc-dev/mcguide/ - It is provided by Netease, the developers of china edition. The article will introduce the structure and configuration of the material file in detail.
+この記事は https://mc.163.com/dev/mcmanual/mc-dev/mcguide/ を翻訳したものです。これは中国版の開発元である NetEase による提供です。この記事では、マテリアルファイルの構造と設定を詳しく紹介します。
 
-## Material files
+## マテリアルファイル
 
-We will explain the material files of native Microsoft. First of all, the files under the directory are basically files with the suffix ".material". In addition, there are three important json files, namely common. json, fancy.json, sad.json.
+ここでは Microsoft 純正のマテリアルファイルについて説明します。まず、ディレクトリ下のファイルは基本的に `.material` 拡張子を持つファイルです。さらに、重要な JSON ファイルが 3 つあります。`common.json`、`fancy.json`、`sad.json` です。
 
-Let's take a look at sad.json and fancy.json first. They are used to control the image quality performance. Each of them defines a list of material files. fancy.json usually defines several more material files than sad.json and may Some additional macros have been added to some material files, and the shader can do special processing by judging these macros:
+まず `sad.json` と `fancy.json` を見てみましょう。これらは画質の設定を制御するためのものです。それぞれがマテリアルファイルの一覧を定義します。`fancy.json` は通常、`sad.json` よりもいくつか多くのマテリアルファイルを定義し、一部のマテリアルファイルには追加のマクロが設定されることがあります。シェーダーは、これらのマクロを判定して特別な処理を行えます。
 
 <CodeHeader>sad.json</CodeHeader>
 
@@ -49,9 +49,9 @@ Let's take a look at sad.json and fancy.json first. They are used to control the
 ]
 ```
 
-It can be seen that fancy.json defines more fancy.material and hologram.material material files than sad.json, and also defines FANCY macros for multiple material files. The switch of in-game settings/video/exquisite texture is to control the switch between sad and fancy. When the fancy texture switch is turned on, the material file in fancy.json will take effect, and when it is turned off, the material file in sad.json will take effect.
+`fancy.json` では、`sad.json` よりも多くの `fancy.material` や `hologram.material` が定義され、複数のマテリアルファイルに `FANCY` マクロも付与されていることがわかります。ゲーム内設定の動画/高画質テクスチャの切り替えは、`sad` と `fancy` の切り替えを制御しています。高画質テクスチャをオンにすると `fancy.json` のマテリアルファイルが有効になり、オフにすると `sad.json` のマテリアルファイルが有効になります。
 
-In order to achieve better performance, the material files in fancy.json usually have more complex operations, while the materials in sad.json usually sacrifice a little rendering performance in exchange for better performance. If developers need to write more complex shaders, it is recommended to write a low-cost version at the same time, and then define them in fancy and sad respectively. Let the player control whether to turn on the corresponding effect through the exquisite texture option in the game.
+より良い性能を実現するために、`fancy.json` のマテリアルファイルは通常より複雑な処理を持ち、`sad.json` のマテリアルは少し描画性能を犠牲にして性能を優先します。より複雑なシェーダーを書く必要があるなら、同時に低コスト版も用意し、それぞれを `fancy` と `sad` に分けて定義することをおすすめします。プレイヤーはゲーム内の高画質テクスチャ設定で、対応する効果をオンにするかどうかを選べます。
 
 <CodeHeader>common.json</CodeHeader>
 
@@ -68,11 +68,11 @@ In order to achieve better performance, the material files in fancy.json usually
 ]
 ```
 
-Compared with sad and fancy, they can be switched between each other. The material files defined in common.json will be loaded after entering the game. Material files are not loaded except those declared in common.json, sad.json, fancy.json.
+`sad` と `fancy` とは異なり、`common.json` はそれらの間で切り替えるためのものです。`common.json` に定義されたマテリアルファイルは、ゲームに入ったあとに読み込まれます。`common.json`、`sad.json`、`fancy.json` で宣言されたもの以外のマテリアルファイルは読み込まれません。
 
-## Material syntax
+## マテリアルの構文
 
-We use one of the material files entity.material to explain, open the file, we can see that the file starts with materials, and then defines the version number version as 1.0.0, these are fixed formats, which identify the parsing of this material file way, we can temporarily ignore it and not modify it.
+例として `entity.material` を使って説明します。ファイルを開くと、先頭が `materials` で始まり、その後にバージョン番号 `version` として `1.0.0` が定義されていることがわかります。これらは固定形式で、このマテリアルファイルの解析方法を示すものです。いったんは無視して、変更しなくてかまいません。
 
 You can see that the definition of each field in the material is in the form of a key-value pair, for example:
 
@@ -82,7 +82,7 @@ You can see that the definition of each field in the material is in the form of 
 ]
 ```
 
-The left side of the colon represents the key as vertexShader, and the right side represents the value shaders/entity.vertex;
+コロンの左側が `vertexShader` のようなキー、右側が `shaders/entity.vertex` のような値を表します。
 
 There are also definitions in list form:
 
@@ -96,39 +96,39 @@ There are also definitions in list form:
 ]
 ```
 
-The declaration with the symbol [ ] is a list, and then inside is the json definition of each child element.
+`[ ]` で示される宣言はリストで、その中に各子要素の JSON 定義が入ります。
 
-## Overview of all property fields of the material
+## マテリアルの全プロパティ項目の概要
 
-### Render state
+### 描画状態
 
 #### `states`
 
-Configure the rendering environment, which can have the following values:
+描画環境を設定します。次の値を指定できます。
 
--   `EnableAlphaToCoverage`：An order-independent rendering method for translucent objects. This switch is only useful in environments that support MSAA. When enabled, the edges of objects will be more accurately softened and transitioned according to the transparency. It can also be used for some complex scenes with a large number of meshes overlapping.
+-   `EnableAlphaToCoverage`：半透明オブジェクト向けの順序非依存レンダリングです。このスイッチは、MSAA をサポートする環境でのみ有効です。有効にすると、オブジェクトのエッジが透明度に応じてより正確にぼかされ、滑らかにつながります。多数のメッシュが重なる複雑なシーンにも使えます。
 
--   `Wireframe`： Draw wireframe mode
+-   `Wireframe`： ワイヤーフレームモードで描画します
 
--   `Blending`: Enables color blending mode, often used to render translucent objects. After declaring this, it is usually necessary to declare the blending factor blendSrc, blendDst
+-   `Blending`: カラーのブレンドモードを有効にします。半透明オブジェクトの描画によく使われます。これを宣言したあとは、通常 `blendSrc` と `blendDst` のブレンド係数も宣言する必要があります。
 
--   `DisableColorWrite`： Do not write color values to the color buffer, none of the RGBA channels are written
+-   `DisableColorWrite`： 色値をカラーバッファに書き込みません。RGBA チャンネルはどれも書き込まれません。
 
--   `DisableAlphaWrite`： Do not write transparency alpha values to the color buffer, allow RGB values to be written
+-   `DisableAlphaWrite`： 透明度の alpha 値をカラーバッファに書き込みません。RGB 値は書き込めます。
 
--   `DisableRGBWrite`： Do not write transparency RGB values to the color buffer, allow writing alpha values
+-   `DisableRGBWrite`： 透明度の RGB 値をカラーバッファに書き込みません。alpha 値は書き込めます。
 
--   `DisableDepthTest`： Turn off depth testing
+-   `DisableDepthTest`： 深度テストをオフにします
 
--   `DisableDepthWrite`： Turn off depth writing
+-   `DisableDepthWrite`： 深度書き込みをオフにします
 
--   `DisableCulling`: Render front and back simultaneously
+-   `DisableCulling`: 表裏を同時に描画します
 
--   `InvertCulling`：Use front cropping. The default is back cropping. After declaring this, the back side is rendered and the front side is cropped.
+-   `InvertCulling`：フロントカリングを使います。既定はバックカリングです。これを宣言すると、裏面が描画され、表面がカットされます。
 
--   `StencilWrite`: Enable stencil mask writing
+-   `StencilWrite`: ステンシルマスクへの書き込みを有効にします
 
--   `EnableStencilTest`： Enable stencil mask testing
+-   `EnableStencilTest`： ステンシルマスクのテストを有効にします
 
 ### Shader path
 

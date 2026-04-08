@@ -1,6 +1,6 @@
 ---
-title: Ore Loot Tables
-description: Learn how to prevent your block loot from dropping when mined with the wrong tool and drop an experience reward when mined successfully.
+title: 鉱石のルートテーブル
+description: 間違ったツールで採掘したときにブロックのルートが落ちないようにし、正しいツールで採掘したときに経験値報酬を落とす方法を学びます。
 category: Tutorials
 tags:
     - easy
@@ -18,29 +18,28 @@ mentions:
 ---
 
 :::tip FORMAT VERSION 1.26.10
-This tutorial assumes a basic understanding of blocks.
-Check out the [blocks guide](/blocks/blocks-intro) before starting.
+このチュートリアルでは、ブロックの基本的な理解を前提としています。
+始める前に [ブロックガイド](/blocks/blocks-intro) を確認してください。
 :::
 
-This tutorial aims to show a new way of creating custom ore blocks with a proper loot table.
-The `minecraft:loot` component will run the specified loot table regardless of the tool used, but by adding the `match_tool` condition to your loot table you can specify what tools are required per pool.
+このチュートリアルでは、適切なルートテーブルを使ってカスタム鉱石ブロックを作成する新しい方法を紹介します。
+`minecraft:loot` コンポーネントは、使用したツールに関係なく指定したルートテーブルを実行しますが、ルートテーブルに `match_tool` 条件を追加すると、各プールに必要なツールを指定できます。
 
-In addition, through use of scripts and custom components, we can create the experience orb reward offered by vanilla ores if the correct tool is used to destroy the block.
+さらに、スクリプトとカスタムコンポーネントを使えば、バニラの鉱石と同じように、正しいツールでブロックを破壊したときに経験値オーブ報酬を出せます。
 
--   Features:
+-   特徴:
 
-    -   Can only be mined using an appropriate tool
-    -   Can specify enchantments on items
-    -   Also drops experience reward
+    -   適切なツールでしか採掘できない
+    -   アイテムに付与エンチャントを指定できる
+    -   経験値報酬もドロップする
 
--   Issues:
+-   問題点:
 
-    -   Non-player methods of breaking the block (explosions, commands, etc.) will fail to drop the loot
+    -   爆発やコマンドなど、プレイヤー以外の方法でブロックを壊した場合、ルートはドロップしない
 
-## Loot Table
+## ルートテーブル
 
-In the example below, you can see how the `match_tool` condition is used to test for a pickaxe item that is iron tier or higher:
-:
+以下の例では、`match_tool` 条件を使って、鉄以上のティアのツルハシを検査する方法を示しています。
 
 <CodeHeader>BP/loot_tables/blocks/silver_ore.json</CodeHeader>
 
@@ -75,11 +74,11 @@ In the example below, you can see how the `match_tool` condition is used to test
 }
 ```
 
-### Specifying Enchantments
+### エンチャントの指定
 
-If needed you can add the enchantments section to your condition, but remember each tool and level must be listed as separate pools.
+必要であれば、条件にエンチャントのセクションを追加できますが、各ツールとレベルは別々のプールとして列挙する必要があることに注意してください。
 
-Also note that it can correctly detect only 1st and 2nd enchantment level.
+また、検出できるのは 1 段階目と 2 段階目のエンチャントレベルのみです。
 
 <CodeHeader>BP/loot_tables/blocks/silver_ore.json > pools</CodeHeader>
 
@@ -99,11 +98,11 @@ Also note that it can correctly detect only 1st and 2nd enchantment level.
 ]
 ```
 
-## XP Reward Script
+## 経験値報酬スクリプト
 
-To spawn experience orbs when your ore block is destroyed, custom components can be used. Here, we use the [onPlayerBreak](/blocks/block-events#player-break) event hook. If you don't want your block to spawn XP, this step can be ignored.
+鉱石ブロックが破壊されたときに経験値オーブを出すには、カスタムコンポーネントを使えます。ここでは [onPlayerBreak](/blocks/block-events#player-break) イベントフックを使います。ブロックが XP を出さないようにしたい場合、この手順は省略できます。
 
-Similarly to the loot table, we check the item in the player's hand and then spawn a random number of XP orbs at the block's location.
+ルートテーブルと同様に、プレイヤーの手にあるアイテムを確認し、ブロックの位置にランダム数の経験値オーブを生成します。
 
 <CodeHeader>BP/scripts/silver_ore.js</CodeHeader>
 
@@ -157,14 +156,14 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
 });
 ```
 
-## Block JSON
+## ブロック JSON
 
-The following block behavior can be used as a template. Don't forget to set the block's texture using `terrain_texture.json`.
+以下のブロック挙動はテンプレートとして使えます。`terrain_texture.json` を使ってブロックのテクスチャを設定するのを忘れないでください。
 
-Here you need to do two things:
+ここでは 2 つのことを行います。
 
--   Point to the new loot table with the `minecraft:loot` component.
--   Add our experience reward custom component to the block's `components`.
+-   `minecraft:loot` コンポーネントで新しいルートテーブルを指す。
+-   ブロックの `components` に、経験値報酬のカスタムコンポーネントを追加する。
 
 <CodeHeader>BP/blocks/silver_ore.json</CodeHeader>
 
@@ -190,6 +189,6 @@ Here you need to do two things:
 }
 ```
 
-## Result
+## 結果
 
 ![](result.gif)

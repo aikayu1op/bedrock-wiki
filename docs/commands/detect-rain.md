@@ -1,38 +1,38 @@
 ---
-title: Rain Detection
+title: 雨の検出
 category: Detection Systems
 tags:
     - easy
 mentions:
     - BedrockCommands
     - zheaEvyline
-description: Detect rain using commands.
+description: コマンドを使って雨を検出します。
 ---
 
-## Introduction
+## はじめに
 
-[Sourced from the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
+[Bedrock Commands Community (BCC) Discord が出典です](https://bedrockcommands.org/)
 
-This system allows you to execute commands automatically whenever it begins raining in the Overworld.
+このシステムを使うと、オーバーワールドで雨が降り始めるたびにコマンドを自動実行できます。
 
-:::warning Limitation:
-This system relies on the mechanic where fire is immediately extinguished by rain. Therefore, the **Fire Spread** gamerule must be enabled for this system to function correctly.
+:::warning 制限:
+このシステムは、雨で火がすぐに消える仕組みに依存しています。そのため、正しく動作させるには **Fire Spread** のゲームルールを有効にしておく必要があります。
 :::
 
-## Setup
+## セットアップ
 
-_Type the following command in Chat:_
+_次のコマンドをチャットで入力します。_
 
 `/scoreboard objectives add wiki:q.is_raining dummy`
 
-If you are using functions and prefer the objective to be added automatically during world initialization, follow the process outlined in [On First World Load](/commands/on-first-world-load).
+functions を使っていて、ワールド初期化時に自動で objective を追加したい場合は、[ワールドの初回読み込み時](/commands/on-first-world-load) に記載された手順に従ってください。
 
-**Next Steps:**
-1. Choose a coordinate in the Overworld located within a ticking area or a chunk that remains loaded at all times.
-2. Ensure there are no blocks above this coordinate obstructing it from the sky.
-3. Secure the area so players cannot interfere with the detection block (fire).
+**手順:**
+1. ティック範囲内、または常に読み込まれたままのチャンクにあるオーバーワールドの座標を選びます。
+2. その座標の上に、空をふさぐブロックがないことを確認します。
+3. プレイヤーが検出用ブロック（火）に干渉できないよう、周囲を保護します。
 
-## System
+## システム
 
 <CodeHeader>BP/functions/wiki/detect/weather/is_raining.mcfunction</CodeHeader>
 
@@ -60,11 +60,11 @@ execute if score .Weather wiki:q.is_raining matches 0 run title @a actionbar It'
 execute if score .Weather wiki:q.is_raining matches 1 run scoreboard players set .Weather wiki:q.is_raining 2
 ```
 
-It is a requirement to follow this same sequence and properly apply the `execute if score .Weather wiki:q.is_raining matches` structure as shown for your desired commands. Also, remember to replace the placeholder coordinates `(0, 0, 0)` with the actual detection coordinate used in your world.
+この同じ順序を守り、`execute if score .Weather wiki:q.is_raining matches` の構造を、目的のコマンドに合わせて正しく適用する必要があります。また、プレースホルダーの座標 `(0, 0, 0)` は、実際にワールドで使う検出座標に置き換えてください。
 
-## Folder Structure
+## フォルダ構成
 
-If you are using functions, organize your behavior pack as follows:
+functions を使う場合、ビヘイビアパックは次のように整理します。
 
 <FolderView
 	:paths="[
@@ -81,4 +81,4 @@ If you are using functions, organize your behavior pack as follows:
 ]"
 ></FolderView>
 
-In this setup, the `is_raining` function is called by `main.mcfunction`, which is executed every tick via `tick.json`.
+この構成では、`is_raining` 関数は `main.mcfunction` から呼び出され、`tick.json` を通じて毎ティック実行されます。

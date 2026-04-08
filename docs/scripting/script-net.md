@@ -1,5 +1,5 @@
 ---
-title: Script Requests API
+title: Script Request API
 category: Tutorials
 tags:
     - experimental
@@ -8,24 +8,24 @@ mentions:
     - conmaster2112
     - SmokeyStack
     - ThomasOrs
-description: API of script requests for Bedrock Dedicated Server.
+description: Bedrock Dedicated Server 向けの script request API です。
 ---
 
 ::: warning
-The Script API is currently in active development, and breaking changes are frequent. This page assumes the format of Minecraft 1.21.20
+Script API は現在も活発に開発されており、破壊的変更が頻繁にあります。このページは Minecraft 1.21.20 の形式を前提としています。
 :::
 
 ::: warning
-This module can only be used on Bedrock Dedicated Servers.
+この module は Bedrock Dedicated Server でのみ使えます。
 :::
 
-In Script API, you can send and receive HTTP-based requests to interact with the internet. For more detailed information please visit the[Microsoft docs](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server-net/minecraft-server-net).
+Script API では、HTTP ベースの request を送受信して internet とやり取りできます。より詳しい情報は [Microsoft docs](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server-net/minecraft-server-net) を参照してください。
 
-## Setup
+## セットアップ
 
-**Dependencies**
+**依存関係**
 
-Like other modules, you will need to add the dependency into your `manifest.json`
+他の module と同様に、`manifest.json` に dependency を追加する必要があります。
 
 ```json
 {
@@ -38,13 +38,13 @@ Like other modules, you will need to add the dependency into your `manifest.json
 }
 ```
 
-## Enable module in Bedrock Dedicated Server
+## Bedrock Dedicated Server で module を有効にする
 
-1. Download the Bedrock Dedicated Server package from the [Minecraft website](https://www.minecraft.net/en-us/download/server/bedrock)
+1. [Minecraft website](https://www.minecraft.net/en-us/download/server/bedrock) から Bedrock Dedicated Server package をダウンロードします。
 
-2. Extract the zip file on a folder.
+2. zip ファイルをフォルダーに展開します。
 
-This is the tree for a default Bedrock Dedicated Server:
+これは、既定の Bedrock Dedicated Server の tree です。
 
 <FolderView :paths="[
 	'BedrockServer/behavior_packs',
@@ -61,10 +61,10 @@ This is the tree for a default Bedrock Dedicated Server:
         'BedrockServer/world_templates',
 ]"></FolderView>
 
-3. In the `permissions.json` file located in `config/<pack_id>/permissions.json` or `config/default/permissions.json`, enable `@minecraft/server-net` module by adding `"@minecraft/server-net"` in the `allowed_modules` key. This module is not enabled by default in the server.
+3. `config/<pack_id>/permissions.json` または `config/default/permissions.json` にある `permissions.json` ファイルで、`allowed_modules` key に `"@minecraft/server-net"` を追加して `@minecraft/server-net` module を有効にします。この module は server では既定で有効になっていません。
 
--   Modifying the files in the default config folder allows every add-on with the server-net module to have access to the `@minecraft/server-net` module.
--   It is recommended to assign individual permissions for each script behavior pack.
+-   既定の config フォルダー内のファイルを変更すると、server-net module を持つすべての add-on が `@minecraft/server-net` module にアクセスできます。
+-   script behavior pack ごとに個別の権限を割り当てることをおすすめします。
 
 <CodeHeader>BedrockServer/config/default/permissions.json</CodeHeader>
 

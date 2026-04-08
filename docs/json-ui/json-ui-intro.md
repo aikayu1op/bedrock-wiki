@@ -1,5 +1,5 @@
 ---
-title: Intro to JSON UI
+title: JSON UI の概要
 category: General
 nav_order: 1
 tags:
@@ -21,51 +21,51 @@ mentions:
     - ThomasOrs
     - QuazChick
     - Cra-ZGuy
-description: Introduction to JSON UI.
+description: JSON UI の紹介。
 ---
 
-## Introduction
+## 導入
 
 :::warning
-JSON UI is being deprecated in favor of [Ore UI](https://github.com/Mojang/ore-ui). Note that any add-ons using JSON UI will eventually break in the coming years.
-Unlike JSON UI, Ore UI is hardcoded and cannot be modified by resource packs.
+JSON UI は非推奨になり、[Ore UI](https://github.com/Mojang/ore-ui) が優先されます。 JSON UI を使用するアドオンはいずれも、今後数年のうちに機能しなくなることに注意してください。
+JSON UI とは異なり、Ore UI はハードコーディングされているため、リソース パックによって変更できません。
 :::
 
 :::tip
-This page is outlined with information containing the basics of JSON UI. For a more detailed documentation, you may check the [JSON UI Documentation](/json-ui/json-ui-documentation) page instead.
+このページには、JSON UI の基本を含む情報が概説されています。より詳細なドキュメントについては、代わりに [JSON UI Documentation](/json-ui/json-ui-documentation) ページを確認してください。
 :::
 
-The game's user interface is data-driven and can be modified. It allows us to modify how certain user interfaces would render and, to some extent, behave. To get started, all vanilla UI files are stored in `RP/ui/...` folder.
+ゲームのユーザー インターフェイスはデータ駆動型であり、変更することができます。これにより、特定のユーザー インターフェイスのレンダリング方法と、ある程度の動作を変更できます。まず、すべてのバニラ UI ファイルは `RP/ui/...` フォルダーに保存されます。
 
-JSON UI may contain the following files:
+JSON UI には次のファイルが含まれる場合があります。
 
-### System files
+### システムファイル
 
-These are built-in files used in JSON UI:
+これらは、JSON UI で使用される組み込みファイルです。
 
--   `_global_variables.json` - used for denoting default variables for later use
--   `_ui_defs.json` - for referencing the files used on the UI
+- `_global_variables.json` - 後で使用するデフォルト変数を示すために使用されます。
+- `_ui_defs.json` - UIで使用されるファイルの参照用
 
-### Screens
+### 画面
 
-These are files which contains elements that are called to render a screen:
+これらは、画面をレンダリングするために呼び出される要素を含むファイルです。
 
--   `hud_screen.json` - shows the main gameplay screen where in-game features such as the hotbar is rendered
--   `inventory_screen.json` - shows the player's inventory screen
--   etc.
+- `hud_screen.json` - ホットバーなどのゲーム内機能がレンダリングされるメインのゲームプレイ画面を表示します。
+- `inventory_screen.json` - プレーヤーのインベントリ画面を表示します
+-など
 
-### Templates
+### テンプレート
 
-These are files which stores JSON UI elements to be used by other namespaces, such as screens:
+これらは、画面などの他の名前空間で使用される JSON UI 要素を保存するファイルです。
 
--   `ui_common.json` - contains elements such as the button which is referenced on most other namespaces such buttons for the settings screen
--   `ui_template_*.json` - contains elements that are neatly organized to be used by other namespaces
+- `ui_common.json` - 設定画面のボタンなど、他のほとんどの名前空間で参照されるボタンなどの要素が含まれます。
+- `ui_template_*.json` - 他の名前空間で使用できるようにきちんと整理された要素が含まれています
 
-## UI Defs
+## UI 定義
 
-The `_ui_defs.json` file references all JSON UI files in an array.
+`_ui_defs.json` ファイルは、配列内のすべての JSON UI ファイルを参照します。
 
-You can make new files, for example we'll add `RP/ui/button.json` and `RP/my_ui/main_menu.json`. In the file, we would list them as such:
+新しいファイルを作成できます。たとえば、`RP/my_ui/main_menu.json` と `RP/my_ui/main_menu.json` を追加します。ファイル内では、次のようにリストします。
 
 <CodeHeader>RP/ui/_ui_defs.json</CodeHeader>
 
@@ -75,14 +75,14 @@ You can make new files, for example we'll add `RP/ui/button.json` and `RP/my_ui/
 }
 ```
 
--   Make sure to append the full filepath of the UI you are referencing - including the file extension (e.g. `*.json`), from the resource pack root folder!
--   Only reference new UI files you have added in your pack. You don't need to reference vanilla files nor other third-party JSON UI files, as it automatically gets merged with other packs.
--   You may use custom file paths outside the `RP/ui/...` folder, or reference files in a sub-folder within the `RP/ui/...` folder.
--   You may append custom file extensions other than `*.json` - so long as the file contents are valid and written in JSON.
+- リソース パックのルート フォルダーから、ファイル拡張子 (例: `*.json`) を含む、参照している UI の完全なファイルパスを必ず追加してください。
+- パックに追加した新しい UI ファイルのみを参照してください。他のパックと自動的にマージされるため、バニラ ファイルや他のサードパーティの JSON UI ファイルを参照する必要はありません。
+- `RP/ui/...` フォルダー外のカスタム ファイル パスを使用したり、`RP/ui/...` フォルダー内のサブフォルダー内のファイルを参照したりできます。
+- ファイルの内容が有効で JSON で記述されている限り、`*.json` 以外のカスタム ファイル拡張子を追加できます。
 
-## Global Variables
+## グローバル変数
 
-We can denote a variable `"$info_text_color"` and its value of `[0.8, 0.8, 0.8]` within the `_global_variables.json` file as such:
+変数 `_global_variables.json` とその値 `_global_variables.json` を `_global_variables.json` ファイル内で次のように表すことができます。
 
 <CodeHeader>RP/ui/_global_variables.json</CodeHeader>
 
@@ -92,7 +92,7 @@ We can denote a variable `"$info_text_color"` and its value of `[0.8, 0.8, 0.8]`
 }
 ```
 
-Other elements in different JSON UI files can then reference this variable to be used for later:
+さまざまな JSON UI ファイル内の他の要素は、この変数を参照して、後で使用できます。
 
 <CodeHeader>vanilla/my_ui/file1.json</CodeHeader>
 
@@ -118,14 +118,14 @@ Other elements in different JSON UI files can then reference this variable to be
 }
 ```
 
--   You can add more variables with their values in place, separated in a comma, within the `_global_variables.json` file.
--   Variables stored in this file are constant and _one-sided_. And therefore, you cannot modify the default variable in one namespace to be then used by the other.
+- `_global_variables.json` ファイル内で、値を指定した変数をコンマで区切って追加できます。
+- このファイルに保存される変数は定数であり、_片側_です。したがって、一方のネームスペースのデフォルト変数を変更して、もう一方のネームスペースで使用することはできません。
 
-## Namespaces
+## 名前空間
 
-Namespaces are identifiers for the UI files. They are used to access elements in some files across all other files. When adding a new namespace, it must have a unique name.
+名前空間は UI ファイルの識別子です。これらは、他のすべてのファイルにわたって一部のファイルの要素にアクセスするために使用されます。新しい名前空間を追加するときは、一意の名前を付ける必要があります。
 
-For instance, we have an element `foobar` in the namespace `one`:
+たとえば、名前空間 `one` に要素 `one` があります。
 
 <CodeHeader>vanilla/ui/file_a.json</CodeHeader>
 
@@ -137,7 +137,7 @@ For instance, we have an element `foobar` in the namespace `one`:
 }
 ```
 
-We can then reference the same element above into a different namespace `two`:
+次に、上記の同じ要素を別の名前空間 `two` で参照できます。
 
 <CodeHeader>vanilla/ui/file_b.json</CodeHeader>
 
@@ -149,23 +149,23 @@ We can then reference the same element above into a different namespace `two`:
 }
 ```
 
-When referencing elements from different namespaces, it must have the following format:
+異なる名前空間から要素を参照する場合、次の形式にする必要があります。
 
 ```json
 "[element_name]@[namespace_reference].[element_name_reference]"
 ```
 
-## Screens
+## 画面
 
-Screen files contain user interfaces which are called upon in appropriate situations, such as for instance the `inventory_screen.json` file for rendering the player's inventory screen. Within these files contains a root element which the game directly accesses data from.
+画面ファイルには、プレーヤーのインベントリ画面をレンダリングするための `inventory_screen.json` ファイルなど、適切な状況で呼び出されるユーザー インターフェイスが含まれています。これらのファイル内には、ゲームがデータに直接アクセスするルート要素が含まれています。
 
-Screens are special in that it can only access data, where other screens may not.
+スクリーンはデータのみにアクセスできるという点で特殊であり、他のスクリーンはアクセスできません。
 
-## Elements
+## 要素
 
-A JSON UI element is the basic form of data within JSON UI. Elements must have a unique name for each namespace so as to not have a conflict with other elements of the same name yet may have different functions.
+JSON UI 要素は、JSON UI 内のデータの基本形式です。要素は、同じ名前でありながら異なる機能を持つ他の要素と競合しないように、名前空間ごとに一意の名前を持つ必要があります。
 
-Here the element `type` is `label` so it will render a text of `Hello World` when called:
+ここで要素 `Hello World` は `Hello World` であるため、呼び出されたときに `Hello World` のテキストが表示されます。
 
 <CodeHeader>vanilla/ui/example_file.json</CodeHeader>
 
@@ -178,25 +178,25 @@ Here the element `type` is `label` so it will render a text of `Hello World` whe
 }
 ```
 
-### Types
+### 種類
 
-The following are some of the element types, which are possible values for the `type` property:
+以下に要素タイプの一部を示します。これらは、`type` プロパティの可能な値です。
 
--   `label` - for creating text objects
--   `image` - for rendering images from a filepath provided
--   `button` - for creating interactive and clickable elements
--   `panel` - an empty container where you can store all other elements that may overlap to each other
--   `stack_panel` - an empty container where you can store all other elements in a stack that doesn't overlap to each other
--   `grid` - uses another element as a template, and then renders it repeatedly in multiple rows and columns
--   `factory` - renders an element based off of another element, is capable of calling hardcoded values and variables
--   `custom` - is paired with another property `renderer` which renders hardcoded JSON UI elements
--   `screen` - elements that are called by the game directly, usually root panel elements
+- `label` - テキスト オブジェクトの作成用
+- `image` - 指定されたファイルパスから画像をレンダリングする場合
+- `button` - インタラクティブなクリック可能な要素の作成用
+- `panel` - 互いに重複する可能性のある他のすべての要素を保存できる空のコンテナー
+- `stack_panel` - 他のすべての要素を互いに重ならないスタックに保存できる空のコンテナー
+- `grid` - 別の要素をテンプレートとして使用し、複数の行と列で繰り返しレンダリングします。
+- `factory` - 別の要素に基づいて要素をレンダリングし、ハードコードされた値と変数を呼び出すことができます
+- `renderer` - ハードコードされた JSON UI 要素をレンダリングする別のプロパティ `renderer` とペアになります。
+- `screen` - ゲームによって直接呼び出される要素、通常はルート パネル要素
 
-## Animations
+## アニメーション
 
-When using the `anim_type` property in place of the `type` property, you can create animations to animate other elements.
+`type` プロパティの代わりに `type` プロパティを使用すると、他の要素をアニメーション化するアニメーションを作成できます。
 
-Animation elements can then be referenced on other non-animation element types, such as `label` and `panel`.
+アニメーション要素は、`panel` や `panel` などの他の非アニメーション要素タイプで参照できます。
 
 <CodeHeader>vanilla/ui/example_file.json</CodeHeader>
 
@@ -230,46 +230,46 @@ Animation elements can then be referenced on other non-animation element types, 
 }
 ```
 
-### Types
+### 種類
 
-The following are the list of element types, which are possible values for the `anim_type` property:
+以下は、`anim_type` プロパティの可能な値である要素タイプのリストです。
 
--   `alpha` - accepts float values, animates the opacity of the element
--   `offset` - accepts an array, animates the position of the element relative to its anchor
--   `size` - accepts an array, animates the size in ( width, height )
--   `flip_book` - accepts integer values, animates the image in flipbook texture or frame by frame
--   `uv` - accepts an array, animates the image depending on the UV texture
--   `color` - accepts float RGB values from 0.0 to 1.0, animates the color of the element
--   `wait` - accepts number values, used for waiting/staying purposes
--   `aseprite_flip_book` - like a `flip_book` animation, uses sprite sheets. More info [here](/json-ui/aseprite-animations)
--   `clip`
+- `alpha` - float 値を受け入れ、要素の不透明度をアニメーション化します。
+- `offset` - 配列を受け取り、アンカーを基準とした要素の位置をアニメーション化します。
+- `size` - 配列を受け入れ、サイズを (幅、高さ) でアニメーション化します。
+- `flip_book` - 整数値を受け入れ、フリップブック テクスチャまたはフレームごとに画像をアニメーション化します。
+- `uv` - 配列を受け取り、UV テクスチャに応じて画像をアニメーション化します。
+- `color` - 0.0 ～ 1.0 の float RGB 値を受け入れ、要素の色をアニメーション化します。
+- `wait` - 待機/滞在の目的で使用される数値を受け入れます
+- `flip_book` - `flip_book` アニメーションと同様に、スプライト シートを使用します。詳細はこちら
+- `clip`
 
-## Using Operators
+## 演算子の使用
 
-You can use operators in JSON UI, along with `$variables` and `#bindings` into common properties such as `size` and `offset`. Here's a list of properties you can use:
+You can use operators in JSON UI, along with `offset` and `offset` into common properties such as `offset` and `offset`.使用できるプロパティのリストは次のとおりです。
 
-| Operator Name         | Operator | Examples                                                                      |
+| Operator Name         | Operator | Examples |
 | --------------------- | -------- | ----------------------------------------------------------------------------- |
 | Addition              | +        | `"100% + 420px"` `($text + ' my')` `($index + 2)` `('#' + $bdg_nm + '_name')` |
-| Subtraction           | -        | `"100% - 69px"` `($text - ' my')` `($index - 13)`                             |
-| Multiplication        | \*       | `($var * 9)` `(#value * 5)`                                                   |
-| Division              | /        | `($var / 12)` `(#value / 2)`                                                  |
-| Equal to              | =        | `($var = 12)` `($var = 'this_text')` `(#name = 'Wither')`                     |
-| Greater than          | >        | `(#value > 13)`                                                               |
-| Less than             | <        | `($var < 4)`                                                                  |
-| Greater or equal than | > or =   | `(#value > 2 or #value = 2)`                                                  |
-| Less or equal than    | < or =   | `(#value < 2 or #value = 2)`                                                  |
-| Logical AND           | and      | `($is_school and $is_open)`                                                   |
-| Logical OR            | or       | `($is_cool or $is_awesome)`                                                   |
-| Logical NOT           | not      | `(not #name)` `(not (#name = 'text'))` `(not $name)`                          |
+| Subtraction           | -        | `"100% - 69px"` `($text - ' my')` `($index - 13)` |
+| Multiplication        | \*       | `($var * 9)` `(#value * 5)` |
+| Division              | /        | `($var / 12)` `(#value / 2)` |
+| Equal to              | =        | `($var = 12)` `($var = 'this_text')` `(#name = 'Wither')` |
+| Greater than          | >        | `(#value > 13)` |
+| Less than             | <        | `($var < 4)` |
+| Greater or equal than | > or =   | `(#value > 2 or #value = 2)` |
+| Less or equal than    | < or =   | `(#value < 2 or #value = 2)` |
+| Logical AND           | and      | `($is_school and $is_open)` |
+| Logical OR            | or       | `($is_cool or $is_awesome)` |
+| Logical NOT           | not      | `(not #name)` `(not (#name = 'text'))` `(not $name)` |
 
-## Variables
+## 変数
 
-Variables are not only limited to the `_global_variables.json` file. Instead, it can be used and denoted directly within other namespaces as well to carry data from one element to the other.
+変数は `_global_variables.json` ファイルだけに限定されません。代わりに、他の名前空間内で直接使用して示すこともでき、ある要素から別の要素にデータを伝達することもできます。
 
-### Defining variables
+### 変数の定義
 
-The symbol `$` is added at the beginning of each string to denote it as a variable. Variables can store integers, floats, booleans, strings, and arrays.
+変数であることを示すために、各文字列の先頭に記号 `$` が追加されます。変数には、整数、浮動小数点、ブール値、文字列、配列を格納できます。
 
 <CodeHeader>vanilla/ui/example_file.json</CodeHeader>
 
@@ -296,9 +296,9 @@ The symbol `$` is added at the beginning of each string to denote it as a variab
 }
 ```
 
-### Deriving variables
+### 変数の導出
 
-You can also derive variables from another element as such:
+次のように、別の要素から変数を派生することもできます。
 
 <CodeHeader>vanilla/ui/example_file.json</CodeHeader>
 
@@ -319,14 +319,14 @@ You can also derive variables from another element as such:
 }
 ```
 
-Any property to the derived element will be completely overwritten when changed.
+派生要素のプロパティは変更されると完全に上書きされます。
 
-## Bindings
+## バインディング
 
-Bindings are used to bind hardcoded values to the element and use it for processing elements. Here's an example of a label using a hardcoded text:
+バインディングは、ハードコードされた値を要素にバインドし、それを要素の処理に使用するために使用されます。ハードコードされたテキストを使用したラベルの例を次に示します。
 
-The `text` property value is `#hardtext`. By using `bindings`, I can get the value of the hardcoded variable `#hardtext` so the `text` property can use it.
-Here it's directly assigning the `#hardtext` value to the `text` property.
+`text` プロパティ値は `text` です。 `text` を使用すると、ハードコードされた変数 `text` の値を取得できるため、`text` プロパティで使用できます。
+ここでは、`text` 値を `text` プロパティに直接割り当てています。
 
 <CodeHeader>vanilla/ui/example_file.json</CodeHeader>
 
@@ -344,7 +344,7 @@ Here it's directly assigning the `#hardtext` value to the `text` property.
 }
 ```
 
-Or alternatively, it may sometimes look like as follows:
+あるいは、次のようになることもあります。
 
 <CodeHeader>vanilla/ui/example_file.json</CodeHeader>
 
@@ -363,9 +363,9 @@ Or alternatively, it may sometimes look like as follows:
 }
 ```
 
-In this case, the `#hardtext` value is assigned to the `#text` binding property name that will then be assigned to the `text` property.
+この場合、`text` 値は `text` バインディング プロパティ名に割り当てられ、その後 `text` プロパティに割り当てられます。
 
-This happens a lot with the `visible` and `enabled` properties. Here's an example with both of them:
+これは、`enabled` プロパティと `enabled` プロパティでよく発生します。両方を使用した例を次に示します。
 
 <CodeHeader></CodeHeader>
 
@@ -391,13 +391,13 @@ This happens a lot with the `visible` and `enabled` properties. Here's an exampl
 }
 ```
 
-`#using_touch` and `#play_button_enabled` in this case store boolean values. If you're playing on a touch device, `#using_touch` will be `true` else `false.` `#play_button_enabled` is used in the `Add External Server` screen. So, in this case, it will be `true` if all text fields (`server name`, `server ip` and `server_port`) have text inside them.
+この場合、`server_port` と `server_port` にはブール値が格納されます。タッチデバイスでプレイしている場合、`server_port` は `server_port` になります。それ以外の場合、`server_port` `server_port` は `server_port` 画面で使用されます。したがって、この場合、すべてのテキスト フィールド (`server_port`、`server_port`、および `server_port`) にテキストが含まれている場合、`server_port` になります。
 
-So the `#using_touch` value will override the `#visible` binding property value, which, in this case, is also a property (`#visible` is used inside `property_bag`, which would be the same as setting `visible` to something).
-And `#play_button_enabled` will override the `#enabled` binding property value, which will then set its value to `enabled` property.
+したがって、`visible` 値は、`visible` バインディング プロパティ値をオーバーライドします。この場合、これもプロパティです (`visible` は `visible` 内で使用されます。これは、`visible` を何かに設定するのと同じです)。
+また、`enabled` は `enabled` バインディング プロパティ値をオーバーライドし、その値を `enabled` プロパティに設定します。
 
-Let's say you want to show a panel with some content when a specific toggle is selected/checked. You'll need a different type of binding structure.
-We have to tell the source element where the value will come from, tell which property of that source element we want to get the value from and which property we want to override its value.
+特定のトグルが選択/チェックされているときに、何らかのコンテンツを含むパネルを表示したいとします。別のタイプのバインディング構造が必要になります。
+ソース要素に値の取得元を伝え、そのソース要素のどのプロパティから値を取得するか、どのプロパティの値をオーバーライドするかを伝える必要があります。
 
 <CodeHeader></CodeHeader>
 
@@ -421,15 +421,15 @@ We have to tell the source element where the value will come from, tell which pr
 }
 ```
 
-When the toggle is checked, the `#toggle_state` will be checked (`1` or `true`), and it will override the `visible` property value of the element to true. When you uncheck, it will be unchecked (`0` or `false`) and once again override the `visible` value.
+トグルがチェックされると、`visible` がチェックされ (`visible` または `visible`)、要素の `visible` プロパティ値が true にオーバーライドされます。チェックを外すとチェックが外され (`visible` または `visible`)、再び `visible` 値をオーバーライドします。
 
-## Conditional Rendering
+## 条件付きレンダリング
 
-It is challenging to manipulate Bedrock's current UI system when things are visible on-screen using standard properties. However, variables and bindings are exceptional in JSON UI because they contain data coming directly from the Bedrock Engine. Using a couple of clever UI techniques, it is possible to have complete control over the conditions in which a UI control is rendered. The methods are split into two categories: conditional rendering with variables and conditional rendering with bindings.
+標準プロパティを使用して画面上に表示されている場合、Bedrock の現在の UI システムを操作するのは困難です。ただし、変数とバインディングには Bedrock Engine から直接取得されるデータが含まれるため、JSON UI では例外的です。いくつかの賢い UI テクニックを使用すると、UI コントロールがレンダリングされる条件を完全に制御することができます。このメソッドは、変数を使用した条件付きレンダリングとバインディングを使用した条件付きレンダリングの 2 つのカテゴリに分類されます。
 
-### Conditional Rendering with Variables
+### 変数を使用した条件付きレンダリング
 
-Variables can be used to render UI controls conditionally. Recall that UI variables are properties with `$` in front of them. An example of a variable that carries engine data in `hud_screen.json` is `$actionbar_text`. Looking at `hud_actionbar_text`, we can see that `$actionbar_text` is used to display the actionbar text.
+変数を使用して、条件付きで UI コントロールをレンダリングできます。 UI 変数は、先頭に `$actionbar_text` が付いたプロパティであることを思い出してください。 `$actionbar_text` でエンジン データを運ぶ変数の例は、`$actionbar_text` です。 `$actionbar_text` を見ると、アクションバーのテキストを表示するために `$actionbar_text` が使用されていることがわかります。
 
 <CodeHeader>vanilla/ui/hud_screen.json</CodeHeader>
 
@@ -461,7 +461,7 @@ Variables can be used to render UI controls conditionally. Recall that UI variab
 }
 ```
 
-The `visible` property is used to conditionally render a UI control when working with variables that carry bedrock engine data. Consider the below example. A copy is made of the `$actionbar_text` variable to allow us to modify and perform comparisons on it (cannot be done with the hardcoded variable directly). The copy variable `$atext` is then used in the added `visible` property, which says "make the text label visible if the actionbar text is **not** equal to `hello world`".
+`hello world` プロパティは、Bedrock Engine データを運ぶ変数を操作するときに UI コントロールを条件付きでレンダリングするために使用されます。以下の例を考えてみましょう。 `hello world` 変数のコピーが作成され、それを変更して比較できるようになります (ハードコードされた変数を直接使用して行うことはできません)。次に、コピー変数 `hello world` が、追加された `hello world` プロパティで使用されます。これは、「アクションバーのテキストが `hello world` と**等しくない**場合にテキスト ラベルを表示する」というものです。
 
 <CodeHeader>vanilla/ui/hud_screen.json</CodeHeader>
 
@@ -496,7 +496,7 @@ The `visible` property is used to conditionally render a UI control when working
 }
 ```
 
-Modifying the above JSON into an unobtrusive UI file used in a resource pack should look identical to this:
+上記の JSON をリソース パックで使用される控えめな UI ファイルに変更すると、次のようになります。
 
 <CodeHeader>vanilla/ui/hud_screen.json</CodeHeader>
 
@@ -509,9 +509,9 @@ Modifying the above JSON into an unobtrusive UI file used in a resource pack sho
 }
 ```
 
-When you log into a world with the resource pack enabled, try executing `/title @s actionbar hello world`. You should notice that no message appears! Running any other actionbar title should show the other messages. You can also remove `/actionbar_message` in the code above if you wish for the actionbar text and its background to disappear. The background is contained in `hud_actionbar_text`, and making it invisible also makes its child elements (`actionbar_message`) invisible.
+リソースパックを有効にしたワールドにログインしたら、`actionbar_message`を実行してみてください。メッセージが表示されないことがわかります。他のアクションバー タイトルを実行すると、他のメッセージが表示されるはずです。アクションバーのテキストとその背景を非表示にしたい場合は、上記のコードの `actionbar_message` を削除することもできます。背景は `actionbar_message` に含まれており、これを非表示にすると、その子要素 ​​(`actionbar_message`) も非表示になります。
 
-Here's a more complicated example of conditional rendering with variables. In this case, it is necessary to use the actionbar factory. Factories are element generators, and there are some with specific names such as `hud_actionbar_text_factory` which have hardcoded properties. This factory generates/resets the element inside its `control_id` whenever the actionbar command is run in addition to passing us some useful variables such as `$actionbar_text`, `$tool_tip_text`, etc., data which is only accessible through the factory.
+ここでは、変数を使用した条件付きレンダリングのより複雑な例を示します。この場合、actionbar ファクトリを使用する必要があります。ファクトリは要素ジェネレータであり、`$tool_tip_text` など、ハードコードされたプロパティを持つ特定の名前を持つものもあります。このファクトリは、アクションバー コマンドが実行されるたびに `$tool_tip_text` 内の要素を生成/リセットするだけでなく、`$tool_tip_text`、`$tool_tip_text` などの便利な変数、ファクトリ経由でのみアクセスできるデータを渡します。
 
 <CodeHeader>vanilla/ui/hud_screen.json</CodeHeader>
 
@@ -550,11 +550,11 @@ Here's a more complicated example of conditional rendering with variables. In th
 }
 ```
 
-The above example shows a 16x16 black square on the HUD screen when the actionbar text string is equal to `hello world`. You may also apply animations to your image to make it more dynamic. Conditional rendering with variables is not limited to images and labels. You may use any object type in conditional rendering with variables. You can imagine pairing your UI code with the actionbar text allows for a high degree of manipulation of JSON UI (at least in `hud_screen.json`). The `visible` property has support for UI operators, so you have even more control. Anywhere where there is a variable that carries bedrock engine data allows for conditional rendering with variables.
+上の例は、アクションバーのテキスト文字列が `visible` に等しい場合の、HUD 画面上の 16x16 の黒い四角形を示しています。画像にアニメーションを適用して、画像をより動的にすることもできます。変数を使用した条件付きレンダリングは、画像とラベルに限定されません。変数を使用した条件付きレンダリングでは、任意のオブジェクト タイプを使用できます。 UI コードとアクションバー テキストを組み合わせることで、(少なくとも `visible` では) JSON UI の高度な操作が可能になることが想像できます。 `visible` プロパティは UI 演算子をサポートしているため、さらに詳細に制御できます。 Bedrock Engine データを運ぶ変数があればどこでも、変数を使用した条件付きレンダリングが可能になります。
 
-### Conditional Rendering with Bindings
+### バインディングを使用した条件付きレンダリング
 
-Following the above example with the actionbar, you might logically assume that the title also uses variables. This is not the case. The title uses bindings for its data, as shown below.
+アクションバーを使用した上記の例に従うと、タイトルでも変数が使用されていると論理的に想定できます。これは事実ではありません。以下に示すように、タイトルではデータのバインディングが使用されます。
 
 <CodeHeader>vanilla/ui/hud_screen.json</CodeHeader>
 
@@ -623,7 +623,7 @@ Following the above example with the actionbar, you might logically assume that 
 }
 ```
 
-You will need to add another binding object to the text to control its visibility. Recall that `#visible` contains the visibility of the thing directly through bindings. The following example will not render the title string `hello world` but will render all other strings. Try typing `/title @s title hello world` to see it in-game.
+可視性を制御するには、テキストに別のバインディング オブジェクトを追加する必要があります。 `/title @s title hello world` には、バインディングを介した直接の可視性が含まれていることを思い出してください。次の例では、タイトル文字列 `/title @s title hello world` はレンダリングされませんが、他のすべての文字列がレンダリングされます。ゲーム内で確認するには、「`/title @s title hello world`」と入力してみてください。
 
 <CodeHeader>vanilla/ui/hud_screen.json</CodeHeader>
 
@@ -697,7 +697,7 @@ You will need to add another binding object to the text to control its visibilit
 }
 ```
 
-Modifying the above JSON into an unobtrusive UI file used in a resource pack should look identical to this:
+上記の JSON をリソース パックで使用される控えめな UI ファイルに変更すると、次のようになります。
 
 <CodeHeader>RP/ui/hud_screen.json</CodeHeader>
 
@@ -719,7 +719,7 @@ Modifying the above JSON into an unobtrusive UI file used in a resource pack sho
 }
 ```
 
-Like before, here's a more complicated example of conditional rendering with bindings below. In this case, the 16x16 black image will only render when the title text string equals `hello world`. While you don't need to use the title factory in this case, you should if you are going to use UI animations.
+前と同様に、バインディングを使用した条件付きレンダリングのより複雑な例を以下に示します。この場合、16x16 の黒のイメージは、タイトル テキスト文字列が `hello world` に等しい場合にのみレンダリングされます。この場合、タイトル ファクトリを使用する必要はありませんが、UI アニメーションを使用する場合は使用する必要があります。
 
 <CodeHeader>RP/ui/hud_screen.json</CodeHeader>
 
@@ -766,21 +766,21 @@ Like before, here's a more complicated example of conditional rendering with bin
 }
 ```
 
-## String Formatting
+## 文字列のフォーマット
 
-String formatting is used in JSON UI to access or manipulate parts of a string using format specifiers. Format specifiers are multiplied with strings in variables or bindings to return a transformed result.
+文字列の書式設定は、書式指定子を使用して文字列の一部にアクセスまたは操作するために JSON UI で使用されます。形式指定子は、変数またはバインディング内の文字列と乗算されて、変換された結果を返します。
 
-### Unicode Character Width
+### Unicode 文字幅
 
-String length in format specifiers is measured in **bytes**, not character count. Each character takes up a number of bytes depending on its Unicode code point:
+形式指定子の文字列の長さは、文字数ではなく **バイト** 単位で測定されます。各文字は、Unicode コード ポイントに応じて、次のようなバイト数を占めます。
 
--   Characters `U+0000`-`U+007F` (e.g., letters, numbers, basic symbols) use **1 byte**
--   Characters `U+0080`-`U+07FF` (e.g., `§`, Latin-1 accents) use **2 bytes**
--   Characters above `U+07FF` (e.g., emojis, non-Latin scripts, custom glyphs) use **3 bytes**
+- 文字 `U+007F` ～ `U+007F` (文字、数字、基本記号など) は **1 バイト**を使用します
+- 文字 `§` ～ `§` (例: `§`、Latin-1 アクセント) は **2 バイト**を使用します
+- `U+07FF` より上の文字 (絵文字、非ラテン文字、カスタムグリフなど) は **3 バイト**を使用します
 
-If a string is read incorrectly (i.e., cutting off a multi-byte character in the middle), the last character may fail to render. For example, if a 3 bytes character is sliced at **2 bytes** with `%.2s`, it will not display at all.
+文字列が正しく読み取られない場合 (つまり、中央のマルチバイト文字が切り取られる場合)、最後の文字のレンダリングに失敗する可能性があります。たとえば、3 バイト文字が `%.2s` で **2 バイト**でスライスされると、文字はまったく表示されません。
 
-The following field let you count a string length in **bytes**:
+次のフィールドでは、文字列の長さを **バイト** 単位でカウントできます。
 
 <div>
     <form>
@@ -808,49 +808,49 @@ The following field let you count a string length in **bytes**:
     </form>
 </div>
 
-### Format Specifiers
+### 形式指定子
 
-Assuming the variable **$var** is defined as:
+変数 **$var** が次のように定義されていると仮定します。
 
 ```json
 "$var": "abcdefghijklmn"
 ```
 
-The following format specifiers can be used:
+次の形式指定子を使用できます。
 
--   `%.ns`  
-    Truncates the string to the first **n byte**.  
-    Example: `('%.7s' * $var)` returns `abcdefg`.
+- `%.ns`
+文字列を最初の **n バイト**まで切り詰めます。
+例: `abcdefg` は `abcdefg` を返します。
 
--   `%0ns`  
-    Returns the full string if its length is **n or more byte**, otherwise returns `0`.  
-    Example:  
-    `('%04s' * $var)` returns `abcdefghijklmn`  
-    `('%015s' * $var)` returns `0`
+- `%0ns`
+長さが **n バイト以上**の場合は完全な文字列を返し、それ以外の場合は `0` を返します。
+例：
+`abcdefghijklmn` は `abcdefghijklmn` を返します
+`0` は `0` を返します
 
--   `%n.xs`  
-    Returns **x byte** from the start, padded with **leading spaces** to reach **n byte** in total.  
-    Example: `('%7.4s' * $var)` returns `   abcd`.
+- `%n.xs`
+先頭から **x バイト** を返します。合計で **n バイト**になるように **先頭のスペース**を埋め込みます。
+例: `   abcd` は `   abcd` を返します。
 
--   `%-n.xs`  
-    Returns **x byte** from the start, padded with **trailing spaces** to reach **n byte** in total.  
-    Example: `('%-7.4s' * $var)` returns `abcd   `.
+- `%-n.xs`
+先頭から **x バイト**を返します。合計で **n バイト**になるように **末尾のスペース**で埋められます。
+例: `abcd   ` は `abcd   ` を返します。
 
--   `%ns`  
-    Adds **spaces to the start** to make the total length **n byte**, if needed.  
-    Example: `('%15s' * $var)` returns ` abcdefghijklmn`.
+- `%ns`
+必要に応じて、先頭に **スペースを追加**して、全長を **n バイト**にします。
+例: ` abcdefghijklmn` は ` abcdefghijklmn` を返します。
 
--   `%-ns`  
-    Adds **spaces to the end** to make the total length **n byte**, if needed.  
-    Example: `('%-15s' * $var)` returns `abcdefghijklmn `.
+- `%-ns`
+必要に応じて、**末尾にスペース**を追加して、合計の長さを **n バイト**にします。
+例: `abcdefghijklmn ` は `abcdefghijklmn ` を返します。
 
-Remember that the usage of this format is limited.
+この形式の使用は制限されていることに注意してください。
 
-## Buttons Mappings
+## ボタンのマッピング
 
-`button_mappings` allows you to modify what would be pressed when a certain control is inputted. This control can either be from a keyboard and mouse, touch, or controller.
+`button_mappings` を使用すると、特定のコントロールが入力されたときに押される内容を変更できます。このコントロールは、キーボードとマウス、タッチ、またはコントローラーから行うことができます。
 
-Here's an example of a button element with the `button_mappings` property:
+以下は、`button_mappings` プロパティを持つボタン要素の例です。
 
 ```json
 {
@@ -881,15 +881,15 @@ Here's an example of a button element with the `button_mappings` property:
 }
 ```
 
-### Mapping types
+### マッピングの種類
 
-Defines the scope of the specified button mapping:
+指定されたボタン マッピングの範囲を定義します。
 
--   `focused` - means when the button is hovered onto first
--   `pressed` - means when the button is clicked or pressed
--   `global` - means when the button exists and is called on the screen
+- `focused` - ボタンが最初にホバーされたときを意味します
+- `pressed` - ボタンがクリックまたは押されたときを意味します
+- `global` - ボタンが存在し、画面上で呼び出されたときを意味します
 
-As long as the `from_button_id` is inputted with it's appropriate `mapping_type`, it will meet the conditions and therefore trigger the `to_button_id` property:
+`to_button_id` が適切な `to_button_id` で入力されている限り、条件を満たしているため、`to_button_id` プロパティがトリガーされます。
 
 ```json
 {
@@ -919,11 +919,11 @@ As long as the `from_button_id` is inputted with it's appropriate `mapping_type`
 }
 ```
 
-### Common button IDs
+### 共通のボタン ID
 
-These are the list of common button IDs you can use in `from_button_id` property.
+これらは、`from_button_id` プロパティで使用できる共通のボタン ID のリストです。
 
-**For mouse and keyboard:**
+**マウスとキーボードの場合:**
 | Button ID | Description |
 |--------------------------------|-------------------|
 | `button.menu_select` | Mouse left click |
@@ -937,7 +937,7 @@ These are the list of common button IDs you can use in `from_button_id` property
 | `button.menu_right` | RIGHT ARROW key |
 | `button.menu_autocomplete` | TAB key |
 
-**For controllers:**
+**コントローラーの場合:**
 | Button ID | Description |
 |--------------------------------|----------------|
 | `button.controller_select ` | X/A button |
@@ -949,33 +949,33 @@ These are the list of common button IDs you can use in `from_button_id` property
 | `button.menu_left` | LEFT DPAD key |
 | `button.menu_right` | RIGHT DPAD key |
 
-It's a good practice in creating UIs to also add support for various different controls across different platforms with different control methods.
+UI を作成する際には、さまざまなコントロール方法を使用するさまざまなプラットフォームにわたるさまざまなコントロールのサポートを追加することをお勧めします。
 
-## Modifications
+## 変更
 
-To modify JSON UI in a non-intrusive way, you can use the `modifications` property to modify previously existing JSON UI elements from other packs (usually vanilla JSON UI files). Doing this makes sure only necessary parts are modified unless otherwise intended, to improve compatibility with other packs that modify the JSON UI.
+非侵入的な方法で JSON UI を変更するには、`modifications` プロパティを使用して、他のパック (通常はバニラ JSON UI ファイル) からの既存の JSON UI 要素を変更できます。これを行うと、特に意図しない限り、必要な部分のみが変更されるようになり、JSON UI を変更する他のパックとの互換性が向上します。
 
-| Modification    | Description                                 |
+| Modification    | Description |
 | --------------- | ------------------------------------------- |
-| `insert_back`   | **insert** at end of array                  |
-| `insert_front`  | **insert** at start of array                |
-| `insert_after`  | **insert** after target in array            |
-| `insert_before` | **insert** before target in array           |
-| `move_back`     | **move** target to end of array             |
-| `move_front`    | **move** target to start of array           |
-| `move_after`    | **move** target after second target         |
-| `move_before`   | **move** target before second target        |
-| `swap`          | **swap** first target with second target    |
+| `insert_back`   | **insert** at end of array |
+| `insert_front`  | **insert** at start of array |
+| `insert_after`  | **insert** after target in array |
+| `insert_before` | **insert** before target in array |
+| `move_back`     | **move** target to end of array |
+| `move_front`    | **move** target to start of array |
+| `move_after`    | **move** target after second target |
+| `move_before`   | **move** target before second target |
+| `swap`          | **swap** first target with second target |
 | `replace`       | **replace** first target with second target |
-| `remove`        | **remove** target                           |
+| `remove`        | **remove** target |
 
-### Examples
+### 例
 
-#### Front/Back
+#### 表/裏
 
-Modify anchored from the top (start) or to the bottom (end) of the list.
+アンカー付きでリストの上部 (開始) または下部 (終了) に変更します。
 
-Prefix the new `foo` control from the top of the list:
+新しい `foo` コントロールにリストの先頭からプレフィックスを付けます。
 
 ```json
 {
@@ -989,7 +989,7 @@ Prefix the new `foo` control from the top of the list:
 }
 ```
 
-Append the new `foo` control to the bottom of the list:
+新しい `foo` コントロールをリストの最後に追加します。
 
 ```json
 {
@@ -1003,7 +1003,7 @@ Append the new `foo` control to the bottom of the list:
 }
 ```
 
-Move the existing `foo` control to the top of the list:
+既存の `foo` コントロールをリストの先頭に移動します。
 
 ```json
 {
@@ -1017,7 +1017,7 @@ Move the existing `foo` control to the top of the list:
 }
 ```
 
-Move the existing `foo` control to the bottom of the list:
+既存の `foo` コントロールをリストの一番下に移動します。
 
 ```json
 {
@@ -1031,7 +1031,7 @@ Move the existing `foo` control to the bottom of the list:
 }
 ```
 
-Move the existing `#example_binding_2` binding to the top of the list:
+既存の `#example_binding_2` バインディングをリストの先頭に移動します。
 
 ```json
 {
@@ -1043,7 +1043,7 @@ Move the existing `#example_binding_2` binding to the top of the list:
 }
 ```
 
-Move the existing `#example_binding_2` binding to the bottom of the list:
+既存の `#example_binding_2` バインディングをリストの一番下に移動します。
 
 ```json
 {
@@ -1055,11 +1055,11 @@ Move the existing `#example_binding_2` binding to the bottom of the list:
 }
 ```
 
-#### After/Before
+#### 後/前
 
-Modify anchored below (after) or above (before) an existing control or binding from the list.
+リストの既存のコントロールまたはバインディングの下 (後) または上 (前) にアンカーされたものを変更します。
 
-Add the new `foo` control below the `second_target` control from the list:
+リストの `second_target` コントロールの下に新しい `second_target` コントロールを追加します。
 
 ```json
 {
@@ -1073,7 +1073,7 @@ Add the new `foo` control below the `second_target` control from the list:
 }
 ```
 
-Add the new `foo` control above the `second_target` control from the list:
+リストの `second_target` コントロールの上に新しい `second_target` コントロールを追加します。
 
 ```json
 {
@@ -1087,7 +1087,7 @@ Add the new `foo` control above the `second_target` control from the list:
 }
 ```
 
-Add the new `#my_binding_1` binding below the `#example_binding_2` binding from the list:
+リストの `#example_binding_2` バインディングの下に新しい `#example_binding_2` バインディングを追加します。
 
 ```json
 {
@@ -1104,7 +1104,7 @@ Add the new `#my_binding_1` binding below the `#example_binding_2` binding from 
 }
 ```
 
-Add the new `#my_binding_1` binding above the `#example_binding_2` binding from the list:
+リストの `#example_binding_2` バインディングの上に新しい `#example_binding_2` バインディングを追加します。
 
 ```json
 {
@@ -1121,7 +1121,7 @@ Add the new `#my_binding_1` binding above the `#example_binding_2` binding from 
 }
 ```
 
-Move the existing `foo` control below the `second_target` control from the list:
+既存の `second_target` コントロールをリストから `second_target` コントロールの下に移動します。
 
 ```json
 {
@@ -1135,7 +1135,7 @@ Move the existing `foo` control below the `second_target` control from the list:
 }
 ```
 
-Move the existing `foo` control above the `second_target` control from the list:
+既存の `second_target` コントロールをリストから `second_target` コントロールの上に移動します。
 
 ```json
 {
@@ -1149,7 +1149,7 @@ Move the existing `foo` control above the `second_target` control from the list:
 }
 ```
 
-Move the existing `#example_binding_1` binding below the `#example_binding_2` binding from the list:
+既存の `#example_binding_2` バインディングをリストから `#example_binding_2` バインディングの下に移動します。
 
 ```json
 {
@@ -1164,7 +1164,7 @@ Move the existing `#example_binding_1` binding below the `#example_binding_2` bi
 }
 ```
 
-Move the existing `#example_binding_1` binding above the `#example_binding_2` binding from the list:
+既存の `#example_binding_2` バインディングをリストから `#example_binding_2` バインディングの上に移動します。
 
 ```json
 {
@@ -1179,11 +1179,11 @@ Move the existing `#example_binding_1` binding above the `#example_binding_2` bi
 }
 ```
 
-#### Swap/Replace/Remove
+#### 交換/置換/削除
 
-Modify anchored to at least one existing controls or bindings:
+少なくとも 1 つの既存のコントロールまたはバインディングにアンカーされた変更を行います。
 
-Swap the position of the existing `#example_binding_1` and `#example_binding_2` bindings:
+既存の `#example_binding_2` と `#example_binding_2` バインディングの位置を交換します。
 
 ```json
 {
@@ -1198,7 +1198,7 @@ Swap the position of the existing `#example_binding_1` and `#example_binding_2` 
 }
 ```
 
-Replace the existing `#example_binding_1` binding to the new `#replacement_binding` binding:
+既存の `#replacement_binding` バインディングを新しい `#replacement_binding` バインディングに置き換えます。
 
 ```json
 {
@@ -1213,7 +1213,7 @@ Replace the existing `#example_binding_1` binding to the new `#replacement_bindi
 }
 ```
 
-Remove the existing `#example_binding_1` binding:
+既存の `#example_binding_1` バインディングを削除します。
 
 ```json
 {

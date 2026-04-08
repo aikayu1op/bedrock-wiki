@@ -6,25 +6,25 @@ mentions:
     - Joelant05
     - AFoxyToast
     - TheItsNameless
-description: The textures_list file is Minecraft's way of caching each texture so that it can retrieve it faster than looking through each image in your textures folder.
+description: textures_list ファイルは、Minecraft が各テクスチャをキャッシュして、textures フォルダー内の各画像を探すより速く取得できるようにする仕組みです。
 ---
 
-## General Overview
+## 概要
 
-The textures list is Minecraft's way of _caching_ each texture so that it can retrieve it faster than looking through each image in your textures folder.
-This is especially important when you have an abundance of textures, where Minecraft could potentially mess up and swap textures or even not load them at all.
+textures list は、Minecraft が各テクスチャを _キャッシュ_ して、textures フォルダー内の各画像を順に探すより速く取得できるようにする仕組みです。
+テクスチャが大量にあるときは特に重要で、Minecraft がテクスチャを取り違えたり、まったく読み込まなかったりする可能性を減らせます。
 
-Minecraft may display a content log _warning_ if you don't have your textures listed in the file.
-You can ignore it if you have a small amount, but it is recommended that you list the textures anyway.
+textures をファイルに列挙していない場合、Minecraft が content log に _warning_ を出すことがあります。
+テクスチャ数が少ないなら無視しても構いませんが、それでも一覧には入れておくことが推奨されます。
 
-## Which Textures Should Be Included?
+## どのテクスチャを入れるべき？
 
-Any texture! All textures can and _should_ be used in the `textures_list.json` file for best practice and performance.
+どんなテクスチャでも構いません。ベストプラクティスとパフォーマンスの観点からは、すべてのテクスチャを `textures_list.json` に入れるべきです。
 
-## File Structure
+## ファイル構成
 
-The structure is simple. The file itself is in `RP/textures` and is named `textures_list.json`.
-The file contains an array of texture paths (file paths in the `textures` folder excluding extensions such as `.texture_set.json` and `.png`):
+構成は単純です。ファイル自体は `RP/textures` に置き、名前は `textures_list.json` です。
+ファイルにはテクスチャパスの配列を入れます（`textures` フォルダー内のファイルパスで、`.texture_set.json` や `.png` などの拡張子は除きます）。
 
 <CodeHeader>RP/textures/textures_list.json</CodeHeader>
 
@@ -44,7 +44,7 @@ The file contains an array of texture paths (file paths in the `textures` folder
 ]
 ```
 
-## Automating
+## 自動化
 
-If you have a lot of textures, it will be tedious to go and list all the texture paths.
-In this case you might prefer start to using [Regolith](https://regolith-docs.readthedocs.io) with its wonderful filters.
+テクスチャが大量にあると、すべてのテクスチャパスを手で列挙するのは面倒です。
+その場合は、便利なフィルターを備えた [Regolith](https://regolith-docs.readthedocs.io) を使うほうがよいかもしれません。

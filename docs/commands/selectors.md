@@ -1,5 +1,5 @@
 ---
-title: Understanding Selectors
+title: セレクターの理解
 category: General
 mentions:
     - Science-geek42
@@ -12,97 +12,97 @@ mentions:
     - jeanmajid
     - keyyard
 nav_order: 2
-description: Understanding target selectors in commands.
+description: コマンド内のターゲットセレクターを理解します。
 ---
 
-Target selectors are used in commands to target who you want to execute a command on without explicitly setting a target, such as a player's name. A target selector is comprised of a selector variable, and optionally a list of selector arguments.
+ターゲットセレクターは、プレイヤー名のように対象を明示的に指定しなくても、コマンドを実行したい相手を指定するために使います。ターゲットセレクターは、セレクター変数と、必要に応じてセレクター引数の一覧で構成されます。
 
-## Selector Variables
+## セレクター変数
 
-The selector variable defines the broad list of entities to select. There are seven selector variables to choose from:
+セレクター変数は、選択するエンティティの大まかな範囲を定義します。選べるセレクター変数は 7 つあります。
 
--   `@a` - Target all players
--   `@p` - Target the nearest player
--   `@r` - Target a random player
--   `@e` - Target all entities
--   `@n` - Target the nearest entity
--   `@s` - Target the executor
--   `@initiator` - Target the player interacting with an NPC
+-   `@a` - すべてのプレイヤーを対象にする
+-   `@p` - 最も近いプレイヤーを対象にする
+-   `@r` - ランダムなプレイヤーを対象にする
+-   `@e` - すべてのエンティティを対象にする
+-   `@n` - 最も近いエンティティを対象にする
+-   `@s` - 実行者を対象にする
+-   `@initiator` - NPC とやり取りしているプレイヤーを対象にする
 
-## Selector Arguments
+## セレクター引数
 
-Selector arguments can narrow down a list of target candidates to those who meet certain conditions. In order to use selector arguments, you must first have a selector variable. To start with selector arguments you must add square brackets `[]` to the end of the chosen target selector like this: `kill @e[]`. Multiple selector arguments can be used by separating them with commas.
+セレクター引数は、候補の中から特定の条件を満たす対象に絞り込むために使います。使うには、まずセレクター変数が必要です。引数を使うには、選んだターゲットセレクターの末尾に `[]` を付けます。例: `kill @e[]`。複数のセレクター引数はカンマで区切って使えます。
 
 ### Type
 
-Limits the selection of targets by their identifier. Negating the argument selects entities without that identifier. This argument cannot be repeated unless negated, since a given entity can only have one identifier. This argument can be used with the selector `@r` to select entities randomly.
+識別子によって対象の選択を制限します。引数を否定すると、その識別子を持たないエンティティを選択します。1 つのエンティティが持てる識別子は 1 つだけなので、この引数は否定しない限り繰り返せません。この引数はセレクター `@r` と組み合わせて、ランダムなエンティティを選ぶこともできます。
 
--   `type=<identifier>`—Include only entities with the given identifier.
--   `type=!<identifier>`—Exclude any entities with the given identifier.
+-   `type=<identifier>`—指定した識別子を持つエンティティだけを含めます。
+-   `type=!<identifier>`—指定した識別子を持つエンティティを除外します。
 
-**Examples:**
+**例:**
 
-Affect all pigs with levitation:
+すべての豚に浮遊を付与する:
 
 -   `/effect @e[type=pig] levitation`
 
-Kill all entities that are not arrows and snowballs:
+矢でも雪玉でもないすべてのエンティティを殺す:
 
 -   `/kill @e[type=!arrow,type=!snowball]`
 
 ### Count
 
-Limits the number of selected entities, following selector sorting rules.
+セレクターの並び順に従って、選択するエンティティ数を制限します。
 
-The selectors `@a`, `@p`, and `@e` sort by increasing distance, while `@r` sorts randomly. For the variables `@p` and `@r`, this argument defaults to 1. Negating this argument reverses the sorting order; random sorting cannot be negated.
+`@a`、`@p`、`@e` は距離が近い順に並び、`@r` はランダムに並びます。`@p` と `@r` では、この引数の既定値は 1 です。引数を否定すると並び順が逆になりますが、ランダム並びは否定できません。
 
--   `c=<count>`—Select up to `<count>` entities.
+-   `c=<count>`—`<count>` 個までのエンティティを選択します。
 
-**Examples:**
+**例:**
 
-Clear stone from the closest five players:
+最も近い 5 人のプレイヤーから石を消す:
 
 -   `/clear @a[c=5] stone`
 
-Damage the furthest two skeletons:
+最も遠い 2 体のスケルトンにダメージを与える:
 
 -   `/damage @e[type=skeleton,c=-2] 2`
 
 ### Position
 
-Changes the position a selector starts its search at. It also modifies where the distance and volume arguments are positioned. Leaving any undefined defaults to the command's current position.
+セレクターが検索を始める位置を変更します。distance と volume の引数が参照する基準位置も変わります。未指定の値は、コマンドの現在位置が既定になります。
 
-[Relative coordinates](/commands/relative-coordinates#relative-coordinates) can be used to define a relative offset from the command's position.
+[相対座標](/commands/relative-coordinates#relative-coordinates) を使うと、コマンド位置からの相対オフセットを指定できます。
 
--   `x=<value>`, `y=<value>`, and `z=<value>`—Defines a position for the target selector.
+-   `x=<value>`, `y=<value>`, `z=<value>`—ターゲットセレクターの基準位置を定義します。
 
-**Examples:**
+**例:**
 
-Teleport the closest player to (140, 64, -200) ten blocks up:
+最も近いプレイヤーを (140, 64, -200) の上 10 ブロックにテレポートする:
 
 -   `/teleport @p[x=140,y=64,z=-200] ~ ~10 ~`
 
 ### Distance
 
-Limits the selection of targets by their spherical distance from the selector. This selects entities by their feet.
+セレクターからの球状距離で対象を制限します。エンティティは足元の位置を基準に判定されます。
 
--   `rm=<value>` and `r=<value>`—Selects entities between the minimum and maximum number of blocks away, inclusive and respectively.
+-   `rm=<value>` と `r=<value>`—それぞれ最小距離と最大距離を含めて、その間のエンティティを選択します。
 
-**Examples:**
+**例:**
 
-Kill all chickens between two and six blocks away:
+2〜6 ブロック離れたすべてのニワトリを殺す:
 
 -   `/kill @e[type=chicken,rm=2,r=6]`
 
-Enchant the held item with Sharpness for all players within one block of (0, 100, 0):
+`(0, 100, 0)` から 1 ブロック以内にいるすべてのプレイヤーの持ち物に鋭さを付与する:
 
 -   `/enchant @a[x=0,y=100,z=0,r=1] sharpness`
 
 ### Volume
 
-Limits the selection of targets to those within or intersecting a specified cuboid volume (bounding box). There are three arguments, each determining the size of the box along their respective axes. If at least one argument is defined, any remaining arguments left undefined are assumed to be 0. This selects entities by their hitbox.
+指定した直方体の範囲内、またはその範囲と交差する対象に絞り込みます。各軸のサイズを決める 3 つの引数があります。少なくとも 1 つを指定した場合、未指定の残りは 0 とみなされます。エンティティはヒットボックス基準で選択されます。
 
-The general formula for calculating the volume between two positions can be viewed as:
+2 つの位置の間の範囲を求める一般的な式は次のとおりです。
 
 ```
 dx = x2 - x1
@@ -110,225 +110,225 @@ dy = y2 - y1
 dz = z2 - z1
 ```
 
--   `dx=<value>`, `dy=<value>`, and `dz=<value>`—Selects entities inside the given bounding box.
+-   `dx=<value>`, `dy=<value>`, `dz=<value>`—指定した境界ボックス内のエンティティを選択します。
 
-**Examples:**
+**例:**
 
-List all entities within a 12x30x2 box:
+12x30x2 のボックス内にいるすべてのエンティティを一覧表示する:
 
 -   `/say @e[dx=12,dz=30,dy=2]`
 
-Add the "wiki:lobby" tag to all players between (-400, 0, -350) and (-150, 256, 50):
+`(-400, 0, -350)` と `(-150, 256, 50)` の間にいるすべてのプレイヤーに "wiki:lobby" タグを付ける:
 
 -   `/tag @a[x=-400,y=0,z=-350,dx=250,dy=256,dz=400] add wiki:lobby`
 
-Add the "wiki:warp" tag to all entities between (-1.5, 0, -2) and (1, 0, 1.5):
+`(-1.5, 0, -2)` と `(1, 0, 1.5)` の間にいるすべてのエンティティに "wiki:warp" タグを付ける:
 
 -   `/tag @a[x=-1.5,y=0,z=-2,dx=2.5,dz=3.5] add wiki:warp`
 
 :::info NOTE:
 
-The target will still be selected even if their hitbox is only partially contained within the volume.
+対象のヒットボックスが範囲内に一部だけ入っていても、選択されます。
 
 ![](volume.png)
 
-In this visual representation, we can see that the horse with a larger hitbox is selected, while the player with a smaller hitbox is not selected, despite standing at the same point.
+この図では、同じ位置に立っていても、ヒットボックスの大きい馬は選択され、ヒットボックスの小さいプレイヤーは選択されていないことが分かります。
 
 :::
 
-Considering the above note, if we want to detect players exactly at a certain Y level (e.g., Y=10) and not partially, we can use a command like this:
+上の注意を踏まえると、特定の Y 座標（例: Y=10）にちょうどいるプレイヤーだけを、部分的にかかる対象を除いて検出したい場合は、次のようなコマンドを使えます。
 
 -   `/execute as @a at @s if entity @s[y=10,r=1] unless entity @s[y=9,r=1] run say found player`
 
 ### Scores
 
-Limits the selection of targets by their score value. This argument is represented as an object, with key-value pairs for a scoreboard objective and a value. The value can represent a range of numbers, using the range syntax. The value of a score can be negated to test if the entity does not have a score value within that range.
+スコア値によって対象を制限します。この引数はオブジェクトとして表され、スコアボード目標と値の組み合わせを持ちます。値は範囲構文を使って数値の範囲を表せます。スコア値を否定すると、その範囲内のスコアを持たないかを判定できます。
 
--   `scores={<objective>=<value>}`—Selects entities whose score under the given objective matches the given value.
+-   `scores={<objective>=<value>}`—指定した目標でのスコアが、与えられた値と一致するエンティティを選択します。
 
-The range syntax works as follows:
+範囲構文は次のように動作します。
 
--   `N..` is any number greater than or equal to N.
--   `..N` is any number less than or equal to N.
--   `N..M` is any number between N and M, inclusive.
+-   `N..` は N 以上の数値です。
+-   `..N` は N 以下の数値です。
+-   `N..M` は N から M までの数値です。
 
-**Examples:**
+**例:**
 
-Set the "points" score for all players with a "wiki:points" score of ten to 0:
+`"wiki:points"` が 10 のすべてのプレイヤーの `"points"` スコアを 0 にする:
 
 -   `/scoreboard players set @p[scores={wiki:points=10}] wiki:points 0`
 
-Add the "wiki:start" tag to armor stands with both a "wiki:started" score of one, and a "wiki:timer" score of 20 or less:
+`"wiki:started"` が 1 で、かつ `"wiki:timer"` が 20 以下のアーマースタンドに "wiki:start" タグを付ける:
 
 -   `/tag @e[type=armor_stand,scores={wiki:started=1,wiki:timer=..20}] add wiki:start`
 
 ### Name
 
-Limits the selection of targets by name. Negating the argument selects entities whose name does not match.
+名前で対象を制限します。引数を否定すると、名前が一致しないエンティティを選択します。
 
--   `name=<name>`—Include only entities with the given name.
--   `name=!<name>`—Exclude any entities with the given name.
+-   `name=<name>`—指定した名前のエンティティだけを含めます。
+-   `name=!<name>`—指定した名前のエンティティを除外します。
 
-**Examples:**
+**例:**
 
-List all zombies named Shadow:
+Shadow という名前のゾンビをすべて一覧表示する:
 
 -   `/say @e[type=zombie,name="Shadow"]`
 
-Give one level to players both not named Steve and not named Alex:
+Steve でも Alex でもないプレイヤー全員に 1 レベル与える:
 
 -   `/xp 1L @a[name=!"Steve",name=!"Alex"]`
 
 ### Tag
 
-Limits the selection of targets by their tags. This argument can be repeated to test for multiple tags, and all filters must pass for an entity to be selected. Negating this argument selects entities without that tag.
+タグで対象を制限します。この引数は複数回書けて、複数タグの判定に使えます。エンティティを選択するには、すべての条件を満たす必要があります。引数を否定すると、そのタグを持たないエンティティを選びます。
 
--   `tag=<tag>`—Include only entities with the given tag.
--   `tag=!<tag>`—Exclude any entities with the given tag.
+-   `tag=<tag>`—指定したタグを持つエンティティだけを含めます。
+-   `tag=!<tag>`—指定したタグを持つエンティティを除外します。
 
-**Examples:**
+**例:**
 
-Kill all mobs with the tag "wiki:marked", and without the tag "wiki:exempt":
+`"wiki:marked"` を持ち、`"wiki:exempt"` を持たないすべてのモブを殺す:
 
 -   `/kill @e[tag=wiki:marked,tag=!wiki:exempt]`
 
 ### Family
 
-Limits the selection of targets by type family. This argument can be repeated to test for multiple families, and all filters must pass for an entity to be selected. Negating this argument selects entities whose type family does not match.
+タイプファミリーで対象を制限します。この引数は複数回書けて、複数ファミリーの判定に使えます。エンティティを選択するには、すべての条件を満たす必要があります。引数を否定すると、そのタイプファミリーに一致しないエンティティを選びます。
 
--   `family=<family>`—Include only entities with the given type family.
--   `family=!<family>`—Exclude any entities with the given type family.
+-   `family=<family>`—指定したタイプファミリーを持つエンティティだけを含めます。
+-   `family=!<family>`—指定したタイプファミリーを持つエンティティを除外します。
 
-**Examples:**
+**例:**
 
-Affect all entities in the "monster" family with Regeneration:
+`"monster"` ファミリーのすべてのエンティティに再生を付与する:
 
 -   `/effect @e[family=monster] regeneration`
 
 ### Property
 
-Limits the selection of targets by property. This argument can be repeated to test for multiple families, and all filters must pass for an entity to be selected. Negating this argument selects entities whose property does not match. Properties can be defined in the Entity Behavior file, and various from types (bool, int, enum,..etc based on behavior set-up)
+プロパティで対象を制限します。この引数は複数回書けて、複数ファミリーの判定に使えます。エンティティを選択するには、すべての条件を満たす必要があります。引数を否定すると、そのプロパティに一致しないエンティティを選びます。プロパティは Entity Behavior ファイルで定義でき、設定内容に応じて bool、int、enum などさまざまな型を取れます。
 
--   `has_property={key=value}` - Include only entities with the correct property
--   `has_property=!{key=value}` - Excludes any entities with the correct property
+-   `has_property={key=value}` - 正しいプロパティを持つエンティティだけを含めます
+-   `has_property=!{key=value}` - 正しいプロパティを持つエンティティを除外します
 
--   **Examples**
-    Kill all entities with wiki:property=true:
+-   **例**
+    `wiki:property=true` を持つすべてのエンティティを殺す:
 -   `/kill @e[has_property={wiki:property=true}]`
 
 ### Rotation
 
-Limits the selection of targets by their rotation. There are two types of rotation: x-rotation, which is vertical rotation around the x-axis; and y-rotation, which is horizontal rotation around the y-axis. X-rotation ranges between -90 and 90 (180° total), going from looking up to down; and y-rotation ranges between -180 and 180 (360° total), starting and ending at North, wrapping around clockwise.
+回転で対象を制限します。回転には 2 種類あり、x-rotation は x 軸まわりの縦回転、y-rotation は y 軸まわりの横回転です。x-rotation は -90 から 90 まで（合計 180°）で、上を見る向きから下を見る向きまでを表します。y-rotation は -180 から 180 まで（合計 360°）で、北を起点に時計回りで一周します。
 
--   `rxm=<value>` and `rx=<value>`—Selects entities whose x-rotation is between the minimum and maximum values, inclusive and respectively.
--   `rym=<value>` and `ry=<value>`—Selects entities whose y-rotation is between the minimum and maximum values, inclusive and respectively.
+-   `rxm=<value>` と `rx=<value>`—x-rotation が最小値から最大値の間にあるエンティティを、それぞれ含めて選択します。
+-   `rym=<value>` と `ry=<value>`—y-rotation が最小値から最大値の間にあるエンティティを、それぞれ含めて選択します。
 
-_x-rotation diagram shared by @SpacebarNinja:_
+_@SpacebarNinja 提供の x-rotation 図:_
 
 <WikiImage src="x-rotation.png" width="400" />
 
-_y-rotation diagram shared by @SpacebarNinja:_
+_@SpacebarNinja 提供の y-rotation 図:_
 
 <WikiImage src="y-rotation.png" width="400" />
 
-**Examples:**
+**例:**
 
-Affect all players looking at or above the horizon with Blindness for one second:
+地平線以上を見ているすべてのプレイヤーに 1 秒間の盲目を付与する:
 
 -   `/effect @a[rx=0] blindness 1` (0 or less)
 
-Damage all players facing generally south:
+おおむね南を向いているすべてのプレイヤーにダメージを与える:
 
 -   `/damage @a[rym=-45, ry=45] 1`
 
-**All Facing Directions:**
+**向きの一覧:**
 
-| Facing Direction | Range (`ry`,`rym`)  |
+| 向き | 範囲 (`ry`,`rym`)  |
 | ---------------- | ------------------- |
-| North            | `[ry=-135,rym=135]` |
-| South            | `[ry=45,rym=-45]`   |
-| East             | `[ry=-45,rym=-135]` |
-| West             | `[ry=135,rym=45]`   |
-| North West       | `[ry=180,rym=90]`   |
-| North East       | `[ry=-90,rym=-180]` |
-| South West       | `[ry=90,rym=0]`     |
-| South East       | `[ry=0,rym=-90]`    |
+| 北              | `[ry=-135,rym=135]` |
+| 南              | `[ry=45,rym=-45]`   |
+| 東              | `[ry=-45,rym=-135]` |
+| 西              | `[ry=135,rym=45]`   |
+| 北西            | `[ry=180,rym=90]`   |
+| 北東            | `[ry=-90,rym=-180]` |
+| 南西            | `[ry=90,rym=0]`     |
+| 南東            | `[ry=0,rym=-90]`    |
 
-**Useful Articles Related to the Rotation Arguments:**
+**Rotation 引数に関する参考記事:**
 
 1. **[Compass Display](/commands/compass-display.md)**
 2. **[Item Drop Detection](/commands/detect-item-drop.md)**
 
 ### Level
 
-Limits the selection of targets by experience levels. Only players can have EXP, so this filters out non-player targets.
+経験値レベルで対象を制限します。EXP を持てるのはプレイヤーだけなので、プレイヤー以外は除外されます。
 
--   `lm=<amount>` and `l=<amount>`—Selects players whose EXP levels are between the minimum and maximum values specified, inclusive and respectively.
+-   `lm=<amount>` と `l=<amount>`—指定した最小値と最大値の間にある EXP レベルのプレイヤーを、それぞれ含めて選択します。
 
-**Examples:**
+**例:**
 
-Give all players who have nine or less levels a gold ingot:
+9 レベル以下のすべてのプレイヤーに金インゴットを与える:
 
 -   `/give @a[lm=9] gold_ingot`
 
-Give all players who have ten or more levels a gold ingot:
+10 レベル以上のすべてのプレイヤーに金インゴットを与える:
 
 -   `/give @a[l=10] gold_ingot`
 
-Give all players who have between ten and twenty levels a diamond:
+10 から 20 レベルのすべてのプレイヤーにダイヤモンドを与える:
 
 -   `/give @a[lm=10, l=20] diamond`
 
 ### Game Mode
 
-Limits the selection of targets by game mode. Only players can use game mode, so this filters out non-player targets. Negating the argument selects targets whose game mode does not match.
+ゲームモードで対象を制限します。ゲームモードを持てるのはプレイヤーだけなので、プレイヤー以外は除外されます。引数を否定すると、そのゲームモードと一致しない対象を選びます。
 
--   `m=<gamemode>`—Selects players by their game mode.
+-   `m=<gamemode>`—ゲームモードでプレイヤーを選択します。
 
-**All Game Mode Values:**
+**ゲームモードの値一覧:**
 
-| Game Mode | Values                |
+| ゲームモード | 値                |
 | --------- | --------------------- |
-| Survival  | `0`, `s`, `survival`  |
-| Creative  | `1`, `c`, `creative`  |
-| Adventure | `2`, `a`, `adventure` |
-| Spectator | `spectator`           |
-| Default   | `d`, `default`        |
+| サバイバル  | `0`, `s`, `survival`  |
+| クリエイティブ  | `1`, `c`, `creative`  |
+| アドベンチャー | `2`, `a`, `adventure` |
+| スペクテイター | `spectator`           |
+| 既定   | `d`, `default`        |
 
-**Examples:**
+**例:**
 
-List all players in Creative mode:
+クリエイティブモードのプレイヤーをすべて一覧表示する:
 
 -   `/say @a[m=creative]`
 
-Set the game mode to Creative mode for players both not in Survival mode, and not in Adventure mode:
+サバイバルモードでもアドベンチャーモードでもないプレイヤーのゲームモードをクリエイティブに設定する:
 
 -   `/gamemode creative @a[m=!survival,m=!adventure]`
 
 ### Items
 
-Limits the selection of targets by what items they have in their inventory. This argument is represented as an object, or an array of objects, with up to one each of the following parameters:
+インベントリ内にあるアイテムによって対象を制限します。この引数はオブジェクト、またはオブジェクトの配列として表され、次の各パラメーターを 1 つずつ指定できます。
 
--   `item=<string>`—The identifier of the item to test for, and the only required argument. This can accept custom identifiers too.
--   `quantity=<int>`—The amount of the item to test for. Accepts a [range](/commands/selectors#scores) for a value. This argument can also be negated.
--   `data=<int>`—The data value of the item to test for. Defaults to -1. **Currently not functional:** [MCPE-151920](https://bugs.mojang.com/browse/MCPE-151920)
--   `location=<string>`—The slot the item should be located in. Accepts the same arguments as the slotType argument in the `/replaceitem` command.
--   `slot=<int>`—The index of the slot used in the "location" argument, and can only be used with "location". Accepts a range for a value. This argument can be negated.
+-   `item=<string>`—判定対象のアイテム識別子です。唯一必須の引数で、カスタム識別子も使えます。
+-   `quantity=<int>`—判定対象の個数です。値には [範囲](/commands/selectors#scores) を使えます。この引数は否定もできます。
+-   `data=<int>`—判定対象のアイテムデータ値です。既定は -1 です。**現在は機能しません:** [MCPE-151920](https://bugs.mojang.com/browse/MCPE-151920)
+-   `location=<string>`—アイテムが入っているべきスロットです。`/replaceitem` コマンドの slotType 引数と同じ引数を受け付けます。
+-   `slot=<int>`—`location` 引数で使うスロットのインデックスで、`location` と一緒にしか使えません。値には範囲を使えます。この引数は否定できます。
 
-**Examples:**
+**例:**
 
-Checks for players who have a netherite sword in their inventory:
+インベントリにネザライトの剣を持っているプレイヤーを判定する:
 
 -   `/testfor @a[hasitem={item=netherite_sword}]`
 
-Clears 2 apples for players that have four or more apples:
+リンゴを 4 個以上持っているプレイヤーからリンゴを 2 個消す:
 
 -   `/clear @a[hasitem={item=apple,quantity=4..}] apple 2`
 
-Checks for players who have two sticks and two diamonds:
+棒 2 本とダイヤモンド 2 個を持っているプレイヤーを判定する:
 
 -   `/testfor @a[hasitem=[{item=diamond,quantity=2},{item=stick,quantity=2}]]`
 
-Checks for players who doesn't have a stick:
+棒を持っていないプレイヤーを判定する:
 
 -   `/testfor @a[hasitem=[{item=stick,quantity=0}]`

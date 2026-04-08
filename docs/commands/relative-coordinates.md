@@ -1,5 +1,5 @@
 ---
-title: Coordinate System
+title: 座標系
 category: General
 mentions:
     - MedicalJewel105
@@ -8,43 +8,43 @@ mentions:
     - Hatchibombotar
     - TheItsNameless
     - QuazChick
-description: Understanding relative coordinates.
+description: 相対座標の仕組みを理解します。
 ---
 
-## The Coordinate System
+## 座標系
 
-Minecraft stores the locations of blocks and entities in the world using a system of three-dimensional coordinates, each representing a value in a one-dimensional axis. They are stored in the format of X, then Y, and lastly Z. Whether you are placing structures and blocks, or teleporting and summoning entities, you can, and are sometimes required to, put in coordinates. They don't need to always be real values however; you can substitute world coordinates for relative values, either based in world space or local space.
+Minecraft は、ワールド内のブロックやエンティティの位置を、3次元座標の仕組みで保存します。各座標は1本の軸上の値を表します。順番は X、Y、Z です。構造物やブロックを設置するときも、エンティティをテレポートさせたり召喚したりするときも、座標を指定できますし、場合によっては必須です。ただし、必ずしも実数値である必要はありません。ワールド座標の代わりに、ワールド空間またはローカル空間に基づく相対値を使えます。
 
 ![](coordinates.png)
 
-_You may already be familiar with coordinates if you've enabled the Show Coordinates world option!_
+_ワールド設定で「座標を表示」を有効にしていれば、すでに座標に慣れているかもしれません。_
 
-## Relative Coordinates (~)
+## 相対座標 (~)
 
-Relative coordinates are represented using tildes in place of real coordinates, and represent a position that is relative to the world coordinates its located at. You may insert numbers after a tilde to add an offset to the current position. These can be mixed with world coordinates, but cannot be mixed with local coordinates.
+相対座標は、実際の座標の代わりにチルダ `~` を使って表し、現在のワールド座標を基準にした位置を意味します。チルダの後ろに数値を入れると、現在位置からのオフセットを加えられます。これはワールド座標と混在できますが、ローカル座標とは混在できません。
 
-Examples:
+例:
 
--   `~ ~ ~`: Current position with no changes.
--   `~5 ~-2 ~`: Current position with a 5-block X offset and a negative 2-block Y offset.
+-   `~ ~ ~`: 変更なしの現在位置
+-   `~5 ~-2 ~`: X に 5 ブロック、Y に -2 ブロックのオフセットを加えた現在位置
 
-### Rotations
+### 回転
 
-Relative coordinates can also be used in the context of rotations, where they represent a rotation that is relative to the current rotation it inherits from. These may also accept numbers after the tilde to add an offset to the current rotation.
+相対座標は回転の文脈でも使えます。この場合は、現在の回転を基準にした回転量を表します。チルダの後ろに数値を入れることで、現在の回転にオフセットを加えられます。
 
-Example: `~90 ~` will add 90° to the current yaw (y-rotation) value.
+例: `~90 ~` は現在の yaw（Y 軸回転）に 90° を加えます。
 
-## Local Coordinates (^)
+## ローカル座標 (^)
 
-Local coordinates are similar to relative coordinates, but represent a position in local space, where the axes are based off of rotation. They take the form `^left ^up ^forward`; you can think of this as `~x ~y ~z` if both your yaw and pitch rotations are 0 (facing straight ahead, due south).
+ローカル座標は相対座標に似ていますが、回転を基準にしたローカル空間の位置を表します。形式は `^left ^up ^forward` です。yaw と pitch の両方が 0 のときは、これを `~x ~y ~z` のように考えられます（真正面、つまり真南を向いている状態）。
 
-Like relative coordinates, you can insert numbers to produce an offset of the current position, in local space. If there is no entity to copy rotation from, the x- and y-rotations are assumed to be 0.
+相対座標と同様に、数値を入れてローカル空間での現在位置からのオフセットを指定できます。回転をコピーする対象のエンティティがない場合、x と y の回転は 0 とみなされます。
 
-Examples:
+例:
 
--   `^10 ^ ^`: Current position with a 10-block offset to the left.
--   `^ ^1.5 ^1`: Current position with a 1.5-block offset upward and a 1-block offset forward.
+-   `^10 ^ ^`: 左に 10 ブロックずらした現在位置
+-   `^ ^1.5 ^1`: 上に 1.5 ブロック、前に 1 ブロックずらした現在位置
 
-## Additional Notes
+## 補足
 
--   The player's eye level is 1.62 blocks above their feet. (~ ~1.62 ~)
+-   プレイヤーの目の高さは、足元から 1.62 ブロック上です。(`~ ~1.62 ~`)

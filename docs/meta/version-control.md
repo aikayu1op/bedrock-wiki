@@ -1,38 +1,38 @@
 ---
-title: Version Control
+title: バージョン管理
 mentions:
     - SirLich
     - sermah
-description: Control changes in add-on files.
+description: アドオンファイルの変更を管理します。
 ---
 
-Version control is the concept of backing up your code iteratively, so you can roll back to specific versions as needed. Version control could be achieved at the most basic level by taking a `.zip` of your add-on every day (or every version) and uploading it to google drive (or saving locally). This isn't unreasonable, but it has three significant difficulties that proper VCS (version control systems) fix:
+バージョン管理とは、コードを段階的にバックアップしておき、必要に応じて特定の版へ戻せるようにする考え方です。最も基本的な方法としては、アドオンを毎日（または更新のたびに）`.zip` にまとめて Google Drive にアップロードするか、ローカルに保存しておくやり方があります。これでも不可能ではありませんが、適切な VCS（version control system, バージョン管理システム）には、次の 3 つの大きな課題を解消する利点があります。
 
--   It isn't easy to compare versions
--   It isn't easy to _actually_ roll-back to a previous version
--   It doesn't do anything to help in team-collaboration
+-   版同士の比較がしにくい
+-   以前の版へ _実際に_ 戻すのがしにくい
+-   チームでの共同作業を助ける仕組みがない
 
-This tutorial will teach the basics of a tool called `git`, and a free, online git storage service called `GitHub. Anyone may follow along, but you will receive the most benefit if you are working in a team environment or often lose your work because you forget to back up.
+このチュートリアルでは、`git` というツールの基本と、無料のオンライン git 保存サービスである `GitHub` を紹介します。誰でも手順を追えますが、チームで作業している場合や、バックアップを忘れて作業を失いがちな場合に、特に効果を実感しやすいはずです。
 
-This tutorial will not be focusing directly on teaching `git` or `GitHub`, as outside knowledge sources better do this. The focus will be on setting up these tools for Minecraft once the basics have been learned.
+このチュートリアルは `git` や `GitHub` を直接教えることを目的にはしていません。そうした内容は、外部の資料のほうが適しています。ここでの焦点は、基本を学んだあとに、Minecraft 向けにこれらのツールをどう設定するかです。
 
 ## Git
 
-`git` is a tool installed locally on your machine and allows you to version your files. You can `commit` changes to your files with a small message (ex. "Fixed issue where dragons couldn't fly after being tamed"), view the full change-list, and quickly jump back to specific changes.
+`git` は自分のマシンにローカルインストールするツールで、ファイルの版管理を行えます。小さなメッセージ（例: 「ドラゴンが手なずけた後に飛べなくなる問題を修正」）付きでファイルの変更を `commit` でき、変更履歴全体を確認したり、特定の変更へすばやく戻ったりできます。
 
-Git is insanely powerful and the de-facto tool for all major programming projects. The most significant drawback for MC work is that it is _complicated_. Be patient while learning.
+Git は非常に強力で、主要なプログラミングプロジェクトで事実上の標準ツールです。MC 作業での最大の欠点は、_複雑_ だという点です。学習中は焦らず進めてください。
 
-For a complete walkthrough of `git`, you should follow the following [git tutorial.](https://www.atlassian.com/git/tutorials/what-is-git)
+`git` の完全な手順については、次の [git tutorial](https://www.atlassian.com/git/tutorials/what-is-git) を参照してください。
 
 ## GitHub
 
-GitHub is a version of your git project (`repository`) that is hosted online. This allows multiple people to work on the same project at the same time and collaborate. This is very helpful for map-making. By hosting on Github, you can also (optionally) make your code public, making it easier than ever to share your add-ons with the world.
+GitHub は、オンラインでホストされる git プロジェクト（`repository`）のことです。これにより複数人が同じプロジェクトで同時に作業し、協力できます。マップ制作ではとても便利です。GitHub でホストすれば、必要に応じてコードを公開し、アドオンを世界に共有しやすくすることもできます。
 
-For a complete walkthrough of using `Github`, you should follow this [github tutorial](https://guides.github.com/activities/hello-world/).
+`GitHub` の使い方を一通り学ぶには、次の [github tutorial](https://guides.github.com/activities/hello-world/) を参照してください。
 
-## Vocabulary Quiz
+## 語彙クイズ
 
-If you've gotten this far, hopefully, you have a GitHub account and are familiar with `git` in a small way. The following terms will be used in this tutorial. If you don't know them, please google :)
+ここまで来たなら、GitHub アカウントを持っていて、`git` にも少しは慣れているはずです。このチュートリアルでは次の用語を使います。知らないものがあれば、ぜひ Google で調べてみてください :)
 
 -   repository
 -   branch
@@ -40,51 +40,51 @@ If you've gotten this far, hopefully, you have a GitHub account and are familiar
 -   github
 -   git
 
-## Setting Up Git
+## Git のセットアップ
 
-This assumes you are adding an _existing_ project to git. The steps are similar if you are starting from scratch.
+ここでは、_既存_ のプロジェクトを git に追加するケースを前提にします。ゼロから始める場合も、手順はほぼ同じです。
 
-### Structure
+### 構成
 
-The big issue with using `git` for add-ons is that `git` generally works by encapsulating a _single_ folder and managing it. Of course, in Bedrock Add-Ons, assets are spread across two folders: The `BP`, and `RP`. To get around this issue, we will place our repository outside of the `com.mojang` folder entirely and then use window `junctions` to "copy" the folders in.
+アドオンで git を使う際の大きな問題は、git が一般に _1 つの_ フォルダーを囲い込んで管理する仕組みだからです。もちろん Bedrock Add-On では、アセットは `BP` と `RP` の 2 つのフォルダーに分かれています。この問題を回避するため、リポジトリは `com.mojang` フォルダーの外に置き、Windows の `junction` を使ってフォルダーを「コピー」したように見せます。
 
-There are many advantages of placing our project in a separate location:
+プロジェクトを別の場所に置くことには、いくつもの利点があります。
 
--   We can include additional files as needed, such as config files, tools, notes, .bb files, etc
--   We can combine the RP and the BP into one repository
--   All of our projects can be easily viewed in a simple location, instead of nested deep within com.mojang
+-   設定ファイル、ツール、メモ、`.bb` ファイルなど、必要に応じて追加ファイルを含められる
+-   RP と BP を 1 つのリポジトリにまとめられる
+-   `com.mojang` の深い階層に埋もれず、すべてのプロジェクトを分かりやすい場所で見られる
 
-### Creating a Git Repository
+### Git リポジトリの作成
 
-Pick a convenient location for your projects. I placed mine at `C:/sirlich/projects`. Make a new folder with the name of your map. We will be using `wiki` as the name of our mock project.
+プロジェクト用に使いやすい場所を選んでください。ここでは例として `C:/sirlich/projects` に置いたことにします。マップ名で新しいフォルダーを作成します。ここではサンプルプロジェクト名として `wiki` を使います。
 
-Right-click the folder, and click `"Open git Bash"`. If this option doesn't appear, you can open `git bash` from the start menu and navigate your project folder. If you don't have `git bash` installed, you should do so now.
+フォルダーを右クリックして、`"Open git Bash"` をクリックします。この項目が表示されない場合は、スタートメニューから `git bash` を開き、プロジェクトフォルダーへ移動してください。`git bash` がインストールされていない場合は、今ここで導入してください。
 
-Type: `git init`. This will create a blank repository in your project.
+次に `git init` と入力します。これでプロジェクト内に空のリポジトリが作成されます。
 
-### Linking Your Existing RP and BP
+### 既存の RP と BP をリンクする
 
-The next step is to make the repository aware of your RP and BP folders. We will be using window symlink "junctions". When we create a junction, we essentially create a wormhole in our file system that will make it appear like your files are in two places at once. Deleting/editing/adding files is perfectly copied over.
+次の手順は、リポジトリに RP と BP フォルダーを認識させることです。ここでは Windows のシンボリックリンクである `junction` を使います。junction を作成すると、ファイルシステムの中にワームホールを作るようなもので、ファイルが 2 か所に同時にあるように見せられます。ファイルの削除・編集・追加は、そのまま反映されます。
 
-Type: `mklink /J wiki_RP "C:/path/to/RP/in/com/mojang"`
-Type: `mklink /J wiki_BP "C:/path/to/BP/in/com/mojang"`
+次のように入力します。`mklink /J wiki_RP "C:/path/to/RP/in/com/mojang"`
+次のように入力します。`mklink /J wiki_BP "C:/path/to/BP/in/com/mojang"`
 
-When you are finished, you should see `wiki_RP` and `wiki_BP` in your project folder, containing all your assets, existing files, etc.
+完了すると、プロジェクトフォルダー内に `wiki_RP` と `wiki_BP` があり、その中にアセットや既存ファイルなどが入っているはずです。
 
-You can now push this repository to `github`, following the tutorial above.
+これで、上のチュートリアルに従ってこのリポジトリを `github` に push できます。
 
-### Extra Files
+### 追加ファイル
 
-Because we created our repository based on symlinks, we can add anything we like into the project folder without worrying about breaking the com.mojang folder. I like to track `.bb` files, cover-art files (`.kra` etc.).
+シンボリックリンクを使ってリポジトリを作成したため、`com.mojang` フォルダーを壊す心配をせずに、プロジェクトフォルダーへ好きなものを追加できます。私は `.bb` ファイルや表紙画像ファイル（`.kra` など）を管理したいです。
 
-You can also add notes, video files, or anything else you want to track.
+メモ、動画ファイル、その他追跡したいものを追加することもできます。
 
-### Working With Your VCS
+### VCS の使い方
 
-The main things to remember about working with VCS:
+VCS を使ううえで覚えておくべき主な点は次のとおりです。
 
--   Always `pull` before starting work
--   Commit and `push` often
--   Always `push` before stopping work
--   If you screw up your files super bad, you can always reset to the last working version. If you commit/push often, hopefully, this wasn't too long ago.
--   Always, and I mean `always` make good commit messages. It's vital when you have to roll back.
+-   作業を始める前には必ず `pull` する
+-   こまめに commit して push する
+-   作業を終える前には必ず `push` する
+-   ファイルをひどく壊してしまっても、最後に正常だった版へいつでも戻せる。こまめに commit/push していれば、そこまで昔の状態ではないはずです。
+-   そして何より、_必ず_ 良い commit メッセージを書く。ロールバックが必要になったときに極めて重要です。

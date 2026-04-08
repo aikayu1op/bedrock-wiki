@@ -1,6 +1,6 @@
 ---
-title: Intro to Blocks
-description: A Hello world guide in making blocks. Learn the block format and how to create basic custom blocks.
+title: ブロック入門
+description: ブロックを作るための Hello world ガイドです。ブロック形式と基本的なカスタムブロックの作成方法を学びます。
 category: General
 nav_order: 1
 tags:
@@ -27,23 +27,23 @@ mentions:
 ---
 
 :::tip FORMAT VERSION 1.26.10
-This page discusses basic block features. You can learn more about other block components [here](/blocks/block-components).
+このページでは、基本的なブロック機能について説明します。ほかのブロックコンポーネントについては [こちら](/blocks/block-components) で詳しく学べます。
 :::
 :::danger NOTE
-Vanilla blocks are hardcoded. You may not override or access them.
+バニラのブロックはハードコードされています。上書きしたりアクセスしたりすることはできません。
 :::
 
-Minecraft Bedrock allows us to add custom blocks into our world with various vanilla-like properties. Custom blocks can have multiple stages (like plants), directional facing, and other useful features.
+Minecraft Bedrock では、バニラに似たさまざまな性質を持つカスタムブロックをワールドに追加できます。カスタムブロックは、植物のような複数段階の状態、向きのある配置、その他の便利な機能を持てます。
 
-This tutorial will cover how to create basic blocks for the stable version of Minecraft.
+このチュートリアルでは、Minecraft の安定版向けに基本的なブロックを作成する方法を扱います。
 
-## Registering Blocks
+## ブロックの登録
 
-Block definitions are structured similarly to entities: they contain a description and a list of components that defines the block's behavior.
+ブロック定義はエンティティと同様の構造です。説明と、ブロックの挙動を定義するコンポーネント一覧を含みます。
 
-Unlike entities, blocks do not have a resource definition other than in `RP/blocks.json`.
+エンティティと違い、ブロックには `RP/blocks.json` 以外にリソース定義はありません。
 
-Below is the **minimum** behavior-side code to get a custom block into the creative inventory.
+以下は、カスタムブロックをクリエイティブインベントリに追加するための、**最小限の** ビヘイビア側コードです。
 
 <CodeHeader>BP/blocks/custom_block.json</CodeHeader>
 
@@ -64,19 +64,19 @@ Below is the **minimum** behavior-side code to get a custom block into the creat
 }
 ```
 
-### Block Description
+### ブロックの説明
 
--   Defines the block's `identifier` - a unique ID in the format of `<namespace>:<identifier>`{lang=xml}.
--   Configures which `menu_category` the block is placed into.
-    -   Also takes the optional parameters `group` and `is_hidden_in_commands`.
+-   ブロックの `identifier` を定義します。形式は `<namespace>:<identifier>`{lang=xml} の一意な ID です。
+-   どの `menu_category` に配置されるかを設定します。
+    -   任意で `group` と `is_hidden_in_commands` も指定できます。
 
-_The block description is also home to [states](/blocks/block-states) and [traits](/blocks/block-traits), which are covered in their own pages._
+_ブロックの説明には [states](/blocks/block-states) と [traits](/blocks/block-traits) も含まれます。これらはそれぞれ別ページで解説しています。_
 
-## Adding Components
+## コンポーネントの追加
 
-Right now, our custom block is using the default component values (which can be found [here](/blocks/block-components)).
+今のところ、カスタムブロックは既定のコンポーネント値を使っています（[こちら](/blocks/block-components) で確認できます）。
 
-Let's configure our own functionality!
+それでは、自分の機能を設定しましょう！
 
 <CodeHeader>BP/blocks/custom_block.json</CodeHeader>
 
@@ -106,20 +106,20 @@ Let's configure our own functionality!
 }
 ```
 
--   [`minecraft:destructible_by_mining`](/blocks/block-components#destructible-by-mining) defines how long the player will need to mine the block until it breaks. Currently, it isn't possible to set different destroy times for different tools.
--   [`minecraft:destructible_by_explosion`](/blocks/block-components#destructible-by-explosion) defines the resistance to explosions. The higher the value, the lower the chance of destruction.
--   [`minecraft:map_color`](/blocks/block-components#map-color) is the hex color code that will be displayed on a Minecraft map to represent this block. `"#ffffff"`{lang=json} means white. You can get hex codes for other colors [here](https://www.google.com/search?q=hex+color+picker).
--   [`minecraft:light_dampening`](/blocks/block-components#light-dampening) defines how much light will be blocked from passing through.
--   [`minecraft:light_emission`](/blocks/block-components#light-emission) defines the light level the block will output.
--   [`minecraft:loot`](/blocks/block-components#loot) defines a loot table path for the block to drop. If this is removed, then the block will drop itself. You can learn more about loot tables [here](/loot/loot-tables).
+-   [`minecraft:destructible_by_mining`](/blocks/block-components#destructible-by-mining) は、プレイヤーがブロックを壊すまでに必要な採掘時間を定義します。現在のところ、ツールごとに破壊時間を変えることはできません。
+-   [`minecraft:destructible_by_explosion`](/blocks/block-components#destructible-by-explosion) は、爆発への耐性を定義します。値が大きいほど破壊されにくくなります。
+-   [`minecraft:map_color`](/blocks/block-components#map-color) は、Minecraft の地図上でこのブロックを表すために表示される 16 進数の色コードです。`"#ffffff"`{lang=json} は白を意味します。ほかの色の 16 進数コードは [こちら](https://www.google.com/search?q=hex+color+picker) で確認できます。
+-   [`minecraft:light_dampening`](/blocks/block-components#light-dampening) は、通過する光をどれだけ遮るかを定義します。
+-   [`minecraft:light_emission`](/blocks/block-components#light-emission) は、ブロックが出力する光レベルを定義します。
+-   [`minecraft:loot`](/blocks/block-components#loot) は、ブロックがドロップするためのルートテーブルのパスを定義します。これを削除すると、ブロックは自分自身をドロップします。ルートテーブルについては [こちら](/loot/loot-tables) で詳しく学べます。
 
-_Browse more block components [here](/blocks/block-components)!_
+_ほかのブロックコンポーネントも [こちら](/blocks/block-components) から確認できます！_
 
-## Applying Textures
+## テクスチャの適用
 
-The [geometry](/blocks/block-components#geometry) and [material instances](/blocks/block-components#material-instances) components should be used to determine how your block looks.
+[geometry](/blocks/block-components#geometry) と [material instances](/blocks/block-components#material-instances) のコンポーネントを使って、ブロックの見た目を決めます。
 
-For our basic 16&times;16&times;16 pixel block, the [vanilla model](/blocks/vanilla-block-models) `minecraft:geometry.full_block` will be used.
+基本の 16&times;16&times;16 ピクセルブロックには、[バニラモデル](/blocks/vanilla-block-models) `minecraft:geometry.full_block` を使います。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -132,7 +132,7 @@ For our basic 16&times;16&times;16 pixel block, the [vanilla model](/blocks/vani
 }
 ```
 
-Now, we need to link the texture shortname to an image file path in `RP/textures/terrain_texture.json`:
+次に、テクスチャの短縮名を `RP/textures/terrain_texture.json` の画像ファイルパスに関連付ける必要があります。
 
 <CodeHeader>RP/textures/terrain_texture.json</CodeHeader>
 
@@ -147,9 +147,9 @@ Now, we need to link the texture shortname to an image file path in `RP/textures
 }
 ```
 
-### Per-Face Textures
+### 面ごとのテクスチャ
 
-Textures can also be applied per face. For example, a custom "compass block" could use the following ✨stunning✨ textures:
+テクスチャは面ごとにも適用できます。たとえば、カスタムの「コンパスブロック」には次のような ✨すばらしい✨ テクスチャを使えます。
 
 <div style="display: grid; grid-template-columns: repeat(auto-fill, 192px); column-gap: 1em;">
 
@@ -192,7 +192,7 @@ Textures can also be applied per face. For example, a custom "compass block" cou
 
 </div>
 
-The [material instances](/blocks/block-components#material-instances) should look like this:
+[material instances](/blocks/block-components#material-instances) は次のようになります。
 
 <CodeHeader>minecraft:block > components</CodeHeader>
 
@@ -219,7 +219,7 @@ The [material instances](/blocks/block-components#material-instances) should loo
 }
 ```
 
-With the following `terrain_texture.json` data:
+以下の `terrain_texture.json` のデータも必要です。
 
 <CodeHeader>RP/textures/terrain_texture.json</CodeHeader>
 
@@ -248,11 +248,11 @@ With the following `terrain_texture.json` data:
 }
 ```
 
-## Applying Sounds
+## サウンドの適用
 
-The mining sound, step on sound, breaking sound, and placement sound of custom blocks can be determined by the `sound` parameter in `RP/blocks.json`.
+カスタムブロックの採掘音、足音、破壊音、設置音は、`RP/blocks.json` の `sound` パラメータで決められます。
 
-Learn more about block sounds [here](/blocks/block-sounds)!
+ブロックのサウンドについては [こちら](/blocks/block-sounds) で詳しく学べます！
 
 <CodeHeader>RP/blocks.json</CodeHeader>
 
@@ -265,9 +265,9 @@ Learn more about block sounds [here](/blocks/block-sounds)!
 }
 ```
 
-## Defining Names
+## 名前の定義
 
-Finally, let's define our block names like this:
+最後に、ブロック名を次のように定義します。
 
 <CodeHeader>RP/texts/en_US.lang</CodeHeader>
 
@@ -276,41 +276,41 @@ tile.wiki:custom_block.name=Custom Block
 tile.wiki:compass_block.name=Compass Block
 ```
 
-You can learn more about translation [here](/text/text-intro).
+翻訳については [こちら](/text/text-intro) で詳しく学べます。
 
-## Result
+## 結果
 
-In this page, you've learnt about the following:
+このページでは、次の内容を学びました。
 
--   [x] Basic features of blocks
--   [x] How to apply a texture to all block faces
--   [x] How to apply textures per face
+-   [x] ブロックの基本機能
+-   [x] すべてのブロック面にテクスチャを適用する方法
+-   [x] 面ごとにテクスチャを適用する方法
 
-...but it's only the beginning, see what else you could do below!
+...でも、まだ始まりにすぎません。下で他のことも見てみましょう！
 
-## What's Next?
+## 次は？
 
 <CardGrid>
-<Card title="Add Functionality" image="/assets/images/icons/crafting_table.png">
+<Card title="機能を追加する" image="/assets/images/icons/crafting_table.png">
 
-Learn about the available block [components](/blocks/block-components) to craft unique gameplay.
+利用できるブロック [components](/blocks/block-components) を学んで、独自のゲームプレイを作りましょう。
 
-Why not give your block a custom model with the [geometry](/blocks/block-components#geometry) component?
-You could also configure your own [collision](/blocks/block-components#collision-box) and [selection](/blocks/block-components#selection-box) boxes to match!
-
-</Card>
-<Card title="Create Variants" image="/assets/images/icons/levers.png">
-
-Make use of block [states](/blocks/block-states) and [permutations](/blocks/block-permutations) to conditionally enable components on your blocks.
-
-For example, you could add liquid depth levels to your custom tank block, with support for multiple liquid types.
+[geometry](/blocks/block-components#geometry) コンポーネントを使って、ブロックにカスタムモデルを付けてみませんか？
+あわせて [collision](/blocks/block-components#collision-box) と [selection](/blocks/block-components#selection-box) のボックスも調整して、見た目に合わせられます。
 
 </Card>
-<Card title="Replicate Vanilla" image="/assets/images/icons/diamond_ore.png">
+<Card title="バリアントを作成する" image="/assets/images/icons/levers.png">
 
-Browse several complete replicas of existing blocks in the **Vanilla Re-Creations** category.
+ブロックの [states](/blocks/block-states) と [permutations](/blocks/block-permutations) を使って、条件に応じてコンポーネントを有効化できます。
 
-Start simple with [custom glass blocks](/blocks/custom-glass-blocks), making use of [material instances](/blocks/block-components#material-instances)!
+たとえば、カスタムのタンクブロックに液体の深さレベルを追加し、複数種類の液体に対応させることができます。
+
+</Card>
+<Card title="バニラを再現する" image="/assets/images/icons/diamond_ore.png">
+
+既存ブロックの完全再現をまとめたものを、**Vanilla Re-Creations** カテゴリでいくつか確認できます。
+
+まずは [custom glass blocks](/blocks/custom-glass-blocks) から始めて、[material instances](/blocks/block-components#material-instances) を使ってみましょう！
 
 </Card>
 </CardGrid>

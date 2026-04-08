@@ -1,6 +1,6 @@
 ---
-title: Script Core Features
-description: Introduction to some of the core API mechanics.
+title: Script のコア機能
+description: コア API の仕組みの一部を紹介します。
 category: Tutorials
 mentions:
     - JaylyDev
@@ -11,14 +11,14 @@ mentions:
 ---
 
 ::: warning
-The Script API is currently in active development, and breaking changes are frequent. This page assumes the format of Minecraft 1.21.20
+Script API は現在も活発に開発されており、破壊的変更が頻繁にあります。このページは Minecraft 1.21.20 の形式を前提としています。
 :::
 
-In Scripting API, most of the core features are implemented in the `@minecraft/server` module, which contains lots of methods to interact with Minecraft world, including entities, blocks, dimensions, and more. This article contains a basic introduction to some of the core API mechanics. For more detailed information please visit the [Microsoft documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/minecraft-server) pages.
+Scripting API では、コア機能のほとんどが `@minecraft/server` module に実装されています。この module には、エンティティ、ブロック、dimension など Minecraft のワールドとやり取りするための多くの method が含まれています。この記事では、コア API の仕組みの基本を紹介します。より詳しい情報は [Microsoft documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/minecraft-server) を参照してください。
 
-## Setup
+## セットアップ
 
-You will need to add the script module as a dependency in your `manifest.json`.
+`manifest.json` に script module を dependency として追加する必要があります。
 
 <CodeHeader>BP/manifest.json</CodeHeader>
 
@@ -33,20 +33,20 @@ You will need to add the script module as a dependency in your `manifest.json`.
 }
 ```
 
-## Events
+## イベント
 
-In script API, the `@minecraft/server` module uses its own event-driven architecture, making it possible to execute code when a specific event occurs by subscribing to an event listener.
+Script API では、`@minecraft/server` module が独自の event-driven architecture を使っています。event listener を購読することで、特定の event が起きたときにコードを実行できます。
 
 **World Events**
 
-World event APIs provides many event listeners that fires when a specific type of events happen in a Minecraft world, such as `chatSend`, `entityHurt`, `playerSpawn`, `worldInitialize` and many more.
+World event API は、Minecraft ワールドで特定の種類の event が発生したときに発火する多くの event listener を提供します。たとえば `chatSend`、`entityHurt`、`playerSpawn`、`worldInitialize` などがあります。
 
 ::: tip
-Check the Microsoft docs to see what world events are available within Minecraft.
+Minecraft で利用できる world event は、Microsoft docs で確認してください。
 
--   Before events fire before an event happens and are read-only but can be canceled. [Before Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/worldbeforeevents).
--   After events fire after an event has run and cannot be canceled. [After Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/worldafterevents)
--   After events should always be used unless the event needs to be canceled.
+-   Before event は event の前に発火し、読み取り専用ですがキャンセルできます。[Before Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/worldbeforeevents)
+-   After event は event の後に発火し、キャンセルできません。[After Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/worldafterevents)
+-   event をキャンセルする必要がない限り、After event を使うべきです。
 
 :::
 
@@ -69,14 +69,14 @@ world.afterEvents.playerBreakBlock.subscribe((event) => {
 
 **System events**
 
-System events fires when a specific type of event happens in the scope of the Minecraft add-on system.
+System event は、Minecraft add-on system の範囲内で特定の種類の event が発生したときに発火します。
 
 ::: tip
-Check the Microsoft docs to see what system events are available within Minecraft.
+Minecraft で利用できる system event は、Microsoft docs で確認してください。
 
--   Before events fire before an event happens and are read-only but can be canceled. [Before Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/systembeforeevents).
--   After events fire after an event has run and cannot be canceled. [After Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/systemafterevents)
--   Both types of events are used for different purposes.
+-   Before event は event の前に発火し、読み取り専用ですがキャンセルできます。[Before Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/systembeforeevents)
+-   After event は event の後に発火し、キャンセルできません。[After Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/systemafterevents)
+-   どちらの event も用途が異なります。
 
 :::
 
@@ -94,7 +94,7 @@ system.beforeEvents.watchdogTerminate.subscribe((event) => {
 
 **ScriptEvents**
 
-ScriptEvents, not to be confused with world events or system events, allows us to respond to inbound `/scriptevent` commands by registering the `scriptEventReceive` event handler, which the event fires if a `/scriptevent` command is invoked by a player, NPC, or block. More information on this event can be found on the [Script Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/scripteventcommandmessageafterevent) page.
+ScriptEvent は、world event や system event と混同しないでください。`scriptEventReceive` event handler を登録することで、受信した `/scriptevent` command に反応できます。これは、プレイヤー、NPC、または block が `/scriptevent` command を実行したときに発火します。この event の詳細は [Script Event Documentation](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/scripteventcommandmessageafterevent) を参照してください。
 
 ```
 /scriptevent <messageId: string> <message: string>

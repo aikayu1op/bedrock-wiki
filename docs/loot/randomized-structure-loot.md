@@ -1,6 +1,6 @@
 ---
-title: Randomized Structure Loot
-description: Learn how to add loot tables to containers in custom structures.
+title: ランダム化された構造物のルート
+description: カスタム構造物のコンテナにルートテーブルを追加する方法を学びます。
 category: Tutorials
 mentions:
     - MedicalJewel105
@@ -14,15 +14,15 @@ tags:
     - easy
 ---
 
-Adding loot tables to containers in structure is easy, you need to have a PC and your choice of either [NBT Studio](https://github.com/tryashtar/nbt-studio/releases/download/v1.14.1/NbtStudio.exe) (executable) or [Loot Tabler](https://mcbe-essentials.github.io/structure-editor/loot-tabler) (browser application). If the wanted loot is in a jigsaw structure a processor can be used.
+構造物内のコンテナにルートテーブルを追加するのは簡単です。PC と、[NBT Studio](https://github.com/tryashtar/nbt-studio/releases/download/v1.14.1/NbtStudio.exe)（実行ファイル）または [Loot Tabler](https://mcbe-essentials.github.io/structure-editor/loot-tabler)（ブラウザアプリ）のどちらかが必要です。欲しいルートがジグソー構造物にある場合は、プロセッサーを使えます。
 
-## Setup
+## 準備
 
-### Creating the Loot Table
+### ルートテーブルの作成
 
-To start, create the directory `BP/loot_tables/chests` and create your loot table file here.
+まず、`BP/loot_tables/chests` ディレクトリを作成し、その中にルートテーブルファイルを作成します。
 
-You can learn how to make loot tables in [Beginner's Guide](/guide/loot-table)
+ルートテーブルの作り方は [初心者ガイド](/guide/loot-table) で学べます。
 
 <CodeHeader>BP/loot_tables/chests/my_structure_loot.json</CodeHeader>
 
@@ -69,74 +69,74 @@ You can learn how to make loot tables in [Beginner's Guide](/guide/loot-table)
 }
 ```
 
-### Exporting Structure
+### 構造物の書き出し
 
-Once you have created your loot table, export your structure into `BP/structures`. Then follow the steps for either NBT Studio or Loot Tabler
+ルートテーブルを作成したら、構造物を `BP/structures` に書き出します。その後、NBT Studio または Loot Tabler の手順に従ってください。
 
 ![](export_structure.png)
 
-## NBT Studio (Executable)
+## NBT Studio（実行ファイル）
 
-### Software Preparation
+### ソフトウェアの準備
 
-Download and launch [NBT Studio](https://github.com/tryashtar/nbt-studio/releases/download/v1.14.1/NbtStudio.exe)
+[NBT Studio](https://github.com/tryashtar/nbt-studio/releases/download/v1.14.1/NbtStudio.exe) をダウンロードして起動します。
 
-### Adding the Loot Table
+### ルートテーブルの追加
 
-Launch NBT Studio and open file `(Ctrl + O)`
+NBT Studio を起動してファイルを開きます（`Ctrl + O`）。
 
 ![](open_file.png)
 
-Find your container (Ctrl + F)
+コンテナを探します（`Ctrl + F`）。
 
 ![](find_container.png)
 
-Navigate to your container, `block_position_data` > `block_entity_data`. Add a string tag
+コンテナへ移動し、`block_position_data` > `block_entity_data` を開きます。文字列タグを追加します。
 
 ![](add_string_tag1.png)
 
-Add `LootTable` and the file path to your loot table
+`LootTable` と、ルートテーブルへのファイルパスを追加します。
 
 ![](add_string_tag2.png)
 
-Save changes (Ctrl + S)
+変更を保存します（`Ctrl + S`）。
 
-## Loot Tabler (Browser Application)
+## Loot Tabler（ブラウザアプリ）
 
-### Adding the Loot Table
+### ルートテーブルの追加
 
-Open the website and click "Upload". Choose your structure file.
+Web サイトを開いて "Upload" をクリックし、構造物ファイルを選びます。
 
 ![](LootTable-step1.png)
 
-Find your container in the containers list, making use of the information displayed under "Container Options"
+"Container Options" に表示される情報を参考にしながら、コンテナを一覧から探します。
 
 ![](LootTable-step2.png)
 
-Under "Loot Table", enter the path to your loot table. Set "Loot Table Seed" to blank or `0` if you want the loot to generate randomly. If you want the loot table to generate consistently, enter a specific value.
+"Loot Table" にルートテーブルのパスを入力します。ルートをランダム生成したい場合は "Loot Table Seed" を空欄にするか `0` に設定します。ルートテーブルを毎回同じ内容にしたい場合は、特定の値を入力します。
 
 ![](LootTable-step3.png)
 
-Download your structure file and place it in `BP/structures`.
+構造物ファイルをダウンロードし、`BP/structures` に配置します。
 
-## Jigsaw Processors
+## ジグソーのプロセッサー
 
-[Processors](/world-generation/jigsaw-structures#processors) for jigsaw structures can set blocks like suspicious sand and chests to have loot.
+ジグソー構造物用の [processors](/world-generation/jigsaw-structures#processors) を使うと、怪しい砂やチェストのようなブロックにルートを持たせられます。
 
-This can be done using a `minecraft:rule` processor with a `block_entity_modifier` rule.
-The `type` field should be specified to `minecraft:append_loot` with the `loot_table` being set to the path to your loot table.
+これは `minecraft:rule` プロセッサーと `block_entity_modifier` ルールを使って行えます。
+`type` フィールドには `minecraft:append_loot` を指定し、`loot_table` にはルートテーブルへのパスを設定します。
 
-Using that rule in combination with `blockstate_match` predicates will allow for blocks to be given loot tables.
+このルールを `blockstate_match` 条件と組み合わせると、ブロックにルートテーブルを与えられます。
 
-A processor setting a chest to have loot will set it to the default rotation unless `blockstate_match` is set to match the input chest with the loot table and then output a chest with the loot table and same rotation.
-A rule is needed for all permutations of the block you want to replace. For example, chests have 4 cardinal directions so 4 rules would be needed.
+プロセッサーでチェストにルートを付けると、`blockstate_match` で入力チェストとルートテーブルを一致させて同じ回転のチェストを出力するようにしていない限り、既定の回転になります。
+置き換えたいブロックのすべてのパーミュテーションに対してルールが必要です。たとえば、チェストには 4 方向の向きがあるので 4 つのルールが必要です。
 
-All of the specified blocks in the structure template with the processor applied will have the loot.
-There is no way to have different loot in different chests in the same structure template using processors.
+プロセッサーを適用した構造物テンプレート内の指定ブロックはすべてルートを持ちます。
+同じ構造物テンプレート内の異なるチェストに、プロセッサーだけで別々のルートを持たせることはできません。
 
-### Example
+### 例
 
-A example of a suspicious gravel having a loot table applied.
+ルートテーブルを適用した怪しい砂利の例です。
 
 <CodeHeader>minecraft:processor_list</CodeHeader>
 
@@ -161,7 +161,7 @@ A example of a suspicious gravel having a loot table applied.
 }
 ```
 
-A example of a chest having a loot table applied to all rotations.
+すべての回転に対してルートテーブルを適用したチェストの例です。
 
 <CodeHeader>minecraft:processor_list</CodeHeader>
 
@@ -249,8 +249,8 @@ A example of a chest having a loot table applied to all rotations.
 }
 ```
 
-## Testing
+## テスト
 
-Load your structure and open the container. For jigsaws use `/place structure` or `/place jigsaw`.
+構造物を読み込み、コンテナを開きます。ジグソーの場合は `/place structure` または `/place jigsaw` を使います。
 
 ![](test.png)

@@ -1,5 +1,5 @@
 ---
-title: Custom Death Animations
+title: カスタム死亡アニメーション
 tags:
     - intermediate
 category: General
@@ -13,31 +13,31 @@ mentions:
     - ChibiMango
     - SmokeyStack
     - ThomasOrs
-description: Change or disable entity death animations.
+description: エンティティの死亡アニメーションを変更または無効化します。
 ---
 
-Death animation refers to the rotation of the entity as it dies. This is accompanied by a red coloring and followed shortly after by the disappearance of the entity geometry and the appearance of the death particles.
+死亡アニメーションとは、エンティティが死ぬときの回転を指します。これに赤い色変化が伴い、その後すぐにエンティティのジオメトリが消え、死亡パーティクルが表示されます。
 
-## Cancelling Death Animations
+## 死亡アニメーションを無効化する
 
-This part will explain how to remove death animations at all.
+ここでは、死亡アニメーション自体を完全に消す方法を説明します。
 
-### Teleporting the Entity
+### エンティティをテレポートする
 
-A fairly common way to remove entities without causing death effects is to teleport them into the void. This can be done from animation controllers by using `!q.is_alive` like:
+死亡演出を出さずにエンティティを消す一般的な方法のひとつは、虚空へテレポートすることです。これはアニメーションコントローラーから `!q.is_alive` を使って次のようにできます。
 `/teleport @s ~ ~-1000 ~`
 
+これを使うと、サウンド、パーティクル、戦利品、見た目の死亡表現を含むすべての死亡効果が消える点に注意してください。
+
+### `minecraft:instant_despawn`
+
+エンティティをただ消したいだけなら、`"minecraft:instant_despawn":{}` を含む component group を追加し、その component group を追加するイベントを実行できます。
+
 Please note that this will remove all death effects, including sound, particles, loot, and the visual death of the entity.
 
-### minecraft:instant_despawn
+### 別のエンティティへの変換
 
-If you want to make entity just disappear, you can add component group with `"minecraft:instant_despawn":{}` and run an event which will add this component group.
-
-Please note that this will remove all death effects, including sound, particles, loot, and the visual death of the entity.
-
-### Transformation to another entity
-
-Similar to teleporting, the entity is triggering an entity transform on death. Use `!q.is_alive` in animation controller to send an event which will add component group with `"minecraft:transformation"` component. With this component entity will convert into another:
+テレポートと同様に、死亡時にエンティティ変換を発動できます。アニメーションコントローラーで `!q.is_alive` を使って、`"minecraft:transformation"` コンポーネントを含む component group を追加するイベントを送ります。このコンポーネントで、エンティティは別のものに変換されます。
 
 <CodeHeader></CodeHeader>
 
@@ -58,13 +58,13 @@ Similar to teleporting, the entity is triggering an entity transform on death. U
 }
 ```
 
-### Cancelling the Animation
+### アニメーションを打ち消す
 
-We can also cancel the rotational value of the entity, allowing the entity to die more conventionally (particles, red-coloring, loot) without the 90-degree spin.
+エンティティの回転値を打ち消すこともできます。これにより、90 度回転せずに、より通常の形で死亡できます（パーティクル、赤色化、戦利品は残る）。
 
-If you need more information about triggering animations from entity death, see [this document](/animation-controllers/death-commands) on death effects.
+エンティティの死亡からアニメーションを発火させる方法の詳細は、死亡エフェクトに関する [こちらのドキュメント](/animation-controllers/death-commands) を参照してください。
 
-Rotation needs to be applied to a bone parent to all other bones, with a pivot at [0,0,0], and the animation should only start when `!q.is_alive`.
+回転は、ほかのすべての bone の親に当たる bone に適用し、pivot は [0,0,0] にします。アニメーションは `!q.is_alive` のときだけ開始するようにしてください。
 
 Animation:
 
@@ -74,9 +74,9 @@ Animation:
 "rotation" : [ 0, 0, "Math.min(Math.sqrt(Math.max(0, q.anim_time * 20 - 0.5) / 20 * 1.6), 1) * -90" ]
 ```
 
-Animation Controller:
+アニメーションコントローラー:
 
-(q.all_animations_finished is only needed for respawning entities, like players)
+(`q.all_animations_finished` が必要なのは、プレイヤーのように再スポーンするエンティティだけです)
 
 <CodeHeader>RP/animation_controllers/custom_death.animation.controllers.json</CodeHeader>
 
@@ -108,21 +108,21 @@ Animation Controller:
 }
 ```
 
-Note that you will need attach animation and animations controller in `.entity.json` file of resource pack.
+リソースパックの `.entity.json` ファイルでは、animation と animation controller の両方を関連付ける必要があります。
 
-## Custom Death Animations
+## カスタム死亡アニメーション
 
-This part will explain how to customize death animation.
+ここでは死亡アニメーションをカスタマイズする方法を説明します。
 
-### Changing Damage Color Overlay
+### ダメージ時の色オーバーレイを変更する
 
-You can remove/customize entity damage color overlay.
+エンティティのダメージ時の色オーバーレイを削除したり、変更したりできます。
 
-Before starting, you must have the basics of render controller so check out the [tutorial](/entities/render-controllers) of render controllers.
+始める前に、render controller の基礎を押さえておきましょう。render controller の [チュートリアル](/entities/render-controllers) を確認してください。
 
-To remove the damage overlay color of any entity you want when it gets damaged, we will use `is_hurt_color` and remove the damage overlay color when an entity receives damage from lava or fire use `on_fire_color`.
-First, you need to make the rgba values to 0
-Here's the example of removing the damage and fire overlay color.
+任意のエンティティがダメージを受けたときのダメージオーバーレイ色を消すには `is_hurt_color` を使います。溶岩や炎によるダメージ時のオーバーレイ色を消すには `on_fire_color` を使います。
+まず、rgba 値を 0 にします。
+以下は、ダメージと炎のオーバーレイ色を消す例です。
 
 <CodeHeader>RP/render_controllers/custom_death.render_controllers.json</CodeHeader>
 
@@ -141,10 +141,10 @@ Here's the example of removing the damage and fire overlay color.
 }
 ```
 
-The code above will remove the red damage overlay color.
+上のコードは、赤いダメージオーバーレイを消します。
 
-You can also change the damage color overlay to different colors just by putting different values in rgba. You can check out various websites to get the rgba values of all colors.
-Here's another example in which the damage color overlay becomes pink.
+rgba に別の値を入れれば、ダメージ色オーバーレイを別の色に変えることもできます。各色の rgba 値は、さまざまなサイトで確認できます。
+以下は、ダメージ色オーバーレイをピンクにする例です。
 
 <CodeHeader>RP/render_controllers/custom_death.render_controllers.json</CodeHeader>
 
@@ -173,15 +173,15 @@ Here's another example in which the damage color overlay becomes pink.
 }
 ```
 
-### Using Damage Sensor to Trigger Instant Despawn and One Item Drop
+### Damage Sensor で即時消滅と 1 アイテムのドロップを発動する
 
-You can use the damage_sensor component to trigger an event upon fatal damage; this event adds a particular despawning component group containing the spawn_entity and instant_despawn components. Spawn_entity with 0 wait time will drop an item just before the entity is despawned. For simple entities like furniture, which only need one item, this is very convenient.
+`damage_sensor` コンポーネントを使うと、致命的なダメージを受けたときにイベントを発動できます。このイベントは、`spawn_entity` と `instant_despawn` を含む特定の消滅用 component group を追加します。`spawn_entity` の待機時間を 0 にすると、エンティティが消える直前にアイテムを 1 つドロップできます。家具のように 1 つのアイテムだけ必要な単純なエンティティには便利です。
 
-When an entity receives fatal damage, an event is triggered that adds a dummy component. We can then use this dummy component to play the animation and using `minecraft:timer` we can have it despawn.
+エンティティが致命的なダメージを受けると、ダミーコンポーネントを追加するイベントが発動します。このダミーコンポーネントを使ってアニメーションを再生し、`minecraft:timer` で消滅させられます。
 
-Please note that you will have to find another work for entities with an inventory. You should also ensure that the despawn component group is not added when the entity is spawned using the entity_spawned event. If you have a entity that performs other actions (movement and attacks) you will likely want to remove those components as well.
+インベントリを持つエンティティには、別の方法を考える必要があります。また、`entity_spawned` イベントでスポーンしたときに despawn 用 component group が追加されないようにしてください。移動や攻撃などの別動作を持つエンティティでは、それらのコンポーネントも外したくなるはずです。
 
-Here an example file in the BP
+以下は BP の例です。
 
 <CodeHeader>BP/entities/entity.json</CodeHeader>
 

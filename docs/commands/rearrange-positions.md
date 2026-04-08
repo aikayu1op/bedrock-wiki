@@ -1,5 +1,5 @@
 ---
-title: Multiplayer Position Rearrangement
+title: マルチプレイヤー位置入れ替え
 category: Useful Creations
 mentions:
     - BedrockCommands
@@ -7,26 +7,26 @@ mentions:
     - jeanmajid
 tags:
     - function
-description: Randomly relocate all selected targets among each other, ensuring none remain in their original position.
+description: 選択した対象を互いにランダムに入れ替え、元の位置に残る対象が 1 つもないようにします。
 ---
 
-## Introduction
+## はじめに
 
 [Sourced by the Bedrock Commands Community (BCC) Discord](https://bedrockcommands.org/)
 
-Multiplayer Position Rearrangement function, or more accurately Multiplayer Position Derangement function, created by @ZheaEvyline, allows you to randomly relocate all selected targets among each other, ensuring no target remains in its original position.
+@ZheaEvyline が作成した Multiplayer Position Rearrangement function、より正確には Multiplayer Position Derangement function は、選択した対象を互いにランダムに入れ替え、どの対象も元の位置に残らないようにします。
 
-A derangement is a permutation of 'N' elements where no element appears in its original position.
+derangement とは、`N` 個の要素の順列で、どの要素も元の位置に現れないものを指します。
 
-For example, if Player1 was at `(0, 0, 1)`, Player2 at `(0, 0, 2)`, and Player3 at `(0, 0, 3)`, Player1 can only be relocated to `(0, 0, 2)`, or `(0, 0, 3)`. The same rule applies to all other players.
+たとえば、Player1 が `(0, 0, 1)`、Player2 が `(0, 0, 2)`、Player3 が `(0, 0, 3)` にいた場合、Player1 は `(0, 0, 2)` か `(0, 0, 3)` にしか移動できません。同じルールは他のプレイヤーにも適用されます。
 
 <br>
 
-**Key Features of this Function Pack:**
+**この Function Pack の主な特徴:**
 
-1. Guaranteed derangement in a single game-tick.
-2. Minimal number of iterations (repetitions/loops).
-3. Cross Dimensional Compatibility.
+1. 1 ゲームティックで derangement を保証。
+2. 反復（繰り返し / ループ）回数を最小化。
+3. 次元をまたいだ互換性。
 
 This function pack is designed to support an unlimited number of targets. However, due to Bedrock limitations, it will halt once the `10,000` function execution limit is reached.
 

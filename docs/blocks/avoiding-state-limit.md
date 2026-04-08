@@ -1,6 +1,6 @@
 ---
-title: Avoiding State Limit
-description: Blocks have a limit of 16 valid values per state that cannot be exceeded. This guide will explain how to avoid reaching the limit.
+title: 状態数の上限を避ける
+description: ブロックの各状態には 16 個までという有効値の上限があり、これを超えることはできません。このガイドでは、その上限に達しないようにする方法を説明します。
 category: Tutorials
 tags:
     - expert
@@ -11,20 +11,20 @@ mentions:
     - QuazChick
 ---
 
-Blocks have a limit of 16 valid values per state that cannot be exceeded.
-This guide will explain how to avoid reaching the limit.
+ブロックの各状態には 16 個までという有効値の上限があり、これを超えることはできません。
+このガイドでは、その上限に達しないようにする方法を説明します。
 
 :::tip
-This tutorial does not show you how to have more than 16 values for a single state, however using this method will simulate that!
+このチュートリアルでは、1 つの状態に 16 個以上の値を持たせる方法は紹介しません。ただし、この方法を使えば同じ結果を再現できます。
 :::
 
-## How It Works
+## 仕組み
 
-This method combines two or more states in order to re-use and read them in permutations or conditions. For example, a block with the English alphabet letters will need 26 values. You can use less values by using combinations.
+この方法では、2 つ以上の状態を組み合わせて、パーミュテーションや条件の中で再利用・参照します。たとえば、英語アルファベットを扱うブロックには 26 個の値が必要です。組み合わせを使えば、より少ない値で表現できます。
 
-## The Logic
+## ロジック
 
-What your code will do going of by the example above is the following:
+上の例でコードが行うことは次のとおりです。
 
 ```
 1 & 1 = A   1 & 5 = E   1 & 9 =  I   1 & 13 = M
@@ -33,7 +33,7 @@ What your code will do going of by the example above is the following:
 1 & 4 = D   1 & 8 = H   1 & 12 = L
 ```
 
-And then;
+そして次に:
 
 ```
 2 & 1 = N   2 & 5 = R   2 & 9 =  V   2 & 13 = Z
@@ -42,15 +42,15 @@ And then;
 2 & 4 = Q   2 & 8 = U   2 & 12 = Y
 ```
 
-Using this method, you achieve the same results with just 15 values. The more values available for combinations, the higher your state limit is.
+この方法を使うと、わずか 15 個の値で同じ結果を実現できます。組み合わせに使える値が増えるほど、状態の上限も高くなります。
 
 :::tip
-You can use more than 2 values in order to have more possible combinations.
+2 つより多い値を使えば、さらに多くの組み合わせを作れます。
 :::
 
-## How It Looks
+## 見え方
 
-Using the example above as reference, your states would look like this:
+上の例を参考にすると、状態は次のようになります。
 
 <CodeHeader>minecraft:block > description</CodeHeader>
 
@@ -61,7 +61,7 @@ Using the example above as reference, your states would look like this:
 }
 ```
 
-And for your conditions, like this:
+条件は次のようになります。
 
 <CodeHeader>Permutation Condition</CodeHeader>
 

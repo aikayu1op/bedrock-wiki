@@ -1,5 +1,5 @@
 ---
-title: Molang into Scoreboard
+title: Molangをスコアボードへ
 mentions:
     - SirLich
     - MedicalJewel105
@@ -7,12 +7,12 @@ mentions:
     - Lufurrius
     - TheItsNameless
     - ThomasOrs
-description: Turn MoLang variable value into scoreboard value.
+description: Molang の変数値をスコアボード値に変換します。
 ---
 
-The following provides a method to read any Molang (variable, query, etc.) into a score instantly. Ensure that the animation name called in the controllers `convert` state matches the name of the animation (animation.namespace.molang_to_score) as defined in the entity.
+以下は、任意の Molang（変数、クエリなど）を即座にスコアへ読み込む方法です。コントローラーの `convert` 状態で呼び出すアニメーション名が、エンティティで定義したアニメーション名（`animation.namespace.molang_to_score`）と一致していることを確認してください。
 
-**NOTE:** These two commands must be run in the world as part of the setup:
+**注:** セットアップの一部として、次の2つのコマンドをワールド内で実行する必要があります。
 `/scoreboard objectives add MoLang dummy`
 `/scoreboard players set "#10" MoLang 10`
 
@@ -67,6 +67,6 @@ The following provides a method to read any Molang (variable, query, etc.) into 
 }
 ```
 
-**Explanation:** When the conversion begins, the controller resets the player's Molang score and `#var`'s (fake player) Molang score. The conversion variable `v.convert` is initialized and the digit variable `v.digit` is set to grab the 10th digit (10^10). The first animation then runs, setting the animation time equal to the 10th digit and setting the digit variable to grab the next digit (digit 9, 10^9). Because all timeline indices are run up until the time set, the "0.0" entry of the timeline will always run. This multiplies the player's Molang score by 10 to set the correct digit and then adds on the last digit grabbed (for the first run this will always be 0, as `#var` was reset by the controller). The process then repeats 10 more times to grab all 10 digits of the conversion variable. Recall that each animation grabs the digit set by the previous animation, which is why the animation is run 11 times.
+**説明:** 変換が始まると、コントローラーはプレイヤーの Molang スコアと `#var`（フェイクプレイヤー）の Molang スコアをリセットします。変換用変数 `v.convert` を初期化し、桁変数 `v.digit` を 10 桁目（10^10）を取得する値に設定します。すると最初のアニメーションが実行され、アニメーション時間が 10 桁目に合わせられ、次の桁（9桁目、10^9）を取得するように `digit` 変数が設定されます。タイムラインの各インデックスは、設定された時間まで実行されるため、タイムラインの `0.0` は常に実行されます。これによりプレイヤーの Molang スコアが 10 倍され、正しい桁が入るようになり、その後で最後に取得した桁が加算されます（最初の実行では `#var` がコントローラーによってリセットされているため、これは常に 0 です）。この処理をさらに 10 回繰り返して、変換変数の 10 桁すべてを取得します。各アニメーションは前のアニメーションで設定された桁を取得するため、アニメーションは 11 回実行されます。
 
-To perform a test of the conversion in-game, set `<condition to start conversion>` to `q.is_using_item` and `<variable to convert>` to `Math.random_integer(0, 9999)`. Grab yourself an apple, start eating and watch the numbers roll.
+ゲーム内で変換のテストを行うには、`<condition to start conversion>` を `q.is_using_item` に、`<variable to convert>` を `Math.random_integer(0, 9999)` に設定します。リンゴを持って食べ始め、数字が変わっていく様子を確認してください。

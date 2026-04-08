@@ -1,5 +1,5 @@
 ---
-title: Useful Links
+title: 便利なリンク
 mentions:
     - SirLich
     - MedicalJewel105
@@ -16,14 +16,14 @@ mentions:
     - JaylyDev
     - zheaEvyline
     - phoenixr-codes
-description: Useful links for developing add-ons.
+description: アドオン開発に役立つリンク集です。
 ---
 
-There is loads of helpful information about Bedrock Development online, but sometimes it is hard to find! We will do our best to keep this list up to date as we continue to find useful content.
+Bedrock 開発に役立つ情報はオンラインにたくさんありますが、見つけにくいことがあります。この一覧は、便利なコンテンツが見つかったら随時更新するようにしています。
 
-Important links have a ⭐.
+重要なリンクには ⭐ を付けています。
 
-## Discord Links
+## Discord リンク
 
 -   ⭐ [Bedrock Add-Ons](https://discord.gg/46JUdQb)
 -   ⭐ [Bedrock OSS](https://discord.gg/XjV87YN)
@@ -45,7 +45,7 @@ Important links have a ⭐.
 -   [Minecraft RTX](http://discord.gg/vNWc3Hh)
 -   [Mojang Bug Tracker](https://discord.gg/rpCyfKV)
 
-## Software (installed)
+## ソフトウェア（インストール版）
 
 -   ⭐ [Blockbench: A boxy 3D model editor](https://blockbench.net/)
 -   ⭐ [bridge. Add-on Editor](https://bridge-core.app/)
@@ -66,7 +66,7 @@ Important links have a ⭐.
 -   [TesserPack (Pack Optimizer)](https://github.com/TBroz15/TesserPack)
 -   [World Converter (Paid)](https://www.universalminecraftconverter.com/download)
 
-## Bedrock Tools Websites
+## Bedrock ツール系 Web サイト
 
 -   ⭐ [Snowstorm Particle Generator](https://jannisx11.github.io/snowstorm/)
 -   ⭐ [mctools.dev](https://mctools.dev/)
@@ -98,7 +98,7 @@ Important links have a ⭐.
 -   [Trade Table Generator](https://mcbe-essentials.github.io/trade-table-editor/)
 -   [World Packager](https://mcbe-essentials.github.io/world-packager/)
 
-## Documentation
+## ドキュメント
 
 -   ⭐ [bedrock.dev](https://bedrock.dev/)
 -   ⭐ [Minecraft Creator Portal](https://docs.microsoft.com/en-us/minecraft/creator/)
@@ -106,18 +106,18 @@ Important links have a ⭐.
 -   [Documentation Graveyard (Removed Components)](https://gist.github.com/destruc7i0n/ea1a6a7f97f0986d9326c58246f96fa3)
 -   [Bedrock Network Protocol (Mojang)](https://mojang.github.io/bedrock-protocol-docs/) => [GitHub](https://github.com/Mojang/bedrock-protocol-docs)
 
-### Getting Started with Your First Add-On
+### 最初の Add-On を始める
 
--   [Getting Started with Add-On Development for Bedrock Edition](https://learn.microsoft.com/en-us/minecraft/creator/documents/gettingstarted): These guides show you exactly how to build your first resource pack and your first behavior pack from start to finish.
--   [Molang: a Beginner's Guide](https://learn.microsoft.com/en-us/minecraft/creator/documents/molangbeginnersguide): Molang is a Minecraft programming language that can be useful for writing some advanced add-ons.
--   [Introduction to the GameTest Framework](https://learn.microsoft.com/en-us/minecraft/creator/documents/gametestgettingstarted): This is the best way to test games, and it uses JavaScript, the most popular programming language in the world!
--   [Build a gameplay experience with TypeScript](https://learn.microsoft.com/en-us/minecraft/creator/documents/scriptinggettingstarted): TypeScript is Microsoft's copy of JavaScript. Writing add-ons in TypeScript allows you to add any functionality you can imagine!
--   [@minecraft/server Module](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/mojang-minecraft): This module and the others near it are how we can access Minecraft values with our TypeScript code. It's technical, but a great resource.
--   [List and summary of commands (Unofficial Minecraft wiki)](https://minecraft.wiki/w/Commands#List_and_summary_of_commands): Most add-ons will run some commands. This community-supported wiki is the best resource for learning each and every command.
+-   [Getting Started with Add-On Development for Bedrock Edition](https://learn.microsoft.com/en-us/minecraft/creator/documents/gettingstarted): このガイドでは、最初のリソースパックと最初のビヘイビアパックを、最初から最後までどのように作るかを正確に説明します。
+-   [Molang: a Beginner's Guide](https://learn.microsoft.com/en-us/minecraft/creator/documents/molangbeginnersguide): Molang は、少し高度なアドオンを書くのに役立つ Minecraft のプログラミング言語です。
+-   [Introduction to the GameTest Framework](https://learn.microsoft.com/en-us/minecraft/creator/documents/gametestgettingstarted): これはゲームをテストする最良の方法で、世界で最も人気のあるプログラミング言語である JavaScript を使います！
+-   [Build a gameplay experience with TypeScript](https://learn.microsoft.com/en-us/minecraft/creator/documents/scriptinggettingstarted): TypeScript は Microsoft 版の JavaScript です。TypeScript でアドオンを書けば、思いつくあらゆる機能を追加できます！
+-   [@minecraft/server Module](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/mojang-minecraft/mojang-minecraft): このモジュールとその周辺のモジュールは、TypeScript コードから Minecraft の値にアクセスする方法です。技術的ですが、とても役立つリソースです。
+-   [List and summary of commands (Unofficial Minecraft wiki)](https://minecraft.wiki/w/Commands#List_and_summary_of_commands): ほとんどのアドオンは何らかのコマンドを使います。このコミュニティ運営の Wiki は、個々のコマンドを学ぶのに最適な資料です。
 
-## Sample Behavior & Resource Packs
+## サンプルの Behavior Pack と Resource Pack
 
-These packs are maintained and published by Mojang.
+これらのパックは Mojang によって保守・公開されています。
 
 -   ⭐ [Vanilla Resource Pack](https://aka.ms/resourcepacktemplate)
 -   ⭐ [Vanilla Behavior Pack](https://aka.ms/behaviorpacktemplate)
@@ -125,19 +125,19 @@ These packs are maintained and published by Mojang.
 -   [Vanilla Behavior Pack (BETA)](https://aka.ms/MinecraftBetaBehaviors)
 -   [Pack Archive (old versions)](https://bedrock.dev/packs)
 
-These packs are published by the open-source community.
+これらのパックはオープンソースコミュニティによって公開されています。
 
 -   [bedrock-examples](https://github.com/Bedrock-OSS/bedrock-examples)
 -   [Enchantment Details](https://github.com/supercam19/EnchantmentDetails)
 -   [Function Pack Templates](https://bedrockcommands.org/resources/)
 
-## Scripting Resources
+## Scripting リソース
 
 -   [GameTests API Wrapper](https://github.com/notbeer/Framework-Wrapper)
 -   [GameTests Plugin-API-Starter-Pack](https://github.com/MajestikButter/Plugin-API-Starter-Pack)
 -   [Useful for Block Tags](https://mcpedl.com/debug-stick/)
 
-## Raytracing Resources
+## レイトレーシング関連リソース
 
 -   ⭐ [Ray Tracing and PBR Texturing guide](https://docs.microsoft.com/en-us/minecraft/creator/documents/rtxgettingstarted)
 -   ⭐ [Minecraft with Ray Tracing and Advanced Graphics FAQ](https://help.minecraft.net/hc/en-us/articles/4408865164173-Minecraft-with-Ray-Tracing-and-Advanced-Graphics-FAQ)
@@ -145,7 +145,7 @@ These packs are published by the open-source community.
 -   [r/minecraftRTX Getting Started Guide](https://www.reddit.com/r/minecraftRTX/comments/iq3lkl/getting_startedhelpful_guidesresource_packs/)
 -   [RenderBender](https://github.com/SpeedyCodes/RenderBender)
 
-## Add-On Marketplaces & Links
+## Add-On マーケットプレイスと関連リンク
 
 -   ⭐ [Minecraft Marketplace](https://www.minecraft.net/en-us/marketplace)
 -   ⭐ [MCPEDL](http://mcpedl.com/?cookie_check=1)
@@ -156,7 +156,7 @@ These packs are published by the open-source community.
 -   [Minecraft Marketplace Stats](https://mcmarketstats.miste.fr/globalStats/)
 -   [Modbay](https://modbay.org/)
 
-## Other useful Links
+## その他の便利なリンク
 
 -   [Bedrock Add-Ons Reddit](https://www.reddit.com/r/BedrockAddons/)
 -   [Bedrock Edition Realm Protocol](https://github.com/NobUwU/BeRP)

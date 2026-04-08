@@ -1,22 +1,22 @@
 ---
-title: Effects in Animations
+title: アニメーション内のエフェクト
 mentions:
     - MedicalJewel105
 category: General
-description: Learn how to add particles and sounds to your animation.
+description: アニメーションにパーティクルやサウンドを追加する方法を学びます。
 ---
 
-## Effects in Animations
+## アニメーション内のエフェクト
 
-Sometimes it is much easier to use particles or sounds in animation rather than in animation controller.
-Animations can have effects in them, such as:
+場合によっては、アニメーションコントローラーよりもアニメーション内でパーティクルやサウンドを使ったほうが簡単です。
+アニメーションには、次のようなエフェクトを含められます。
 
 -   Particles
 -   Sounds
 
-### Particles
+### パーティクル
 
-Minecraft Particles can be used in entity animations. For example, the phantom has an animation which emits the minecraft:phantom_trail particle constantly. Let's try to add a particle to our entity's attack animation.
+Minecraft のパーティクルは、エンティティのアニメーションで使えます。たとえば、ファントムには `minecraft:phantom_trail` パーティクルを継続的に出すアニメーションがあります。ここでは、エンティティの攻撃アニメーションにパーティクルを追加してみます。
 
 <CodeHeader>RP/entity/my_entity.json</CodeHeader>
 
@@ -26,19 +26,19 @@ Minecraft Particles can be used in entity animations. For example, the phantom h
 }
 ```
 
-Here we defined a shortname for particle that we are going to use.
+ここでは、これから使うパーティクルの shortname を定義しています。
 
-You can find a list of particles [here](https://minecraft.wiki/w/Particles) or [here](/particles/vanilla-particles).
+パーティクル一覧は [こちら](https://minecraft.wiki/w/Particles) または [こちら](/particles/vanilla-particles) で確認できます。
 
 :::warning Warning!
 Not every particle works there. If you have problems, consider trying another particle. For example, use this one.
 Also note that some particles emit constantly.
 :::
 
-### Sounds
+### サウンド
 
-If you want to use a sound, you need to define it too.
-You can get sounds at [ZapSplat](https://www.zapsplat.com/).
+サウンドを使いたい場合は、そちらも定義する必要があります。
+サウンドは [ZapSplat](https://www.zapsplat.com/) などで入手できます。
 
 <CodeHeader>RP/entity/my_entity.json</CodeHeader>
 

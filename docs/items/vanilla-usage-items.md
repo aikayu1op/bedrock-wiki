@@ -1,18 +1,18 @@
 ---
-title: Vanilla Usage Components
+title: バニラの使用コンポーネント
 category: Documentation
 mentions:
     - MedicalJewel105
-description: Automatically generated list of item components used in vanilla.
+description: バニラで使われているアイテムコンポーネントの自動生成リストです。
 ---
 
-This page was created with [Wiki Content Generator](https://github.com/Bedrock-OSS/bedrock-wiki-content-generator). If there are issues, contact us on [Bedrock OSS](https://discord.gg/XjV87YN) Discord server.
-Note that not more than 8 examples are shown for each component to keep this page fast to load. Namespace `minecraft` was also removed.
-If you want to see full page, you can do it [here](/items/vui-full). _Last updated for 1.21.60_
+このページは [Wiki Content Generator](https://github.com/Bedrock-OSS/bedrock-wiki-content-generator) で作成されました。問題がある場合は、[Bedrock OSS](https://discord.gg/XjV87YN) の Discord サーバーで連絡してください。
+このページを軽く保つため、各コンポーネントにつき 8 例までしか表示していません。namespace `minecraft` も削除しています。
+全文を見たい場合は、[こちら](/items/vui-full) を参照してください。_1.21.60 時点で更新_
 
 ## block
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 camera
 
@@ -26,7 +26,7 @@ camera
 
 ## bundle_interaction
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 black_bundle
 
@@ -112,7 +112,7 @@ light_blue_bundle
 
 ## camera
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 camera
 
@@ -132,7 +132,7 @@ camera
 
 ## cooldown
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 wind_charge
 
@@ -149,7 +149,7 @@ wind_charge
 
 ## display_name
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 apple
 
@@ -205,7 +205,7 @@ wind_charge
 
 ## foil
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 appleEnchanted
 
@@ -227,7 +227,7 @@ golden_apple
 
 ## food
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 apple
 
@@ -349,7 +349,7 @@ carrot
 
 ## hand_equipped
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 appleEnchanted
 
@@ -371,7 +371,7 @@ breeze_rod
 
 ## icon
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 apple
 
@@ -469,7 +469,7 @@ gray_bundle
 
 ## max_damage
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 clownfish
 
@@ -523,7 +523,7 @@ salmon
 
 ## max_stack_size
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 beetroot_soup
 
@@ -593,7 +593,7 @@ green_bundle
 
 ## projectile
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 wind_charge
 
@@ -609,7 +609,7 @@ wind_charge
 
 ## seed
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 beetroot_seeds
 
@@ -702,7 +702,7 @@ pumpkin_seeds
 
 ## stacked_by_data
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 appleEnchanted
 
@@ -772,7 +772,7 @@ salmon
 
 ## storage_item
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 black_bundle
 
@@ -914,7 +914,7 @@ light_blue_bundle
 
 ## tags
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 apple
 
@@ -932,7 +932,7 @@ apple
 
 ## throwable
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 wind_charge
 
@@ -950,7 +950,7 @@ wind_charge
 
 ## use_animation
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 apple
 
@@ -964,7 +964,7 @@ apple
 
 ## use_duration
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 appleEnchanted
 
@@ -1034,7 +1034,7 @@ carrot
 
 ## use_modifiers
 
-<Spoiler title="Show">
+<Spoiler title="表示">
 
 apple
 
@@ -1048,3 +1048,4 @@ apple
 ```
 
 </Spoiler>
+

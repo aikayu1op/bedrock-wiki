@@ -1,51 +1,51 @@
 ---
-title: Namespaces
+title: 名前空間
 mentions:
     - SirLich
     - MedicalJewel105
-description: Namespaces are identifiers that mark content ownership and are helpful because they keep naming conflicts from happening.
+description: 名前空間はコンテンツの所有者を示す識別子であり、命名の衝突を防ぐのに役立ちます。
 ---
 
-Namespaces are identifiers that mark content ownership. You can think of them as folders. Namespaces are helpful because they keep naming conflicts from happening.
+名前空間はコンテンツの所有者を示す識別子です。フォルダーのようなものだと考えるとよいでしょう。名前空間は、命名の衝突を防いでくれるため便利です。
 
-Namespaces in add-on creation can essentially be thought of as "the part to the left of the colon". For example, `minecraft` is the namespace of `minecraft:zombie`. The general form is `namespace:name`.
+アドオン制作における名前空間は、基本的に「コロンの左側の部分」だと考えられます。たとえば、`minecraft` は `minecraft:zombie` の名前空間です。一般的な形式は `namespace:name` です。
 
-As a concrete example of why namespaces are helpful, let's imagine you create a new Mob. You name it `minecraft:shark`, not aware that you should create your own namespace for custom content. Next year, Mojang decides to add sharks into the game! Now there is a naming conflict since there are two definitions of `minecraft:shark`. Your add-on will break. It would have been wiser to pick a unique namespace for your shark, so you don't collide with Mojang, or any other creator.
+名前空間が役立つ具体例として、新しい Mob を作る場面を考えてみましょう。独自のコンテンツ用の名前空間を作るべきだと知らずに、`minecraft:shark` という名前を付けたとします。ところが翌年、Mojang がゲームにサメを追加することにしたらどうでしょう。`minecraft:shark` という定義が 2 つ存在することになり、命名衝突が発生します。あなたのアドオンは壊れてしまいます。サメには Mojang や他の作成者と衝突しない、固有の名前空間を選ぶべきでした。
 
-## Picking a namespace
+## 名前空間の決め方
 
-A suitable namespace is unique to you, and unique to the project. Something like `mob` or `cars` or `content` or `custom` would be a **bad** namespace since another developer might come up with the same namespace as you.
+適切な名前空間は、自分だけに固有で、プロジェクトにも固有のものです。`mob`、`cars`、`content`、`custom` のような名前空間は、他の開発者も同じものを思いつくかもしれないため、**よくありません**。
 
-A suitable namespace is short. You will be writing your namespace a **LOT**, so the shorter, the better. `my_amazing_mobs_addon` would be a lousy namespace for this reason.
+適切な名前空間は短いことも大切です。名前空間は**何度も**書くことになるので、短いほどよいです。`my_amazing_mobs_addon` は、その意味でかなり使いにくい名前空間です。
 
-It is recommended to use a convenient version of your player/company name, combined with the product name.
+プレイヤー名や会社名を使いやすい形にして、製品名と組み合わせるのがおすすめです。
 
-Some good examples:
+良い例:
 
 -   `wiki_mobsplus`
 -   `cubeworld_mto`
 -   `bworks_ftp`
 
-**DO NOT ATTEMPT** to use `minecraft` or `minecon` as a namespace.
+**`minecraft` や `minecon` を名前空間として使わないでください。**
 
-## Where to use namespaces?
+## 名前空間はどこで使う？
 
-In short, you should use namespaces as often as you can.
+短く言えば、使える場面ではできるだけ名前空間を使うべきです。
 
-For starters, you should use a namespace when adding custom entities to the game. For example `wiki:shark`. It is also recommended to use namespaces for components and events. Just like Mojang uses `minecraft:pig_saddled` you should use `namespace:my_mob_event`, and `namespace:my_component_group`. The same applies to animation controllers, render controllers, and animations.
+まず、カスタムエンティティをゲームに追加する場合には名前空間を使いましょう。たとえば `wiki:shark` です。コンポーネントやイベントにも名前空間を使うことが推奨されます。Mojang が `minecraft:pig_saddled` を使っているのと同じように、`namespace:my_mob_event` や `namespace:my_component_group` を使うべきです。これはアニメーションコントローラー、レンダーコントローラー、アニメーションにも当てはまります。
 
-For example: `controller.animation.namespace.entity_name.action` is better than `controller.animation.my_action`.
+たとえば、`controller.animation.namespace.entity_name.action` は `controller.animation.my_action` より望ましいです。
 
-## Where NOT to use namespaces.
+## 名前空間を使わない場所
 
-The actual file structure does not need namespaces, unless it's the filepath is used in game. For example: `animations/namespace/my_entity/animation` is more confusing than `animations/my_entity/animation`.
+実際のファイル構造には、ゲーム内でファイルパスが使われる場合を除いて、名前空間は不要です。たとえば `animations/namespace/my_entity/animation` より、`animations/my_entity/animation` のほうがわかりやすいです。
 
-The following folders contain files that are referenced by path, and thus should contain a namespace: `functions`, `structures`, `loot_tables`, `trade_tables`, `sounds`, and `textures`.
+次のフォルダーにはパスで参照されるファイルが含まれるため、名前空間を含めるべきです。`functions`、`structures`、`loot_tables`、`trade_tables`、`sounds`、`textures` です。
 
--   **Example:** `BP/functions/namespace/test.mcfunction`
+-   **例:** `BP/functions/namespace/test.mcfunction`
 
-You may also refer to the [Style Guide](/meta/style-guide) for information about namespaces.
+名前空間については、[スタイルガイド](/meta/style-guide) も参考にしてください。
 
-## Namespace Registry
+## 名前空間レジストリ
 
-The Bedrock OSS organization maintains a mapping between namespaces, and the author/addon name. You can consider [registering your namespaces there.](https://github.com/Bedrock-OSS/add-on-registry)
+Bedrock OSS の組織は、名前空間と作者/アドオン名の対応表を管理しています。[そこで名前空間を登録することもできます。](https://github.com/Bedrock-OSS/add-on-registry)

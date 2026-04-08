@@ -1,5 +1,5 @@
 ---
-title: Server Forms
+title: サーバー向けフォーム
 category: Tutorials
 mentions:
     - DrakPlay
@@ -14,14 +14,14 @@ mentions:
     - SmokeyStack
     - ThomasOrs
     - kumja1
-description: Create form UIs without the need for JSON UI-wrangling.
+description: JSON UI をいじらずに form UI を作成します。
 ---
 
-In version 1.18.30, Minecraft released a wonderful new script module, `@minecraft/server-ui` (formerly named `mojang-minecraft-ui`). With this module, we can create form UIs without the need for JSON UI-wrangling.
+1.18.30 で、Minecraft は新しい script module `@minecraft/server-ui`（旧名 `mojang-minecraft-ui`）を公開しました。この module を使えば、JSON UI をいじらずに form UI を作成できます。
 
-## Setup
+## セットアップ
 
-Like other modules, you will need to add the dependency into your `manifest.json`
+他の module と同様に、`manifest.json` に dependency を追加する必要があります。
 
 ```json
 {
@@ -44,13 +44,13 @@ And import the module on your script files
 import { ActionFormData, MessageFormData, ModalFormData } from "@minecraft/server-ui";
 ```
 
-## Form Types
+## Form の種類
 
-The `@minecraft/server-ui` module comes with 3 form types- the Action Form Data, Message Form Data, and Modal Form Data.
+`@minecraft/server-ui` module には 3種類の form があります。Action Form Data、Message Form Data、Modal Form Data です。
 
-### Action Forms
+### Action Form
 
-Action Form is the form which contains a bunch of buttons. This form is ideal for shop UIs, minigames selections, etc. If you have seen a featured server has a UI with lots of buttons, this is that form.
+Action Form は、たくさんの button を持つ form です。ショップ UI やミニゲーム選択などに最適です。Featured server の UI でボタンがたくさん並んでいるのを見たことがあれば、それがこの form です。
 
 To use the form, you need to create it first.
 
@@ -58,7 +58,7 @@ To use the form, you need to create it first.
 let form = new ActionFormData();
 ```
 
-The form has 3 functions/properties: Title, Body, and Button.
+この form には Title、Body、Button の 3つの function / property があります。
 
 #### Title
 
@@ -70,7 +70,7 @@ form.title("Action Form");
 
 #### Body
 
-Body adds some sort of description of the form. You can explain more about the function of the form.
+Body にはフォームの説明を入れます。フォームの役割をより詳しく説明できます。
 
 ```js
 form.body("This is Action Form Body");
@@ -78,9 +78,9 @@ form.body("This is Action Form Body");
 
 #### Button
 
-Button is the main function of the form. The form can have many buttons for the player to choose. Each button has 2 arguments. The first argument is the label, the text that shows up on the button.
+Button はフォームの主要な機能です。フォームにはプレイヤーが選べる複数のボタンを置けます。各ボタンには 2 つの引数があります。1 つ目は label で、ボタンに表示される文字です。
 
-The second argument is optional and is the button icon, which shows a picture/icon on the button. To use it, you need to define the texture path. You can use the vanilla resource pack to show icons (Example `textures/items/compass`). Custom textures will need `.png` at the end of the path, as well as a valid resource pack on the world.
+2 つ目の引数は任意で、ボタンのアイコンです。ボタン上に画像やアイコンを表示します。使うには texture path を定義する必要があります。アイコンにはバニラの resource pack を使えます（例: `textures/items/compass`）。カスタムテクスチャを使う場合は、パス末尾に `.png` を付け、ワールドに有効な resource pack が必要です。
 
 ```js
 // No icon
@@ -92,12 +92,12 @@ form.button("Button 3", "textures/wiki/icons/btn_icon_3");
 ```
 
 :::warning
-The maximum number of buttons is 256. More may cause the form to break.
+ボタンの最大数は 256 です。これを超えるとフォームが壊れることがあります。
 :::
 
 #### Example
 
-This an example of an Action Form.
+これは Action Form の例です。
 
 ```js
 let form = new ActionFormData();

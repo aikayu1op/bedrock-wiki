@@ -1,20 +1,20 @@
 ---
-title: Hurt Animations
+title: 被ダメージアニメーション
 tags:
     - intermediate
 mentions:
     - MedicalJewel105
     - stekdev17
 category: Tutorials
-description: Tutorial on how to trigger custom animation when entity is hurt.
+description: エンティティがダメージを受けたときにカスタムアニメーションを発動する方法を解説します。
 ---
 
-This guide will teach you to trigger custom hurt animations for entities.
-There is no really good way to make custom hurt animations as for now (at least from I know).
+このガイドでは、エンティティのカスタム被ダメージアニメーションを発動する方法を説明します。
+現時点では、カスタム被ダメージアニメーションを作る決定的な方法はあまりありません（少なくとも私の知る限りでは）。
 
-## BP Entity Part
+## BP のエンティティ側
 
-First you need to setup entity file. Make sure to use file version that supports properties.
+最初にエンティティファイルを設定します。properties をサポートするファイルバージョンを使ってください。
 
 Add the following to entity description:
 
@@ -30,7 +30,7 @@ Add the following to entity description:
 }
 ```
 
-And this in component groups:
+そして、component groups には次を追加します。
 
 <CodeHeader>BP/entity/my_entity.json#component_groups</CodeHeader>
 
@@ -45,7 +45,7 @@ And this in component groups:
 }
 ```
 
-Events to add this component group and switch properties:
+この component group を追加し、プロパティを切り替えるイベントです。
 
 <CodeHeader>BP/entity/my_entity.json#events</CodeHeader>
 
@@ -72,7 +72,7 @@ Events to add this component group and switch properties:
 }
 ```
 
-To call this event add `damage_sensor` to components:
+このイベントを呼ぶには、components に `damage_sensor` を追加します。
 
 <CodeHeader>BP/entity/my_entity.json#components</CodeHeader>
 
@@ -87,8 +87,8 @@ To call this event add `damage_sensor` to components:
 }
 ```
 
-## RP AC Part
+## RP の AC 側
 
-You can transition to state with hurt animation this way: `"damage_state": "q.property('wiki:is_hurt')"` and from there use `"default": "q.all_animations_finished"`.
+このようにして、被ダメージアニメーションの state に遷移できます: `"damage_state": "q.property('wiki:is_hurt')"`。そこから `"default": "q.all_animations_finished"` を使います。
 
-This could be useful for creating custom boats.
+これはカスタムボートを作るときにも役立つかもしれません。

@@ -1,6 +1,6 @@
 ---
-title: Aseprite Animations
-description: Learn how to create animations using Aseprite and how to display them in JSON UI.
+title: Aseprite アニメーション
+description: Aseprite でアニメーションを作成し、JSON UI で表示する方法を学びます。
 category: Tutorials
 mentions:
     - TheDataLioness
@@ -10,20 +10,20 @@ mentions:
     - stirante
 ---
 
-## Introduction to Aseprite
+## Aseprite の紹介
 
-[Aseprite](https://www.aseprite.org/) is a paid pixel art application specifically designed for creating skins and resource packs with ease.
-It offers a wide array of tools, extensive documentation, and tutorials, catering to artists of all skill levels.
-Its source code can be compiled for free personal use.
+[Aseprite](https://www.aseprite.org/) は、スキンやリソースパックを簡単に作れるよう設計された、有料のピクセルアート制作アプリです。
+豊富なツール、充実したドキュメント、チュートリアルを備え、あらゆるレベルのアーティストに対応しています。
+ソースコードは、個人利用に限り無料でコンパイルできます。
 
-[LibreSprite](https://libresprite.github.io/) is a free and open-source alternative to Aseprite.
-It is a fork of the last open-source licensed version of Aseprite, and this tutorial can also be followed using LibreSprite.
+[LibreSprite](https://libresprite.github.io/) は、Aseprite の代替となる無料かつオープンソースのツールです。
+Aseprite の最後のオープンソース版から分岐したもので、このチュートリアルは LibreSprite でも実践できます。
 
-## Creating an Animation in Aseprite
+## Aseprite でアニメーションを作成する
 
-Suppose you have a series of frame images named "frameimage" with sequential numbers from 1 to 5.
-Import the first image, and Aseprite will automatically recognize the other images with the same name but different numbers.
-It will then place them in the correct order and create an animation.
+`frameimage` という名前で 1 から 5 まで連番のフレーム画像があるとします。
+最初の画像を読み込むと、Aseprite は同じ名前で番号だけが異なる他の画像を自動的に認識します。
+その後、それらを正しい順序で並べてアニメーションを作成します。
 
 <FolderView :paths="[
     'frameimage1.png',
@@ -33,21 +33,21 @@ It will then place them in the correct order and create an animation.
     'frameimage5.png'
 ]" />
 
-Use the arrow keys to navigate through all frames and the "Enter" key to play or pause the animation.
-Press the "Tab" key to open the timeline and select individual frames.
-Right-click a frame in the timeline to access various settings.
+矢印キーで全フレームを移動し、`Enter` キーでアニメーションの再生と一時停止を切り替えます。
+`Tab` キーでタイムラインを開き、個別のフレームを選択できます。
+タイムライン上のフレームを右クリックすると、各種設定にアクセスできます。
 
-To export the animation, use the shortcut "Ctrl + E" or navigate to "File" -> "Export to Sprite Sheet".
-In the output settings, select the Output file and the JSON Data.
-You'll see a dropdown menu with Hash and Array options.
-Ensure the Array option is selected, or the export will not work properly.
+アニメーションを書き出すには、`Ctrl + E` のショートカットを使うか、`ファイル` -> `スプライトシートに書き出し` に進みます。
+出力設定では、`Output file` と `JSON Data` を選択してください。
+`Hash` と `Array` の選択肢があるドロップダウンが表示されます。
+`Array` オプションを選択しないと、正しく書き出されません。
 
-You should now have two files: the SpriteSheet image and a JSON file.
-Ensure both files have the same name but different extensions.
+これで、`SpriteSheet` 画像と JSON ファイルの 2 つができているはずです。
+両方のファイルが同じ名前で、拡張子だけが異なっていることを確認してください。
 
-## Using Aseprite Animations in JSON UI
+## JSON UI で Aseprite アニメーションを使う
 
-The `aseprite_flip_book` animation type can only be used for the `uv` property in an element of the type `image`.
+`aseprite_flip_book` アニメーションタイプは、`image` 型要素の `uv` プロパティにしか使えません。
 
 <CodeHeader>RP/ui/example_file.json</CodeHeader>
 
@@ -67,5 +67,5 @@ The `aseprite_flip_book` animation type can only be used for the `uv` property i
 }
 ```
 
-Set the `texture` field to the path of the exported files without the extension.
-The `uv_size` field should be set to the width and height of a single frame.
+`texture` フィールドには、書き出したファイルの拡張子を除いたパスを設定します。
+`uv_size` フィールドには、1 フレームの幅と高さを設定します。
